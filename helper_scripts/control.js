@@ -12,6 +12,19 @@
 // on non-Plex tabs or pages without active video playback.
 
 //////////////////////////////
+// 0. CLEANUP FUNCTION
+//////////////////////////////
+
+// Removes the control panel and hover trigger from the DOM
+function clearControlPanel() {
+  const panel = document.getElementById("subtitle-control-panel");
+  const trigger = document.getElementById("subtitle-panel-hover-trigger");
+  if (panel) panel.remove();
+  if (trigger) trigger.remove();
+}
+
+
+//////////////////////////////
 // 1. GLOBAL CONFIG OBJECT
 //////////////////////////////
 

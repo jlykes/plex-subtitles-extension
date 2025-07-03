@@ -64,6 +64,7 @@ function monitorForVideoChange(lingqTerms) {
     } else if (lastVideoExists) {
       // The video has been closed or ended
       lastVideoSrc = null;
+      clearControlPanel(); // Remove the control panel and trigger from DOM
       lastVideoExists = false;
       clearSubtitleOverlay();
     }
