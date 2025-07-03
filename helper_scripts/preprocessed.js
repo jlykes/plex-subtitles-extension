@@ -21,7 +21,7 @@ function runPreprocessedMode(lingqTerms, filename) {
       window.subtitleList = enrichedSubs;  // Store subtitles globally for navigation
       let lastRenderedIndex = -1;  // Prevent re-rendering the same subtitle
 
-      // Set up a polling loop that runs every 300ms to sync subtitles with playback
+      // Set up a polling loop that runs every 100ms to sync subtitles with playback
       setInterval(() => {
         const video = document.querySelector("video");
         if (!video) return;
@@ -60,7 +60,7 @@ function runPreprocessedMode(lingqTerms, filename) {
         window.lastRenderedText = active.text;
 
         renderPreprocessedLine(active, lingqTerms);
-      }, 300);
+      }, 100);
     });
 }
 

@@ -152,15 +152,19 @@ async function main() {
   monitorForVideoChange(lingqTerms);
 }
 
-// Attempt to run immediately
-main();
+// 🔁 Do NOT run main() immediately — video element may exist before it's fully loaded.
+//    Instead, use the fallback interval below to wait until video.readyState >= 2
 
-// Fallback: if main() exits early, watch for video and retry once
+// Fallback: poll every second until a playable video is detected.
+// This avoids initializing too early (e.g. while video is still spinning/loading).
 let mainInterval = setInterval(() => {
   const video = findPlexVideoElement();
-  if (video) {
-    console.log("🎬 Detected late video. Initializing subtitle overlay...");
+
+  if (video && video.readyState >= 2) {
+    console.log("🎬 Detected playable video. Initializing subtitle overlay...");
     main();
-    clearInterval(mainInterval);
+    clearInterval(mainInterval); // 🧹 Stop polling once main() successfully runs
+  } else if (video) {
+    console.log("⏳ Video detected but not ready. Waiting...");
   }
-}, 1000);
+}, 100);
