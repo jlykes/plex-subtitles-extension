@@ -29,10 +29,13 @@ function runPreprocessedMode(lingqTerms, filename) {
         clearInterval(preprocessedInterval);
         preprocessedInterval = null;
       }
+      
+      let autoPauseTimeout = null;
+      let lastPausedIndex = -1;
 
       // Set up a polling loop that runs every 300ms to sync subtitles with playback
       preprocessedInterval = setInterval(() => {
-        const video = document.querySelector("video");
+        const video = findPlexVideoElement();
         if (!video) return;
 
         const currentTime = video.currentTime;
@@ -74,6 +77,24 @@ function runPreprocessedMode(lingqTerms, filename) {
         if (!container) return;  // Don't render if container is gone
 
         renderPreprocessedLine(active, lingqTerms);
+
+        if (window.subtitleConfig.autoPause && active.end !== lastPausedIndex) {
+          clearTimeout(autoPauseTimeout); // Cancel previous pause
+
+          const video = findPlexVideoElement();
+          const now = video?.currentTime ?? 0;
+          const delay = Math.max(0, (active.end - now) * 1000);  // Convert seconds to ms
+
+          autoPauseTimeout = setTimeout(() => {
+            const v = findPlexVideoElement();
+            if (v && !v.paused) {
+              v.pause();
+              console.log("⏸️ Auto-paused at subtitle end");
+            }
+          }, delay);
+
+          lastPausedIndex = active.end;
+        }
       }, 300);
     });
 }

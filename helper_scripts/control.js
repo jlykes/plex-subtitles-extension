@@ -35,7 +35,8 @@ window.subtitleConfig = {
   pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
   fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
   position: "bottom",     // Screen position of subtitles: "bottom" or "top"
-  explanations: false     // Toggle for sentence explanation box (handled externally)
+  explanations: false,     // Toggle for sentence explanation box (handled externally)
+  autoPause: false
 };
 
 //////////////////////////////
@@ -118,6 +119,10 @@ function createControlPanel() {
         <option value="bottom" selected>Bottom</option>
         <option value="top">Top</option>
       </select>
+    </label><br/><br/>
+    <label>
+        <input type="checkbox" id="auto-pause-setting" />
+        Auto-pause after each subtitle
     </label><br/><br/>
     <div id="sentence-explanation-wrapper" style="margin-top: 12px;">
       <div><strong>Sentence Explanation:</strong></div>
@@ -224,4 +229,9 @@ function bindControlPanelListeners() {
       overlay.style.bottom = e.target.value === "bottom" ? "15vh" : "auto";
     }
   });
+
+    // Bind auto-pause
+    document.getElementById("auto-pause-setting")?.addEventListener("change", e => {
+    window.subtitleConfig.autoPause = e.target.checked;
+    });
 }
