@@ -70,42 +70,11 @@ function updateCurrentExplanation(text) {
 }
 
 //////////////////////////////
-// 3. CONDITIONAL PANEL INJECTION
-//////////////////////////////
-
-// Checks if a valid Plex video player is present in the DOM.
-function isPlexVideoPresent() {
-  return [...document.querySelectorAll("video")]
-    .some(el => el.classList.contains("HTMLMedia-mediaElement-u17S9P"));
-}
-
-// Only creates the panel if we're on a Plex tab with a valid video.
-function createControlPanelIfNeeded() {
-  if (!isPlexVideoPresent()) return;
-  if (!document.querySelector("#subtitle-control-panel")) {
-    createControlPanel();
-  }
-}
-
-// Delay initial check slightly to wait for Plex's DOM to load.
-setTimeout(() => {
-  createControlPanelIfNeeded();
-}, 500);
-
-// Fallback: watch for DOM changes in case Plex injects the video player after load.
-const observer = new MutationObserver(() => {
-  if (isPlexVideoPresent() && !document.querySelector("#subtitle-control-panel")) {
-    createControlPanel();
-    observer.disconnect(); // Stop watching once panel is injected
-  }
-});
-observer.observe(document.body, { childList: true, subtree: true });
-
-//////////////////////////////
-// 4. CREATE PANEL & TRIGGER
+// 3. CREATE PANEL & TRIGGER
 //////////////////////////////
 
 function createControlPanel() {
+  console.log("🛠 createControlPanel() was called"); // Debug log to trace when control panel is injected
   // Prevent duplicate panels from being created
   if (document.querySelector("#subtitle-control-panel")) return;
   // === Create invisible trigger region for hover detection ===
@@ -217,7 +186,7 @@ function createControlPanel() {
 }
 
 //////////////////////////////
-// 5. BIND PANEL LISTENERS
+// 4. BIND PANEL LISTENERS
 //////////////////////////////
 
 // Binds listeners to control panel elements that update subtitleConfig
