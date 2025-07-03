@@ -59,9 +59,8 @@ function setupKeyboardShortcuts() {
 
   window.addEventListener("keydown", (e) => {
     // Attempt to find the Plex video element by class name
-    const video = [...document.querySelectorAll("video")].find(el => el.classList.contains("HTMLMedia-mediaElement-u17S9P"));
+    const video = findPlexVideoElement();
     if (!video) {
-      console.warn("⚠️ No video element found during keydown");
       return;
     }
 
@@ -105,12 +104,8 @@ function setupKeyboardShortcuts() {
   // Also allow click-to-pause when Plex UI is hidden
   // Ensure click-to-pause still works when Plex UI is hidden
   document.addEventListener("click", (event) => {
-    const video = [...document.querySelectorAll("video")].find(el =>
-      el.classList.contains("HTMLMedia-mediaElement-u17S9P")
-    );
-  
+    const video = findPlexVideoElement();
     if (!video) {
-      console.warn("⚠️ No video element found during click");
       return;
     }
   

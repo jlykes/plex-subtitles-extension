@@ -111,40 +111,43 @@ function renderPreprocessedLine(sub, lingqTerms) {
     updateCurrentExplanation(sub.explanation || "");
   }
 
-  // Wrapper contains the full line (text + translation)
+  // Wrapper contains the full line (Chinese subtitle + translation)
   const wrapper = document.createElement("div");
-  wrapper.style.display = "block";
-  wrapper.style.position = "relative";
-  wrapper.style.cursor = "pointer";
+  wrapper.style.display = "flex";                     // Stack children vertically
+  wrapper.style.flexDirection = "column";             // Ensure vertical stacking order
+  wrapper.style.alignItems = "center";                // Center content horizontally
+  wrapper.style.cursor = "pointer";                   // Show pointer cursor on hover
+  wrapper.style.marginTop = "4px";                    // Add some spacing above
 
   // Main subtitle line with Chinese characters and annotations
   const mainLine = document.createElement("div");
-  mainLine.style.display = "inline-block";
-  mainLine.style.verticalAlign = "bottom";
-  mainLine.style.position = "relative";
+  mainLine.style.display = "inline-block";            // Allow inline behavior
+  mainLine.style.verticalAlign = "bottom";            // Align with other inline content if needed
+  mainLine.style.position = "relative";               // Enable tooltip positioning if needed
+  mainLine.style.textAlign = "center";                // Center the Chinese text
 
-  // Create a line of English translation (shown only on hover)
+  // Translation line (shown only on hover)
   const translation = document.createElement("div");
   translation.textContent = sub.translation || "";
-  translation.style.position = "absolute";
-  translation.style.bottom = "-1.6em";
-  translation.style.left = "50%";
-  translation.style.transform = "translateX(-50%)";
-  translation.style.fontSize = "0.5em";
-  translation.style.color = "#ccc";
-  translation.style.marginTop = "4px";
-  translation.style.whiteSpace = "nowrap";
-  translation.style.display = "none";
-  translation.style.textAlign = "center";
+  translation.style.fontSize = "0.5em";               // Smaller font size for translation
+  translation.style.color = "#ccc";                   // Light gray text color
+  translation.style.marginTop = "4px";                // Spacing between Chinese and translation
+  translation.style.whiteSpace = "normal";            // Allow line wrapping when needed
+  translation.style.wordBreak = "break-word";         // Break long words if needed
+  translation.style.textAlign = "center";             // Center the translation text
+  translation.style.visibility = "hidden";            // Hide by default but keep layout space
+  translation.style.maxWidth = "90vw";                // Prevent overflowing the viewport width
+  translation.style.minHeight = "1em";                // Reserve height even when hidden or empty
 
   // Toggle visibility of the translation on hover
   wrapper.addEventListener("mouseenter", () => {
-    translation.style.display = "block";
+    translation.style.visibility = "visible";         // Show translation when hovering
   });
   wrapper.addEventListener("mouseleave", () => {
-    translation.style.display = "none";
+    translation.style.visibility = "hidden";          // Hide translation when mouse leaves
   });
 
+  
   // Process each segmented word or character in the subtitle line
   sub.segmented.forEach(entry => {
     const word = entry.word;
