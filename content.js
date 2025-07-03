@@ -39,6 +39,25 @@ function findPlexVideoElement() {
   );
 }
 
+// Shared function for initializing subtitle overlay system for current video
+async function initializeForCurrentVideo(lingqTerms) {
+  // Ensure subtitle overlay container exists
+  createOverlayContainer();
+
+  // Hide the default Plex subtitles to prevent interference
+  hideOriginalPlexSubtitles();
+
+  // Set up subtitle keyboard navigation (S/A/D)
+  setupKeyboardShortcuts();
+
+  // Create and configure the subtitle control panel UI
+  createControlPanel();
+  bindControlPanelListeners();
+
+  // Load subtitles based on enriched JSON (or fall back to live mode)
+  await loadSubtitlesForCurrentVideo(lingqTerms);
+}
+
 // Track video state and react to new or removed videos
 let lastVideoSrc = null;
 let lastVideoExists = false;
@@ -56,10 +75,21 @@ function monitorForVideoChange(lingqTerms) {
         lastVideoExists = true;
         clearSubtitleOverlay();
 
-        // Delay to let Plex update the DOM (e.g. title metadata)
-        setTimeout(() => {
-          loadSubtitlesForCurrentVideo(lingqTerms);
-        }, 1000);
+        // Wait until the new video is fully playable (readyState >= 2) before initializing
+        const waitForReadyState = setInterval(() => {
+          const newVideo = findPlexVideoElement();
+          if (newVideo && newVideo.readyState >= 2) {
+            clearInterval(waitForReadyState);
+            console.log("🎬 New video is now playable. Initializing subtitle overlay...");
+
+            (async () => {
+              const lingqTermsUpdated = await loadLingQTerms();
+              await initializeForCurrentVideo(lingqTermsUpdated);
+            })();
+          } else {
+            console.log("⏳ Waiting for new video to become playable...");
+          }
+        }, 500);
       }
     } else if (lastVideoExists) {
       // The video has been closed or ended
@@ -94,12 +124,10 @@ async function loadSubtitlesForCurrentVideo(lingqTerms) {
 
   if (filename && await checkEnrichedJSONExists(normalized)) {
     console.log(`📦 Using enriched subtitles from: ${filename}`);
-    updateModeDisplay("preprocessed");
     runPreprocessedMode(lingqTerms, filename);
+    
   } else {
     console.warn("🔁 No enriched subtitle JSON found. Falling back to live subtitle mode.");
-    updateModeDisplay("live");
-
     const segmentit = window.Segmentit.useDefault(new window.Segmentit.Segment());
 
     // Wait for Plex to render subtitles before processing
@@ -124,22 +152,13 @@ async function main() {
   createControlPanel(); 
 
   // Bind event listeners for the control panel dropdowns and sliders
-  if (typeof bindControlPanelListeners === "function") {
-    bindControlPanelListeners();
-  }
+  bindControlPanelListeners();
 
   // Load user's LingQ vocabulary terms
   const lingqTerms = await loadLingQTerms();
 
-  // Create overlay container and suppress original Plex subtitles
-  createOverlayContainer();
-  hideOriginalPlexSubtitles();
-
-  // Setup keyboard shortcuts (S/A/D)
-  setupKeyboardShortcuts();
-
-  // Load and display subtitles for the current video
-  await loadSubtitlesForCurrentVideo(lingqTerms);
+  // Run core initialization logic for current video
+  await initializeForCurrentVideo(lingqTerms);
 
   // ⛔️ Prime lastVideoSrc and lastVideoExists to avoid duplicate subtitle loading
   const initialVideo = findPlexVideoElement();

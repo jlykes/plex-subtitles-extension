@@ -14,6 +14,9 @@
  * are populated from the enriched JSON subtitle file.
  */
 
+// Used to make sure doesn't run more than ones
+let keyboardShortcutsInitialized = false;
+
 // Tracks whether Plex UI is currently hidden
 window.__plexUIHidden = false;
 
@@ -49,6 +52,10 @@ function togglePlexUIBlocker() {
  * and toggling the Plex UI overlay.
  */
 function setupKeyboardShortcuts() {
+  if (keyboardShortcutsInitialized) return;
+  
+  keyboardShortcutsInitialized = true;
+
   window.addEventListener("keydown", (e) => {
     // Attempt to find the Plex video element by class name
     const video = [...document.querySelectorAll("video")].find(el => el.classList.contains("HTMLMedia-mediaElement-u17S9P"));

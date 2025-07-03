@@ -3,6 +3,9 @@
 // This function begins the enriched subtitle rendering process.
 // It fetches the subtitle JSON, synchronizes it with video playback,
 // and continually updates the subtitle overlay based on current time.
+
+let preprocessedInterval = null;
+
 function runPreprocessedMode(lingqTerms, filename) {
   console.log(`📦 Preprocessed subtitle mode enabled. Loading: ${filename}`);
 
@@ -21,8 +24,14 @@ function runPreprocessedMode(lingqTerms, filename) {
       window.subtitleList = enrichedSubs;  // Store subtitles globally for navigation
       let lastRenderedIndex = -1;  // Prevent re-rendering the same subtitle
 
-      // Set up a polling loop that runs every 100ms to sync subtitles with playback
-      setInterval(() => {
+      // 🔁 Clear any previously running subtitle polling interval to prevent duplicate rendering
+      if (preprocessedInterval) {
+        clearInterval(preprocessedInterval);
+        preprocessedInterval = null;
+      }
+
+      // Set up a polling loop that runs every 300ms to sync subtitles with playback
+      preprocessedInterval = setInterval(() => {
         const video = document.querySelector("video");
         if (!video) return;
 
@@ -60,7 +69,7 @@ function runPreprocessedMode(lingqTerms, filename) {
         window.lastRenderedText = active.text;
 
         renderPreprocessedLine(active, lingqTerms);
-      }, 100);
+      }, 300);
     });
 }
 

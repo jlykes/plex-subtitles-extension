@@ -80,7 +80,8 @@ function hideOriginalPlexSubtitles() {
 function clearSubtitleOverlay() {
   const container = document.getElementById("custom-subtitle-overlay");
   if (container) {
-    container.innerHTML = ""; // Remove any subtitle text
+    container.remove(); // Remove the container entirely from DOM
+    console.log("🧹 Removed custom subtitle overlay container from DOM.");
   }
 
   // Reset subtitle tracking state so we don’t display outdated content

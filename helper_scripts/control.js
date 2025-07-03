@@ -31,7 +31,6 @@ function clearControlPanel() {
 // Shared configuration for subtitles, modifiable via the control panel.
 // These values are read by other modules to control subtitle rendering.
 window.subtitleConfig = {
-  mode: "auto",           // Subtitle source mode: auto-detect, live, or preprocessed
   translation: "hover",   // When to show translations: "off", "hover", "always"
   pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
   fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
@@ -46,7 +45,6 @@ window.subtitleConfig = {
 // Updates the display of the current subtitle mode in the control panel.
 function updateModeDisplay(newMode) {
   console.log("📺 updateModeDisplay called with:", newMode); // Debug log
-  window.subtitleConfig.mode = newMode;
   const modeEl = document.getElementById("mode-display");
   if (modeEl) modeEl.textContent = `Mode: ${newMode}`;
   else console.warn("⚠️ updateModeDisplay: #mode-display element not found");
