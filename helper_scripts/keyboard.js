@@ -20,6 +20,7 @@ let keyboardShortcutsInitialized = false;
 // Tracks whether Plex UI is currently hidden
 window.__plexUIHidden = false;
 
+
 /**
  * Toggles visibility of known Plex UI elements (e.g., playback controls, overlays)
  * by modifying their `display` property. Targets a known list of DOM elements
@@ -130,8 +131,6 @@ function setupKeyboardShortcuts() {
       video.paused ? video.play() : video.pause();
     }
   });
-  
-
 }
 
 // Note: Call setupKeyboardShortcuts() from main() in content.js

@@ -4,6 +4,7 @@
 // This overlay will replace Plex's native subtitles and display enriched content
 // (e.g., pinyin, coloring, hover tooltips) with custom styling.
 function createOverlayContainer() {
+
   // Remove any existing overlay to prevent duplication or stale state
   const existing = document.getElementById("custom-subtitle-overlay");
   if (existing) existing.remove();
@@ -76,6 +77,7 @@ function createOverlayContainer() {
       delete container.dataset.wasPlaying;
     }
   });
+
 }
 
 // Hides the original Plex subtitles completely by applying a CSS rule.
@@ -104,3 +106,58 @@ function clearSubtitleOverlay() {
   window.lastSubtitleStartTime = null;
   window.subtitleList = [];
 } 
+
+/// LOGIC TO HIDE MOUSE UNLESS MOVE
+
+let cursorEnforcementActive = true;
+let hideCursorTimer = null;
+
+// Enforce 'cursor: none !important' using CSS + MutationObserver
+function addCursorHideStyle() {
+  if (!document.getElementById("custom-cursor-hide-style")) {
+    const style = document.createElement("style");
+    style.id = "custom-cursor-hide-style";
+    style.textContent = `
+      html, body, video, * {
+        cursor: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+function removeCursorHideStyle() {
+  const style = document.getElementById("custom-cursor-hide-style");
+  if (style) style.remove();
+}
+
+// Initial force-hide
+addCursorHideStyle();
+
+// Create the observer that re-enforces the hiding
+const observer = new MutationObserver(() => {
+  if (cursorEnforcementActive) {
+    addCursorHideStyle();
+  }
+});
+observer.observe(document.documentElement, {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  attributeFilter: ['style', 'class']
+});
+
+// Mouse movement temporarily disables hiding
+document.addEventListener("mousemove", () => {
+  removeCursorHideStyle();             // Let the cursor show
+  cursorEnforcementActive = false;    // Disable MutationObserver response
+
+  // Clear any previous timer
+  clearTimeout(hideCursorTimer);
+
+  // After 2s of no movement, hide the cursor again
+  hideCursorTimer = setTimeout(() => {
+    cursorEnforcementActive = true;
+    addCursorHideStyle();
+  }, 2000);
+});
