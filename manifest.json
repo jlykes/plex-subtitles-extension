@@ -32,6 +32,7 @@
     {
       "resources": [
         "enriched_subtitles/*.enriched.json",
+        "html/control_panel.html",
         "lingqs.json"
       ],
       "matches": ["*://app.plex.tv/*"]

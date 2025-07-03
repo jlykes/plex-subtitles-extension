@@ -1,0 +1,176 @@
+<div class="control-layout-grid">
+  <div class="section" id="appearance-section">
+    <h3>Appearance</h3>
+    <div class="control-row">
+      <label for="dropdown-visibility">Visibility (S)</label>
+      <select id="dropdown-visibility">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+        <option value="on-stop">On-Stop only</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-size">Size ([ / ])</label>
+      <input id="slider-size" type="range" min="1" max="10" value="5.5" />
+      <span id="slider-size-value"></span>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-position">Position (H)</label>
+      <select id="dropdown-position">
+        <option value="bottom" selected>Bottom</option>
+        <option value="top">Top</option>
+        <option value="center">Center</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-height">Height (↑ / ↓)</label>
+      <input id="slider-height" type="range" min="1" max="100" value="20" />
+      <span id="slider-height-value"></span>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-lingq">LingQ status (L)</label>
+      <select id="dropdown-lingq">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-pinyin">Pinyin (P)</label>
+      <select id="dropdown-pinyin">
+        <option value="none">None</option>
+        <option value="all">All</option>
+        <option value="unknown" selected>Unknown only</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-tone">Tone coloring (C)</label>
+      <select id="dropdown-tone">
+        <option value="none" selected>None</option>
+        <option value="all">All</option>
+        <option value="unknown">Unknown only</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-translation">Translation (T)</label>
+      <select id="dropdown-translation">
+        <option value="off">Off</option>
+        <option value="on">On</option>
+        <option value="on-hover" selected>On-Hover</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section" id="behavior-section">
+    <h3>Behavior</h3>
+    <div class="control-row">
+      <label for="dropdown-continuous">Continuous</label>
+      <select id="dropdown-continuous">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-pause-hover">Pause on hover (P)</label>
+      <select id="dropdown-pause-hover">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-auto-pause">Auto-pause (A)</label>
+      <select id="dropdown-auto-pause">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-autopause-delay">Auto-pause delay</label>
+      <input id="slider-autopause-delay" type="range" min="10" max="300" value="200" />
+      <span id="slider-autopause-delay-value"></span>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-remove-silences">Remove silences (R)</label>
+      <select id="dropdown-remove-silences">
+        <option value="off" selected>Off</option>
+        <option value="on">On</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section" id="info-section">
+    <h3>Additional Information</h3>
+    <div class="control-row">
+      <label for="mode-display">Mode:</label>
+      <span id="mode-display" class="info-value">auto</span>
+    </div>
+    <div class="control-row">
+      <label for="coverage-display">% Coverage:</label>
+      <span id="coverage-display" class="info-value">---</span>
+    </div>
+    <div class="control-row" id="sentence-explanation-wrapper">
+      <label for="sentence-explanation">Sentence Explanation:</label>
+    </div>
+    <div id="sentence-explanation" class="info-value" style="margin-left: 10px;"></div>
+  </div>
+</div>
+
+<style>
+  .control-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .section h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    border-bottom: 1px solid #555;
+    color: #ddd;
+  }
+
+  .control-row {
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .control-row label {
+    flex: 1.5;
+    font-size: 12px;
+    margin-right: 6px;
+    white-space: nowrap;
+    color: #ddd;
+    line-height: 20px;         /* Match height of the dropdown */
+    vertical-align: middle;    /* Align label with select vertically */
+  }
+
+  .info-value {
+    font-size: 12px;
+    color: #ccc;
+    margin-bottom: 3px;
+  }
+
+  #sentence-explanation {
+    font-style: italic;
+  }
+
+  select {
+    border: none;
+    border-radius: 12px;
+    padding: 1px 6px;
+    background-color: #444;
+    color: white;
+    font-size: 12px;
+    height: 20px;
+    line-height: 16px;
+    vertical-align: middle;
+  }
+
+  input[type="range"] {
+    width: 100px;
+    margin-left: 8px;
+    height: 10px;
+  }
+</style>

@@ -47,7 +47,7 @@ window.subtitleConfig = {
 function updateModeDisplay(newMode) {
   console.log("📺 updateModeDisplay called with:", newMode); // Debug log
   const modeEl = document.getElementById("mode-display");
-  if (modeEl) modeEl.textContent = `Mode: ${newMode}`;
+  if (modeEl) modeEl.textContent = `${newMode}`;
   else console.warn("⚠️ updateModeDisplay: #mode-display element not found");
 }
 
@@ -83,8 +83,8 @@ function createControlPanel() {
     position: "fixed",
     top: 0,
     right: 0,
-    width: "400px",
-    height: "700px",
+    width: "205px",
+    height: "500px",
     zIndex: 99997,
     backgroundColor: "transparent",
     pointerEvents: "auto"
@@ -94,41 +94,13 @@ function createControlPanel() {
   // === Create the control panel UI container ===
   const panel = document.createElement("div");
   panel.id = "subtitle-control-panel";
-  panel.innerHTML = `
-    <div id="mode-display" style="margin-bottom: 12px;">Mode: auto</div>
-    <label>Translation:
-      <select id="translation-setting">
-        <option value="off">Off</option>
-        <option value="hover" selected>Hover</option>
-        <option value="always">Always</option>
-      </select>
-    </label><br/><br/>
-    <label>Pinyin:
-      <select id="pinyin-setting">
-        <option value="none">None</option>
-        <option value="unknown">Unknown</option>
-        <option value="all" selected>All</option>
-      </select>
-    </label><br/><br/>
-    <label>Font Size:
-      <input type="range" id="font-size-setting" min="3" max="10" step="0.1" value="5.5"/>
-      <span id="font-size-value">5.5vh</span>
-    </label><br/><br/>
-    <label>Position:
-      <select id="position-setting">
-        <option value="bottom" selected>Bottom</option>
-        <option value="top">Top</option>
-      </select>
-    </label><br/><br/>
-    <label>
-        <input type="checkbox" id="auto-pause-setting" />
-        Auto-pause after each subtitle
-    </label><br/><br/>
-    <div id="sentence-explanation-wrapper" style="margin-top: 12px;">
-      <div><strong>Sentence Explanation:</strong></div>
-      <div id="sentence-explanation" style="margin-top: 6px; font-style: italic; color: #ccc; font-size: 15px;"></div>
-    </div>
-  `;
+
+  fetch(chrome.runtime.getURL("html/control_panel.html"))
+    .then(res => res.text())
+    .then(html => {
+        panel.innerHTML = html;
+        bindControlPanelListeners();
+  });
 
   // === Apply styling to panel ===
   Object.assign(panel.style, {
@@ -143,7 +115,8 @@ function createControlPanel() {
     zIndex: 99998,
     fontFamily: "sans-serif",
     lineHeight: "1.6",
-    maxWidth: "300px",
+    width: "250px",
+    maxWidth: "250x",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
     opacity: "0",
     pointerEvents: "none",
@@ -151,9 +124,6 @@ function createControlPanel() {
   });
 
   document.body.appendChild(panel);
-
-  // Setup all event listeners for dropdowns, sliders, etc.
-  bindControlPanelListeners();
 
   //////////////////////////////
   // 5. Hover Visibility Logic
@@ -208,10 +178,10 @@ function bindControlPanelListeners() {
   });
 
   // When font size slider is adjusted
-  document.getElementById("font-size-setting")?.addEventListener("input", e => {
+  document.getElementById("slider-size")?.addEventListener("input", e => {
     const size = parseFloat(e.target.value);
     window.subtitleConfig.fontSizeVH = size;
-    document.getElementById("font-size-value").textContent = `${size}vh`;
+    document.getElementById("slider-size").textContent = `${size}vh`;
 
     // Update font size immediately on subtitle overlay
     const overlay = document.getElementById("custom-subtitle-overlay");
@@ -219,7 +189,7 @@ function bindControlPanelListeners() {
   });
 
   // When position dropdown changes
-  document.getElementById("position-setting")?.addEventListener("change", e => {
+  document.getElementById("dropdown-position")?.addEventListener("change", e => {
     window.subtitleConfig.position = e.target.value;
 
     // Move overlay to top or bottom accordingly
