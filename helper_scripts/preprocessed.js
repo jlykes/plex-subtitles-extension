@@ -54,8 +54,10 @@ function runPreprocessedMode(lingqTerms, filename) {
         if (!active) {
           if (!USE_CONTINUOUS_SUBTITLES) {
             const container = document.getElementById("custom-subtitle-overlay");
-            container.innerHTML = "";
-            window.lastRenderedText = "";
+            if (container) {
+              container.innerHTML = "";
+              window.lastRenderedText = "";
+            }
           }
           return;
         }
@@ -67,6 +69,9 @@ function runPreprocessedMode(lingqTerms, filename) {
         lastRenderedIndex = active.start;
         window.lastSubtitleStartTime = active.start;
         window.lastRenderedText = active.text;
+        
+        const container = document.getElementById("custom-subtitle-overlay");
+        if (!container) return;  // Don't render if container is gone
 
         renderPreprocessedLine(active, lingqTerms);
       }, 300);

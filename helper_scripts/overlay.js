@@ -60,6 +60,22 @@ function createOverlayContainer() {
     }
   `;
   document.head.appendChild(style);
+
+  container.addEventListener("mouseenter", () => {
+    const video = findPlexVideoElement();
+    if (video && !video.paused) {
+      video.pause();
+      container.dataset.wasPlaying = "true";
+    }
+  });
+
+  container.addEventListener("mouseleave", () => {
+    const video = findPlexVideoElement();
+    if (video && container.dataset.wasPlaying === "true") {
+      video.play();
+      delete container.dataset.wasPlaying;
+    }
+  });
 }
 
 // Hides the original Plex subtitles completely by applying a CSS rule.

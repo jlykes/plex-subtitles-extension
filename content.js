@@ -32,13 +32,6 @@ const SUBTITLE_MAX_WIDTH_VW = 90;
 // 2. VIDEO SWITCH MONITOR
 //////////////////////////////
 
-// Looks for the active Plex video element based on known CSS class
-function findPlexVideoElement() {
-  return [...document.querySelectorAll("video")].find(el =>
-    el.classList.contains("HTMLMedia-mediaElement-u17S9P")
-  );
-}
-
 // Shared function for initializing subtitle overlay system for current video
 async function initializeForCurrentVideo(lingqTerms) {
   // Ensure subtitle overlay container exists

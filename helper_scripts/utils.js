@@ -88,3 +88,10 @@ async function checkEnrichedJSONExists(normalizedTitle) {
     return false;
   }
 }
+
+// Looks for the active Plex video element based on known CSS class
+function findPlexVideoElement() {
+  return [...document.querySelectorAll("video")].find(el =>
+    el.classList.contains("HTMLMedia-mediaElement-u17S9P")
+  );
+}
