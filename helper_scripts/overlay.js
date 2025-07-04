@@ -17,11 +17,11 @@ function createOverlayContainer() {
   const position = window.subtitleConfig?.position || "bottom";  // fallback just in case
 
   if (position === "bottom") {
-    container.style.bottom = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+    container.style.bottom = `${window.subtitleConfig.heightVH}vh`;
     container.style.top = "auto";
     container.style.transform = "translateX(-50%)";
   } else if (position === "top") {
-    container.style.top = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+    container.style.top = `${window.subtitleConfig.heightVH}vh`;
     container.style.bottom = "auto";
     container.style.transform = "translateX(-50%)";
   } else if (position === "center") {

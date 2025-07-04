@@ -31,13 +31,14 @@ function clearControlPanel() {
 // Shared configuration for subtitles, modifiable via the control panel.
 // These values are read by other modules to control subtitle rendering.
 window.subtitleConfig = {
-  translation: "hover",   // When to show translations: "off", "hover", "always"
-  pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
-  fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
-  position: "bottom",     // Screen position of subtitles: "bottom" or "top"
-  explanations: false,     // Toggle for sentence explanation box (handled externally)
-  autoPause: false,
-  visibility: "on"        // NEW: "off", "on", "on-stop"
+    visibility: "on",       // Subtitle visibility: "off", "on", "on-stop"
+    fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
+    position: "bottom",     // Screen position of subtitles: "bottom", "top", "center"
+    heightVH: 16,           // Subtitle offset from top/bottom in vh (viewport height units) 
+    pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
+    translation: "hover",   // When to show translations: "off", "hover", "always"
+    autoPause: false,       // Auto-pause subtitles: "on", "off"
+    explanations: false     // Toggle for sentence explanation box (handled externally)
 };
 
 //////////////////////////////
@@ -229,11 +230,11 @@ function bindControlPanelListeners() {
         if (!overlay) return;
 
         if (e.target.value === "bottom") {
-            overlay.style.bottom = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+            overlay.style.bottom = `${window.subtitleConfig.heightVH}vh`;
             overlay.style.top = "auto";
             overlay.style.transform = "translateX(-50%)";
         } else if (e.target.value === "top") {
-            overlay.style.top = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+            overlay.style.top = `${window.subtitleConfig.heightVH}vh`;
             overlay.style.bottom = "auto";
             overlay.style.transform = "translateX(-50%)";
         } else if (e.target.value === "center") {
@@ -243,7 +244,30 @@ function bindControlPanelListeners() {
         }
     });
 
+    // "Height" slider changes
+    document.getElementById("slider-height")?.addEventListener("input", e => {
+        const height = parseFloat(e.target.value);
+        window.subtitleConfig.heightVH = height;
 
+        const overlay = document.getElementById("custom-subtitle-overlay");
+        if (!overlay) return;
+
+        const position = window.subtitleConfig.position;
+
+        if (position === "bottom") {
+            overlay.style.bottom = `${height}vh`;
+            overlay.style.top = "auto";
+            overlay.style.transform = "translateX(-50%)";
+        } else if (position === "top") {
+            overlay.style.top = `${height}vh`;
+            overlay.style.bottom = "auto";
+            overlay.style.transform = "translateX(-50%)";
+        } else if (position === "center") {
+            overlay.style.top = "50%";
+            overlay.style.bottom = "auto";
+            overlay.style.transform = "translate(-50%, -50%)";
+        }
+    });
 
     // When translation dropdown changes
     document.getElementById("translation-setting")?.addEventListener("change", e => {
@@ -254,8 +278,6 @@ function bindControlPanelListeners() {
     document.getElementById("pinyin-setting")?.addEventListener("change", e => {
         window.subtitleConfig.pinyin = e.target.value;
     });
-
-
 
     // Bind auto-pause
     document.getElementById("auto-pause-setting")?.addEventListener("change", e => {
