@@ -1,135 +1,40 @@
 // === helper_scripts/preprocessed.js ===
 
-// This function begins the enriched subtitle rendering process.
-// It fetches the subtitle JSON, synchronizes it with video playback,
-// and continually updates the subtitle overlay based on current time.
-
+// Interval handle for polling loop and optional pause scheduling
 let preprocessedInterval = null;
+let autoPauseTimeout = null;
 
+/**
+ * Entry point: starts preprocessed subtitle mode.
+ * Loads enriched JSON, initializes overlay container, begins polling loop.
+ */
 function runPreprocessedMode(lingqTerms, filename) {
   console.log(`📦 Preprocessed subtitle mode enabled. Loading: ${filename}`);
   window.lingqTerms = lingqTerms;
 
-  // 🔄 Update control panel to indicate that we are in preprocessed mode
-  if (typeof updateModeDisplay === "function") {
-    updateModeDisplay("Preprocessed");
-  }
+  updateModeDisplay("Preprocessed");        // Show current mode in control panel
+  clearSubtitleOverlay();                   // Clear existing overlay
+  createOverlayContainer();                 // Ensure overlay element is available
 
-  clearSubtitleOverlay();        // Ensure clean state before loading new subtitles
-  createOverlayContainer();      // Recreate overlay (ensures styles/tooltips are attached)
-
-  // Load the enriched subtitle JSON file from the extension's resource path
+  // Fetch enriched subtitles from the packaged JSON file
   fetch(chrome.runtime.getURL(filename))
     .then(res => res.json())
     .then(enrichedSubs => {
-      window.subtitleList = enrichedSubs;  // Store subtitles globally for navigation
-      let lastRenderedIndex = -1;  // Prevent re-rendering the same subtitle
+      window.subtitleList = enrichedSubs;
 
-      // 🔁 Clear any previously running subtitle polling interval to prevent duplicate rendering
+      // Stop existing loop if switching videos/modes
       if (preprocessedInterval) {
         clearInterval(preprocessedInterval);
         preprocessedInterval = null;
       }
-          
-      let autoPauseTimeout = null;
-      let lastPausedIndex = -1;
 
-      // Set up a polling loop that runs every 300ms to sync subtitles with playback
-      preprocessedInterval = setInterval(() => {
-        const video = findPlexVideoElement();
-        if (!video) return;
-
-        const currentTime = video.currentTime;
-
-        // // Detect if repeated subtitle, for purposes of auto-pause
-        // let isRepeatedSubtitle = false;
-        // const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
-        // const nextSub = enrichedSubs[currentIndex + 1];
-
-        let active;
-        if (window.subtitleConfig.useContinuous) {
-          for (let i = enrichedSubs.length - 1; i >= 0; i--) {
-            if (currentTime >= enrichedSubs[i].start) {
-              active = enrichedSubs[i];
-              break;
-            }
-          }
-        } else {
-          active = enrichedSubs.find(s => currentTime >= s.start && currentTime <= s.end);
-        }
-
-        // 🧱 Bail out early if no active subtitle (non-continuous mode)
-        if (!active) {
-          const container = document.getElementById("custom-subtitle-overlay");
-          if (container && !window.subtitleConfig.useContinuous) {
-            container.innerHTML = "";
-            window.lastRenderedText = "";
-          }
-          return;
-        }
-
-        // ✅ Only run this if `active` is defined:
-        let isRepeatedSubtitle = false;
-        const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
-        const nextSub = enrichedSubs[currentIndex + 1];
-
-        if (nextSub && nextSub.text && nextSub.text.trim() === active.text.trim()) {
-          isRepeatedSubtitle = true;
-        }
-
-        // If no subtitle should be shown right now, clear the overlay
-        if (!active) {
-          if (!window.subtitleConfig.useContinuous) {
-            const container = document.getElementById("custom-subtitle-overlay");
-            if (container) {
-              container.innerHTML = "";
-              window.lastRenderedText = "";
-            }
-          }
-          return;
-        }
-
-        // Skip if the current subtitle is the same as last rendered
-        if (active.start === lastRenderedIndex) return;
-
-        // Update global state and render the new subtitle
-        lastRenderedIndex = active.start;
-        window.lastSubtitleStartTime = active.start;
-        window.lastRenderedText = active.text;
-        
-        const container = document.getElementById("custom-subtitle-overlay");
-        if (!container) return;  // Don't render if container is gone
-
-        renderPreprocessedLine(active, lingqTerms);
-
-        // Auto-pause if setting is set, and not repeated subittle
-        if (window.subtitleConfig.autoPause && active.end !== lastPausedIndex && !isRepeatedSubtitle) {
-          clearTimeout(autoPauseTimeout); // Cancel previous pause
-
-          const video = findPlexVideoElement();
-          const now = video?.currentTime ?? 0;
-          const extra = window.subtitleConfig.autoPauseDelayMs || 0;
-          const delay = Math.max(0, (active.end - now) * 1000 + extra);
-
-
-          autoPauseTimeout = setTimeout(() => {
-            const v = findPlexVideoElement();
-            if (v && !v.paused) {
-              v.pause();
-              console.log("⏸️ Auto-paused at subtitle end");
-            }
-          }, delay);
-
-          lastPausedIndex = active.end;
-        }
-      }, 300);
+      // Begin polling playback time to sync subtitles
+      startPollingLoop(enrichedSubs, lingqTerms);
     });
-  
-  // Define reRender function for pre-processed mode (for purposes of changing LingQ color status)
-  window.reRenderCurrentSubtitle = () => {
-    if (!window.subtitleList || !window.lastSubtitleStartTime) return;
 
-    const currentSub = window.subtitleList.find(
+  // Re-render current subtitle when config (e.g., pinyin visibility) changes
+  window.reRenderCurrentSubtitle = () => {
+    const currentSub = window.subtitleList?.find(
       s => s.start === window.lastSubtitleStartTime
     );
     if (!currentSub) return;
@@ -142,100 +47,209 @@ function runPreprocessedMode(lingqTerms, filename) {
   };
 }
 
-// Render a single enriched subtitle line into the overlay container.
-// Adds color, pinyin, tooltip definitions, and on-hover translation.
-function renderPreprocessedLine(sub, lingqTerms) {
-  console.log("🔁 renderPreprocessedLine called with:", sub.text);
-  const container = document.getElementById("custom-subtitle-overlay");
-  container.innerHTML = "";  // Clear previous subtitle line
+/**
+ * Polls every 300ms to determine which subtitle should be displayed.
+ * Uses current video time to find appropriate entry in enriched subtitle list.
+ */
+function startPollingLoop(enrichedSubs, lingqTerms) {
+  let lastRenderedIndex = -1;
+  let lastPausedIndex = -1;
 
-  // 🔄 Update sentence explanation in the control panel (if available)
-  if (typeof updateCurrentExplanation === "function") {
-    updateCurrentExplanation(sub.explanation || "");
-  }
+  preprocessedInterval = setInterval(() => {
+    const video = findPlexVideoElement();
+    if (!video) return;
 
-  // Wrapper contains the full line (Chinese subtitle + translation)
+    const currentTime = video.currentTime;
+
+    // Decide whether to use continuous vs. normal subtitle display mode
+    const active = window.subtitleConfig.useContinuous
+      ? getMostRecentSubtitle(currentTime, enrichedSubs)
+      : getActiveSubtitle(currentTime, enrichedSubs);
+
+    if (!active) {
+      clearInactiveOverlayIfNeeded();
+      return;
+    }
+
+    if (active.start === lastRenderedIndex) return;
+
+    const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
+    const nextSub = enrichedSubs[currentIndex + 1];
+    const isRepeated = nextSub && nextSub.text?.trim() === active.text?.trim();
+
+    renderSubtitle(active, lingqTerms);
+    lastRenderedIndex = active.start;
+
+    if (shouldAutoPause(active, lastPausedIndex, isRepeated)) {
+      scheduleAutoPause(active.end, () => {
+        const v = findPlexVideoElement();
+        if (v && !v.paused) {
+          v.pause();
+          console.log("⏸️ Auto-paused at subtitle end");
+        }
+      });
+      lastPausedIndex = active.end;
+    }
+  }, 300);
+}
+
+/**
+ * Creates and styles the outer wrapper, main line, and translation divs
+ * for subtitle rendering. Handles translation visibility modes.
+ *
+ * @param {string} translationText - The subtitle translation text to display
+ * @returns {{ wrapper: HTMLElement, mainLine: HTMLElement, translation: HTMLElement }}
+ */
+function createSubtitleWrapper(translationText) {
   const wrapper = document.createElement("div");
-  wrapper.style.display = "flex";                     // Stack children vertically
-  wrapper.style.flexDirection = "column";             // Ensure vertical stacking order
-  wrapper.style.alignItems = "center";                // Center content horizontally
-  wrapper.style.cursor = "pointer";                   // Show pointer cursor on hover
-  wrapper.style.marginTop = "4px";                    // Add some spacing above
+  wrapper.style.display = "flex";
+  wrapper.style.flexDirection = "column";
+  wrapper.style.alignItems = "center";
+  wrapper.style.cursor = "pointer";
+  wrapper.style.marginTop = "4px";
 
-  // Main subtitle line with Chinese characters and annotations
   const mainLine = document.createElement("div");
-  mainLine.style.display = "inline-block";            // Allow inline behavior
-  mainLine.style.verticalAlign = "bottom";            // Align with other inline content if needed
-  mainLine.style.position = "relative";               // Enable tooltip positioning if needed
-  mainLine.style.textAlign = "center";                // Center the Chinese text
+  mainLine.style.display = "inline-block";
+  mainLine.style.verticalAlign = "bottom";
+  mainLine.style.position = "relative";
+  mainLine.style.textAlign = "center";
 
-  // Translation line (shown only on hover)
   const translation = document.createElement("div");
-  translation.textContent = sub.translation || "";
-  translation.style.fontSize = "0.5em";               // Smaller font size for translation
-  translation.style.color = "#ccc";                   // Light gray text color
-  translation.style.marginTop = "4px";                // Spacing between Chinese and translation
-  translation.style.whiteSpace = "normal";            // Allow line wrapping when needed
-  translation.style.wordBreak = "break-word";         // Break long words if needed
-  translation.style.textAlign = "center";             // Center the translation text
-  translation.style.maxWidth = "90vw";                // Prevent overflowing the viewport width
-  translation.style.minHeight = "1em";                // Reserve height even when hidden or empty
+  translation.textContent = translationText || "";
+  translation.style.fontSize = "0.5em";
+  translation.style.color = "#ccc";
+  translation.style.marginTop = "4px";
+  translation.style.whiteSpace = "normal";
+  translation.style.wordBreak = "break-word";
+  translation.style.textAlign = "center";
+  translation.style.maxWidth = "90vw";
+  translation.style.minHeight = "1em";
 
-  // Toggle visibility of the translation on hover
-  const visibilitySetting = window.subtitleConfig.translation;
-
-  if (visibilitySetting === "off") {
+  // Configure visibility based on translation setting
+  const visibility = window.subtitleConfig.translation;
+  if (visibility === "off") {
     translation.style.visibility = "hidden";
-  } else if (visibilitySetting === "on-hover") {
-    translation.style.visibility = "hidden"; // hidden by default
+  } else if (visibility === "on-hover") {
+    translation.style.visibility = "hidden";
     wrapper.addEventListener("mouseenter", () => {
       translation.style.visibility = "visible";
     });
     wrapper.addEventListener("mouseleave", () => {
       translation.style.visibility = "hidden";
     });
-  } else if (visibilitySetting === "always") {
+  } else if (visibility === "always") {
     translation.style.visibility = "visible";
   }
-    
-  // Process each segmented word or character in the subtitle line
+
+  return { wrapper, mainLine, translation };
+}
+
+
+/**
+ * Renders a subtitle line by generating annotated spans for each word
+ * and displaying a translation block with hover/visibility rules.
+ */
+function renderPreprocessedLine(sub, lingqTerms) {
+  console.log("🔁 renderPreprocessedLine called with:", sub.text);
+
+  const container = document.getElementById("custom-subtitle-overlay");
+  container.innerHTML = "";
+
+  updateCurrentExplanation(sub.explanation || "");
+
+  // Create wrapper, mainline, and translation divs
+  const { wrapper, mainLine, translation } = createSubtitleWrapper(sub.translation);
+
+  // Create one annotated span per segmented word
   sub.segmented.forEach(entry => {
     const word = entry.word;
     const pinyin = entry.pinyin;
     const status = lingqTerms[word];
     const meaning = sub.word_meanings?.find(w => w.word === word)?.meaning || "";
 
-    const wrapper = createWordWrapper({ word, pinyin, status, meaning });
-    mainLine.appendChild(wrapper);
+    const wordSpan = createWordWrapper({ word, pinyin, status, meaning });
+    mainLine.appendChild(wordSpan);
   });
 
-  // Combine everything and inject into the DOM
   wrapper.appendChild(mainLine);
   wrapper.appendChild(translation);
   container.appendChild(wrapper);
 }
 
-// Re-renders subtitle given state of LingQ status
-window.reRenderCurrentSubtitle = () => {
-  if (!window.subtitleList || !window.lastSubtitleStartTime) return;
+/**
+ * Gets the subtitle currently covering the playback time (normal mode).
+ */
+function getActiveSubtitle(currentTime, subs) {
+  return subs.find(s => currentTime >= s.start && currentTime <= s.end);
+}
 
-  const currentSub = window.subtitleList.find(
-    s => s.start === window.lastSubtitleStartTime
-  );
-  if (!currentSub) return;
+/**
+ * Gets the most recent subtitle that started before current time (continuous mode).
+ */
+function getMostRecentSubtitle(currentTime, subs) {
+  for (let i = subs.length - 1; i >= 0; i--) {
+    if (currentTime >= subs[i].start) return subs[i];
+  }
+  return null;
+}
 
+/**
+ * Clears overlay display when no subtitle is active.
+ */
+function clearInactiveOverlayIfNeeded() {
+  if (!window.subtitleConfig.useContinuous) {
+    const container = document.getElementById("custom-subtitle-overlay");
+    if (container) {
+      container.innerHTML = "";
+      window.lastRenderedText = "";
+    }
+  }
+}
+
+/**
+ * Handles overlay and state update for a given subtitle line.
+ */
+function renderSubtitle(sub, lingqTerms) {
   const container = document.getElementById("custom-subtitle-overlay");
   if (!container) return;
 
-  container.innerHTML = "";
-  renderPreprocessedLine(currentSub, window.lingqTerms || {});
-};
+  renderPreprocessedLine(sub, lingqTerms);
 
-// Stops pre-processed mode (for the purposes of switching to a new video)
+  window.lastSubtitleStartTime = sub.start;
+  window.lastRenderedText = sub.text;
+}
+
+/**
+ * Determines if auto-pause should trigger based on current config and context.
+ */
+function shouldAutoPause(active, lastPausedIndex, isRepeated) {
+  return (
+    window.subtitleConfig.autoPause &&
+    active.end !== lastPausedIndex &&
+    !isRepeated
+  );
+}
+
+/**
+ * Sets a timeout to auto-pause playback after the subtitle ends.
+ */
+function scheduleAutoPause(endTime, callback) {
+  clearTimeout(autoPauseTimeout);
+  const now = findPlexVideoElement()?.currentTime ?? 0;
+  const extra = window.subtitleConfig.autoPauseDelayMs || 0;
+  const delay = Math.max(0, (endTime - now) * 1000 + extra);
+  autoPauseTimeout = setTimeout(callback, delay);
+}
+
+/**
+ * Stops preprocessed mode when switching videos or subtitle modes.
+ */
 window.stopPreprocessedMode = function () {
   if (preprocessedInterval) {
     clearInterval(preprocessedInterval);
     preprocessedInterval = null;
     console.log("🛑 Preprocessed subtitle polling stopped");
   }
+  clearTimeout(autoPauseTimeout);
+  autoPauseTimeout = null;
 };
