@@ -36,7 +36,8 @@ window.subtitleConfig = {
   fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
   position: "bottom",     // Screen position of subtitles: "bottom" or "top"
   explanations: false,     // Toggle for sentence explanation box (handled externally)
-  autoPause: false
+  autoPause: false,
+  visibility: "on"        // NEW: "off", "on", "on-stop"
 };
 
 //////////////////////////////
@@ -83,8 +84,8 @@ function createControlPanel() {
     position: "fixed",
     top: 0,
     right: 0,
-    width: "205px",
-    height: "500px",
+    width: "250px",
+    height: "800px",
     zIndex: 99997,
     backgroundColor: "transparent",
     pointerEvents: "auto"
@@ -122,6 +123,7 @@ function createControlPanel() {
     pointerEvents: "none",
     transition: "right 0.3s ease, opacity 0.3s ease"
   });
+
 
   document.body.appendChild(panel);
 
@@ -206,4 +208,40 @@ function bindControlPanelListeners() {
     document.getElementById("auto-pause-setting")?.addEventListener("change", e => {
         window.subtitleConfig.autoPause = e.target.checked;
     });
-}
+
+    // 🔄 Blur dropdowns after interaction to restore spacebar
+    panel.querySelectorAll("select").forEach(select => {
+        select.addEventListener("change", e => {
+        e.target.blur(); // remove keyboard focus
+        document.activeElement.blur(); // ensure global blur
+        setTimeout(() => document.body.focus(), 0); // restore body focus on next tick
+        });
+
+        // Also prevent keys from sticking to select after blur
+        select.addEventListener("keydown", e => {
+        if ([" ", "ArrowDown", "ArrowUp"].includes(e.key)) {
+            e.preventDefault(); // stop the key from triggering dropdown navigation
+            e.target.blur();    // force blur
+            setTimeout(() => document.body.focus(), 0); // refocus body
+        }
+        });
+    });
+
+      // 🔄 Blur range sliders after interaction to restore spacebar
+    panel.querySelectorAll('input[type="range"]').forEach(slider => {
+        slider.addEventListener("change", e => {
+        e.target.blur();
+        document.activeElement.blur();
+        setTimeout(() => document.body.focus(), 0);
+        });
+
+        slider.addEventListener("keydown", e => {
+        if ([" ", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+            e.preventDefault();
+            e.target.blur();
+            setTimeout(() => document.body.focus(), 0);
+        }
+        });
+    });
+
+    }
