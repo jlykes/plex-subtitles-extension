@@ -39,6 +39,7 @@ window.subtitleConfig = {
     pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
     translation: "hover",   // When to show translations: "off", "hover", "always"
     autoPause: false,       // Auto-pause subtitles: "on", "off"
+    autoPauseDelayMs: 200,  // Auto-pause delay in ms after subtitle ends (since sometimes ends to early)
     explanations: false     // Toggle for sentence explanation box (handled externally)
 };
 
@@ -290,6 +291,13 @@ function bindControlPanelListeners() {
     // "Auto-pause" dropdown changes
     document.getElementById("dropdown-auto-pause")?.addEventListener("change", e => {
         window.subtitleConfig.autoPause = e.target.value === "on";
+    })
+
+    // "Auto-pause delay" slider changes
+
+    document.getElementById("slider-autopause-delay")?.addEventListener("input", e => {
+        const val = parseInt(e.target.value);
+        window.subtitleConfig.autoPauseDelayMs = val;
     });
 
     ////////////////////////////////////

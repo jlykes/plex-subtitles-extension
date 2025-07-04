@@ -54,6 +54,16 @@ function runPreprocessedMode(lingqTerms, filename) {
           active = enrichedSubs.find(s => currentTime >= s.start && currentTime <= s.end);
         }
 
+
+        // Detect if repeated subtitle, for purposes of auto-pause
+        let isRepeatedSubtitle = false;
+        const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
+        const nextSub = enrichedSubs[currentIndex + 1];
+
+        if (nextSub && nextSub.text && nextSub.text.trim() === active.text.trim()) {
+          isRepeatedSubtitle = true;
+        }
+
         // If no subtitle should be shown right now, clear the overlay
         if (!active) {
           if (!USE_CONTINUOUS_SUBTITLES) {
@@ -79,13 +89,15 @@ function runPreprocessedMode(lingqTerms, filename) {
 
         renderPreprocessedLine(active, lingqTerms);
 
-        // Auto-pause if setting is set
-        if (window.subtitleConfig.autoPause && active.end !== lastPausedIndex) {
+        // Auto-pause if setting is set, and not repeated subittle
+        if (window.subtitleConfig.autoPause && active.end !== lastPausedIndex && !isRepeatedSubtitle) {
           clearTimeout(autoPauseTimeout); // Cancel previous pause
 
           const video = findPlexVideoElement();
           const now = video?.currentTime ?? 0;
-          const delay = Math.max(0, (active.end - now) * 1000);  // Convert seconds to ms
+          const extra = window.subtitleConfig.autoPauseDelayMs || 0;
+          const delay = Math.max(0, (active.end - now) * 1000 + extra);
+
 
           autoPauseTimeout = setTimeout(() => {
             const v = findPlexVideoElement();
@@ -100,7 +112,7 @@ function runPreprocessedMode(lingqTerms, filename) {
       }, 300);
     });
   
-  // Define reRender function for pre-processed mode (for purposes of chaing LingQ color status)
+  // Define reRender function for pre-processed mode (for purposes of changing LingQ color status)
   window.reRenderCurrentSubtitle = () => {
     if (!window.subtitleList || !window.lastSubtitleStartTime) return;
 
