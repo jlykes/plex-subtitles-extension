@@ -106,7 +106,7 @@ function createControlPanel() {
   Object.assign(panel.style, {
     position: "fixed",
     top: "12px",
-    right: "12px",
+    right: "-280px",
     backgroundColor: "rgba(34,34,34,0.85)",
     color: "#fff",
     padding: "18px",
@@ -120,7 +120,7 @@ function createControlPanel() {
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
     opacity: "0",
     pointerEvents: "none",
-    transition: "opacity 0.1s ease"
+    transition: "right 0.3s ease, opacity 0.3s ease"
   });
 
   document.body.appendChild(panel);
@@ -137,6 +137,7 @@ function createControlPanel() {
     clearTimeout(hideTimeout);
     hoverActive = true;
     panel.style.opacity = "1";
+    panel.style.right = "12px";  // Slide in
     panel.style.pointerEvents = "auto";
   }
 
@@ -146,6 +147,7 @@ function createControlPanel() {
     hideTimeout = setTimeout(() => {
       if (!hoverActive) {
         panel.style.opacity = "0";
+        panel.style.right = "-280px";  // Slide out
         panel.style.pointerEvents = "none";
       }
     }, 300);
