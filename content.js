@@ -23,7 +23,6 @@ const ENABLE_LINGQ_COLORING = true;
 const SUBTITLE_POSITION = "bottom";
 
 // Subtitle text display formatting
-const SUBTITLE_FONT_SIZE_VH = 5.5;
 const SUBTITLE_LINE_HEIGHT = 1.1;
 const SUBTITLE_BOTTOM_OFFSET_VH = 15;
 const SUBTITLE_MAX_WIDTH_VW = 90;

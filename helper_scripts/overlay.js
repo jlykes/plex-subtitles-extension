@@ -20,7 +20,7 @@ function createOverlayContainer() {
   container.style.transform = "translateX(-50%)";
 
   // Sizing and styling
-  container.style.fontSize = `${SUBTITLE_FONT_SIZE_VH}vh`;
+  container.style.fontSize = `${window.subtitleConfig.fontSizeVH}vh`;
   container.style.lineHeight = SUBTITLE_LINE_HEIGHT;
   container.style.zIndex = "9999";
   container.style.pointerEvents = "auto";         // Allow interaction with subtitles (e.g., copy)

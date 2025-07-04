@@ -196,7 +196,9 @@ function bindControlPanelListeners() {
     const panel = document.getElementById("subtitle-control-panel");
     if (!panel) return;
 
-    // When visbility dropdown chagnes
+    // == APPEARANCE ==
+
+    // Visibility dropdown
     document.getElementById("dropdown-visibility")?.addEventListener("change", e=> {
         window.subtitleConfig.visibility = e.target.value;
         updateSubtitleVisibility();
@@ -209,6 +211,17 @@ function bindControlPanelListeners() {
         video.addEventListener("play", updateSubtitleVisibility);
     }
 
+    // Size slider adjusted
+    document.getElementById("slider-size")?.addEventListener("input", e => {
+        const size = parseFloat(e.target.value);
+        window.subtitleConfig.fontSizeVH = size;
+
+        // Update font size immediately on subtitle overlay
+        const overlay = document.getElementById("custom-subtitle-overlay");
+        if (overlay) overlay.style.fontSize = `${size}vh`;
+    });
+
+
     // When translation dropdown changes
     document.getElementById("translation-setting")?.addEventListener("change", e => {
         window.subtitleConfig.translation = e.target.value;
@@ -217,17 +230,6 @@ function bindControlPanelListeners() {
     // When pinyin dropdown changes
     document.getElementById("pinyin-setting")?.addEventListener("change", e => {
         window.subtitleConfig.pinyin = e.target.value;
-    });
-
-    // When font size slider is adjusted
-    document.getElementById("slider-size")?.addEventListener("input", e => {
-        const size = parseFloat(e.target.value);
-        window.subtitleConfig.fontSizeVH = size;
-        document.getElementById("slider-size").textContent = `${size}vh`;
-
-        // Update font size immediately on subtitle overlay
-        const overlay = document.getElementById("custom-subtitle-overlay");
-        if (overlay) overlay.style.fontSize = `${size}vh`;
     });
 
     // When position dropdown changes
