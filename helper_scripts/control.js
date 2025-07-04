@@ -93,7 +93,7 @@ async function createControlPanel() {
     top: 0,
     right: 0,
     width: "250px",
-    height: "800px",
+    height: "600px",
     zIndex: 99997,
     backgroundColor: "transparent",
     pointerEvents: "auto"
