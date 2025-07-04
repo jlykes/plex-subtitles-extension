@@ -203,7 +203,9 @@ function bindControlPanelListeners() {
     const panel = document.getElementById("subtitle-control-panel");
     if (!panel) return;
 
+    /////////////////////
     // == APPEARANCE ==
+    /////////////////////
 
     // "Visibility" dropdown changes
     document.getElementById("dropdown-visibility")?.addEventListener("change", e=> {
@@ -285,6 +287,15 @@ function bindControlPanelListeners() {
         }
     });
 
+    // "Auto-pause" dropdown changes
+    document.getElementById("dropdown-auto-pause")?.addEventListener("change", e => {
+        window.subtitleConfig.autoPause = e.target.value === "on";
+    });
+
+    ////////////////////////////////////
+    // == NEED TO CHECK ==
+    ////////////////////////////////////
+    
     // When translation dropdown changes
     document.getElementById("translation-setting")?.addEventListener("change", e => {
         window.subtitleConfig.translation = e.target.value;
@@ -295,10 +306,10 @@ function bindControlPanelListeners() {
         window.subtitleConfig.pinyin = e.target.value;
     });
 
-    // Bind auto-pause
-    document.getElementById("auto-pause-setting")?.addEventListener("change", e => {
-        window.subtitleConfig.autoPause = e.target.checked;
-    });
+
+    ////////////////////////////////////
+    // == BLOCK KEYBOARD INTERACTION ==
+    ////////////////////////////////////
 
     // 🔄 Blur dropdowns after interaction to restore spacebar
     panel.querySelectorAll("select").forEach(select => {

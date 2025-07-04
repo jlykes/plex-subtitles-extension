@@ -79,6 +79,7 @@ function runPreprocessedMode(lingqTerms, filename) {
 
         renderPreprocessedLine(active, lingqTerms);
 
+        // Auto-pause if setting is set
         if (window.subtitleConfig.autoPause && active.end !== lastPausedIndex) {
           clearTimeout(autoPauseTimeout); // Cancel previous pause
 
