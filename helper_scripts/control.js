@@ -37,9 +37,9 @@ window.subtitleConfig = {
     position: "bottom",     // Screen position of subtitles: "bottom", "top", "center"
     heightVH: 16,           // Subtitle offset from top/bottom in vh (viewport height units) 
     lingqStatus: "on",      // Show or hide LingQ color underlines: "on", or "off"
-    pinyin: "all",          // When to show pinyin: "none", "unknown only", or "all"
-    toneColor: "on",        // When to show tone color: "none", "unknown only", "all"
-    translation: "on-hover",   // When to show translations: "off", "hover", "always"
+    pinyin: "unknown-only",          // When to show pinyin: "none", "unknown-only", or "all"
+    toneColor: "all",        // When to show tone color: "none", "unknown-only", "all"
+    translation: "on-hover",   // When to show translations: "off", "on-hover", "always"
     
     // Behavior
     useContinuous: true,   // Enable continuous mode where subs stay up until next one: "on", "off"
@@ -292,10 +292,14 @@ function bindControlPanelListeners() {
         }
     });
 
-    // NEED TO CHECK
     // "Pinyin" dropdown changes
-    document.getElementById("pinyin-setting")?.addEventListener("change", e => {
+    document.getElementById("dropdown-pinyin")?.addEventListener("change", e => {
         window.subtitleConfig.pinyin = e.target.value;
+
+        // 🔁 Force re-render of current subtitle line
+        if (typeof window.reRenderCurrentSubtitle === "function") {
+            window.reRenderCurrentSubtitle();
+        }
     });
 
     // "Tone color" dropdown changes

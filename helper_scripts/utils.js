@@ -71,11 +71,11 @@ function getToneColor(pinyin) {
     : 5;
 
   switch (tone) {
-    case 1: return "#ffaaaa"; // light red
-    case 2: return "#ffffaa"; // light yellow
-    case 3: return "#aaffaa"; // light green
-    case 4: return "#aaaaff"; // light blue
-    default: return "#cccccc"; // light gray
+    case 1: return "#f8c2c2"; // tone 1: soft red
+    case 2: return "#f8f2b2"; // tone 2: muted yellow
+    case 3: return "#baf5c6"; // tone 3: pastel green
+    case 4: return "#a8d2f0"; // tone 4: sky blue
+    default: return "#dddddd"; // neutral tone: light gray
   }
 }
 

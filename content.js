@@ -16,9 +16,6 @@
 // 1. CONFIG & CONSTANTS
 //////////////////////////////
 
-// These settings control visual and behavior parameters for the overlay
-const SHOW_PINYIN = true;
-
 // Subtitle text display formatting
 const SUBTITLE_LINE_HEIGHT = 1.1;
 const SUBTITLE_MAX_WIDTH_VW = 90;

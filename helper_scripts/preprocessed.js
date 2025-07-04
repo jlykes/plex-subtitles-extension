@@ -263,57 +263,6 @@ function renderPreprocessedLine(sub, lingqTerms) {
       wordWrapper.classList.remove("hover-highlight");
     });
 
-    // // Annotate with ruby + pinyin + tone color if enabled and appropriate
-    // if (!isPunct && SHOW_PINYIN && (window.subtitleConfig.toneColor === "all" || status !== 3)) {
-    //   const ruby = document.createElement("ruby");
-    //   const charList = [...word];
-    //   const pinyinList = (pinyin || "").split(" ");
-
-    //   charList.forEach((char, i) => {
-    //     const charSpan = document.createElement("span");
-    //     charSpan.textContent = char;
-    //     charSpan.style.margin = "0";
-
-    //     // Determine tone coloring eligibility
-    //     const colorMode = window.subtitleConfig.toneColor;
-    //     const eligible =
-    //       colorMode === "all" ||
-    //       (colorMode === "unknown-only" && status !== 3);  // not known
-
-    //     const rt = document.createElement("rt");
-    //     rt.textContent = pinyinList[i] || "";
-
-    //     if (eligible && pinyinList[i]) {
-    //       charSpan.style.color = getToneColor(pinyinList[i]);
-    //       rt.style.color = getToneColor(pinyinList[i]);
-    //     } else {
-    //       charSpan.style.color = "white";
-    //     }
-
-    //     const rubyChar = document.createElement("ruby");
-    //     rubyChar.appendChild(charSpan);
-    //     rubyChar.appendChild(rt);
-
-    //     ruby.appendChild(rubyChar);
-    //   });
-
-    //   wordWrapper.appendChild(ruby);
-    // } else {
-    //   // If punctuation or no pinyin, just create a styled span
-    //   const span = document.createElement("span");
-    //   span.textContent = word;
-    //   span.style.margin = "0";
-    //   span.style.color = "white";
-
-    //   if (!isPunct && underlineColor) {
-    //     span.style.borderBottom = `0.1em solid ${underlineColor}`;
-    //     span.style.paddingBottom = "2px";
-    //     span.style.borderRadius = "0.05em";
-    //   }
-
-    //   wordWrapper.appendChild(span);
-    // }
-
     // Read tone coloring mode from config: "none", "all", or "unknown-only"
     const toneMode = window.subtitleConfig.toneColor;
 
@@ -323,8 +272,8 @@ function renderPreprocessedLine(sub, lingqTerms) {
     const shouldColor = toneMode === "all" || (toneMode === "unknown-only" && status !== 3);
 
     // Determine whether to show pinyin (Ruby annotation)
-    // This is controlled independently by SHOW_PINYIN now
-    const showPinyin = SHOW_PINYIN;
+    const pinyinSetting = window.subtitleConfig.pinyin; // "none", "unknown-only", or "all"
+    const shouldShowPinyin = pinyinSetting === "all" || (pinyinSetting === "unknown-only" && status !== 3);
 
     const charList = [...word];
     const pinyinList = (pinyin || "").split(" ");
@@ -344,7 +293,8 @@ function renderPreprocessedLine(sub, lingqTerms) {
         charSpan.style.color = "white";
       }
 
-      if (showPinyin && !isPunct) {
+      // Determine whether to apply pinyin ruby
+      if (!isPunct && shouldShowPinyin) {
         // Create ruby text (pinyin)
         const rt = document.createElement("rt");
         rt.textContent = pinyinList[i] || "";
