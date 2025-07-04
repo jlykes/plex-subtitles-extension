@@ -141,7 +141,6 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
   const isPunct = isPunctuationDigitOrSpace(word);
 
   // === Determine settings from global subtitle config ===
-
   const underlineColor =
     config.lingqStatus === "on" && !isPunct ? getUnderlineColor(status) : null;
 
@@ -153,19 +152,17 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
     config.pinyin === "all" ||
     (config.pinyin === "unknown-only" && status !== 3);
 
+  
   // === Split characters and corresponding pinyin ===
-
   const charList = [...word]; // Split Chinese word into characters
   const pinyinList = (pinyin || "").split(" "); // One pinyin per char
 
   // === Create wrapper for the full word ===
-
   const wrapper = document.createElement("span");
   wrapper.style.position = "relative";
   wrapper.style.display = "inline-block";
 
   // === Add underline if applicable ===
-
   if (underlineColor) {
     wrapper.style.borderBottom = `0.1em solid ${underlineColor}`;
     wrapper.style.paddingBottom = "2px";
@@ -173,7 +170,6 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
   }
 
   // === Add tooltip (hover definition), if present ===
-
   if (meaning) {
     const tooltip = document.createElement("div");
     tooltip.textContent = meaning;
@@ -207,7 +203,6 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
   }
 
   // === Render each character with pinyin and tone color if needed ===
-
   charList.forEach((char, i) => {
     const span = document.createElement("span");
     span.textContent = char;

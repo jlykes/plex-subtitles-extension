@@ -6,6 +6,7 @@
 // Global reference to the MutationObserver so we can disconnect it later if needed
 let liveSubtitleObserver = null;
 
+
 // This function monitors DOM mutations to detect live subtitle changes on Plex
 function waitForSubtitles(lingqTerms, segmentit) {
   updateModeDisplay("Live");
@@ -49,6 +50,7 @@ function waitForSubtitles(lingqTerms, segmentit) {
   console.log("👀 Watching for Plex subtitles...");
 }
 
+
 // Replaces the live subtitle text with a styled overlay.
 // Performs segmentation of Chinese text, looks up LingQ status, colors accordingly,
 // and optionally annotates with pinyin using ruby tags.
@@ -56,6 +58,7 @@ function updateOverlay(text, lingqTerms, segmentit) {
   window.lastLiveSubtitle = text;
   renderLiveLine(text, lingqTerms, segmentit);
 }
+
 
 // Function to render a subtitle in live mode
 function renderLiveLine(text, lingqTerms, segmentit) {

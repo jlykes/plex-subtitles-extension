@@ -11,9 +11,61 @@
 // the special class HTMLMedia-mediaElement-u17S9P). This avoids rendering it
 // on non-Plex tabs or pages without active video playback.
 
+
 //////////////////////////////
-// 0. CLEANUP FUNCTION
+// 1. GLOBAL CONFIG OBJECT
 //////////////////////////////
+
+// Shared configuration for subtitle appearance and behavior.
+// This global object is modified by the control panel and read by
+// the rendering logic in `live.js` and `preprocessed.js`.
+window.subtitleConfig = {
+  // === Appearance Settings ===
+  visibility: "on",            // "off", "on", or "on-stop"
+  fontSizeVH: 5.5,             // Subtitle font size (in viewport height units)
+  position: "bottom",          // "bottom", "top", or "center"
+  heightVH: 16,                // Subtitle offset from top/bottom in vh (viewport height units) 
+  lingqStatus: "on",           // LingQ status display: "on", "unknown-only", or "off"
+  pinyin: "unknown-only",      // Pinyin display mode: "none", "unknown-only", or "all"
+  toneColor: "all",             // Whether to color characters by tone (true/false)
+  translation: "on-hover",     // Translation visibility: "off", "on-hover", or "always"
+
+  // === Behavior Settings ===
+  useContinuous: true,         // Keep last subtitle shown after time range ends
+  autoPause: false,            // Automatically pause video when subtitle ends
+  autoPauseDelayMs: 200        // Delay (ms) before pausing video
+};
+
+//////////////////////////////
+// 2. PANEL INITIALIZATION
+//////////////////////////////
+
+/**
+ * Creates the control panel DOM elements and binds all event listeners.
+ * Called once per page load when the overlay is injected.
+ */
+async function createControlPanel() {
+  if (document.querySelector("#subtitle-control-panel")) return; // Avoid duplicate insertion
+
+  const trigger = createPanelHoverTrigger();
+  document.body.appendChild(trigger);
+
+  const panel = createPanelContainer();
+  document.body.appendChild(panel);
+
+  // Load HTML content from extension directory
+  const html = await fetch(chrome.runtime.getURL("html/control_panel.html")).then(r => r.text());
+  panel.innerHTML = html;
+
+  // Bind user-facing interactivity and settings
+  bindAppearanceControls(panel);
+  bindBehaviorControls(panel);
+  bindFocusRestoration(panel);
+
+  // Enable hover-to-show behavior
+  initHoverPanelBehavior(panel, trigger);
+}
+
 
 // Removes the control panel and hover trigger from the DOM
 function clearControlPanel() {
@@ -23,70 +75,14 @@ function clearControlPanel() {
   if (trigger) trigger.remove();
 }
 
-
 //////////////////////////////
-// 1. GLOBAL CONFIG OBJECT
-//////////////////////////////
-
-// Shared configuration for subtitles, modifiable via the control panel.
-// These values are read by other modules to control subtitle rendering.
-window.subtitleConfig = {
-    // Appearance
-    visibility: "on",       // Subtitle visibility: "off", "on", "on-stop"
-    fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
-    position: "bottom",     // Screen position of subtitles: "bottom", "top", "center"
-    heightVH: 16,           // Subtitle offset from top/bottom in vh (viewport height units) 
-    lingqStatus: "on",      // Show or hide LingQ color underlines: "on", or "off"
-    pinyin: "unknown-only",          // When to show pinyin: "none", "unknown-only", or "all"
-    toneColor: "all",        // When to show tone color: "none", "unknown-only", "all"
-    translation: "on-hover",   // When to show translations: "off", "on-hover", "always"
-    
-    // Behavior
-    useContinuous: true,   // Enable continuous mode where subs stay up until next one: "on", "off"
-    autoPause: false,       // Auto-pause subtitles: "on", "off"
-    autoPauseDelayMs: 200  // Auto-pause delay in ms after subtitle ends (since sometimes ends to early)
-};
-
-//////////////////////////////
-// 2. EXTERNAL INTERFACES
+// 3. DOM STRUCTURE HELPERS
 //////////////////////////////
 
-// Updates the display of the current subtitle mode in the control panel.
-function updateModeDisplay(newMode) {
-  console.log("📺 updateModeDisplay called with:", newMode); // Debug log
-  const modeEl = document.getElementById("mode-display");
-  if (modeEl) modeEl.textContent = `${newMode}`;
-  else console.warn("⚠️ updateModeDisplay: #mode-display element not found");
-}
-
-// Shows or hides a sentence explanation box in the panel, based on content.
-function updateCurrentExplanation(text) {
-  console.log("📘 updateCurrentExplanation called with:", text); // Debug log
-  const wrapper = document.getElementById("sentence-explanation-wrapper");
-  const box = document.getElementById("sentence-explanation");
-  if (wrapper && box) {
-    if (text && text.trim()) {
-      box.textContent = text;
-      wrapper.style.display = "block";
-    } else {
-      wrapper.style.display = "none";
-    }
-  } else {
-    console.warn("⚠️ updateCurrentExplanation: elements not found");
-  }
-}
-
-//////////////////////////////
-// 3. CREATE PANEL & TRIGGER
-//////////////////////////////
-
-async function createControlPanel() {
-  console.log("🛠 createControlPanel() was called"); // Debug log to trace when control panel is injected
-
-  // Prevent duplicate panels from being created
-  if (document.querySelector("#subtitle-control-panel")) return;
-
-  // === Create invisible trigger region for hover detection ===
+/**
+ * Creates the transparent hover zone that triggers the control panel to appear.
+ */
+function createPanelHoverTrigger() {
   const trigger = document.createElement("div");
   trigger.id = "subtitle-panel-hover-trigger";
   Object.assign(trigger.style, {
@@ -99,25 +95,20 @@ async function createControlPanel() {
     backgroundColor: "transparent",
     pointerEvents: "auto"
   });
-  document.body.appendChild(trigger);
+  return trigger;
+}
 
-  // === Create the control panel UI container ===
+/**
+ * Creates the styled floating control panel container element.
+ */
+function createPanelContainer() {
   const panel = document.createElement("div");
   panel.id = "subtitle-control-panel";
-
-  fetch(chrome.runtime.getURL("html/control_panel.html"))
-    .then(res => res.text())
-    .then(html => {
-        panel.innerHTML = html;
-        bindControlPanelListeners();
-  });
-
-  // === Apply styling to panel ===
   Object.assign(panel.style, {
     position: "fixed",
     top: "12px",
-    right: "-280px",
-    backgroundColor: "rgba(34,34,34,0.85)",
+    right: "-280px", // hidden initially
+    backgroundColor: "rgba(34, 34, 34, 0.85)",
     color: "#fff",
     padding: "18px",
     borderRadius: "12px",
@@ -126,48 +117,40 @@ async function createControlPanel() {
     fontFamily: "sans-serif",
     lineHeight: "1.6",
     width: "250px",
-    maxWidth: "250x",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
     opacity: "0",
     pointerEvents: "none",
     transition: "right 0.3s ease, opacity 0.3s ease"
   });
+  return panel;
+}
 
-
-  document.body.appendChild(panel);
-
-    // Wait one frame to ensure it's in DOM before listeners need it
-  await new Promise(resolve => requestAnimationFrame(resolve));
-
-  //////////////////////////////
-  // 5. Hover Visibility Logic
-  //////////////////////////////
-
+/**
+ * Controls how the panel slides in and out on hover.
+ */
+function initHoverPanelBehavior(panel, trigger) {
   let hoverActive = false;
   let hideTimeout;
 
-  // Show the panel immediately
-  function showPanel() {
+  const showPanel = () => {
     clearTimeout(hideTimeout);
     hoverActive = true;
     panel.style.opacity = "1";
-    panel.style.right = "12px";  // Slide in
+    panel.style.right = "12px";
     panel.style.pointerEvents = "auto";
-  }
+  };
 
-  // Hide the panel after a short delay unless mouse is still over it
-  function hidePanelDelayed() {
+  const hidePanelDelayed = () => {
     hoverActive = false;
     hideTimeout = setTimeout(() => {
       if (!hoverActive) {
         panel.style.opacity = "0";
-        panel.style.right = "-280px";  // Slide out
+        panel.style.right = "-280px";
         panel.style.pointerEvents = "none";
       }
     }, 300);
-  }
+  };
 
-  // Attach hover listeners to trigger zone and panel
   trigger.addEventListener("mouseenter", showPanel);
   trigger.addEventListener("mouseleave", hidePanelDelayed);
   panel.addEventListener("mouseenter", showPanel);
@@ -175,57 +158,30 @@ async function createControlPanel() {
 }
 
 //////////////////////////////
-// 4. PANEL UPDATE HOOKS
+// 4. CONTROL BINDERS
 //////////////////////////////
 
-// Update subtitle visbility when control panel area clicked
-function updateSubtitleVisibility() {
-    const container = document.getElementById("custom-subtitle-overlay");
-    if (!container) return;
+/**
+ * Binds dropdowns and sliders related to subtitle **appearance**:
+ * visibility, font size, position, LingQ status, pinyin, etc.
+ */
+function bindAppearanceControls(panel) {
+    const overlay = () => document.getElementById("custom-subtitle-overlay");
 
-    const visibility = window.subtitleConfig.visibility;
-
-    if (visibility === "off") {
-        container.style.display = "none";
-    } else if (visibility === "on") {
-        container.style.display = "block";
-    } else if (visibility === "on-stop") {
-        const video = findPlexVideoElement();
-        if (video && video.paused) {
-            container.style.display = "block";
-        } else {
-            container.style.display = "none";
-        }
-    }
-}
-
-//////////////////////////////
-// 5. BIND PANEL LISTENERS
-//////////////////////////////
-
-// Binds listeners to control panel elements that update subtitleConfig
-function bindControlPanelListeners() {
-    const panel = document.getElementById("subtitle-control-panel");
-    if (!panel) return;
-
-    /////////////////////
-    // == APPEARANCE ==
-    /////////////////////
-
-    // "Visibility" dropdown changes
-    document.getElementById("dropdown-visibility")?.addEventListener("change", e=> {
+    // "Visibility" dropdown changes  
+    panel.querySelector("#dropdown-visibility")?.addEventListener("change", e => {
         window.subtitleConfig.visibility = e.target.value;
         updateSubtitleVisibility();
     });
 
-    // For "On-Stop" visibility setting, update subtitle visiblity upon play or pause
+      // For "On-Stop" visibility setting, update subtitle visiblity upon play or pause
     const video = findPlexVideoElement();
     if (video) {
         video.addEventListener("pause", updateSubtitleVisibility);
         video.addEventListener("play", updateSubtitleVisibility);
     }
 
-    // "Size" slider adjusted
+     // "Size" slider adjusted
     document.getElementById("slider-size")?.addEventListener("input", e => {
         const size = parseFloat(e.target.value);
         window.subtitleConfig.fontSizeVH = size;
@@ -283,104 +239,149 @@ function bindControlPanelListeners() {
     });
 
     // "LingQ Status" dropdown changes
-    document.getElementById("dropdown-lingq")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-lingq")?.addEventListener("change", e => {
         window.subtitleConfig.lingqStatus = e.target.value;
-
-        // Re-render depending on current mode
-        if (typeof window.reRenderCurrentSubtitle === "function") {
-            window.reRenderCurrentSubtitle();
-        }
+        window.reRenderCurrentSubtitle?.();
     });
 
     // "Pinyin" dropdown changes
-    document.getElementById("dropdown-pinyin")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-pinyin")?.addEventListener("change", e => {
         window.subtitleConfig.pinyin = e.target.value;
-
-        // 🔁 Force re-render of current subtitle line
-        if (typeof window.reRenderCurrentSubtitle === "function") {
-            window.reRenderCurrentSubtitle();
-        }
+        window.reRenderCurrentSubtitle?.();
     });
 
-    // "Tone color" dropdown changes
-    document.getElementById("dropdown-tone-color")?.addEventListener("change", e => {
+     // "Tone color" dropdown changes
+    panel.querySelector("#dropdown-tone-color")?.addEventListener("change", e => {
         window.subtitleConfig.toneColor = e.target.value;
-
-        // Trigger re-render
-        if (typeof window.reRenderCurrentSubtitle === "function") {
-            window.reRenderCurrentSubtitle();
-        }
+        window.reRenderCurrentSubtitle?.();
     });
 
     // "Translation" dropdown changes
-    document.getElementById("dropdown-translation")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-translation")?.addEventListener("change", e => {
         window.subtitleConfig.translation = e.target.value;
-    
-        // 🔁 Force re-render of current subtitle line
-        if (typeof window.reRenderCurrentSubtitle === "function") {
-            window.reRenderCurrentSubtitle();
-        }
+        window.reRenderCurrentSubtitle?.();
     });
+}
 
-    /////////////////////
-    // == BEHAVIOR ==
-    /////////////////////
-
+/**
+ * Binds behavior-related controls: auto-pause and continuous mode.
+ */
+function bindBehaviorControls(panel) {
+    
     // "Continuous" dropdown changes
-    document.getElementById("dropdown-continuous")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-continuous")?.addEventListener("change", e => {
         window.subtitleConfig.useContinuous = e.target.value === "on";
     });
 
-
     // "Auto-pause" dropdown changes
-    document.getElementById("dropdown-auto-pause")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-auto-pause")?.addEventListener("change", e => {
         window.subtitleConfig.autoPause = e.target.value === "on";
-    })
+    });
 
     // "Auto-pause delay" slider changes
-    document.getElementById("slider-autopause-delay")?.addEventListener("input", e => {
-        const val = parseInt(e.target.value);
-        window.subtitleConfig.autoPauseDelayMs = val;
+    panel.querySelector("#slider-autopause-delay")?.addEventListener("input", e => {
+        window.subtitleConfig.autoPauseDelayMs = parseInt(e.target.value);
     });
+}
 
+/**
+ * Restores keyboard focus to the document after interacting with controls.
+ * Prevents issues with Plex navigation when focus gets trapped on inputs.
+ */
+function bindFocusRestoration(panel) {
+  const blurAndFocus = (e) => {
+    e.target.blur();
+    document.activeElement.blur();
+    setTimeout(() => document.body.focus(), 0);
+  };
 
-    ////////////////////////////////////
-    // == BLOCK KEYBOARD INTERACTION ==
-    ////////////////////////////////////
+  panel.querySelectorAll("select").forEach(select => {
+    select.addEventListener("change", blurAndFocus);
+    select.addEventListener("keydown", e => {
+      if ([" ", "ArrowDown", "ArrowUp"].includes(e.key)) {
+        e.preventDefault();
+        blurAndFocus(e);
+      }
+    });
+  });
 
-    // 🔄 Blur dropdowns after interaction to restore spacebar
-    panel.querySelectorAll("select").forEach(select => {
-        select.addEventListener("change", e => {
-        e.target.blur(); // remove keyboard focus
-        document.activeElement.blur(); // ensure global blur
-        setTimeout(() => document.body.focus(), 0); // restore body focus on next tick
-        });
+  panel.querySelectorAll('input[type="range"]').forEach(slider => {
+    slider.addEventListener("change", blurAndFocus);
+    slider.addEventListener("keydown", e => {
+      if ([" ", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        e.preventDefault();
+        blurAndFocus(e);
+      }
+    });
+  });
+}
 
-        // Also prevent keys from sticking to select after blur
-        select.addEventListener("keydown", e => {
-        if ([" ", "ArrowDown", "ArrowUp"].includes(e.key)) {
-            e.preventDefault(); // stop the key from triggering dropdown navigation
-            e.target.blur();    // force blur
-            setTimeout(() => document.body.focus(), 0); // refocus body
+//////////////////////////////
+// 5. EXTERNAL INTERFACES
+//////////////////////////////
+
+/**
+ * Updates the subtitle mode text in the control panel display area.
+ * Typically called by `live.js` when switching between modes.
+ */
+function updateModeDisplay(newMode) {
+  console.log("📺 updateModeDisplay called with:", newMode);
+  const modeEl = document.getElementById("mode-display");
+  if (modeEl) modeEl.textContent = `${newMode}`;
+  else console.warn("⚠️ updateModeDisplay: #mode-display element not found");
+}
+
+/**
+ * Sets or hides the sentence explanation text shown in the panel.
+ * Typically called by `preprocessed.js` when a line has an explanation.
+ */
+function updateCurrentExplanation(text) {
+  console.log("📘 updateCurrentExplanation called with:", text);
+  const wrapper = document.getElementById("sentence-explanation-wrapper");
+  const box = document.getElementById("sentence-explanation");
+
+  if (wrapper && box) {
+    if (text && text.trim()) {
+      box.textContent = text;
+      wrapper.style.display = "block";
+    } else {
+      wrapper.style.display = "none";
+    }
+  } else {
+    console.warn("⚠️ updateCurrentExplanation: elements not found");
+  }
+}
+
+/**
+ * Backward-compatible function that calls all individual binder functions.
+ * Still used by other modules, so retained for compatibility.
+ */
+function bindControlPanelListeners() {
+  const panel = document.getElementById("subtitle-control-panel");
+  if (!panel) return;
+
+  bindAppearanceControls(panel);
+  bindBehaviorControls(panel);
+  bindFocusRestoration(panel);
+}
+
+// Update subtitle visbility when control panel area clicked
+function updateSubtitleVisibility() {
+    const container = document.getElementById("custom-subtitle-overlay");
+    if (!container) return;
+
+    const visibility = window.subtitleConfig.visibility;
+
+    if (visibility === "off") {
+        container.style.display = "none";
+    } else if (visibility === "on") {
+        container.style.display = "block";
+    } else if (visibility === "on-stop") {
+        const video = findPlexVideoElement();
+        if (video && video.paused) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
         }
-        });
-    });
-
-    // 🔄 Blur range sliders after interaction to restore spacebar
-    panel.querySelectorAll('input[type="range"]').forEach(slider => {
-        slider.addEventListener("change", e => {
-        e.target.blur();
-        document.activeElement.blur();
-        setTimeout(() => document.body.focus(), 0);
-        });
-
-        slider.addEventListener("keydown", e => {
-        if ([" ", "ArrowLeft", "ArrowRight"].includes(e.key)) {
-            e.preventDefault();
-            e.target.blur();
-            setTimeout(() => document.body.focus(), 0);
-        }
-        });
-    });
-
+    }
 }
