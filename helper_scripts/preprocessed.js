@@ -41,9 +41,27 @@ function runPreprocessedMode(lingqTerms, filename) {
 
         const currentTime = video.currentTime;
 
-        // Determine which subtitle should be shown based on current time
+        // // Determine which subtitle should be shown based on current time
+        // let active;
+        // if (window.subtitleConfig.useContinuous) {
+        //   for (let i = enrichedSubs.length - 1; i >= 0; i--) {
+        //     if (currentTime >= enrichedSubs[i].start) {
+        //       active = enrichedSubs[i];
+        //       break;
+        //     }
+        //   }
+        // } else {
+        //   active = enrichedSubs.find(s => currentTime >= s.start && currentTime <= s.end);
+        // }
+
+
+        // // Detect if repeated subtitle, for purposes of auto-pause
+        // let isRepeatedSubtitle = false;
+        // const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
+        // const nextSub = enrichedSubs[currentIndex + 1];
+
         let active;
-        if (USE_CONTINUOUS_SUBTITLES) {
+        if (window.subtitleConfig.useContinuous) {
           for (let i = enrichedSubs.length - 1; i >= 0; i--) {
             if (currentTime >= enrichedSubs[i].start) {
               active = enrichedSubs[i];
@@ -54,8 +72,17 @@ function runPreprocessedMode(lingqTerms, filename) {
           active = enrichedSubs.find(s => currentTime >= s.start && currentTime <= s.end);
         }
 
+        // 🧱 Bail out early if no active subtitle (non-continuous mode)
+        if (!active) {
+          const container = document.getElementById("custom-subtitle-overlay");
+          if (container && !window.subtitleConfig.useContinuous) {
+            container.innerHTML = "";
+            window.lastRenderedText = "";
+          }
+          return;
+        }
 
-        // Detect if repeated subtitle, for purposes of auto-pause
+        // ✅ Only run this if `active` is defined:
         let isRepeatedSubtitle = false;
         const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
         const nextSub = enrichedSubs[currentIndex + 1];
@@ -66,7 +93,7 @@ function runPreprocessedMode(lingqTerms, filename) {
 
         // If no subtitle should be shown right now, clear the overlay
         if (!active) {
-          if (!USE_CONTINUOUS_SUBTITLES) {
+          if (!window.subtitleConfig.useContinuous) {
             const container = document.getElementById("custom-subtitle-overlay");
             if (container) {
               container.innerHTML = "";

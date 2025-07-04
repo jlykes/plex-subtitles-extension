@@ -17,9 +17,7 @@
 //////////////////////////////
 
 // These settings control visual and behavior parameters for the overlay
-const USE_CONTINUOUS_SUBTITLES = true;
 const SHOW_PINYIN = true;
-const ENABLE_LINGQ_COLORING = true;
 
 // Subtitle text display formatting
 const SUBTITLE_LINE_HEIGHT = 1.1;

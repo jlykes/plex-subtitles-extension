@@ -31,16 +31,19 @@ function clearControlPanel() {
 // Shared configuration for subtitles, modifiable via the control panel.
 // These values are read by other modules to control subtitle rendering.
 window.subtitleConfig = {
+    // Appearance
     visibility: "on",       // Subtitle visibility: "off", "on", "on-stop"
     fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
     position: "bottom",     // Screen position of subtitles: "bottom", "top", "center"
     heightVH: 16,           // Subtitle offset from top/bottom in vh (viewport height units) 
     lingqStatus: "on",      // Show or hide LingQ color underlines: "on", or "off"
     pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
+
+    // Behavior
     translation: "hover",   // When to show translations: "off", "hover", "always"
+    useContinuous: true,   // Enable continuous mode where subs stay up until next one: "on", "off"
     autoPause: false,       // Auto-pause subtitles: "on", "off"
-    autoPauseDelayMs: 200,  // Auto-pause delay in ms after subtitle ends (since sometimes ends to early)
-    explanations: false     // Toggle for sentence explanation box (handled externally)
+    autoPauseDelayMs: 200  // Auto-pause delay in ms after subtitle ends (since sometimes ends to early)
 };
 
 //////////////////////////////
@@ -298,6 +301,15 @@ function bindControlPanelListeners() {
     document.getElementById("slider-autopause-delay")?.addEventListener("input", e => {
         const val = parseInt(e.target.value);
         window.subtitleConfig.autoPauseDelayMs = val;
+    });
+
+    /////////////////////
+    // == BEHAVIOR ==
+    /////////////////////
+
+    // "Continuous" dropdown changes
+    document.getElementById("dropdown-continuous")?.addEventListener("change", e => {
+        window.subtitleConfig.useContinuous = e.target.value === "on";
     });
 
     ////////////////////////////////////
