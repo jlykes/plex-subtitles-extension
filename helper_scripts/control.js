@@ -198,7 +198,7 @@ function bindControlPanelListeners() {
 
     // == APPEARANCE ==
 
-    // Visibility dropdown
+    // "Visibility" dropdown changes
     document.getElementById("dropdown-visibility")?.addEventListener("change", e=> {
         window.subtitleConfig.visibility = e.target.value;
         updateSubtitleVisibility();
@@ -211,7 +211,7 @@ function bindControlPanelListeners() {
         video.addEventListener("play", updateSubtitleVisibility);
     }
 
-    // Size slider adjusted
+    // "Size" slider adjusted
     document.getElementById("slider-size")?.addEventListener("input", e => {
         const size = parseFloat(e.target.value);
         window.subtitleConfig.fontSizeVH = size;
@@ -220,6 +220,29 @@ function bindControlPanelListeners() {
         const overlay = document.getElementById("custom-subtitle-overlay");
         if (overlay) overlay.style.fontSize = `${size}vh`;
     });
+
+    // "Position" dropdown changes
+    document.getElementById("dropdown-position")?.addEventListener("change", e => {
+        window.subtitleConfig.position = e.target.value;
+
+        const overlay = document.getElementById("custom-subtitle-overlay");
+        if (!overlay) return;
+
+        if (e.target.value === "bottom") {
+            overlay.style.bottom = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+            overlay.style.top = "auto";
+            overlay.style.transform = "translateX(-50%)";
+        } else if (e.target.value === "top") {
+            overlay.style.top = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+            overlay.style.bottom = "auto";
+            overlay.style.transform = "translateX(-50%)";
+        } else if (e.target.value === "center") {
+            overlay.style.top = "50%";
+            overlay.style.bottom = "auto";
+            overlay.style.transform = "translate(-50%, -50%)";
+        }
+    });
+
 
 
     // When translation dropdown changes
@@ -232,17 +255,7 @@ function bindControlPanelListeners() {
         window.subtitleConfig.pinyin = e.target.value;
     });
 
-    // When position dropdown changes
-    document.getElementById("dropdown-position")?.addEventListener("change", e => {
-        window.subtitleConfig.position = e.target.value;
 
-        // Move overlay to top or bottom accordingly
-        const overlay = document.getElementById("custom-subtitle-overlay");
-        if (overlay) {
-            overlay.style.top = e.target.value === "top" ? "15vh" : "auto";
-            overlay.style.bottom = e.target.value === "bottom" ? "15vh" : "auto";
-        }
-    });
 
     // Bind auto-pause
     document.getElementById("auto-pause-setting")?.addEventListener("change", e => {

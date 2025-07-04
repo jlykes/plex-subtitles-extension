@@ -14,8 +14,22 @@ function createOverlayContainer() {
 
   // Positioning: top or bottom depending on config
   container.style.position = "absolute";
-  container.style.bottom = SUBTITLE_POSITION === "bottom" ? `${SUBTITLE_BOTTOM_OFFSET_VH}vh` : "auto";
-  container.style.top = SUBTITLE_POSITION === "top" ? `${SUBTITLE_BOTTOM_OFFSET_VH}vh` : "auto";
+  const position = window.subtitleConfig?.position || "bottom";  // fallback just in case
+
+  if (position === "bottom") {
+    container.style.bottom = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+    container.style.top = "auto";
+    container.style.transform = "translateX(-50%)";
+  } else if (position === "top") {
+    container.style.top = `${SUBTITLE_BOTTOM_OFFSET_VH}vh`;
+    container.style.bottom = "auto";
+    container.style.transform = "translateX(-50%)";
+  } else if (position === "center") {
+    container.style.top = "50%";
+    container.style.bottom = "auto";
+    container.style.transform = "translate(-50%, -50%)";
+  }
+
   container.style.left = "50%";
   container.style.transform = "translateX(-50%)";
 

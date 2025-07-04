@@ -20,11 +20,10 @@
 const USE_CONTINUOUS_SUBTITLES = true;
 const SHOW_PINYIN = true;
 const ENABLE_LINGQ_COLORING = true;
-const SUBTITLE_POSITION = "bottom";
 
 // Subtitle text display formatting
 const SUBTITLE_LINE_HEIGHT = 1.1;
-const SUBTITLE_BOTTOM_OFFSET_VH = 15;
+const SUBTITLE_BOTTOM_OFFSET_VH = 16;
 const SUBTITLE_MAX_WIDTH_VW = 90;
 
 //////////////////////////////
