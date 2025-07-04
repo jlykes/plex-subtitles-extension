@@ -192,19 +192,26 @@ function renderPreprocessedLine(sub, lingqTerms) {
   translation.style.whiteSpace = "normal";            // Allow line wrapping when needed
   translation.style.wordBreak = "break-word";         // Break long words if needed
   translation.style.textAlign = "center";             // Center the translation text
-  translation.style.visibility = "hidden";            // Hide by default but keep layout space
   translation.style.maxWidth = "90vw";                // Prevent overflowing the viewport width
   translation.style.minHeight = "1em";                // Reserve height even when hidden or empty
 
   // Toggle visibility of the translation on hover
-  wrapper.addEventListener("mouseenter", () => {
-    translation.style.visibility = "visible";         // Show translation when hovering
-  });
-  wrapper.addEventListener("mouseleave", () => {
-    translation.style.visibility = "hidden";          // Hide translation when mouse leaves
-  });
+  const visibilitySetting = window.subtitleConfig.translation;
 
-  
+  if (visibilitySetting === "off") {
+    translation.style.visibility = "hidden";
+  } else if (visibilitySetting === "on-hover") {
+    translation.style.visibility = "hidden"; // hidden by default
+    wrapper.addEventListener("mouseenter", () => {
+      translation.style.visibility = "visible";
+    });
+    wrapper.addEventListener("mouseleave", () => {
+      translation.style.visibility = "hidden";
+    });
+  } else if (visibilitySetting === "always") {
+    translation.style.visibility = "visible";
+  }
+    
   // Process each segmented word or character in the subtitle line
   sub.segmented.forEach(entry => {
     const word = entry.word;

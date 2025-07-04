@@ -40,7 +40,7 @@ window.subtitleConfig = {
     pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
 
     // Behavior
-    translation: "hover",   // When to show translations: "off", "hover", "always"
+    translation: "on-hover",   // When to show translations: "off", "hover", "always"
     useContinuous: true,   // Enable continuous mode where subs stay up until next one: "on", "off"
     autoPause: false,       // Auto-pause subtitles: "on", "off"
     autoPauseDelayMs: 200  // Auto-pause delay in ms after subtitle ends (since sometimes ends to early)
@@ -297,7 +297,6 @@ function bindControlPanelListeners() {
     })
 
     // "Auto-pause delay" slider changes
-
     document.getElementById("slider-autopause-delay")?.addEventListener("input", e => {
         const val = parseInt(e.target.value);
         window.subtitleConfig.autoPauseDelayMs = val;
@@ -312,14 +311,19 @@ function bindControlPanelListeners() {
         window.subtitleConfig.useContinuous = e.target.value === "on";
     });
 
+    // "Translation" dropdown changes
+    document.getElementById("dropdown-translation")?.addEventListener("change", e => {
+        window.subtitleConfig.translation = e.target.value;
+    
+        // 🔁 Force re-render of current subtitle line
+        if (typeof window.reRenderCurrentSubtitle === "function") {
+            window.reRenderCurrentSubtitle();
+        }
+    });
+
     ////////////////////////////////////
     // == NEED TO CHECK ==
     ////////////////////////////////////
-    
-    // When translation dropdown changes
-    document.getElementById("translation-setting")?.addEventListener("change", e => {
-        window.subtitleConfig.translation = e.target.value;
-    });
 
     // When pinyin dropdown changes
     document.getElementById("pinyin-setting")?.addEventListener("change", e => {
