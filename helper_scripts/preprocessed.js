@@ -41,20 +41,6 @@ function runPreprocessedMode(lingqTerms, filename) {
 
         const currentTime = video.currentTime;
 
-        // // Determine which subtitle should be shown based on current time
-        // let active;
-        // if (window.subtitleConfig.useContinuous) {
-        //   for (let i = enrichedSubs.length - 1; i >= 0; i--) {
-        //     if (currentTime >= enrichedSubs[i].start) {
-        //       active = enrichedSubs[i];
-        //       break;
-        //     }
-        //   }
-        // } else {
-        //   active = enrichedSubs.find(s => currentTime >= s.start && currentTime <= s.end);
-        // }
-
-
         // // Detect if repeated subtitle, for purposes of auto-pause
         // let isRepeatedSubtitle = false;
         // const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);

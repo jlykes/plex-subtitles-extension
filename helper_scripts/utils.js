@@ -123,3 +123,112 @@ function findPlexVideoElement() {
     el.classList.contains("HTMLMedia-mediaElement-u17S9P")
   );
 }
+
+/**
+ * Creates a fully styled and annotated word span for a subtitle line.
+ * Includes optional pinyin ruby, tone coloring, underlining by LingQ status,
+ * and a hoverable tooltip showing word meaning.
+ *
+ * @param {Object} opts
+ * @param {string} opts.word - The raw Chinese word or character
+ * @param {string} opts.pinyin - The pinyin with tone marks (space-separated for multi-char words)
+ * @param {number} opts.status - The LingQ status (0=new, 1=learning, 2=known, 3=ignored)
+ * @param {string} opts.meaning - Definition or explanation for tooltip display
+ * @returns {HTMLElement} A styled span or ruby wrapper element
+ */
+function createWordWrapper({ word, pinyin, status, meaning }) {
+  const config = window.subtitleConfig || {};
+  const isPunct = isPunctuationDigitOrSpace(word);
+
+  // === Determine settings from global subtitle config ===
+
+  const underlineColor =
+    config.lingqStatus === "on" && !isPunct ? getUnderlineColor(status) : null;
+
+  const shouldColor =
+    config.toneColor === "all" ||
+    (config.toneColor === "unknown-only" && status !== 3);
+
+  const shouldShowPinyin =
+    config.pinyin === "all" ||
+    (config.pinyin === "unknown-only" && status !== 3);
+
+  // === Split characters and corresponding pinyin ===
+
+  const charList = [...word]; // Split Chinese word into characters
+  const pinyinList = (pinyin || "").split(" "); // One pinyin per char
+
+  // === Create wrapper for the full word ===
+
+  const wrapper = document.createElement("span");
+  wrapper.style.position = "relative";
+  wrapper.style.display = "inline-block";
+
+  // === Add underline if applicable ===
+
+  if (underlineColor) {
+    wrapper.style.borderBottom = `0.1em solid ${underlineColor}`;
+    wrapper.style.paddingBottom = "2px";
+    wrapper.style.borderRadius = "0.05em";
+  }
+
+  // === Add tooltip (hover definition), if present ===
+
+  if (meaning) {
+    const tooltip = document.createElement("div");
+    tooltip.textContent = meaning;
+
+    Object.assign(tooltip.style, {
+      position: "absolute",
+      bottom: "100%",
+      left: "50%",
+      transform: "translateX(-50%)",
+      padding: "4px 8px",
+      backgroundColor: "#222",
+      color: "#fff",
+      fontSize: "0.5em",
+      borderRadius: "4px",
+      whiteSpace: "normal",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.5)",
+      display: "none",
+      zIndex: "1000",
+      maxWidth: "200px",
+      textAlign: "left"
+    });
+
+    wrapper.addEventListener("mouseenter", () => {
+      tooltip.style.display = "block";
+    });
+    wrapper.addEventListener("mouseleave", () => {
+      tooltip.style.display = "none";
+    });
+
+    wrapper.appendChild(tooltip);
+  }
+
+  // === Render each character with pinyin and tone color if needed ===
+
+  charList.forEach((char, i) => {
+    const span = document.createElement("span");
+    span.textContent = char;
+    span.style.margin = "0";
+
+    const toneColor = shouldColor && pinyinList[i] ? getToneColor(pinyinList[i]) : "white";
+    span.style.color = toneColor;
+
+    if (!isPunct && shouldShowPinyin) {
+      const ruby = document.createElement("ruby");
+      const rt = document.createElement("rt");
+      rt.textContent = pinyinList[i] || "";
+      rt.style.color = toneColor;
+
+      ruby.appendChild(span);
+      ruby.appendChild(rt);
+      wrapper.appendChild(ruby);
+    } else {
+      wrapper.appendChild(span);
+    }
+  });
+
+  return wrapper;
+}

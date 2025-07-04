@@ -150,12 +150,6 @@ async function main() {
     return;
   }
 
-  // Create the control panel (if not already created)
-  createControlPanel(); 
-
-  // Bind event listeners for the control panel dropdowns and sliders
-  bindControlPanelListeners();
-
   // Load user's LingQ vocabulary terms
   const lingqTerms = await loadLingQTerms();
 
