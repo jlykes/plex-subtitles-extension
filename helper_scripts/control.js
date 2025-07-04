@@ -163,46 +163,84 @@ function createControlPanel() {
 }
 
 //////////////////////////////
-// 4. BIND PANEL LISTENERS
+// 4. PANEL UPDATE HOOKS
+//////////////////////////////
+
+// Update subtitle visbility when control panel area clicked
+function updateSubtitleVisibility() {
+    const container = document.getElementById("custom-subtitle-overlay");
+    if (!container) return;
+
+    const visibility = window.subtitleConfig.visibility;
+
+    if (visibility === "off") {
+        container.style.display = "none";
+    } else if (visibility === "on") {
+        container.style.display = "block";
+    } else if (visibility === "on-stop") {
+        const video = findPlexVideoElement();
+        if (video && video.paused) {
+            container.style.display = "block";
+        } else {
+            container.style.display = "none";
+        }
+    }
+}
+
+//////////////////////////////
+// 5. BIND PANEL LISTENERS
 //////////////////////////////
 
 // Binds listeners to control panel elements that update subtitleConfig
 function bindControlPanelListeners() {
-  const panel = document.getElementById("subtitle-control-panel");
-  if (!panel) return;
+    const panel = document.getElementById("subtitle-control-panel");
+    if (!panel) return;
 
-  // When translation dropdown changes
-  document.getElementById("translation-setting")?.addEventListener("change", e => {
-    window.subtitleConfig.translation = e.target.value;
-  });
+    // When visbility dropdown chagnes
+    document.getElementById("dropdown-visibility")?.addEventListener("change", e=> {
+        window.subtitleConfig.visibility = e.target.value;
+        updateSubtitleVisibility();
+    });
 
-  // When pinyin dropdown changes
-  document.getElementById("pinyin-setting")?.addEventListener("change", e => {
-    window.subtitleConfig.pinyin = e.target.value;
-  });
-
-  // When font size slider is adjusted
-  document.getElementById("slider-size")?.addEventListener("input", e => {
-    const size = parseFloat(e.target.value);
-    window.subtitleConfig.fontSizeVH = size;
-    document.getElementById("slider-size").textContent = `${size}vh`;
-
-    // Update font size immediately on subtitle overlay
-    const overlay = document.getElementById("custom-subtitle-overlay");
-    if (overlay) overlay.style.fontSize = `${size}vh`;
-  });
-
-  // When position dropdown changes
-  document.getElementById("dropdown-position")?.addEventListener("change", e => {
-    window.subtitleConfig.position = e.target.value;
-
-    // Move overlay to top or bottom accordingly
-    const overlay = document.getElementById("custom-subtitle-overlay");
-    if (overlay) {
-      overlay.style.top = e.target.value === "top" ? "15vh" : "auto";
-      overlay.style.bottom = e.target.value === "bottom" ? "15vh" : "auto";
+    // For "On-Stop" visibility setting, update subtitle visiblity upon play or pause
+    const video = findPlexVideoElement();
+    if (video) {
+        video.addEventListener("pause", updateSubtitleVisibility);
+        video.addEventListener("play", updateSubtitleVisibility);
     }
-  });
+
+    // When translation dropdown changes
+    document.getElementById("translation-setting")?.addEventListener("change", e => {
+        window.subtitleConfig.translation = e.target.value;
+    });
+
+    // When pinyin dropdown changes
+    document.getElementById("pinyin-setting")?.addEventListener("change", e => {
+        window.subtitleConfig.pinyin = e.target.value;
+    });
+
+    // When font size slider is adjusted
+    document.getElementById("slider-size")?.addEventListener("input", e => {
+        const size = parseFloat(e.target.value);
+        window.subtitleConfig.fontSizeVH = size;
+        document.getElementById("slider-size").textContent = `${size}vh`;
+
+        // Update font size immediately on subtitle overlay
+        const overlay = document.getElementById("custom-subtitle-overlay");
+        if (overlay) overlay.style.fontSize = `${size}vh`;
+    });
+
+    // When position dropdown changes
+    document.getElementById("dropdown-position")?.addEventListener("change", e => {
+        window.subtitleConfig.position = e.target.value;
+
+        // Move overlay to top or bottom accordingly
+        const overlay = document.getElementById("custom-subtitle-overlay");
+        if (overlay) {
+            overlay.style.top = e.target.value === "top" ? "15vh" : "auto";
+            overlay.style.bottom = e.target.value === "bottom" ? "15vh" : "auto";
+        }
+    });
 
     // Bind auto-pause
     document.getElementById("auto-pause-setting")?.addEventListener("change", e => {
@@ -227,7 +265,7 @@ function bindControlPanelListeners() {
         });
     });
 
-      // 🔄 Blur range sliders after interaction to restore spacebar
+    // 🔄 Blur range sliders after interaction to restore spacebar
     panel.querySelectorAll('input[type="range"]').forEach(slider => {
         slider.addEventListener("change", e => {
         e.target.blur();
@@ -244,4 +282,4 @@ function bindControlPanelListeners() {
         });
     });
 
-    }
+}
