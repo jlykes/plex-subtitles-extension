@@ -11,7 +11,7 @@ function runPreprocessedMode(lingqTerms, filename) {
 
   // 🔄 Update control panel to indicate that we are in preprocessed mode
   if (typeof updateModeDisplay === "function") {
-    updateModeDisplay("preprocessed");
+    updateModeDisplay("Preprocessed");
   }
 
   clearSubtitleOverlay();        // Ensure clean state before loading new subtitles

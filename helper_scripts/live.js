@@ -8,7 +8,7 @@ let liveSubtitleObserver = null;
 
 // This function monitors DOM mutations to detect live subtitle changes on Plex
 function waitForSubtitles(lingqTerms, segmentit) {
-  updateModeDisplay("live");
+  updateModeDisplay("Live");
   console.log("🎯 Live subtitle mode enabled.");
 
   // 🧹 Clear any previously running observer to avoid duplicated rendering logic

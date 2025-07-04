@@ -202,6 +202,6 @@ function bindControlPanelListeners() {
 
     // Bind auto-pause
     document.getElementById("auto-pause-setting")?.addEventListener("change", e => {
-    window.subtitleConfig.autoPause = e.target.checked;
+        window.subtitleConfig.autoPause = e.target.checked;
     });
 }
