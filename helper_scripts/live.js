@@ -11,6 +11,9 @@ function waitForSubtitles(lingqTerms, segmentit) {
   updateModeDisplay("Live");
   console.log("🎯 Live subtitle mode enabled.");
 
+  window.lingqTerms = lingqTerms;
+  window.segmentit = segmentit;
+
   // 🧹 Clear any previously running observer to avoid duplicated rendering logic
   if (liveSubtitleObserver) {
     liveSubtitleObserver.disconnect();
@@ -37,37 +40,43 @@ function waitForSubtitles(lingqTerms, segmentit) {
     subtree: true,
   });
 
+  // Re-render function for LingQ status visbility changes
+  window.reRenderCurrentSubtitle = () => {
+    if (!window.lastLiveSubtitle) return;
+    renderLiveLine(window.lastLiveSubtitle, window.lingqTerms || {}, window.segmentit);
+  };
+
   console.log("👀 Watching for Plex subtitles...");
 }
-
 
 // Replaces the live subtitle text with a styled overlay.
 // Performs segmentation of Chinese text, looks up LingQ status, colors accordingly,
 // and optionally annotates with pinyin using ruby tags.
 function updateOverlay(text, lingqTerms, segmentit) {
-  // Locate the custom overlay container where subtitles will be rendered
-  const container = document.getElementById("custom-subtitle-overlay");
-  container.innerHTML = "";  // Clear any existing content
+  window.lastLiveSubtitle = text;
+  renderLiveLine(text, lingqTerms, segmentit);
+}
 
-  // Segment the incoming subtitle line using the Segmentit library
-  // Each word object has a .w field containing the segmented string
+// Function to render a subtitle in live mode
+function renderLiveLine(text, lingqTerms, segmentit) {
+  const container = document.getElementById("custom-subtitle-overlay");
+  if (!container) return;
+  container.innerHTML = "";
+
   const words = segmentit.doSegment(text)
     .map(w => w.w)
-    .filter(w => w && w.trim() !== "");  // Remove empty or purely whitespace segments
+    .filter(w => w && w.trim() !== "");
 
-  // Iterate through each segmented word to apply styling and pinyin
   words.forEach(word => {
-    const span = document.createElement("span");  // Basic span to hold the word
+    const span = document.createElement("span");
     span.textContent = word;
     span.style.color = "white";
     span.style.margin = "0";
 
-    // Skip punctuation, digits, and whitespace from further processing
     if (!isPunctuationDigitOrSpace(word)) {
-      const status = lingqTerms[word];  // Retrieve the LingQ status (0=new, 1=learning, 2=known, 3=ignored)
-      const underlineColor = ENABLE_LINGQ_COLORING ? getUnderlineColor(status) : null;
+      const status = lingqTerms[word];
+      const underlineColor = window.subtitleConfig.lingqStatus === "on" ? getUnderlineColor(status) : null;
 
-      // Apply underline styling based on LingQ color if enabled
       if (underlineColor) {
         span.style.textDecoration = "underline";
         span.style.textDecorationColor = underlineColor;
@@ -75,24 +84,22 @@ function updateOverlay(text, lingqTerms, segmentit) {
         span.style.textUnderlineOffset = "8px";
       }
 
-      // If pinyin display is enabled and word is not marked "ignored",
-      // use ruby annotation to show pronunciation above the word
       if (SHOW_PINYIN && status !== 3) {
         const ruby = document.createElement("ruby");
         ruby.appendChild(span);
 
         const rt = document.createElement("rt");
-        rt.textContent = getPinyin(word);  // Retrieve pinyin string from dictionary
+        rt.textContent = getPinyin(word);
 
         ruby.appendChild(rt);
         container.appendChild(ruby);
-        return;  // Avoid also appending the original span outside the ruby
+        return;
       }
     }
 
-    // Append the styled or raw word span to the overlay container
     container.appendChild(span);
   });
 }
+
 
 // Note: Call waitForSubtitles(...) from main() in content.js if enriched JSON is not found.

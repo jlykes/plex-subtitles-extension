@@ -35,6 +35,7 @@ window.subtitleConfig = {
     fontSizeVH: 5.5,        // Subtitle font size in vh (viewport height units)
     position: "bottom",     // Screen position of subtitles: "bottom", "top", "center"
     heightVH: 16,           // Subtitle offset from top/bottom in vh (viewport height units) 
+    lingqStatus: "on",      // Show or hide LingQ color underlines: "on", or "off"
     pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
     translation: "hover",   // When to show translations: "off", "hover", "always"
     autoPause: false,       // Auto-pause subtitles: "on", "off"
@@ -266,6 +267,16 @@ function bindControlPanelListeners() {
             overlay.style.top = "50%";
             overlay.style.bottom = "auto";
             overlay.style.transform = "translate(-50%, -50%)";
+        }
+    });
+
+    // "LingQ Status" dropdown changes
+    document.getElementById("dropdown-lingq")?.addEventListener("change", e => {
+        window.subtitleConfig.lingqStatus = e.target.value;
+
+        // Re-render depending on current mode
+        if (typeof window.reRenderCurrentSubtitle === "function") {
+            window.reRenderCurrentSubtitle();
         }
     });
 

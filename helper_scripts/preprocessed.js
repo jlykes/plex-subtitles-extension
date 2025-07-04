@@ -8,6 +8,7 @@ let preprocessedInterval = null;
 
 function runPreprocessedMode(lingqTerms, filename) {
   console.log(`📦 Preprocessed subtitle mode enabled. Loading: ${filename}`);
+  window.lingqTerms = lingqTerms;
 
   // 🔄 Update control panel to indicate that we are in preprocessed mode
   if (typeof updateModeDisplay === "function") {
@@ -97,6 +98,22 @@ function runPreprocessedMode(lingqTerms, filename) {
         }
       }, 300);
     });
+  
+    // Define reRender function for pre-processed mode (for purposes of chaing LingQ color status)
+    window.reRenderCurrentSubtitle = () => {
+      if (!window.subtitleList || !window.lastSubtitleStartTime) return;
+
+      const currentSub = window.subtitleList.find(
+        s => s.start === window.lastSubtitleStartTime
+      );
+      if (!currentSub) return;
+
+      const container = document.getElementById("custom-subtitle-overlay");
+      if (!container) return;
+
+      container.innerHTML = "";
+      renderPreprocessedLine(currentSub, window.lingqTerms || {});
+    };
 }
 
 // Render a single enriched subtitle line into the overlay container.
@@ -154,7 +171,7 @@ function renderPreprocessedLine(sub, lingqTerms) {
     const pinyin = entry.pinyin;
     const isPunct = isPunctuationDigitOrSpace(word);
     const status = lingqTerms[word];  // LingQ known/learning/ignored status
-    const underlineColor = ENABLE_LINGQ_COLORING ? getUnderlineColor(status) : null;
+    const underlineColor = window.subtitleConfig.lingqStatus === "on" ? getUnderlineColor(status) : null;
     const wordInfo = sub.word_meanings?.find(w => w.word === word);
     const meaningText = wordInfo?.meaning || "";
 
@@ -241,3 +258,19 @@ function renderPreprocessedLine(sub, lingqTerms) {
   wrapper.appendChild(translation);
   container.appendChild(wrapper);
 }
+
+// Re-renders subtitle given state of LingQ status
+window.reRenderCurrentSubtitle = () => {
+  if (!window.subtitleList || !window.lastSubtitleStartTime) return;
+
+  const currentSub = window.subtitleList.find(
+    s => s.start === window.lastSubtitleStartTime
+  );
+  if (!currentSub) return;
+
+  const container = document.getElementById("custom-subtitle-overlay");
+  if (!container) return;
+
+  container.innerHTML = "";
+  renderPreprocessedLine(currentSub, window.lingqTerms || {});
+};
