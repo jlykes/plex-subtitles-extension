@@ -75,10 +75,12 @@ function updateCurrentExplanation(text) {
 // 3. CREATE PANEL & TRIGGER
 //////////////////////////////
 
-function createControlPanel() {
+async function createControlPanel() {
   console.log("🛠 createControlPanel() was called"); // Debug log to trace when control panel is injected
+
   // Prevent duplicate panels from being created
   if (document.querySelector("#subtitle-control-panel")) return;
+
   // === Create invisible trigger region for hover detection ===
   const trigger = document.createElement("div");
   trigger.id = "subtitle-panel-hover-trigger";
@@ -128,6 +130,9 @@ function createControlPanel() {
 
 
   document.body.appendChild(panel);
+
+    // Wait one frame to ensure it's in DOM before listeners need it
+  await new Promise(resolve => requestAnimationFrame(resolve));
 
   //////////////////////////////
   // 5. Hover Visibility Logic

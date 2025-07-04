@@ -41,7 +41,7 @@ async function initializeForCurrentVideo(lingqTerms) {
   setupKeyboardShortcuts();
 
   // Create and configure the subtitle control panel UI
-  createControlPanel();
+  await createControlPanel();
   bindControlPanelListeners();
 
   // Load subtitles based on enriched JSON (or fall back to live mode)
