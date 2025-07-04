@@ -63,43 +63,72 @@ function renderLiveLine(text, lingqTerms, segmentit) {
   if (!container) return;
   container.innerHTML = "";
 
+  // Segment the incoming live subtitle line into Chinese word tokens
   const words = segmentit.doSegment(text)
     .map(w => w.w)
     .filter(w => w && w.trim() !== "");
 
+  // For each segmented word, create an annotated wrapper using shared logic
   words.forEach(word => {
-    const span = document.createElement("span");
-    span.textContent = word;
-    span.style.color = "white";
-    span.style.margin = "0";
+    const pinyin = getPinyin(word);
+    const status = lingqTerms[word];
+    const wrapper = createWordWrapper({
+      word,
+      pinyin,
+      status,
+      meaning: "" // No word meanings available in live mode
+    });
 
-    if (!isPunctuationDigitOrSpace(word)) {
-      const status = lingqTerms[word];
-      const underlineColor = window.subtitleConfig.lingqStatus === "on" ? getUnderlineColor(status) : null;
-
-      if (underlineColor) {
-        span.style.textDecoration = "underline";
-        span.style.textDecorationColor = underlineColor;
-        span.style.textDecorationThickness = "4px";
-        span.style.textUnderlineOffset = "8px";
-      }
-
-      if (SHOW_PINYIN && status !== 3) {
-        const ruby = document.createElement("ruby");
-        ruby.appendChild(span);
-
-        const rt = document.createElement("rt");
-        rt.textContent = getPinyin(word);
-
-        ruby.appendChild(rt);
-        container.appendChild(ruby);
-        return;
-      }
-    }
-
-    container.appendChild(span);
+    container.appendChild(wrapper);
   });
 }
+
+
+
+// function renderLiveLine(text, lingqTerms, segmentit) {
+//   const container = document.getElementById("custom-subtitle-overlay");
+//   if (!container) return;
+//   container.innerHTML = "";
+
+//   const words = segmentit.doSegment(text)
+//     .map(w => w.w)
+//     .filter(w => w && w.trim() !== "");
+
+//   words.forEach(word => {
+//     const span = document.createElement("span");
+//     span.textContent = word;
+//     span.style.color = "white";
+//     span.style.margin = "0";
+
+//     if (!isPunctuationDigitOrSpace(word)) {
+//       const status = lingqTerms[word];
+//       const underlineColor = window.subtitleConfig.lingqStatus === "on" ? getUnderlineColor(status) : null;
+
+//       if (underlineColor) {
+//         span.style.textDecoration = "underline";
+//         span.style.textDecorationColor = underlineColor;
+//         span.style.textDecorationThickness = "4px";
+//         span.style.textUnderlineOffset = "8px";
+//       }
+
+//       if (SHOW_PINYIN && status !== 3) {
+//         const ruby = document.createElement("ruby");
+//         ruby.appendChild(span);
+
+//         const rt = document.createElement("rt");
+//         rt.textContent = getPinyin(word);
+
+//         ruby.appendChild(rt);
+//         container.appendChild(ruby);
+//         return;
+//       }
+//     }
+
+//     container.appendChild(span);
+//   });
+// }
+
+
 
 // Stop live mode, for purposes of closing out video and switching to a new one
 window.stopLiveMode = function () {
