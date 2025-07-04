@@ -65,6 +65,14 @@ function monitorForVideoChange(lingqTerms) {
         lastVideoExists = true;
         clearSubtitleOverlay();
 
+        // 🧼 Always stop both modes before starting a new one
+        if (typeof window.stopPreprocessedMode === "function") {
+          window.stopPreprocessedMode();
+        }
+        if (typeof window.stopLiveMode === "function") {
+          window.stopLiveMode();
+        }
+
         // Wait until the new video is fully playable (readyState >= 2) before initializing
         const waitForReadyState = setInterval(() => {
           const newVideo = findPlexVideoElement();
@@ -87,6 +95,15 @@ function monitorForVideoChange(lingqTerms) {
       clearControlPanel(); // Remove the control panel and trigger from DOM
       lastVideoExists = false;
       clearSubtitleOverlay();
+
+      // 🧼 Cleanup any polling or observers
+      if (typeof window.stopPreprocessedMode === "function") {
+        window.stopPreprocessedMode();
+      }
+      if (typeof window.stopLiveMode === "function") {
+        console.log("🧹 Attempting to stop live subtitle mode:", typeof window.stopLiveMode);
+        window.stopLiveMode();
+      }
     }
   }, 100); // Check every 100ms
 } 

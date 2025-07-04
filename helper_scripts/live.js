@@ -101,5 +101,14 @@ function renderLiveLine(text, lingqTerms, segmentit) {
   });
 }
 
+// Stop live mode, for purposes of closing out video and switching to a new one
+window.stopLiveMode = function () {
+  console.log("🛑 Live subtitle function called");
+  if (liveSubtitleObserver) {
+    liveSubtitleObserver.disconnect();
+    liveSubtitleObserver = null;
+    console.log("🛑 Live subtitle observer disconnected");
+  }
+};
 
 // Note: Call waitForSubtitles(...) from main() in content.js if enriched JSON is not found.

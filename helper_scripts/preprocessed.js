@@ -30,7 +30,7 @@ function runPreprocessedMode(lingqTerms, filename) {
         clearInterval(preprocessedInterval);
         preprocessedInterval = null;
       }
-      
+          
       let autoPauseTimeout = null;
       let lastPausedIndex = -1;
 
@@ -99,21 +99,21 @@ function runPreprocessedMode(lingqTerms, filename) {
       }, 300);
     });
   
-    // Define reRender function for pre-processed mode (for purposes of chaing LingQ color status)
-    window.reRenderCurrentSubtitle = () => {
-      if (!window.subtitleList || !window.lastSubtitleStartTime) return;
+  // Define reRender function for pre-processed mode (for purposes of chaing LingQ color status)
+  window.reRenderCurrentSubtitle = () => {
+    if (!window.subtitleList || !window.lastSubtitleStartTime) return;
 
-      const currentSub = window.subtitleList.find(
-        s => s.start === window.lastSubtitleStartTime
-      );
-      if (!currentSub) return;
+    const currentSub = window.subtitleList.find(
+      s => s.start === window.lastSubtitleStartTime
+    );
+    if (!currentSub) return;
 
-      const container = document.getElementById("custom-subtitle-overlay");
-      if (!container) return;
+    const container = document.getElementById("custom-subtitle-overlay");
+    if (!container) return;
 
-      container.innerHTML = "";
-      renderPreprocessedLine(currentSub, window.lingqTerms || {});
-    };
+    container.innerHTML = "";
+    renderPreprocessedLine(currentSub, window.lingqTerms || {});
+  };
 }
 
 // Render a single enriched subtitle line into the overlay container.
@@ -273,4 +273,13 @@ window.reRenderCurrentSubtitle = () => {
 
   container.innerHTML = "";
   renderPreprocessedLine(currentSub, window.lingqTerms || {});
+};
+
+// Stops pre-processed mode (for the purposes of switching to a new video)
+window.stopPreprocessedMode = function () {
+  if (preprocessedInterval) {
+    clearInterval(preprocessedInterval);
+    preprocessedInterval = null;
+    console.log("🛑 Preprocessed subtitle polling stopped");
+  }
 };
