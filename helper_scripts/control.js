@@ -37,10 +37,11 @@ window.subtitleConfig = {
     position: "bottom",     // Screen position of subtitles: "bottom", "top", "center"
     heightVH: 16,           // Subtitle offset from top/bottom in vh (viewport height units) 
     lingqStatus: "on",      // Show or hide LingQ color underlines: "on", or "off"
-    pinyin: "all",          // When to show pinyin: "none", "unknown", or "all"
-
-    // Behavior
+    pinyin: "all",          // When to show pinyin: "none", "unknown only", or "all"
+    toneColor: "on",        // When to show tone color: "none", "unknown only", "all"
     translation: "on-hover",   // When to show translations: "off", "hover", "always"
+    
+    // Behavior
     useContinuous: true,   // Enable continuous mode where subs stay up until next one: "on", "off"
     autoPause: false,       // Auto-pause subtitles: "on", "off"
     autoPauseDelayMs: 200  // Auto-pause delay in ms after subtitle ends (since sometimes ends to early)
@@ -291,24 +292,20 @@ function bindControlPanelListeners() {
         }
     });
 
-    // "Auto-pause" dropdown changes
-    document.getElementById("dropdown-auto-pause")?.addEventListener("change", e => {
-        window.subtitleConfig.autoPause = e.target.value === "on";
-    })
-
-    // "Auto-pause delay" slider changes
-    document.getElementById("slider-autopause-delay")?.addEventListener("input", e => {
-        const val = parseInt(e.target.value);
-        window.subtitleConfig.autoPauseDelayMs = val;
+    // NEED TO CHECK
+    // "Pinyin" dropdown changes
+    document.getElementById("pinyin-setting")?.addEventListener("change", e => {
+        window.subtitleConfig.pinyin = e.target.value;
     });
 
-    /////////////////////
-    // == BEHAVIOR ==
-    /////////////////////
+    // "Tone color" dropdown changes
+    document.getElementById("dropdown-tone-color")?.addEventListener("change", e => {
+        window.subtitleConfig.toneColor = e.target.value;
 
-    // "Continuous" dropdown changes
-    document.getElementById("dropdown-continuous")?.addEventListener("change", e => {
-        window.subtitleConfig.useContinuous = e.target.value === "on";
+        // Trigger re-render
+        if (typeof window.reRenderCurrentSubtitle === "function") {
+            window.reRenderCurrentSubtitle();
+        }
     });
 
     // "Translation" dropdown changes
@@ -321,13 +318,25 @@ function bindControlPanelListeners() {
         }
     });
 
-    ////////////////////////////////////
-    // == NEED TO CHECK ==
-    ////////////////////////////////////
+    /////////////////////
+    // == BEHAVIOR ==
+    /////////////////////
 
-    // When pinyin dropdown changes
-    document.getElementById("pinyin-setting")?.addEventListener("change", e => {
-        window.subtitleConfig.pinyin = e.target.value;
+    // "Continuous" dropdown changes
+    document.getElementById("dropdown-continuous")?.addEventListener("change", e => {
+        window.subtitleConfig.useContinuous = e.target.value === "on";
+    });
+
+
+    // "Auto-pause" dropdown changes
+    document.getElementById("dropdown-auto-pause")?.addEventListener("change", e => {
+        window.subtitleConfig.autoPause = e.target.value === "on";
+    })
+
+    // "Auto-pause delay" slider changes
+    document.getElementById("slider-autopause-delay")?.addEventListener("input", e => {
+        const val = parseInt(e.target.value);
+        window.subtitleConfig.autoPauseDelayMs = val;
     });
 
 

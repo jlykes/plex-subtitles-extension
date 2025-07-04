@@ -227,6 +227,13 @@ function renderPreprocessedLine(sub, lingqTerms) {
     wordWrapper.style.position = "relative";
     wordWrapper.style.display = "inline-block";
 
+    // Add underline (fake)
+    if (underlineColor && !isPunct) {
+      wordWrapper.style.borderBottom = `0.1em solid ${underlineColor}`;
+      wordWrapper.style.paddingBottom = "2px";
+      wordWrapper.style.borderRadius = "0.05em"; // <-- Add this line
+    }
+
     // Tooltip definition shown on hover above the word
     const tooltip = document.createElement("div");
     tooltip.textContent = meaningText;
@@ -256,44 +263,106 @@ function renderPreprocessedLine(sub, lingqTerms) {
       wordWrapper.classList.remove("hover-highlight");
     });
 
-    // Annotate with ruby + pinyin if enabled and appropriate
-    if (!isPunct && SHOW_PINYIN && status !== 3) {
-      const ruby = document.createElement("ruby");
-      const span = document.createElement("span");
-      span.textContent = word;
-      span.style.margin = "0";
-      span.style.color = "white";
+    // // Annotate with ruby + pinyin + tone color if enabled and appropriate
+    // if (!isPunct && SHOW_PINYIN && (window.subtitleConfig.toneColor === "all" || status !== 3)) {
+    //   const ruby = document.createElement("ruby");
+    //   const charList = [...word];
+    //   const pinyinList = (pinyin || "").split(" ");
 
-      // Add LingQ underline if enabled
-      if (!isPunct && underlineColor) {
-        span.style.textDecoration = "underline";
-        span.style.textDecorationColor = underlineColor;
-        span.style.textDecorationThickness = "4px";
-        span.style.textUnderlineOffset = "8px";
+    //   charList.forEach((char, i) => {
+    //     const charSpan = document.createElement("span");
+    //     charSpan.textContent = char;
+    //     charSpan.style.margin = "0";
+
+    //     // Determine tone coloring eligibility
+    //     const colorMode = window.subtitleConfig.toneColor;
+    //     const eligible =
+    //       colorMode === "all" ||
+    //       (colorMode === "unknown-only" && status !== 3);  // not known
+
+    //     const rt = document.createElement("rt");
+    //     rt.textContent = pinyinList[i] || "";
+
+    //     if (eligible && pinyinList[i]) {
+    //       charSpan.style.color = getToneColor(pinyinList[i]);
+    //       rt.style.color = getToneColor(pinyinList[i]);
+    //     } else {
+    //       charSpan.style.color = "white";
+    //     }
+
+    //     const rubyChar = document.createElement("ruby");
+    //     rubyChar.appendChild(charSpan);
+    //     rubyChar.appendChild(rt);
+
+    //     ruby.appendChild(rubyChar);
+    //   });
+
+    //   wordWrapper.appendChild(ruby);
+    // } else {
+    //   // If punctuation or no pinyin, just create a styled span
+    //   const span = document.createElement("span");
+    //   span.textContent = word;
+    //   span.style.margin = "0";
+    //   span.style.color = "white";
+
+    //   if (!isPunct && underlineColor) {
+    //     span.style.borderBottom = `0.1em solid ${underlineColor}`;
+    //     span.style.paddingBottom = "2px";
+    //     span.style.borderRadius = "0.05em";
+    //   }
+
+    //   wordWrapper.appendChild(span);
+    // }
+
+    // Read tone coloring mode from config: "none", "all", or "unknown-only"
+    const toneMode = window.subtitleConfig.toneColor;
+
+    // Determine whether this word should be tone-colored
+    // "all" → always color
+    // "unknown-only" → color only if LingQ status !== 3 (not known)
+    const shouldColor = toneMode === "all" || (toneMode === "unknown-only" && status !== 3);
+
+    // Determine whether to show pinyin (Ruby annotation)
+    // This is controlled independently by SHOW_PINYIN now
+    const showPinyin = SHOW_PINYIN;
+
+    const charList = [...word];
+    const pinyinList = (pinyin || "").split(" ");
+
+    // Loop over each character
+    charList.forEach((char, i) => {
+      // Create the visible character span
+      const charSpan = document.createElement("span");
+      charSpan.textContent = char;
+      charSpan.style.margin = "0";
+
+      // Determine whether to apply tone color
+      if (shouldColor && pinyinList[i]) {
+        const toneColor = getToneColor(pinyinList[i]);
+        charSpan.style.color = toneColor;
+      } else {
+        charSpan.style.color = "white";
       }
 
-      const rt = document.createElement("rt");
-      rt.textContent = pinyin;
+      if (showPinyin && !isPunct) {
+        // Create ruby text (pinyin)
+        const rt = document.createElement("rt");
+        rt.textContent = pinyinList[i] || "";
+        rt.style.color = charSpan.style.color;
 
-      ruby.appendChild(span);
-      ruby.appendChild(rt);
-      wordWrapper.appendChild(ruby);
-    } else {
-      // If punctuation or no pinyin, just create a styled span
-      const span = document.createElement("span");
-      span.textContent = word;
-      span.style.margin = "0";
-      span.style.color = "white";
+        // Wrap charSpan and rt in a ruby container
+        const rubyChar = document.createElement("ruby");
+        rubyChar.appendChild(charSpan);
+        rubyChar.appendChild(rt);
 
-      if (!isPunct && underlineColor) {
-        span.style.textDecoration = "underline";
-        span.style.textDecorationColor = underlineColor;
-        span.style.textDecorationThickness = "4px";
-        span.style.textUnderlineOffset = "8px";
+        // Add this annotated ruby block to the line
+        wordWrapper.appendChild(rubyChar);
+      } else {
+        // No ruby: just show the colored character
+        wordWrapper.appendChild(charSpan);
       }
+    });
 
-      wordWrapper.appendChild(span);
-    }
 
     // Append tooltip and word to the main line
     wordWrapper.appendChild(tooltip);

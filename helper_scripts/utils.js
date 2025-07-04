@@ -52,6 +52,34 @@ function getPinyin(word) {
   return "none";
 }
 
+
+// Gets the color of the tone for given pinyin
+function getToneColor(pinyin) {
+  const toneMatch = pinyin.match(/[āēīōūǖ]|[áéíóúǘ]|[ǎěǐǒǔǚ]|[àèìòùǜ]/);
+  const tone = toneMatch
+    ? {
+        "āēīōūǖ": 1,
+        "áéíóúǘ": 2,
+        "ǎěǐǒǔǚ": 3,
+        "àèìòùǜ": 4,
+      }[Object.keys({
+        "āēīōūǖ": 1,
+        "áéíóúǘ": 2,
+        "ǎěǐǒǔǚ": 3,
+        "àèìòùǜ": 4,
+      }).find(key => key.includes(toneMatch[0]))] || 5
+    : 5;
+
+  switch (tone) {
+    case 1: return "#ffaaaa"; // light red
+    case 2: return "#ffffaa"; // light yellow
+    case 3: return "#aaffaa"; // light green
+    case 4: return "#aaaaff"; // light blue
+    default: return "#cccccc"; // light gray
+  }
+}
+
+
 // Attempts to detect the media title from the browser tab.
 // If the default Plex title ("Plex") is still set, retries a few times with a delay.
 async function detectMediaTitleWithRetry(maxRetries = 20, delay = 500) {
