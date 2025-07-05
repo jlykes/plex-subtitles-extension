@@ -1,13 +1,22 @@
-// === Live Subtitle Fallback Mode ===
+// === helper_scripts/live.js ===
+
 // This module handles subtitle overlay rendering when no enriched JSON is found.
 // It uses MutationObserver to watch for raw subtitle elements rendered by Plex in real time
 // and enhances them by replacing the subtitle overlay content with enriched formatting.
+
 
 // Global reference to the MutationObserver so we can disconnect it later if needed
 let liveSubtitleObserver = null;
 
 
-// This function monitors DOM mutations to detect live subtitle changes on Plex
+/**
+ * This function sets up a MutationObserver to watch for live subtitle changes
+ * in the Plex video player. It replaces the subtitle text with an enriched overlay
+ * that highlights vocabulary terms from LingQ and segments Chinese text using Segmentit.
+ * @param {*} lingqTerms The vocabulary terms from LingQ to highlight in subtitles
+ * @param {*} segmentit The Segmentit instance for segmenting Chinese text
+ * @return {void}
+ */
 function waitForSubtitles(lingqTerms, segmentit) {
   updateModeDisplay("Live");
   console.log("🎯 Live subtitle mode enabled.");
@@ -51,16 +60,33 @@ function waitForSubtitles(lingqTerms, segmentit) {
 }
 
 
-// Replaces the live subtitle text with a styled overlay.
-// Performs segmentation of Chinese text, looks up LingQ status, colors accordingly,
-// and optionally annotates with pinyin using ruby tags.
+/**
+ * Replaces the live subtitle text with a styled overlay.
+ * This function segments the Chinese text, looks up LingQ vocabulary terms,
+ * colors the words according to their status, and optionally annotates with pinyin.
+ * It updates the global `lastLiveSubtitle` variable for re-rendering purposes.
+ * @param {*} text The live subtitle text to render
+ * @param {*} lingqTerms The vocabulary terms from LingQ to highlight in subtitles
+ * @param {*} segmentit The Segmentit instance for segmenting Chinese text
+ * @returns {void}
+ */
 function updateOverlay(text, lingqTerms, segmentit) {
   window.lastLiveSubtitle = text;
   renderLiveLine(text, lingqTerms, segmentit);
 }
 
 
-// Function to render a subtitle in live mode
+/**
+ * This function renders a live subtitle line by segmenting the text,
+ * creating annotated word wrappers, and appending them to the subtitle overlay container.
+ * It uses the Segmentit library to segment Chinese text into word tokens,
+ * and highlights vocabulary terms from LingQ by applying appropriate styles.
+ * It also retrieves pinyin for each word to display as a ruby annotation if configured.
+ * @param {*} text The live subtitle text to render
+ * @param {*} lingqTerms The vocabulary terms from LingQ to highlight in subtitles
+ * @param {*} segmentit The Segmentit instance for segmenting Chinese text
+ * @returns {void}
+ */
 function renderLiveLine(text, lingqTerms, segmentit) {
   const container = document.getElementById("custom-subtitle-overlay");
   if (!container) return;
@@ -87,53 +113,13 @@ function renderLiveLine(text, lingqTerms, segmentit) {
 }
 
 
-
-// function renderLiveLine(text, lingqTerms, segmentit) {
-//   const container = document.getElementById("custom-subtitle-overlay");
-//   if (!container) return;
-//   container.innerHTML = "";
-
-//   const words = segmentit.doSegment(text)
-//     .map(w => w.w)
-//     .filter(w => w && w.trim() !== "");
-
-//   words.forEach(word => {
-//     const span = document.createElement("span");
-//     span.textContent = word;
-//     span.style.color = "white";
-//     span.style.margin = "0";
-
-//     if (!isPunctuationDigitOrSpace(word)) {
-//       const status = lingqTerms[word];
-//       const underlineColor = window.subtitleConfig.lingqStatus === "on" ? getUnderlineColor(status) : null;
-
-//       if (underlineColor) {
-//         span.style.textDecoration = "underline";
-//         span.style.textDecorationColor = underlineColor;
-//         span.style.textDecorationThickness = "4px";
-//         span.style.textUnderlineOffset = "8px";
-//       }
-
-//       if (SHOW_PINYIN && status !== 3) {
-//         const ruby = document.createElement("ruby");
-//         ruby.appendChild(span);
-
-//         const rt = document.createElement("rt");
-//         rt.textContent = getPinyin(word);
-
-//         ruby.appendChild(rt);
-//         container.appendChild(ruby);
-//         return;
-//       }
-//     }
-
-//     container.appendChild(span);
-//   });
-// }
-
-
-
-// Stop live mode, for purposes of closing out video and switching to a new one
+/**
+ * Stops the live subtitle observer and cleans up resources.
+ * This function disconnects the MutationObserver that watches for live subtitle changes,
+ * effectively stopping the live subtitle rendering process.
+ * It should be called when the video ends or when switching to a new video.
+ * @returns {void}
+ */
 window.stopLiveMode = function () {
   console.log("🛑 Live subtitle function called");
   if (liveSubtitleObserver) {

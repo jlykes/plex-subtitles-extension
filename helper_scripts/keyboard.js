@@ -1,18 +1,16 @@
 // === helper_scripts/keyboard.js ===
 
-/**
- * This module sets up keyboard shortcuts to control subtitle playback and Plex UI behavior.
- *
- * Shortcuts:
- *   S - Repeats the currently displayed subtitle
- *   A - Jumps to the previous subtitle in the list
- *   D - Advances to the next subtitle
- *   H - Toggles visibility of the Plex UI overlay (playback controls)
- *
- * These shortcuts only function in preprocessed subtitle mode,
- * where `window.subtitleList` and `window.lastSubtitleStartTime`
- * are populated from the enriched JSON subtitle file.
- */
+// This module sets up keyboard shortcuts to control subtitle playback and Plex UI behavior.
+//
+// Shortcuts:
+//   S - Repeats the currently displayed subtitle
+//   A - Jumps to the previous subtitle in the list
+//   D - Advances to the next subtitle
+//   H - Toggles visibility of the Plex UI overlay (playback controls)
+// 
+// These shortcuts only function in preprocessed subtitle mode,
+// where `window.subtitleList` and `window.lastSubtitleStartTime`
+// are populated from the enriched JSON subtitle file.
 
 // Used to make sure doesn't run more than ones
 let keyboardShortcutsInitialized = false;
@@ -55,7 +53,7 @@ function togglePlexUIBlocker() {
 function setupKeyboardShortcuts() {
   if (keyboardShortcutsInitialized) return;
   
-  keyboardShortcutsInitialized = true;
+  keyboardShortcutsInitialized = true; // Prevent multiple initializations
 
   window.addEventListener("keydown", (e) => {
     // Attempt to find the Plex video element by class name

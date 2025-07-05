@@ -1,6 +1,5 @@
 // === helper_scripts/control.js ===
-// Control Panel for Plex Subtitle Overlay
-// ----------------------------------------
+
 // This module creates a floating UI for toggling subtitle display options.
 // The panel appears when the mouse enters the top-right region of the screen
 // and stays open while hovered. It reflects the current subtitle mode
