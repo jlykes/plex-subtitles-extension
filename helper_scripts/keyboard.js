@@ -23,6 +23,7 @@ window.__plexUIHidden = false;
  * Toggles visibility of known Plex UI elements (e.g., playback controls, overlays)
  * by modifying their `display` property. Targets a known list of DOM elements
  * based on class names and data-testid attributes used by Plex.
+ * @returns {void}
  */
 function togglePlexUIBlocker() {
   const elements = document.querySelectorAll(`
@@ -49,6 +50,7 @@ function togglePlexUIBlocker() {
 /**
  * Sets up global keyboard event listener for controlling subtitle navigation
  * and toggling the Plex UI overlay.
+ * @returns {void}
  */
 function setupKeyboardShortcuts() {
   if (keyboardShortcutsInitialized) return;

@@ -244,7 +244,6 @@ async function main() {
  * Fallback: poll every second until a playable video is detected.
  * This avoids initializing too early (e.g. while video is still spinning/loading).
  * @returns {HTMLVideoElement|null} The Plex video element or null if not found.
- * @description
  */
 let mainInterval = setInterval(() => {
   const video = findPlexVideoElement();

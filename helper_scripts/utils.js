@@ -1,7 +1,12 @@
 // === helper_scripts/utils.js ===
+// This module contains utility functions used across the extension,
+// such as loading LingQ terms, normalizing titles, and creating styled word spans.
 
-// Loads the user's LingQ vocabulary list from the static JSON file bundled with the extension.
-// Converts it into a lookup object where each term is mapped to its LingQ status (0=new, 1=learning, 2=known, 3=ignored).
+/**
+ * Loads the LingQ vocabulary terms from the bundled JSON file.
+ * The JSON should be structured as an array of objects with "term" and "status" properties.
+ * @returns {Promise<Object>} A promise that resolves to an object mapping terms to their LingQ status
+ */
 async function loadLingQTerms() {
   const response = await fetch(chrome.runtime.getURL("lingqs.json"));
   const data = await response.json();
@@ -14,8 +19,11 @@ async function loadLingQTerms() {
   return result;
 }
 
-// Returns a color associated with the LingQ status code.
-// These are used for underlining words based on familiarity level.
+/**
+ * Returns the underline color based on the LingQ status code
+ * @param {*} status The LingQ status code
+ * @returns {string|null} The hex color code for the underline, or null if no underline should be applied
+ */
 function getUnderlineColor(status) {
   switch (status) {
     case 3: return null;         // Ignored — no underline
@@ -26,8 +34,12 @@ function getUnderlineColor(status) {
   }
 }
 
-// Determines whether the given token is punctuation, digits, or whitespace.
-// Also filters out special invisible Unicode characters sometimes found in subtitle text.
+/**
+ * Checks if a token is punctuation, a digit, or whitespace.
+ * This is useful for filtering out non-content tokens in subtitles.
+ * @param {*} token The token to check, typically a word or character from subtitles
+ * @returns {boolean} True if the token is punctuation, a digit, or whitespace, false otherwise
+ */
 function isPunctuationDigitOrSpace(token) {
   const invisibleChars = ['‌', '‍', '​', '﻿'];
   return (
@@ -38,8 +50,12 @@ function isPunctuationDigitOrSpace(token) {
   );
 }
 
-// Uses the pinyin-pro library (injected globally) to retrieve the pinyin pronunciation of a word.
-// Falls back to "none" if the library fails or is unavailable.
+/**
+ * Uses the pinyin-pro library to convert a Chinese word or character to pinyin.
+ * If the library is not available or conversion fails, returns "none".
+ * @param {*} word The Chinese word or character to convert to pinyin
+ * @returns {string} The pinyin representation of the word, or "none" if conversion fails
+ */
 function getPinyin(word) {
   if (window.pinyin) {
     try {
@@ -52,8 +68,11 @@ function getPinyin(word) {
   return "none";
 }
 
-
-// Gets the color of the tone for given pinyin
+/**
+ * Gets the color associated with the tone of a given pinyin string.
+ * @param {*} pinyin The pinyin string with tone marks
+ * @returns {string} The hex color code representing the tone
+ */
 function getToneColor(pinyin) {
   const toneMatch = pinyin.match(/[āēīōūǖ]|[áéíóúǘ]|[ǎěǐǒǔǚ]|[àèìòùǜ]/);
   const tone = toneMatch
@@ -79,9 +98,15 @@ function getToneColor(pinyin) {
   }
 }
 
-
-// Attempts to detect the media title from the browser tab.
-// If the default Plex title ("Plex") is still set, retries a few times with a delay.
+/**
+ * Attempts to detect the media title from the browser tab.
+ * If the default Plex title ("Plex") is still set, retries a few times with a delay.
+ * This is useful for cases where the title may not be immediately available
+ * (e.g. when the page is still loading or the title is dynamically set).
+ * @param {*} maxRetries The maximum number of retries to detect the title
+ * @param {*} delay The delay in milliseconds between retries
+ * @returns {string|null} The detected media title, or null if it could not be detected
+ */
 async function detectMediaTitleWithRetry(maxRetries = 20, delay = 500) {
   for (let i = 0; i < maxRetries; i++) {
     const title = document.title.trim();
@@ -93,8 +118,14 @@ async function detectMediaTitleWithRetry(maxRetries = 20, delay = 500) {
   return null;  // Could not detect title in time
 }
 
-// Normalizes a media title into a consistent, file-safe format.
-// Cleans leading symbols, removes special characters, and replaces spaces with underscores.
+/**
+ * Normalizes a media title for use in file names or URLs.
+ * This function removes leading whitespace, special characters,
+ * and converts spaces to underscores. It also removes the leading ▶ character
+ * and any fallback Plex titles that may be present.
+ * @param {*} title The media title to normalize
+ * @returns {string} The normalized title suitable for file names or URLs
+ */
 function normalizeTitle(title) {
   return title
     .trim()                                 // Remove leading/trailing whitespace
@@ -105,8 +136,14 @@ function normalizeTitle(title) {
     .replace(/\s+/g, "_");                // Convert spaces to underscores
 }
 
-// Checks whether an enriched JSON subtitle file exists for the given normalized title.
-// Used to determine whether to run in preprocessed mode or live subtitle mode.
+/**
+ * Checks if the enriched JSON file for the given normalized title exists.
+ * This is used to determine if preprocessed subtitles are available for the current media.
+ * It fetches the file from the extension's URL and checks the response status.
+ * If the file exists, it returns true; otherwise, it returns false.
+ * @param {*} normalizedTitle The normalized title of the media, used to construct the file path
+ * @returns True if the enriched JSON file exists, false otherwise
+ */
 async function checkEnrichedJSONExists(normalizedTitle) {
   const url = chrome.runtime.getURL(`enriched_subtitles/${normalizedTitle}.enriched.json`);
   try {
@@ -117,7 +154,10 @@ async function checkEnrichedJSONExists(normalizedTitle) {
   }
 }
 
-// Looks for the active Plex video element based on known CSS class
+/**
+ * Looks for the active Plex video element in the DOM.
+ * @returns {HTMLElement|null} The video element if found, or null if not
+ */
 function findPlexVideoElement() {
   return [...document.querySelectorAll("video")].find(el =>
     el.classList.contains("HTMLMedia-mediaElement-u17S9P")
@@ -128,7 +168,6 @@ function findPlexVideoElement() {
  * Creates a fully styled and annotated word span for a subtitle line.
  * Includes optional pinyin ruby, tone coloring, underlining by LingQ status,
  * and a hoverable tooltip showing word meaning.
- *
  * @param {Object} opts
  * @param {string} opts.word - The raw Chinese word or character
  * @param {string} opts.pinyin - The pinyin with tone marks (space-separated for multi-char words)

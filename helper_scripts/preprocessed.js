@@ -114,7 +114,7 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
  * Creates and styles the outer wrapper, main line, and translation divs
  * for subtitle rendering. Handles translation visibility modes.
  * @param {string} translationText - The subtitle translation text to display
- * @returns {{ wrapper: HTMLElement, mainLine: HTMLElement, translation: HTMLElement }}
+ * @returns {{ wrapper: HTMLElement, mainLine: HTMLElement, translation: HTMLElement }} The created elements
  */
 function createSubtitleWrapper(translationText) {
   const wrapper = document.createElement("div");
