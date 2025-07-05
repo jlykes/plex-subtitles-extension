@@ -76,6 +76,9 @@ function setupKeyboardShortcuts() {
     if (key === "s" && window.lastSubtitleStartTime != null) {
       video.currentTime = window.lastSubtitleStartTime;
       video.play();
+
+      // Reset last rendered index to ensure auto-pause gets re-initiated
+      window.lastRenderedIndex = -1;
     }
 
     // A - Jump to the previous subtitle
@@ -97,7 +100,15 @@ function setupKeyboardShortcuts() {
         window.lastSubtitleStartTime = next.start;
         video.currentTime = next.start;
         video.play();
+
+        // Reset last rendered index to ensure auto-pause gets re-initiated
+        window.lastRenderedIndex = -1;
       }
+    }
+
+    // Arrow keys - Reset last rendered index to ensure auto-pause gets re-initiated
+    if (key === "arrowleft" || key === "arrowright") {
+      window.lastRenderedIndex = -1;
     }
   });
 

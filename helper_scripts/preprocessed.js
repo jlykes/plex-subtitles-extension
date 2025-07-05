@@ -63,8 +63,7 @@ function runPreprocessedMode(lingqTerms, filename) {
  * @returns {void}
  */
 function startPollingLoop(enrichedSubs, lingqTerms) {
-  let lastRenderedIndex = -1;
-  let lastPausedIndex = -1;
+  window.lastRenderedIndex = -1
   
   preprocessedInterval = setInterval(() => {
     const video = findPlexVideoElement();
@@ -85,7 +84,7 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
     }
 
     // If the active subtitle hasn't changed, skip rendering
-    if (active.start === lastRenderedIndex) return;
+    if (active.start === window.lastRenderedIndex) return;
 
     // Set up variables for auto-pause logic, limit pause if repeated subtitle
     const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
@@ -96,14 +95,13 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
     renderSubtitle(active, lingqTerms);
     lastRenderedIndex = active.start;
 
-    // Initialize auto-pause if conditions are met
-    // This checks if auto-pause is enabled, the subtitle has not yet ended,
-    // and whether the subtitle is not a repeated line
-    // If so, schedule the auto-pause based on the subtitle's end time
-    if (shouldAutoPause(active, lastPausedIndex, isRepeated)) {
+    // Initialize auto-pause if enabled and conditions are met
+    // This checks if the subtitle has not yet ended and is not a repeated line
+    // If auto-pause is enabled, it schedules a pause at the end of the subtitle
+    // If the subtitle is repeated, it does not schedule a pause
+    if (shouldAutoPause(active, isRepeated)) {
       const previousSub = enrichedSubs.find(s => s.start === lastRenderedIndex);
       scheduleAutoPause(active, previousSub);
-      lastPausedIndex = active.end;
     }
   }, 300);
 }
@@ -265,21 +263,19 @@ function renderSubtitle(sub, lingqTerms) {
 }
 
 /**
- * Determines if auto-pause should trigger based on current config and context.
- * Checks if auto-pause is enabled, the subtitle has not yet ended,
- * and whether the subtitle is not a repeated line.
- * @param {Object} active - The currently active subtitle object
- * @param {number} lastPausedIndex - The index of the last paused subtitle
- * @param {boolean} isRepeated - Whether the current subtitle is a repeated line
- * @returns {boolean} - True if auto-pause should be triggered, false otherwise
+ * Checks if auto-pause should be triggered based on the current subtitle state.
+ * This function evaluates whether auto-pause is enabled in the configuration,
+ * whether the subtitle has not yet ended, and whether it is not a repeated line.
+ * @param {*} active The currently active subtitle object
+ * @param {*} isRepeated True if the subtitle is a repeated line
+ * @returns {boolean} True if auto-pause should be triggered
  */
-function shouldAutoPause(active, lastPausedIndex, isRepeated) {
+function shouldAutoPause(active, isRepeated) {
   
-  // Works by checking if auto-pause is enabled in the config,
-  // the active subtitle has not yet ended, and it is not a repeated line.
+  // Check if auto-pause is enabled in the config and if the subtitle has not yet ended
+  // Also ensure that the subtitle is not a repeated line (to avoid unnecessary pauses)
   return (
     window.subtitleConfig.autoPause &&
-    active.end !== lastPausedIndex &&
     !isRepeated
   );
 }
@@ -294,6 +290,7 @@ function shouldAutoPause(active, lastPausedIndex, isRepeated) {
  */
 function scheduleAutoPause(currentSub, previousSub) {
   clearTimeout(autoPauseTimeout);
+  console.log("⏱️ Scheduling auto-pause for subtitle:", currentSub.text);
 
   // Find the video element to get current playback time
   // If no video is found, exit early

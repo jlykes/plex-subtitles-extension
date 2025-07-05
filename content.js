@@ -45,7 +45,6 @@ async function initializeForCurrentVideo(lingqTerms) {
   await loadSubtitlesForCurrentVideo(lingqTerms);
 }
 
-
 /**
  * Periodically checks for changes in the Plex video element.
  * If a new video starts or the current one ends, we react accordingly.
@@ -94,7 +93,6 @@ function monitorForVideoChange(lingqTerms) {
   }, 100); // Check every 100ms
 }
 
-
 /**
  * Stops all subtitle-related activity and removes overlays.
  * Called when a new video starts, or the current one ends.
@@ -107,7 +105,6 @@ function cleanUpActiveModes() {
   window.stopPreprocessedMode();
   window.stopLiveMode();
 }
-
 
 /**
  * Handles the case where a video has ended or was closed.
@@ -125,7 +122,6 @@ function handleVideoClosed() {
   // Clean up all UI components and stop active modes
   cleanUpActiveModes();
 }
-
 
 /**
  * Waits for the video to be fully loaded (readyState >= 2),
