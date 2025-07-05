@@ -96,15 +96,13 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
     renderSubtitle(active, lingqTerms);
     lastRenderedIndex = active.start;
 
-    // Initialize auto-pause if enabled and conditions are met
+    // Initialize auto-pause if conditions are met
+    // This checks if auto-pause is enabled, the subtitle has not yet ended,
+    // and whether the subtitle is not a repeated line
+    // If so, schedule the auto-pause based on the subtitle's end time
     if (shouldAutoPause(active, lastPausedIndex, isRepeated)) {
-      scheduleAutoPause(active.end, () => {
-        const v = findPlexVideoElement();
-        if (v && !v.paused) {
-          v.pause();
-          console.log("⏸️ Auto-paused at subtitle end");
-        }
-      });
+      const previousSub = enrichedSubs.find(s => s.start === lastRenderedIndex);
+      scheduleAutoPause(active, previousSub);
       lastPausedIndex = active.end;
     }
   }, 300);
@@ -287,20 +285,53 @@ function shouldAutoPause(active, lastPausedIndex, isRepeated) {
 }
 
 /**
- * Sets a timeout to auto-pause playback after the subtitle ends.
- * Calculates the delay based on the end time of the subtitle,
- * current playback time, and any additional delay configured.
- * Clears any existing timeout to avoid multiple pauses.
- * @param {number} endTime - The end time of the subtitle in seconds
- * @param {Function} callback - The function to call when the timeout expires
- * @returns {void}
+ * This function schedules an auto-pause based on the current subtitle's end time.
+ * It calculates the delay until the subtitle ends, adds any configured delay,
+ * and sets a timeout to pause the video when that time is reached.
+ * @param {*} currentSub The current subtitle object containing start and end times
+ * @param {*} previousSub The previous subtitle object to check against
+ * @returns 
  */
-function scheduleAutoPause(endTime, callback) {
+function scheduleAutoPause(currentSub, previousSub) {
   clearTimeout(autoPauseTimeout);
-  const now = findPlexVideoElement()?.currentTime ?? 0;
-  const extra = window.subtitleConfig.autoPauseDelayMs || 0;
-  const delay = Math.max(0, (endTime - now) * 1000 + extra);
-  autoPauseTimeout = setTimeout(callback, delay);
+
+  // Find the video element to get current playback time
+  // If no video is found, exit early
+  const video = findPlexVideoElement();
+  if (!video) return;
+
+  // Calculate the delay until the subtitle ends, plus any configured extra delay
+  const now = video.currentTime;
+  const endTime = currentSub.end;
+  const delay = Math.max(0, (endTime - now) * 1000 + (window.subtitleConfig.autoPauseDelayMs || 0));
+
+  // Initialize the auto-pause timeout
+  autoPauseTimeout = setTimeout(() => {
+    const v = findPlexVideoElement();
+    if (!v || v.paused) return;
+
+    // Check what subtitle is currently active
+    const current = window.subtitleConfig.useContinuous
+      ? getMostRecentSubtitle(v.currentTime, window.subtitleList)
+      : getActiveSubtitle(v.currentTime, window.subtitleList);
+
+    // If the subtitle changed since we scheduled the pause, rewind to previous
+    if (!current || current.start !== currentSub.start) { // If subtitle mismatch
+      const rewindTarget = previousSub?.end ?? (v.currentTime - 0.3); // Default to 0.3 seconds before current time if no previous sub
+      console.log("⏪ Rewinding before pausing due to subtitle mismatch");
+      v.currentTime = Math.max(0, rewindTarget); // Ensure we don't go negative
+
+      // Wait a short time to ensure the video has time to seek before pausing
+      setTimeout(() => {
+        v.pause();
+        console.log("⏸️ Auto-paused after rewind");
+      }, 50);
+
+    } else { // If the subtitle matches, just pause
+      v.pause();
+      console.log("⏸️ Auto-paused on correct subtitle");
+    }
+  }, delay);
 }
 
 /**
