@@ -4,7 +4,7 @@
 
 // Interval handle for polling loop and optional pause scheduling
 let preprocessedInterval = null;
-let autoPauseTimeout = null;
+window.autoPauseTimeout = null;
 
 /**
  * Entry point: starts preprocessed subtitle mode.
@@ -289,8 +289,6 @@ function shouldAutoPause(active, isRepeated) {
  * @returns 
  */
 function scheduleAutoPause(currentSub, previousSub) {
-  clearTimeout(autoPauseTimeout);
-  console.log("⏱️ Scheduling auto-pause for subtitle:", currentSub.text);
 
   // Find the video element to get current playback time
   // If no video is found, exit early
@@ -301,9 +299,12 @@ function scheduleAutoPause(currentSub, previousSub) {
   const now = video.currentTime;
   const endTime = currentSub.end;
   const delay = Math.max(0, (endTime - now) * 1000 + (window.subtitleConfig.autoPauseDelayMs || 0));
+  
+
+  console.log("⏱️ Scheduling auto-pause for subtitle:", currentSub.text, " with delay (ms):", delay);
 
   // Initialize the auto-pause timeout
-  autoPauseTimeout = setTimeout(() => {
+  window.autoPauseTimeout = setTimeout(() => {
     const v = findPlexVideoElement();
     if (!v || v.paused) return;
 
@@ -315,7 +316,19 @@ function scheduleAutoPause(currentSub, previousSub) {
     // If the subtitle changed since we scheduled the pause, rewind to previous
     if (!current || current.start !== currentSub.start) { // If subtitle mismatch
       const rewindTarget = previousSub?.end ?? (v.currentTime - 0.3); // Default to 0.3 seconds before current time if no previous sub
-      console.log("⏪ Rewinding before pausing due to subtitle mismatch");
+      console.log("⏪ Rewinding before pausing due to subtitle mismatch for subtitle:", currentSub.text);
+
+      // ✅ If rewind target is in the future, skip the rewind
+      if (rewindTarget >= video.currentTime) {
+        console.warn("⚠️ Skipping rewind — target is ahead of current time", {
+          rewindTarget,
+          currentTime: video.currentTime,
+          previousSub,
+          currentSub
+        });
+        return; // Do nothing — don’t pause or seek
+      }
+
       v.currentTime = Math.max(0, rewindTarget); // Ensure we don't go negative
 
       // Wait a short time to ensure the video has time to seek before pausing
