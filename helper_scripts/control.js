@@ -43,6 +43,13 @@ window.subtitleConfig = {
 /**
  * Creates the control panel DOM elements and binds all event listeners.
  * Called once per page load when the overlay is injected.
+ * This function:
+ * - Creates the hover trigger element that shows the panel
+ * - Creates the panel container with initial styles
+ * - Loads the HTML content from the extension directory
+ * - Binds all user-facing controls for appearance and behavior
+ * - Initializes hover-to-show behavior
+ * @returns {Promise<void>}
  */
 async function createControlPanel() {
   if (document.querySelector("#subtitle-control-panel")) return; // Avoid duplicate insertion
@@ -67,7 +74,12 @@ async function createControlPanel() {
 }
 
 
-// Removes the control panel and hover trigger from the DOM
+/**
+ * Clears the control panel and its hover trigger from the DOM.
+ * This is typically called when the overlay is removed or the page is unloaded.
+ * It ensures no leftover elements remain that could interfere with future overlays.
+ * @returns {void}
+ */
 function clearControlPanel() {
   const panel = document.getElementById("subtitle-control-panel");
   const trigger = document.getElementById("subtitle-panel-hover-trigger");
@@ -81,6 +93,10 @@ function clearControlPanel() {
 
 /**
  * Creates the transparent hover zone that triggers the control panel to appear.
+ * This element is positioned in the top-right corner of the viewport
+ * and covers a large area to ensure easy access.
+ * It is styled to be invisible but captures mouse events.
+ * @returns {HTMLDivElement} The hover trigger element.
  */
 function createPanelHoverTrigger() {
   const trigger = document.createElement("div");
@@ -100,6 +116,10 @@ function createPanelHoverTrigger() {
 
 /**
  * Creates the styled floating control panel container element.
+ * This panel will hold all the controls for subtitle appearance and behavior.
+ * It is initially positioned off-screen to the right and becomes visible
+ * when the user hovers over the trigger area.
+ * @returns {HTMLDivElement} The control panel container element.
  */
 function createPanelContainer() {
   const panel = document.createElement("div");
@@ -127,6 +147,12 @@ function createPanelContainer() {
 
 /**
  * Controls how the panel slides in and out on hover.
+ * This function sets up event listeners on the trigger and panel
+ * to show the panel when hovered and hide it after a delay when not hovered.
+ * It uses a timeout to allow the user to move the mouse between the trigger and panel.
+ * @param {HTMLDivElement} panel - The control panel element.
+ * @param {HTMLDivElement} trigger - The hover trigger element.
+ * @returns {void}
  */
 function initHoverPanelBehavior(panel, trigger) {
   let hoverActive = false;
@@ -164,6 +190,11 @@ function initHoverPanelBehavior(panel, trigger) {
 /**
  * Binds dropdowns and sliders related to subtitle **appearance**:
  * visibility, font size, position, LingQ status, pinyin, etc.
+ * This function sets up event listeners for each control element
+ * and updates the global `subtitleConfig` object accordingly.
+ * It also updates the subtitle overlay immediately when settings change.
+ * @param {HTMLDivElement} panel - The control panel element.
+ * @returns {void}
  */
 function bindAppearanceControls(panel) {
     const overlay = () => document.getElementById("custom-subtitle-overlay");
@@ -265,6 +296,11 @@ function bindAppearanceControls(panel) {
 
 /**
  * Binds behavior-related controls: auto-pause and continuous mode.
+ * This function sets up event listeners for the behavior controls
+ * and updates the global `subtitleConfig` object accordingly.
+ * It allows users to toggle continuous subtitle display and auto-pause behavior.
+ * @param {HTMLDivElement} panel - The control panel element.
+ * @returns {void}
  */
 function bindBehaviorControls(panel) {
     
@@ -287,6 +323,11 @@ function bindBehaviorControls(panel) {
 /**
  * Restores keyboard focus to the document after interacting with controls.
  * Prevents issues with Plex navigation when focus gets trapped on inputs.
+ * This function adds event listeners to dropdowns and sliders
+ * to blur them when changed or interacted with, restoring focus to the body.
+ * This ensures that keyboard navigation remains smooth and intuitive.
+ * @param {HTMLDivElement} panel - The control panel element.
+ * @returns {void}
  */
 function bindFocusRestoration(panel) {
   const blurAndFocus = (e) => {
@@ -322,7 +363,9 @@ function bindFocusRestoration(panel) {
 
 /**
  * Updates the subtitle mode text in the control panel display area.
- * Typically called by `live.js` when switching between modes.
+ * Typically called when switching between modes.
+ * @param {string} newMode - The new subtitle mode (e.g., "Live", "Preprocessed").
+ * @returns {void}
  */
 function updateModeDisplay(newMode) {
   console.log("📺 updateModeDisplay called with:", newMode);
@@ -334,6 +377,8 @@ function updateModeDisplay(newMode) {
 /**
  * Sets or hides the sentence explanation text shown in the panel.
  * Typically called by `preprocessed.js` when a line has an explanation.
+ * @param {string} text - The explanation text to display.
+ * @returns {void}
  */
 function updateCurrentExplanation(text) {
   console.log("📘 updateCurrentExplanation called with:", text);
@@ -355,6 +400,10 @@ function updateCurrentExplanation(text) {
 /**
  * Backward-compatible function that calls all individual binder functions.
  * Still used by other modules, so retained for compatibility.
+ * This function binds all the necessary event listeners
+ * and initializes the control panel functionality.
+ * It should be called once the control panel is injected into the DOM.
+ * @returns {void}
  */
 function bindControlPanelListeners() {
   const panel = document.getElementById("subtitle-control-panel");
@@ -365,7 +414,16 @@ function bindControlPanelListeners() {
   bindFocusRestoration(panel);
 }
 
-// Update subtitle visbility when control panel area clicked
+/**
+ * Updates the visibility of the subtitle overlay based on the current configuration.
+ * This function checks the `window.subtitleConfig.visibility` setting
+ * and applies the appropriate display style to the subtitle overlay container.
+ * It handles three visibility modes:
+ * - "off": Hides the overlay completely.
+ * - "on": Shows the overlay regardless of video state.
+ * - "on-stop": Shows the overlay only when the video is paused.
+ * @returns {void}
+ */
 function updateSubtitleVisibility() {
     const container = document.getElementById("custom-subtitle-overlay");
     if (!container) return;
