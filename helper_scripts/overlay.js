@@ -3,7 +3,6 @@
 // which replaces the native subtitles with enriched content. 
 
 
-
 /**
  * Creates the custom subtitle overlay container in the DOM.
  * This container will hold the enriched subtitles and apply custom styles.
@@ -101,7 +100,6 @@ function createOverlayContainer() {
 
 }
 
-
 /**
  * Hides the original Plex subtitles completely by applying a CSS rule.
  * Ensures only the custom overlay is visible to the user.
@@ -117,7 +115,6 @@ function hideOriginalPlexSubtitles() {
   `;
   document.head.appendChild(style);
 }
-
 
 /**
  * Clears all content from the custom subtitle overlay.
@@ -215,35 +212,3 @@ function setupCursorEnforcement() {
     }, 2000);
   });
 }
-
-
-// // Initial force-hide
-// addCursorHideStyle();
-
-// // Create the observer that re-enforces the hiding
-// const observer = new MutationObserver(() => {
-//   if (cursorEnforcementActive) {
-//     addCursorHideStyle();
-//   }
-// });
-// observer.observe(document.documentElement, {
-//   childList: true,
-//   subtree: true,
-//   attributes: true,
-//   attributeFilter: ['style', 'class']
-// });
-
-// // Mouse movement temporarily disables hiding
-// document.addEventListener("mousemove", () => {
-//   removeCursorHideStyle();             // Let the cursor show
-//   cursorEnforcementActive = false;    // Disable MutationObserver response
-
-//   // Clear any previous timer
-//   clearTimeout(hideCursorTimer);
-
-//   // After 2s of no movement, hide the cursor again
-//   hideCursorTimer = setTimeout(() => {
-//     cursorEnforcementActive = true;
-//     addCursorHideStyle();
-//   }, 2000);
-// });
