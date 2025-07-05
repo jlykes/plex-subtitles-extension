@@ -1,8 +1,15 @@
 // === helper_scripts/overlay.js ===
+// This module creates a custom subtitle overlay container for Plex,
+// which replaces the native subtitles with enriched content. 
 
-// Creates a custom subtitle overlay container and injects it into the page.
-// This overlay will replace Plex's native subtitles and display enriched content
-// (e.g., pinyin, coloring, hover tooltips) with custom styling.
+
+
+/**
+ * Creates the custom subtitle overlay container in the DOM.
+ * This container will hold the enriched subtitles and apply custom styles.
+ * It also sets up event listeners for mouse interactions to pause/resume video playback.
+ * @returns {void}
+ */
 function createOverlayContainer() {
 
   // Remove any existing overlay to prevent duplication or stale state
@@ -94,8 +101,12 @@ function createOverlayContainer() {
 
 }
 
-// Hides the original Plex subtitles completely by applying a CSS rule.
-// Ensures only the custom overlay is visible to the user.
+
+/**
+ * Hides the original Plex subtitles completely by applying a CSS rule.
+ * Ensures only the custom overlay is visible to the user.
+ * @returns {void}
+ */
 function hideOriginalPlexSubtitles() {
   const style = document.createElement("style");
   style.textContent = `
@@ -107,8 +118,13 @@ function hideOriginalPlexSubtitles() {
   document.head.appendChild(style);
 }
 
-// Clears all content from the custom subtitle overlay.
-// This is useful when stopping playback or switching to a new video.
+
+/**
+ * Clears all content from the custom subtitle overlay.
+ * This is useful when stopping playback or switching to a new video.
+ * It removes the overlay container from the DOM and resets subtitle tracking state.
+ * @returns {void}
+ */
 function clearSubtitleOverlay() {
   const container = document.getElementById("custom-subtitle-overlay");
   if (container) {
@@ -122,11 +138,16 @@ function clearSubtitleOverlay() {
 } 
 
 /// LOGIC TO HIDE MOUSE UNLESS MOVE
-
 let cursorEnforcementActive = true;
 let hideCursorTimer = null;
 
-// Enforce 'cursor: none !important' using CSS + MutationObserver
+/**
+ * Adds a custom CSS style to hide the cursor across the document.
+ * This style is applied globally to all elements, including videos.
+ * It ensures the cursor remains hidden unless the user moves the mouse.
+ * @returns {void}
+ * @see removeCursorHideStyle() to revert this behavior.
+ */
 function addCursorHideStyle() {
   if (!document.getElementById("custom-cursor-hide-style")) {
     const style = document.createElement("style");
@@ -140,38 +161,89 @@ function addCursorHideStyle() {
   }
 }
 
+/**
+ * Removes the custom CSS style that hides the cursor.
+ * This reverts the cursor behavior back to normal, allowing it to be visible.
+ * It is typically called when the user moves the mouse to temporarily show the cursor.
+ * @returns {void}
+ */
 function removeCursorHideStyle() {
   const style = document.getElementById("custom-cursor-hide-style");
   if (style) style.remove();
 }
 
-// Initial force-hide
-addCursorHideStyle();
+/**
+ * Sets up the cursor enforcement logic to hide the cursor after a period of inactivity.
+ * It uses a MutationObserver to re-apply the hiding style if the document changes.
+ * The cursor is temporarily shown when the user moves the mouse.
+ * After 2 seconds of inactivity, the cursor is hidden again.
+ * @returns {void}
+ */
+function setupCursorEnforcement() {
+  addCursorHideStyle(); // Initial force-hide
 
-// Create the observer that re-enforces the hiding
-const observer = new MutationObserver(() => {
-  if (cursorEnforcementActive) {
-    addCursorHideStyle();
-  }
-});
-observer.observe(document.documentElement, {
-  childList: true,
-  subtree: true,
-  attributes: true,
-  attributeFilter: ['style', 'class']
-});
+  // Create the observer that re-enforces the hiding
+  // This will re-apply the hiding style if the document changes
+  // (e.g., new elements added, styles changed)
+  const observer = new MutationObserver(() => {
+    if (cursorEnforcementActive) {
+      addCursorHideStyle();
+    }
+  });
 
-// Mouse movement temporarily disables hiding
-document.addEventListener("mousemove", () => {
-  removeCursorHideStyle();             // Let the cursor show
-  cursorEnforcementActive = false;    // Disable MutationObserver response
+  // Start observing the document for changes
+  // We watch for childList changes, subtree modifications, and attribute changes
+  // Specifically looking for style and class changes that might affect cursor visibility
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style', 'class']
+  });
 
-  // Clear any previous timer
-  clearTimeout(hideCursorTimer);
+  // Mouse movement temporarily disables hiding
+  // When the user moves the mouse, we remove the hiding style
+  // and reset the enforcement state to allow cursor visibility
+  // After 2 seconds of no movement, we re-apply the hiding style
+  document.addEventListener("mousemove", () => {
+    removeCursorHideStyle();
+    cursorEnforcementActive = false;
+    clearTimeout(hideCursorTimer);
+    hideCursorTimer = setTimeout(() => {
+      cursorEnforcementActive = true;
+      addCursorHideStyle();
+    }, 2000);
+  });
+}
 
-  // After 2s of no movement, hide the cursor again
-  hideCursorTimer = setTimeout(() => {
-    cursorEnforcementActive = true;
-    addCursorHideStyle();
-  }, 2000);
-});
+
+// // Initial force-hide
+// addCursorHideStyle();
+
+// // Create the observer that re-enforces the hiding
+// const observer = new MutationObserver(() => {
+//   if (cursorEnforcementActive) {
+//     addCursorHideStyle();
+//   }
+// });
+// observer.observe(document.documentElement, {
+//   childList: true,
+//   subtree: true,
+//   attributes: true,
+//   attributeFilter: ['style', 'class']
+// });
+
+// // Mouse movement temporarily disables hiding
+// document.addEventListener("mousemove", () => {
+//   removeCursorHideStyle();             // Let the cursor show
+//   cursorEnforcementActive = false;    // Disable MutationObserver response
+
+//   // Clear any previous timer
+//   clearTimeout(hideCursorTimer);
+
+//   // After 2s of no movement, hide the cursor again
+//   hideCursorTimer = setTimeout(() => {
+//     cursorEnforcementActive = true;
+//     addCursorHideStyle();
+//   }, 2000);
+// });

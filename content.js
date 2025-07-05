@@ -223,6 +223,9 @@ async function main() {
   // Run core initialization logic for current video
   await initializeForCurrentVideo(lingqTerms);
 
+  // Set up cursor enforcement to hide cursor when not moving
+  setupCursorEnforcement();
+
   // ⛔️ Prime lastVideoSrc and videoPreviouslyDetected to avoid duplicate subtitle loading
   const initialVideo = findPlexVideoElement();
   if (initialVideo) {
