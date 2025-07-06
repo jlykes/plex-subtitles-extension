@@ -143,9 +143,11 @@ function createSubtitleWrapper(translationText) {
     translation.style.visibility = "hidden";
     wrapper.addEventListener("mouseenter", () => {
       translation.style.visibility = "visible";
+      window.updateSubtitleBackground?.();
     });
     wrapper.addEventListener("mouseleave", () => {
       translation.style.visibility = "hidden";
+      window.updateSubtitleBackground?.();
     });
   } else if (visibility === "always") {
     translation.style.visibility = "visible";
@@ -189,6 +191,9 @@ function renderPreprocessedLine(sub, lingqTerms) {
   wrapper.appendChild(mainLine);
   wrapper.appendChild(translation);
   container.appendChild(wrapper);
+
+  // Apply background styling after content is rendered
+  window.updateSubtitleBackground?.();
 }
 
 /**

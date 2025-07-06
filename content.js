@@ -171,9 +171,11 @@ async function loadSubtitlesForCurrentVideo(lingqTerms) {
   const normalized = rawTitle ? normalizeTitle(rawTitle) : null;
   console.log("🔧 Normalized title:", normalized);
   const filename = normalized ? `enriched_subtitles/${normalized}.enriched.json` : null;
+  console.log("🔍 Looking for filename:", filename);
+  console.log("🔍 Full path being checked:", chrome.runtime.getURL(filename || ""));
 
   //Try using enriched subtitles; if so, go to preprocessed mode; if not found, go to live mode
-  if (filename && await checkEnrichedJSONExists(normalized)) {
+  if (filename && normalized && await checkEnrichedJSONExists(normalized)) {
 
     // Initiate preprocessed mode
     console.log(`📦 Using enriched subtitles from: ${filename}`);

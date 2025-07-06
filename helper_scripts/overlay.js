@@ -46,8 +46,7 @@ function createOverlayContainer() {
   container.style.pointerEvents = "auto";         // Allow interaction with subtitles (e.g., copy)
   container.style.userSelect = "text";             // Allow users to select/copy text
   container.style.color = "white";
-  container.style.padding = "10px 20px";
-  container.style.borderRadius = "10px";
+  // Padding and border radius will be set by updateSubtitleBackground() based on translation visibility
   container.style.fontFamily = "sans-serif";
   container.style.textAlign = "center";
   container.style.maxWidth = `${SUBTITLE_MAX_WIDTH_VW}vw`;
@@ -55,8 +54,14 @@ function createOverlayContainer() {
   container.style.textShadow = "2px 2px 4px rgba(0,0,0,0.8)";  // Improve contrast on any background
   container.style.cursor = "text";
 
+  // Background styling is now applied to the main line, not the container
+  // This is handled by updateSubtitleBackground() when content is rendered
+
   // Add to the DOM
   document.body.appendChild(container);
+
+  // Apply initial background styling
+  window.updateSubtitleBackground?.();
 
   // Add custom styles for ruby/pinyin and hover highlighting
   const style = document.createElement("style");

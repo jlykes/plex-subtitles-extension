@@ -31,7 +31,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "enriched_subtitles/*.enriched.json",
+        "enriched_subtitles/*",
         "html/control_panel.html",
         "lingqs.json"
       ],

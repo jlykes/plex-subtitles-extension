@@ -98,7 +98,7 @@ function renderLiveLine(text, lingqTerms, segmentit) {
     .filter(w => w && w.trim() !== "");
 
   // For each segmented word, create an annotated wrapper using shared logic
-  words.forEach(word => {
+  words.forEach(word => { 
     const pinyin = getPinyin(word);
     const status = lingqTerms[word];
     const wrapper = createWordWrapper({
@@ -110,6 +110,9 @@ function renderLiveLine(text, lingqTerms, segmentit) {
 
     container.appendChild(wrapper);
   });
+
+  // Apply background styling after content is rendered
+  window.updateSubtitleBackground?.();
 }
 
 

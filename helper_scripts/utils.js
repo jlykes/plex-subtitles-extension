@@ -132,8 +132,10 @@ function normalizeTitle(title) {
     .replace(/^▶\s*/, "")                 // Remove leading ▶ character
     .replace(/^Plex.*$/i, "")              // Remove fallback Plex titles
     .replace(/[:]/g, " -")                 // Replace colons with hyphens
-    .replace(/[^a-zA-Z0-9\s\-]/g, "")    // Remove unwanted special chars
-    .replace(/\s+/g, "_");                // Convert spaces to underscores
+    .replace(/\s+/g, "_")                 // Convert spaces to underscores
+    .replace(/[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]/g, ".") // Replace Chinese characters and fullwidth punctuation with dots
+    .replace(/[#]/g, "")                  // Remove hash symbols (URL fragment identifiers)
+    .replace(/[—'&,’]/g, "_");             // Replace em dash, apostrophe, ampersand, comma, and curly apostrophe with underscores
 }
 
 /**
@@ -146,10 +148,13 @@ function normalizeTitle(title) {
  */
 async function checkEnrichedJSONExists(normalizedTitle) {
   const url = chrome.runtime.getURL(`enriched_subtitles/${normalizedTitle}.enriched.json`);
+  console.log("🔍 Checking for enriched JSON at URL:", url);
   try {
     const res = await fetch(url);
+    console.log("📄 Response status:", res.status, res.ok ? "✅ Found" : "❌ Not found");
     return res.ok;
   } catch (e) {
+    console.log("❌ Error fetching enriched JSON:", e);
     return false;
   }
 }

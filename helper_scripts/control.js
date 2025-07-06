@@ -28,6 +28,8 @@ window.subtitleConfig = {
   pinyin: "unknown-only",      // Pinyin display mode: "none", "unknown-only", or "all"
   toneColor: "all",             // Whether to color characters by tone (true/false)
   translation: "on-hover",     // Translation visibility: "off", "on-hover", or "always"
+  background: "off",           // Background display: "off" or "on"
+  backgroundOpacity: 50,       // Background opacity percentage (0-100)
 
   // === Behavior Settings ===
   useContinuous: true,         // Keep last subtitle shown after time range ends
@@ -63,6 +65,9 @@ async function createControlPanel() {
   const html = await fetch(chrome.runtime.getURL("html/control_panel.html")).then(r => r.text());
   panel.innerHTML = html;
 
+  // Initialize control values from config
+  initializeControlValues(panel);
+
   // Bind user-facing interactivity and settings
   bindAppearanceControls(panel);
   bindBehaviorControls(panel);
@@ -70,6 +75,29 @@ async function createControlPanel() {
 
   // Enable hover-to-show behavior
   initHoverPanelBehavior(panel, trigger);
+}
+
+/**
+ * Initializes control values from the global subtitle config.
+ * This ensures that when the control panel is created, all controls
+ * reflect the current configuration state.
+ * @param {HTMLDivElement} panel - The control panel element.
+ * @returns {void}
+ */
+function initializeControlValues(panel) {
+  const config = window.subtitleConfig || {};
+
+  // Initialize background controls
+  const backgroundDropdown = panel.querySelector("#dropdown-background");
+  if (backgroundDropdown) {
+    backgroundDropdown.value = config.background || "off";
+  }
+
+  const backgroundOpacitySlider = panel.querySelector("#slider-background-opacity");
+  if (backgroundOpacitySlider) {
+    const opacity = config.backgroundOpacity || 50;
+    backgroundOpacitySlider.value = opacity;
+  }
 }
 
 
@@ -290,6 +318,21 @@ function bindAppearanceControls(panel) {
     panel.querySelector("#dropdown-translation")?.addEventListener("change", e => {
         window.subtitleConfig.translation = e.target.value;
         window.reRenderCurrentSubtitle?.();
+        // Update background after re-rendering to account for translation visibility change
+        setTimeout(() => window.updateSubtitleBackground?.(), 0);
+    });
+
+    // "Background" dropdown changes
+    panel.querySelector("#dropdown-background")?.addEventListener("change", e => {
+        window.subtitleConfig.background = e.target.value;
+        updateSubtitleBackground();
+    });
+
+    // "Background opacity" slider changes
+    panel.querySelector("#slider-background-opacity")?.addEventListener("input", e => {
+        const opacity = parseInt(e.target.value);
+        window.subtitleConfig.backgroundOpacity = opacity;
+        updateSubtitleBackground();
     });
 }
 
@@ -442,3 +485,62 @@ function updateSubtitleVisibility() {
         }
     }
 }
+
+/**
+ * Updates the background styling of the subtitle overlay based on the current configuration.
+ * This function applies a semi-transparent black background to either the entire container
+ * (when translation is visible) or just the main line (when translation is hidden).
+ * @returns {void}
+ */
+function updateSubtitleBackground() {
+    const container = document.getElementById("custom-subtitle-overlay");
+    if (!container) return;
+
+    // Get the wrapper (first child of container)
+    const wrapper = container.firstElementChild;
+    if (!wrapper) return;
+
+    // Get mainLine and translation as children of wrapper
+    const mainLine = wrapper.children[0];
+    const translation = wrapper.children[1];
+
+    if (!mainLine) return;
+
+    const backgroundEnabled = window.subtitleConfig.background === "on";
+    const opacity = window.subtitleConfig.backgroundOpacity || 50;
+
+    if (backgroundEnabled) {
+        const translationVisible = translation &&
+            translation.style.visibility !== "hidden" &&
+            translation.textContent.trim() !== "";
+
+        if (translationVisible) {
+            // Background on container, not main line
+            container.style.backgroundColor = `rgba(0,0,0,${opacity/100})`;
+            container.style.padding = "10px 20px";
+            container.style.borderRadius = "10px";
+            mainLine.style.backgroundColor = "transparent";
+            mainLine.style.padding = "0";
+            mainLine.style.borderRadius = "0";
+        } else {
+            // Background on main line only
+            container.style.backgroundColor = "transparent";
+            container.style.padding = "0";
+            container.style.borderRadius = "0";
+            mainLine.style.backgroundColor = `rgba(0,0,0,${opacity/100})`;
+            mainLine.style.padding = "8px 16px";
+            mainLine.style.borderRadius = "8px";
+        }
+    } else {
+        // Remove all backgrounds when disabled
+        container.style.backgroundColor = "transparent";
+        container.style.padding = "0";
+        container.style.borderRadius = "0";
+        mainLine.style.backgroundColor = "transparent";
+        mainLine.style.padding = "0";
+        mainLine.style.borderRadius = "0";
+    }
+}
+
+// Make the function available globally for other modules
+window.updateSubtitleBackground = updateSubtitleBackground;
