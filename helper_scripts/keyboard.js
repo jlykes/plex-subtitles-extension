@@ -78,7 +78,7 @@ function setupKeyboardShortcuts() {
       video.play();
 
       // Reset last rendered index to ensure auto-pause gets re-initiated
-      // window.lastRenderedIndex = -1;
+      window.lastRenderedIndex = -1;
       window.lastPausedSubtitleStart = null;
     }
 
@@ -103,14 +103,14 @@ function setupKeyboardShortcuts() {
         video.play();
 
         // Reset last rendered index to ensure auto-pause gets re-initiated
-        // window.lastRenderedIndex = -1;
+        window.lastRenderedIndex = -1;
         window.lastPausedSubtitleStart = null;
       }
     }
 
     // Arrow keys - Reset last rendered index to ensure auto-pause gets re-initiated
     if (key === "arrowleft" || key === "arrowright") {
-      // window.lastRenderedIndex = -1;
+      window.lastRenderedIndex = -1;
       window.lastPausedSubtitleStart = null;
     }
 
