@@ -1,11 +1,16 @@
 # Development Log - Plex Metalayer
 
-### Potential Future Features
+### Potential Future Updates
 - [**In Progress**] LingQ Status Percentage Tracking - Complete implementation of percentage display
+- Pause on hover toggle
+- Remove silences mode
+- Save state (e.g., with local storage)
+- LingQ API Integration - Real-time vocabulary fetching and updating
+- Cross platform support - For Mobile, etc. 
+- Cross media player support - For YT, Netflix, Disney+
 - Subtitle History - Add scrollback/explorer functionality
-- LingQ API Integration - Real-time vocabulary fetching
+- Custom playbar interface
 - Export Features - Save learning data and statistics
-- Mobile Support - Plex mobile app integration 
 
 ## Project History
 
