@@ -271,3 +271,125 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
 
   return wrapper;
 }
+
+/**
+ * Extracts all word occurrences from enriched subtitle data.
+ * Works with the enriched JSON structure that contains segmented words.
+ * @param {Array} subtitleData - Array of enriched subtitle objects
+ * @returns {Array<string>} Array of all word occurrences (not unique)
+ */
+function extractAllWordsFromSubtitles(subtitleData) {
+  const allWords = [];
+  
+  if (!subtitleData || !Array.isArray(subtitleData)) {
+    return allWords;
+  }
+
+  // Iterate through each subtitle in the enriched JSON
+  subtitleData.forEach(subtitle => {
+    // Extract words from the segmented array (enriched JSON format)
+    if (subtitle.segmented && Array.isArray(subtitle.segmented)) {
+      subtitle.segmented.forEach(segment => {
+        if (segment.word && !isPunctuationDigitOrSpace(segment.word)) {
+          allWords.push(segment.word);
+        }
+      });
+    }
+  });
+
+  return allWords;
+}
+
+/**
+ * Gets the LingQ status for a specific word.
+ * @param {string} word - The word to look up
+ * @param {Object} lingqTerms - Object mapping terms to their LingQ status
+ * @returns {number} The LingQ status (0, 1, 2, or 3), defaults to 0 if not found
+ */
+function getLingQStatusForWord(word, lingqTerms) {
+  if (!lingqTerms || !word) {
+    return 0; // Default to new status
+  }
+  
+  // Direct lookup in LingQ terms
+  if (lingqTerms.hasOwnProperty(word)) {
+    return lingqTerms[word];
+  }
+  
+  // If not found, return 0 (new/unknown)
+  return 0;
+}
+
+/**
+ * Calculates percentage breakdown of words by LingQ status.
+ * Processes the entire enriched subtitle document to get cross-document percentages.
+ * @param {Array} subtitleData - Array of enriched subtitle objects
+ * @param {Object} lingqTerms - Object mapping terms to their LingQ status
+ * @returns {Object} Object containing counts and percentages for each status
+ */
+function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
+  // Extract all word occurrences from enriched subtitle data
+  const allWords = extractAllWordsFromSubtitles(subtitleData);
+  const totalWords = allWords.length;
+  
+  if (totalWords === 0) {
+    return {
+      totalWords: 0,
+      status3: { percentage: 0, count: 0 },  // Known
+      status2: { percentage: 0, count: 0 },  // Familiar  
+      status1: { percentage: 0, count: 0 },  // Recognized
+      status0: { percentage: 0, count: 0 }   // New
+    };
+  }
+
+  // Initialize counters for each status
+  const statusCounts = { 0: 0, 1: 0, 2: 0, 3: 0 };
+  
+  // Count each word occurrence by its LingQ status
+  allWords.forEach(word => {
+    const status = getLingQStatusForWord(word, lingqTerms);
+    if (statusCounts.hasOwnProperty(status)) {
+      statusCounts[status]++;
+    } else {
+      statusCounts[0]++; // Default to new for invalid status
+    }
+  });
+
+  // Calculate percentages and format output
+  const result = {
+    totalWords: totalWords,
+    status3: { 
+      percentage: Math.round((statusCounts[3] / totalWords) * 100), 
+      count: statusCounts[3] 
+    },
+    status2: { 
+      percentage: Math.round((statusCounts[2] / totalWords) * 100), 
+      count: statusCounts[2] 
+    },
+    status1: { 
+      percentage: Math.round((statusCounts[1] / totalWords) * 100), 
+      count: statusCounts[1] 
+    },
+    status0: { 
+      percentage: Math.round((statusCounts[0] / totalWords) * 100), 
+      count: statusCounts[0] 
+    }
+  };
+
+  return result;
+}
+
+/**
+ * Formats a percentage value for display (no decimals).
+ * @param {number} value - The percentage value
+ * @returns {string} Formatted percentage string
+ */
+function formatPercentage(value) {
+  if (typeof value !== 'number' || isNaN(value)) {
+    return '---';
+  }
+  return `${value}%`;
+}
+
+// Make the functions available globally for other modules
+window.formatPercentage = formatPercentage;
