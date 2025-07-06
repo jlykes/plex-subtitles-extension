@@ -78,7 +78,8 @@ function setupKeyboardShortcuts() {
       video.play();
 
       // Reset last rendered index to ensure auto-pause gets re-initiated
-      window.lastRenderedIndex = -1;
+      // window.lastRenderedIndex = -1;
+      window.lastPausedSubtitleStart = null;
     }
 
     // A - Jump to the previous subtitle
@@ -102,16 +103,21 @@ function setupKeyboardShortcuts() {
         video.play();
 
         // Reset last rendered index to ensure auto-pause gets re-initiated
-        window.lastRenderedIndex = -1;
+        // window.lastRenderedIndex = -1;
+        window.lastPausedSubtitleStart = null;
       }
     }
 
     // Arrow keys - Reset last rendered index to ensure auto-pause gets re-initiated
     if (key === "arrowleft" || key === "arrowright") {
-      window.lastRenderedIndex = -1;
+      // window.lastRenderedIndex = -1;
+      window.lastPausedSubtitleStart = null;
     }
+
+  
   });
 
+  
   // Also allow click-to-pause when Plex UI is hidden
   // Ensure click-to-pause still works when Plex UI is hidden
   document.addEventListener("click", (event) => {
@@ -139,5 +145,7 @@ function setupKeyboardShortcuts() {
   });
 }
 
+
 // Note: Call setupKeyboardShortcuts() from main() in content.js
 // after subtitles have been loaded and the video element is ready.
+

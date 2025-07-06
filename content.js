@@ -41,6 +41,28 @@ async function initializeForCurrentVideo(lingqTerms) {
   await createControlPanel(); // Done as await function in so that DOM chagnes made before continue
   bindControlPanelListeners();
 
+  video = findPlexVideoElement();
+  
+  video.addEventListener("seeked", () => {
+    if (window.autoPausePollingInterval) {
+      console.log("🧹 Clearing auto-pause polling loop due to seek");
+      clearInterval(window.autoPausePollingInterval);
+      window.autoPausePollingInterval = null;
+    }
+
+    // Also clear last paused index, to allow new one to fire if applicable
+    window.lastPausedSubtitleStart = null;
+  });
+
+  video.addEventListener("pause", () => {
+    if (window.autoPausePollingInterval) {
+      console.log("⏸️ Clearing auto-pause polling loop due to manual pause");
+      clearInterval(window.autoPausePollingInterval);
+      window.autoPausePollingInterval = null;
+    }
+  });
+
+
   // Load subtitles based on enriched JSON (or fall back to live mode)
   await loadSubtitlesForCurrentVideo(lingqTerms);
 }
