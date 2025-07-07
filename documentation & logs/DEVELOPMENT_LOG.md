@@ -41,6 +41,8 @@
 - Implemented `H` key to toggle Plex UI visibility and click-to-pause functionality when UI is hidden
 - Added LingQ status percentage tracking to control panel showing word breakdown by status (Known/Familiar/Recognized/New) with total word count and comma formatting
 - Implemented "Remove Silences" mode that automatically skips from subtitle end to next subtitle start, eliminating silent periods with configurable minimum gap threshold
+- Enhanced live mode control panel by completely hiding features not available in live mode: translation controls, auto-pause controls, continuous mode, remove silences controls, and min silence gap slider (already had percentage stats and sentence explanation hidden)
+- Removed number display from min silence gap slider to match other slider controls
 
 ### Subtitle Rendering & Visual Features
 - Implemented full tone coloring support with `getToneColor()` function for all 5 tones

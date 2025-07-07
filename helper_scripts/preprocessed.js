@@ -22,8 +22,12 @@ function runPreprocessedMode(lingqTerms, filename) {
   clearSubtitleOverlay();                   // Clear existing overlay
   createOverlayContainer();                 // Ensure overlay element is available
   
-  // Enable remove silences option for preprocessed mode
+  // Enable features available in preprocessed mode
   enableRemoveSilencesInPreprocessedMode();
+  showTranslationInPreprocessedMode();
+  showAutoPauseInPreprocessedMode();
+  showContinuousInPreprocessedMode();
+  showBehaviorSectionInPreprocessedMode();
 
   // Fetch enriched subtitles from the packaged JSON file
   fetch(chrome.runtime.getURL(filename))

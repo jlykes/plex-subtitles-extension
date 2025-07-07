@@ -744,6 +744,96 @@ function showSentenceExplanation() {
   }
 }
 
+/**
+ * Hides translation-related controls in live mode.
+ * Translation requires preprocessed data not available in live mode.
+ * @returns {void}
+ */
+function hideTranslationInLiveMode() {
+  console.log("🙈 hideTranslationInLiveMode called");
+  
+  const translationDropdown = document.getElementById("dropdown-translation");
+  if (translationDropdown) {
+    // Find the parent control-row and hide it completely
+    const controlRow = translationDropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'none';
+    }
+  }
+}
+
+/**
+ * Shows translation controls in preprocessed mode.
+ * @returns {void}
+ */
+function showTranslationInPreprocessedMode() {
+  console.log("👁️ showTranslationInPreprocessedMode called");
+  
+  const translationDropdown = document.getElementById("dropdown-translation");
+  if (translationDropdown) {
+    // Find the parent control-row and show it
+    const controlRow = translationDropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'flex';
+    }
+  }
+}
+
+/**
+ * Hides auto-pause controls in live mode.
+ * Auto-pause requires subtitle timing data not available in live mode.
+ * @returns {void}
+ */
+function hideAutoPauseInLiveMode() {
+  console.log("🙈 hideAutoPauseInLiveMode called");
+  
+  const autoPauseDropdown = document.getElementById("dropdown-auto-pause");
+  const autoPauseDelaySlider = document.getElementById("slider-autopause-delay");
+  
+  if (autoPauseDropdown) {
+    // Find the parent control-row and hide it completely
+    const controlRow = autoPauseDropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'none';
+    }
+  }
+  
+  if (autoPauseDelaySlider) {
+    // Find the parent control-row and hide it completely
+    const controlRow = autoPauseDelaySlider.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'none';
+    }
+  }
+}
+
+/**
+ * Shows auto-pause controls in preprocessed mode.
+ * @returns {void}
+ */
+function showAutoPauseInPreprocessedMode() {
+  console.log("👁️ showAutoPauseInPreprocessedMode called");
+  
+  const autoPauseDropdown = document.getElementById("dropdown-auto-pause");
+  const autoPauseDelaySlider = document.getElementById("slider-autopause-delay");
+  
+  if (autoPauseDropdown) {
+    // Find the parent control-row and show it
+    const controlRow = autoPauseDropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'flex';
+    }
+  }
+  
+  if (autoPauseDelaySlider) {
+    // Find the parent control-row and show it
+    const controlRow = autoPauseDelaySlider.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'flex';
+    }
+  }
+}
+
 //////////////////////////////
 // 6. REMOVE SILENCES FUNCTIONALITY
 //////////////////////////////
@@ -830,46 +920,120 @@ function skipToNextSubtitle(nextTime) {
 }
 
 /**
- * Disables the remove silences option in live mode.
+ * Hides the remove silences option in live mode.
  * This function should be called when switching to live mode.
  * @returns {void}
  */
 function disableRemoveSilencesInLiveMode() {
   const dropdown = document.getElementById("dropdown-remove-silences");
+  const slider = document.getElementById("slider-min-silence-gap");
+  
   if (dropdown) {
-    dropdown.disabled = true;
-    dropdown.value = "off";
-    window.subtitleConfig.removeSilences = false;
-    
-    // Add visual indication that it's not available
-    const label = dropdown.previousElementSibling;
-    if (label && label.tagName === "LABEL") {
-      label.style.opacity = "0.5";
-      label.title = "Not available in live mode";
+    // Find the parent control-row and hide it completely
+    const controlRow = dropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'none';
     }
-    
-    console.log("🔇 Remove silences disabled for live mode");
   }
+  
+  if (slider) {
+    // Find the parent control-row and hide it completely
+    const controlRow = slider.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'none';
+    }
+  }
+  
+  console.log("🔇 Remove silences hidden for live mode");
 }
 
 /**
- * Enables the remove silences option in preprocessed mode.
+ * Shows the remove silences option in preprocessed mode.
  * This function should be called when switching to preprocessed mode.
  * @returns {void}
  */
 function enableRemoveSilencesInPreprocessedMode() {
   const dropdown = document.getElementById("dropdown-remove-silences");
+  const slider = document.getElementById("slider-min-silence-gap");
+  
   if (dropdown) {
-    dropdown.disabled = false;
-    
-    // Remove visual indication
-    const label = dropdown.previousElementSibling;
-    if (label && label.tagName === "LABEL") {
-      label.style.opacity = "1";
-      label.title = "";
+    // Find the parent control-row and show it
+    const controlRow = dropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'flex';
     }
-    
-    console.log("🔇 Remove silences enabled for preprocessed mode");
+  }
+  
+  if (slider) {
+    // Find the parent control-row and show it
+    const controlRow = slider.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'flex';
+    }
+  }
+  
+  console.log("🔇 Remove silences shown for preprocessed mode");
+}
+
+/**
+ * Hides the continuous mode option in live mode.
+ * Continuous mode doesn't work properly in live mode since we can't track subtitle timing.
+ * @returns {void}
+ */
+function hideContinuousInLiveMode() {
+  console.log("🙈 hideContinuousInLiveMode called");
+  
+  const continuousDropdown = document.getElementById("dropdown-continuous");
+  if (continuousDropdown) {
+    // Find the parent control-row and hide it completely
+    const controlRow = continuousDropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'none';
+    }
+  }
+}
+
+/**
+ * Shows the continuous mode option in preprocessed mode.
+ * @returns {void}
+ */
+function showContinuousInPreprocessedMode() {
+  console.log("👁️ showContinuousInPreprocessedMode called");
+  
+  const continuousDropdown = document.getElementById("dropdown-continuous");
+  if (continuousDropdown) {
+    // Find the parent control-row and show it
+    const controlRow = continuousDropdown.closest('.control-row');
+    if (controlRow) {
+      controlRow.style.display = 'flex';
+    }
+  }
+}
+
+/**
+ * Hides the entire behavior section in live mode.
+ * All behavior controls are hidden in live mode, so hide the section header too.
+ * @returns {void}
+ */
+function hideBehaviorSectionInLiveMode() {
+  console.log("🙈 hideBehaviorSectionInLiveMode called");
+  
+  const behaviorSection = document.getElementById("behavior-section");
+  if (behaviorSection) {
+    behaviorSection.style.display = 'none';
+  }
+}
+
+/**
+ * Shows the behavior section in preprocessed mode.
+ * @returns {void}
+ */
+function showBehaviorSectionInPreprocessedMode() {
+  console.log("👁️ showBehaviorSectionInPreprocessedMode called");
+  
+  const behaviorSection = document.getElementById("behavior-section");
+  if (behaviorSection) {
+    behaviorSection.style.display = 'block';
   }
 }
 
@@ -882,6 +1046,14 @@ window.clearStatusPercentagesDisplay = clearStatusPercentagesDisplay;
 window.showStatusPercentagesLoading = showStatusPercentagesLoading;
 window.hideSentenceExplanation = hideSentenceExplanation;
 window.showSentenceExplanation = showSentenceExplanation;
+window.hideTranslationInLiveMode = hideTranslationInLiveMode;
+window.showTranslationInPreprocessedMode = showTranslationInPreprocessedMode;
+window.hideAutoPauseInLiveMode = hideAutoPauseInLiveMode;
+window.showAutoPauseInPreprocessedMode = showAutoPauseInPreprocessedMode;
+window.hideContinuousInLiveMode = hideContinuousInLiveMode;
+window.showContinuousInPreprocessedMode = showContinuousInPreprocessedMode;
+window.hideBehaviorSectionInLiveMode = hideBehaviorSectionInLiveMode;
+window.showBehaviorSectionInPreprocessedMode = showBehaviorSectionInPreprocessedMode;
 window.monitorVideoTimeForSkips = monitorVideoTimeForSkips;
 window.skipToNextSubtitle = skipToNextSubtitle;
 window.disableRemoveSilencesInLiveMode = disableRemoveSilencesInLiveMode;
