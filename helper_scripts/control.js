@@ -12,7 +12,7 @@
 
 
 //////////////////////////////
-// 1. PANEL INITIALIZATION
+// 1. PANEL INITIALIZATION & CLEANUP
 //////////////////////////////
 
 /**
@@ -97,57 +97,6 @@ async function createControlPanel() {
 }
 
 /**
- * Initializes control values from the global subtitle config.
- * This ensures that when the control panel is created, all controls
- * reflect the current configuration state.
- * @param {HTMLDivElement} panel - The control panel element.
- * @returns {void}
- */
-function initializeControlValues(panel) {
-  const config = window.subtitleConfig || {};
-
-  // Initialize all dropdown controls
-  const dropdowns = {
-    'dropdown-visibility': config.visibility || 'on',
-    'dropdown-position': config.position || 'bottom',
-    'dropdown-lingq': config.lingqStatus || 'on',
-    'dropdown-pinyin': config.pinyin || 'unknown-only',
-    'dropdown-tone-color': config.toneColor || 'all',
-    'dropdown-translation': config.translation || 'on-hover',
-    'dropdown-background': config.background || 'off',
-    'dropdown-continuous': config.useContinuous ? 'on' : 'off',
-    'dropdown-auto-pause': config.autoPause ? 'on' : 'off',
-    'dropdown-remove-silences': config.removeSilences ? 'on' : 'off'
-  };
-
-  // Set dropdown values
-  Object.entries(dropdowns).forEach(([id, value]) => {
-    const dropdown = panel.querySelector(`#${id}`);
-    if (dropdown) {
-      dropdown.value = value;
-    }
-  });
-
-  // Initialize sliders
-  const sliders = {
-    'slider-size': config.fontSizeVH || 5.5,
-    'slider-height': config.heightVH || 16,
-    'slider-background-opacity': config.backgroundOpacity || 50,
-    'slider-autopause-delay': config.autoPauseDelayMs || 0,
-    'slider-min-silence-gap': config.minSilenceGapMs || 1000
-  };
-
-  // Set slider values
-  Object.entries(sliders).forEach(([id, value]) => {
-    const slider = panel.querySelector(`#${id}`);
-    if (slider) {
-      slider.value = value;
-    }
-  });
-}
-
-
-/**
  * Clears the control panel and its hover trigger from the DOM.
  * This is typically called when the overlay is removed or the page is unloaded.
  * It ensures no leftover elements remain that could interfere with future overlays.
@@ -163,8 +112,30 @@ function clearControlPanel() {
   cleanupVideoPlayerVisibilityMonitoring();
 }
 
+/**
+ * Backward-compatible function that calls all individual binder functions.
+ * Still used by other modules, so retained for compatibility.
+ * This function binds all the necessary event listeners
+ * and initializes the control panel functionality.
+ * It should be called once the control panel is injected into the DOM.
+ * @returns {void}
+ */
+function bindControlPanelListeners() {
+  const panel = document.getElementById("subtitle-control-panel");
+  if (!panel) return;
+
+  bindAppearanceControls(panel);
+  bindBehaviorControls(panel);
+  bindFocusRestoration(panel);
+  
+  // Set up video player visibility monitoring if not already set up
+  if (!videoPlayerVisibilityObserver) {
+    setupVideoPlayerVisibilityMonitoring();
+  }
+}
+
 //////////////////////////////
-// 3. DOM STRUCTURE HELPERS
+// 2. DOM STRUCTURE HELPERS
 //////////////////////////////
 
 /**
@@ -259,68 +230,63 @@ function initHoverPanelBehavior(panel, trigger) {
   panel.addEventListener("mouseleave", hidePanelDelayed);
 }
 
-/**
- * Backward-compatible function that calls all individual binder functions.
- * Still used by other modules, so retained for compatibility.
- * This function binds all the necessary event listeners
- * and initializes the control panel functionality.
- * It should be called once the control panel is injected into the DOM.
- * @returns {void}
- */
-function bindControlPanelListeners() {
-  const panel = document.getElementById("subtitle-control-panel");
-  if (!panel) return;
-
-  bindAppearanceControls(panel);
-  bindBehaviorControls(panel);
-  bindFocusRestoration(panel);
-  
-  // Set up video player visibility monitoring if not already set up
-  if (!videoPlayerVisibilityObserver) {
-    setupVideoPlayerVisibilityMonitoring();
-  }
-}
-
 //////////////////////////////
-// 2. EXTERNAL INTERFACES
+// 3. CONTROL INITIALIZATION
 //////////////////////////////
 
-// Panel Display Updates
 /**
- * Updates the subtitle mode text in the control panel display area.
- * Typically called when switching between modes.
- * @param {string} newMode - The new subtitle mode (e.g., "Live", "Preprocessed").
+ * Initializes control values from the global subtitle config.
+ * This ensures that when the control panel is created, all controls
+ * reflect the current configuration state.
+ * @param {HTMLDivElement} panel - The control panel element.
  * @returns {void}
  */
-function updateModeDisplay(newMode) {
-  console.log("📺 updateModeDisplay called with:", newMode);
-  const modeEl = document.getElementById("mode-display");
-  if (modeEl) modeEl.textContent = `${newMode}`;
-  else console.warn("⚠️ updateModeDisplay: #mode-display element not found");
-}
+function initializeControlValues(panel) {
+  const config = window.subtitleConfig || {};
 
-/**
- * Sets or hides the sentence explanation text shown in the panel.
- * Typically called by `preprocessed.js` when a line has an explanation.
- * @param {string} text - The explanation text to display.
- * @returns {void}
- */
-function updateCurrentExplanation(text) {
-  console.log("📘 updateCurrentExplanation called with:", text);
-  const wrapper = document.getElementById("sentence-explanation-wrapper");
-  const box = document.getElementById("sentence-explanation");
+  // Initialize all dropdown controls
+  const dropdowns = {
+    'dropdown-visibility': config.visibility || 'on',
+    'dropdown-position': config.position || 'bottom',
+    'dropdown-lingq': config.lingqStatus || 'on',
+    'dropdown-pinyin': config.pinyin || 'unknown-only',
+    'dropdown-tone-color': config.toneColor || 'all',
+    'dropdown-translation': config.translation || 'on-hover',
+    'dropdown-background': config.background || 'off',
+    'dropdown-continuous': config.useContinuous ? 'on' : 'off',
+    'dropdown-auto-pause': config.autoPause ? 'on' : 'off',
+    'dropdown-remove-silences': config.removeSilences ? 'on' : 'off'
+  };
 
-  if (wrapper && box) {
-    if (text && text.trim()) {
-      box.textContent = text;
-      wrapper.style.display = "block";
-    } else {
-      wrapper.style.display = "none";
+  // Set dropdown values
+  Object.entries(dropdowns).forEach(([id, value]) => {
+    const dropdown = panel.querySelector(`#${id}`);
+    if (dropdown) {
+      dropdown.value = value;
     }
-  } else {
-    console.warn("⚠️ updateCurrentExplanation: elements not found");
-  }
+  });
+
+  // Initialize sliders
+  const sliders = {
+    'slider-size': config.fontSizeVH || 5.5,
+    'slider-height': config.heightVH || 16,
+    'slider-background-opacity': config.backgroundOpacity || 50,
+    'slider-autopause-delay': config.autoPauseDelayMs || 0,
+    'slider-min-silence-gap': config.minSilenceGapMs || 1000
+  };
+
+  // Set slider values
+  Object.entries(sliders).forEach(([id, value]) => {
+    const slider = panel.querySelector(`#${id}`);
+    if (slider) {
+      slider.value = value;
+    }
+  });
 }
+
+//////////////////////////////
+// 4. SUBTITLE VISIBILITY & DISPLAY
+//////////////////////////////
 
 /**
  * Checks if the Plex video player is currently visible.
@@ -342,7 +308,6 @@ function isPlexVideoPlayerVisible() {
   return hasShowVideoPlayerClass;
 }
 
-// Subtitle Overlay Updates
 /**
  * Updates the visibility of the subtitle overlay based on the current configuration.
  * This function checks the `window.subtitleConfig.visibility` setting
@@ -457,7 +422,107 @@ function updateSubtitleBackground() {
     }
 }
 
-// Status Percentage Updates
+/**
+ * Sets up a MutationObserver to monitor changes in the Plex video player visibility.
+ * This observer watches for changes in the class list of the main Plex container
+ * and updates subtitle visibility when the video player is shown or hidden.
+ * @returns {void}
+ */
+function setupVideoPlayerVisibilityMonitoring() {
+  // Clean up any existing observer
+  if (videoPlayerVisibilityObserver) {
+    videoPlayerVisibilityObserver.disconnect();
+    videoPlayerVisibilityObserver = null;
+  }
+
+  const plexContainer = document.querySelector('#plex');
+  if (!plexContainer) {
+    console.log("⚠️ setupVideoPlayerVisibilityMonitoring: Plex container not found");
+    return;
+  }
+
+  // Create observer to watch for class changes on the Plex container
+  videoPlayerVisibilityObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        console.log("🎬 Video player visibility state changed, updating subtitle visibility");
+        console.log("🎬 Mutation details:", {
+          type: mutation.type,
+          attributeName: mutation.attributeName,
+          oldValue: mutation.oldValue,
+          target: mutation.target.className
+        });
+        updateSubtitleVisibility();
+      }
+    });
+  });
+
+  // Start observing the Plex container for class attribute changes
+  videoPlayerVisibilityObserver.observe(plexContainer, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+
+  console.log("👀 Video player visibility monitoring set up");
+}
+
+/**
+ * Cleans up the video player visibility observer.
+ * This should be called when the extension is unloaded or when cleaning up.
+ * @returns {void}
+ */
+function cleanupVideoPlayerVisibilityMonitoring() {
+  if (videoPlayerVisibilityObserver) {
+    videoPlayerVisibilityObserver.disconnect();
+    videoPlayerVisibilityObserver = null;
+    console.log("🧹 Video player visibility monitoring cleaned up");
+  }
+}
+
+//////////////////////////////
+// 5. PANEL DISPLAY UPDATES
+//////////////////////////////
+
+/**
+ * Updates the subtitle mode text in the control panel display area.
+ * Typically called when switching between modes.
+ * @param {string} newMode - The new subtitle mode (e.g., "Live", "Preprocessed").
+ * @returns {void}
+ */
+function updateModeDisplay(newMode) {
+  console.log("📺 updateModeDisplay called with:", newMode);
+  const modeEl = document.getElementById("mode-display");
+  if (modeEl) modeEl.textContent = `${newMode}`;
+  else console.warn("⚠️ updateModeDisplay: #mode-display element not found");
+}
+
+/**
+ * Sets or hides the sentence explanation text shown in the panel.
+ * Typically called by `preprocessed.js` when a line has an explanation.
+ * @param {string} text - The explanation text to display.
+ * @returns {void}
+ */
+function updateCurrentExplanation(text) {
+  console.log("📘 updateCurrentExplanation called with:", text);
+  const wrapper = document.getElementById("sentence-explanation-wrapper");
+  const box = document.getElementById("sentence-explanation");
+
+  if (wrapper && box) {
+    if (text && text.trim()) {
+      box.textContent = text;
+      wrapper.style.display = "block";
+    } else {
+      wrapper.style.display = "none";
+    }
+  } else {
+    console.warn("⚠️ updateCurrentExplanation: elements not found");
+  }
+}
+
+//////////////////////////////
+// 6. LINGQ STATUS PERCENTAGES
+//////////////////////////////
+
 /**
  * Updates the LingQ status percentage display in the control panel.
  * This function takes the calculated percentages and updates all the
@@ -583,10 +648,15 @@ function showStatusPercentagesLoading() {
 }
 
 //////////////////////////////
-// LINGQ DATA FETCHING (PHASE 1)
+// 7. LINGQ DATA FETCHING
 //////////////////////////////
 
-// === MANUAL LINGQ UPDATE BUTTON LOGIC ===
+/**
+ * Binds the manual LingQ update button functionality.
+ * This function sets up the click handler for the update button
+ * and manages the button state during the update process.
+ * @returns {void}
+ */
 function bindLingqUpdateButton() {
   const btn = document.getElementById('update-lingq-btn');
   if (!btn) return;
@@ -609,12 +679,9 @@ function bindLingqUpdateButton() {
   });
 }
 
-// Make the functions available globally for other modules
-window.bindControlPanelListeners = bindControlPanelListeners;
-window.initializeControlValues = initializeControlValues;
-window.updateSubtitleBackground = updateSubtitleBackground;
-window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
-window.isPlexVideoPlayerVisible = isPlexVideoPlayerVisible;
+//////////////////////////////
+// 8. GLOBAL EXPORTS & VARIABLES
+//////////////////////////////
 
 // Global promise for initial LingQ fetch
 window.lingqInitialFetchPromise = null;
@@ -622,91 +689,12 @@ window.lingqInitialFetchPromise = null;
 // Global reference to the video player visibility observer
 let videoPlayerVisibilityObserver = null;
 
-/**
- * Sets up a MutationObserver to monitor changes in the Plex video player visibility.
- * This observer watches for changes in the class list of the main Plex container
- * and updates subtitle visibility when the video player is shown or hidden.
- * @returns {void}
- */
-function setupVideoPlayerVisibilityMonitoring() {
-  // Clean up any existing observer
-  if (videoPlayerVisibilityObserver) {
-    videoPlayerVisibilityObserver.disconnect();
-    videoPlayerVisibilityObserver = null;
-  }
-
-  const plexContainer = document.querySelector('#plex');
-  if (!plexContainer) {
-    console.log("⚠️ setupVideoPlayerVisibilityMonitoring: Plex container not found");
-    return;
-  }
-
-  // Create observer to watch for class changes on the Plex container
-  videoPlayerVisibilityObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-        console.log("🎬 Video player visibility state changed, updating subtitle visibility");
-        console.log("🎬 Mutation details:", {
-          type: mutation.type,
-          attributeName: mutation.attributeName,
-          oldValue: mutation.oldValue,
-          target: mutation.target.className
-        });
-        updateSubtitleVisibility();
-      }
-    });
-  });
-
-  // Start observing the Plex container for class attribute changes
-  videoPlayerVisibilityObserver.observe(plexContainer, {
-    attributes: true,
-    attributeFilter: ['class']
-  });
-
-  console.log("👀 Video player visibility monitoring set up");
-}
-
-/**
- * Cleans up the video player visibility observer.
- * This should be called when the extension is unloaded or when cleaning up.
- * @returns {void}
- */
-function cleanupVideoPlayerVisibilityMonitoring() {
-  if (videoPlayerVisibilityObserver) {
-    videoPlayerVisibilityObserver.disconnect();
-    videoPlayerVisibilityObserver = null;
-    console.log("🧹 Video player visibility monitoring cleaned up");
-  }
-}
-
-// Make the monitoring functions available globally
+// Make the functions available globally for other modules
+window.bindControlPanelListeners = bindControlPanelListeners;
+window.initializeControlValues = initializeControlValues;
+window.updateSubtitleBackground = updateSubtitleBackground;
+window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
+window.isPlexVideoPlayerVisible = isPlexVideoPlayerVisible;
 window.setupVideoPlayerVisibilityMonitoring = setupVideoPlayerVisibilityMonitoring;
 window.cleanupVideoPlayerVisibilityMonitoring = cleanupVideoPlayerVisibilityMonitoring;
 
-// Manual test function for debugging video player visibility
-window.testVideoPlayerVisibility = function() {
-  console.log("🧪 Testing video player visibility...");
-  
-  const plexContainer = document.querySelector('#plex');
-  console.log("🧪 Plex container found:", !!plexContainer);
-  if (plexContainer) {
-    console.log("🧪 Plex container classes:", plexContainer.className);
-    console.log("🧪 Has 'show-video-player' class:", plexContainer.classList.contains('show-video-player'));
-  }
-  
-  const isVisible = isPlexVideoPlayerVisible();
-  console.log("🧪 isPlexVideoPlayerVisible() result:", isVisible);
-  
-  const subtitleContainer = document.getElementById("custom-subtitle-overlay");
-  console.log("🧪 Subtitle container found:", !!subtitleContainer);
-  if (subtitleContainer) {
-    console.log("🧪 Subtitle container display style:", subtitleContainer.style.display);
-  }
-  
-  console.log("🧪 Current subtitle config:", window.subtitleConfig);
-  
-  // Force update subtitle visibility
-  updateSubtitleVisibility();
-  
-  console.log("🧪 Test complete!");
-};

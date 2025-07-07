@@ -90,7 +90,7 @@
 - Discovered and fixed Chrome extension file access issues with non-ASCII characters in filenames
 - Updated normalization function to remove `#` and handle other problematic characters
 - Fixed live mode background styling issue where background only covered first character instead of entire subtitle line by aligning DOM structure with preprocessed mode
-- Fixed subtitle visibility issue where subtitles would show even when video player is minimized by implementing video player visibility detection and automatic subtitle hiding when showing movie info instead of video player
+- Fixed subtitle visibility when Plex video player is minimized by adding video player visibility detection and hiding subtitles when showing movie info screen
 
 ### Development Tools & Debugging
 - Added debug logging for main functions and video readiness tracking
