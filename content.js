@@ -208,6 +208,11 @@ async function loadSubtitlesForCurrentVideo(lingqTerms) {
 async function main() {
   console.log("🚀 main() function is running");
   
+  // Initialize settings from storage
+  if (window.storageUtils) {
+    await window.storageUtils.initializeSettings();
+  }
+  
   // Attempt to find video; if not loaded yet, return
   const video = findPlexVideoElement();
   if (!video) {

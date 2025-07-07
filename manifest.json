@@ -6,7 +6,8 @@
   "permissions": [
     "scripting",
     "activeTab",
-    "cookies"
+    "cookies",
+    "storage"
   ],
   "host_permissions": [
     "*://app.plex.tv/*"
@@ -18,6 +19,7 @@
         "helper_scripts/segmentit.min.js",
         "helper_scripts/pinyin-pro.js",
         "helper_scripts/utils.js",
+        "helper_scripts/storage.js",
         "helper_scripts/overlay.js",
         "helper_scripts/preprocessed.js",
         "helper_scripts/keyboard.js",

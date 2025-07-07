@@ -62,6 +62,14 @@
 - Added guard conditions to ensure pause only fires if correct subtitle is still active
 - Implemented rewind logic to jump back to correct subtitle if active subtitle changed before pause
 
+### Settings Persistence & Storage
+- Implemented Chrome storage sync for cross-device settings persistence
+- Added storage.js module with save/load/reset functionality for all control panel settings
+- Centralized default settings in storage.js getDefaultSettings() function
+- Added "Reset to Defaults" button for easy settings management
+- Removed redundant window.subtitleConfig object from control.js
+- Added fallback to localStorage when Chrome storage unavailable
+
 ### Bug Fixes & Stability Improvements
 - Fixed control panel appearing on wrong tabs by checking for Plex video presence
 - Resolved initialization running multiple times causing duplicated subtitles

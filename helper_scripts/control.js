@@ -12,34 +12,6 @@
 
 
 //////////////////////////////
-// 1. GLOBAL CONFIG OBJECT
-//////////////////////////////
-
-// Shared configuration for subtitle appearance and behavior.
-// This global object is modified by the control panel and read by
-// the rendering logic in `live.js` and `preprocessed.js`.
-window.subtitleConfig = {
-  // === Appearance Settings ===
-  visibility: "on",            // "off", "on", or "on-stop"
-  fontSizeVH: 5.5,             // Subtitle font size (in viewport height units)
-  position: "bottom",          // "bottom", "top", or "center"
-  heightVH: 16,                // Subtitle offset from top/bottom in vh (viewport height units) 
-  lingqStatus: "on",           // LingQ status display: "on", "unknown-only", or "off"
-  pinyin: "unknown-only",      // Pinyin display mode: "none", "unknown-only", or "all"
-  toneColor: "all",             // Whether to color characters by tone (true/false)
-  translation: "on-hover",     // Translation visibility: "off", "on-hover", or "always"
-  background: "off",           // Background display: "off" or "on"
-  backgroundOpacity: 50,       // Background opacity percentage (0-100)
-
-  // === Behavior Settings ===
-  useContinuous: true,         // Keep last subtitle shown after time range ends
-  autoPause: false,            // Automatically pause video when subtitle ends
-  autoPauseDelayMs: 0,         // Delay (ms) before pausing video
-  removeSilences: false,       // Skip from subtitle end to next subtitle start
-  minSilenceGapMs: 1000        // Minimum silence gap to skip (1 second default)
-};
-
-//////////////////////////////
 // 2. PANEL INITIALIZATION
 //////////////////////////////
 
@@ -67,13 +39,17 @@ async function createControlPanel() {
   const html = await fetch(chrome.runtime.getURL("html/control_panel.html")).then(r => r.text());
   panel.innerHTML = html;
 
-  // Initialize control values from config
+  // Initialize settings from storage and then control values
+  if (window.storageUtils) {
+    await window.storageUtils.initializeSettings();
+  }
   initializeControlValues(panel);
 
   // Bind user-facing interactivity and settings
   bindAppearanceControls(panel);
   bindBehaviorControls(panel);
   bindFocusRestoration(panel);
+  bindSettingsManagement(panel);
 
   // Enable hover-to-show behavior
   initHoverPanelBehavior(panel, trigger);
@@ -89,30 +65,44 @@ async function createControlPanel() {
 function initializeControlValues(panel) {
   const config = window.subtitleConfig || {};
 
-  // Initialize background controls
-  const backgroundDropdown = panel.querySelector("#dropdown-background");
-  if (backgroundDropdown) {
-    backgroundDropdown.value = config.background || "off";
-  }
+  // Initialize all dropdown controls
+  const dropdowns = {
+    'dropdown-visibility': config.visibility || 'on',
+    'dropdown-position': config.position || 'bottom',
+    'dropdown-lingq': config.lingqStatus || 'on',
+    'dropdown-pinyin': config.pinyin || 'unknown-only',
+    'dropdown-tone-color': config.toneColor || 'all',
+    'dropdown-translation': config.translation || 'on-hover',
+    'dropdown-background': config.background || 'off',
+    'dropdown-continuous': config.useContinuous ? 'on' : 'off',
+    'dropdown-auto-pause': config.autoPause ? 'on' : 'off',
+    'dropdown-remove-silences': config.removeSilences ? 'on' : 'off'
+  };
 
-  const backgroundOpacitySlider = panel.querySelector("#slider-background-opacity");
-  if (backgroundOpacitySlider) {
-    const opacity = config.backgroundOpacity || 50;
-    backgroundOpacitySlider.value = opacity;
-  }
-
-  // Initialize min silence gap slider
-  const minSilenceGapSlider = panel.querySelector("#slider-min-silence-gap");
-  if (minSilenceGapSlider) {
-    const minGap = config.minSilenceGapMs || 1000;
-    minSilenceGapSlider.value = minGap;
-    
-    // Update the display value
-    const valueDisplay = panel.querySelector("#slider-min-silence-gap-value");
-    if (valueDisplay) {
-      valueDisplay.textContent = `${minGap}ms`;
+  // Set dropdown values
+  Object.entries(dropdowns).forEach(([id, value]) => {
+    const dropdown = panel.querySelector(`#${id}`);
+    if (dropdown) {
+      dropdown.value = value;
     }
-  }
+  });
+
+  // Initialize sliders
+  const sliders = {
+    'slider-size': config.fontSizeVH || 5.5,
+    'slider-height': config.heightVH || 16,
+    'slider-background-opacity': config.backgroundOpacity || 50,
+    'slider-autopause-delay': config.autoPauseDelayMs || 0,
+    'slider-min-silence-gap': config.minSilenceGapMs || 1000
+  };
+
+  // Set slider values
+  Object.entries(sliders).forEach(([id, value]) => {
+    const slider = panel.querySelector(`#${id}`);
+    if (slider) {
+      slider.value = value;
+    }
+  });
 }
 
 
@@ -242,9 +232,14 @@ function bindAppearanceControls(panel) {
     const overlay = () => document.getElementById("custom-subtitle-overlay");
 
     // "Visibility" dropdown changes  
-    panel.querySelector("#dropdown-visibility")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-visibility")?.addEventListener("change", async e => {
         window.subtitleConfig.visibility = e.target.value;
         updateSubtitleVisibility();
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('visibility', e.target.value);
+        }
     });
 
       // For "On-Stop" visibility setting, update subtitle visiblity upon play or pause
@@ -255,17 +250,24 @@ function bindAppearanceControls(panel) {
     }
 
      // "Size" slider adjusted
-    document.getElementById("slider-size")?.addEventListener("input", e => {
+    document.getElementById("slider-size")?.addEventListener("input", async e => {
         const size = parseFloat(e.target.value);
         window.subtitleConfig.fontSizeVH = size;
 
         // Update font size immediately on subtitle overlay
         const overlay = document.getElementById("custom-subtitle-overlay");
         if (overlay) overlay.style.fontSize = `${size}vh`;
+        
+
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('fontSizeVH', size);
+        }
     });
 
     // "Position" dropdown changes
-    document.getElementById("dropdown-position")?.addEventListener("change", e => {
+    document.getElementById("dropdown-position")?.addEventListener("change", async e => {
         window.subtitleConfig.position = e.target.value;
 
         const overlay = document.getElementById("custom-subtitle-overlay");
@@ -284,10 +286,15 @@ function bindAppearanceControls(panel) {
             overlay.style.bottom = "auto";
             overlay.style.transform = "translate(-50%, -50%)";
         }
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('position', e.target.value);
+        }
     });
 
     // "Height" slider changes
-    document.getElementById("slider-height")?.addEventListener("input", e => {
+    document.getElementById("slider-height")?.addEventListener("input", async e => {
         const height = parseFloat(e.target.value);
         window.subtitleConfig.heightVH = height;
 
@@ -309,45 +316,82 @@ function bindAppearanceControls(panel) {
             overlay.style.bottom = "auto";
             overlay.style.transform = "translate(-50%, -50%)";
         }
+        
+
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('heightVH', height);
+        }
     });
 
     // "LingQ Status" dropdown changes
-    panel.querySelector("#dropdown-lingq")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-lingq")?.addEventListener("change", async e => {
         window.subtitleConfig.lingqStatus = e.target.value;
         window.reRenderCurrentSubtitle?.();
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('lingqStatus', e.target.value);
+        }
     });
 
     // "Pinyin" dropdown changes
-    panel.querySelector("#dropdown-pinyin")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-pinyin")?.addEventListener("change", async e => {
         window.subtitleConfig.pinyin = e.target.value;
         window.reRenderCurrentSubtitle?.();
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('pinyin', e.target.value);
+        }
     });
 
      // "Tone color" dropdown changes
-    panel.querySelector("#dropdown-tone-color")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-tone-color")?.addEventListener("change", async e => {
         window.subtitleConfig.toneColor = e.target.value;
         window.reRenderCurrentSubtitle?.();
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('toneColor', e.target.value);
+        }
     });
 
     // "Translation" dropdown changes
-    panel.querySelector("#dropdown-translation")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-translation")?.addEventListener("change", async e => {
         window.subtitleConfig.translation = e.target.value;
         window.reRenderCurrentSubtitle?.();
         // Update background after re-rendering to account for translation visibility change
         setTimeout(() => window.updateSubtitleBackground?.(), 0);
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('translation', e.target.value);
+        }
     });
 
     // "Background" dropdown changes
-    panel.querySelector("#dropdown-background")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-background")?.addEventListener("change", async e => {
         window.subtitleConfig.background = e.target.value;
         updateSubtitleBackground();
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('background', e.target.value);
+        }
     });
 
     // "Background opacity" slider changes
-    panel.querySelector("#slider-background-opacity")?.addEventListener("input", e => {
+    panel.querySelector("#slider-background-opacity")?.addEventListener("input", async e => {
         const opacity = parseInt(e.target.value);
         window.subtitleConfig.backgroundOpacity = opacity;
         updateSubtitleBackground();
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('backgroundOpacity', opacity);
+        }
     });
 }
 
@@ -362,39 +406,146 @@ function bindAppearanceControls(panel) {
 function bindBehaviorControls(panel) {
     
     // "Continuous" dropdown changes
-    panel.querySelector("#dropdown-continuous")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-continuous")?.addEventListener("change", async e => {
         window.subtitleConfig.useContinuous = e.target.value === "on";
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('useContinuous', e.target.value === "on");
+        }
     });
 
     // "Auto-pause" dropdown changes
-    panel.querySelector("#dropdown-auto-pause")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-auto-pause")?.addEventListener("change", async e => {
         window.subtitleConfig.autoPause = e.target.value === "on";
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('autoPause', e.target.value === "on");
+        }
     });
 
     // "Auto-pause delay" slider changes
-    panel.querySelector("#slider-autopause-delay")?.addEventListener("input", e => {
-        window.subtitleConfig.autoPauseDelayMs = parseInt(e.target.value);
+    panel.querySelector("#slider-autopause-delay")?.addEventListener("input", async e => {
+        const value = parseInt(e.target.value);
+        window.subtitleConfig.autoPauseDelayMs = value;
+        
+
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('autoPauseDelayMs', value);
+        }
     });
 
     // "Remove silences" dropdown changes
-    panel.querySelector("#dropdown-remove-silences")?.addEventListener("change", e => {
+    panel.querySelector("#dropdown-remove-silences")?.addEventListener("change", async e => {
         window.subtitleConfig.removeSilences = e.target.value === "on";
         console.log("🔇 Remove silences mode:", e.target.value === "on" ? "enabled" : "disabled");
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('removeSilences', e.target.value === "on");
+        }
     });
 
     // "Min silence gap" slider changes
-    panel.querySelector("#slider-min-silence-gap")?.addEventListener("input", e => {
+    panel.querySelector("#slider-min-silence-gap")?.addEventListener("input", async e => {
         const value = parseInt(e.target.value);
         window.subtitleConfig.minSilenceGapMs = value;
         
-        // Update the display value
-        const valueDisplay = panel.querySelector("#slider-min-silence-gap-value");
-        if (valueDisplay) {
-            valueDisplay.textContent = `${value}ms`;
-        }
+
         
         console.log("🔇 Min silence gap set to:", value, "ms");
+        
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('minSilenceGapMs', value);
+        }
     });
+}
+
+
+/**
+ * Binds settings management controls like reset to defaults.
+ * @param {HTMLDivElement} panel - The control panel element.
+ * @returns {void}
+ */
+function bindSettingsManagement(panel) {
+  // Reset to defaults button
+  panel.querySelector("#reset-settings-btn")?.addEventListener("click", async () => {
+    console.log("Reset button clicked");
+    
+    if (window.storageUtils) {
+      try {
+        console.log("Before reset - subtitleConfig:", window.subtitleConfig);
+        
+        await window.storageUtils.resetSettings();
+        console.log("Storage reset completed");
+        
+        // Reload settings and reinitialize controls
+        await window.storageUtils.initializeSettings();
+        console.log("Settings reinitialized - subtitleConfig:", window.subtitleConfig);
+        
+        initializeControlValues(panel);
+        console.log("Control values reinitialized");
+        
+        // Apply all visual changes to the subtitle overlay
+        const overlay = document.getElementById("custom-subtitle-overlay");
+        if (overlay) {
+          console.log("Applying visual changes to overlay");
+          
+          // Apply font size
+          const newFontSize = `${window.subtitleConfig.fontSizeVH}vh`;
+          overlay.style.fontSize = newFontSize;
+          console.log("Font size set to:", newFontSize);
+          
+          // Apply position and height
+          const position = window.subtitleConfig.position;
+          const height = window.subtitleConfig.heightVH;
+          console.log("Position:", position, "Height:", height);
+          
+          if (position === "bottom") {
+            overlay.style.bottom = `${height}vh`;
+            overlay.style.top = "auto";
+            overlay.style.transform = "translateX(-50%)";
+          } else if (position === "top") {
+            overlay.style.top = `${height}vh`;
+            overlay.style.bottom = "auto";
+            overlay.style.transform = "translateX(-50%)";
+          } else if (position === "center") {
+            overlay.style.top = "50%";
+            overlay.style.bottom = "auto";
+            overlay.style.transform = "translate(-50%, -50%)";
+          }
+        } else {
+          console.warn("No subtitle overlay found");
+        }
+        
+        // Update visibility
+        updateSubtitleVisibility();
+        console.log("Visibility updated");
+        
+        // Update background
+        updateSubtitleBackground();
+        console.log("Background updated");
+        
+        // Re-render current subtitle to apply new settings
+        if (window.reRenderCurrentSubtitle) {
+          window.reRenderCurrentSubtitle();
+          console.log("Subtitle re-rendered");
+        } else {
+          console.warn("reRenderCurrentSubtitle function not available");
+        }
+        
+        console.log("Settings reset to defaults successfully");
+      } catch (error) {
+        console.error("Error resetting settings:", error);
+      }
+    } else {
+      console.error("Storage utils not available");
+    }
+  });
 }
 
 /**
