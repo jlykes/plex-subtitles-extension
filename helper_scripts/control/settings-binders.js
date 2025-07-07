@@ -9,7 +9,7 @@
  * @returns {void}
  */
 function bindSettingsManagement(panel) {
-f  console.log("🔧 bindSettingsManagement called with panel:", panel);
+  console.log("🔧 bindSettingsManagement called with panel:", panel);
   
   // Reset to defaults button
   const resetButton = panel.querySelector("#reset-settings-btn");
