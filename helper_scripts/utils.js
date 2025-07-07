@@ -207,17 +207,26 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
   const isPunct = isPunctuationDigitOrSpace(word);
 
   // === Determine settings from global subtitle config ===
-  const underlineColor =
-    config.lingqStatus === "on" && !isPunct && status ? getUnderlineColor(status, word) : null;
+  // Handle words not in LingQ data - they should be underlined in blue
+  let underlineColor = null;
+  if (config.lingqStatus === "on" && !isPunct && isChineseWord(word)) {
+    if (status) {
+      // Word is in LingQ data, use its status
+      underlineColor = getUnderlineColor(status, word);
+    } else {
+      // Word is not in LingQ data, underline in blue
+      underlineColor = "blue";
+    }
+  }
 
   const shouldColor =
     config.toneColor === "all" ||
-    (config.toneColor === "unknown-only" && status && !isKnownWord(status));
+    (config.toneColor === "unknown-only" && (!status || !isKnownWord(status)));
 
   // Only show pinyin if config allows AND the word contains Chinese
   const shouldShowPinyin =
     (config.pinyin === "all" ||
-      (config.pinyin === "unknown-only" && status && !isKnownWord(status))) &&
+      (config.pinyin === "unknown-only" && (!status || !isKnownWord(status)))) &&
     isChineseWord(word);
 
   

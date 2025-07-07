@@ -96,6 +96,7 @@
 - Fixed live mode background styling issue where background only covered first character instead of entire subtitle line by aligning DOM structure with preprocessed mode
 - Fixed subtitle visibility when Plex video player is minimized by adding video player visibility detection and hiding subtitles when showing movie info screen
 - Added control panel visibility management to hide control panel when video player is minimized, keeping movie info screen clean
+- Fixed words not in LingQ data not being underlined in blue by updating createWordWrapper logic to handle undefined status values
 
 ### Development Tools & Debugging
 - Added debug logging for main functions and video readiness tracking
