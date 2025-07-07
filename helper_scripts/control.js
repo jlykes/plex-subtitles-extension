@@ -155,7 +155,7 @@ function createPanelHoverTrigger() {
     position: "fixed",
     top: 0,
     right: 0,
-    width: "250px",
+    width: "300px",
     height: "700px",
     zIndex: 99997,
     backgroundColor: "transparent",
@@ -177,7 +177,7 @@ function createPanelContainer() {
   Object.assign(panel.style, {
     position: "fixed",
     top: "12px",
-    right: "-280px", // hidden initially
+    right: "-330px", // hidden initially (adjusted for wider panel)
     backgroundColor: "rgba(34, 34, 34, 0.85)",
     color: "#fff",
     padding: "18px",
@@ -186,7 +186,7 @@ function createPanelContainer() {
     zIndex: 99998,
     fontFamily: "sans-serif",
     lineHeight: "1.6",
-    width: "250px",
+    width: "300px",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.4)",
     opacity: "0",
     pointerEvents: "none",
@@ -221,7 +221,7 @@ function initHoverPanelBehavior(panel, trigger) {
     hideTimeout = setTimeout(() => {
       if (!hoverActive) {
         panel.style.opacity = "0";
-        panel.style.right = "-280px";
+        panel.style.right = "-330px";
         panel.style.pointerEvents = "none";
       }
     }, 300);

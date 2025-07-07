@@ -12,6 +12,9 @@ function getUnderlineColor(statusInfo, word) {
   // Only underline if the word is Chinese
   if (word && !isChineseWord(word)) return null;
   
+  // Check if statusInfo is valid
+  if (!statusInfo || typeof statusInfo !== 'object') return null;
+  
   // Extract status and extended_status from the status info object
   const status = statusInfo.status;
   const extended_status = statusInfo.extended_status;
@@ -182,6 +185,9 @@ function isChineseWord(word) {
  * @returns {boolean} True if the word is known, false otherwise
  */
 function isKnownWord(statusInfo) {
+  // Check if statusInfo is valid
+  if (!statusInfo || typeof statusInfo !== 'object') return false;
+  
   return statusInfo.status === 3;
 }
 
@@ -202,16 +208,16 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
 
   // === Determine settings from global subtitle config ===
   const underlineColor =
-    config.lingqStatus === "on" && !isPunct ? getUnderlineColor(status, word) : null;
+    config.lingqStatus === "on" && !isPunct && status ? getUnderlineColor(status, word) : null;
 
   const shouldColor =
     config.toneColor === "all" ||
-    (config.toneColor === "unknown-only" && !isKnownWord(status));
+    (config.toneColor === "unknown-only" && status && !isKnownWord(status));
 
   // Only show pinyin if config allows AND the word contains Chinese
   const shouldShowPinyin =
     (config.pinyin === "all" ||
-      (config.pinyin === "unknown-only" && !isKnownWord(status))) &&
+      (config.pinyin === "unknown-only" && status && !isKnownWord(status))) &&
     isChineseWord(word);
 
   
@@ -332,7 +338,13 @@ function getLingQStatusForWord(word, lingqTerms) {
   
   // Direct lookup in LingQ terms
   if (lingqTerms.hasOwnProperty(word)) {
-    return lingqTerms[word].status;
+    const statusInfo = lingqTerms[word];
+    // Check if statusInfo is valid and has a status property
+    if (statusInfo && typeof statusInfo === 'object' && typeof statusInfo.status === 'number') {
+      return statusInfo.status;
+    }
+    // If statusInfo is invalid, return 0 (new status)
+    return 0;
   }
   
   // If not found, return 0 (new status)
@@ -369,9 +381,9 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
     1: 0, 
     2: 0, 
     '3_known': 0,    // status=3, extended_status=3
-    '3_learned': 0   // status=3, extended_status=0
+    '3_learned': 0,  // status=3, extended_status=0
+    unseen: 0        // Words not found in LingQ data
   };
-  let unseenCount = 0;
 
   // Count each word occurrence by its LingQ status or as unseen
   allWords.forEach(word => {
