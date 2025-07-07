@@ -72,6 +72,7 @@
 - Fixed click interception issues with subtitle panel hover trigger
 - Discovered and fixed Chrome extension file access issues with non-ASCII characters in filenames
 - Updated normalization function to remove `#` and handle other problematic characters
+- Fixed live mode background styling issue where background only covered first character instead of entire subtitle line by aligning DOM structure with preprocessed mode
 
 ### Development Tools & Debugging
 - Added debug logging for main functions and video readiness tracking

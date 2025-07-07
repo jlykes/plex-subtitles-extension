@@ -92,6 +92,20 @@ function renderLiveLine(text, lingqTerms, segmentit) {
   if (!container) return;
   container.innerHTML = "";
 
+  // Create wrapper and mainline divs (same structure as preprocessed mode, but without translation)
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "flex";
+  wrapper.style.flexDirection = "column";
+  wrapper.style.alignItems = "center";
+  wrapper.style.cursor = "pointer";
+  wrapper.style.marginTop = "4px";
+
+  const mainLine = document.createElement("div");
+  mainLine.style.display = "inline-block";
+  mainLine.style.verticalAlign = "bottom";
+  mainLine.style.position = "relative";
+  mainLine.style.textAlign = "center";
+
   // Segment the incoming live subtitle line into Chinese word tokens
   const words = segmentit.doSegment(text)
     .map(w => w.w)
@@ -101,15 +115,19 @@ function renderLiveLine(text, lingqTerms, segmentit) {
   words.forEach(word => { 
     const pinyin = getPinyin(word);
     const status = lingqTerms[word];
-    const wrapper = createWordWrapper({
+    const wordSpan = createWordWrapper({
       word,
       pinyin,
       status,
       meaning: "" // No word meanings available in live mode
     });
 
-    container.appendChild(wrapper);
+    mainLine.appendChild(wordSpan);
   });
+
+  // Append the main line to the wrapper
+  wrapper.appendChild(mainLine);
+  container.appendChild(wrapper);
 
   // Apply background styling after content is rendered
   window.updateSubtitleBackground?.();
