@@ -293,6 +293,9 @@ function renderSubtitle(sub, lingqTerms) {
 
   window.lastSubtitleStartTime = sub.start;
   window.lastRenderedText = sub.text;
+  
+  // Check video player visibility after rendering subtitle
+  window.updateSubtitleVisibility?.();
 }
 
 /**

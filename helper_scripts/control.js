@@ -91,6 +91,9 @@ async function createControlPanel() {
       }
     });
   });
+
+  // Set up video player visibility monitoring
+  setupVideoPlayerVisibilityMonitoring();
 }
 
 /**
@@ -155,6 +158,9 @@ function clearControlPanel() {
   const trigger = document.getElementById("subtitle-panel-hover-trigger");
   if (panel) panel.remove();
   if (trigger) trigger.remove();
+  
+  // Clean up video player visibility monitoring
+  cleanupVideoPlayerVisibilityMonitoring();
 }
 
 //////////////////////////////
@@ -268,6 +274,11 @@ function bindControlPanelListeners() {
   bindAppearanceControls(panel);
   bindBehaviorControls(panel);
   bindFocusRestoration(panel);
+  
+  // Set up video player visibility monitoring if not already set up
+  if (!videoPlayerVisibilityObserver) {
+    setupVideoPlayerVisibilityMonitoring();
+  }
 }
 
 //////////////////////////////
@@ -311,6 +322,26 @@ function updateCurrentExplanation(text) {
   }
 }
 
+/**
+ * Checks if the Plex video player is currently visible.
+ * This function looks for the main Plex container and checks if it has
+ * the 'show-video-player' class, which indicates the video player is visible.
+ * @returns {boolean} True if the video player is visible, false otherwise.
+ */
+function isPlexVideoPlayerVisible() {
+  const plexContainer = document.querySelector('#plex');
+  if (!plexContainer) {
+    console.log("🔍 isPlexVideoPlayerVisible: Plex container not found");
+    return false;
+  }
+  
+  const hasShowVideoPlayerClass = plexContainer.classList.contains('show-video-player');
+  console.log("🔍 isPlexVideoPlayerVisible: Container classes:", plexContainer.className, "Has show-video-player:", hasShowVideoPlayerClass);
+  
+  // Check if the container has the 'show-video-player' class
+  return hasShowVideoPlayerClass;
+}
+
 // Subtitle Overlay Updates
 /**
  * Updates the visibility of the subtitle overlay based on the current configuration.
@@ -320,23 +351,51 @@ function updateCurrentExplanation(text) {
  * - "off": Hides the overlay completely.
  * - "on": Shows the overlay regardless of video state.
  * - "on-stop": Shows the overlay only when the video is paused.
+ * 
+ * Additionally, this function now checks if the Plex video player is visible.
+ * If the video player is minimized (showing movie info instead), subtitles are hidden
+ * regardless of the visibility setting.
  * @returns {void}
  */
 function updateSubtitleVisibility() {
+    console.log("🎬 updateSubtitleVisibility called");
+    
     const container = document.getElementById("custom-subtitle-overlay");
-    if (!container) return;
+    if (!container) {
+        console.log("⚠️ updateSubtitleVisibility: Subtitle container not found");
+        return;
+    }
 
-    const visibility = window.subtitleConfig.visibility;
+    // First check if the Plex video player is visible
+    // If not visible (minimized), hide subtitles regardless of settings
+    const videoPlayerVisible = isPlexVideoPlayerVisible();
+    console.log("🎬 updateSubtitleVisibility: Video player visible:", videoPlayerVisible);
+    
+    if (!videoPlayerVisible) {
+        console.log("🎬 updateSubtitleVisibility: Hiding subtitles - video player not visible");
+        container.style.display = "none";
+        return;
+    }
+
+    const visibility = window.subtitleConfig?.visibility || 'on';
+    console.log("🎬 updateSubtitleVisibility: Visibility setting:", visibility);
 
     if (visibility === "off") {
+        console.log("🎬 updateSubtitleVisibility: Hiding subtitles - visibility off");
         container.style.display = "none";
     } else if (visibility === "on") {
+        console.log("🎬 updateSubtitleVisibility: Showing subtitles - visibility on");
         container.style.display = "block";
     } else if (visibility === "on-stop") {
         const video = findPlexVideoElement();
-        if (video && video.paused) {
+        const isPaused = video && video.paused;
+        console.log("🎬 updateSubtitleVisibility: on-stop mode, video paused:", isPaused);
+        
+        if (isPaused) {
+            console.log("🎬 updateSubtitleVisibility: Showing subtitles - video paused");
             container.style.display = "block";
         } else {
+            console.log("🎬 updateSubtitleVisibility: Hiding subtitles - video playing");
             container.style.display = "none";
         }
     }
@@ -555,6 +614,99 @@ window.bindControlPanelListeners = bindControlPanelListeners;
 window.initializeControlValues = initializeControlValues;
 window.updateSubtitleBackground = updateSubtitleBackground;
 window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
+window.isPlexVideoPlayerVisible = isPlexVideoPlayerVisible;
 
 // Global promise for initial LingQ fetch
 window.lingqInitialFetchPromise = null;
+
+// Global reference to the video player visibility observer
+let videoPlayerVisibilityObserver = null;
+
+/**
+ * Sets up a MutationObserver to monitor changes in the Plex video player visibility.
+ * This observer watches for changes in the class list of the main Plex container
+ * and updates subtitle visibility when the video player is shown or hidden.
+ * @returns {void}
+ */
+function setupVideoPlayerVisibilityMonitoring() {
+  // Clean up any existing observer
+  if (videoPlayerVisibilityObserver) {
+    videoPlayerVisibilityObserver.disconnect();
+    videoPlayerVisibilityObserver = null;
+  }
+
+  const plexContainer = document.querySelector('#plex');
+  if (!plexContainer) {
+    console.log("⚠️ setupVideoPlayerVisibilityMonitoring: Plex container not found");
+    return;
+  }
+
+  // Create observer to watch for class changes on the Plex container
+  videoPlayerVisibilityObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        console.log("🎬 Video player visibility state changed, updating subtitle visibility");
+        console.log("🎬 Mutation details:", {
+          type: mutation.type,
+          attributeName: mutation.attributeName,
+          oldValue: mutation.oldValue,
+          target: mutation.target.className
+        });
+        updateSubtitleVisibility();
+      }
+    });
+  });
+
+  // Start observing the Plex container for class attribute changes
+  videoPlayerVisibilityObserver.observe(plexContainer, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+
+  console.log("👀 Video player visibility monitoring set up");
+}
+
+/**
+ * Cleans up the video player visibility observer.
+ * This should be called when the extension is unloaded or when cleaning up.
+ * @returns {void}
+ */
+function cleanupVideoPlayerVisibilityMonitoring() {
+  if (videoPlayerVisibilityObserver) {
+    videoPlayerVisibilityObserver.disconnect();
+    videoPlayerVisibilityObserver = null;
+    console.log("🧹 Video player visibility monitoring cleaned up");
+  }
+}
+
+// Make the monitoring functions available globally
+window.setupVideoPlayerVisibilityMonitoring = setupVideoPlayerVisibilityMonitoring;
+window.cleanupVideoPlayerVisibilityMonitoring = cleanupVideoPlayerVisibilityMonitoring;
+
+// Manual test function for debugging video player visibility
+window.testVideoPlayerVisibility = function() {
+  console.log("🧪 Testing video player visibility...");
+  
+  const plexContainer = document.querySelector('#plex');
+  console.log("🧪 Plex container found:", !!plexContainer);
+  if (plexContainer) {
+    console.log("🧪 Plex container classes:", plexContainer.className);
+    console.log("🧪 Has 'show-video-player' class:", plexContainer.classList.contains('show-video-player'));
+  }
+  
+  const isVisible = isPlexVideoPlayerVisible();
+  console.log("🧪 isPlexVideoPlayerVisible() result:", isVisible);
+  
+  const subtitleContainer = document.getElementById("custom-subtitle-overlay");
+  console.log("🧪 Subtitle container found:", !!subtitleContainer);
+  if (subtitleContainer) {
+    console.log("🧪 Subtitle container display style:", subtitleContainer.style.display);
+  }
+  
+  console.log("🧪 Current subtitle config:", window.subtitleConfig);
+  
+  // Force update subtitle visibility
+  updateSubtitleVisibility();
+  
+  console.log("🧪 Test complete!");
+};

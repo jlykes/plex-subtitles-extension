@@ -142,6 +142,9 @@ function renderLiveLine(text, lingqTerms, segmentit) {
 
   // Apply background styling after content is rendered
   window.updateSubtitleBackground?.();
+  
+  // Check video player visibility after rendering subtitle
+  window.updateSubtitleVisibility?.();
 }
 
 
