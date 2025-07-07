@@ -18,7 +18,6 @@
 - Created LingQ status integration with color-coded underlines
 - Added pinyin overlay system
 - Set up basic file structure with `content.js`, `manifest.json`, `segmentit.min.js`, `lingqs.json`
-- Split code into modular files: `overlay.js`, `preprocess.js`, `live.js`, `keyboard.js`, `utils.js`
 - Implemented responsive design with percentage-based sizing (`vh`/`vw`)
 - Added global config block for user-configurable constants
 
@@ -49,9 +48,7 @@
 - Applied tone coloring per character inside each word with soft, pastel color palette
 - Fixed underline gaps by applying underline to word wrapper instead of character spans
 - Replaced `SHOW_PINYIN` boolean with dropdown for `none`, `unknown-only`, and `all` options
-- Refactored translation visibility to use CSS `display` toggle instead of DOM manipulation
 - Fixed continuous mode logic to properly honor `window.subtitleConfig.continuous` setting
-- Refactored code to combine pinyin rendering logic into single `forEach` loop for better maintainability
 
 ### User Interaction & Controls
 - Created keyboard shortcuts for subtitle navigation (`R`, `S`, `F`)
@@ -67,8 +64,16 @@
 - Added storage.js module with save/load/reset functionality for all control panel settings
 - Centralized default settings in storage.js getDefaultSettings() function
 - Added "Reset to Defaults" button for easy settings management
-- Removed redundant window.subtitleConfig object from control.js
 - Added fallback to localStorage when Chrome storage unavailable
+
+### Code Refactoring & Architecture
+- Split code into modular files: `overlay.js`, `preprocess.js`, `live.js`, `keyboard.js`, `utils.js`
+- Refactored code to use `initializeForCurrentVideo()` helper for shared setup
+- Refactored translation visibility to use CSS `display` toggle instead of DOM manipulation
+- Refactored code to combine pinyin rendering logic into single `forEach` loop for better maintainability
+- Removed redundant window.subtitleConfig object from control.js
+- Extracted skip logic functionality from control.js into separate helper_scripts/control/skip-logic.js module
+- Extracted UI state management functions from control.js into helper_scripts/control/ui-managers.js module
 
 ### Bug Fixes & Stability Improvements
 - Fixed control panel appearing on wrong tabs by checking for Plex video presence
@@ -86,12 +91,8 @@
 
 ### Development Tools & Debugging
 - Added debug logging for main functions and video readiness tracking
-- Refactored code to use `initializeForCurrentVideo()` helper for shared setup
 - Made `setupKeyboardShortcuts()` safe to call multiple times
 - Added debugging tools including Chrome DevTools Sources panel and Live Expressions
 - Added utility functions to process subtitle data and calculate LingQ status percentages
 - Explored global state conflicts and version tracking to prevent old polling loops from firing
-
-### Code Refactoring & Architecture
-- Extracted skip logic functionality from control.js into separate helper_scripts/control/skip-logic.js module
 
