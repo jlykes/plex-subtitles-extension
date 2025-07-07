@@ -74,6 +74,7 @@
 - Removed redundant window.subtitleConfig object from control.js
 - Extracted skip logic functionality from control.js into separate helper_scripts/control/skip-logic.js module
 - Extracted UI state management functions from control.js into helper_scripts/control/ui-managers.js module
+- Extracted control binders into separate modules: appearance-binders.js, behavior-binders.js, settings-binders.js
 
 ### Bug Fixes & Stability Improvements
 - Fixed control panel appearing on wrong tabs by checking for Plex video presence
