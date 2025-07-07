@@ -3,13 +3,34 @@
 // such as loading LingQ terms, normalizing titles, and creating styled word spans.
 
 /**
- * Loads the LingQ vocabulary terms from the bundled JSON file.
+ * Loads the LingQ vocabulary terms from chrome.storage.local if available,
+ * otherwise falls back to the bundled JSON file.
  * The JSON should be structured as an array of objects with "term" and "status" properties.
  * @returns {Promise<Object>} A promise that resolves to an object mapping terms to their LingQ status
  */
 async function loadLingQTerms() {
-  const response = await fetch(chrome.runtime.getURL("lingqs.json"));
-  const data = await response.json();
+  // Try to load from chrome.storage.local first
+  const localData = await new Promise(resolve => {
+    if (chrome && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.get('lingqs', (result) => {
+        console.log('[DEBUG] lingqs in storage:', result.lingqs);
+        resolve(result.lingqs || null);
+      });
+    } else {
+      resolve(null);
+    }
+  });
+
+  let data;
+  if (localData && Array.isArray(localData)) {
+    console.log('[LingQ] Loaded LingQ terms from chrome.storage.local');
+    data = localData;
+  } else {
+    console.log('[LingQ] Loaded LingQ terms from bundled lingqs.json');
+    const response = await fetch(chrome.runtime.getURL("lingqs.json"));
+    data = await response.json();
+  }
+
   const result = {};
   data.forEach(entry => {
     if (entry.term && typeof entry.status === "number") {

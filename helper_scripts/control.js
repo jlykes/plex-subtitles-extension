@@ -53,6 +53,32 @@ async function createControlPanel() {
 
   // Enable hover-to-show behavior
   initHoverPanelBehavior(panel, trigger);
+
+  // Bind manual LingQ update button
+  bindLingqUpdateButton();
+
+  // Start automatic LingQ data fetching every 1 minute and do initial fetch
+  if (!window.lingqInitialFetchPromise) {
+    // Initial fetch promise (resolves after first fetch completes)
+    window.lingqInitialFetchPromise = (async () => {
+      const cookies = await getLingqCookies();
+      if (cookies) {
+        const data = await fetchLingqData(cookies.csrftoken, cookies.wwwlingqcomsa);
+        if (data) {
+          await storeLingqData(data);
+          console.log("[LingQ] Initial fetch complete and data stored.");
+        } else {
+          console.warn("[LingQ] Initial fetch failed: API returned no data.");
+        }
+      } else {
+        console.warn("[LingQ] Initial fetch failed: No cookies found.");
+      }
+    })();
+  }
+  startLingqAutoFetch();
+
+  // Set up LingQ storage change listener
+  setupLingqStorageListener();
 }
 
 /**
@@ -485,8 +511,140 @@ function showStatusPercentagesLoading() {
   });
 }
 
+//////////////////////////////
+// LINGQ DATA FETCHING (PHASE 1)
+//////////////////////////////
+
+/**
+ * Requests csrftoken and wwwlingqcomsa cookies for lingq.com from the background script.
+ * @returns {Promise<{csrftoken: string, wwwlingqcomsa: string}|null>}
+ */
+async function getLingqCookies() {
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage({ type: 'getLingqCookies' }, (response) => {
+      resolve(response);
+    });
+  });
+}
+
+/**
+ * Requests the LingQ vocabulary data from the API via the background script.
+ * @param {string} csrftoken
+ * @param {string} wwwlingqcomsa
+ * @returns {Promise<Object|null>} The LingQ data or null on failure
+ */
+async function fetchLingqData(csrftoken, wwwlingqcomsa) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(
+      {
+        type: 'fetchLingqData',
+        csrftoken,
+        wwwlingqcomsa
+      },
+      (response) => {
+        if (response && response.data) {
+          resolve(response.data);
+        } else {
+          console.error('[LingQ] fetchLingqData error:', response && response.error);
+          resolve(null);
+        }
+      }
+    );
+  });
+}
+
+/**
+ * Stores LingQ data in chrome.storage.local under the key 'lingqs'.
+ * @param {Object} data
+ * @returns {Promise<void>}
+ */
+async function storeLingqData(data) {
+  return new Promise((resolve) => {
+    chrome.storage.local.set({ lingqs: data }, () => {
+      resolve();
+    });
+  });
+}
+
+/**
+ * Sets up automatic periodic fetching of LingQ data every five minutes.
+ * Calls getLingqCookies, fetchLingqData, and storeLingqData in sequence.
+ * Can be called on extension load or panel open.
+ */
+function startLingqAutoFetch(intervalMs = 60000) { // 1 minute default
+  async function fetchAndStoreLingqData() {
+    const cookies = await getLingqCookies();
+    if (!cookies) {
+      console.warn("Could not get LingQ cookies. User may not be logged in.");
+      return;
+    }
+    const data = await fetchLingqData(cookies.csrftoken, cookies.wwwlingqcomsa);
+    if (data) {
+      await storeLingqData(data);
+      console.log(`[LingQ] Auto-fetch: Data updated in chrome.storage.local at ${new Date().toLocaleTimeString()}`);
+    } else {
+      console.warn("Failed to fetch LingQ data from API.");
+    }
+  }
+  // Fetch once immediately
+  fetchAndStoreLingqData();
+  // Set up interval
+  return setInterval(fetchAndStoreLingqData, intervalMs);
+}
+
+// === MANUAL LINGQ UPDATE BUTTON LOGIC ===
+function bindLingqUpdateButton() {
+  const btn = document.getElementById('update-lingq-btn');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Updating...';
+    try {
+      const cookies = await getLingqCookies();
+      if (!cookies) throw new Error('Not logged in to LingQ');
+      const data = await fetchLingqData(cookies.csrftoken, cookies.wwwlingqcomsa);
+      if (!data) throw new Error('API fetch failed');
+      await storeLingqData(data);
+      btn.textContent = 'Success!';
+      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 1200);
+    } catch (e) {
+      btn.textContent = 'Error!';
+      setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 1800);
+    }
+  });
+}
+
+// === Listen for LingQ data changes and re-render subtitles ===
+function setupLingqStorageListener() {
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === 'local' && changes.lingqs) {
+      console.log('[LingQ] Detected LingQ data change in storage, re-rendering subtitles...');
+      
+      // Update window.lingqTerms with fresh data
+      loadLingQTerms().then(lingqTerms => {
+        window.lingqTerms = lingqTerms;
+        
+        // Re-render current subtitle with updated terms
+        if (window.reRenderCurrentSubtitle) {
+          window.reRenderCurrentSubtitle();
+        }
+        
+        // Update status percentages if in preprocessed mode
+        if (window.subtitleList && Array.isArray(window.subtitleList)) {
+          const percentages = calculateLingQStatusPercentages(window.subtitleList, lingqTerms);
+          updateStatusPercentagesDisplay(percentages);
+        }
+      });
+    }
+  });
+}
+
 // Make the functions available globally for other modules
 window.bindControlPanelListeners = bindControlPanelListeners;
 window.initializeControlValues = initializeControlValues;
 window.updateSubtitleBackground = updateSubtitleBackground;
 window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
+
+// Global promise for initial LingQ fetch
+window.lingqInitialFetchPromise = null;

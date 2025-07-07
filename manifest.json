@@ -10,7 +10,8 @@
     "storage"
   ],
   "host_permissions": [
-    "*://app.plex.tv/*"
+    "*://app.plex.tv/*",
+    "https://www.lingq.com/*"
   ],
   "content_scripts": [
     {
@@ -44,5 +45,8 @@
       ],
       "matches": ["*://app.plex.tv/*"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

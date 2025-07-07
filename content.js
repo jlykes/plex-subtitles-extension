@@ -141,6 +141,12 @@ function waitForVideoReadyAndInitialize() {
 
       // Async init: refresh LingQ terms and start rendering subtitles
       (async () => {
+        // Wait for initial LingQ fetch if present
+        if (window.lingqInitialFetchPromise) {
+          console.log('[LingQ] Waiting for initial LingQ fetch to complete (video switch)...');
+          await window.lingqInitialFetchPromise;
+          console.log('[LingQ] Initial LingQ fetch complete (video switch). Proceeding.');
+        }
         const lingqTermsUpdated = await loadLingQTerms();
         await initializeForCurrentVideo(lingqTermsUpdated);
       })();
@@ -218,6 +224,13 @@ async function main() {
   if (!video) {
     console.log("🚫 No valid Plex video detected. Subtitle overlay system not initialized.");
     return;
+  }
+
+  // Wait for initial LingQ fetch if present
+  if (window.lingqInitialFetchPromise) {
+    console.log('[LingQ] Waiting for initial LingQ fetch to complete...');
+    await window.lingqInitialFetchPromise;
+    console.log('[LingQ] Initial LingQ fetch complete. Proceeding.');
   }
 
   // Load user's LingQ vocabulary terms

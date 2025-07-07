@@ -65,6 +65,7 @@
 - Centralized default settings in storage.js getDefaultSettings() function
 - Added "Reset to Defaults" button for easy settings management
 - Added fallback to localStorage when Chrome storage unavailable
+- Implemented automatic LingQ data fetching, storage, and live subtitle/percentage reactivity in the extension
 
 ### Code Refactoring & Architecture
 - Split code into modular files: `overlay.js`, `preprocess.js`, `live.js`, `keyboard.js`, `utils.js`
