@@ -158,6 +158,208 @@ def search_lingq_cards(search_term, cookies=None, headers=None, page=1, page_siz
         print(f"❌ Exception searching: {e}")
         return {"success": False, "error": str(e)}
 
+def import_lingq_word(text, cookies=None, headers=None):
+    """
+    Imports a new word into LingQ.
+    
+    Args:
+        text (str): The Chinese word or text to import
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Response data or error info
+    """
+    url = "https://www.lingq.com/api/v2/zh/cards/import/"
+    
+    # Prepare the data to send
+    data = {"text": text}
+    
+    print(f"📥 Importing word: '{text}'")
+    
+    try:
+        response = requests.post(url, json=data, headers=headers, cookies=cookies)
+        
+        print(f"   Status: {response.status_code}")
+        
+        if response.ok:
+            # Import successful - POST requests often don't return response body
+            print(f"✅ Successfully imported '{text}'")
+            return {"success": True, "data": None}
+        else:
+            print(f"❌ Failed to import '{text}': {response.status_code}")
+            if response.text:
+                print(f"Response: {response.text}")
+            return {"success": False, "status_code": response.status_code, "error": response.text}
+            
+    except Exception as e:
+        print(f"❌ Exception importing '{text}': {e}")
+        return {"success": False, "error": str(e)}
+
+def search_or_import_word(text, cookies=None, headers=None):
+    """
+    Searches for a word and imports it if not found.
+    
+    Args:
+        text (str): The word to search for or import
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Result info with word details and whether it was imported
+    """
+    print(f"🔍 Searching for word: '{text}'")
+    
+    # First, search for the word
+    search_result = search_lingq_cards(text, cookies, headers, page_size=5)
+    
+    if search_result["success"] and search_result["count"] > 0:
+        # Word found, return the first result
+        first_result = search_result["results"][0]
+        print(f"✅ Word '{text}' found in database")
+        return {
+            "found": True,
+            "imported": False,
+            "word_data": first_result,
+            "pk": first_result.get("pk")
+        }
+    else:
+        # Word not found, import it
+        print(f"❌ Word '{text}' not found, importing...")
+        import_result = import_lingq_word(text, cookies, headers)
+        
+        if import_result["success"]:
+            # Try to search again to get the newly imported word's details
+            search_again = search_lingq_cards(text, cookies, headers, page_size=5)
+            if search_again["success"] and search_again["count"] > 0:
+                new_word = search_again["results"][0]
+                return {
+                    "found": True,
+                    "imported": True,
+                    "word_data": new_word,
+                    "pk": new_word.get("pk")
+                }
+        
+        return {
+            "found": False,
+            "imported": False,
+            "error": import_result.get("error", "Unknown error")
+        }
+
+def update_word_status_by_characters(characters, status, extended_status=None, cookies=None, headers=None):
+    """
+    Updates a word's status by Chinese characters. Searches first, imports if not found, then updates.
+    
+    Args:
+        characters (str): The Chinese characters to search for
+        status (int): New status (0=New, 1=Learning, 2=Familiar, 3=Known)
+        extended_status (int, optional): Extended status for status=3 words
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Result info with word details and what actions were taken
+    """
+    print(f"🎯 Updating status for characters: '{characters}' to status={status}")
+    if extended_status is not None:
+        print(f"   Extended status: {extended_status}")
+    print("=" * 50)
+    
+    # Step 1: Search for the word
+    print("🔍 Step 1: Searching for word...")
+    search_result = search_lingq_cards(characters, cookies, headers, page_size=5)
+    
+    word_pk = None
+    was_imported = False
+    
+    if search_result["success"] and search_result["count"] > 0:
+        # Word found
+        first_result = search_result["results"][0]
+        word_pk = first_result.get("pk")
+        term = first_result.get("term", "N/A")
+        current_status = first_result.get("status", "N/A")
+        current_extended = first_result.get("extended_status", "N/A")
+        
+        print(f"✅ Found existing word: '{term}' (ID: {word_pk})")
+        print(f"   Current status: {current_status}, extended: {current_extended}")
+        was_imported = False
+    else:
+        # Word not found, import it
+        print("❌ Word not found, importing...")
+        import_result = import_lingq_word(characters, cookies, headers)
+        
+        if import_result["success"]:
+            # Search again to get the newly imported word's details
+            print("🔍 Searching for newly imported word...")
+            search_again = search_lingq_cards(characters, cookies, headers, page_size=5)
+            
+            if search_again["success"] and search_again["count"] > 0:
+                new_word = search_again["results"][0]
+                word_pk = new_word.get("pk")
+                term = new_word.get("term", "N/A")
+                current_status = new_word.get("status", "N/A")
+                current_extended = new_word.get("extended_status", "N/A")
+                
+                print(f"✅ Successfully imported: '{term}' (ID: {word_pk})")
+                print(f"   Initial status: {current_status}, extended: {current_extended}")
+                was_imported = True
+            else:
+                print("❌ Failed to find newly imported word")
+                return {
+                    "success": False,
+                    "error": "Could not find word after import",
+                    "imported": True,
+                    "updated": False
+                }
+        else:
+            print("❌ Failed to import word")
+            return {
+                "success": False,
+                "error": import_result.get("error", "Import failed"),
+                "imported": False,
+                "updated": False
+            }
+    
+    # Step 2: Update the word's status
+    if word_pk:
+        print(f"\n🔄 Step 2: Updating status...")
+        update_data = {"status": status}
+        if extended_status is not None:
+            update_data["extended_status"] = extended_status
+        
+        patch_result = patch_lingq_word(word_pk, status, extended_status, cookies, headers)
+        
+        if patch_result["success"]:
+            print(f"✅ Successfully updated word status!")
+            return {
+                "success": True,
+                "word_pk": word_pk,
+                "term": term,
+                "imported": was_imported,
+                "updated": True,
+                "old_status": current_status,
+                "old_extended": current_extended,
+                "new_status": status,
+                "new_extended": extended_status
+            }
+        else:
+            print(f"❌ Failed to update word status")
+            return {
+                "success": False,
+                "word_pk": word_pk,
+                "term": term,
+                "imported": was_imported,
+                "updated": False,
+                "error": patch_result.get("error", "Update failed")
+            }
+    else:
+        return {
+            "success": False,
+            "error": "No word ID found",
+            "imported": was_imported,
+            "updated": False
+        }
+
 # === TEST FUNCTIONS ===
 def test_status_update(lingq_id, cookies, headers):
     """
@@ -210,6 +412,9 @@ def interactive_mode(cookies, headers):
     print("  get <id>     - Get details for a LingQ")
     print("  patch <id> <status> [extended_status] - Update a LingQ")
     print("  search <term> - Search for LingQ cards")
+    print("  import <term> - Import a new word")
+    print("  find <term>  - Search and import if not found")
+    print("  update <characters> <status> [extended_status] - Search/import/update by Chinese characters")
     print("  test <id>    - Run full status cycle test")
     print("  quit         - Exit")
     print()
@@ -240,12 +445,36 @@ def interactive_mode(cookies, headers):
                 search_term = " ".join(command[1:])
                 search_lingq_cards(search_term, cookies, headers)
                 
+            elif cmd == "import" and len(command) >= 2:
+                import_term = " ".join(command[1:])
+                import_lingq_word(import_term, cookies, headers)
+                
+            elif cmd == "find" and len(command) >= 2:
+                find_term = " ".join(command[1:])
+                result = search_or_import_word(find_term, cookies, headers)
+                if result["found"]:
+                    print(f"✅ Word ready: ID {result['pk']} (imported: {result['imported']})")
+                else:
+                    print(f"❌ Failed to find or import word: {result.get('error')}")
+                
+            elif cmd == "update" and len(command) >= 3:
+                characters = command[1]
+                status = int(command[2])
+                extended_status = int(command[3]) if len(command) > 3 else None
+                result = update_word_status_by_characters(characters, status, extended_status, cookies, headers)
+                if result["success"]:
+                    print(f"✅ Complete! Word '{result['term']}' (ID: {result['word_pk']})")
+                    print(f"   Imported: {result['imported']}, Updated: {result['updated']}")
+                    print(f"   Status: {result['old_status']} → {result['new_status']}")
+                else:
+                    print(f"❌ Failed: {result.get('error')}")
+                
             elif cmd == "test" and len(command) >= 2:
                 lingq_id = int(command[1])
                 test_status_update(lingq_id, cookies, headers)
                 
             else:
-                print("❌ Invalid command. Use: get <id>, patch <id> <status> [extended_status], search <term>, test <id>, or quit")
+                print("❌ Invalid command. Use: get <id>, patch <id> <status> [extended_status], search <term>, import <term>, find <term>, update <pinyin> <status> [extended_status], test <id>, or quit")
                 
         except KeyboardInterrupt:
             print("\n👋 Goodbye!")
@@ -299,6 +528,30 @@ def main():
             search_term = " ".join(sys.argv[2:])
             search_lingq_cards(search_term, cookies, HEADERS)
             
+        elif command == "import" and len(sys.argv) >= 3:
+            import_term = " ".join(sys.argv[2:])
+            import_lingq_word(import_term, cookies, HEADERS)
+            
+        elif command == "find" and len(sys.argv) >= 3:
+            find_term = " ".join(sys.argv[2:])
+            result = search_or_import_word(find_term, cookies, HEADERS)
+            if result["found"]:
+                print(f"✅ Word ready: ID {result['pk']} (imported: {result['imported']})")
+            else:
+                print(f"❌ Failed to find or import word: {result.get('error')}")
+            
+        elif command == "update" and len(sys.argv) >= 4:
+            characters = sys.argv[2]
+            status = int(sys.argv[3])
+            extended_status = int(sys.argv[4]) if len(sys.argv) > 4 else None
+            result = update_word_status_by_characters(characters, status, extended_status, cookies, HEADERS)
+            if result["success"]:
+                print(f"✅ Complete! Word '{result['term']}' (ID: {result['word_pk']})")
+                print(f"   Imported: {result['imported']}, Updated: {result['updated']}")
+                print(f"   Status: {result['old_status']} → {result['new_status']}")
+            else:
+                print(f"❌ Failed: {result.get('error')}")
+            
         elif command == "test" and len(sys.argv) >= 3:
             lingq_id = int(sys.argv[2])
             test_status_update(lingq_id, cookies, HEADERS)
@@ -308,6 +561,9 @@ def main():
             print("  python lingq_patch.py get <lingq_id>")
             print("  python lingq_patch.py patch <lingq_id> <status> [extended_status]")
             print("  python lingq_patch.py search <term>")
+            print("  python lingq_patch.py import <term>")
+            print("  python lingq_patch.py find <term>")
+            print("  python lingq_patch.py update <characters> <status> [extended_status]")
             print("  python lingq_patch.py test <lingq_id>")
             print("  python lingq_patch.py interactive")
     else:
