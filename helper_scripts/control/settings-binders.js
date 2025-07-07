@@ -9,8 +9,13 @@
  * @returns {void}
  */
 function bindSettingsManagement(panel) {
+  console.log("🔧 bindSettingsManagement called with panel:", panel);
+  
   // Reset to defaults button
-  panel.querySelector("#reset-settings-btn")?.addEventListener("click", async () => {
+  const resetButton = panel.querySelector("#reset-settings-btn");
+  console.log("🔧 Reset button found:", resetButton);
+  
+  resetButton?.addEventListener("click", async () => {
     console.log("Reset button clicked");
     
     if (window.storageUtils) {

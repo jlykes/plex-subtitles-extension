@@ -215,11 +215,28 @@ function initHoverPanelBehavior(panel, trigger) {
   panel.addEventListener("mouseleave", hidePanelDelayed);
 }
 
+/**
+ * Backward-compatible function that calls all individual binder functions.
+ * Still used by other modules, so retained for compatibility.
+ * This function binds all the necessary event listeners
+ * and initializes the control panel functionality.
+ * It should be called once the control panel is injected into the DOM.
+ * @returns {void}
+ */
+function bindControlPanelListeners() {
+  const panel = document.getElementById("subtitle-control-panel");
+  if (!panel) return;
+
+  bindAppearanceControls(panel);
+  bindBehaviorControls(panel);
+  bindFocusRestoration(panel);
+}
 
 //////////////////////////////
 // 2. EXTERNAL INTERFACES
 //////////////////////////////
 
+// Panel Display Updates
 /**
  * Updates the subtitle mode text in the control panel display area.
  * Typically called when switching between modes.
@@ -256,23 +273,7 @@ function updateCurrentExplanation(text) {
   }
 }
 
-/**
- * Backward-compatible function that calls all individual binder functions.
- * Still used by other modules, so retained for compatibility.
- * This function binds all the necessary event listeners
- * and initializes the control panel functionality.
- * It should be called once the control panel is injected into the DOM.
- * @returns {void}
- */
-function bindControlPanelListeners() {
-  const panel = document.getElementById("subtitle-control-panel");
-  if (!panel) return;
-
-  bindAppearanceControls(panel);
-  bindBehaviorControls(panel);
-  bindFocusRestoration(panel);
-}
-
+// Subtitle Overlay Updates
 /**
  * Updates the visibility of the subtitle overlay based on the current configuration.
  * This function checks the `window.subtitleConfig.visibility` setting
@@ -359,6 +360,7 @@ function updateSubtitleBackground() {
     }
 }
 
+// Status Percentage Updates
 /**
  * Updates the LingQ status percentage display in the control panel.
  * This function takes the calculated percentages and updates all the
@@ -395,5 +397,7 @@ function updateStatusPercentagesDisplay(percentages) {
 }
 
 // Make the functions available globally for other modules
+window.bindControlPanelListeners = bindControlPanelListeners;
+window.initializeControlValues = initializeControlValues;
 window.updateSubtitleBackground = updateSubtitleBackground;
 window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
