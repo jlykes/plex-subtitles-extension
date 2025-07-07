@@ -21,6 +21,10 @@ function waitForSubtitles(lingqTerms, segmentit) {
   updateModeDisplay("Live");
   console.log("🎯 Live subtitle mode enabled.");
 
+  // Hide percentage rows and sentence explanation in live mode (not supported)
+  hidePercentageRows();
+  hideSentenceExplanation();
+
   window.lingqTerms = lingqTerms;
   window.segmentit = segmentit;
 
@@ -148,6 +152,9 @@ window.stopLiveMode = function () {
     liveSubtitleObserver = null;
     console.log("🛑 Live subtitle observer disconnected");
   }
+  
+  // Clear percentage display when stopping live mode
+  clearStatusPercentagesDisplay();
 };
 
 // Note: Call waitForSubtitles(...) from main() in content.js if enriched JSON is not found.

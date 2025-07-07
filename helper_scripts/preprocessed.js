@@ -28,6 +28,13 @@ function runPreprocessedMode(lingqTerms, filename) {
     .then(enrichedSubs => {
       window.subtitleList = enrichedSubs;
 
+      // Show percentage rows and sentence explanation for preprocessed mode
+      showPercentageRows();
+      showSentenceExplanation();
+      showStatusPercentagesLoading();
+      const percentages = calculateLingQStatusPercentages(enrichedSubs, lingqTerms);
+      updateStatusPercentagesDisplay(percentages);
+
       // Stop existing loop if switching videos/modes
       if (preprocessedInterval) {
         clearInterval(preprocessedInterval);
@@ -365,4 +372,7 @@ window.stopPreprocessedMode = function () {
     Object.values(window.autoPausePollingIntervals).forEach(clearInterval);
     window.autoPausePollingIntervals = {};
   }
+  
+  // Clear percentage display when stopping preprocessed mode
+  clearStatusPercentagesDisplay();
 };

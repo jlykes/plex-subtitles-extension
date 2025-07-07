@@ -41,6 +41,7 @@
 - Implemented real functionality for visibility toggle, size slider, position dropdown, height slider, and LingQ coloring toggle
 - Added subtitle hover pause functionality to pause video when hovering over subtitles
 - Implemented `H` key to toggle Plex UI visibility and click-to-pause functionality when UI is hidden
+- Added LingQ status percentage tracking to control panel showing word breakdown by status (Known/Familiar/Recognized/New) with total word count and comma formatting
 
 ### Subtitle Rendering & Visual Features
 - Implemented full tone coloring support with `getToneColor()` function for all 5 tones

@@ -542,5 +542,179 @@ function updateSubtitleBackground() {
     }
 }
 
-// Make the function available globally for other modules
+/**
+ * Updates the LingQ status percentage display in the control panel.
+ * This function takes the calculated percentages and updates all the
+ * percentage display elements in the Key Info section.
+ * @param {Object} percentages - Object containing status percentages
+ * @returns {void}
+ */
+function updateStatusPercentagesDisplay(percentages) {
+  console.log("📊 updateStatusPercentagesDisplay called with:", percentages);
+  
+  // Update total words count with comma formatting
+  const totalWordsElement = document.getElementById('total-words');
+  if (totalWordsElement && percentages) {
+    const totalWords = percentages.totalWords || 0;
+    totalWordsElement.textContent = totalWords.toLocaleString();
+  }
+  
+  // Update each status percentage display
+  const statusElements = {
+    'status-known': percentages?.status3?.percentage,      // Known (4/5) maps to data status 3
+    'status-familiar': percentages?.status2?.percentage,   // Familiar (3) maps to data status 2
+    'status-recognized': percentages?.status1?.percentage, // Recognized (2) maps to data status 1
+    'status-new': percentages?.status0?.percentage         // New (1) maps to data status 0
+  };
+
+  Object.entries(statusElements).forEach(([elementId, percentage]) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = formatPercentage(percentage);
+    } else {
+      console.warn(`⚠️ updateStatusPercentagesDisplay: #${elementId} element not found`);
+    }
+  });
+}
+
+/**
+ * Shows the percentage display rows in the control panel.
+ * This is called when switching to preprocessed mode.
+ * @returns {void}
+ */
+function showPercentageRows() {
+  console.log("👁️ showPercentageRows called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      // Find the parent control-row and show it
+      const controlRow = element.closest('.control-row');
+      if (controlRow) {
+        controlRow.style.display = 'flex';
+      }
+    }
+  });
+}
+
+/**
+ * Hides the percentage display rows in the control panel.
+ * This is called when switching to live mode.
+ * @returns {void}
+ */
+function hidePercentageRows() {
+  console.log("🙈 hidePercentageRows called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      // Find the parent control-row and hide it
+      const controlRow = element.closest('.control-row');
+      if (controlRow) {
+        controlRow.style.display = 'none';
+      }
+    }
+  });
+}
+
+/**
+ * Clears all status percentage displays in the control panel.
+ * This is typically called when switching videos or when no data is available.
+ * @returns {void}
+ */
+function clearStatusPercentagesDisplay() {
+  console.log("🧹 clearStatusPercentagesDisplay called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = '---';
+    }
+  });
+}
+
+/**
+ * Shows a loading state for the status percentage calculations.
+ * This provides user feedback while calculations are in progress.
+ * @returns {void}
+ */
+function showStatusPercentagesLoading() {
+  console.log("⏳ showStatusPercentagesLoading called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = 'Calculating...';
+    }
+  });
+}
+
+/**
+ * Hides the sentence explanation section in the control panel.
+ * This is called when switching to live mode since explanations aren't available.
+ * @returns {void}
+ */
+function hideSentenceExplanation() {
+  console.log("🙈 hideSentenceExplanation called");
+  
+  const wrapper = document.getElementById("sentence-explanation-wrapper");
+  if (wrapper) {
+    wrapper.style.display = "none";
+  }
+}
+
+/**
+ * Shows the sentence explanation section in the control panel.
+ * This is called when switching to preprocessed mode.
+ * @returns {void}
+ */
+function showSentenceExplanation() {
+  console.log("👁️ showSentenceExplanation called");
+  
+  const wrapper = document.getElementById("sentence-explanation-wrapper");
+  if (wrapper) {
+    wrapper.style.display = "block";
+  }
+}
+
+// Make the functions available globally for other modules
 window.updateSubtitleBackground = updateSubtitleBackground;
+window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
+window.showPercentageRows = showPercentageRows;
+window.hidePercentageRows = hidePercentageRows;
+window.clearStatusPercentagesDisplay = clearStatusPercentagesDisplay;
+window.showStatusPercentagesLoading = showStatusPercentagesLoading;
+window.hideSentenceExplanation = hideSentenceExplanation;
+window.showSentenceExplanation = showSentenceExplanation;
