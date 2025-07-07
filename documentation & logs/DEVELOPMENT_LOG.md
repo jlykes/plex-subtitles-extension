@@ -92,3 +92,6 @@
 - Added utility functions to process subtitle data and calculate LingQ status percentages
 - Explored global state conflicts and version tracking to prevent old polling loops from firing
 
+### Code Refactoring & Architecture
+- Extracted skip logic functionality from control.js into separate helper_scripts/control/skip-logic.js module
+
