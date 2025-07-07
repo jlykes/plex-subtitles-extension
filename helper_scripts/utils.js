@@ -22,9 +22,12 @@ async function loadLingQTerms() {
 /**
  * Returns the underline color based on the LingQ status code
  * @param {*} status The LingQ status code
+ * @param {*} word The word to check if it's Chinese
  * @returns {string|null} The hex color code for the underline, or null if no underline should be applied
  */
-function getUnderlineColor(status) {
+function getUnderlineColor(status, word) {
+  // Only underline if the word is Chinese
+  if (word && !isChineseWord(word)) return null;
   switch (status) {
     case 3: return null;         // Ignored — no underline
     case 2: return "#fff9c4";    // Known — light yellow
@@ -170,6 +173,15 @@ function findPlexVideoElement() {
 }
 
 /**
+ * Returns true if the word contains at least one Chinese character.
+ * @param {string} word
+ * @returns {boolean}
+ */
+function isChineseWord(word) {
+  return /[\u4e00-\u9fff]/.test(word);
+}
+
+/**
  * Creates a fully styled and annotated word span for a subtitle line.
  * Includes optional pinyin ruby, tone coloring, underlining by LingQ status,
  * and a hoverable tooltip showing word meaning.
@@ -186,15 +198,17 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
 
   // === Determine settings from global subtitle config ===
   const underlineColor =
-    config.lingqStatus === "on" && !isPunct ? getUnderlineColor(status) : null;
+    config.lingqStatus === "on" && !isPunct ? getUnderlineColor(status, word) : null;
 
   const shouldColor =
     config.toneColor === "all" ||
     (config.toneColor === "unknown-only" && status !== 3);
 
+  // Only show pinyin if config allows AND the word contains Chinese
   const shouldShowPinyin =
-    config.pinyin === "all" ||
-    (config.pinyin === "unknown-only" && status !== 3);
+    (config.pinyin === "all" ||
+      (config.pinyin === "unknown-only" && status !== 3)) &&
+    isChineseWord(word);
 
   
   // === Split characters and corresponding pinyin ===
@@ -290,7 +304,8 @@ function extractAllWordsFromSubtitles(subtitleData) {
     // Extract words from the segmented array (enriched JSON format)
     if (subtitle.segmented && Array.isArray(subtitle.segmented)) {
       subtitle.segmented.forEach(segment => {
-        if (segment.word && !isPunctuationDigitOrSpace(segment.word)) {
+        // Only include words that contain at least one Chinese character
+        if (segment.word && isChineseWord(segment.word)) {
           allWords.push(segment.word);
         }
       });
