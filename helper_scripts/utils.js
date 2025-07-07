@@ -321,11 +321,10 @@ function getLingQStatusForWord(word, lingqTerms) {
 }
 
 /**
- * Calculates percentage breakdown of words by LingQ status.
- * Processes the entire enriched subtitle document to get cross-document percentages.
+ * Calculates percentage breakdown of words by LingQ status, including 'unseen' (not in LingQ data).
  * @param {Array} subtitleData - Array of enriched subtitle objects
  * @param {Object} lingqTerms - Object mapping terms to their LingQ status
- * @returns {Object} Object containing counts and percentages for each status
+ * @returns {Object} Object containing counts and percentages for each status and unseen
  */
 function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
   // Extract all word occurrences from enriched subtitle data
@@ -338,20 +337,26 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
       status3: { percentage: 0, count: 0 },  // Known
       status2: { percentage: 0, count: 0 },  // Familiar  
       status1: { percentage: 0, count: 0 },  // Recognized
-      status0: { percentage: 0, count: 0 }   // New
+      status0: { percentage: 0, count: 0 },  // New
+      unseen:  { percentage: 0, count: 0 }   // Unseen (not in LingQ data)
     };
   }
 
-  // Initialize counters for each status
+  // Initialize counters for each status and unseen
   const statusCounts = { 0: 0, 1: 0, 2: 0, 3: 0 };
-  
-  // Count each word occurrence by its LingQ status
+  let unseenCount = 0;
+
+  // Count each word occurrence by its LingQ status or as unseen
   allWords.forEach(word => {
-    const status = getLingQStatusForWord(word, lingqTerms);
-    if (statusCounts.hasOwnProperty(status)) {
-      statusCounts[status]++;
+    if (lingqTerms && lingqTerms.hasOwnProperty(word)) {
+      const status = lingqTerms[word];
+      if (statusCounts.hasOwnProperty(status)) {
+        statusCounts[status]++;
+      } else {
+        statusCounts[0]++; // Fallback to new for invalid status
+      }
     } else {
-      statusCounts[0]++; // Default to new for invalid status
+      unseenCount++;
     }
   });
 
@@ -373,6 +378,10 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
     status0: { 
       percentage: Math.round((statusCounts[0] / totalWords) * 100), 
       count: statusCounts[0] 
+    },
+    unseen: {
+      percentage: Math.round((unseenCount / totalWords) * 100),
+      count: unseenCount
     }
   };
 

@@ -383,7 +383,8 @@ function updateStatusPercentagesDisplay(percentages) {
     'status-known': percentages?.status3?.percentage,      // Known (4/5) maps to data status 3
     'status-familiar': percentages?.status2?.percentage,   // Familiar (3) maps to data status 2
     'status-recognized': percentages?.status1?.percentage, // Recognized (2) maps to data status 1
-    'status-new': percentages?.status0?.percentage         // New (1) maps to data status 0
+    'status-new': percentages?.status0?.percentage,        // New (1) maps to data status 0
+    'status-unseen': percentages?.unseen?.percentage       // Unseen (not in LingQ data)
   };
 
   Object.entries(statusElements).forEach(([elementId, percentage]) => {
@@ -392,6 +393,94 @@ function updateStatusPercentagesDisplay(percentages) {
       element.textContent = formatPercentage(percentage);
     } else {
       console.warn(`⚠️ updateStatusPercentagesDisplay: #${elementId} element not found`);
+    }
+  });
+}
+
+function showPercentageRows() {
+  console.log("👁️ showPercentageRows called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new',
+    'status-unseen'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      // Find the parent control-row and show it
+      const controlRow = element.closest('.control-row');
+      if (controlRow) {
+        controlRow.style.display = 'flex';
+      }
+    }
+  });
+}
+
+function hidePercentageRows() {
+  console.log("🙈 hidePercentageRows called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new',
+    'status-unseen'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      // Find the parent control-row and hide it
+      const controlRow = element.closest('.control-row');
+      if (controlRow) {
+        controlRow.style.display = 'none';
+      }
+    }
+  });
+}
+
+function clearStatusPercentagesDisplay() {
+  console.log("🧹 clearStatusPercentagesDisplay called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new',
+    'status-unseen'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = '---';
+    }
+  });
+}
+
+function showStatusPercentagesLoading() {
+  console.log("⏳ showStatusPercentagesLoading called");
+  
+  const statusElements = [
+    'total-words',
+    'status-known',
+    'status-familiar', 
+    'status-recognized',
+    'status-new',
+    'status-unseen'
+  ];
+
+  statusElements.forEach(elementId => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.textContent = 'Calculating...';
     }
   });
 }
