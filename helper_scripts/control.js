@@ -94,6 +94,9 @@ async function createControlPanel() {
 
   // Set up video player visibility monitoring
   setupVideoPlayerVisibilityMonitoring();
+  
+  // Initial visibility check for control panel
+  updateControlPanelVisibility();
 }
 
 /**
@@ -367,6 +370,40 @@ function updateSubtitleVisibility() {
 }
 
 /**
+ * Updates the visibility of the control panel based on video player state.
+ * This function hides the control panel when the video player is minimized
+ * (showing movie info instead) to keep the interface clean.
+ * @returns {void}
+ */
+function updateControlPanelVisibility() {
+  console.log("🎛️ updateControlPanelVisibility called");
+  
+  const panel = document.getElementById("subtitle-control-panel");
+  const trigger = document.getElementById("subtitle-panel-hover-trigger");
+  
+  if (!panel || !trigger) {
+    console.log("⚠️ updateControlPanelVisibility: Control panel elements not found");
+    return;
+  }
+
+  // Check if the Plex video player is visible
+  const videoPlayerVisible = isPlexVideoPlayerVisible();
+  console.log("🎛️ updateControlPanelVisibility: Video player visible:", videoPlayerVisible);
+  
+  if (!videoPlayerVisible) {
+    console.log("🎛️ updateControlPanelVisibility: Hiding control panel - video player not visible");
+    // Hide both panel and trigger
+    panel.style.display = "none";
+    trigger.style.display = "none";
+  } else {
+    console.log("🎛️ updateControlPanelVisibility: Showing control panel - video player visible");
+    // Show both panel and trigger
+    panel.style.display = "block";
+    trigger.style.display = "block";
+  }
+}
+
+/**
  * Updates the background styling of the subtitle overlay based on the current configuration.
  * This function applies a semi-transparent black background to either the entire container
  * (when translation is visible) or just the main line (when translation is hidden).
@@ -445,7 +482,7 @@ function setupVideoPlayerVisibilityMonitoring() {
   videoPlayerVisibilityObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-        console.log("🎬 Video player visibility state changed, updating subtitle visibility");
+        console.log("🎬 Video player visibility state changed, updating visibility");
         console.log("🎬 Mutation details:", {
           type: mutation.type,
           attributeName: mutation.attributeName,
@@ -453,6 +490,7 @@ function setupVideoPlayerVisibilityMonitoring() {
           target: mutation.target.className
         });
         updateSubtitleVisibility();
+        updateControlPanelVisibility();
       }
     });
   });
@@ -695,6 +733,7 @@ window.initializeControlValues = initializeControlValues;
 window.updateSubtitleBackground = updateSubtitleBackground;
 window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
 window.isPlexVideoPlayerVisible = isPlexVideoPlayerVisible;
+window.updateControlPanelVisibility = updateControlPanelVisibility;
 window.setupVideoPlayerVisibilityMonitoring = setupVideoPlayerVisibilityMonitoring;
 window.cleanupVideoPlayerVisibilityMonitoring = cleanupVideoPlayerVisibilityMonitoring;
 
