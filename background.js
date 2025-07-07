@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   if (request.type === 'fetchLingqData') {
     const { csrftoken, wwwlingqcomsa } = request;
-    fetch("https://www.lingq.com/api/languages/zh/lingqs/?status=4&page=1&page_size=25", {
+    fetch("https://www.lingq.com/api/languages/zh/lingqs/", {
       method: "GET",
       headers: {
         "Accept": "application/json",

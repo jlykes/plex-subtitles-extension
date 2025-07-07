@@ -44,7 +44,7 @@ def main():
     }
 
     # === API URL (edit params as needed) ===
-    url = "https://www.lingq.com/api/languages/zh/lingqs/?status=4&page=1&page_size=25"
+    url = "https://www.lingq.com/api/languages/zh/lingqs/"
 
     # === MAKE THE REQUEST ===
     response = requests.get(url, headers=HEADERS, cookies=cookies)

@@ -147,7 +147,7 @@ function waitForVideoReadyAndInitialize() {
           await window.lingqInitialFetchPromise;
           console.log('[LingQ] Initial LingQ fetch complete (video switch). Proceeding.');
         }
-        const lingqTermsUpdated = await loadLingQTerms();
+        const lingqTermsUpdated = await window.lingqData.loadLingQTerms();
         await initializeForCurrentVideo(lingqTermsUpdated);
       })();
     } else {
@@ -234,7 +234,7 @@ async function main() {
   }
 
   // Load user's LingQ vocabulary terms
-  const lingqTerms = await loadLingQTerms();
+  const lingqTerms = await window.lingqData.loadLingQTerms();
 
   // Run core initialization logic for current video
   await initializeForCurrentVideo(lingqTerms);
