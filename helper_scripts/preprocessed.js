@@ -340,7 +340,7 @@ function scheduleAutoPause(currentSub) {
     }
 
     if (elapsedSinceEnd >= delaySec) {
-      v.currentTime = Math.max(0, currentSub.end - 0.1);
+      v.currentTime = Math.max(0, currentSub.end);
       v.pause();
       window.lastPausedSubtitleStart = currentSub.start;
       console.log("⏸️ Auto-paused triggered by:", currentSub.text, "after delay of", delayMs, "ms");
@@ -348,7 +348,7 @@ function scheduleAutoPause(currentSub) {
       clearInterval(window.autoPausePollingIntervals[currentSub.start]);
       delete window.autoPausePollingIntervals[currentSub.start];
     }
-  }, 100);
+  }, 5);
 
   window.autoPausePollingIntervals[currentSub.start] = intervalId;
 }

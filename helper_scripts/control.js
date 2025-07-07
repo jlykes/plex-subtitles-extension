@@ -34,7 +34,7 @@ window.subtitleConfig = {
   // === Behavior Settings ===
   useContinuous: true,         // Keep last subtitle shown after time range ends
   autoPause: false,            // Automatically pause video when subtitle ends
-  autoPauseDelayMs: 200        // Delay (ms) before pausing video
+  autoPauseDelayMs: 0        // Delay (ms) before pausing video
 };
 
 //////////////////////////////
