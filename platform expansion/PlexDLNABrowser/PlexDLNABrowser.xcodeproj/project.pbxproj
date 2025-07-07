@@ -29,9 +29,22 @@
 		82693CB72E1BB21A009BE97C /* PlexDLNABrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlexDLNABrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		82693CD02E1BB3C5009BE97C /* Exceptions for "PlexDLNABrowser" folder in "PlexDLNABrowser" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 82693C9F2E1BB217009BE97C /* PlexDLNABrowser */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		82693CA22E1BB217009BE97C /* PlexDLNABrowser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				82693CD02E1BB3C5009BE97C /* Exceptions for "PlexDLNABrowser" folder in "PlexDLNABrowser" target */,
+			);
 			path = PlexDLNABrowser;
 			sourceTree = "<group>";
 		};
