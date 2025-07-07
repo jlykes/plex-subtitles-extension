@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		82693CAE2E1BB21A009BE97C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82693C982E1BB217009BE97C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82693C9F2E1BB217009BE97C;
+			remoteInfo = PlexDLNABrowser;
+		};
+		82693CB82E1BB21A009BE97C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82693C982E1BB217009BE97C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82693C9F2E1BB217009BE97C;
+			remoteInfo = PlexDLNABrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		82693CA02E1BB217009BE97C /* PlexDLNABrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlexDLNABrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		82693CAD2E1BB21A009BE97C /* PlexDLNABrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlexDLNABrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		82693CB72E1BB21A009BE97C /* PlexDLNABrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlexDLNABrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		82693CA22E1BB217009BE97C /* PlexDLNABrowser */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PlexDLNABrowser;
+			sourceTree = "<group>";
+		};
+		82693CB02E1BB21A009BE97C /* PlexDLNABrowserTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PlexDLNABrowserTests;
+			sourceTree = "<group>";
+		};
+		82693CBA2E1BB21A009BE97C /* PlexDLNABrowserUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PlexDLNABrowserUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82693C9D2E1BB217009BE97C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82693CAA2E1BB21A009BE97C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82693CB42E1BB21A009BE97C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		82693C972E1BB217009BE97C = {
+			isa = PBXGroup;
+			children = (
+				82693CA22E1BB217009BE97C /* PlexDLNABrowser */,
+				82693CB02E1BB21A009BE97C /* PlexDLNABrowserTests */,
+				82693CBA2E1BB21A009BE97C /* PlexDLNABrowserUITests */,
+				82693CA12E1BB217009BE97C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		82693CA12E1BB217009BE97C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82693CA02E1BB217009BE97C /* PlexDLNABrowser.app */,
+				82693CAD2E1BB21A009BE97C /* PlexDLNABrowserTests.xctest */,
+				82693CB72E1BB21A009BE97C /* PlexDLNABrowserUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82693C9F2E1BB217009BE97C /* PlexDLNABrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82693CC12E1BB21A009BE97C /* Build configuration list for PBXNativeTarget "PlexDLNABrowser" */;
+			buildPhases = (
+				82693C9C2E1BB217009BE97C /* Sources */,
+				82693C9D2E1BB217009BE97C /* Frameworks */,
+				82693C9E2E1BB217009BE97C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				82693CA22E1BB217009BE97C /* PlexDLNABrowser */,
+			);
+			name = PlexDLNABrowser;
+			packageProductDependencies = (
+			);
+			productName = PlexDLNABrowser;
+			productReference = 82693CA02E1BB217009BE97C /* PlexDLNABrowser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		82693CAC2E1BB21A009BE97C /* PlexDLNABrowserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82693CC42E1BB21A009BE97C /* Build configuration list for PBXNativeTarget "PlexDLNABrowserTests" */;
+			buildPhases = (
+				82693CA92E1BB21A009BE97C /* Sources */,
+				82693CAA2E1BB21A009BE97C /* Frameworks */,
+				82693CAB2E1BB21A009BE97C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				82693CAF2E1BB21A009BE97C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				82693CB02E1BB21A009BE97C /* PlexDLNABrowserTests */,
+			);
+			name = PlexDLNABrowserTests;
+			packageProductDependencies = (
+			);
+			productName = PlexDLNABrowserTests;
+			productReference = 82693CAD2E1BB21A009BE97C /* PlexDLNABrowserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		82693CB62E1BB21A009BE97C /* PlexDLNABrowserUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82693CC72E1BB21A009BE97C /* Build configuration list for PBXNativeTarget "PlexDLNABrowserUITests" */;
+			buildPhases = (
+				82693CB32E1BB21A009BE97C /* Sources */,
+				82693CB42E1BB21A009BE97C /* Frameworks */,
+				82693CB52E1BB21A009BE97C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				82693CB92E1BB21A009BE97C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				82693CBA2E1BB21A009BE97C /* PlexDLNABrowserUITests */,
+			);
+			name = PlexDLNABrowserUITests;
+			packageProductDependencies = (
+			);
+			productName = PlexDLNABrowserUITests;
+			productReference = 82693CB72E1BB21A009BE97C /* PlexDLNABrowserUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		82693C982E1BB217009BE97C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					82693C9F2E1BB217009BE97C = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					82693CAC2E1BB21A009BE97C = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 82693C9F2E1BB217009BE97C;
+					};
+					82693CB62E1BB21A009BE97C = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 82693C9F2E1BB217009BE97C;
+					};
+				};
+			};
+			buildConfigurationList = 82693C9B2E1BB217009BE97C /* Build configuration list for PBXProject "PlexDLNABrowser" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 82693C972E1BB217009BE97C;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 82693CA12E1BB217009BE97C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82693C9F2E1BB217009BE97C /* PlexDLNABrowser */,
+				82693CAC2E1BB21A009BE97C /* PlexDLNABrowserTests */,
+				82693CB62E1BB21A009BE97C /* PlexDLNABrowserUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		82693C9E2E1BB217009BE97C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82693CAB2E1BB21A009BE97C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82693CB52E1BB21A009BE97C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		82693C9C2E1BB217009BE97C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82693CA92E1BB21A009BE97C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82693CB32E1BB21A009BE97C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		82693CAF2E1BB21A009BE97C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82693C9F2E1BB217009BE97C /* PlexDLNABrowser */;
+			targetProxy = 82693CAE2E1BB21A009BE97C /* PBXContainerItemProxy */;
+		};
+		82693CB92E1BB21A009BE97C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82693C9F2E1BB217009BE97C /* PlexDLNABrowser */;
+			targetProxy = 82693CB82E1BB21A009BE97C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		82693CBF2E1BB21A009BE97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		82693CC02E1BB21A009BE97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		82693CC22E1BB21A009BE97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = soulturtle.PlexDLNABrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		82693CC32E1BB21A009BE97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = soulturtle.PlexDLNABrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		82693CC52E1BB21A009BE97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = soulturtle.PlexDLNABrowserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlexDLNABrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PlexDLNABrowser";
+			};
+			name = Debug;
+		};
+		82693CC62E1BB21A009BE97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = soulturtle.PlexDLNABrowserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlexDLNABrowser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PlexDLNABrowser";
+			};
+			name = Release;
+		};
+		82693CC82E1BB21A009BE97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = soulturtle.PlexDLNABrowserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PlexDLNABrowser;
+			};
+			name = Debug;
+		};
+		82693CC92E1BB21A009BE97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZK3GVNCF3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = soulturtle.PlexDLNABrowserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PlexDLNABrowser;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		82693C9B2E1BB217009BE97C /* Build configuration list for PBXProject "PlexDLNABrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82693CBF2E1BB21A009BE97C /* Debug */,
+				82693CC02E1BB21A009BE97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82693CC12E1BB21A009BE97C /* Build configuration list for PBXNativeTarget "PlexDLNABrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82693CC22E1BB21A009BE97C /* Debug */,
+				82693CC32E1BB21A009BE97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82693CC42E1BB21A009BE97C /* Build configuration list for PBXNativeTarget "PlexDLNABrowserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82693CC52E1BB21A009BE97C /* Debug */,
+				82693CC62E1BB21A009BE97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82693CC72E1BB21A009BE97C /* Build configuration list for PBXNativeTarget "PlexDLNABrowserUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82693CC82E1BB21A009BE97C /* Debug */,
+				82693CC92E1BB21A009BE97C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 82693C982E1BB217009BE97C /* Project object */;
+}

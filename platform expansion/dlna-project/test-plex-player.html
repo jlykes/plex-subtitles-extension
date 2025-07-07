@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plex DLNA Test Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+        
+        .library-panel {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .video-panel {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 4px;
+        }
+        
+        .video-player {
+            width: 100%;
+            max-width: 100%;
+            background: #000;
+            border-radius: 4px;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 10;
+            display: none;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .overlay-controls {
+            margin-top: 10px;
+            padding: 10px;
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        .overlay-controls input[type="text"] {
+            background: #444;
+            color: white;
+            border: 1px solid #555;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        
+        .overlay-controls button {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #3a3a3a;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .item:hover {
+            background: #4a4a4a;
+        }
+        
+        .item.folder {
+            border-left: 3px solid #007acc;
+        }
+        
+        .item.video {
+            border-left: 3px solid #28a745;
+        }
+        
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background: #333;
+        }
+        
+        .status.success {
+            background: #28a745;
+        }
+        
+        .status.error {
+            background: #dc3545;
+        }
+        
+        .status.info {
+            background: #007acc;
+        }
+        
+        button {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background: #005a9e;
+        }
+        
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        
+        .debug-info {
+            background: #333;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .breadcrumb {
+            background: #333;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .breadcrumb span {
+            color: #007acc;
+            cursor: pointer;
+        }
+        
+        .breadcrumb span:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎬 Plex DLNA Test Player</h1>
+    
+    <div class="status info" id="status">
+        Ready to browse Plex library...
+    </div>
+    
+    <div class="container">
+        <div class="library-panel">
+            <h3>📁 Media Library</h3>
+            <button onclick="testConnection()" id="testBtn">Test Connection</button>
+            <button onclick="browseLibrary()" id="browseBtn">Browse Library</button>
+            <button onclick="goBack()" id="backBtn" disabled>← Back</button>
+            
+            <div class="breadcrumb" id="breadcrumb">
+                <span onclick="navigateTo('0')">Root</span>
+            </div>
+            
+            <div id="libraryContent"></div>
+            <div class="debug-info" id="debugInfo"></div>
+        </div>
+        
+        <div class="video-panel">
+            <h3>🎥 Video Player</h3>
+            <div class="video-container">
+                <video id="videoPlayer" class="video-player" controls>
+                    Your browser does not support the video tag.
+                </video>
+                <div id="videoOverlay" class="video-overlay">
+                    Sample Overlay Text
+                </div>
+            </div>
+            <div id="videoInfo"></div>
+            <div class="overlay-controls">
+                <h4>🎯 Overlay Controls</h4>
+                <input type="text" id="overlayText" placeholder="Enter overlay text" value="Sample Overlay Text">
+                <button onclick="toggleOverlay()">Toggle Overlay</button>
+                <button onclick="setOverlayText()">Update Text</button>
+                <br>
+                <label>Position: </label>
+                <button onclick="moveOverlay('top-left')">Top Left</button>
+                <button onclick="moveOverlay('top-right')">Top Right</button>
+                <button onclick="moveOverlay('bottom-left')">Bottom Left</button>
+                <button onclick="moveOverlay('bottom-right')">Bottom Right</button>
+                <button onclick="moveOverlay('center')">Center</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPath = '0';
+        let pathHistory = ['0'];
+        let pathNames = ['Root'];
+        
+        // Update status display
+        function updateStatus(message, type = 'info') {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+        
+        // Add debug info
+        function addDebugInfo(info) {
+            const debugEl = document.getElementById('debugInfo');
+            const timestamp = new Date().toLocaleTimeString();
+            debugEl.innerHTML += `[${timestamp}] ${info}<br>`;
+            debugEl.scrollTop = debugEl.scrollHeight;
+        }
+        
+        // Update breadcrumb
+        function updateBreadcrumb() {
+            const breadcrumbEl = document.getElementById('breadcrumb');
+            breadcrumbEl.innerHTML = pathNames.map((name, index) => {
+                return `<span onclick="navigateTo('${pathHistory[index]}')">${name}</span>`;
+            }).join(' > ');
+        }
+        
+        // Navigate to a specific object ID
+        function navigateTo(objectId) {
+            const index = pathHistory.indexOf(objectId);
+            if (index !== -1) {
+                // Truncate history to this point
+                pathHistory = pathHistory.slice(0, index + 1);
+                pathNames = pathNames.slice(0, index + 1);
+            }
+            currentPath = objectId;
+            browseDirectory(objectId);
+        }
+        
+        // Test connection to Plex via our proxy
+        async function testConnection() {
+            try {
+                updateStatus('Testing connection to Plex server...', 'info');
+                addDebugInfo('Testing connection...');
+                
+                const response = await fetch('/test-plex');
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateStatus('✅ Connected to Plex server successfully!', 'success');
+                    addDebugInfo('Connection successful');
+                    addDebugInfo(`Device description preview: ${data.deviceDescription}`);
+                } else {
+                    updateStatus(`❌ Connection failed: ${data.message}`, 'error');
+                    addDebugInfo(`Connection failed: ${data.message}`);
+                }
+                
+            } catch (error) {
+                console.error('Connection test error:', error);
+                updateStatus(`❌ Connection error: ${error.message}`, 'error');
+                addDebugInfo(`Connection error: ${error.message}`);
+            }
+        }
+        
+        // Browse the Plex library
+        async function browseLibrary() {
+            try {
+                updateStatus('Browsing Plex library...', 'info');
+                addDebugInfo('Starting library browse...');
+                
+                // Reset to root
+                currentPath = '0';
+                pathHistory = ['0'];
+                pathNames = ['Root'];
+                updateBreadcrumb();
+                
+                await browseDirectory('0');
+                
+            } catch (error) {
+                console.error('Error browsing library:', error);
+                updateStatus(`Error: ${error.message}`, 'error');
+                addDebugInfo(`Browse error: ${error.message}`);
+            }
+        }
+        
+        // Browse a specific directory
+        async function browseDirectory(objectId) {
+            try {
+                updateStatus('Loading directory...', 'info');
+                addDebugInfo(`Browsing directory: ${objectId}`);
+                
+                const response = await fetch(`/browse/${objectId}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateStatus(`✅ Loaded ${data.items.length} items`, 'success');
+                    addDebugInfo(`Found ${data.items.length} items in directory`);
+                    
+                    displayItems(data.items);
+                    currentPath = objectId;
+                } else {
+                    throw new Error(data.error || 'Failed to browse directory');
+                }
+                
+            } catch (error) {
+                console.error('Error browsing directory:', error);
+                updateStatus(`Error browsing: ${error.message}`, 'error');
+                addDebugInfo(`Directory browse error: ${error.message}`);
+            }
+        }
+        
+        // Display items in the library panel
+        function displayItems(items) {
+            const contentEl = document.getElementById('libraryContent');
+            contentEl.innerHTML = '';
+            
+            if (items.length === 0) {
+                contentEl.innerHTML = '<div class="item">No items found in this directory</div>';
+                return;
+            }
+            
+            items.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = `item ${item.type}`;
+                itemEl.innerHTML = `
+                    <strong>${item.title}</strong>
+                    <br><small>${item.type} (ID: ${item.id})</small>
+                `;
+                
+                itemEl.onclick = () => {
+                    if (item.type === 'folder' || item.isContainer) {
+                        // Navigate to folder
+                        pathHistory.push(item.id);
+                        pathNames.push(item.title);
+                        updateBreadcrumb();
+                        browseDirectory(item.id);
+                    } else if (item.type === 'video') {
+                        playVideo(item);
+                    }
+                };
+                
+                contentEl.appendChild(itemEl);
+            });
+        }
+        
+        // Play a video
+        function playVideo(videoItem) {
+            const videoPlayer = document.getElementById('videoPlayer');
+            const videoInfo = document.getElementById('videoInfo');
+            
+            if (videoItem.url) {
+                // Use the actual video URL from Plex
+                videoPlayer.src = videoItem.url;
+                videoInfo.innerHTML = `
+                    <h4>${videoItem.title}</h4>
+                    <p>Playing from Plex DLNA</p>
+                    <p><small>URL: ${videoItem.url.substring(0, 100)}...</small></p>
+                `;
+                addDebugInfo(`Playing video: ${videoItem.title}`);
+            } else {
+                // Fallback to test video
+                const testVideoUrl = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+                videoPlayer.src = testVideoUrl;
+                videoInfo.innerHTML = `
+                    <h4>${videoItem.title}</h4>
+                    <p>Playing test video (no direct URL available)</p>
+                    <p><small>Note: This is a test video. Real Plex streaming would use the actual video URL.</small></p>
+                `;
+                addDebugInfo(`Playing test video for: ${videoItem.title}`);
+            }
+            
+            updateStatus(`Playing: ${videoItem.title}`, 'success');
+        }
+        
+        // Go back in directory history
+        function goBack() {
+            if (pathHistory.length > 1) {
+                pathHistory.pop();
+                pathNames.pop();
+                const previousPath = pathHistory[pathHistory.length - 1];
+                updateBreadcrumb();
+                browseDirectory(previousPath);
+            }
+        }
+        
+        // Overlay control functions
+        function toggleOverlay() {
+            const overlay = document.getElementById('videoOverlay');
+            if (overlay.style.display === 'none' || overlay.style.display === '') {
+                overlay.style.display = 'block';
+                addDebugInfo('Overlay shown');
+            } else {
+                overlay.style.display = 'none';
+                addDebugInfo('Overlay hidden');
+            }
+        }
+        
+        function setOverlayText() {
+            const textInput = document.getElementById('overlayText');
+            const overlay = document.getElementById('videoOverlay');
+            overlay.textContent = textInput.value;
+            addDebugInfo(`Overlay text updated: "${textInput.value}"`);
+        }
+        
+        function moveOverlay(position) {
+            const overlay = document.getElementById('videoOverlay');
+            
+            // Reset all positioning
+            overlay.style.top = '';
+            overlay.style.bottom = '';
+            overlay.style.left = '';
+            overlay.style.right = '';
+            overlay.style.transform = '';
+            
+            switch(position) {
+                case 'top-left':
+                    overlay.style.top = '20px';
+                    overlay.style.left = '20px';
+                    break;
+                case 'top-right':
+                    overlay.style.top = '20px';
+                    overlay.style.right = '20px';
+                    break;
+                case 'bottom-left':
+                    overlay.style.bottom = '20px';
+                    overlay.style.left = '20px';
+                    break;
+                case 'bottom-right':
+                    overlay.style.bottom = '20px';
+                    overlay.style.right = '20px';
+                    break;
+                case 'center':
+                    overlay.style.top = '50%';
+                    overlay.style.left = '50%';
+                    overlay.style.transform = 'translate(-50%, -50%)';
+                    break;
+            }
+            
+            addDebugInfo(`Overlay moved to ${position}`);
+        }
+        
+        // Test connection on page load
+        window.onload = function() {
+            updateStatus('Ready to browse Plex library', 'info');
+            addDebugInfo('Page loaded, ready to browse');
+        };
+    </script>
+</body>
+</html> 
