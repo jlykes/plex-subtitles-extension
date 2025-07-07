@@ -15,6 +15,7 @@ function showPercentageRows() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new'
@@ -43,6 +44,7 @@ function hidePercentageRows() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new'
@@ -71,6 +73,7 @@ function clearStatusPercentagesDisplay() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new'
@@ -95,6 +98,7 @@ function showStatusPercentagesLoading() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new'

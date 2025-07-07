@@ -580,11 +580,12 @@ function updateStatusPercentagesDisplay(percentages) {
   
   // Update each status percentage display
   const statusElements = {
-    'status-known': percentages?.status3?.percentage,      // Known (4/5) maps to data status 3
-    'status-familiar': percentages?.status2?.percentage,   // Familiar (3) maps to data status 2
-    'status-recognized': percentages?.status1?.percentage, // Recognized (2) maps to data status 1
-    'status-new': percentages?.status0?.percentage,        // New (1) maps to data status 0
-    'status-unseen': percentages?.unseen?.percentage       // Unseen (not in LingQ data)
+    'status-known': percentages?.status3_known?.percentage,      // Known (status=3, extended_status=3)
+    'status-learned': percentages?.status3_learned?.percentage,  // Learned (status=3, extended_status=0)
+    'status-familiar': percentages?.status2?.percentage,         // Familiar (status=2)
+    'status-recognized': percentages?.status1?.percentage,       // Recognized (status=1)
+    'status-new': percentages?.status0?.percentage,              // New (status=0)
+    'status-unseen': percentages?.unseen?.percentage             // Unseen (not in LingQ data)
   };
 
   Object.entries(statusElements).forEach(([elementId, percentage]) => {
@@ -603,6 +604,7 @@ function showPercentageRows() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
@@ -627,6 +629,7 @@ function hidePercentageRows() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
@@ -651,6 +654,7 @@ function clearStatusPercentagesDisplay() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
@@ -671,6 +675,7 @@ function showStatusPercentagesLoading() {
   const statusElements = [
     'total-words',
     'status-known',
+    'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',

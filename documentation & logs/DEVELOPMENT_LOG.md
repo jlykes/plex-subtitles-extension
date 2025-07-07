@@ -77,6 +77,10 @@
 - Extracted UI state management functions from control.js into helper_scripts/control/ui-managers.js module
 - Extracted control binders into separate modules: appearance-binders.js, behavior-binders.js, settings-binders.js
 
+### LingQ Integration & Status Management
+- Implemented differentiation between "Known" (status=3, extended_status=3) and "Learned" (status=3, extended_status=0) statuses with updated underline colors and percentage calculations
+- Removed legacy status handling code and debug logging to clean up codebase
+
 ### Bug Fixes & Stability Improvements
 - Fixed control panel appearing on wrong tabs by checking for Plex video presence
 - Resolved initialization running multiple times causing duplicated subtitles
@@ -99,4 +103,8 @@
 - Added debugging tools including Chrome DevTools Sources panel and Live Expressions
 - Added utility functions to process subtitle data and calculate LingQ status percentages
 - Explored global state conflicts and version tracking to prevent old polling loops from firing
+
+### LingQ Integration & Status Management
+- Implemented differentiation between "Known" (status=3, extended_status=3) and "Learned" (status=3, extended_status=0) statuses with updated underline colors and percentage calculations
+- Removed legacy status handling code and debug logging to clean up codebase
 

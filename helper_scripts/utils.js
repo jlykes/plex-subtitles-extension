@@ -4,16 +4,27 @@
 
 /**
  * Returns the underline color based on the LingQ status code
- * @param {*} status The LingQ status code
- * @param {*} word The word to check if it's Chinese
+ * @param {Object} statusInfo The LingQ status info object with status and extended_status properties
+ * @param {string} word The word to check if it's Chinese
  * @returns {string|null} The hex color code for the underline, or null if no underline should be applied
  */
-function getUnderlineColor(status, word) {
+function getUnderlineColor(statusInfo, word) {
   // Only underline if the word is Chinese
   if (word && !isChineseWord(word)) return null;
+  
+  // Extract status and extended_status from the status info object
+  const status = statusInfo.status;
+  const extended_status = statusInfo.extended_status;
+  
   switch (status) {
-    case 3: return null;         // Ignored — no underline
-    case 2: return "#fff9c4";    // Known — light yellow
+    case 3:
+      // Differentiate between "Known" and "Learned" based on extended_status
+      if (extended_status === 0 || extended_status === null) {
+        return "rgba(128, 128, 128, 0.3)"; // Light gray, somewhat transparent for "Learned"
+      } else {
+        return null; // No underline for "Known" (status=3, extended_status=3)
+      }
+    case 2: return "#fff9c4";    // Familiar — light yellow
     case 1: return "#fdd835";    // Learning — medium yellow
     case 0: return "#fbc02d";    // New — bold yellow
     default: return "blue";     // Fallback color
@@ -165,13 +176,23 @@ function isChineseWord(word) {
 }
 
 /**
+ * Determines if a word is considered "known" based on its LingQ status.
+ * A word is "known" if it has status=3 (regardless of extended_status).
+ * @param {Object} statusInfo - The LingQ status object with status and extended_status properties
+ * @returns {boolean} True if the word is known, false otherwise
+ */
+function isKnownWord(statusInfo) {
+  return statusInfo.status === 3;
+}
+
+/**
  * Creates a fully styled and annotated word span for a subtitle line.
  * Includes optional pinyin ruby, tone coloring, underlining by LingQ status,
  * and a hoverable tooltip showing word meaning.
  * @param {Object} opts
  * @param {string} opts.word - The raw Chinese word or character
  * @param {string} opts.pinyin - The pinyin with tone marks (space-separated for multi-char words)
- * @param {number} opts.status - The LingQ status (0=new, 1=learning, 2=known, 3=ignored)
+ * @param {Object} opts.status - The LingQ status object with status and extended_status properties
  * @param {string} opts.meaning - Definition or explanation for tooltip display
  * @returns {HTMLElement} A styled span or ruby wrapper element
  */
@@ -185,12 +206,12 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
 
   const shouldColor =
     config.toneColor === "all" ||
-    (config.toneColor === "unknown-only" && status !== 3);
+    (config.toneColor === "unknown-only" && !isKnownWord(status));
 
   // Only show pinyin if config allows AND the word contains Chinese
   const shouldShowPinyin =
     (config.pinyin === "all" ||
-      (config.pinyin === "unknown-only" && status !== 3)) &&
+      (config.pinyin === "unknown-only" && !isKnownWord(status))) &&
     isChineseWord(word);
 
   
@@ -301,7 +322,7 @@ function extractAllWordsFromSubtitles(subtitleData) {
 /**
  * Gets the LingQ status for a specific word.
  * @param {string} word - The word to look up
- * @param {Object} lingqTerms - Object mapping terms to their LingQ status
+ * @param {Object} lingqTerms - Object mapping terms to their LingQ status info
  * @returns {number} The LingQ status (0, 1, 2, or 3), defaults to 0 if not found
  */
 function getLingQStatusForWord(word, lingqTerms) {
@@ -311,17 +332,18 @@ function getLingQStatusForWord(word, lingqTerms) {
   
   // Direct lookup in LingQ terms
   if (lingqTerms.hasOwnProperty(word)) {
-    return lingqTerms[word];
+    return lingqTerms[word].status;
   }
   
-  // If not found, return 0 (new/unknown)
+  // If not found, return 0 (new status)
   return 0;
 }
 
 /**
  * Calculates percentage breakdown of words by LingQ status, including 'unseen' (not in LingQ data).
+ * Now differentiates between "Known" (status=3, extended_status=3) and "Learned" (status=3, extended_status=0).
  * @param {Array} subtitleData - Array of enriched subtitle objects
- * @param {Object} lingqTerms - Object mapping terms to their LingQ status
+ * @param {Object} lingqTerms - Object mapping terms to their LingQ status info
  * @returns {Object} Object containing counts and percentages for each status and unseen
  */
 function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
@@ -332,38 +354,60 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
   if (totalWords === 0) {
     return {
       totalWords: 0,
-      status3: { percentage: 0, count: 0 },  // Known
-      status2: { percentage: 0, count: 0 },  // Familiar  
-      status1: { percentage: 0, count: 0 },  // Recognized
-      status0: { percentage: 0, count: 0 },  // New
-      unseen:  { percentage: 0, count: 0 }   // Unseen (not in LingQ data)
+      status3_known: { percentage: 0, count: 0 },    // Known (status=3, extended_status=3)
+      status3_learned: { percentage: 0, count: 0 },  // Learned (status=3, extended_status=0)
+      status2: { percentage: 0, count: 0 },          // Familiar  
+      status1: { percentage: 0, count: 0 },          // Recognized
+      status0: { percentage: 0, count: 0 },          // New
+      unseen:  { percentage: 0, count: 0 }           // Unseen (not in LingQ data)
     };
   }
 
   // Initialize counters for each status and unseen
-  const statusCounts = { 0: 0, 1: 0, 2: 0, 3: 0 };
+  const statusCounts = { 
+    0: 0, 
+    1: 0, 
+    2: 0, 
+    '3_known': 0,    // status=3, extended_status=3
+    '3_learned': 0   // status=3, extended_status=0
+  };
   let unseenCount = 0;
 
   // Count each word occurrence by its LingQ status or as unseen
   allWords.forEach(word => {
     if (lingqTerms && lingqTerms.hasOwnProperty(word)) {
-      const status = lingqTerms[word];
-      if (statusCounts.hasOwnProperty(status)) {
+      const statusInfo = lingqTerms[word];
+      const status = statusInfo.status;
+      const extended_status = statusInfo.extended_status;
+      
+      if (status === 3) {
+        // Differentiate between "Known" and "Learned"
+        if (extended_status === 0 || extended_status === null) {
+          statusCounts['3_learned']++;
+        } else {
+          statusCounts['3_known']++;
+        }
+      } else if (statusCounts.hasOwnProperty(status)) {
         statusCounts[status]++;
       } else {
         statusCounts[0]++; // Fallback to new for invalid status
       }
     } else {
-      unseenCount++;
+      // Word not found in LingQ data, count as unseen
+      statusCounts.unseen++;
     }
   });
 
   // Calculate percentages and format output
   const result = {
     totalWords: totalWords,
-    status3: { 
-      percentage: Math.round((statusCounts[3] / totalWords) * 100), 
-      count: statusCounts[3] 
+    status3_known: { 
+      percentage: Math.round((statusCounts['3_known'] / totalWords) * 100), 
+      count: statusCounts['3_known'] 
+    },
+    status3_learned: { 
+      percentage: Math.round((statusCounts['3_learned'] / totalWords) * 100), 
+      count: statusCounts['3_learned'] 
     },
     status2: { 
       percentage: Math.round((statusCounts[2] / totalWords) * 100), 
@@ -378,8 +422,8 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
       count: statusCounts[0] 
     },
     unseen: {
-      percentage: Math.round((unseenCount / totalWords) * 100),
-      count: unseenCount
+      percentage: Math.round((statusCounts.unseen / totalWords) * 100),
+      count: statusCounts.unseen
     }
   };
 

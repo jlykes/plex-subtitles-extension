@@ -94,8 +94,8 @@ function setupLingqStorageListener(onChange) {
 /**
  * Loads the LingQ vocabulary terms from chrome.storage.local if available,
  * otherwise falls back to the bundled JSON file.
- * The JSON should be structured as an array of objects with "term" and "status" properties.
- * @returns {Promise<Object>} A promise that resolves to an object mapping terms to their LingQ status
+ * The JSON should be structured as an array of objects with "term", "status", and "extended_status" properties.
+ * @returns {Promise<Object>} A promise that resolves to an object mapping terms to their LingQ status info
  */
 async function loadLingQTerms() {
   // Try to load from chrome.storage.local first
@@ -123,9 +123,14 @@ async function loadLingQTerms() {
   const result = {};
   data.forEach(entry => {
     if (entry.term && typeof entry.status === "number") {
-      result[entry.term] = entry.status;
+      // Store both status and extended_status for each term
+      result[entry.term] = {
+        status: entry.status,
+        extended_status: entry.extended_status || null
+      };
     }
   });
+  
   return result;
 }
 
