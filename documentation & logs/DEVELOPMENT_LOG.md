@@ -1,9 +1,7 @@
 # Development Log - Plex Metalayer
 
 ### Potential Future Updates
-- [**In Progress**] LingQ Status Percentage Tracking - Complete implementation of percentage display
 - Pause on hover toggle
-- Remove silences mode
 - Save state (e.g., with local storage)
 - LingQ API Integration - Real-time vocabulary fetching and updating
 - Cross platform support - For Mobile, etc. 
@@ -42,6 +40,7 @@
 - Added subtitle hover pause functionality to pause video when hovering over subtitles
 - Implemented `H` key to toggle Plex UI visibility and click-to-pause functionality when UI is hidden
 - Added LingQ status percentage tracking to control panel showing word breakdown by status (Known/Familiar/Recognized/New) with total word count and comma formatting
+- Implemented "Remove Silences" mode that automatically skips from subtitle end to next subtitle start, eliminating silent periods with configurable minimum gap threshold
 
 ### Subtitle Rendering & Visual Features
 - Implemented full tone coloring support with `getToneColor()` function for all 5 tones

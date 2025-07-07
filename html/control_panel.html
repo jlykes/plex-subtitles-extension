@@ -137,11 +137,16 @@
       <input id="slider-autopause-delay" type="range" min="0" max="2000" value="0" />
     </div>
     <div class="control-row">
-      <label for="dropdown-remove-silences">Remove silences (to-do)</label>
+      <label for="dropdown-remove-silences">Remove silences</label>
       <select id="dropdown-remove-silences">
         <option value="off" selected>Off</option>
         <option value="on">On</option>
       </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-min-silence-gap">Min silence gap</label>
+      <input id="slider-min-silence-gap" type="range" min="0" max="5000" value="1000" step="100" />
+      <span id="slider-min-silence-gap-value"></span>
     </div>
   </div>
 

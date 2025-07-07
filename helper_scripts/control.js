@@ -34,7 +34,9 @@ window.subtitleConfig = {
   // === Behavior Settings ===
   useContinuous: true,         // Keep last subtitle shown after time range ends
   autoPause: false,            // Automatically pause video when subtitle ends
-  autoPauseDelayMs: 0        // Delay (ms) before pausing video
+  autoPauseDelayMs: 0,         // Delay (ms) before pausing video
+  removeSilences: false,       // Skip from subtitle end to next subtitle start
+  minSilenceGapMs: 1000        // Minimum silence gap to skip (1 second default)
 };
 
 //////////////////////////////
@@ -97,6 +99,19 @@ function initializeControlValues(panel) {
   if (backgroundOpacitySlider) {
     const opacity = config.backgroundOpacity || 50;
     backgroundOpacitySlider.value = opacity;
+  }
+
+  // Initialize min silence gap slider
+  const minSilenceGapSlider = panel.querySelector("#slider-min-silence-gap");
+  if (minSilenceGapSlider) {
+    const minGap = config.minSilenceGapMs || 1000;
+    minSilenceGapSlider.value = minGap;
+    
+    // Update the display value
+    const valueDisplay = panel.querySelector("#slider-min-silence-gap-value");
+    if (valueDisplay) {
+      valueDisplay.textContent = `${minGap}ms`;
+    }
   }
 }
 
@@ -359,6 +374,26 @@ function bindBehaviorControls(panel) {
     // "Auto-pause delay" slider changes
     panel.querySelector("#slider-autopause-delay")?.addEventListener("input", e => {
         window.subtitleConfig.autoPauseDelayMs = parseInt(e.target.value);
+    });
+
+    // "Remove silences" dropdown changes
+    panel.querySelector("#dropdown-remove-silences")?.addEventListener("change", e => {
+        window.subtitleConfig.removeSilences = e.target.value === "on";
+        console.log("🔇 Remove silences mode:", e.target.value === "on" ? "enabled" : "disabled");
+    });
+
+    // "Min silence gap" slider changes
+    panel.querySelector("#slider-min-silence-gap")?.addEventListener("input", e => {
+        const value = parseInt(e.target.value);
+        window.subtitleConfig.minSilenceGapMs = value;
+        
+        // Update the display value
+        const valueDisplay = panel.querySelector("#slider-min-silence-gap-value");
+        if (valueDisplay) {
+            valueDisplay.textContent = `${value}ms`;
+        }
+        
+        console.log("🔇 Min silence gap set to:", value, "ms");
     });
 }
 
@@ -709,6 +744,135 @@ function showSentenceExplanation() {
   }
 }
 
+//////////////////////////////
+// 6. REMOVE SILENCES FUNCTIONALITY
+//////////////////////////////
+
+/**
+ * Monitors video time for skip conditions and executes skips when needed.
+ * This function should be called periodically during video playback.
+ * @param {number} currentTime - Current video time in seconds
+ * @param {Object} currentSubtitle - Current subtitle object
+ * @param {Object} nextSubtitle - Next subtitle object
+ * @param {Array} subtitleData - Full subtitle data array
+ * @param {number} currentIndex - Current subtitle index
+ * @returns {boolean} True if a skip was executed, false otherwise
+ */
+function monitorVideoTimeForSkips(currentTime, currentSubtitle, nextSubtitle, subtitleData, currentIndex) {
+  // Check if remove silences mode is enabled
+  if (!window.subtitleConfig?.removeSilences) {
+    return false;
+  }
+
+  // Get auto-pause threshold from config
+  const autoPauseThreshold = window.subtitleConfig.autoPauseDelayMs || 0;
+
+  // DEBUG: Log current state
+  console.log("🔍 Skip Debug:", {
+    currentTime: currentTime.toFixed(2),
+    currentSubtitleEnd: currentSubtitle?.end?.toFixed(2),
+    nextSubtitleStart: nextSubtitle?.start?.toFixed(2),
+    autoPauseThreshold: autoPauseThreshold,
+    removeSilencesEnabled: window.subtitleConfig?.removeSilences
+  });
+
+  // Check if we should skip to next subtitle
+  const skipResult = shouldSkipToNextSubtitle(
+    currentTime, 
+    currentSubtitle, 
+    nextSubtitle, 
+    true, // removeSilencesEnabled
+    autoPauseThreshold
+  );
+
+  // DEBUG: Log skip result
+  console.log("🔍 Skip Result:", skipResult);
+
+  if (skipResult.shouldSkip) {
+    console.log("⏭️ Executing skip:", skipResult.skipReason, "to time:", skipResult.nextSubtitleTime);
+    skipToNextSubtitle(skipResult.nextSubtitleTime);
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Executes a skip to the specified time while maintaining playback state.
+ * @param {number} nextTime - The time to skip to in seconds
+ * @returns {void}
+ */
+function skipToNextSubtitle(nextTime) {
+  const video = findPlexVideoElement();
+  if (!video) {
+    console.warn("⚠️ skipToNextSubtitle: No video element found");
+    return;
+  }
+
+  // Note: We don't cancel auto-pause timers here anymore
+  // Instead, we prevent skipping if auto-pause is about to fire
+
+  // Store current playback state
+  const wasPlaying = !video.paused;
+  const currentPlaybackRate = video.playbackRate;
+
+  // Perform the skip
+  video.currentTime = nextTime;
+
+  // Restore playback state if it was playing
+  if (wasPlaying && video.paused) {
+    video.play().catch(e => {
+      console.warn("⚠️ Failed to resume playback after skip:", e);
+    });
+  }
+
+  console.log("✅ Skip completed to time:", nextTime);
+}
+
+/**
+ * Disables the remove silences option in live mode.
+ * This function should be called when switching to live mode.
+ * @returns {void}
+ */
+function disableRemoveSilencesInLiveMode() {
+  const dropdown = document.getElementById("dropdown-remove-silences");
+  if (dropdown) {
+    dropdown.disabled = true;
+    dropdown.value = "off";
+    window.subtitleConfig.removeSilences = false;
+    
+    // Add visual indication that it's not available
+    const label = dropdown.previousElementSibling;
+    if (label && label.tagName === "LABEL") {
+      label.style.opacity = "0.5";
+      label.title = "Not available in live mode";
+    }
+    
+    console.log("🔇 Remove silences disabled for live mode");
+  }
+}
+
+/**
+ * Enables the remove silences option in preprocessed mode.
+ * This function should be called when switching to preprocessed mode.
+ * @returns {void}
+ */
+function enableRemoveSilencesInPreprocessedMode() {
+  const dropdown = document.getElementById("dropdown-remove-silences");
+  if (dropdown) {
+    dropdown.disabled = false;
+    
+    // Remove visual indication
+    const label = dropdown.previousElementSibling;
+    if (label && label.tagName === "LABEL") {
+      label.style.opacity = "1";
+      label.title = "";
+    }
+    
+    console.log("🔇 Remove silences enabled for preprocessed mode");
+  }
+}
+
 // Make the functions available globally for other modules
 window.updateSubtitleBackground = updateSubtitleBackground;
 window.updateStatusPercentagesDisplay = updateStatusPercentagesDisplay;
@@ -718,3 +882,7 @@ window.clearStatusPercentagesDisplay = clearStatusPercentagesDisplay;
 window.showStatusPercentagesLoading = showStatusPercentagesLoading;
 window.hideSentenceExplanation = hideSentenceExplanation;
 window.showSentenceExplanation = showSentenceExplanation;
+window.monitorVideoTimeForSkips = monitorVideoTimeForSkips;
+window.skipToNextSubtitle = skipToNextSubtitle;
+window.disableRemoveSilencesInLiveMode = disableRemoveSilencesInLiveMode;
+window.enableRemoveSilencesInPreprocessedMode = enableRemoveSilencesInPreprocessedMode;

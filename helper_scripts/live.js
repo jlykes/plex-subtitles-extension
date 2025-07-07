@@ -24,6 +24,9 @@ function waitForSubtitles(lingqTerms, segmentit) {
   // Hide percentage rows and sentence explanation in live mode (not supported)
   hidePercentageRows();
   hideSentenceExplanation();
+  
+  // Disable remove silences option in live mode (not supported)
+  disableRemoveSilencesInLiveMode();
 
   window.lingqTerms = lingqTerms;
   window.segmentit = segmentit;

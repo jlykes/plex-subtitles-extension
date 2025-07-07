@@ -391,5 +391,178 @@ function formatPercentage(value) {
   return `${value}%`;
 }
 
+/**
+ * Calculates the skip trigger time for remove silences feature.
+ * Uses the auto-pause threshold to ensure user hears the entire subtitle.
+ * @param {number} subtitleEndTime - The end time of the current subtitle
+ * @param {number} autoPauseThreshold - The auto-pause threshold in milliseconds
+ * @returns {number} The time when skip should trigger
+ */
+function calculateSkipTriggerTime(subtitleEndTime, autoPauseThreshold) {
+  if (typeof subtitleEndTime !== 'number' || isNaN(subtitleEndTime)) {
+    return 0;
+  }
+  
+  // Convert auto-pause threshold from milliseconds to seconds
+  const thresholdInSeconds = (autoPauseThreshold || 0) / 1000;
+  
+  return subtitleEndTime + thresholdInSeconds;
+}
+
+/**
+ * Determines if current playback should skip to next subtitle.
+ * @param {number} currentTime - Current video time in seconds
+ * @param {Object} currentSubtitle - Current subtitle object with start/end times
+ * @param {Object} nextSubtitle - Next subtitle object with start time
+ * @param {boolean} removeSilencesEnabled - Whether remove silences mode is enabled
+ * @param {number} autoPauseThreshold - Auto-pause threshold in milliseconds
+ * @returns {Object} Object containing skip decision and next subtitle time
+ */
+function shouldSkipToNextSubtitle(currentTime, currentSubtitle, nextSubtitle, removeSilencesEnabled, autoPauseThreshold) {
+  // If remove silences is disabled, don't skip
+  if (!removeSilencesEnabled) {
+    return {
+      shouldSkip: false,
+      nextSubtitleTime: 0,
+      skipReason: "disabled"
+    };
+  }
+
+  // If no current subtitle or invalid timing, don't skip
+  if (!currentSubtitle || typeof currentSubtitle.end !== 'number') {
+    return {
+      shouldSkip: false,
+      nextSubtitleTime: 0,
+      skipReason: "no_current_subtitle"
+    };
+  }
+
+  // If no next subtitle, don't skip (end of video)
+  if (!nextSubtitle || typeof nextSubtitle.start !== 'number') {
+    return {
+      shouldSkip: false,
+      nextSubtitleTime: 0,
+      skipReason: "no_next_subtitle"
+    };
+  }
+
+  // Calculate the silence gap between current and next subtitle
+  const silenceGapMs = (nextSubtitle.start - currentSubtitle.end) * 1000; // Convert to milliseconds
+  
+  // Get minimum silence gap threshold from config
+  const minSilenceGapMs = window.subtitleConfig?.minSilenceGapMs || 1000;
+  
+  // If silence gap is too small, don't skip
+  if (silenceGapMs < minSilenceGapMs) {
+    return {
+      shouldSkip: false,
+      nextSubtitleTime: nextSubtitle.start,
+      skipReason: "gap_too_small",
+      silenceGapMs: silenceGapMs,
+      minSilenceGapMs: minSilenceGapMs
+    };
+  }
+
+  // Check if auto-pause is enabled and we're within the auto-pause window
+  // If so, don't skip to allow auto-pause to execute at the correct location
+  if (window.subtitleConfig?.autoPause) {
+    const autoPauseDelayMs = window.subtitleConfig.autoPauseDelayMs || 0;
+    const autoPauseDelaySec = autoPauseDelayMs / 1000;
+    const timeSinceSubtitleEnd = currentTime - currentSubtitle.end;
+    
+    // DEBUG: Log auto-pause window check
+    console.log("🔍 Auto-pause window check:", {
+      currentTime: currentTime.toFixed(2),
+      subtitleEnd: currentSubtitle.end.toFixed(2),
+      timeSinceSubtitleEnd: timeSinceSubtitleEnd.toFixed(2),
+      autoPauseDelaySec: autoPauseDelaySec,
+      windowEnd: (autoPauseDelaySec + 0.5).toFixed(2),
+      withinWindow: timeSinceSubtitleEnd >= 0 && timeSinceSubtitleEnd <= autoPauseDelaySec + 0.5
+    });
+    
+    // If we're within the auto-pause window, don't skip
+    if (timeSinceSubtitleEnd >= 0 && timeSinceSubtitleEnd <= autoPauseDelaySec + 0.5) {
+      return {
+        shouldSkip: false,
+        nextSubtitleTime: nextSubtitle.start,
+        skipReason: "auto_pause_window",
+        silenceGapMs: silenceGapMs,
+        timeSinceSubtitleEnd: timeSinceSubtitleEnd.toFixed(2),
+        autoPauseDelaySec: autoPauseDelaySec
+      };
+    }
+  }
+
+  // Calculate when we should trigger the skip
+  const skipTriggerTime = calculateSkipTriggerTime(currentSubtitle.end, autoPauseThreshold);
+  
+  // DEBUG: Log skip calculation
+  console.log("🔍 Skip Calculation:", {
+    currentTime: currentTime.toFixed(2),
+    subtitleEnd: currentSubtitle.end.toFixed(2),
+    autoPauseThreshold: autoPauseThreshold,
+    skipTriggerTime: skipTriggerTime.toFixed(2),
+    silenceGapMs: silenceGapMs.toFixed(0),
+    minSilenceGapMs: minSilenceGapMs,
+    autoPauseEnabled: window.subtitleConfig?.autoPause || false,
+    shouldSkip: currentTime >= skipTriggerTime
+  });
+  
+  // Check if current time has reached or passed the skip trigger time
+  if (currentTime >= skipTriggerTime) {
+    return {
+      shouldSkip: true,
+      nextSubtitleTime: nextSubtitle.start,
+      skipReason: "end_of_subtitle_plus_threshold",
+      silenceGapMs: silenceGapMs
+    };
+  }
+
+  return {
+    shouldSkip: false,
+    nextSubtitleTime: nextSubtitle.start,
+    skipReason: "not_yet_time",
+    silenceGapMs: silenceGapMs
+  };
+}
+
+/**
+ * Finds the start time of the next subtitle segment.
+ * @param {number} currentIndex - Current subtitle index
+ * @param {Array} subtitleData - Array of subtitle objects
+ * @returns {Object} Object containing next subtitle info
+ */
+function getNextSubtitleTime(currentIndex, subtitleData) {
+  if (!subtitleData || !Array.isArray(subtitleData) || currentIndex < 0) {
+    return {
+      found: false,
+      nextTime: 0,
+      nextIndex: -1
+    };
+  }
+
+  // Look for the next subtitle with a different start time
+  for (let i = currentIndex + 1; i < subtitleData.length; i++) {
+    const nextSubtitle = subtitleData[i];
+    if (nextSubtitle && typeof nextSubtitle.start === 'number') {
+      return {
+        found: true,
+        nextTime: nextSubtitle.start,
+        nextIndex: i
+      };
+    }
+  }
+
+  // No next subtitle found (end of video)
+  return {
+    found: false,
+    nextTime: 0,
+    nextIndex: -1
+  };
+}
+
 // Make the functions available globally for other modules
 window.formatPercentage = formatPercentage;
+window.calculateSkipTriggerTime = calculateSkipTriggerTime;
+window.shouldSkipToNextSubtitle = shouldSkipToNextSubtitle;
+window.getNextSubtitleTime = getNextSubtitleTime;

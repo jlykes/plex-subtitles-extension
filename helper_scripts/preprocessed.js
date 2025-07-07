@@ -21,6 +21,9 @@ function runPreprocessedMode(lingqTerms, filename) {
   updateModeDisplay("Preprocessed");        // Show current mode in control panel
   clearSubtitleOverlay();                   // Clear existing overlay
   createOverlayContainer();                 // Ensure overlay element is available
+  
+  // Enable remove silences option for preprocessed mode
+  enableRemoveSilencesInPreprocessedMode();
 
   // Fetch enriched subtitles from the packaged JSON file
   fetch(chrome.runtime.getURL(filename))
@@ -91,13 +94,30 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
       return;
     }
 
-    // If the active subtitle hasn't changed, skip rendering
-    if (active.start === window.lastRenderedIndex) return;
-
     // Set up variables for auto-pause logic, limit pause if repeated subtitle
     const currentIndex = enrichedSubs.findIndex(s => s.start === active.start);
     const nextSub = enrichedSubs[currentIndex + 1];
     const isRepeated = nextSub && nextSub.text?.trim() === active.text?.trim();
+
+    // Monitor for remove silences skip conditions FIRST
+    // Check continuously regardless of subtitle changes
+    if (active && nextSub) {
+      const skipExecuted = monitorVideoTimeForSkips(
+        currentTime,
+        active,
+        nextSub,
+        enrichedSubs,
+        currentIndex
+      );
+      
+      // If a skip was executed, we don't need to continue with this iteration
+      if (skipExecuted) {
+        return;
+      }
+    }
+
+    // If the active subtitle hasn't changed, skip rendering
+    if (active.start === window.lastRenderedIndex) return;
 
     // Render the subtitle line, and update the rendered index
     renderSubtitle(active, lingqTerms);
@@ -108,7 +128,7 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
     if (shouldAutoPause(active, isRepeated)) {
       scheduleAutoPause(active);
     }
-  }, 300);
+  }, 50);
 }
 
 /**
