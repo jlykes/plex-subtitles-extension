@@ -225,6 +225,9 @@ function renderPreprocessedLine(sub, lingqTerms) {
 
   // Apply background styling after content is rendered
   window.updateSubtitleBackground?.();
+
+  // Attach popup listeners after rendering words
+  if (window.initWordPopup) window.initWordPopup();
 }
 
 /**

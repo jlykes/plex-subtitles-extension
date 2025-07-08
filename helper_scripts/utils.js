@@ -236,6 +236,7 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
 
   // === Create wrapper for the full word ===
   const wrapper = document.createElement("span");
+  wrapper.classList.add("subtitle-word");
   wrapper.style.position = "relative";
   wrapper.style.display = "inline-block";
 

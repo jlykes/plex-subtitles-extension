@@ -360,6 +360,221 @@ def update_word_status_by_characters(characters, status, extended_status=None, c
             "updated": False
         }
 
+def get_lingq_tags(identifier, cookies=None, headers=None):
+    """
+    Gets the tags for a LingQ word by ID or Chinese characters.
+    
+    Args:
+        identifier (int or str): The LingQ ID (int) or Chinese characters (str)
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Response data or error info
+    """
+    # Check if identifier is a number (ID) or string (characters)
+    if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()):
+        # It's an ID
+        lingq_id = int(identifier)
+        url = f"https://www.lingq.com/api/v3/zh/cards/{lingq_id}/"
+        
+        print(f"🏷️ Fetching tags for LingQ {lingq_id}")
+        
+        try:
+            response = requests.get(url, headers=headers, cookies=cookies)
+            
+            if response.ok:
+                data = response.json()
+                tags = data.get("tags", [])
+                term = data.get("term", "N/A")
+                print(f"✅ Retrieved tags for '{term}' (ID: {lingq_id})")
+                print(f"   Tags: {tags}")
+                return {"success": True, "data": data, "tags": tags, "term": term}
+            else:
+                print(f"❌ Failed to fetch tags for LingQ {lingq_id}: {response.status_code}")
+                return {"success": False, "status_code": response.status_code, "error": response.text}
+                
+        except Exception as e:
+            print(f"❌ Exception fetching tags for LingQ {lingq_id}: {e}")
+            return {"success": False, "error": str(e)}
+    else:
+        # It's Chinese characters
+        characters = identifier
+        print(f"🏷️ Getting tags for characters: '{characters}'")
+        
+        # First search for the word
+        search_result = search_lingq_cards(characters, cookies, headers, page_size=5)
+        
+        if search_result["success"] and search_result["count"] > 0:
+            first_result = search_result["results"][0]
+            word_pk = first_result.get("pk")
+            term = first_result.get("term", "N/A")
+            tags = first_result.get("tags", [])
+            
+            print(f"✅ Found word: '{term}' (ID: {word_pk})")
+            print(f"   Tags: {tags}")
+            return {"success": True, "word_pk": word_pk, "term": term, "tags": tags}
+        else:
+            print(f"❌ Word '{characters}' not found")
+            return {"success": False, "error": "Word not found"}
+
+def update_lingq_tags(identifier, tags, cookies=None, headers=None):
+    """
+    Updates the tags for a LingQ word by ID or Chinese characters.
+    
+    Args:
+        identifier (int or str): The LingQ ID (int) or Chinese characters (str)
+        tags (list): List of tag strings to set
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Response data or error info
+    """
+    # Check if identifier is a number (ID) or string (characters)
+    if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()):
+        # It's an ID
+        lingq_id = int(identifier)
+        url = f"https://www.lingq.com/api/v3/zh/cards/{lingq_id}/"
+        
+        # Prepare the data to send
+        data = {"tags": tags}
+        
+        print(f"🏷️ Updating tags for LingQ {lingq_id}: {tags}")
+        
+        try:
+            response = requests.patch(url, json=data, headers=headers, cookies=cookies)
+            
+            if response.ok:
+                response_data = response.json()
+                term = response_data.get("term", "N/A")
+                updated_tags = response_data.get("tags", [])
+                print(f"✅ Successfully updated tags for '{term}' (ID: {lingq_id})")
+                print(f"   New tags: {updated_tags}")
+                return {"success": True, "data": response_data, "tags": updated_tags}
+            else:
+                print(f"❌ Failed to update tags for LingQ {lingq_id}: {response.status_code}")
+                print(f"Response: {response.text}")
+                return {"success": False, "status_code": response.status_code, "error": response.text}
+                
+        except Exception as e:
+            print(f"❌ Exception updating tags for LingQ {lingq_id}: {e}")
+            return {"success": False, "error": str(e)}
+    else:
+        # It's Chinese characters
+        characters = identifier
+        print(f"🏷️ Updating tags for characters: '{characters}' to {tags}")
+        
+        # First search for the word
+        search_result = search_lingq_cards(characters, cookies, headers, page_size=5)
+        
+        if search_result["success"] and search_result["count"] > 0:
+            first_result = search_result["results"][0]
+            word_pk = first_result.get("pk")
+            term = first_result.get("term", "N/A")
+            
+            print(f"✅ Found word: '{term}' (ID: {word_pk})")
+            return update_lingq_tags(word_pk, tags, cookies, headers)
+        else:
+            print(f"❌ Word '{characters}' not found")
+            return {"success": False, "error": "Word not found"}
+
+def add_lingq_tag(identifier, new_tag, cookies=None, headers=None):
+    """
+    Adds a single tag to a LingQ word by ID or Chinese characters (preserves existing tags).
+    
+    Args:
+        identifier (int or str): The LingQ ID (int) or Chinese characters (str)
+        new_tag (str): The tag to add
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Response data or error info
+    """
+    # First get current tags
+    current_result = get_lingq_tags(identifier, cookies, headers)
+    
+    if not current_result["success"]:
+        return current_result
+    
+    current_tags = current_result["tags"]
+    
+    # Check if tag already exists
+    if new_tag in current_tags:
+        if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()):
+            print(f"⚠️ Tag '{new_tag}' already exists for LingQ {identifier}")
+        else:
+            print(f"⚠️ Tag '{new_tag}' already exists for '{identifier}'")
+        return {"success": True, "data": current_result["data"], "tags": current_tags, "added": False}
+    
+    # Get the word ID for the update
+    if "word_pk" in current_result:
+        word_pk = current_result["word_pk"]
+    else:
+        word_pk = int(identifier) if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()) else None
+    
+    if word_pk is None:
+        return {"success": False, "error": "Could not determine word ID"}
+    
+    # Add the new tag
+    updated_tags = current_tags + [new_tag]
+    
+    if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()):
+        print(f"➕ Adding tag '{new_tag}' to LingQ {identifier}")
+    else:
+        print(f"➕ Adding tag '{new_tag}' to '{identifier}'")
+    
+    return update_lingq_tags(word_pk, updated_tags, cookies, headers)
+
+def remove_lingq_tag(identifier, tag_to_remove, cookies=None, headers=None):
+    """
+    Removes a single tag from a LingQ word by ID or Chinese characters.
+    
+    Args:
+        identifier (int or str): The LingQ ID (int) or Chinese characters (str)
+        tag_to_remove (str): The tag to remove
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+    
+    Returns:
+        dict: Response data or error info
+    """
+    # First get current tags
+    current_result = get_lingq_tags(identifier, cookies, headers)
+    
+    if not current_result["success"]:
+        return current_result
+    
+    current_tags = current_result["tags"]
+    
+    # Check if tag exists
+    if tag_to_remove not in current_tags:
+        if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()):
+            print(f"⚠️ Tag '{tag_to_remove}' not found for LingQ {identifier}")
+        else:
+            print(f"⚠️ Tag '{tag_to_remove}' not found for '{identifier}'")
+        return {"success": True, "data": current_result["data"], "tags": current_tags, "removed": False}
+    
+    # Get the word ID for the update
+    if "word_pk" in current_result:
+        word_pk = current_result["word_pk"]
+    else:
+        word_pk = int(identifier) if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()) else None
+    
+    if word_pk is None:
+        return {"success": False, "error": "Could not determine word ID"}
+    
+    # Remove the tag
+    updated_tags = [tag for tag in current_tags if tag != tag_to_remove]
+    
+    if isinstance(identifier, int) or (isinstance(identifier, str) and identifier.isdigit()):
+        print(f"➖ Removing tag '{tag_to_remove}' from LingQ {identifier}")
+    else:
+        print(f"➖ Removing tag '{tag_to_remove}' from '{identifier}'")
+    
+    return update_lingq_tags(word_pk, updated_tags, cookies, headers)
+
 # === TEST FUNCTIONS ===
 def test_status_update(lingq_id, cookies, headers):
     """
@@ -415,6 +630,10 @@ def interactive_mode(cookies, headers):
     print("  import <term> - Import a new word")
     print("  find <term>  - Search and import if not found")
     print("  update <characters> <status> [extended_status] - Search/import/update by Chinese characters")
+    print("  tags <id/characters> - Get tags for a LingQ (ID or Chinese characters)")
+    print("  settags <id/characters> <tag1> [tag2] ... - Set tags (replaces all)")
+    print("  addtag <id/characters> <tag> - Add a single tag")
+    print("  rmtag <id/characters> <tag> - Remove a single tag")
     print("  test <id>    - Run full status cycle test")
     print("  quit         - Exit")
     print()
@@ -469,12 +688,31 @@ def interactive_mode(cookies, headers):
                 else:
                     print(f"❌ Failed: {result.get('error')}")
                 
+            elif cmd == "tags" and len(command) >= 2:
+                identifier = command[1]
+                get_lingq_tags(identifier, cookies, headers)
+                
+            elif cmd == "settags" and len(command) >= 3:
+                identifier = command[1]
+                tags = command[2:]
+                update_lingq_tags(identifier, tags, cookies, headers)
+                
+            elif cmd == "addtag" and len(command) >= 3:
+                identifier = command[1]
+                tag = command[2]
+                add_lingq_tag(identifier, tag, cookies, headers)
+                
+            elif cmd == "rmtag" and len(command) >= 3:
+                identifier = command[1]
+                tag = command[2]
+                remove_lingq_tag(identifier, tag, cookies, headers)
+                
             elif cmd == "test" and len(command) >= 2:
                 lingq_id = int(command[1])
                 test_status_update(lingq_id, cookies, headers)
                 
             else:
-                print("❌ Invalid command. Use: get <id>, patch <id> <status> [extended_status], search <term>, import <term>, find <term>, update <pinyin> <status> [extended_status], test <id>, or quit")
+                print("❌ Invalid command. Use: get <id>, patch <id> <status> [extended_status], search <term>, import <term>, find <term>, update <characters> <status> [extended_status], tags <id/characters>, settags <id/characters> <tag1> [tag2] ..., addtag <id/characters> <tag>, rmtag <id/characters> <tag>, test <id>, or quit")
                 
         except KeyboardInterrupt:
             print("\n👋 Goodbye!")
@@ -552,6 +790,25 @@ def main():
             else:
                 print(f"❌ Failed: {result.get('error')}")
             
+        elif command == "tags" and len(sys.argv) >= 3:
+            identifier = sys.argv[2]
+            get_lingq_tags(identifier, cookies, HEADERS)
+            
+        elif command == "settags" and len(sys.argv) >= 4:
+            identifier = sys.argv[2]
+            tags = sys.argv[3:]
+            update_lingq_tags(identifier, tags, cookies, HEADERS)
+            
+        elif command == "addtag" and len(sys.argv) >= 4:
+            identifier = sys.argv[2]
+            tag = sys.argv[3]
+            add_lingq_tag(identifier, tag, cookies, HEADERS)
+            
+        elif command == "rmtag" and len(sys.argv) >= 4:
+            identifier = sys.argv[2]
+            tag = sys.argv[3]
+            remove_lingq_tag(identifier, tag, cookies, HEADERS)
+            
         elif command == "test" and len(sys.argv) >= 3:
             lingq_id = int(sys.argv[2])
             test_status_update(lingq_id, cookies, HEADERS)
@@ -564,6 +821,10 @@ def main():
             print("  python lingq_patch.py import <term>")
             print("  python lingq_patch.py find <term>")
             print("  python lingq_patch.py update <characters> <status> [extended_status]")
+            print("  python lingq_patch.py tags <id/characters>")
+            print("  python lingq_patch.py settags <id/characters> <tag1> [tag2] ...")
+            print("  python lingq_patch.py addtag <id/characters> <tag>")
+            print("  python lingq_patch.py rmtag <id/characters> <tag>")
             print("  python lingq_patch.py test <lingq_id>")
             print("  python lingq_patch.py interactive")
     else:

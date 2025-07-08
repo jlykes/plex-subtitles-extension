@@ -143,6 +143,9 @@ function renderLiveLine(text, lingqTerms, segmentit) {
   // Apply background styling after content is rendered
   window.updateSubtitleBackground?.();
   
+  // Attach popup listeners after rendering words
+  if (window.initWordPopup) window.initWordPopup();
+  
   // Check video player visibility after rendering subtitle
   window.updateSubtitleVisibility?.();
 }
