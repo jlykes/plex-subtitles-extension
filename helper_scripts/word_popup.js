@@ -220,6 +220,13 @@ async function showWordPopup(wordElement) {
 function hideWordPopup() {
     const existing = document.querySelector('.word-popup');
     if (existing) existing.remove();
+    
+    // Remove highlight from the previously active word
+    if (lastPopupWordElement) {
+        lastPopupWordElement.style.backgroundColor = '';
+        lastPopupWordElement.style.borderRadius = '';
+    }
+    
     lastPopupWordElement = null;
     document.removeEventListener('click', handleDocumentClickToClosePopup, true);
 }
@@ -434,6 +441,12 @@ function addWordClickListeners() {
     wordSpans.forEach(span => {
         span.removeEventListener('click', handleWordClick);
         span.addEventListener('click', handleWordClick);
+        
+        // Add hover effects
+        span.removeEventListener('mouseenter', handleWordHover);
+        span.removeEventListener('mouseleave', handleWordHoverEnd);
+        span.addEventListener('mouseenter', handleWordHover);
+        span.addEventListener('mouseleave', handleWordHoverEnd);
     });
 }
 
@@ -476,6 +489,34 @@ function handleWordClick(event) {
     const wordElement = event.currentTarget;
     hideWordPopup(); // Always close any existing popup
     showWordPopup(wordElement);
+}
+
+/**
+ * Handles mouse enter events on subtitle word elements.
+ * Adds a transparent gray background highlight to the word.
+ * @param {Event} event - The mouseenter event object
+ * @returns {void}
+ */
+function handleWordHover(event) {
+    const wordElement = event.currentTarget;
+    wordElement.style.backgroundColor = 'rgba(128, 128, 128, 0.3)'; // Transparent gray
+    wordElement.style.borderRadius = '3px';
+    wordElement.style.transition = 'background-color 0.15s ease';
+}
+
+/**
+ * Handles mouse leave events on subtitle word elements.
+ * Removes the background highlight unless the word has an active popup.
+ * @param {Event} event - The mouseleave event object
+ * @returns {void}
+ */
+function handleWordHoverEnd(event) {
+    const wordElement = event.currentTarget;
+    // Only remove highlight if this word doesn't have an active popup
+    if (lastPopupWordElement !== wordElement) {
+        wordElement.style.backgroundColor = '';
+        wordElement.style.borderRadius = '';
+    }
 }
 
 /**
