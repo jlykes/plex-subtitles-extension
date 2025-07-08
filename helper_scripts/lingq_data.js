@@ -123,10 +123,11 @@ async function loadLingQTerms() {
   const result = {};
   data.forEach(entry => {
     if (entry.term && typeof entry.status === "number") {
-      // Store both status and extended_status for each term
+      // Store status, extended_status, and tags for each term
       result[entry.term] = {
         status: entry.status,
-        extended_status: entry.extended_status || null
+        extended_status: entry.extended_status || null,
+        tags: entry.tags || []
       };
     }
   });

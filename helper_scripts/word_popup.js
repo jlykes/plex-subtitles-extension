@@ -26,6 +26,7 @@ async function getCurrentLingQData(wordText) {
         
         if (wordData) {
             console.log(`[word_popup] Found LingQ data for '${wordText}':`, wordData);
+            console.log(`[word_popup] Tags for '${wordText}':`, wordData.tags);
             return {
                 found: true,
                 status: wordData.status,
@@ -114,12 +115,17 @@ function highlightCurrentStatusAndTags(popup, wordData) {
         const buttonText = btn.textContent.trim();
         let shouldHighlight = false;
         
+        console.log(`[word_popup] Checking tag button: '${buttonText}'`);
+        console.log(`[word_popup] Word tags:`, wordData.tags);
+        
         if (buttonText === 'no characters known') {
-            // Highlight if no tags or empty tags array
-            shouldHighlight = (!wordData.tags || wordData.tags.length === 0);
+            // Don't highlight "no characters known" by default - only if explicitly set
+            shouldHighlight = false;
+            console.log(`[word_popup] 'no characters known' should highlight:`, shouldHighlight);
         } else {
             // Check if this tag exists in the word's tags
             shouldHighlight = wordData.tags && wordData.tags.includes(buttonText);
+            console.log(`[word_popup] '${buttonText}' should highlight:`, shouldHighlight);
         }
         
         if (shouldHighlight) {
