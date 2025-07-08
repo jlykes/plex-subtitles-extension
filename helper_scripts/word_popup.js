@@ -1,6 +1,7 @@
 // word_popup.js
 // Handles LingQ word click popup UI and event logic
 // Phase 1: Scaffold structure for popup rendering and event handling
+// Phase 2 Step 1: Highlight current status/tags from local storage
 
 // === Initialization ===
 function initWordPopup() {
@@ -26,8 +27,120 @@ function handleWordClick(event) {
     showWordPopup(wordElement);
 }
 
+// === Get current LingQ data for a word ===
+async function getCurrentLingQData(wordText) {
+    try {
+        // Load LingQ terms from local storage
+        const lingqTerms = await window.lingqData.loadLingQTerms();
+        
+        // Look up the word
+        const wordData = lingqTerms[wordText];
+        
+        if (wordData) {
+            console.log(`[word_popup] Found LingQ data for '${wordText}':`, wordData);
+            return {
+                found: true,
+                status: wordData.status,
+                extended_status: wordData.extended_status,
+                tags: wordData.tags || []
+            };
+        } else {
+            console.log(`[word_popup] No LingQ data found for '${wordText}'`);
+            return {
+                found: false,
+                status: null, // Use null to indicate "not in LingQ data" vs status 0
+                extended_status: null,
+                tags: []
+            };
+        }
+    } catch (error) {
+        console.error('[word_popup] Error loading LingQ data:', error);
+        return {
+            found: false,
+            status: 0,
+            extended_status: null,
+            tags: []
+        };
+    }
+}
+
+// === Highlight current status and tags ===
+function highlightCurrentStatusAndTags(popup, wordData) {
+    console.log('[word_popup] Highlighting status and tags:', wordData);
+    
+    // Highlight status buttons
+    const statusButtons = popup.querySelectorAll('.status-btn');
+    statusButtons.forEach((btn, index) => {
+        const buttonText = btn.textContent.trim();
+        let shouldHighlight = false;
+        
+        if (buttonText === '✓') {
+            // Checkmark button - highlight if status is 3 and extended_status is 3 (Known)
+            shouldHighlight = (wordData.status === 3 && wordData.extended_status === 3);
+        } else {
+            // Number buttons (0-4) - map to correct LingQ status values
+            const buttonStatus = parseInt(buttonText);
+            if (buttonStatus === 0) {
+                // Button 0 = Unseen (not in LingQ data)
+                shouldHighlight = (wordData.status === null);
+            } else if (buttonStatus === 1) {
+                // Button 1 = New (status=0 in LingQ data)
+                shouldHighlight = (wordData.status === 0);
+            } else if (buttonStatus === 2) {
+                // Button 2 = Recognized (status=1 in LingQ data)
+                shouldHighlight = (wordData.status === 1);
+            } else if (buttonStatus === 3) {
+                // Button 3 = Familiar (status=2 in LingQ data)
+                shouldHighlight = (wordData.status === 2);
+            } else if (buttonStatus === 4) {
+                // Button 4 = Learned (status=3, extended_status=0 in LingQ data)
+                shouldHighlight = (wordData.status === 3 && (wordData.extended_status === 0 || wordData.extended_status === null));
+            }
+        }
+        
+        if (shouldHighlight) {
+            btn.style.background = '#FFEB3B'; // Light yellow for current status
+            btn.style.borderColor = '#FFEB3B';
+            btn.style.color = '#333'; // Dark text for better contrast
+            btn.classList.add('current-status'); // Add class for tracking
+        } else {
+            btn.style.background = '#222';
+            btn.style.borderColor = '#888';
+            btn.style.color = '#fff';
+            btn.classList.remove('current-status');
+        }
+    });
+    
+    // Highlight tag buttons
+    const tagButtons = popup.querySelectorAll('.tag-btn');
+    tagButtons.forEach(btn => {
+        const buttonText = btn.textContent.trim();
+        let shouldHighlight = false;
+        
+        if (buttonText === 'no characters known') {
+            // Highlight if no tags or empty tags array
+            shouldHighlight = (!wordData.tags || wordData.tags.length === 0);
+        } else {
+            // Check if this tag exists in the word's tags
+            shouldHighlight = wordData.tags && wordData.tags.includes(buttonText);
+        }
+        
+        if (shouldHighlight) {
+            btn.style.background = '#FFEB3B'; // Light yellow for current tag
+            btn.style.borderColor = '#FFEB3B';
+            btn.style.color = '#333'; // Dark text for better contrast
+            btn.classList.add('current-tag'); // Add class for tracking
+        } else {
+            btn.style.background = '#222';
+            btn.style.borderColor = '#888';
+            btn.style.color = '#fff';
+            btn.classList.remove('current-tag');
+        }
+    });
+}
+
 // === Render popup below clicked word ===
-function showWordPopup(wordElement) {
+async function showWordPopup(wordElement) {
     hideWordPopup();
     lastPopupWordElement = wordElement;
     console.log('[word_popup] showWordPopup called for:', wordElement.innerText);
@@ -126,20 +239,7 @@ function showWordPopup(wordElement) {
         btn.style.justifyContent = 'center';
         btn.style.textAlign = 'center';
         btn.style.lineHeight = '1';
-        btn.addEventListener('mouseenter', () => {
-            btn.style.background = '#444';
-            btn.style.borderColor = '#fff';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.background = '#222';
-            btn.style.borderColor = '#888';
-        });
-        btn.addEventListener('mousedown', () => {
-            btn.style.background = '#666';
-        });
-        btn.addEventListener('mouseup', () => {
-            btn.style.background = '#444';
-        });
+
     });
 
     // Style tag buttons
@@ -154,21 +254,12 @@ function showWordPopup(wordElement) {
         btn.style.transition = 'background 0.15s, border 0.15s, color 0.15s';
         btn.style.outline = 'none';
         btn.style.boxShadow = '0 1px 4px rgba(0,0,0,0.10)';
-        btn.addEventListener('mouseenter', () => {
-            btn.style.background = '#444';
-            btn.style.borderColor = '#fff';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.background = '#222';
-            btn.style.borderColor = '#888';
-        });
-        btn.addEventListener('mousedown', () => {
-            btn.style.background = '#666';
-        });
-        btn.addEventListener('mouseup', () => {
-            btn.style.background = '#444';
-        });
+
     });
+
+    // === Get current LingQ data and highlight buttons ===
+    const wordData = await getCurrentLingQData(wordText);
+    highlightCurrentStatusAndTags(popup, wordData);
 
     const rect = wordElement.getBoundingClientRect();
     const scrollY = window.scrollY || window.pageYOffset;
@@ -236,9 +327,8 @@ function showWordPopup(wordElement) {
         document.addEventListener('click', handleDocumentClickToClosePopup, true);
     }, 0);
 
-    // TODO: Add event listeners for status/tag buttons
-    // TODO: Highlight current status/tag
-    // TODO: Animate popup appearance
+    // Add click outside to close
+    document.addEventListener('click', handleDocumentClickToClosePopup);
 }
 
 // === Hide/close popup ===
