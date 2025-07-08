@@ -222,6 +222,8 @@ function highlightCurrentStatusAndTags(popup, wordData) {
  * @returns {Promise<void>}
  */
 async function showWordPopup(wordElement) {
+    console.log('[word_popup] showWordPopup called for:', wordElement.innerText);
+    console.log('[word_popup] Stack trace:', new Error().stack);
     hideWordPopup();
     lastPopupWordElement = wordElement;
     
@@ -302,6 +304,8 @@ async function showWordPopup(wordElement) {
  * @returns {void}
  */
 function hideWordPopup() {
+    console.log('[word_popup] hideWordPopup called');
+    console.log('[word_popup] lastPopupWordElement before nulling:', lastPopupWordElement);
     const existing = document.querySelector('.word-popup');
     if (existing) existing.remove();
     
@@ -312,6 +316,7 @@ function hideWordPopup() {
     }
     
     lastPopupWordElement = null;
+    console.log('[word_popup] lastPopupWordElement set to null');
     document.removeEventListener('click', handleDocumentClickToClosePopup, true);
 }
 
@@ -573,9 +578,26 @@ if (!window._wordPopupFullscreenListenerAdded) {
  * @returns {void}
  */
 function handleWordClick(event) {
+    console.log('[word_popup] handleWordClick called for word:', event.currentTarget.innerText);
+    console.log('[word_popup] lastPopupWordElement before check:', lastPopupWordElement);
     event.stopPropagation();
     const wordElement = event.currentTarget;
-    hideWordPopup(); // Always close any existing popup
+    
+    // Store the current popup word element before potentially hiding it
+    const currentPopupWordElement = lastPopupWordElement;
+    
+    // Check if there's already a popup open for this word
+    const existingPopup = document.querySelector('.word-popup');
+    if (existingPopup && currentPopupWordElement === wordElement) {
+        // Popup is open for this word, so close it and return early
+        console.log('[word_popup] Same word clicked, closing popup');
+        hideWordPopup();
+        return;
+    }
+
+    // Popup is not open for this word, so open it
+    console.log('[word_popup] System thinks popup is not open for this word, so opening it');
+    hideWordPopup();
     showWordPopup(wordElement);
 }
 
@@ -615,13 +637,14 @@ function handleWordHoverEnd(event) {
  */
 function handleDocumentClickToClosePopup(event) {
     const popup = document.querySelector('.word-popup');
-    // If clicking a subtitle word, let its click handler run after closing the popup
+    // If clicking a subtitle word, let its click handler manage the popup
     if (popup && !popup.contains(event.target)) {
         if (!event.target.closest('.subtitle-word')) {
             event.preventDefault();
             event.stopPropagation();
+            hideWordPopup();
         }
-        hideWordPopup();
+        // If it's a subtitle word, do nothing here
     }
 }
 
