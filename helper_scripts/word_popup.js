@@ -54,6 +54,43 @@ async function getCurrentLingQData(wordText) {
 }
 
 /**
+ * Gets the appropriate highlight colors based on button type and text.
+ * @param {string} buttonText - The text content of the button
+ * @param {boolean} isStatusButton - Whether this is a status button (true) or tag button (false)
+ * @returns {Object} Object with background and text color properties
+ */
+function getHighlightColors(buttonText, isStatusButton = true) {
+    if (isStatusButton) {
+        // Use exact same colors as underlines from utils.js
+        if (buttonText === '✓') {
+            // Checkmark = green (no underline equivalent)
+            return { background: '#4CAF50', text: '#fff' };
+        } else if (buttonText === '0') {
+            // Status 0 = blue (fallback color from utils.js)
+            return { background: 'blue', text: '#fff' };
+        } else if (buttonText === '1') {
+            // Status 1 = bold yellow (#fbc02d from utils.js)
+            return { background: '#fbc02d', text: '#333' };
+        } else if (buttonText === '2') {
+            // Status 2 = medium yellow (#fdd835 from utils.js)
+            return { background: '#fdd835', text: '#333' };
+        } else if (buttonText === '3') {
+            // Status 3 = light yellow (#fff9c4 from utils.js)
+            return { background: '#fff9c4', text: '#333' };
+        } else if (buttonText === '4') {
+            // Status 4 = light gray (solid for better visibility)
+            return { background: '#F5F5F5', text: '#333' };
+        } else {
+            // Fallback
+            return { background: 'blue', text: '#fff' };
+        }
+    } else {
+        // Tag buttons use gray colors
+        return { background: '#E0E0E0', text: '#333' };
+    }
+}
+
+/**
  * Highlights the correct status and tag buttons in the popup based on current LingQ data.
  * Maps LingQ status values to control panel display numbers and highlights appropriate buttons.
  * @param {HTMLElement} popup - The popup DOM element containing status and tag buttons
@@ -97,9 +134,11 @@ function highlightCurrentStatusAndTags(popup, wordData) {
         }
         
         if (shouldHighlight) {
-            btn.style.background = '#FFEB3B'; // Light yellow for current status
-            btn.style.borderColor = '#FFEB3B';
-            btn.style.color = '#333'; // Dark text for better contrast
+            // Get colors from the reusable function
+            const colors = getHighlightColors(buttonText, true);
+            btn.style.background = colors.background;
+            btn.style.borderColor = colors.background;
+            btn.style.color = colors.text;
             btn.classList.add('current-status'); // Add class for tracking
         } else {
             btn.style.background = '#222';
@@ -129,9 +168,11 @@ function highlightCurrentStatusAndTags(popup, wordData) {
         }
         
         if (shouldHighlight) {
-            btn.style.background = '#FFEB3B'; // Light yellow for current tag
-            btn.style.borderColor = '#FFEB3B';
-            btn.style.color = '#333'; // Dark text for better contrast
+            // Get colors from the reusable function
+            const colors = getHighlightColors(buttonText, false);
+            btn.style.background = colors.background;
+            btn.style.borderColor = colors.background;
+            btn.style.color = colors.text;
             btn.classList.add('current-tag'); // Add class for tracking
         } else {
             btn.style.background = '#222';
@@ -156,6 +197,12 @@ function highlightCurrentStatusAndTags(popup, wordData) {
 async function showWordPopup(wordElement) {
     hideWordPopup();
     lastPopupWordElement = wordElement;
+    
+    // Add highlighting to the word element
+    wordElement.style.backgroundColor = 'rgba(128, 128, 128, 0.3)'; // Transparent gray
+    wordElement.style.borderRadius = '3px';
+    wordElement.style.transition = 'background-color 0.15s ease';
+    
     console.log('[word_popup] showWordPopup called for:', wordElement.innerText);
 
     // === Get word text for display ===
@@ -291,7 +338,6 @@ function generatePopupHTML(wordText, pinyin, definition, count) {
       <div class="tag-row" style="display:flex;flex-direction:column;gap:7px;justify-content:center;align-items:center;">
         <button class="tag-btn">characters known</button>
         <button class="tag-btn">partial characters known</button>
-        <button class="tag-btn">no characters known</button>
       </div>
     `;
 }
@@ -459,11 +505,14 @@ function addWordClickListeners() {
 /**
  * Adds fullscreen change event listeners to handle popup repositioning.
  * Ensures the popup stays properly positioned when entering/exiting fullscreen mode.
+ * Also re-adds word click listeners since the overlay might be recreated.
  * @returns {void}
  */
 function addFullscreenListeners() {
     const handler = () => {
         console.log('[word_popup] fullscreenchange event fired');
+    
+        
         if (lastPopupWordElement && document.querySelector('.word-popup')) {
             console.log('[word_popup] Repositioning popup for:', lastPopupWordElement.innerText);
             // Use a timeout for more reliable repositioning
@@ -479,6 +528,8 @@ function addFullscreenListeners() {
     document.addEventListener('mozfullscreenchange', handler);
     document.addEventListener('MSFullscreenChange', handler);
 }
+
+// Initialize fullscreen listeners when script loads
 if (!window._wordPopupFullscreenListenerAdded) {
     addFullscreenListeners();
     window._wordPopupFullscreenListenerAdded = true;
