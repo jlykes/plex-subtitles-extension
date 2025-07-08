@@ -39,7 +39,7 @@ function runPreprocessedMode(lingqTerms, filename) {
       showPercentageRows();
       showSentenceExplanation();
       showStatusPercentagesLoading();
-      const percentages = calculateLingQStatusPercentages(enrichedSubs, lingqTerms);
+      const percentages = calculateLingQStatusPercentages(enrichedSubs, window.lingqTerms);
       updateStatusPercentagesDisplay(percentages);
 
       // Stop existing loop if switching videos/modes
@@ -49,7 +49,7 @@ function runPreprocessedMode(lingqTerms, filename) {
       }
 
       // Begin polling playback time to sync subtitles
-      startPollingLoop(enrichedSubs, lingqTerms);
+      startPollingLoop(enrichedSubs);
     });
 
 
@@ -65,7 +65,7 @@ function runPreprocessedMode(lingqTerms, filename) {
     if (!container) return;
 
     container.innerHTML = "";
-    renderPreprocessedLine(currentSub, window.lingqTerms || {});
+    renderPreprocessedLine(currentSub);
   };
 }
 
@@ -74,10 +74,9 @@ function runPreprocessedMode(lingqTerms, filename) {
  * Uses current video time to find appropriate entry in enriched subtitle list.
  * Handles auto-pause logic based on subtitle end times.
  * @param {Array} enrichedSubs - Array of enriched subtitle objects
- * @param {Object} lingqTerms - Object mapping LingQ vocabulary terms to their statuses
  * @returns {void}
  */
-function startPollingLoop(enrichedSubs, lingqTerms) {
+function startPollingLoop(enrichedSubs) {
   window.lastRenderedIndex = -1
   
   preprocessedInterval = setInterval(() => {
@@ -124,7 +123,7 @@ function startPollingLoop(enrichedSubs, lingqTerms) {
     if (active.start === window.lastRenderedIndex) return;
 
     // Render the subtitle line, and update the rendered index
-    renderSubtitle(active, lingqTerms);
+    renderSubtitle(active);
     window.lastRenderedIndex = active.start;
 
     // Initialize auto-pause if enabled and conditions are met 
@@ -191,10 +190,9 @@ function createSubtitleWrapper(translationText) {
  * Renders a subtitle line by generating annotated spans for each word
  * and displaying a translation block with hover/visibility rules.
  * @param {Object} sub - The subtitle object containing text, segmented words, and translation
- * @param {Object} lingqTerms - Object mapping LingQ vocabulary terms to their statuses
  * @returns {void}
  */
-function renderPreprocessedLine(sub, lingqTerms) {
+function renderPreprocessedLine(sub) {
   console.log("🔁 renderPreprocessedLine called with:", sub.text);
 
   // Get the overlay container and clear previous content
@@ -211,7 +209,7 @@ function renderPreprocessedLine(sub, lingqTerms) {
   sub.segmented.forEach(entry => {
     const word = entry.word;
     const pinyin = entry.pinyin;
-    const status = lingqTerms[word];
+    const status = window.lingqTerms[word];
     const meaning = sub.word_meanings?.find(w => w.word === word)?.meaning || "";
 
     const wordSpan = createWordWrapper({ word, pinyin, status, meaning });
@@ -285,14 +283,14 @@ function clearInactiveOverlayIfNeeded() {
  * Renders the subtitle text, updates the last subtitle start time,
  * and stores the last rendered text for potential re-rendering.
  * @param {Object} sub - The subtitle object containing start time, text, etc.
- * @param {Object} lingqTerms - Object mapping LingQ vocabulary terms to their statuses
  * @returns {void}
  */
-function renderSubtitle(sub, lingqTerms) {
+function renderSubtitle(sub) {
   const container = document.getElementById("custom-subtitle-overlay");
   if (!container) return;
 
-  renderPreprocessedLine(sub, lingqTerms);
+  // Use window.lingqTerms instead of the passed parameter to get the most up-to-date data
+  renderPreprocessedLine(sub);
 
   window.lastSubtitleStartTime = sub.start;
   window.lastRenderedText = sub.text;

@@ -135,6 +135,34 @@ async function loadLingQTerms() {
   return result;
 }
 
+/**
+ * Saves the LingQ vocabulary terms to chrome.storage.local.
+ * Converts the object format back to the array format expected by the storage.
+ * @param {Object} lingqTerms - Object mapping terms to their LingQ status info
+ * @returns {Promise<void>}
+ */
+async function saveLingQTerms(lingqTerms) {
+  // Convert object format back to array format for storage
+  const data = Object.entries(lingqTerms).map(([term, info]) => ({
+    term: term,
+    status: info.status,
+    extended_status: info.extended_status,
+    tags: info.tags || []
+  }));
+
+  return new Promise((resolve) => {
+    if (chrome && chrome.storage && chrome.storage.local) {
+      chrome.storage.local.set({ lingqs: data }, () => {
+        console.log('[LingQ] Saved LingQ terms to chrome.storage.local');
+        resolve();
+      });
+    } else {
+      console.warn('[LingQ] Chrome storage not available');
+      resolve();
+    }
+  });
+}
+
 // Export functions for use in control.js
 window.lingqData = {
   getLingqCookies,
@@ -142,5 +170,6 @@ window.lingqData = {
   storeLingqData,
   startLingqAutoFetch,
   setupLingqStorageListener,
-  loadLingQTerms
+  loadLingQTerms,
+  saveLingQTerms
 }; 

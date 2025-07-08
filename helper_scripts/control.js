@@ -80,8 +80,19 @@ async function createControlPanel() {
   // Set up LingQ storage change listener to re-render subtitles and update percentages
   // whenever LingQ data changes in storage
   window.lingqData.setupLingqStorageListener(() => {
+    // Always update window.lingqTerms with latest data from storage
     window.lingqData.loadLingQTerms().then(lingqTerms => {
       window.lingqTerms = lingqTerms;
+      console.log('[control] Updated window.lingqTerms with latest data from storage');
+      
+      // Don't re-render if a word popup is currently open
+      const popup = document.querySelector('.word-popup');
+      if (popup) {
+        console.log('[control] Skipping subtitle re-render because word popup is open');
+        return;
+      }
+      
+      // Re-render subtitle and update percentages
       if (window.reRenderCurrentSubtitle) {
         window.reRenderCurrentSubtitle();
       }

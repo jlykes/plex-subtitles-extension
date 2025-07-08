@@ -3,8 +3,9 @@
 // Phase 1: Scaffold structure for popup rendering and event handling
 // Phase 2 Step 1: Highlight current status/tags from local storage
 
+
 //////////////////////////////
-// 1. POPUP DATA MANAGEMENT
+// 1. UPDATING CURRENT DATA
 //////////////////////////////
 
 /**
@@ -18,15 +19,41 @@
  */
 async function getCurrentLingQData(wordText) {
     try {
-        // Load LingQ terms from local storage
+        console.log(`[word_popup] getCurrentLingQData called for '${wordText}'`);
+        
+        // Try to use global window.lingqTerms first (most up-to-date)
+        if (window.lingqTerms) {
+            console.log(`[word_popup] Using global window.lingqTerms (${Object.keys(window.lingqTerms).length} terms)`);
+            const wordData = window.lingqTerms[wordText];
+            
+            if (wordData) {
+                console.log(`[word_popup] Found LingQ data in global for '${wordText}':`, wordData);
+                return {
+                    found: true,
+                    status: wordData.status,
+                    extended_status: wordData.extended_status,
+                    tags: wordData.tags || []
+                };
+            } else {
+                console.log(`[word_popup] No LingQ data found in global for '${wordText}'`);
+                return {
+                    found: false,
+                    status: null,
+                    extended_status: null,
+                    tags: []
+                };
+            }
+        }
+        
+        // Fallback to loading from storage
+        console.log(`[word_popup] Global window.lingqTerms not available, loading from storage...`);
         const lingqTerms = await window.lingqData.loadLingQTerms();
         
         // Look up the word
         const wordData = lingqTerms[wordText];
         
         if (wordData) {
-            console.log(`[word_popup] Found LingQ data for '${wordText}':`, wordData);
-            console.log(`[word_popup] Tags for '${wordText}':`, wordData.tags);
+            console.log(`[word_popup] Found LingQ data in storage for '${wordText}':`, wordData);
             return {
                 found: true,
                 status: wordData.status,
@@ -34,7 +61,7 @@ async function getCurrentLingQData(wordText) {
                 tags: wordData.tags || []
             };
         } else {
-            console.log(`[word_popup] No LingQ data found for '${wordText}'`);
+            console.log(`[word_popup] No LingQ data found in storage for '${wordText}'`);
             return {
                 found: false,
                 status: null, // Use null to indicate "not in LingQ data" vs status 0
@@ -209,6 +236,7 @@ async function showWordPopup(wordElement) {
     // Only keep Chinese characters for wordText
     const rawText = wordElement.innerText.trim();
     const wordText = (rawText.match(/[\u4e00-\u9fff]+/g) || []).join('');
+    console.log(`[word_popup] Raw text: '${rawText}', extracted wordText: '${wordText}'`);
     
     // Get pinyin using getPinyin from utils.js if available
     let pinyin = 'N/A';
@@ -263,6 +291,9 @@ async function showWordPopup(wordElement) {
 
     // Add click outside to close
     document.addEventListener('click', handleDocumentClickToClosePopup);
+    
+    // Add button click handlers for status and tag updates
+    addButtonClickHandlers(popup, wordText);
 }
 
 /**
@@ -594,8 +625,345 @@ function handleDocumentClickToClosePopup(event) {
     }
 }
 
+/**
+ * Adds click event handlers to status and tag buttons in the popup.
+ * Handles status updates and tag toggles when buttons are clicked.
+ * @param {HTMLElement} popup - The popup DOM element containing buttons
+ * @param {string} wordText - The Chinese word text being updated
+ * @returns {void}
+ */
+function addButtonClickHandlers(popup, wordText) {
+    // Add status button click handlers
+    const statusButtons = popup.querySelectorAll('.status-btn');
+    statusButtons.forEach(btn => {
+        btn.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            const buttonText = btn.textContent.trim();
+            console.log(`[word_popup] Status button clicked: ${buttonText} for word: ${wordText}`);
+            
+            await updateWordStatus(wordText, buttonText);
+        });
+    });
+    
+    // Add tag button click handlers
+    const tagButtons = popup.querySelectorAll('.tag-btn');
+    tagButtons.forEach(btn => {
+        btn.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            const buttonText = btn.textContent.trim();
+            console.log(`[word_popup] Tag button clicked: ${buttonText} for word: ${wordText}`);
+            
+            await toggleWordTag(wordText, buttonText);
+        });
+    });
+}
+
 //////////////////////////////
-// 5. POPUP EXPORT/INIT
+// 5. POPUP DATA UPDATES
+//////////////////////////////
+
+/**
+ * Updates the LingQ status for a word based on button click.
+ * Maps button text to LingQ status values and updates both local storage and server.
+ * @param {string} wordText - The Chinese word to update
+ * @param {string} buttonText - The button text (0, 1, 2, 3, 4, or ✓)
+ * @returns {Promise<void>}
+ */
+async function updateWordStatus(wordText, buttonText) {
+    try {
+        // Map button text to LingQ status values
+        let newStatus, newExtendedStatus;
+        
+        if (buttonText === '✓') {
+            // Checkmark = Known (status=3, extended_status=3)
+            newStatus = 3;
+            newExtendedStatus = 3;
+        } else if (buttonText === '0') {
+            // Button 0 = Unseen (remove from LingQ data)
+            newStatus = null;
+            newExtendedStatus = null;
+        } else if (buttonText === '1') {
+            // Button 1 = New (status=0)
+            newStatus = 0;
+            newExtendedStatus = null;
+        } else if (buttonText === '2') {
+            // Button 2 = Recognized (status=1)
+            newStatus = 1;
+            newExtendedStatus = null;
+        } else if (buttonText === '3') {
+            // Button 3 = Familiar (status=2)
+            newStatus = 2;
+            newExtendedStatus = null;
+        } else if (buttonText === '4') {
+            // Button 4 = Learned (status=3, extended_status=0)
+            newStatus = 3;
+            newExtendedStatus = 0;
+        } else {
+            console.error(`[word_popup] Unknown status button: ${buttonText}`);
+            return;
+        }
+        
+        console.log(`[word_popup] Updating status for '${wordText}' to:`, { status: newStatus, extended_status: newExtendedStatus });
+        
+        // Get current data to preserve existing tags
+        const currentData = await getCurrentLingQData(wordText);
+        const currentTags = currentData.tags || [];
+        
+        // Update local storage (preserve existing tags)
+        console.log(`[word_popup] About to update local storage for '${wordText}' with status:`, newStatus, 'extended_status:', newExtendedStatus, 'preserving tags:', currentTags);
+        await updateLocalLingQData(wordText, newStatus, newExtendedStatus, currentTags);
+        console.log(`[word_popup] Finished updating local storage for '${wordText}'`);
+        
+        // Update UI immediately for better responsiveness
+        const popup = document.querySelector('.word-popup');
+        if (popup) {
+            // Create word data object for immediate highlighting
+            const immediateWordData = {
+                found: true,
+                status: newStatus,
+                extended_status: newExtendedStatus,
+                tags: currentTags
+            };
+            highlightCurrentStatusAndTags(popup, immediateWordData);
+        }
+        
+        // Update just the clicked word's underline without re-rendering entire subtitle
+        updateWordUnderline(wordText, newStatus, newExtendedStatus);
+        
+        // Update server in the background (don't await)
+        if (newStatus !== null) {
+            updateServerLingQData(wordText, newStatus, newExtendedStatus, currentTags).catch(error => {
+                console.error('[word_popup] Background server update failed:', error);
+            });
+        } else {
+            // Mark as deleted using status: -1
+            updateServerLingQData(wordText, -1, 0, currentTags).catch(error => {
+                console.error('[word_popup] Background server update failed:', error);
+            });
+        }
+        
+    } catch (error) {
+        console.error('[word_popup] Error updating word status:', error);
+    }
+}
+
+/**
+ * Toggles a tag for a word based on button click.
+ * Adds or removes the tag from both local storage and server.
+ * @param {string} wordText - The Chinese word to update
+ * @param {string} tagText - The tag text to toggle
+ * @returns {Promise<void>}
+ */
+async function toggleWordTag(wordText, tagText) {
+    try {
+        console.log(`[word_popup] Toggling tag '${tagText}' for word '${wordText}'`);
+        
+        // Get current LingQ data
+        const currentData = await getCurrentLingQData(wordText);
+        const currentTags = currentData.tags || [];
+        
+        // Toggle the tag
+        let newTags;
+        if (currentTags.includes(tagText)) {
+            // Remove tag
+            newTags = currentTags.filter(tag => tag !== tagText);
+            console.log(`[word_popup] Removing tag '${tagText}' from '${wordText}'`);
+        } else {
+            // Add tag
+            newTags = [...currentTags, tagText];
+            console.log(`[word_popup] Adding tag '${tagText}' to '${wordText}'`);
+        }
+        
+        // Update local storage
+        await updateLocalLingQData(wordText, currentData.status, currentData.extended_status, newTags);
+        
+        // Update UI immediately for better responsiveness
+        const popup = document.querySelector('.word-popup');
+        if (popup) {
+            // Create word data object for immediate highlighting
+            const immediateWordData = {
+                found: true,
+                status: currentData.status,
+                extended_status: currentData.extended_status,
+                tags: newTags
+            };
+            highlightCurrentStatusAndTags(popup, immediateWordData);
+        }
+        
+        // Update server in the background (don't await)
+        updateServerLingQData(wordText, currentData.status, currentData.extended_status, newTags).catch(error => {
+            console.error('[word_popup] Background server update failed:', error);
+        });
+        
+    } catch (error) {
+        console.error('[word_popup] Error toggling word tag:', error);
+    }
+}
+
+/**
+ * Updates LingQ data in local storage for a word.
+ * @param {string} wordText - The Chinese word to update
+ * @param {number|null} status - The new status value
+ * @param {number|null} extendedStatus - The new extended status value
+ * @param {Array<string>} tags - The new tags array
+ * @returns {Promise<void>}
+ */
+async function updateLocalLingQData(wordText, status, extendedStatus, tags) {
+    try {
+        console.log(`[word_popup] Loading current LingQ terms from storage...`);
+        const lingqTerms = await window.lingqData.loadLingQTerms();
+        console.log(`[word_popup] Current LingQ terms loaded:`, Object.keys(lingqTerms).length, 'terms');
+        
+        if (status === null) {
+            // Remove word from LingQ data
+            delete lingqTerms[wordText];
+            console.log(`[word_popup] Removed '${wordText}' from local LingQ data`);
+        } else {
+            // Update or add word to LingQ data
+            lingqTerms[wordText] = {
+                status: status,
+                extended_status: extendedStatus,
+                tags: tags || []
+            };
+            console.log(`[word_popup] Updated local LingQ data for '${wordText}':`, lingqTerms[wordText]);
+        }
+        
+        // Save updated data back to local storage
+        console.log(`[word_popup] Saving updated LingQ terms to storage...`);
+        await window.lingqData.saveLingQTerms(lingqTerms);
+        console.log(`[word_popup] Successfully saved LingQ terms to storage`);
+        
+        // Also update the global window.lingqTerms to keep it in sync
+        window.lingqTerms = lingqTerms;
+        console.log(`[word_popup] Updated global window.lingqTerms`);
+        
+    } catch (error) {
+        console.error('[word_popup] Error updating local LingQ data:', error);
+        throw error;
+    }
+}
+
+/**
+ * Updates the underline color for a specific word without re-rendering the entire subtitle.
+ * Finds all instances of the word in the current subtitle and updates their styling.
+ * @param {string} wordText - The Chinese word to update
+ * @param {number|null} status - The new status value
+ * @param {number|null} extendedStatus - The new extended status value
+ * @returns {void}
+ */
+function updateWordUnderline(wordText, status, extendedStatus) {
+    console.log(`[word_popup] updateWordUnderline called for '${wordText}' with status:`, status, 'extended_status:', extendedStatus);
+    
+    // Find all word elements with this text
+    const wordElements = document.querySelectorAll('.subtitle-word');
+    console.log(`[word_popup] Found ${wordElements.length} subtitle word elements`);
+    
+    let foundAndUpdated = false;
+    wordElements.forEach(element => {
+        // Check if this element contains the target word
+        const elementText = element.textContent.trim();
+        console.log(`[word_popup] Checking element with text: '${elementText}' against target: '${wordText}'`);
+        
+        // More robust matching - check if the element contains the target word
+        // This handles cases where there might be extra whitespace or the text is nested
+        // Also extract just the Chinese characters from the element text for comparison
+        const elementChineseOnly = (elementText.match(/[\u4e00-\u9fff]+/g) || []).join('');
+        console.log(`[word_popup] Element Chinese only: '${elementChineseOnly}'`);
+        
+        if (elementText === wordText || elementText.includes(wordText) || elementChineseOnly === wordText) {
+            // Update the underline color based on new status
+            const config = window.subtitleConfig || {};
+            if (config.lingqStatus === "on") {
+                let underlineColor = null;
+                
+                if (status !== null) {
+                    // Word is in LingQ data, use its status
+                    // Implement the same color logic as getUnderlineColor from utils.js
+                    if (/[\u4e00-\u9fff]/.test(wordText)) { // Check if word is Chinese
+                        switch (status) {
+                            case 3:
+                                // Differentiate between "Known" and "Learned" based on extended_status
+                                if (extendedStatus === 0 || extendedStatus === null) {
+                                    underlineColor = "rgba(128, 128, 128, 0.3)"; // Light gray for "Learned"
+                                } else {
+                                    underlineColor = null; // No underline for "Known" (status=3, extended_status=3)
+                                }
+                                break;
+                            case 2: underlineColor = "#fff9c4"; break;    // Familiar — light yellow
+                            case 1: underlineColor = "#fdd835"; break;    // Learning — medium yellow
+                            case 0: underlineColor = "#fbc02d"; break;    // New — bold yellow
+                            default: underlineColor = "blue"; break;     // Fallback color
+                        }
+                    }
+                } else {
+                    // Word is not in LingQ data, underline in blue
+                    underlineColor = "blue";
+                }
+                
+                // Update the underline
+                if (underlineColor) {
+                    element.style.borderBottom = `0.1em solid ${underlineColor}`;
+                    element.style.paddingBottom = "2px";
+                    element.style.borderRadius = "0.05em";
+                } else {
+                    // Remove underline if no color should be applied
+                    element.style.borderBottom = "";
+                    element.style.paddingBottom = "";
+                    element.style.borderRadius = "";
+                }
+                foundAndUpdated = true;
+                console.log(`[word_popup] Successfully updated underline for '${wordText}' to color:`, underlineColor);
+            }
+        }
+    });
+    
+    if (!foundAndUpdated) {
+        console.log(`[word_popup] WARNING: No word elements found matching '${wordText}'`);
+    }
+}
+
+/**
+ * Updates LingQ data on the server via background script to avoid CORS issues.
+ * @param {string} wordText - The Chinese word to update
+ * @param {number} status - The new status value
+ * @param {number|null} extendedStatus - The new extended status value
+ * @param {Array<string>} tags - The new tags array
+ * @returns {Promise<void>}
+ */
+async function updateServerLingQData(wordText, status, extendedStatus, tags) {
+    try {
+        // Prepare the update data
+        const updateData = {
+            status: status,
+            extended_status: extendedStatus,
+            tags: tags || []
+        };
+        
+        console.log(`[word_popup] Updating server LingQ data for '${wordText}':`, updateData);
+        
+        // Send message to background script to search/import/update
+        const response = await chrome.runtime.sendMessage({
+            action: 'updateLingQTerm',
+            wordText: wordText,
+            updateData: updateData
+        });
+        
+        if (response.success) {
+            console.log(`[word_popup] Successfully updated server LingQ data for '${wordText}'`);
+        } else {
+            throw new Error(`Server update failed: ${response.error}`);
+        }
+        
+    } catch (error) {
+        console.error('[word_popup] Error updating server LingQ data:', error);
+        throw error;
+    }
+}
+
+
+
+//////////////////////////////
+// 6. POPUP EXPORT/INIT
 //////////////////////////////
 
 window.initWordPopup = initWordPopup;
