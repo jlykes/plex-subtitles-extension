@@ -124,8 +124,10 @@ function renderLiveLine(text, lingqTerms, segmentit) {
 
   // For each segmented word, create an annotated wrapper using shared logic
   words.forEach(word => { 
-    const pinyin = getPinyin(word);
-    const status = lingqTerms[word];
+    // Strip non-Chinese characters for pinyin generation and LingQ lookup
+    const chineseOnly = (word.match(/[\u4e00-\u9fff]+/g) || []).join('');
+    const pinyin = getPinyin(chineseOnly);
+    const status = lingqTerms[chineseOnly];
     const wordSpan = createWordWrapper({
       word,
       pinyin,

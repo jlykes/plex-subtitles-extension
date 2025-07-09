@@ -209,7 +209,9 @@ function renderPreprocessedLine(sub) {
   sub.segmented.forEach(entry => {
     const word = entry.word;
     const pinyin = entry.pinyin;
-    const status = window.lingqTerms[word];
+    // Strip non-Chinese characters for LingQ lookup
+    const chineseOnly = (word.match(/[\u4e00-\u9fff]+/g) || []).join('');
+    const status = window.lingqTerms[chineseOnly];
     const meaning = sub.word_meanings?.find(w => w.word === word)?.meaning || "";
 
     const wordSpan = createWordWrapper({ word, pinyin, status, meaning });
@@ -368,7 +370,7 @@ function scheduleAutoPause(currentSub) {
     }
 
     if (elapsedSinceEnd >= delaySec) {
-      v.currentTime = Math.max(0, currentSub.end);
+      v.currentTime = Math.max(0, currentSub.end) - 0.05;
       v.pause();
       window.lastPausedSubtitleStart = currentSub.start;
       console.log("⏸️ Auto-paused triggered by:", currentSub.text, "after delay of", delayMs, "ms");

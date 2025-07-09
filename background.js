@@ -76,17 +76,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                   .then(importResponse => {
                     if (importResponse.ok) {
                       wasImported = true;
-                      // Search again to get the newly imported word's ID
-                      return fetch(searchUrl, {
-                        method: "GET",
-                        headers: headers,
-                        credentials: "include"
-                      });
+                      // Retry search up to 5 times with 3s delay
+                      let attempts = 0;
+                      function retrySearch() {
+                        attempts++;
+                        return fetch(searchUrl, {
+                          method: "GET",
+                          headers: headers,
+                          credentials: "include"
+                        })
+                          .then(r => r.json())
+                          .then(importSearchData => {
+                            if (importSearchData.count > 0) {
+                              termId = importSearchData.results[0].pk;
+                              console.log(`Successfully imported word: ${wordText} (ID: ${termId}) after ${attempts} attempt(s)`);
+                              return importSearchData;
+                            } else if (attempts < 5) {
+                              return new Promise(resolve => setTimeout(resolve, 3000)).then(retrySearch);
+                            } else {
+                              throw new Error("Could not find word after import (after 5 attempts)");
+                            }
+                          });
+                      }
+                      return retrySearch();
                     } else {
                       throw new Error(`Import failed: ${importResponse.status}`);
                     }
                   })
-                  .then(importResponse => importResponse.json())
                   .then(importSearchData => {
                     if (importSearchData.count > 0) {
                       termId = importSearchData.results[0].pk;

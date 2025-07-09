@@ -19,15 +19,17 @@
  */
 async function getCurrentLingQData(wordText) {
     try {
-        console.log(`[word_popup] getCurrentLingQData called for '${wordText}'`);
+        // Strip out all non-Chinese characters to match LingQ's normalization
+        const normalizedWordText = (wordText.match(/[\u4e00-\u9fff]+/g) || []).join('');
+        console.log(`[word_popup] getCurrentLingQData called for '${wordText}' (normalized: '${normalizedWordText}')`);
         
         // Try to use global window.lingqTerms first (most up-to-date)
         if (window.lingqTerms) {
             console.log(`[word_popup] Using global window.lingqTerms (${Object.keys(window.lingqTerms).length} terms)`);
-            const wordData = window.lingqTerms[wordText];
+            const wordData = window.lingqTerms[normalizedWordText];
             
             if (wordData) {
-                console.log(`[word_popup] Found LingQ data in global for '${wordText}':`, wordData);
+                console.log(`[word_popup] Found LingQ data in global for '${normalizedWordText}':`, wordData);
                 return {
                     found: true,
                     status: wordData.status,
@@ -35,7 +37,7 @@ async function getCurrentLingQData(wordText) {
                     tags: wordData.tags || []
                 };
             } else {
-                console.log(`[word_popup] No LingQ data found in global for '${wordText}'`);
+                console.log(`[word_popup] No LingQ data found in global for '${normalizedWordText}'`);
                 return {
                     found: false,
                     status: null,
@@ -50,10 +52,10 @@ async function getCurrentLingQData(wordText) {
         const lingqTerms = await window.lingqData.loadLingQTerms();
         
         // Look up the word
-        const wordData = lingqTerms[wordText];
+        const wordData = lingqTerms[normalizedWordText];
         
         if (wordData) {
-            console.log(`[word_popup] Found LingQ data in storage for '${wordText}':`, wordData);
+            console.log(`[word_popup] Found LingQ data in storage for '${normalizedWordText}':`, wordData);
             return {
                 found: true,
                 status: wordData.status,
@@ -61,7 +63,7 @@ async function getCurrentLingQData(wordText) {
                 tags: wordData.tags || []
             };
         } else {
-            console.log(`[word_popup] No LingQ data found in storage for '${wordText}'`);
+            console.log(`[word_popup] No LingQ data found in storage for '${normalizedWordText}'`);
             return {
                 found: false,
                 status: null, // Use null to indicate "not in LingQ data" vs status 0
@@ -88,31 +90,27 @@ async function getCurrentLingQData(wordText) {
  */
 function getHighlightColors(buttonText, isStatusButton = true) {
     if (isStatusButton) {
-        // Use exact same colors as underlines from utils.js
-        if (buttonText === '✓') {
-            // Checkmark = green (no underline equivalent)
-            return { background: '#4CAF50', text: '#fff' };
-        } else if (buttonText === '0') {
-            // Status 0 = blue (fallback color from utils.js)
-            return { background: 'blue', text: '#fff' };
-        } else if (buttonText === '1') {
-            // Status 1 = bold yellow (#fbc02d from utils.js)
-            return { background: '#fbc02d', text: '#333' };
+        // Button '1' = status 0 (New)
+        if (buttonText === '1') {
+            return { background: '#ffe600', text: '#333' };
         } else if (buttonText === '2') {
-            // Status 2 = medium yellow (#fdd835 from utils.js)
-            return { background: '#fdd835', text: '#333' };
+            // Button '2' = status 1 (Learning)
+            return { background: 'rgba(255,230,0,0.5)', text: 'black' };
         } else if (buttonText === '3') {
-            // Status 3 = light yellow (#fff9c4 from utils.js)
-            return { background: '#fff9c4', text: '#333' };
+            // Button '3' = status 2 (Familiar)
+            return { background: 'rgba(255,230,0,0.2)', text: 'white' };
+        } else if (buttonText === '0') {
+            // Button '0' = blue (not in LingQ data)
+            return { background: 'blue', text: '#fff' };
+        } else if (buttonText === '✓') {
+            return { background: '#4CAF50', text: '#fff' };
         } else if (buttonText === '4') {
-            // Status 4 = light gray (solid for better visibility)
-            return { background: '#F5F5F5', text: '#333' };
+            // Button '4' = Learned (gray, matches underline)
+            return { background: 'rgba(128,128,128,0.3)', text: 'white' };
         } else {
-            // Fallback
             return { background: 'blue', text: '#fff' };
         }
     } else {
-        // Tag buttons use gray colors
         return { background: '#E0E0E0', text: '#333' };
     }
 }
@@ -860,6 +858,12 @@ async function updateLocalLingQData(wordText, status, extendedStatus, tags) {
         window.lingqTerms = lingqTerms;
         console.log(`[word_popup] Updated global window.lingqTerms`);
         
+        // Recalculate and update LingQ status percentages in the control panel
+        if (window.subtitleList && window.updateStatusPercentagesDisplay && typeof calculateLingQStatusPercentages === "function") {
+            const percentages = calculateLingQStatusPercentages(window.subtitleList, window.lingqTerms);
+            window.updateStatusPercentagesDisplay(percentages);
+        }
+        
     } catch (error) {
         console.error('[word_popup] Error updating local LingQ data:', error);
         throw error;
@@ -877,6 +881,9 @@ async function updateLocalLingQData(wordText, status, extendedStatus, tags) {
 function updateWordUnderline(wordText, status, extendedStatus) {
     console.log(`[word_popup] updateWordUnderline called for '${wordText}' with status:`, status, 'extended_status:', extendedStatus);
     
+    // Strip non-Chinese characters for consistent matching
+    const chineseOnly = (wordText.match(/[\u4e00-\u9fff]+/g) || []).join('');
+    
     // Find all word elements with this text
     const wordElements = document.querySelectorAll('.subtitle-word');
     console.log(`[word_popup] Found ${wordElements.length} subtitle word elements`);
@@ -893,7 +900,7 @@ function updateWordUnderline(wordText, status, extendedStatus) {
         const elementChineseOnly = (elementText.match(/[\u4e00-\u9fff]+/g) || []).join('');
         console.log(`[word_popup] Element Chinese only: '${elementChineseOnly}'`);
         
-        if (elementText === wordText || elementText.includes(wordText) || elementChineseOnly === wordText) {
+        if (elementText === wordText || elementText.includes(wordText) || elementChineseOnly === chineseOnly) {
             // Update the underline color based on new status
             const config = window.subtitleConfig || {};
             if (config.lingqStatus === "on") {
@@ -901,21 +908,19 @@ function updateWordUnderline(wordText, status, extendedStatus) {
                 
                 if (status !== null) {
                     // Word is in LingQ data, use its status
-                    // Implement the same color logic as getUnderlineColor from utils.js
                     if (/[\u4e00-\u9fff]/.test(wordText)) { // Check if word is Chinese
                         switch (status) {
                             case 3:
-                                // Differentiate between "Known" and "Learned" based on extended_status
                                 if (extendedStatus === 0 || extendedStatus === null) {
-                                    underlineColor = "rgba(128, 128, 128, 0.3)"; // Light gray for "Learned"
+                                    underlineColor = "rgba(128, 128, 128, 0.3)";
                                 } else {
-                                    underlineColor = null; // No underline for "Known" (status=3, extended_status=3)
+                                    underlineColor = null;
                                 }
                                 break;
-                            case 2: underlineColor = "#fff9c4"; break;    // Familiar — light yellow
-                            case 1: underlineColor = "#fdd835"; break;    // Learning — medium yellow
-                            case 0: underlineColor = "#fbc02d"; break;    // New — bold yellow
-                            default: underlineColor = "blue"; break;     // Fallback color
+                            case 2: underlineColor = "rgba(255,230,0,0.2)"; break;    // Familiar — very light yellow
+                            case 1: underlineColor = "rgba(255,230,0,0.5)"; break;    // Learning — lighter yellow
+                            case 0: underlineColor = "#ffe600"; break;                // New — bright yellow
+                            default: underlineColor = "blue"; break;
                         }
                     }
                 } else {

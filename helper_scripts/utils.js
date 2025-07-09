@@ -27,9 +27,9 @@ function getUnderlineColor(statusInfo, word) {
       } else {
         return null; // No underline for "Known" (status=3, extended_status=3)
       }
-    case 2: return "#fff9c4";    // Familiar — light yellow
-    case 1: return "#fdd835";    // Learning — medium yellow
-    case 0: return "#fbc02d";    // New — bold yellow
+    case 2: return "rgba(255,230,0,0.2)";    // Familiar — light yellow
+    case 1: return "rgba(255,230,0,0.5)";    // Learning — medium yellow
+    case 0: return "#ffe600";    // New — bold yellow
     default: return "blue";     // Fallback color
   }
 }
@@ -206,13 +206,18 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
   const config = window.subtitleConfig || {};
   const isPunct = isPunctuationDigitOrSpace(word);
 
+  // === Strip non-Chinese characters for LingQ lookup ===
+  const chineseOnly = (word.match(/[\u4e00-\u9fff]+/g) || []).join('');
+  
   // === Determine settings from global subtitle config ===
   // Handle words not in LingQ data - they should be underlined in blue
   let underlineColor = null;
   if (config.lingqStatus === "on" && !isPunct && isChineseWord(word)) {
-    if (status) {
+    // Use the Chinese-only version for LingQ lookup
+    const lingqStatus = window.lingqTerms[chineseOnly];
+    if (lingqStatus) {
       // Word is in LingQ data, use its status
-      underlineColor = getUnderlineColor(status, word);
+      underlineColor = getUnderlineColor(lingqStatus, word);
     } else {
       // Word is not in LingQ data, underline in blue
       underlineColor = "blue";
