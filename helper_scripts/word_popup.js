@@ -823,6 +823,13 @@ async function updateWordStatus(wordText, buttonText) {
             });
         }
         
+        // Add Notion entry when word is marked as learned (status 4)
+        if (buttonText === '4') {
+            addNotionWordTrackerEntry(wordText).catch(error => {
+                console.error('[word_popup] Notion API update failed:', error);
+            });
+        }
+        
     } catch (error) {
         console.error('[word_popup] Error updating word status:', error);
     }
@@ -1044,6 +1051,40 @@ async function updateServerLingQData(wordText, status, extendedStatus, tags) {
         
     } catch (error) {
         console.error('[word_popup] Error updating server LingQ data:', error);
+        throw error;
+    }
+}
+
+/**
+ * Adds or updates a word entry in the Notion word tracker database.
+ * @param {string} wordText - The Chinese word to add to Notion
+ * @returns {Promise<void>}
+ */
+async function addNotionWordTrackerEntry(wordText) {
+    try {
+        console.log(`[word_popup] Adding word '${wordText}' to Notion tracker`);
+        
+        // Get current date in local timezone
+        const today = new Date();
+        const localDate = today.toLocaleDateString('en-CA'); // YYYY-MM-DD format
+        
+        // Send message to background script to create/update Notion entry
+        const response = await chrome.runtime.sendMessage({
+            action: 'addNotionWordTrackerEntry',
+            wordText: wordText,
+            status: '4',
+            date: localDate
+        });
+        
+        if (response.success) {
+            console.log(`[word_popup] Successfully added word '${wordText}' to Notion tracker`);
+            console.log(`[word_popup] Action: ${response.action}`); // 'created' or 'updated'
+        } else {
+            throw new Error(`Notion update failed: ${response.error}`);
+        }
+        
+    } catch (error) {
+        console.error('[word_popup] Error adding word to Notion tracker:', error);
         throw error;
     }
 }
