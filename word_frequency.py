@@ -26,15 +26,11 @@ from typing import Dict, List, Tuple
  */
 """
 def is_chinese_word(word: str) -> bool:
-    """Check if a word contains Chinese characters and is not purely numeric."""
+    """Check if a word consists entirely of Chinese characters (no non-Chinese characters allowed)."""
     # Match Chinese characters (Unicode ranges for Chinese)
-    chinese_regex = re.compile(r'[\u4e00-\u9fff\u3400-\u4dbf\u20000-\u2a6df\u2a700-\u2b73f\u2b740-\u2b81f\u2b820-\u2ceaf\uf900-\ufaff\u3300-\u33ff\ufe30-\ufe4f]')
-    
-    # Must contain at least one Chinese character AND not be purely numeric
-    has_chinese = bool(chinese_regex.search(word))
-    is_numeric = word.isdigit()
-    
-    return has_chinese and not is_numeric
+    chinese_regex = re.compile(r'^[\u4e00-\u9fff\u3400-\u4dbf\u20000-\u2a6df\u2a700-\u2b73f\u2b740-\u2b81f\u2b820-\u2ceaf\uf900-\ufaff\u3300-\u33ff\ufe30-\ufe4f]+$')
+    # The word must be non-empty and all characters must be Chinese
+    return bool(word) and bool(chinese_regex.fullmatch(word))
 
 """
 /**
