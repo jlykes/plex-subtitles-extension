@@ -284,3 +284,16 @@ let mainInterval = setInterval(() => {
     console.log("⏳ Video detected but not ready. Waiting...");
   }
 }, 100);
+
+// Temporary functions for Notion configuration setup
+window.setupNotionConfig = function() {
+    chrome.runtime.sendMessage({action: 'setupNotionConfig'}, function(response) {
+        console.log('Setup response:', response);
+    });
+};
+
+window.testNotionConnection = function() {
+    chrome.runtime.sendMessage({action: 'testNotionConnection'}, function(response) {
+        console.log('Test response:', response);
+    });
+};

@@ -11,7 +11,8 @@
   ],
   "host_permissions": [
     "*://app.plex.tv/*",
-    "https://www.lingq.com/*"
+    "https://www.lingq.com/*",
+    "https://api.notion.com/*"
   ],
   "content_scripts": [
     {
@@ -46,7 +47,8 @@
         "html/control_panel.html",
         "lingqs.json",
         "cache/word_frequency.json",
-        "cache/word_scores.json"
+        "cache/word_scores.json",
+        "helper_scripts/notion_api.js"
       ],
       "matches": ["*://app.plex.tv/*"]
     }
