@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """
-Word Frequency Analysis Script
-Generates frequency scores for Chinese words in enriched subtitle files.
+word_frequency.py
+
+This module analyzes enriched Chinese subtitle files to build a word frequency dictionary.
+It provides utilities for extracting, counting, and categorizing Chinese word occurrences
+across a subtitle corpus, supporting downstream features such as frequency-based word highlighting
+and learning progress tracking.
 """
 
 import json
@@ -10,6 +14,17 @@ import re
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+
+"""
+/**
+ * Checks if a word contains Chinese characters and is not purely numeric.
+ *
+ * @function is_chinese_word
+ * @param {str} word - The word to check.
+ * @returns {bool} True if the word contains at least one Chinese character and is not purely numeric, False otherwise.
+ *
+ */
+"""
 def is_chinese_word(word: str) -> bool:
     """Check if a word contains Chinese characters and is not purely numeric."""
     # Match Chinese characters (Unicode ranges for Chinese)
@@ -21,6 +36,15 @@ def is_chinese_word(word: str) -> bool:
     
     return has_chinese and not is_numeric
 
+"""
+/**
+ * Builds a word frequency dictionary from enriched subtitle files.
+ *
+ * @function build_word_frequency_corpus
+ * @returns {Dict[str, int]} Dictionary mapping words to their frequency counts.
+ *
+ */
+"""
 def build_word_frequency_corpus() -> Dict[str, int]:
     """Parse all enriched subtitle files and build word frequency dictionary."""
     enriched_dir = Path(__file__).parent / "enriched_subtitles"
@@ -53,6 +77,16 @@ def build_word_frequency_corpus() -> Dict[str, int]:
         print(f"Error building word frequency corpus: {error}")
         return {}
 
+"""
+/**
+ * Maps word frequencies to scores 1-5 based on cumulative frequency.
+ *
+ * @function map_frequency_to_scores
+ * @param {Dict[str, int]} frequency_dict - Dictionary mapping words to their frequency counts.
+ * @returns {Dict[str, int]} Dictionary mapping words to their frequency scores.
+ *
+ */
+"""
 def map_frequency_to_scores(frequency_dict: Dict[str, int]) -> Dict[str, int]:
     """Map frequency counts to scores 1-5 based on cumulative frequency."""
     # Sort words by frequency descending
@@ -89,6 +123,16 @@ def map_frequency_to_scores(frequency_dict: Dict[str, int]) -> Dict[str, int]:
     
     return score_dict
 
+"""
+/**
+ * Saves frequency and score data to cache files.
+ *
+ * @function save_frequency_data
+ * @param {Dict[str, int]} frequency_dict - Dictionary mapping words to their frequency counts.
+ * @param {Dict[str, int]} score_dict - Dictionary mapping words to their frequency scores.
+ *
+ */
+"""
 def save_frequency_data(frequency_dict: Dict[str, int], score_dict: Dict[str, int]):
     """Save frequency and score data to cache files."""
     cache_dir = Path(__file__).parent / "cache"
@@ -106,6 +150,16 @@ def save_frequency_data(frequency_dict: Dict[str, int], score_dict: Dict[str, in
     print(f"Frequency data saved to: {frequency_path}")
     print(f"Score data saved to: {score_path}")
 
+"""
+/**
+ * Prints corpus statistics and sample data, including the top 5 words by score.
+ *
+ * @function print_statistics
+ * @param {Dict[str, int]} frequency_dict - Dictionary mapping words to their frequency counts.
+ * @param {Dict[str, int]} score_dict - Dictionary mapping words to their frequency scores.
+ *
+ */
+"""
 def print_statistics(frequency_dict: Dict[str, int], score_dict: Dict[str, int]):
     """Print corpus statistics and sample data."""
     total_words = sum(frequency_dict.values())
@@ -134,6 +188,14 @@ def print_statistics(frequency_dict: Dict[str, int], score_dict: Dict[str, int])
     for score in sorted(score_counts.keys(), reverse=True):
         print(f"Score {score}: {score_counts[score]:,} words")
 
+"""
+/**
+ * Main function to build and save word frequency data.
+ *
+ * @function main
+ *
+ */
+"""
 def main():
     """Main function to build and save word frequency data."""
     print("Building word frequency corpus...")

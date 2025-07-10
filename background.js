@@ -1,7 +1,9 @@
 // background.js
+// This file contains the background script for the Chrome extension.
+// It handles the API requests and responses for the extension.
+// It also contains the functions for the Notion word tracker database. 
 
 // === NOTION API FUNCTIONS ===
-
 /**
  * Creates or updates an entry in the Notion word tracker database.
  * If the word already exists, it updates the existing entry instead of creating a duplicate.
@@ -141,7 +143,29 @@ async function createNotionWordTrackerEntry(word, status, date, apiKey, database
     }
 }
 
+// === LINGQ and NOTION API FUNCTIONS ===
+/**
+ * Handles requests for LingQ cookies and data, as well as Notion API functions
+ * LingQ API functions:
+ * - getLingqCookies (gets the LingQ cookies)
+ * - fetchLingqData (fetches the LingQ data for the word)
+ * - updateLingQTerm (updates the word's status/tags)
+ * 
+ * Notion API functions:
+ * - addNotionWordTrackerEntry (adds a new word to the Notion word tracker database)
+ * - setupNotionConfig (sets up the Notion API key and database ID)
+ * - testNotionConnection (tests the Notion API connection)
+ * @param {Object} request - The request object
+ * @param {Object} sender - The sender of the request
+ * @param {Function} sendResponse - Function to send the response back to the content script
+ */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  
+  // ------------------------------------------------------------
+  // === LINGQ API FUNCTIONS ===
+  // ------------------------------------------------------------
+  
+  // Get LingQ cookies
   if (request.type === 'getLingqCookies') {
     chrome.cookies.get({ url: "https://www.lingq.com", name: "csrftoken" }, function(csrfCookie) {
       chrome.cookies.get({ url: "https://www.lingq.com", name: "wwwlingqcomsa" }, function(sessionCookie) {
@@ -158,6 +182,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Return true to indicate async response
     return true;
   }
+ 
+  // Fetch LingQ data
   if (request.type === 'fetchLingqData') {
     const { csrftoken, wwwlingqcomsa } = request;
     fetch("https://www.lingq.com/api/languages/zh/lingqs/", {
@@ -282,6 +308,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
     return true; // Indicates async response
   }
+  
+  // ------------------------------------------------------------
+  // === NOTION API FUNCTIONS ===
+  // ------------------------------------------------------------
   
   // Handle Notion word tracker entries
   if (request.action === 'addNotionWordTrackerEntry') {
