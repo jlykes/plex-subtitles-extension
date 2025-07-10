@@ -98,6 +98,13 @@
 - Added control panel visibility management to hide control panel when video player is minimized, keeping movie info screen clean
 - Fixed words not in LingQ data not being underlined in blue by updating createWordWrapper logic to handle undefined status values
 
+### LingQ Integration & Status Management
+- Implemented differentiation between "Known" (status=3, extended_status=3) and "Learned" (status=3, extended_status=0) statuses with updated underline colors and percentage calculations
+- Removed legacy status handling code and debug logging to clean up codebase
+
+### Word Frequency Analysis & Popup Enhancement
+- Added word frequency scoring system with Python script for corpus analysis and JavaScript plugin for popup display showing frequency scores 1-5 with color coding and corpus statistics
+
 ### Development Tools & Debugging
 - Added debug logging for main functions and video readiness tracking
 - Made `setupKeyboardShortcuts()` safe to call multiple times
@@ -105,7 +112,5 @@
 - Added utility functions to process subtitle data and calculate LingQ status percentages
 - Explored global state conflicts and version tracking to prevent old polling loops from firing
 
-### LingQ Integration & Status Management
-- Implemented differentiation between "Known" (status=3, extended_status=3) and "Learned" (status=3, extended_status=0) statuses with updated underline colors and percentage calculations
-- Removed legacy status handling code and debug logging to clean up codebase
+
 

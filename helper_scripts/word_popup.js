@@ -259,12 +259,19 @@ async function showWordPopup(wordElement) {
         definition = tooltip.textContent.trim();
     }
 
+    // === Get frequency info from global data ===
+    let frequencyInfo = null;
+    if (window.frequencyData) {
+        frequencyInfo = getWordFrequencyInfo(wordText, window.frequencyData);
+        console.log('[word_popup] Frequency info:', frequencyInfo);
+    }
+
     // Create popup element
     const popup = document.createElement('div');
     popup.className = 'word-popup';
     
     // Generate and set HTML content
-    popup.innerHTML = generatePopupHTML(wordText, pinyin, definition, count);
+    popup.innerHTML = generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo);
     
     // Apply styling
     applyPopupStyling(popup);
@@ -331,12 +338,61 @@ let lastPopupWordElement = null;
  * @param {string} pinyin - The pinyin pronunciation
  * @param {string} definition - The English definition (optional)
  * @param {string} count - The word frequency count in the video
+ * @param {Object|null} frequencyInfo - Frequency information for the word
  * @returns {string} HTML string for the popup content
  */
-function generatePopupHTML(wordText, pinyin, definition, count) {
+function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
     let definitionHTML = '';
     if (definition) {
         definitionHTML = `<span class="popup-definition" style="color:#fff;font-size:0.97em;margin:0;padding:0;">${definition}</span>`;
+    }
+
+    // Generate frequency score display
+    let frequencyHTML = '';
+    if (frequencyInfo && frequencyInfo.score) {
+        const scoreColors = {
+            5: '#4CAF50', // Green for very common
+            4: '#8BC34A', // Light green for common
+            3: '#FFC107', // Yellow for moderate
+            2: '#FF9800', // Orange for uncommon
+            1: '#F44336'  // Red for rare
+        };
+        const scoreColor = scoreColors[frequencyInfo.score] || '#888';
+        const formattedCount = typeof formatFrequencyCount === 'function' ? 
+            formatFrequencyCount(frequencyInfo.count) : frequencyInfo.count;
+        
+        // Get corpus size from frequency data (total word occurrences)
+        const corpusSize = window.frequencyData ? 
+            Object.values(window.frequencyData.frequency).reduce((sum, count) => sum + count, 0) : 0;
+        const corpusSizeFormatted = typeof formatFrequencyCount === 'function' ? 
+            formatFrequencyCount(corpusSize) : corpusSize;
+        
+        frequencyHTML = `
+          <div class="popup-frequency" style="
+            width:100%;
+            text-align:center;
+            font-size:1.05em;
+            font-weight:500;
+            margin-bottom:2px;
+            line-height:1.05;
+            padding-top:0;
+            padding-bottom:0;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:8px;">
+            <span class="frequency-score" style="
+              color: ${scoreColor};
+              font-weight: bold;
+              font-size: 1.1em;">${frequencyInfo.score}</span>
+            <span style="color: ${scoreColor}; font-size: 1.1em;">⭐</span>
+            <span style="color: #888; font-size: 0.95em;">(${frequencyInfo.scoreDescription})</span>
+            <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
+            <span style="color:#fff;font-size:0.97em;margin:0;padding:0;">${formattedCount} in ${corpusSizeFormatted} corpus</span>
+            <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
+            <span class="popup-count" style="color:#fff;font-size:0.97em;margin:0;padding:0;">${count}</span>
+          </div>
+        `;
     }
 
     return `
@@ -358,9 +414,8 @@ function generatePopupHTML(wordText, pinyin, definition, count) {
         <span class="popup-pinyin" style="margin:0;padding:0;">${pinyin}</span>
         <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
         <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">${definitionHTML}</span>
-        <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
-        <span class="popup-count" style="color:#fff;font-size:0.97em;margin:0;padding:0;">${count}</span>
       </div>
+      ${frequencyHTML}
       <div class="status-row" style="display:flex;gap:16px;justify-content:center;margin-bottom:6px;">
         <button class="status-btn">0</button>
         <button class="status-btn">1</button>
@@ -432,6 +487,11 @@ function applyPopupStyling(popup) {
         btn.style.transition = 'background 0.15s, border 0.15s, color 0.15s';
         btn.style.outline = 'none';
         btn.style.boxShadow = '0 1px 4px rgba(0,0,0,0.10)';
+        btn.style.display = 'flex';
+        btn.style.alignItems = 'center';
+        btn.style.justifyContent = 'center';
+        btn.style.textAlign = 'center';
+        btn.style.lineHeight = '1';
     });
 }
 

@@ -27,6 +27,7 @@
         "helper_scripts/keyboard.js",
         "helper_scripts/live.js",
         "helper_scripts/word_popup.js",
+        "helper_scripts/word_frequency_plugin.js",
         "helper_scripts/control/skip-logic.js",
         "helper_scripts/control/ui-managers.js",
         "helper_scripts/control/appearance-binders.js",
@@ -43,7 +44,9 @@
       "resources": [
         "enriched_subtitles/*",
         "html/control_panel.html",
-        "lingqs.json"
+        "lingqs.json",
+        "cache/word_frequency.json",
+        "cache/word_scores.json"
       ],
       "matches": ["*://app.plex.tv/*"]
     }

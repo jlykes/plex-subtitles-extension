@@ -236,6 +236,18 @@ async function main() {
   // Load user's LingQ vocabulary terms
   const lingqTerms = await window.lingqData.loadLingQTerms();
 
+  // Load frequency data for word popup feature
+  try {
+    if (typeof loadFrequencyData === 'function') {
+      console.log('[Frequency] Loading frequency data...');
+      window.frequencyData = await loadFrequencyData();
+      console.log('[Frequency] Frequency data loaded successfully');
+    }
+  } catch (error) {
+    console.error('[Frequency] Error loading frequency data:', error);
+    window.frequencyData = null;
+  }
+
   // Run core initialization logic for current video
   await initializeForCurrentVideo(lingqTerms);
 
