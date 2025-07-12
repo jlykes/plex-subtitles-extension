@@ -441,7 +441,7 @@ function applyPopupStyling(popup) {
     // Apply main popup styles
     popup.style.position = 'absolute';
     popup.style.zIndex = 10001;
-    popup.style.background = '#333';
+    popup.style.background = 'rgba(51, 51, 51, 0.85)';
     popup.style.color = '#fff';
     popup.style.borderRadius = '16px';
     popup.style.padding = '14px 16px';
@@ -459,8 +459,8 @@ function applyPopupStyling(popup) {
         btn.style.width = '38px';
         btn.style.height = '38px';
         btn.style.borderRadius = '50%';
-        btn.style.border = '1px solid #888';
-        btn.style.background = '#222';
+        btn.style.border = '1px solid rgba(136, 136, 136, 0.85)';
+        btn.style.background = 'rgba(34, 34, 34, 0.85)';
         btn.style.color = '#fff';
         btn.style.fontSize = '1.2em';
         btn.style.fontWeight = 'bold';
@@ -478,8 +478,8 @@ function applyPopupStyling(popup) {
     // Style tag buttons
     popup.querySelectorAll('.tag-btn').forEach(btn => {
         btn.style.borderRadius = '18px';
-        btn.style.border = '1px solid #888';
-        btn.style.background = '#222';
+        btn.style.border = '1px solid rgba(136, 136, 136, 0.85)';
+        btn.style.background = 'rgba(34, 34, 34, 0.85)';
         btn.style.color = '#fff';
         btn.style.fontSize = '0.98em';
         btn.style.padding = '7px 18px';
