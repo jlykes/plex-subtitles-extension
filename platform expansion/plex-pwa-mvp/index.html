@@ -64,7 +64,15 @@
         
         <div class="controls">
             <button onclick="loadTestVideo()">Load Test Video</button>
+            <button onclick="discoverPlexServers()">Discover Plex Servers</button>
             <button onclick="toggleOverlay()">Toggle Text Overlay</button>
+        </div>
+        
+        <div class="section">
+            <h2>Plex Server Discovery</h2>
+            <div id="serversList" class="list">
+                <p>Click "Discover Plex Servers" to find your Plex server</p>
+            </div>
         </div>
         
         <div style="position: relative;">
@@ -94,6 +102,117 @@
             overlayVisible = !overlayVisible;
             textOverlay.style.display = overlayVisible ? 'block' : 'none';
             console.log('Overlay visibility:', overlayVisible);
+        }
+        
+        async function discoverPlexServers() {
+            console.log('Discovering Plex servers...');
+            
+            try {
+                const response = await fetch('/discover-dlna');
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayServers(data.devices);
+                } else {
+                    console.error('Discovery failed:', data.error);
+                    document.getElementById('serversList').innerHTML = '<p>Discovery failed: ' + data.error + '</p>';
+                }
+            } catch (error) {
+                console.error('Error discovering servers:', error);
+                document.getElementById('serversList').innerHTML = '<p>Error: ' + error.message + '</p>';
+            }
+        }
+        
+        function displayServers(servers) {
+            const serversList = document.getElementById('serversList');
+            
+            if (servers.length === 0) {
+                serversList.innerHTML = '<p>No Plex servers found. Make sure DLNA is enabled in Plex settings.</p>';
+                return;
+            }
+            
+            let html = '<h3>Found Plex Servers:</h3>';
+            servers.forEach(server => {
+                html += `
+                    <div class="server-item">
+                        <div><strong>IP:</strong> ${server.ip}</div>
+                        <div><strong>Server:</strong> ${server.server || 'Unknown'}</div>
+                        <button onclick="browseServer('${server.ip}')">Browse This Server</button>
+                    </div>
+                `;
+            });
+            
+            serversList.innerHTML = html;
+        }
+        
+        async function browseServer(serverIP) {
+            console.log('Browsing server:', serverIP);
+            
+            try {
+                const response = await fetch(`/browse-dlna/0?plexIP=${serverIP}&plexPort=32469`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayContent(data.items, serverIP);
+                } else {
+                    console.error('Browse failed:', data.error);
+                }
+            } catch (error) {
+                console.error('Error browsing server:', error);
+            }
+        }
+        
+        function displayContent(items, serverIP) {
+            const serversList = document.getElementById('serversList');
+            
+            let html = `<h3>Content on ${serverIP}:</h3>`;
+            
+            if (items.length === 0) {
+                html += '<p>No content found</p>';
+            } else {
+                items.forEach(item => {
+                    if (item.type === 'file' && item.url) {
+                        html += `
+                            <div class="server-item">
+                                <div><strong>${item.title}</strong></div>
+                                <button onclick="loadDLNAVideo('${item.url}')">Play This Video</button>
+                            </div>
+                        `;
+                    } else if (item.type === 'folder') {
+                        html += `
+                            <div class="server-item">
+                                <div><strong>📁 ${item.title}</strong></div>
+                                <button onclick="browseFolder('${item.id}', '${serverIP}')">Browse Folder</button>
+                            </div>
+                        `;
+                    }
+                });
+            }
+            
+            serversList.innerHTML = html;
+        }
+        
+        async function browseFolder(folderId, serverIP) {
+            console.log('Browsing folder:', folderId, 'on server:', serverIP);
+            
+            try {
+                const response = await fetch(`/browse-dlna/${folderId}?plexIP=${serverIP}&plexPort=32469`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayContent(data.items, serverIP);
+                } else {
+                    console.error('Browse folder failed:', data.error);
+                }
+            } catch (error) {
+                console.error('Error browsing folder:', error);
+            }
+        }
+        
+        function loadDLNAVideo(videoUrl) {
+            console.log('Loading DLNA video:', videoUrl);
+            videoPlayer.src = videoUrl;
+            document.getElementById('videoTitle').textContent = 'DLNA Video';
         }
         
         // Initialize
