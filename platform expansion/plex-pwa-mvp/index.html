@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plex MVP - Video Player</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .text-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        button {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        button:hover {
+            background: #005a9e;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <h1>Plex MVP - Video Player</h1>
+        
+        <div class="controls">
+            <button onclick="loadTestVideo()">Load Test Video</button>
+            <button onclick="toggleOverlay()">Toggle Text Overlay</button>
+        </div>
+        
+        <div style="position: relative;">
+            <video id="videoPlayer" controls>
+                Your browser does not support the video tag.
+            </video>
+            
+            <div class="text-overlay" id="textOverlay">
+                This is a test subtitle overlay
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const textOverlay = document.getElementById('textOverlay');
+        let overlayVisible = true;
+        
+        function loadTestVideo() {
+            // For now, we'll use a placeholder video
+            // Later we'll replace this with a real DLNA URL
+            videoPlayer.src = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+            console.log('Loading test video...');
+        }
+        
+        function toggleOverlay() {
+            overlayVisible = !overlayVisible;
+            textOverlay.style.display = overlayVisible ? 'block' : 'none';
+            console.log('Overlay visibility:', overlayVisible);
+        }
+        
+        // Initialize
+        console.log('MVP Video Player loaded');
+    </script>
+</body>
+</html> 

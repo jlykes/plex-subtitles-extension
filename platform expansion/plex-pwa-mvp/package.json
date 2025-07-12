@@ -1,0 +1,12 @@
+{
+  "name": "plex-pwa-mvp",
+  "version": "1.0.0",
+  "description": "Plex PWA MVP - Basic video player with overlay",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+} 
