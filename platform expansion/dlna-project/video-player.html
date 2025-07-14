@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enhanced Video Player</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+        }
+        
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .video-player {
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            background: #111;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        video {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        
+        .subtitle-overlay {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 24px;
+            line-height: 1.4;
+            text-align: center;
+            max-width: 90%;
+            z-index: 1000;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .control-btn {
+            background: #333;
+            color: #fff;
+            border: 2px solid #666;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .control-btn:hover {
+            background: #555;
+            border-color: #888;
+        }
+        
+        .control-btn:focus {
+            outline: 3px solid #007acc;
+        }
+        
+        .word-popup {
+            position: absolute;
+            background: rgba(51, 51, 51, 0.95);
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            font-size: 16px;
+            max-width: 250px;
+            z-index: 2000;
+        }
+        
+        .status-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .status-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #666;
+            background: #333;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .status-btn:hover {
+            background: #555;
+        }
+        
+        .subtitle-word {
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .subtitle-word:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .video-info {
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .time-display {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <h1>Enhanced Video Player</h1>
+        
+        <div class="controls">
+            <button class="control-btn" onclick="loadTestVideo()">Load Test Video</button>
+            <button class="control-btn" onclick="toggleSubtitles()">Toggle Subtitles</button>
+            <button class="control-btn" onclick="toggleFullscreen()">Fullscreen</button>
+            <button class="control-btn" onclick="loadSampleSubtitles()">Load Sample Subs</button>
+        </div>
+        
+        <div class="video-info">
+            <div id="videoTitle">No video loaded</div>
+            <div class="time-display">
+                <span id="currentTime">00:00</span> / <span id="totalTime">00:00</span>
+            </div>
+        </div>
+        
+        <div class="video-player">
+            <video id="videoPlayer" controls>
+                Your browser does not support the video tag.
+            </video>
+            <div class="subtitle-overlay" id="subtitleOverlay" style="display: none;">
+                Click "Load Sample Subs" to see enhanced subtitles
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPopup = null;
+        let wordFrequencyData = {};
+        let lingqTerms = {};
+        let currentSubtitles = [];
+        let currentSubtitleIndex = 0;
+        let subtitlesEnabled = false;
+        
+        const videoPlayer = document.getElementById('videoPlayer');
+        const subtitleOverlay = document.getElementById('subtitleOverlay');
+        
+        // Load data when page loads
+        async function loadData() {
+            try {
+                // Load word frequency data
+                const freqResponse = await fetch('/word-frequency-data');
+                const freqData = await freqResponse.json();
+                if (freqData.success) {
+                    wordFrequencyData = freqData.data;
+                    console.log('Word frequency data loaded:', Object.keys(wordFrequencyData).length, 'words');
+                }
+                
+                // Load LingQ data
+                const lingqResponse = await fetch('/lingq-data');
+                const lingqData = await lingqResponse.json();
+                if (lingqData.success) {
+                    lingqTerms = lingqData.data;
+                    console.log('LingQ data loaded:', Object.keys(lingqTerms).length, 'words');
+                }
+                
+                // Load selected video from browser
+                const selectedVideoJson = localStorage.getItem('selectedVideo');
+                if (selectedVideoJson) {
+                    const selectedVideo = JSON.parse(selectedVideoJson);
+                    loadVideoFromDLNA(selectedVideo);
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+        
+        function loadVideoFromDLNA(video) {
+            if (video && video.url) {
+                videoPlayer.src = video.url;
+                document.getElementById('videoTitle').textContent = video.title;
+                console.log('Loading DLNA video:', video.title, video.url);
+            } else {
+                console.log('No valid video URL found');
+            }
+        }
+        
+        // Load test video (you'll need to replace with a real video ID)
+        async function loadTestVideo() {
+            try {
+                // For testing, we'll use a sample video URL
+                // In production, you'd get this from your Plex server
+                const testVideoUrl = 'http://192.168.4.113:32400/library/metadata/1/media';
+                
+                const response = await fetch(testVideoUrl);
+                if (response.ok) {
+                    const data = await response.text();
+                    const mediaUrlMatch = data.match(/<Part[^>]*key="([^"]*)"[^>]*>/);
+                    
+                    if (mediaUrlMatch) {
+                        const videoPath = mediaUrlMatch[1];
+                        const fullVideoUrl = `http://192.168.4.113:32400${videoPath}`;
+                        
+                        videoPlayer.src = fullVideoUrl;
+                        document.getElementById('videoTitle').textContent = 'Test Video Loaded';
+                        
+                        console.log('Video loaded:', fullVideoUrl);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading video:', error);
+                alert('Could not load video. Check console for details.');
+            }
+        }
+        
+        // Load sample subtitles
+        async function loadSampleSubtitles() {
+            try {
+                const response = await fetch('/available-subtitles');
+                const data = await response.json();
+                
+                if (data.success && data.videos.length > 0) {
+                    // Load the first available video's subtitles
+                    const firstVideo = data.videos[0];
+                    const subtitleResponse = await fetch(`/enriched-subtitles/${encodeURIComponent(firstVideo)}`);
+                    const subtitleData = await subtitleResponse.json();
+                    
+                    if (subtitleData.success) {
+                        currentSubtitles = subtitleData.subtitles;
+                        currentSubtitleIndex = 0;
+                        subtitlesEnabled = true;
+                        
+                        // Show the first subtitle
+                        showCurrentSubtitle();
+                        
+                        console.log('Subtitles loaded:', currentSubtitles.length, 'entries');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading subtitles:', error);
+            }
+        }
+        
+        // Show current subtitle
+        function showCurrentSubtitle() {
+            if (!subtitlesEnabled || currentSubtitleIndex >= currentSubtitles.length) {
+                subtitleOverlay.style.display = 'none';
+                return;
+            }
+            
+            const subtitle = currentSubtitles[currentSubtitleIndex];
+            if (subtitle && subtitle.segmented) {
+                let enhancedHTML = '';
+                subtitle.segmented.forEach(segment => {
+                    if (segment.word.match(/[\u4e00-\u9fff]+/)) {
+                        // Chinese word - add clickable span
+                        const frequency = wordFrequencyData[segment.word] || 1;
+                        const lingqData = lingqTerms[segment.word] || null;
+                        const status = lingqData ? lingqData.status : null;
+                        const color = getStatusColor(status);
+                        
+                        enhancedHTML += `<span class="subtitle-word" data-word="${segment.word}" data-frequency="${frequency}" data-status="${status}" style="border-bottom: 2px solid ${color}; cursor: pointer;">${segment.word}</span>`;
+                    } else {
+                        // Non-Chinese text - add as-is
+                        enhancedHTML += segment.word;
+                    }
+                });
+                
+                subtitleOverlay.innerHTML = enhancedHTML;
+                subtitleOverlay.style.display = 'block';
+                
+                // Add click listeners
+                addWordClickListeners();
+            }
+        }
+        
+        // Add word click listeners
+        function addWordClickListeners() {
+            const words = subtitleOverlay.querySelectorAll('.subtitle-word');
+            words.forEach(word => {
+                word.addEventListener('click', showWordPopup);
+            });
+        }
+        
+        // Show word popup
+        function showWordPopup(event) {
+            const word = event.target;
+            const wordText = word.dataset.word;
+            const frequency = word.dataset.frequency;
+            const status = word.dataset.status;
+            
+            hidePopup();
+            
+            const popup = document.createElement('div');
+            popup.className = 'word-popup';
+            popup.innerHTML = `
+                <div style="font-weight: bold; margin-bottom: 8px;">${wordText}</div>
+                <div style="margin-bottom: 8px;">Frequency: ${frequency}</div>
+                <div style="margin-bottom: 8px;">Status: ${status || 'Not in LingQ'}</div>
+                <div class="status-buttons">
+                    <button class="status-btn" data-status="0">0</button>
+                    <button class="status-btn" data-status="1">1</button>
+                    <button class="status-btn" data-status="2">2</button>
+                    <button class="status-btn" data-status="3">3</button>
+                    <button class="status-btn" data-status="4">4</button>
+                </div>
+            `;
+            
+            // Position popup
+            const rect = word.getBoundingClientRect();
+            popup.style.left = rect.left + 'px';
+            popup.style.top = (rect.top - popup.offsetHeight - 10) + 'px';
+            
+            document.body.appendChild(popup);
+            currentPopup = popup;
+            
+            // Add status button listeners
+            popup.querySelectorAll('.status-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    updateWordStatus(wordText, btn.dataset.status);
+                    hidePopup();
+                });
+            });
+        }
+        
+        // Hide popup
+        function hidePopup() {
+            if (currentPopup) {
+                currentPopup.remove();
+                currentPopup = null;
+            }
+        }
+        
+        // Get status color
+        function getStatusColor(status) {
+            switch(status) {
+                case 0: return '#ffe600'; // New - bright yellow
+                case 1: return 'rgba(255,230,0,0.5)'; // Learning - lighter yellow
+                case 2: return 'rgba(255,230,0,0.2)'; // Familiar - very light yellow
+                case 3: return 'rgba(128,128,128,0.3)'; // Learned - gray
+                default: return 'blue'; // Not in LingQ data
+            }
+        }
+        
+        // Toggle subtitles
+        function toggleSubtitles() {
+            subtitlesEnabled = !subtitlesEnabled;
+            if (subtitlesEnabled) {
+                showCurrentSubtitle();
+            } else {
+                subtitleOverlay.style.display = 'none';
+            }
+        }
+        
+        // Update word status
+        function updateWordStatus(wordText, status) {
+            console.log('Updating word status:', wordText, status);
+            // Here you would integrate with your LingQ API
+        }
+        
+        // Toggle fullscreen
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // Video time update handler
+        videoPlayer.addEventListener('timeupdate', () => {
+            const currentTime = videoPlayer.currentTime;
+            const totalTime = videoPlayer.duration;
+            
+            document.getElementById('currentTime').textContent = formatTime(currentTime);
+            document.getElementById('totalTime').textContent = formatTime(totalTime);
+            
+            // Update subtitle based on current time
+            if (subtitlesEnabled && currentSubtitles.length > 0) {
+                updateSubtitleForTime(currentTime);
+            }
+        });
+        
+        // Format time
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '00:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Update subtitle based on current time
+        function updateSubtitleForTime(currentTime) {
+            for (let i = 0; i < currentSubtitles.length; i++) {
+                const subtitle = currentSubtitles[i];
+                if (currentTime >= subtitle.start && currentTime <= subtitle.end) {
+                    if (currentSubtitleIndex !== i) {
+                        currentSubtitleIndex = i;
+                        showCurrentSubtitle();
+                    }
+                    break;
+                }
+            }
+        }
+        
+        // Close popup when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.word-popup') && !event.target.closest('.subtitle-word')) {
+                hidePopup();
+            }
+        });
+        
+        // Keyboard navigation for TV remote
+        document.addEventListener('keydown', (event) => {
+            switch(event.key) {
+                case 'Escape':
+                    hidePopup();
+                    break;
+                case 'Enter':
+                    // Handle selection
+                    break;
+            }
+        });
+        
+        // Load data when page loads
+        loadData();
+    </script>
+</body>
+</html> 

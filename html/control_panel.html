@@ -1,0 +1,246 @@
+<!-- File: html/control_panel.html -->
+ <!--
+  This file defines the control panel layout and styles for the Plex Subtitles Extension.
+  It includes sections for key information, appearance settings, and behavior controls.
+-->
+
+<div class="control-layout-grid">
+  
+  <!-- Key Info Section -->
+  <div class="section" id="info-section">
+    <h3>Key Info</h3>
+    <div class="control-row">
+      <label for="mode-display">Mode:</label>
+      <span id="mode-display" class="info-value">Auto</span>
+    </div>
+    <div class="control-row">
+      <label for="total-words">Total Words:</label>
+      <span id="total-words" class="info-value">---</span>
+    </div>
+    <div class="control-row">
+      <label for="status-known">% Known (✓):</label>
+      <span id="status-known" class="info-value">---</span>
+    </div>
+    <div class="control-row">
+      <label for="status-learned">% Learned (4):</label>
+      <span id="status-learned" class="info-value">---</span>
+    </div>
+    <div class="control-row">
+      <label for="status-familiar">% Familiar (3):</label>
+      <span id="status-familiar" class="info-value">---</span>
+    </div>
+    <div class="control-row">
+      <label for="status-recognized">% Recognized (2):</label>
+      <span id="status-recognized" class="info-value">---</span>
+    </div>
+    <div class="control-row">
+      <label for="status-new">% New (1):</label>
+      <span id="status-new" class="info-value">---</span>
+    </div>
+    <div class="control-row">
+      <label for="status-unseen">% Unseen:</label>
+      <span id="status-unseen" class="info-value">---</span>
+    </div>
+  </div>
+
+  <!-- Appearance Section -->
+  <div class="section" id="appearance-section">
+    <h3>Appearance</h3>
+    <div class="control-row">
+      <label for="dropdown-visibility">Visibility</label>
+      <select id="dropdown-visibility">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+        <option value="on-stop">On-Stop only</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-size">Size</label>
+      <input id="slider-size" type="range" min="1" max="10" value="5.5" step="0.01" />
+    </div>
+    <div class="control-row">
+      <label for="dropdown-position">Position</label>
+      <select id="dropdown-position">
+        <option value="bottom" selected>Bottom</option>
+        <option value="top">Top</option>
+        <option value="center">Center</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-height">Height</label>
+      <input id="slider-height" type="range" min="0" max="25" value="16" step="0.05" />
+    </div>
+    <div class="control-row">
+      <label for="dropdown-lingq">LingQ status</label>
+      <select id="dropdown-lingq">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-pinyin">Pinyin</label>
+      <select id="dropdown-pinyin">
+        <option value="none">None</option>
+        <option value="all">All</option>
+        <option value="unknown-only" selected>Unknown only</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-tone-color">Tone color</label>
+      <select id="dropdown-tone-color">
+        <option value="none">None</option>
+        <option value="all" selected>All</option>
+        <option value="unknown-only">Unknown only</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-translation">Translation</label>
+      <select id="dropdown-translation">
+        <option value="off">Off</option>
+        <option value="always">Always</option>
+        <option value="on-hover" selected>On-Hover</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-background">Background</label>
+      <select id="dropdown-background">
+        <option value="off" selected>Off</option>
+        <option value="on">On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-background-opacity">Background opacity</label>
+      <input id="slider-background-opacity" type="range" min="0" max="100" value="50" step="5" />
+    </div>
+  </div>
+
+  <!-- Behavior Section -->
+  <div class="section" id="behavior-section">
+    <h3>Behavior</h3>
+    <div class="control-row">
+      <label for="dropdown-continuous">Continuous</label>
+      <select id="dropdown-continuous">
+        <option value="off">Off</option>
+        <option value="on" selected>On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="dropdown-auto-pause">Auto-pause</label>
+      <select id="dropdown-auto-pause">
+        <option value="off" selected>Off</option>
+        <option value="on">On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-autopause-delay">Auto-pause delay</label>
+      <input id="slider-autopause-delay" type="range" min="0" max="2000" value="0" />
+    </div>
+    <div class="control-row">
+      <label for="dropdown-remove-silences">Remove silences</label>
+      <select id="dropdown-remove-silences">
+        <option value="off" selected>Off</option>
+        <option value="on">On</option>
+      </select>
+    </div>
+    <div class="control-row">
+      <label for="slider-min-silence-gap">Min silence gap</label>
+      <input id="slider-min-silence-gap" type="range" min="0" max="5000" value="1000" step="100" />
+    </div>
+  </div>
+
+  <!-- Sentence Explanation Section -->
+  <div class="section" id="sentence-explanation-wrapper">
+    <h3>Sentence Explanation</h3>
+    <div id="sentence-explanation" class="info-value" style="margin-left: 10px;"></div>
+  </div>
+
+  <!-- Button Row -->
+  <div class="control-row" style="justify-content: space-between; margin-top: 8px;">
+    <button id="reset-settings-btn" class="settings-btn">Reset to Defaults</button>
+    <button id="update-lingq-btn" class="settings-btn">Update LingQ Data</button>
+  </div>
+
+</div>
+
+<!-- Style for the control panel -->
+<style>
+  .control-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .section h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 14px;
+    border-bottom: 1px solid #555;
+    color: #ddd;
+    font-weight: bold;
+  }
+
+  .control-row {
+    margin-bottom: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .control-row label {
+    flex: 1.5;
+    font-size: 12px;
+    margin-right: 6px;
+    white-space: nowrap;
+    color: #ddd;
+    line-height: 20px;         /* Match height of the dropdown */
+    vertical-align: middle;    /* Align label with select vertically */
+  }
+
+  .info-value {
+    font-size: 12px;
+    color: #ccc;
+    margin-bottom: 2px;
+  }
+
+  #sentence-explanation {
+    font-style: italic;
+  }
+
+  select {
+    border: none;
+    border-radius: 12px;
+    padding: 1px 6px;
+    background-color: #444;
+    color: white;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+
+  input[type="range"] {
+    width: 100px;
+    margin-left: 8px;
+    height: 10px;
+  }
+
+  .settings-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .settings-btn:hover {
+    background-color: #666;
+  }
+
+  .settings-btn:active {
+    background-color: #444;
+  }
+
+</style>

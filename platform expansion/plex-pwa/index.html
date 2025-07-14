@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plex PWA</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>Plex PWA</h1>
+            <div class="status" id="status">Ready</div>
+        </header>
+        
+        <main class="main">
+            <div class="section">
+                <h2>Server Discovery</h2>
+                <button id="discoverBtn" class="btn">Discover Plex Servers</button>
+                <div id="serversList" class="list"></div>
+            </div>
+            
+            <div class="section">
+                <h2>Content Browser</h2>
+                <div id="browserContent" class="browser">
+                    <p>Discover a server first to browse content</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html> 
