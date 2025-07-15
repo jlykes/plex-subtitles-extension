@@ -107,6 +107,9 @@ function getHighlightColors(buttonText, isStatusButton = true) {
         } else if (buttonText === '4') {
             // Button '4' = Learned (gray, matches underline)
             return { background: 'rgba(128,128,128,0.3)', text: 'white' };
+        } else if (buttonText === '🗑️') {
+            // Trashcan button = Ignored (red)
+            return { background: '#f44336', text: 'white' };
         } else {
             return { background: 'blue', text: '#fff' };
         }
@@ -137,6 +140,9 @@ function highlightCurrentStatusAndTags(popup, wordData) {
         if (buttonText === '✓') {
             // Checkmark button - highlight if status is 3 and extended_status is 3 (Known)
             shouldHighlight = (wordData.status === 3 && wordData.extended_status === 3);
+        } else if (buttonText === '🗑️') {
+            // Trashcan button - highlight if status is -1 (Ignored)
+            shouldHighlight = (wordData.status === -1);
         } else {
             // Number buttons (0-4) - map to correct LingQ status values
             const buttonStatus = parseInt(buttonText);
@@ -417,6 +423,7 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
       </div>
       ${frequencyHTML}
       <div class="status-row" style="display:flex;gap:16px;justify-content:center;margin-bottom:6px;">
+        <button class="status-btn">🗑️</button>
         <button class="status-btn">0</button>
         <button class="status-btn">1</button>
         <button class="status-btn">2</button>
@@ -779,6 +786,10 @@ async function updateWordStatus(wordText, buttonText) {
             // Button 4 = Learned (status=3, extended_status=0)
             newStatus = 3;
             newExtendedStatus = 0;
+        } else if (buttonText === '🗑️') {
+            // Trashcan = Ignored (status=-1)
+            newStatus = -1;
+            newExtendedStatus = null;
         } else {
             console.error(`[word_popup] Unknown status button: ${buttonText}`);
             return;
@@ -977,6 +988,7 @@ function updateWordUnderline(wordText, status, extendedStatus) {
                     // Word is in LingQ data, use its status
                     if (/[\u4e00-\u9fff]/.test(wordText)) { // Check if word is Chinese
                         switch (status) {
+                            case -1: underlineColor = null; break;                    // Ignored — no underline
                             case 3:
                                 if (extendedStatus === 0 || extendedStatus === null) {
                                     underlineColor = "rgba(128, 128, 128, 0.3)";

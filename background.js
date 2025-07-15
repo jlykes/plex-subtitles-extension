@@ -183,9 +183,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
  
-  // Fetch LingQ data
+  // Fetch LingQ data (including ignored words, minimal format)
   if (request.type === 'fetchLingqData') {
     const { csrftoken, wwwlingqcomsa } = request;
+    
+    // First fetch regular LingQ data (v1 API)
     fetch("https://www.lingq.com/api/languages/zh/lingqs/", {
       method: "GET",
       headers: {
@@ -195,12 +197,99 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       credentials: "include"
     })
       .then(response => response.json())
-      .then(data => sendResponse({ data }))
+      .then(regularData => {
+        // Map regular words to minimal format
+        const minimalRegular = regularData.map(word => ({
+          term: word.term,
+          status: word.status,
+          extended_status: word.extended_status,
+          tags: word.tags || []
+        }));
+        
+        // Then fetch ignored words (v3 API, paginated)
+        const page_size = 1000;
+        let page = 1;
+        let allIgnored = [];
+        let totalCount = null;
+        
+        function fetchIgnoredPage() {
+          return fetch(`https://www.lingq.com/api/v3/zh/cards/?page=${page}&page_size=${page_size}&status=-1`, {
+            method: "GET",
+            headers: {
+              "Accept": "application/json",
+              "X-CSRFToken": csrftoken
+            },
+            credentials: "include"
+          })
+            .then(res => res.json())
+            .then(data => {
+              if (totalCount === null) totalCount = data.count;
+              if (Array.isArray(data.results)) {
+                allIgnored = allIgnored.concat(data.results);
+              }
+              if (data.next && allIgnored.length < totalCount) {
+                page++;
+                return fetchIgnoredPage();
+              }
+            });
+        }
+        
+        fetchIgnoredPage()
+          .then(() => {
+            // Map ignored words to minimal format
+            const minimalIgnored = allIgnored.map(word => ({
+              term: word.term,
+              status: word.status,
+              extended_status: word.extended_status,
+              tags: word.tags || []
+            }));
+            // Combine both
+            const combinedData = minimalRegular.concat(minimalIgnored);
+
+            // === Console log stats by status, differentiating Learned and Known ===
+            let learnedCount = 0;
+            let knownCount = 0;
+            const statusCounts = {};
+            for (const word of combinedData) {
+              const status = word.status;
+              // Differentiating Learned and Known
+              if (status === 3) {
+                if (word.extended_status === 3) {
+                  knownCount++;
+                } else {
+                  learnedCount++;
+                }
+              }
+              statusCounts[status] = (statusCounts[status] || 0) + 1;
+            }
+            const statusNames = {
+              '-1': 'Ignored',
+              '0': 'New',
+              '1': 'Learning',
+              '2': 'Familiar'
+            };
+            console.log('[background] LingQ word status counts:');
+            Object.keys(statusCounts).sort((a, b) => Number(a) - Number(b)).forEach(status => {
+              if (status === '3') return; // Skip redundant status 3 line
+              const name = statusNames[status] || `Status ${status}`;
+              console.log(`   ${name} (status ${status}): ${statusCounts[status]} words`);
+            });
+            console.log(`   Learned (status 3, ext 0/null): ${learnedCount} words`);
+            console.log(`   Known (status 3, ext 3): ${knownCount} words`);
+            console.log(`[background] Total words: ${combinedData.length}`);
+
+            sendResponse({ data: combinedData });
+          })
+          .catch(err => {
+            // If ignored words fetch fails, still return regular data
+            sendResponse({ data: minimalRegular });
+          });
+      })
       .catch(err => sendResponse({ error: err.toString() }));
     return true; // Indicates async response
   }
   
-  // Handle LingQ term updates (PATCH requests)
+    // Handle LingQ term updates (PATCH requests)
   if (request.action === 'updateLingQTerm') {
     const { wordText, updateData } = request;
     
@@ -214,8 +303,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             "X-CSRFToken": csrfCookie.value
           };
           
-          // Step 1: Search for the word
-          const searchUrl = `https://www.lingq.com/api/v3/zh/cards/?search=${encodeURIComponent(wordText)}&page_size=5`;
+          // Use character-based approach: search, import if needed, then update
+          console.log(`🎯 Updating status for characters: '${wordText}' to status=${updateData.status}`);
+          
+          // Step 1: Search for the word (including all statuses)
+          const searchUrl = `https://www.lingq.com/api/v3/zh/cards/?search=${encodeURIComponent(wordText)}&page_size=10`;
           
           fetch(searchUrl, {
             method: "GET",
@@ -230,10 +322,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               if (searchData.count > 0) {
                 // Word found, get the first result
                 termId = searchData.results[0].pk;
-                console.log(`Found existing word: ${wordText} (ID: ${termId})`);
+                const term = searchData.results[0].term || wordText;
+                const currentStatus = searchData.results[0].status;
+                console.log(`✅ Found existing word: '${term}' (ID: ${termId}, current status: ${currentStatus})`);
+                wasImported = false;
               } else {
-                // Word not found, import it first
-                console.log(`Word not found, importing: ${wordText}`);
+                // Word not found, import it
+                console.log(`❌ Word not found, importing: ${wordText}`);
                 return fetch("https://www.lingq.com/api/v2/zh/cards/import/", {
                   method: "POST",
                   headers: headers,
@@ -243,7 +338,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                   .then(importResponse => {
                     if (importResponse.ok) {
                       wasImported = true;
-                      // Retry search up to 5 times with 3s delay
+                      // Search again to get the newly imported word's details
+                      // Retry search up to 5 times with 2s delay to handle import delay
+                      console.log("🔍 Searching for newly imported word...");
                       let attempts = 0;
                       function retrySearch() {
                         attempts++;
@@ -256,10 +353,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                           .then(importSearchData => {
                             if (importSearchData.count > 0) {
                               termId = importSearchData.results[0].pk;
-                              console.log(`Successfully imported word: ${wordText} (ID: ${termId}) after ${attempts} attempt(s)`);
-                              return importSearchData;
+                              const term = importSearchData.results[0].term || wordText;
+                              const currentStatus = importSearchData.results[0].status;
+                              console.log(`✅ Successfully imported: '${term}' (ID: ${termId}, initial status: ${currentStatus}) after ${attempts} attempt(s)`);
+                              return { found: true, termId: termId, wasImported: true };
                             } else if (attempts < 5) {
-                              return new Promise(resolve => setTimeout(resolve, 3000)).then(retrySearch);
+                              console.log(`⏳ Word not found yet, retrying in 2 seconds... (attempt ${attempts}/5)`);
+                              return new Promise(resolve => setTimeout(resolve, 2000)).then(retrySearch);
                             } else {
                               throw new Error("Could not find word after import (after 5 attempts)");
                             }
@@ -269,20 +369,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                     } else {
                       throw new Error(`Import failed: ${importResponse.status}`);
                     }
-                  })
-                  .then(importSearchData => {
-                    if (importSearchData.count > 0) {
-                      termId = importSearchData.results[0].pk;
-                      console.log(`Successfully imported word: ${wordText} (ID: ${termId})`);
-                    } else {
-                      throw new Error("Could not find word after import");
-                    }
                   });
               }
               
               if (termId) {
+                return { found: true, termId: termId, wasImported: wasImported };
+              }
+            })
+            .then(result => {
+              if (result && result.found) {
                 // Step 2: Update the word's status/tags
-                return fetch(`https://www.lingq.com/api/v3/zh/cards/${termId}/`, {
+                console.log(`🔄 Updating word (ID: ${result.termId}) with data:`, updateData);
+                return fetch(`https://www.lingq.com/api/v3/zh/cards/${result.termId}/`, {
                   method: "PATCH",
                   headers: headers,
                   credentials: "include",
@@ -293,14 +391,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
               }
             })
             .then(updateResponse => {
+              console.log(`📡 Update response status: ${updateResponse.status}`);
               if (updateResponse.ok) {
                 return updateResponse.json();
               } else {
-                throw new Error(`Update failed: ${updateResponse.status}`);
+                const errorText = updateResponse.text ? updateResponse.text() : 'No error text';
+                console.error(`❌ Update failed with status ${updateResponse.status}:`, errorText);
+                throw new Error(`Update failed: ${updateResponse.status} - ${errorText}`);
               }
             })
-            .then(data => sendResponse({ success: true, data }))
-            .catch(err => sendResponse({ success: false, error: err.toString() }));
+            .then(data => {
+              console.log(`✅ Successfully updated word status! Response data:`, data);
+              sendResponse({ success: true, data });
+            })
+            .catch(err => {
+              console.error(`❌ Error updating word: ${err}`);
+              sendResponse({ success: false, error: err.toString() });
+            });
         } else {
           sendResponse({ success: false, error: "Authentication cookies not found" });
         }
