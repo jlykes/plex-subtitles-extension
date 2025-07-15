@@ -20,6 +20,8 @@ function getUnderlineColor(statusInfo, word) {
   const extended_status = statusInfo.extended_status;
   
   switch (status) {
+    case -1:
+      return null; // No underline for Ignored
     case 3:
       // Differentiate between "Known" and "Learned" based on extended_status
       if (extended_status === 0 || extended_status === null) {
