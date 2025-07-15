@@ -105,7 +105,7 @@ def search_lingq_cards(search_term, cookies=None, headers=None, page=1, page_siz
         page_size (int): Number of results per page
         search_criteria (str): Search criteria ("contains", "exact", etc.)
         sort (str): Sort order ("alpha", "date", etc.)
-        statuses (list): List of status values to include (0,1,2,3,4)
+        statuses (list): List of status values to include (0,1,2,3,4,-1 for ignored)
     
     Returns:
         dict: Response data or error info
@@ -157,6 +157,93 @@ def search_lingq_cards(search_term, cookies=None, headers=None, page=1, page_siz
     except Exception as e:
         print(f"❌ Exception searching: {e}")
         return {"success": False, "error": str(e)}
+
+def get_ignored_words(cookies=None, headers=None, page_size=1000, save_to_file=True):
+    """
+    Gets all ignored words (status = -1) from LingQ.
+    
+    Args:
+        cookies (dict): Authentication cookies
+        headers (dict): Request headers
+        page_size (int): Number of results per page (max 1000)
+        save_to_file (bool): Whether to save results to a JSON file
+    
+    Returns:
+        dict: Response data with all ignored words
+    """
+    print("🚫 Fetching all ignored words (status = -1)...")
+    
+    all_ignored_words = []
+    page = 1
+    total_fetched = 0
+    
+    while True:
+        print(f"📄 Fetching page {page}...")
+        
+        # Use search_lingq_cards with empty search term and status filter for -1
+        result = search_lingq_cards(
+            search_term="",  # Empty search to get all words
+            cookies=cookies,
+            headers=headers,
+            page=page,
+            page_size=page_size,
+            search_criteria="contains",
+            sort="alpha",
+            statuses=[-1]  # Only ignored words
+        )
+        
+        if not result["success"]:
+            print(f"❌ Failed to fetch page {page}: {result.get('error', 'Unknown error')}")
+            break
+        
+        data = result["data"]
+        results = data.get("results", [])
+        total_count = data.get("count", 0)
+        
+        if not results:
+            print(f"📭 No more results on page {page}")
+            break
+        
+        all_ignored_words.extend(results)
+        total_fetched += len(results)
+        
+        print(f"✅ Page {page}: Got {len(results)} ignored words (Total: {total_fetched}/{total_count})")
+        
+        # Check if we've got everything
+        if total_fetched >= total_count:
+            print(f"🎉 Got all {total_fetched} ignored words!")
+            break
+        
+        # Check if there's a next page
+        if not data.get("next"):
+            print(f"🏁 No more pages available")
+            break
+        
+        page += 1
+    
+    print(f"🎉 Finished! Total ignored words: {len(all_ignored_words)}")
+    
+    # Save to file if requested
+    if save_to_file and all_ignored_words:
+        filename = "ignored_words.json"
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(all_ignored_words, f, ensure_ascii=False, indent=2)
+        print(f"✅ Saved {len(all_ignored_words)} ignored words to {filename}")
+        
+        # Also save a simple list of terms
+        terms_filename = "ignored_words_terms.txt"
+        with open(terms_filename, "w", encoding="utf-8") as f:
+            for word in all_ignored_words:
+                term = word.get("term", "")
+                if term:
+                    f.write(term + "\n")
+        print(f"✅ Saved terms list to {terms_filename}")
+    
+    return {
+        "success": True,
+        "count": len(all_ignored_words),
+        "words": all_ignored_words
+    }
 
 def import_lingq_word(text, cookies=None, headers=None):
     """
@@ -813,6 +900,9 @@ def main():
             lingq_id = int(sys.argv[2])
             test_status_update(lingq_id, cookies, HEADERS)
             
+        elif command == "ignored":
+            get_ignored_words(cookies, HEADERS)
+            
         else:
             print("Usage:")
             print("  python lingq_patch.py get <lingq_id>")
@@ -826,6 +916,7 @@ def main():
             print("  python lingq_patch.py addtag <id/characters> <tag>")
             print("  python lingq_patch.py rmtag <id/characters> <tag>")
             print("  python lingq_patch.py test <lingq_id>")
+            print("  python lingq_patch.py ignored")
             print("  python lingq_patch.py interactive")
     else:
         # Start interactive mode
