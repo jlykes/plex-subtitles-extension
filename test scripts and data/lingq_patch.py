@@ -2,6 +2,7 @@ import requests
 import browser_cookie3
 import json
 import sys
+import time
 
 # === AUTOMATIC COOKIE EXTRACTION ===
 def get_lingq_cookies():
@@ -378,20 +379,23 @@ def update_word_status_by_characters(characters, status, extended_status=None, c
         if import_result["success"]:
             # Search again to get the newly imported word's details
             print("🔍 Searching for newly imported word...")
-            search_again = search_lingq_cards(characters, cookies, headers, page_size=5)
-            
-            if search_again["success"] and search_again["count"] > 0:
-                new_word = search_again["results"][0]
-                word_pk = new_word.get("pk")
-                term = new_word.get("term", "N/A")
-                current_status = new_word.get("status", "N/A")
-                current_extended = new_word.get("extended_status", "N/A")
-                
-                print(f"✅ Successfully imported: '{term}' (ID: {word_pk})")
-                print(f"   Initial status: {current_status}, extended: {current_extended}")
-                was_imported = True
+            for attempt in range(5):
+                search_again = search_lingq_cards(characters, cookies, headers, page_size=5)
+                if search_again["success"] and search_again["count"] > 0:
+                    new_word = search_again["results"][0]
+                    word_pk = new_word.get("pk")
+                    term = new_word.get("term", "N/A")
+                    current_status = new_word.get("status", "N/A")
+                    current_extended = new_word.get("extended_status", "N/A")
+                    print(f"✅ Successfully imported: '{term}' (ID: {word_pk})")
+                    print(f"   Initial status: {current_status}, extended: {current_extended}")
+                    was_imported = True
+                    break
+                else:
+                    print(f"⏳ Word not found after import, waiting 3 seconds (attempt {attempt+1}/5)...")
+                    time.sleep(3)
             else:
-                print("❌ Failed to find newly imported word")
+                print("❌ Failed to find newly imported word after several attempts")
                 return {
                     "success": False,
                     "error": "Could not find word after import",
