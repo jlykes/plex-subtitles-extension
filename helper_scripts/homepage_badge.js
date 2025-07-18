@@ -28,6 +28,10 @@ function detectPlexPageType() {
     if (document.querySelector('[data-testid="cellItem"]') && !document.querySelector('[data-testid="metadata-title"]')) {
       return 'home_or_movie_overview';
     }
+    // Folders page: look for ListRow-row-oh5MTV
+    if (document.querySelector('.ListRow-row-oh5MTV')) {
+      return 'folders';
+    }
     // Add more page type checks as needed
     return 'unknown';
   }
@@ -296,7 +300,7 @@ async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxex
 function getEnrichedSubtitleFilenameForEpisodeCard(episodeCard) {
   // 1. Get show title (from page header, not card)
   const showTitleEl = document.querySelector('[data-testid="metadata-title"]');
-  const showTitle = showTitleEl ? showTitleEl.textContent.trim().replace(/\s+/g, '_') : null;
+  const showTitle = showTitleEl ? window.normalizeTitle(showTitleEl.textContent.trim()) : null;
 
   // 2. Get season number (from page header)
   const seasonSubtitleEl = document.querySelector('[data-testid="metadata-subtitle"]');
@@ -324,7 +328,7 @@ function getEnrichedSubtitleFilenameForEpisodeCard(episodeCard) {
 
   // 4. Build filename if all info is present
   if (showTitle && seasonNum && epNum) {
-    return `${showTitle}_-_S${seasonNum}_·_E${epNum}.enriched.json`;
+    return `${showTitle}_-_S${seasonNum}_·_E${epNum}`;
   }
   return null;
 }
@@ -393,6 +397,23 @@ async function handleTVOverviewBadge(cell) {
 }
 
 /**
+ * Handles badge injection for Plex Folders pages.
+ * @param {HTMLElement} cell - The cell to inject the badge into
+ */
+function handleFoldersPageBadge(cell) {
+  // Find the title element
+  const titleEl = cell.querySelector('.MetadataDetailsRow-title-QFytpJ');
+  // Find the year/subtitle element
+  const yearEl = cell.querySelector('.MetadataDetailsRow-subtitle-rx7YZP');
+  // Normalize the title (reuse your normalization logic)
+  const rawTitle = titleEl ? titleEl.textContent.trim() : '';
+  const normalizedTitle = window.normalizeTitle ? window.normalizeTitle(rawTitle) : rawTitle;
+
+  // Inject the badge inline with the year/subtitle
+  injectFinalBadge(cell, normalizedTitle, '', yearEl, null, null);
+}
+
+/**
  * Handles the badge injection logic for a given cell (episode card or movie card),
  * dispatching based on the detected page type.
  * @param {HTMLElement} cell - The cell to inject the badge into
@@ -414,6 +435,10 @@ async function handleBadgeInjectionForCell(cell) {
       await handleTVOverviewBadge(cell);
       break;
     }
+    case 'folders': {
+      handleFoldersPageBadge(cell);
+      break;
+    }
     default: {
       // Unknown or unsupported page type
       // Optionally, do nothing or inject a generic badge
@@ -427,15 +452,40 @@ async function handleBadgeInjectionForCell(cell) {
  * @returns {void}
  */
 function observeAndInjectEnrichedBadges() {
+  const foldersCellSelector = '.MetadataDetailsRow-overlay-OPOaNZ';
+  const defaultCellSelector = 'div[data-testid="cellItem"]';
+
+  function injectForCurrentPage() {
+    const pageType = detectPlexPageType();
+    if (pageType === 'folders') {
+      document.querySelectorAll(foldersCellSelector).forEach(cell => handleBadgeInjectionForCell(cell));
+    } else {
+      document.querySelectorAll(defaultCellSelector).forEach(cell => handleBadgeInjectionForCell(cell));
+    }
+  }
+
+  // Initial injection
+  injectForCurrentPage();
+
+  // Observe for dynamically added cells
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1) {
-          if (node.matches && node.matches(cellSelector)) {
-            handleBadgeInjectionForCell(node);
+          const pageType = detectPlexPageType();
+          if (pageType === 'folders') {
+            if (node.matches && node.matches(foldersCellSelector)) {
+              handleBadgeInjectionForCell(node);
+            }
+            const newCells = node.querySelectorAll ? node.querySelectorAll(foldersCellSelector) : [];
+            newCells.forEach(cell => handleBadgeInjectionForCell(cell));
+          } else {
+            if (node.matches && node.matches(defaultCellSelector)) {
+              handleBadgeInjectionForCell(node);
+            }
+            const newCells = node.querySelectorAll ? node.querySelectorAll(defaultCellSelector) : [];
+            newCells.forEach(cell => handleBadgeInjectionForCell(cell));
           }
-          const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
-          newCells.forEach(cell => handleBadgeInjectionForCell(cell));
         }
       });
     });
