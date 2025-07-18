@@ -5,12 +5,8 @@
     "text": "上集说到",
     "segmented": [
       {
-        "word": "上",
-        "pinyin": "shàng"
-      },
-      {
-        "word": "集",
-        "pinyin": "jí"
+        "word": "上集",
+        "pinyin": "shàng jí"
       },
       {
         "word": "说到",
@@ -18,22 +14,17 @@
       }
     ],
     "translation": "In the previous episode mentioned",
-    "explanation": "The structure 上集 (shàng jí) means 'previous episode' and is commonly used in Chinese subtitles to refer to the previous part of a series or show.",
+    "explanation": "The sentence structure 上集说到 is a common way to introduce a topic that was discussed in the previous episode.",
     "word_meanings": [
       {
-        "word": "上",
-        "meaning": "previous",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "集",
-        "meaning": "episode",
-        "grammatical_role": "noun"
+        "word": "上集",
+        "meaning": "previous episode",
+        "grammar": "noun"
       },
       {
         "word": "说到",
         "meaning": "mentioned",
-        "grammatical_role": "verb"
+        "grammar": "verb + directional complement"
       }
     ]
   },
@@ -43,8 +34,12 @@
     "text": "小巴疑心自己是海狮族",
     "segmented": [
       {
-        "word": "小巴",
-        "pinyin": "xiǎo bā"
+        "word": "小",
+        "pinyin": "xiǎo"
+      },
+      {
+        "word": "巴",
+        "pinyin": "bā"
       },
       {
         "word": "疑心",
@@ -59,20 +54,28 @@
         "pinyin": "shì"
       },
       {
-        "word": "海狮族",
-        "pinyin": "hǎi shī zú"
+        "word": "海狮",
+        "pinyin": "hǎi shī"
+      },
+      {
+        "word": "族",
+        "pinyin": "zú"
       }
     ],
-    "translation": "Xiaoba suspects that he is a member of the sea lion tribe.",
-    "explanation": "In Chinese, the verb 'to be' (是) is often omitted in sentences when it is clear from context. In this sentence, '是' is used to indicate 'is' between 'oneself' and 'sea lion tribe'.",
+    "translation": "Xiaoba suspects that he is from the sea lion tribe.",
+    "explanation": "The sentence structure in Chinese is Subject + Verb + Object. In this sentence, '小巴' (Xiaoba) is the subject, '疑心' (suspects) is the verb, and '自己是海狮族' (that he is from the sea lion tribe) is the object. The word '自己' (oneself) emphasizes that Xiaoba himself is the one who suspects his identity.",
     "word_meanings": [
       {
-        "word": "小巴",
-        "meaning": "Xiaoba (name of a character)"
+        "word": "小",
+        "meaning": "small, little"
+      },
+      {
+        "word": "巴",
+        "meaning": "Xiaoba (character's name)"
       },
       {
         "word": "疑心",
-        "meaning": "suspect/doubt"
+        "meaning": "suspect, doubt"
       },
       {
         "word": "自己",
@@ -83,8 +86,12 @@
         "meaning": "is"
       },
       {
-        "word": "海狮族",
-        "meaning": "sea lion tribe"
+        "word": "海狮",
+        "meaning": "sea lion"
+      },
+      {
+        "word": "族",
+        "meaning": "tribe"
       }
     ]
   },
@@ -118,38 +125,32 @@
         "pinyin": "lí kāi"
       }
     ],
-    "translation": "Intending to leave for fear of hurting everyone",
-    "explanation": "The structure 怕...而... is used to express the reason or cause for an action. In this sentence, 怕伤害大家 (fear of hurting everyone) is the reason for the action 打算离开 (intending to leave).",
+    "translation": "Afraid of hurting everyone and planning to leave",
+    "explanation": "The structure 怕...而... indicates the reason (afraid of) and the action (planning to leave) in this sentence.",
     "word_meanings": [
       {
         "word": "怕",
-        "meaning": "fear",
-        "grammatical_role": "verb"
+        "meaning": "afraid of"
       },
       {
         "word": "伤害",
-        "meaning": "hurt",
-        "grammatical_role": "noun (object)"
+        "meaning": "hurting"
       },
       {
         "word": "大家",
-        "meaning": "everyone",
-        "grammatical_role": "noun (subject)"
+        "meaning": "everyone"
       },
       {
         "word": "而",
-        "meaning": "for",
-        "grammatical_role": "conjunction"
+        "meaning": "and"
       },
       {
         "word": "打算",
-        "meaning": "intend",
-        "grammatical_role": "verb"
+        "meaning": "planning to"
       },
       {
         "word": "离开",
-        "meaning": "leave",
-        "grammatical_role": "verb"
+        "meaning": "leave"
       }
     ]
   },
@@ -183,32 +184,38 @@
         "pinyin": "liú xià lái"
       }
     ],
-    "translation": "But was sincerely left by everyone",
-    "explanation": "In this sentence, the tricky part might be the use of the passive marker '被' which indicates the action happening to the subject '大家' (everyone). Also, the adverbial marker '地' is used to modify the verb '留下来' (left) by indicating the manner in which the action is done.",
+    "translation": "But was sincerely persuaded to stay by everyone",
+    "explanation": "The structure '被...留下来' indicates that the subject (in this case, the speaker) was persuaded by everyone to stay sincerely.",
     "word_meanings": [
       {
         "word": "却",
-        "meaning": "but"
+        "meaning": "but",
+        "grammar": "conjunction"
       },
       {
         "word": "被",
-        "meaning": "passive marker"
+        "meaning": "passive marker",
+        "grammar": "passive marker"
       },
       {
         "word": "大家",
-        "meaning": "everyone"
+        "meaning": "everyone",
+        "grammar": "noun"
       },
       {
         "word": "真诚",
-        "meaning": "sincerely"
+        "meaning": "sincerely",
+        "grammar": "adverb"
       },
       {
         "word": "地",
-        "meaning": "adverbial marker"
+        "meaning": "adverbial particle",
+        "grammar": "adverbial particle"
       },
       {
         "word": "留下来",
-        "meaning": "left"
+        "meaning": "persuaded to stay",
+        "grammar": "verb phrase"
       }
     ]
   },
@@ -254,44 +261,53 @@
         "pinyin": "piāo liú píng"
       }
     ],
-    "translation": "And Xiao Huihui found many drift bottles in the leader's room.",
-    "explanation": "In Chinese, the word order is different from English, so it's important to pay attention to the context to understand the meaning of each word. Also, the particle '了' is used to indicate the completion of an action in this sentence.",
+    "translation": "And Xiao Huihui found many message bottles in the leader's room",
+    "explanation": "The sentence follows a subject-verb-object structure, with '而' connecting the action of finding many message bottles in the leader's room.",
     "word_meanings": [
       {
         "word": "而",
-        "meaning": "and"
+        "meaning": "and",
+        "grammar": "conjunction"
       },
       {
         "word": "小灰灰",
-        "meaning": "Xiao Huihui (character's name)"
+        "meaning": "Xiao Huihui",
+        "grammar": "noun"
       },
       {
         "word": "在",
-        "meaning": "in, at"
+        "meaning": "in",
+        "grammar": "preposition"
       },
       {
         "word": "首领",
-        "meaning": "leader"
+        "meaning": "leader",
+        "grammar": "noun"
       },
       {
         "word": "房间",
-        "meaning": "room"
+        "meaning": "room",
+        "grammar": "noun"
       },
       {
         "word": "找到",
-        "meaning": "found"
+        "meaning": "found",
+        "grammar": "verb"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion of action"
+        "meaning": "(completion marker)",
+        "grammar": "verb complement"
       },
       {
         "word": "许多",
-        "meaning": "many"
+        "meaning": "many",
+        "grammar": "adjective"
       },
       {
         "word": "漂流瓶",
-        "meaning": "drift bottles"
+        "meaning": "message bottles",
+        "grammar": "noun"
       }
     ]
   },
@@ -345,8 +361,8 @@
         "pinyin": "gōng"
       }
     ],
-    "translation": "Grey Wolf noticed a familiar bow when receiving Little Grey",
-    "explanation": "In Chinese, the possession is indicated by placing 的 after the noun. Also, the particle 了 is used to indicate the completion of an action.",
+    "translation": "Grey Wolf found a familiar bow when picking up Grey Goat.",
+    "explanation": "In this sentence, 灰太狼 (Grey Wolf) is the subject, 在 (at/in) indicates the location, 接 (pick up) is the action verb, 小灰灰 (Grey Goat) is the object being picked up, 时 (when) introduces the time of the action, 发现 (found) is the main verb, 熟悉的 (familiar) describes the bow, and 弓 (bow) is the object being found.",
     "word_meanings": [
       {
         "word": "灰太狼",
@@ -362,11 +378,11 @@
       },
       {
         "word": "接",
-        "meaning": "receive"
+        "meaning": "pick up"
       },
       {
         "word": "小灰灰",
-        "meaning": "Little Grey"
+        "meaning": "Grey Goat"
       },
       {
         "word": "时",
@@ -374,11 +390,11 @@
       },
       {
         "word": "发现",
-        "meaning": "notice/discover"
+        "meaning": "found"
       },
       {
         "word": "了",
-        "meaning": "indicates completion"
+        "meaning": "(indicating completion of an action)"
       },
       {
         "word": "熟悉",
@@ -386,7 +402,7 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "(possessive particle)"
       },
       {
         "word": "弓",
@@ -424,8 +440,8 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Could it be that I saw it wrong?",
-    "explanation": "The structure '难道是' is used to express a rhetorical question or doubt. The word '错了' means 'wrong' but in this context, it is used to indicate the completion of the action of seeing something incorrectly.",
+    "translation": "Could it be that I saw it wrong",
+    "explanation": "The structure '难道是' is used to express doubt or uncertainty, similar to 'could it be that'. The verb '看' is followed by the verb complement '错了' to indicate seeing something incorrectly.",
     "word_meanings": [
       {
         "word": "难道",
@@ -440,7 +456,7 @@
       {
         "word": "我",
         "meaning": "I",
-        "grammatical_role": "pronoun"
+        "grammatical_role": "noun"
       },
       {
         "word": "看",
@@ -450,12 +466,12 @@
       {
         "word": "错",
         "meaning": "wrong",
-        "grammatical_role": "adjective"
+        "grammatical_role": "verb complement"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion of action",
-        "grammatical_role": "particle"
+        "meaning": "(completion marker)",
+        "grammatical_role": "verb complement"
       }
     ]
   },
@@ -465,8 +481,12 @@
     "text": "不会的那张弓我不可能认错的",
     "segmented": [
       {
-        "word": "不会的",
-        "pinyin": "bú huì de"
+        "word": "不会",
+        "pinyin": "bú huì"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       },
       {
         "word": "那",
@@ -485,60 +505,56 @@
         "pinyin": "wǒ"
       },
       {
-        "word": "不可能",
-        "pinyin": "bù kě néng"
+        "word": "不",
+        "pinyin": "bù"
+      },
+      {
+        "word": "可能",
+        "pinyin": "kě néng"
       },
       {
         "word": "认错",
         "pinyin": "rèn cuò"
+      }
+    ],
+    "translation": "I can't be wrong about that bow.",
+    "explanation": "In this sentence, the speaker is emphasizing that they cannot possibly be mistaken about recognizing that specific bow.",
+    "word_meanings": [
+      {
+        "word": "不会",
+        "meaning": "cannot"
       },
       {
         "word": "的",
-        "pinyin": "de"
-      }
-    ],
-    "translation": "I cannot possibly mistake that bow.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association. In this sentence, it is used after the verb '认错' (mistake) to show that the mistake is related to the bow.",
-    "word_meanings": [
-      {
-        "word": "不会的",
-        "meaning": "cannot",
-        "grammatical_role": "adjective"
+        "meaning": "possessive particle"
       },
       {
         "word": "那",
-        "meaning": "that",
-        "grammatical_role": "pronoun"
+        "meaning": "that"
       },
       {
         "word": "张",
-        "meaning": "measure word for bow",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for flat objects like paper, pictures, etc."
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "noun"
+        "meaning": "bow"
       },
       {
         "word": "我",
-        "meaning": "I",
-        "grammatical_role": "pronoun"
+        "meaning": "I"
       },
       {
-        "word": "不可能",
-        "meaning": "cannot possibly",
-        "grammatical_role": "adverb"
+        "word": "不",
+        "meaning": "not"
+      },
+      {
+        "word": "可能",
+        "meaning": "possible"
       },
       {
         "word": "认错",
-        "meaning": "mistake",
-        "grammatical_role": "verb"
-      },
-      {
-        "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "mistake"
       }
     ]
   },
@@ -548,16 +564,8 @@
     "text": "灰太狼你在干什么呢",
     "segmented": [
       {
-        "word": "灰",
-        "pinyin": "huī"
-      },
-      {
-        "word": "太",
-        "pinyin": "tài"
-      },
-      {
-        "word": "狼",
-        "pinyin": "láng"
+        "word": "灰太狼",
+        "pinyin": "huī tài láng"
       },
       {
         "word": "你",
@@ -580,48 +588,38 @@
         "pinyin": "ne"
       }
     ],
-    "translation": "What are you doing, Wolf?",
-    "explanation": "The structure '在 + verb' is used to indicate an ongoing action in Chinese. The particle '呢' is used to emphasize the question.",
+    "translation": "Grey Wolf, what are you doing?",
+    "explanation": "The sentence structure is a simple question asking what Grey Wolf is currently doing.",
     "word_meanings": [
       {
-        "word": "灰",
-        "meaning": "Gray",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "太",
-        "meaning": "too",
-        "grammatical_role": "adverb"
-      },
-      {
-        "word": "狼",
-        "meaning": "wolf",
-        "grammatical_role": "noun"
+        "word": "灰太狼",
+        "meaning": "Grey Wolf",
+        "grammar": "noun"
       },
       {
         "word": "你",
         "meaning": "you",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "在",
-        "meaning": "at/in",
-        "grammatical_role": "preposition"
+        "meaning": "indicating an ongoing action",
+        "grammar": "preposition"
       },
       {
         "word": "干",
         "meaning": "do",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "什么",
         "meaning": "what",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "呢",
-        "meaning": "(particle indicating a question)",
-        "grammatical_role": "particle"
+        "meaning": "used at the end of a sentence to indicate a continuation of an action or situation",
+        "grammar": "particle"
       }
     ]
   },
@@ -639,8 +637,8 @@
         "pinyin": "bào qiàn"
       }
     ],
-    "translation": "Sorry sorry",
-    "explanation": "In Chinese, repeating a word can emphasize the meaning or intensity of the word. In this case, the repetition of '抱歉' emphasizes the speaker's apology.",
+    "translation": "Sorry, sorry",
+    "explanation": "The word '抱歉' means 'sorry' and is repeated for emphasis in this context.",
     "word_meanings": [
       {
         "word": "抱歉",
@@ -666,20 +664,16 @@
         "pinyin": "zěn me"
       },
       {
-        "word": "心",
-        "pinyin": "xīn"
-      },
-      {
-        "word": "不在焉",
-        "pinyin": "bù zài yān"
+        "word": "心不在焉",
+        "pinyin": "xīn bù zài yān"
       },
       {
         "word": "的",
         "pinyin": "de"
       }
     ],
-    "translation": "Why are you absent-minded?",
-    "explanation": "The phrase '心不在焉' is a Chinese idiom that means 'absent-minded' or 'not focused'.",
+    "translation": "Why are you so absent-minded?",
+    "explanation": "The phrase '心不在焉' means 'absent-minded' or 'not focused'. The particle '的' at the end of the sentence adds emphasis.",
     "word_meanings": [
       {
         "word": "你",
@@ -690,16 +684,12 @@
         "meaning": "how"
       },
       {
-        "word": "心",
-        "meaning": "heart/mind"
-      },
-      {
-        "word": "不在焉",
+        "word": "心不在焉",
         "meaning": "absent-minded"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "particle indicating emphasis or completion"
       }
     ]
   },
@@ -749,8 +739,8 @@
         "pinyin": "xiǎng"
       }
     ],
-    "translation": "I have some things that I haven't figured out, so I've been thinking about it all the time.",
-    "explanation": "The structure '没搞清楚' means 'haven't figured out' and is a common way to express not understanding something in Chinese.",
+    "translation": "I have some things not clear so I've been thinking about it",
+    "explanation": "The sentence structure in Chinese is Subject + Adverbial + Verb + Object, which is different from English. In this sentence, the speaker is explaining that they have some things they haven't figured out, so they have been continuously thinking about it.",
     "word_meanings": [
       {
         "word": "我",
@@ -770,7 +760,7 @@
       },
       {
         "word": "搞清楚",
-        "meaning": "figured out"
+        "meaning": "clear"
       },
       {
         "word": "所以",
@@ -782,15 +772,15 @@
       },
       {
         "word": "一直",
-        "meaning": "all the time"
+        "meaning": "continuously"
       },
       {
         "word": "在",
-        "meaning": "in"
+        "meaning": "at"
       },
       {
         "word": "想",
-        "meaning": "thinking"
+        "meaning": "think"
       }
     ]
   },
@@ -838,14 +828,10 @@
       {
         "word": "想",
         "pinyin": "xiǎng"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
       }
     ],
-    "translation": "Go figure it out if you haven't figured it out, why think so much?",
-    "explanation": "This sentence emphasizes the idea of not overthinking and just figuring things out instead of dwelling on them.",
+    "translation": "Didn't understand, just go figure it out, what's there to think about",
+    "explanation": "The speaker is telling someone to stop overthinking and just go figure out what they don't understand.",
     "word_meanings": [
       {
         "word": "没",
@@ -853,12 +839,11 @@
       },
       {
         "word": "搞清楚",
-        "meaning": "figure out",
-        "grammatical_role": "verb"
+        "meaning": "understand/figure out"
       },
       {
         "word": "就",
-        "meaning": "then"
+        "meaning": "just"
       },
       {
         "word": "去",
@@ -866,12 +851,11 @@
       },
       {
         "word": "搞清楚",
-        "meaning": "figure out",
-        "grammatical_role": "verb"
+        "meaning": "figure out"
       },
       {
         "word": "啊",
-        "meaning": "particle indicating suggestion"
+        "meaning": "exclamatory particle"
       },
       {
         "word": "有",
@@ -888,10 +872,6 @@
       {
         "word": "想",
         "meaning": "think"
-      },
-      {
-        "word": "的",
-        "meaning": "particle indicating possession"
       }
     ]
   },
@@ -929,43 +909,36 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Yes, thank you for reminding me.",
-    "explanation": "In this sentence, the tricky part might be the use of the particle '了' at the end, which indicates the completion of the action of being reminded. It's important to note that '了' can have various meanings depending on the context.",
+    "translation": "Yes, thank you for reminding me",
+    "explanation": "The sentence is a simple expression of gratitude in response to being reminded of something.",
     "word_meanings": [
       {
         "word": "对",
-        "meaning": "yes",
-        "grammatical_role": "interjection"
+        "meaning": "yes, correct"
       },
       {
         "word": "啊",
-        "meaning": "exclamatory particle",
-        "grammatical_role": "particle"
+        "meaning": "expressing affirmation or approval"
       },
       {
         "word": "谢谢",
-        "meaning": "thank you",
-        "grammatical_role": "verb"
+        "meaning": "thank you"
       },
       {
         "word": "你",
-        "meaning": "you",
-        "grammatical_role": "pronoun"
+        "meaning": "you"
       },
       {
         "word": "提醒",
-        "meaning": "remind",
-        "grammatical_role": "verb"
+        "meaning": "remind"
       },
       {
         "word": "我",
-        "meaning": "me",
-        "grammatical_role": "pronoun"
+        "meaning": "me"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion of an action",
-        "grammatical_role": "particle"
+        "meaning": "indicates completion of an action"
       }
     ]
   },
@@ -988,7 +961,7 @@
       }
     ],
     "translation": "Grey Wolf",
-    "explanation": "In this context, the phrase '灰太狼' refers to the character Grey Wolf in the Pleasant Goat and Big Big Wolf series. The word '太' here is used as an adverb to mean 'too much', emphasizing the character's name.",
+    "explanation": "The sentence simply consists of the character names 'Grey Wolf'. '灰' means 'grey', '太' means 'too', and '狼' means 'wolf'.",
     "word_meanings": [
       {
         "word": "灰",
@@ -1017,12 +990,8 @@
         "pinyin": "nǐ"
       },
       {
-        "word": "能",
-        "pinyin": "néng"
-      },
-      {
-        "word": "不能",
-        "pinyin": "bù néng"
+        "word": "能不能",
+        "pinyin": "néng bù néng"
       },
       {
         "word": "先",
@@ -1053,57 +1022,44 @@
         "pinyin": "a"
       }
     ],
-    "translation": "Can you please help me loosen up before leaving?",
-    "explanation": "The structure '先...再...' is used to indicate doing one action before another. In this sentence, the speaker is asking the listener to help them loosen up before leaving.",
+    "translation": "Can you help me loosen up first before leaving?",
+    "explanation": "The structure '能不能先...再...' is used to make a polite request in Chinese, asking someone to do something before doing something else.",
     "word_meanings": [
       {
         "word": "你",
-        "meaning": "you",
-        "grammatical_role": "subject"
+        "meaning": "you"
       },
       {
-        "word": "能",
-        "meaning": "can",
-        "grammatical_role": "modal verb"
-      },
-      {
-        "word": "不能",
-        "meaning": "cannot",
-        "grammatical_role": "negation"
+        "word": "能不能",
+        "meaning": "can"
       },
       {
         "word": "先",
-        "meaning": "first",
-        "grammatical_role": "adverb"
+        "meaning": "first"
       },
       {
         "word": "帮",
-        "meaning": "help",
-        "grammatical_role": "verb"
+        "meaning": "help"
       },
       {
         "word": "我",
-        "meaning": "me",
-        "grammatical_role": "object"
+        "meaning": "me"
       },
       {
         "word": "松开",
-        "meaning": "loosen up",
-        "grammatical_role": "verb"
+        "meaning": "loosen up"
       },
       {
         "word": "再",
-        "meaning": "again",
-        "grammatical_role": "adverb"
+        "meaning": "before"
       },
       {
         "word": "走",
-        "meaning": "leave",
-        "grammatical_role": "verb"
+        "meaning": "leave"
       },
       {
         "word": "啊",
-        "meaning": "particle for emphasis"
+        "meaning": "particle indicating a request or suggestion"
       }
     ]
   },
@@ -1113,8 +1069,12 @@
     "text": "对不起了首领先睡一会吧",
     "segmented": [
       {
-        "word": "对不起了",
-        "pinyin": "duì bù qǐ le"
+        "word": "对不起",
+        "pinyin": "duì bù qǐ"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       },
       {
         "word": "首领",
@@ -1129,46 +1089,51 @@
         "pinyin": "shuì"
       },
       {
-        "word": "一会",
-        "pinyin": "yī huì"
+        "word": "一会儿",
+        "pinyin": "yī huì er"
       },
       {
         "word": "吧",
         "pinyin": "ba"
       }
     ],
-    "translation": "Sorry, leader, please go sleep first.",
-    "explanation": "In this sentence, the tricky part might be the use of '了' after '对不起', which indicates a past action. Also, '先' is used to suggest doing something before something else, in this case, sleeping before doing something else.",
+    "translation": "Sorry, leader, please rest for a while first.",
+    "explanation": "The sentence structure is Subject + Verb + Adverb + Object + Modal Particle. The speaker is apologizing to the leader and suggesting that they rest for a while first.",
     "word_meanings": [
       {
-        "word": "对不起了",
+        "word": "对不起",
         "meaning": "Sorry",
-        "grammatical_role": "expression"
+        "grammar": "interjection"
+      },
+      {
+        "word": "了",
+        "meaning": "indicates completion of an action",
+        "grammar": "particle"
       },
       {
         "word": "首领",
         "meaning": "leader",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "先",
         "meaning": "first",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "睡",
-        "meaning": "sleep",
-        "grammatical_role": "verb"
+        "meaning": "rest/sleep",
+        "grammar": "verb"
       },
       {
-        "word": "一会",
-        "meaning": "a while",
-        "grammatical_role": "noun"
+        "word": "一会儿",
+        "meaning": "for a while",
+        "grammar": "noun"
       },
       {
         "word": "吧",
-        "meaning": "please",
-        "grammatical_role": "particle"
+        "meaning": "modal particle indicating suggestion",
+        "grammar": "particle"
       }
     ]
   },
@@ -1202,32 +1167,38 @@
         "pinyin": "tài hǎo le"
       }
     ],
-    "translation": "It's great that the leader isn't there.",
-    "explanation": "The tricky part here is the use of '原来' which means 'originally' but in this context, it is used to express a realization or discovery. Also, the structure '不在' means 'is not there' where '不' means 'not' and '在' means 'at/in'.",
+    "translation": "So the leader is not there, that's great",
+    "explanation": "The sentence structure follows the pattern '原来 + situation + 不在 + location + 太好了', meaning 'So it turns out the leader is not there, that's great'. The use of '原来' adds a sense of realization or discovery.",
     "word_meanings": [
       {
         "word": "原来",
-        "meaning": "originally"
+        "meaning": "so; turns out",
+        "grammatical_role": "adverb"
       },
       {
         "word": "首领",
-        "meaning": "leader"
+        "meaning": "leader",
+        "grammatical_role": "noun"
       },
       {
         "word": "不",
-        "meaning": "not"
+        "meaning": "not",
+        "grammatical_role": "adverb"
       },
       {
         "word": "在",
-        "meaning": "at/in"
+        "meaning": "at; in",
+        "grammatical_role": "preposition"
       },
       {
         "word": "那",
-        "meaning": "there"
+        "meaning": "there",
+        "grammatical_role": "pronoun"
       },
       {
         "word": "太好了",
-        "meaning": "great"
+        "meaning": "great",
+        "grammatical_role": "adjective"
       }
     ]
   },
@@ -1253,28 +1224,28 @@
         "pinyin": "lái le"
       }
     ],
-    "translation": "Someone is coming, not good.",
-    "explanation": "In Chinese, the structure '有人要来了' is commonly used to indicate that someone is coming or on their way. The placement of '不好' before the sentence emphasizes that the situation is not good.",
+    "translation": "Not good, someone is coming",
+    "explanation": "The structure '有人要来了' indicates that someone is on their way or coming towards the speaker, emphasizing the imminent arrival of the person.",
     "word_meanings": [
       {
         "word": "不好",
         "meaning": "not good",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "有人",
         "meaning": "someone",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "要",
-        "meaning": "will",
-        "grammatical_role": "verb"
+        "meaning": "to come",
+        "grammar": "verb"
       },
       {
         "word": "来了",
-        "meaning": "coming",
-        "grammatical_role": "verb"
+        "meaning": "is coming",
+        "grammar": "verb complement"
       }
     ]
   },
@@ -1292,16 +1263,18 @@
         "pinyin": "jiē zhe"
       }
     ],
-    "translation": "Mei Yangyang continued",
-    "explanation": "In this context, 美羊羊 is the name of a character in the movie, and 接着 is used to indicate that the character is continuing to do something.",
+    "translation": "Mei Yangyang continues",
+    "explanation": "The sentence indicates that Mei Yangyang is continuing to do something, without specifying the exact action.",
     "word_meanings": [
       {
         "word": "美羊羊",
-        "meaning": "Mei Yangyang (character's name)"
+        "meaning": "Mei Yangyang",
+        "grammatical_role": "subject"
       },
       {
         "word": "接着",
-        "meaning": "continued (to continue)"
+        "meaning": "continues",
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -1315,28 +1288,20 @@
         "pinyin": "měi yáng yáng"
       },
       {
-        "word": "这",
-        "pinyin": "zhè"
-      },
-      {
-        "word": "边",
-        "pinyin": "biān"
+        "word": "这边",
+        "pinyin": "zhè biān"
       }
     ],
-    "translation": "This side, Mei Yangyang",
-    "explanation": "In this context, the sentence means 'Mei Yangyang, this side.' The structure of '这边' is commonly used to indicate a specific direction or side in Chinese.",
+    "translation": "Mei Yangyang here",
+    "explanation": "The sentence simply states the location of the character Mei Yangyang, emphasizing that she is 'here'.",
     "word_meanings": [
       {
         "word": "美羊羊",
-        "meaning": "Mei Yangyang (character's name)"
+        "meaning": "Mei Yangyang"
       },
       {
-        "word": "这",
-        "meaning": "this"
-      },
-      {
-        "word": "边",
-        "meaning": "side"
+        "word": "这边",
+        "meaning": "here"
       }
     ]
   },
@@ -1379,39 +1344,47 @@
       }
     ],
     "translation": "Lazy Goat, why are you standing there daydreaming?",
-    "explanation": "In Chinese, the subject usually comes before the verb. The use of '呀' at the end of the sentence adds a sense of casualness or friendliness.",
+    "explanation": "The sentence structure is Subject + Verb + Location + Verb Complement + Question Word + Particle. The use of '呀' at the end adds a sense of casualness or familiarity to the question.",
     "word_meanings": [
       {
         "word": "懒羊羊",
-        "meaning": "Lazy Goat"
+        "meaning": "Lazy Goat",
+        "grammar": "subject"
       },
       {
         "word": "你",
-        "meaning": "you"
+        "meaning": "you",
+        "grammar": "subject"
       },
       {
         "word": "站",
-        "meaning": "stand"
+        "meaning": "stand",
+        "grammar": "verb"
       },
       {
         "word": "在",
-        "meaning": "at/in"
+        "meaning": "at/in",
+        "grammar": "preposition"
       },
       {
         "word": "那里",
-        "meaning": "there"
+        "meaning": "there",
+        "grammar": "noun"
       },
       {
         "word": "发呆",
-        "meaning": "daydreaming"
+        "meaning": "daydreaming",
+        "grammar": "verb complement"
       },
       {
         "word": "干什么",
-        "meaning": "what are you doing"
+        "meaning": "why",
+        "grammar": "question word"
       },
       {
         "word": "呀",
-        "meaning": "used at the end of a sentence to soften the tone or express surprise"
+        "meaning": "(particle indicating mild surprise)",
+        "grammar": "particle"
       }
     ]
   },
@@ -1437,8 +1410,8 @@
         "pinyin": "fēi pán"
       }
     ],
-    "translation": "Why not catch the frisbee",
-    "explanation": "In Chinese, the word order is different from English, so '为什么不' directly translates to 'why not'. Additionally, '接' can mean 'to catch' in this context, not just 'to receive'.",
+    "translation": "Why not catch the frisbee?",
+    "explanation": "The sentence structure is a simple question asking why someone is not catching the frisbee.",
     "word_meanings": [
       {
         "word": "为什么",
@@ -1480,12 +1453,12 @@
         "pinyin": "le"
       }
     ],
-    "translation": "What did you see?",
-    "explanation": "The structure '你们看见什么了' is a basic question in Chinese, asking 'What did you see?' The particle '了' at the end indicates the completion of the action.",
+    "translation": "What did you guys see?",
+    "explanation": "The sentence structure is a simple question in Chinese, with the subject '你们' (you guys), the verb '看见' (see), and the object '什么' (what). The particle '了' at the end indicates the completion of the action.",
     "word_meanings": [
       {
         "word": "你们",
-        "meaning": "you all",
+        "meaning": "you guys",
         "grammatical_role": "subject"
       },
       {
@@ -1500,8 +1473,8 @@
       },
       {
         "word": "了",
-        "meaning": "(indicates completion of action)",
-        "grammatical_role": "particle"
+        "meaning": "indicates completion of action",
+        "grammatical_role": "verb complement"
       }
     ]
   },
@@ -1516,11 +1489,11 @@
       }
     ],
     "translation": "06",
-    "explanation": "This subtitle line simply displays the number 6, indicating a specific scene or segment in the movie.",
+    "explanation": "This sentence simply states the number '06' and does not require further explanation.",
     "word_meanings": [
       {
         "word": "06",
-        "meaning": "the number 6"
+        "meaning": "06"
       }
     ]
   },
@@ -1551,7 +1524,7 @@
       }
     ],
     "translation": "The ocean over there is pink.",
-    "explanation": "In Chinese, adjectives usually come before the noun they describe. Also, possessive particle '的' is used to indicate possession or description in this sentence.",
+    "explanation": "In this sentence, 的 is a possessive particle used to indicate the relationship between 'over there' and 'ocean'. 粉色 is a compound word meaning 'pink'.",
     "word_meanings": [
       {
         "word": "那边",
@@ -1613,8 +1586,8 @@
         "pinyin": "le"
       }
     ],
-    "translation": "The sea with two colors is really magical.",
-    "explanation": "The structure '两种...的...' is used to describe a noun with two different qualities or characteristics. In this sentence, it describes the sea having two colors.",
+    "translation": "The two-colored sea is really magical",
+    "explanation": "This sentence showcases the use of adjectives in Chinese to describe nouns. The structure 'adjective + noun' is commonly used to express characteristics or qualities of the noun. In this case, the adjective '两种' (two kinds/types) describes the noun '大海' (sea/ocean), followed by the adverb '真是' (really) to emphasize the quality described by the adjective.",
     "word_meanings": [
       {
         "word": "两种",
@@ -1623,17 +1596,17 @@
       },
       {
         "word": "颜色",
-        "meaning": "colors",
+        "meaning": "color",
         "grammatical_role": "noun"
       },
       {
         "word": "的",
-        "meaning": "of",
+        "meaning": "'s / of",
         "grammatical_role": "possessive particle"
       },
       {
         "word": "大海",
-        "meaning": "sea",
+        "meaning": "sea/ocean",
         "grammatical_role": "noun"
       },
       {
@@ -1654,7 +1627,7 @@
       {
         "word": "了",
         "meaning": "(indicates completion of action)",
-        "grammatical_role": "particle"
+        "grammatical_role": "verb complement"
       }
     ]
   },
@@ -1672,12 +1645,8 @@
         "pinyin": "le"
       },
       {
-        "word": "灰太",
-        "pinyin": "huī tài"
-      },
-      {
-        "word": "狠",
-        "pinyin": "hěn"
+        "word": "灰太狠",
+        "pinyin": "huī tài hěn"
       },
       {
         "word": "看起来",
@@ -1692,43 +1661,32 @@
         "pinyin": "huāng zhāng"
       }
     ],
-    "translation": "Why does Hui Tai look so panicked?",
-    "explanation": "The structure '怎么了' is commonly used in Chinese to ask why something has changed or happened. The character '灰太' is a name and '狠' is used as an intensifier to mean 'very'.",
+    "translation": "What's wrong, Gray Wolf looks so flustered",
+    "explanation": "The sentence structure is Subject + Verb + Adverb. The use of '了' at the end of the sentence indicates a change of state or completion of an action.",
     "word_meanings": [
       {
         "word": "怎么",
-        "meaning": "why",
-        "grammatical_role": "interrogative adverb"
+        "meaning": "what"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion or change of situation",
-        "grammatical_role": "particle"
+        "meaning": "(completion marker)"
       },
       {
-        "word": "灰太",
-        "meaning": "Hui Tai (character's name)",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "狠",
-        "meaning": "very",
-        "grammatical_role": "adverb"
+        "word": "灰太狠",
+        "meaning": "Gray Wolf"
       },
       {
         "word": "看起来",
-        "meaning": "looks",
-        "grammatical_role": "verb"
+        "meaning": "looks"
       },
       {
         "word": "这么",
-        "meaning": "so",
-        "grammatical_role": "adverb"
+        "meaning": "so"
       },
       {
         "word": "慌张",
-        "meaning": "panicked",
-        "grammatical_role": "adjective"
+        "meaning": "flustered"
       }
     ]
   },
@@ -1759,7 +1717,7 @@
       }
     ],
     "translation": "This is not dad's bow",
-    "explanation": "In Chinese, possessive relationships are often expressed by placing 的 after the possessor. For example, 爸爸的 means 'dad's'.",
+    "explanation": "The sentence follows the subject-verb-object structure commonly seen in Chinese sentences. The possessive particle '的' is used to indicate possession, similar to the English 's. The negation '不是' is used to express 'is not'.",
     "word_meanings": [
       {
         "word": "这个",
@@ -1768,7 +1726,7 @@
       },
       {
         "word": "不是",
-        "meaning": "is not",
+        "meaning": "not be",
         "grammatical_role": "verb"
       },
       {
@@ -1823,42 +1781,35 @@
       }
     ],
     "translation": "Where did you get this bow from?",
-    "explanation": "In Chinese, the word order is subject-verb-object, so '你' (you) comes before '从哪里' (from where). The measure word '把' is used for objects like bows in this context.",
+    "explanation": "The sentence structure is Subject-Verb-Object. The measure word '把' is used for certain objects like bows in Chinese.",
     "word_meanings": [
       {
         "word": "这",
-        "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "meaning": "this"
       },
       {
         "word": "把",
-        "meaning": "measure word for certain objects like bows or chairs",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for bow"
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "noun"
+        "meaning": "bow"
       },
       {
         "word": "你",
-        "meaning": "you",
-        "grammatical_role": "pronoun"
+        "meaning": "you"
       },
       {
         "word": "从",
-        "meaning": "from",
-        "grammatical_role": "preposition"
+        "meaning": "from"
       },
       {
         "word": "哪里",
-        "meaning": "where",
-        "grammatical_role": "interrogative pronoun"
+        "meaning": "where"
       },
       {
         "word": "拿到",
-        "meaning": "get",
-        "grammatical_role": "verb"
+        "meaning": "get"
       }
     ]
   },
@@ -1892,8 +1843,8 @@
         "pinyin": "zhǎo dào"
       }
     ],
-    "translation": "I found in the leader's room",
-    "explanation": "In Chinese, possessives are indicated by adding 的 after the noun. In this sentence, 我在首领的房间找到的 translates to 'I found in the leader's room.'",
+    "translation": "I found it in the leader's room",
+    "explanation": "The sentence follows the subject-verb-object word order commonly used in Chinese. The possessive particle '的' indicates possession, and the verb '找到' is used to express finding something.",
     "word_meanings": [
       {
         "word": "我",
@@ -1901,15 +1852,15 @@
       },
       {
         "word": "在",
-        "meaning": "in, at"
+        "meaning": "in/at"
       },
       {
         "word": "首领",
-        "meaning": "leader's"
+        "meaning": "leader"
       },
       {
         "word": "的",
-        "meaning": "'s (possessive particle)"
+        "meaning": "possessive particle"
       },
       {
         "word": "房间",
@@ -1967,8 +1918,8 @@
         "pinyin": "ne"
       }
     ],
-    "translation": "But why is dad's bow at the leader's place?",
-    "explanation": "In Chinese, possessive relationships are indicated by placing 的 after the possessor. The use of 会 in this context indicates a possibility or likelihood of something happening.",
+    "translation": "But why would dad's bow be at the leader's place?",
+    "explanation": "The sentence structure follows the pattern of '为什么...呢' to pose a rhetorical question, emphasizing the curiosity about why dad's bow is at the leader's place.",
     "word_meanings": [
       {
         "word": "可是",
@@ -1980,7 +1931,7 @@
       },
       {
         "word": "的",
-        "meaning": "'s (possessive particle)"
+        "meaning": "possessive particle"
       },
       {
         "word": "弓",
@@ -1992,7 +1943,7 @@
       },
       {
         "word": "会",
-        "meaning": "is (modal verb indicating possibility)"
+        "meaning": "would"
       },
       {
         "word": "在",
@@ -2008,7 +1959,7 @@
       },
       {
         "word": "呢",
-        "meaning": "(particle indicating a question or emphasis)"
+        "meaning": "modal particle indicating a rhetorical question"
       }
     ]
   },
@@ -2042,32 +1993,38 @@
         "pinyin": "ma"
       }
     ],
-    "translation": "Are dad and grandpa here too?",
-    "explanation": "The sentence structure follows the pattern of subject + adverb + verb + location + question particle. The use of '也' emphasizes the inclusion of dad and grandpa in the question.",
+    "translation": "Is Grandpa also here?",
+    "explanation": "The sentence structure follows the pattern of Subject + 也 + 在 + Location + 吗, where 吗 is used to form a yes/no question.",
     "word_meanings": [
       {
         "word": "爸爸",
-        "meaning": "dad"
+        "meaning": "dad/father",
+        "grammatical_role": "noun"
       },
       {
         "word": "爷爷",
-        "meaning": "grandpa"
+        "meaning": "grandpa",
+        "grammatical_role": "noun"
       },
       {
         "word": "也",
-        "meaning": "also"
+        "meaning": "also",
+        "grammatical_role": "adverb"
       },
       {
         "word": "在",
-        "meaning": "at"
+        "meaning": "at/in",
+        "grammatical_role": "preposition"
       },
       {
         "word": "这里",
-        "meaning": "here"
+        "meaning": "here",
+        "grammatical_role": "noun"
       },
       {
         "word": "吗",
-        "meaning": "question particle"
+        "meaning": "question particle",
+        "grammatical_role": "particle"
       }
     ]
   },
@@ -2093,24 +2050,28 @@
         "pinyin": "kàn kàn"
       }
     ],
-    "translation": "Go over there and take a look",
-    "explanation": "In Chinese, verbs do not change form based on the subject or tense, so '你们' (you all) is followed directly by '去' (go). Also, repeating a verb like '看' (look) with a duplicate character '看看' adds a sense of casual suggestion or encouragement.",
+    "translation": "You guys go over there and take a look.",
+    "explanation": "The sentence is a command telling a group of people to go to a specific location and visually inspect something.",
     "word_meanings": [
       {
         "word": "你们",
-        "meaning": "you all"
+        "meaning": "you guys",
+        "grammatical_role": "subject"
       },
       {
         "word": "去",
-        "meaning": "go"
+        "meaning": "go",
+        "grammatical_role": "verb"
       },
       {
         "word": "那边",
-        "meaning": "over there"
+        "meaning": "over there",
+        "grammatical_role": "location adverbial"
       },
       {
         "word": "看看",
-        "meaning": "take a look"
+        "meaning": "take a look",
+        "grammatical_role": "verb complement"
       }
     ]
   },
@@ -2128,18 +2089,18 @@
         "pinyin": "nǐ men"
       }
     ],
-    "translation": "You you",
-    "explanation": "In Chinese, pronouns do not change based on singular or plural forms, so '你们' can mean 'you' or 'you all' depending on the context.",
+    "translation": "You guys you guys",
+    "explanation": "The repetition of '你们' emphasizes the speaker's address to a group of people, similar to saying 'you guys, you guys' in English.",
     "word_meanings": [
       {
         "word": "你们",
-        "meaning": "you all",
-        "grammatical_role": "pronoun"
+        "meaning": "you guys",
+        "grammatical_role": "subject"
       },
       {
         "word": "你们",
-        "meaning": "you all",
-        "grammatical_role": "pronoun"
+        "meaning": "you guys",
+        "grammatical_role": "subject"
       }
     ]
   },
@@ -2166,11 +2127,11 @@
       }
     ],
     "translation": "Go search over there",
-    "explanation": "In Chinese, the verb usually comes before the object. Also, the verb '搜' is repeated for emphasis.",
+    "explanation": "The sentence structure is Subject + Verb + Object, with the verb '搜' (search) repeated for emphasis.",
     "word_meanings": [
       {
         "word": "去",
-        "meaning": "Go",
+        "meaning": "go",
         "grammatical_role": "verb"
       },
       {
@@ -2217,7 +2178,7 @@
       }
     ],
     "translation": "Not good, could it be discovered?",
-    "explanation": "The structure '难道' is used to express a rhetorical question or to suggest a possibility. The use of '被' indicates the passive voice in Chinese.",
+    "explanation": "The structure '难道...了' is used to express a rhetorical question, implying a negative or unexpected outcome.",
     "word_meanings": [
       {
         "word": "不好",
@@ -2241,7 +2202,7 @@
       },
       {
         "word": "了",
-        "meaning": "indicating completion of an action",
+        "meaning": "completion particle",
         "grammatical_role": "particle"
       }
     ]
@@ -2264,8 +2225,12 @@
         "pinyin": "gōng"
       },
       {
-        "word": "收好",
-        "pinyin": "shōu hǎo"
+        "word": "收",
+        "pinyin": "shōu"
+      },
+      {
+        "word": "好",
+        "pinyin": "hǎo"
       },
       {
         "word": "我",
@@ -2289,7 +2254,7 @@
       }
     ],
     "translation": "You put away the bow, I'll go out and see what's going on.",
-    "explanation": "In Chinese, the verb '看' (to see/look) is often reduplicated to indicate a quick or casual action, similar to adding 'just' in English. The particle '把' is used to indicate the object of the verb in this sentence structure.",
+    "explanation": "In this sentence, the structure '把 + object + verb' is used to indicate the object is being affected by the action of the verb. The repetition of '看看' emphasizes the act of taking a quick look.",
     "word_meanings": [
       {
         "word": "你",
@@ -2297,15 +2262,19 @@
       },
       {
         "word": "把",
-        "meaning": "particle indicating the object of the verb"
+        "meaning": "put away (indicating the object is affected by the action)"
       },
       {
         "word": "弓",
         "meaning": "bow"
       },
       {
-        "word": "收好",
-        "meaning": "put away"
+        "word": "收",
+        "meaning": "collect; put away"
+      },
+      {
+        "word": "好",
+        "meaning": "well; properly"
       },
       {
         "word": "我",
@@ -2317,7 +2286,7 @@
       },
       {
         "word": "看看",
-        "meaning": "have a look"
+        "meaning": "take a look"
       },
       {
         "word": "什么",
@@ -2335,12 +2304,20 @@
     "text": "快点快点给我找出来",
     "segmented": [
       {
-        "word": "快点",
-        "pinyin": "kuài diǎn"
+        "word": "快",
+        "pinyin": "kuài"
       },
       {
-        "word": "快点",
-        "pinyin": "kuài diǎn"
+        "word": "点",
+        "pinyin": "diǎn"
+      },
+      {
+        "word": "快",
+        "pinyin": "kuài"
+      },
+      {
+        "word": "点",
+        "pinyin": "diǎn"
       },
       {
         "word": "给",
@@ -2351,26 +2328,40 @@
         "pinyin": "wǒ"
       },
       {
-        "word": "找出来",
-        "pinyin": "zhǎo chū lái"
+        "word": "找",
+        "pinyin": "zhǎo"
+      },
+      {
+        "word": "出来",
+        "pinyin": "chū lái"
       }
     ],
     "translation": "Hurry up and find it for me quickly.",
-    "explanation": "In Chinese, adverbial phrases can be repeated for emphasis, as seen with '快点快点' meaning 'hurry up quickly'. The verb '找出来' means 'find it' and includes the directional complement '出来' indicating the action of finding something out.",
+    "explanation": "This sentence is a command instructing someone to quickly find something and bring it out. The repetition of '快点' emphasizes the urgency of the action.",
     "word_meanings": [
       {
-        "word": "快点",
-        "meaning": "hurry up",
-        "grammatical_role": "adverbial phrase"
+        "word": "快",
+        "meaning": "quickly; hurry up",
+        "grammatical_role": "adverb"
       },
       {
-        "word": "快点",
-        "meaning": "hurry up",
-        "grammatical_role": "adverbial phrase"
+        "word": "点",
+        "meaning": "particle indicating a small amount or degree",
+        "grammatical_role": "noun"
+      },
+      {
+        "word": "快",
+        "meaning": "quickly; hurry up",
+        "grammatical_role": "adverb"
+      },
+      {
+        "word": "点",
+        "meaning": "particle indicating a small amount or degree",
+        "grammatical_role": "noun"
       },
       {
         "word": "给",
-        "meaning": "give",
+        "meaning": "to give",
         "grammatical_role": "verb"
       },
       {
@@ -2379,9 +2370,14 @@
         "grammatical_role": "pronoun"
       },
       {
-        "word": "找出来",
-        "meaning": "find it",
-        "grammatical_role": "verb phrase"
+        "word": "找",
+        "meaning": "to find",
+        "grammatical_role": "verb"
+      },
+      {
+        "word": "出来",
+        "meaning": "out; to come out",
+        "grammatical_role": "verb complement"
       }
     ]
   },
@@ -2424,47 +2420,39 @@
       }
     ],
     "translation": "Ah Shui, what are you guys doing?",
-    "explanation": "The structure '在 + verb' is used to indicate an ongoing action in Chinese. The particle '呢' is used to indicate a question in a casual tone.",
+    "explanation": "The sentence structure follows the pattern 'Subject + 这是 + 在 + Verb + 什么 + 呢', which is commonly used in Chinese to ask about ongoing actions or situations.",
     "word_meanings": [
       {
         "word": "阿水",
-        "meaning": "Ah Shui (name of a character)",
-        "grammatical_role": "subject"
+        "meaning": "Ah Shui (name of a character)"
       },
       {
         "word": "你们",
-        "meaning": "you guys",
-        "grammatical_role": "pronoun"
+        "meaning": "you guys"
       },
       {
         "word": "这",
-        "meaning": "this",
-        "grammatical_role": "determiner"
+        "meaning": "this"
       },
       {
         "word": "是",
-        "meaning": "are",
-        "grammatical_role": "verb"
+        "meaning": "are"
       },
       {
         "word": "在",
-        "meaning": "doing",
-        "grammatical_role": "preposition"
+        "meaning": "doing"
       },
       {
         "word": "干",
-        "meaning": "do",
-        "grammatical_role": "verb"
+        "meaning": "what"
       },
       {
         "word": "什么",
-        "meaning": "what",
-        "grammatical_role": "pronoun"
+        "meaning": "what"
       },
       {
         "word": "呢",
-        "meaning": "question particle",
-        "grammatical_role": "particle"
+        "meaning": "(particle indicating a question)"
       }
     ]
   },
@@ -2486,12 +2474,12 @@
         "pinyin": "gōng"
       },
       {
-        "word": "丢了",
-        "pinyin": "diū le"
+        "word": "丢",
+        "pinyin": "diū"
       }
     ],
     "translation": "The leader's bow is lost",
-    "explanation": "In Chinese, possession is indicated by placing 的 after the possessor (首领) and before the possessed object (弓). The verb 丢了 indicates that something is lost.",
+    "explanation": "The sentence structure in Chinese is Subject + Possessive Particle + Object + Verb. In this case, '首领的弓' means 'the leader's bow'. The verb '丢了' indicates that the bow is lost.",
     "word_meanings": [
       {
         "word": "首领",
@@ -2500,8 +2488,8 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "'s",
+        "grammatical_role": "possessive particle"
       },
       {
         "word": "弓",
@@ -2509,7 +2497,7 @@
         "grammatical_role": "noun"
       },
       {
-        "word": "丢了",
+        "word": "丢",
         "meaning": "lost",
         "grammatical_role": "verb"
       }
@@ -2521,8 +2509,12 @@
     "text": "不就是一把弓吗需要那么紧张吗",
     "segmented": [
       {
-        "word": "不就是",
-        "pinyin": "bù jiù shì"
+        "word": "不",
+        "pinyin": "bù"
+      },
+      {
+        "word": "就是",
+        "pinyin": "jiù shì"
       },
       {
         "word": "一",
@@ -2557,53 +2549,48 @@
         "pinyin": "ma"
       }
     ],
-    "translation": "Just a bow, why so nervous?",
-    "explanation": "The structure '不就是' is a common way to express 'just' or 'only' in Chinese. The measure word '把' is used for objects with handles, like a bow in this context. The repetition of '吗' at the end of the sentence is a common way to form a question in Chinese.",
+    "translation": "Isn't it just a bow, why so nervous?",
+    "explanation": "The sentence structure is Subject + 不就是 + Noun + 吗 + Verb + 那么 + Adjective + 吗. This structure is used to express a rhetorical question emphasizing the simplicity or insignificance of something.",
     "word_meanings": [
       {
-        "word": "不就是",
-        "meaning": "Just a",
-        "grammatical_role": "adverbial phrase"
+        "word": "不",
+        "meaning": "not"
+      },
+      {
+        "word": "就是",
+        "meaning": "just"
       },
       {
         "word": "一",
-        "meaning": "one",
-        "grammatical_role": "numeral"
+        "meaning": "one"
       },
       {
         "word": "把",
-        "meaning": "measure word for objects with handles (like knives, chairs, etc.)",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for bow"
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "noun"
+        "meaning": "bow"
       },
       {
         "word": "吗",
-        "meaning": "question particle",
-        "grammatical_role": "question particle"
+        "meaning": "question particle"
       },
       {
         "word": "需要",
-        "meaning": "need",
-        "grammatical_role": "verb"
+        "meaning": "need"
       },
       {
         "word": "那么",
-        "meaning": "so",
-        "grammatical_role": "adverb"
+        "meaning": "so"
       },
       {
         "word": "紧张",
-        "meaning": "nervous",
-        "grammatical_role": "adjective"
+        "meaning": "nervous"
       },
       {
         "word": "吗",
-        "meaning": "question particle",
-        "grammatical_role": "question particle"
+        "meaning": "question particle"
       }
     ]
   },
@@ -2650,52 +2637,52 @@
       }
     ],
     "translation": "This bow is the leader's most important thing",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor. In this sentence, 首领 (leader) possesses the 弓 (bow), making it the leader's most important thing.",
+    "explanation": "In Chinese, possessive relationships are often expressed by placing 的 after the possessor. In this sentence, 的 connects 'leader' and 'important thing' to show that the important thing belongs to the leader.",
     "word_meanings": [
       {
         "word": "这",
         "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "grammar": "demonstrative pronoun"
       },
       {
         "word": "把",
-        "meaning": "measure word for bow",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for objects with a handle (such as knives, bows, chairs, etc.)",
+        "grammar": "classifier"
       },
       {
         "word": "弓",
         "meaning": "bow",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "可是",
-        "meaning": "is",
-        "grammatical_role": "conjunction"
+        "meaning": "but",
+        "grammar": "conjunction"
       },
       {
         "word": "首领",
         "meaning": "leader",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "最",
         "meaning": "most",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "重要",
         "meaning": "important",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "的",
         "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "grammar": "particle"
       },
       {
         "word": "东西",
         "meaning": "thing",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       }
     ]
   },
@@ -2737,8 +2724,8 @@
         "pinyin": "shí hòu"
       }
     ],
-    "translation": "Back in the day when we discovered the leader at sea",
-    "explanation": "The phrase '想当年' is an idiomatic expression used to reminisce about the past, similar to 'back in the day' in English. The possessive particle '的' is used to indicate possession or association between '首领' (leader) and the action of discovering.",
+    "translation": "Back in the day when we found the leader at sea",
+    "explanation": "The structure '想当年' is an idiomatic expression used to refer to 'back in the day' or 'in the past'.",
     "word_meanings": [
       {
         "word": "想当年",
@@ -2754,11 +2741,11 @@
       },
       {
         "word": "海上",
-        "meaning": "sea/on the sea"
+        "meaning": "sea/ocean"
       },
       {
         "word": "发现",
-        "meaning": "discovered"
+        "meaning": "found"
       },
       {
         "word": "首领",
@@ -2766,7 +2753,7 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "'s (possessive particle)"
       },
       {
         "word": "时候",
@@ -2808,8 +2795,12 @@
         "pinyin": "jiù"
       },
       {
-        "word": "只有",
-        "pinyin": "zhǐ yǒu"
+        "word": "只",
+        "pinyin": "zhǐ"
+      },
+      {
+        "word": "有",
+        "pinyin": "yǒu"
       },
       {
         "word": "这",
@@ -2828,68 +2819,60 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Under his thin and weak body, there is only this bow.",
-    "explanation": "The structure '在...下' is a common way to express 'under' in Chinese. The measure word '把' is used for long, slender objects like bows.",
+    "translation": "Under his thin and weak body, there is only this bow",
+    "explanation": "This sentence follows the structure '在...下' to indicate 'under'. The word '就' is used for emphasis, and '只有' means 'only have'. The measure word '把' is used for objects like bows.",
     "word_meanings": [
       {
         "word": "在",
-        "meaning": "under",
-        "grammatical_role": "preposition"
+        "meaning": "at/in"
       },
       {
         "word": "他",
-        "meaning": "his",
-        "grammatical_role": "pronoun"
+        "meaning": "he"
       },
       {
         "word": "瘦弱",
-        "meaning": "thin and weak",
-        "grammatical_role": "adjective"
+        "meaning": "thin and weak"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "身躯",
-        "meaning": "body",
-        "grammatical_role": "noun"
+        "meaning": "body"
       },
       {
         "word": "下",
-        "meaning": "below",
-        "grammatical_role": "noun"
+        "meaning": "under"
       },
       {
         "word": "就",
-        "meaning": "only",
-        "grammatical_role": "adverb"
+        "meaning": "exactly/precisely"
       },
       {
-        "word": "只有",
-        "meaning": "only have",
-        "grammatical_role": "verb"
+        "word": "只",
+        "meaning": "only"
+      },
+      {
+        "word": "有",
+        "meaning": "have"
       },
       {
         "word": "这",
-        "meaning": "this",
-        "grammatical_role": "determiner"
+        "meaning": "this"
       },
       {
         "word": "把",
-        "meaning": "measure word for bow",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for bow"
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "noun"
+        "meaning": "bow"
       },
       {
         "word": "了",
-        "meaning": "indicates completion",
-        "grammatical_role": "particle"
+        "meaning": "completes the action"
       }
     ]
   },
@@ -2903,8 +2886,12 @@
         "pinyin": "zhè me"
       },
       {
-        "word": "多年",
-        "pinyin": "duō nián"
+        "word": "多",
+        "pinyin": "duō"
+      },
+      {
+        "word": "年",
+        "pinyin": "nián"
       },
       {
         "word": "首领",
@@ -2935,53 +2922,48 @@
         "pinyin": "gōng"
       }
     ],
-    "translation": "The leader has been cherishing this bow for many years.",
-    "explanation": "In Chinese, measure words are used before nouns to specify the quantity or type of the object being referred to. In this sentence, '把' is a measure word used for objects like bows, chairs, knives, etc.",
+    "translation": "For so many years, the leader has been cherishing this bow.",
+    "explanation": "In this sentence, the structure '一直...着' is used to indicate that the leader has been continuously cherishing the bow over the years.",
     "word_meanings": [
       {
         "word": "这么",
-        "meaning": "this much/so",
-        "grammatical_role": "adverb"
+        "meaning": "so; such"
       },
       {
-        "word": "多年",
-        "meaning": "many years",
-        "grammatical_role": "noun"
+        "word": "多",
+        "meaning": "many"
+      },
+      {
+        "word": "年",
+        "meaning": "years"
       },
       {
         "word": "首领",
-        "meaning": "leader",
-        "grammatical_role": "noun"
+        "meaning": "leader; chief"
       },
       {
         "word": "一直",
-        "meaning": "always",
-        "grammatical_role": "adverb"
+        "meaning": "always; continuously"
       },
       {
         "word": "珍藏",
-        "meaning": "cherish",
-        "grammatical_role": "verb"
+        "meaning": "cherish"
       },
       {
         "word": "着",
-        "meaning": "particle indicating continuous tense",
-        "grammatical_role": "particle"
+        "meaning": "indicating continuous or ongoing action"
       },
       {
         "word": "这",
-        "meaning": "this",
-        "grammatical_role": "determiner"
+        "meaning": "this"
       },
       {
         "word": "把",
-        "meaning": "measure word for certain objects like chairs, knives, etc.",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for bow"
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "noun"
+        "meaning": "bow"
       }
     ]
   },
@@ -3007,24 +2989,20 @@
         "pinyin": "chōng zǒu"
       },
       {
-        "word": "那",
-        "pinyin": "nà"
-      },
-      {
-        "word": "天",
-        "pinyin": "tiān"
+        "word": "那天",
+        "pinyin": "nà tiān"
       }
     ],
-    "translation": "The day when dad was washed away by water",
-    "explanation": "In Chinese, the passive voice is formed by placing the object before the passive marker '被'. This sentence structure might be different from English and can be confusing for learners.",
+    "translation": "Dad was washed away by the water that day",
+    "explanation": "The sentence uses the passive voice structure with the passive marker '被' to indicate that the subject (Dad) received the action of being washed away by the water.",
     "word_meanings": [
       {
         "word": "爸爸",
-        "meaning": "dad"
+        "meaning": "Dad"
       },
       {
         "word": "被",
-        "meaning": "passive marker indicating the subject is affected by the action"
+        "meaning": "passive marker indicating the subject receives the action"
       },
       {
         "word": "水",
@@ -3035,12 +3013,8 @@
         "meaning": "wash away"
       },
       {
-        "word": "那",
-        "meaning": "that"
-      },
-      {
-        "word": "天",
-        "meaning": "day"
+        "word": "那天",
+        "meaning": "that day"
       }
     ]
   },
@@ -3068,35 +3042,44 @@
       {
         "word": "出去",
         "pinyin": "chū qù"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       }
     ],
-    "translation": "Indeed went out carrying a bow and arrow",
-    "explanation": "In Chinese, the verb 'to go out' (出去) is often used after a verb to indicate the action of going out while carrying or wearing something. In this sentence, '背着' (carrying on one's back) is used before '弓箭' (bow and arrow) to indicate the manner in which the action of going out is carried out.",
+    "translation": "Indeed, he went out carrying a bow and arrows.",
+    "explanation": "The structure '背着' + noun indicates carrying something on one's back. The particle '的' is used to link the descriptive phrase '背着弓箭' to the verb '出去'.",
     "word_meanings": [
       {
         "word": "确实",
         "meaning": "indeed",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "是",
         "meaning": "is",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "背着",
         "meaning": "carrying on one's back",
-        "grammatical_role": "verb"
+        "grammar": "verb complement"
       },
       {
         "word": "弓箭",
-        "meaning": "bow and arrow",
-        "grammatical_role": "noun"
+        "meaning": "bow and arrows",
+        "grammar": "noun"
       },
       {
         "word": "出去",
         "meaning": "go out",
-        "grammatical_role": "verb"
+        "grammar": "verb"
+      },
+      {
+        "word": "的",
+        "meaning": "particle indicating descriptive phrase",
+        "grammar": "particle"
       }
     ]
   },
@@ -3122,40 +3105,64 @@
         "pinyin": "bèi"
       },
       {
-        "word": "捡回来",
-        "pinyin": "jiǎn huí lái"
+        "word": "捡",
+        "pinyin": "jiǎn"
       },
       {
-        "word": "的时候",
-        "pinyin": "de shí hòu"
+        "word": "回来",
+        "pinyin": "huí lái"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
+      },
+      {
+        "word": "时候",
+        "pinyin": "shí hòu"
       }
     ],
-    "translation": "When the leader was picked up at sea",
-    "explanation": "The tricky part here is the passive marker '被', which indicates that the leader is the one being picked up, rather than doing the action of picking up.",
+    "translation": "The leader was picked up at sea",
+    "explanation": "This sentence follows the passive voice structure commonly used in Chinese to indicate that the leader was the one who got picked up at sea.",
     "word_meanings": [
       {
         "word": "首领",
-        "meaning": "leader"
+        "meaning": "leader",
+        "grammatical_role": "subject"
       },
       {
         "word": "在",
-        "meaning": "at"
+        "meaning": "at",
+        "grammatical_role": "preposition"
       },
       {
         "word": "海上",
-        "meaning": "sea"
+        "meaning": "sea",
+        "grammatical_role": "location"
       },
       {
         "word": "被",
-        "meaning": "passive marker"
+        "meaning": "passive marker",
+        "grammatical_role": "passive marker"
       },
       {
-        "word": "捡回来",
-        "meaning": "picked up"
+        "word": "捡",
+        "meaning": "pick up",
+        "grammatical_role": "verb"
       },
       {
-        "word": "的时候",
-        "meaning": "when"
+        "word": "回来",
+        "meaning": "back",
+        "grammatical_role": "directional complement"
+      },
+      {
+        "word": "的",
+        "meaning": "adjectival marker",
+        "grammatical_role": "adjectival marker"
+      },
+      {
+        "word": "时候",
+        "meaning": "time",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -3201,8 +3208,8 @@
         "pinyin": "shǒu shàng"
       }
     ],
-    "translation": "This bow has reached the leader's hands",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession, similar to 's in English. The structure 'noun + 的 + noun' is commonly used to show possession or relationship.",
+    "translation": "This bow ended up in the leader's hands",
+    "explanation": "The sentence structure is Subject + Verb + Object, with the possessive particle '的' indicating possession.",
     "word_meanings": [
       {
         "word": "这",
@@ -3211,8 +3218,8 @@
       },
       {
         "word": "把",
-        "meaning": "measure word for certain objects like chairs, knives, bows",
-        "grammatical_role": "measure word"
+        "meaning": "measure word for bow",
+        "grammatical_role": "classifier"
       },
       {
         "word": "弓",
@@ -3221,17 +3228,17 @@
       },
       {
         "word": "就",
-        "meaning": "indicating immediacy or certainty",
+        "meaning": "indicating that something happens earlier than expected",
         "grammatical_role": "adverb"
       },
       {
         "word": "到",
-        "meaning": "to arrive/reach",
+        "meaning": "to arrive",
         "grammatical_role": "verb"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion or change of state",
+        "meaning": "completed action marker",
         "grammatical_role": "particle"
       },
       {
@@ -3246,8 +3253,8 @@
       },
       {
         "word": "手上",
-        "meaning": "on hand",
-        "grammatical_role": "noun phrase"
+        "meaning": "hands",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -3271,14 +3278,18 @@
       {
         "word": "捡到",
         "pinyin": "jiǎn dào"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       }
     ],
     "translation": "Could it be the leader picked it up",
-    "explanation": "难道 (nándào) is an adverb used to express surprise or doubt. 捡到 (jiǎn dào) means 'picked up' and is a verb-object compound word.",
+    "explanation": "The adverb '难道' is used to indicate a rhetorical question, expressing doubt or surprise. The particle '的' at the end of the sentence indicates that the action of picking up has happened in the past.",
     "word_meanings": [
       {
         "word": "难道",
-        "meaning": "Could it be",
+        "meaning": "could it be that",
         "grammatical_role": "adverb"
       },
       {
@@ -3293,8 +3304,13 @@
       },
       {
         "word": "捡到",
-        "meaning": "picked it up",
-        "grammatical_role": "verb"
+        "meaning": "picked up",
+        "grammatical_role": "verb complement"
+      },
+      {
+        "word": "的",
+        "meaning": "particle indicating past experience",
+        "grammatical_role": "particle"
       }
     ]
   },
@@ -3344,48 +3360,58 @@
         "pinyin": "de"
       }
     ],
-    "translation": "Where did he find it if it was picked up?",
-    "explanation": "The structure '如果...又...的' is used to express a hypothetical situation and question where something was found.",
+    "translation": "If it is picked up, then where did he pick it up?",
+    "explanation": "This sentence is a conditional statement asking about the origin of the bow. The structure 如果...他又在哪里捡到的 is commonly used in Chinese to inquire about the circumstances or location of an action.",
     "word_meanings": [
       {
         "word": "如果",
-        "meaning": "if"
+        "meaning": "if",
+        "grammar": "conjunction"
       },
       {
         "word": "是",
-        "meaning": "is"
+        "meaning": "is",
+        "grammar": "verb"
       },
       {
         "word": "捡到",
-        "meaning": "picked up"
+        "meaning": "pick up",
+        "grammar": "verb complement"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "particle indicating past experience",
+        "grammar": "particle"
       },
       {
         "word": "他",
-        "meaning": "he"
+        "meaning": "he",
+        "grammar": "noun"
       },
       {
         "word": "又",
-        "meaning": "again"
+        "meaning": "then",
+        "grammar": "adverb"
       },
       {
         "word": "在",
-        "meaning": "at"
+        "meaning": "at",
+        "grammar": "preposition"
       },
       {
         "word": "哪里",
-        "meaning": "where"
+        "meaning": "where",
+        "grammar": "pronoun"
       },
       {
         "word": "捡到",
-        "meaning": "picked up"
+        "meaning": "pick up",
+        "grammar": "verb"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "particle indicating past experience",
+        "grammar": "particle"
       }
     ]
   },
@@ -3407,8 +3433,12 @@
         "pinyin": "bú huì"
       },
       {
-        "word": "见过",
-        "pinyin": "jiàn guò"
+        "word": "见",
+        "pinyin": "jiàn"
+      },
+      {
+        "word": "过",
+        "pinyin": "guò"
       },
       {
         "word": "我",
@@ -3419,8 +3449,8 @@
         "pinyin": "bà bà"
       }
     ],
-    "translation": "Has he met my dad?",
-    "explanation": "The structure '会不会' is used to form a question asking about a possibility, in this case, whether he has met the speaker's dad.",
+    "translation": "Has he ever met my dad",
+    "explanation": "The sentence structure in Chinese is Subject + 会 + Verb + Object + Particle. In this case, the particle 过 indicates the experience of meeting the speaker's dad in the past.",
     "word_meanings": [
       {
         "word": "他",
@@ -3428,15 +3458,19 @@
       },
       {
         "word": "会",
-        "meaning": "will/may (indicates a possibility)"
+        "meaning": "will"
       },
       {
         "word": "不会",
         "meaning": "not"
       },
       {
-        "word": "见过",
-        "meaning": "met/seen before"
+        "word": "见",
+        "meaning": "meet"
+      },
+      {
+        "word": "过",
+        "meaning": "ever"
       },
       {
         "word": "我",
@@ -3487,7 +3521,7 @@
       }
     ],
     "translation": "Will he know about my dad's news?",
-    "explanation": "In Chinese, possessive relationships are indicated by placing 的 after the possessor. 吗 is used at the end of a sentence to turn it into a yes-no question.",
+    "explanation": "The sentence structure follows the pattern of 'subject + modal verb + verb + possessive pronoun + noun + possessive particle + noun + question particle'. The particle '吗' at the end turns the sentence into a yes-no question.",
     "word_meanings": [
       {
         "word": "他",
@@ -3561,8 +3595,8 @@
         "pinyin": "gàn má"
       }
     ],
-    "translation": "Why are you two still standing there stupidly?",
-    "explanation": "In Chinese, adjectives come before the noun they describe. The structure 'verb + 着' indicates an ongoing action.",
+    "translation": "You two are still standing there foolishly, what are you doing?",
+    "explanation": "The sentence structure is subject + adverb + adjective + verb + complement + interrogative pronoun. The use of '还' emphasizes the continuation of the action.",
     "word_meanings": [
       {
         "word": "你们",
@@ -3581,18 +3615,18 @@
       },
       {
         "word": "傻",
-        "meaning": "stupid",
+        "meaning": "foolishly",
         "grammatical_role": "adjective"
       },
       {
         "word": "站着",
         "meaning": "standing",
-        "grammatical_role": "verb + aspect particle"
+        "grammatical_role": "verb + complement"
       },
       {
         "word": "干吗",
-        "meaning": "why",
-        "grammatical_role": "adverb"
+        "meaning": "what",
+        "grammatical_role": "interrogative pronoun"
       }
     ]
   },
@@ -3626,38 +3660,38 @@
         "pinyin": "fáng jiān"
       }
     ],
-    "translation": "The leader said to search each room one by one.",
-    "explanation": "In Chinese, the verb usually comes before the object. The structure '逐个' means 'each one by one' and is used to emphasize searching each room individually.",
+    "translation": "The leader said to search the rooms one by one",
+    "explanation": "In this sentence, the verb '说了' (said) is followed by the particle '要' (to) to indicate the future action of '逐个搜查房间' (search the rooms one by one). The structure '逐个' (one by one) is used to specify the manner in which the rooms are to be searched.",
     "word_meanings": [
       {
         "word": "首领",
         "meaning": "leader",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "说了",
         "meaning": "said",
-        "grammatical_role": "verb"
+        "grammar": "verb + complement"
       },
       {
         "word": "要",
         "meaning": "to",
-        "grammatical_role": "particle indicating intention"
+        "grammar": "particle indicating future action"
       },
       {
         "word": "逐个",
-        "meaning": "each one by one",
-        "grammatical_role": "adverbial phrase"
+        "meaning": "one by one",
+        "grammar": "adverbial phrase"
       },
       {
         "word": "搜查",
         "meaning": "search",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "房间",
-        "meaning": "room",
-        "grammatical_role": "noun"
+        "meaning": "rooms",
+        "grammar": "noun"
       }
     ]
   },
@@ -3695,36 +3729,43 @@
         "pinyin": "sōu dào"
       }
     ],
-    "translation": "Oops, saying that will definitely get us caught.",
-    "explanation": "The structure '会被 + verb' is used to indicate a passive action that will happen in the future. The particle '的话' is often used to introduce a hypothetical situation.",
+    "translation": "Oh no, this way, we will definitely be found.",
+    "explanation": "In this sentence, the structure '会被 + verb' is used to indicate a passive action that will definitely happen in the future.",
     "word_meanings": [
       {
         "word": "糟糕",
-        "meaning": "Oops"
+        "meaning": "Oh no",
+        "grammatical_role": "interjection"
       },
       {
         "word": "这样",
-        "meaning": "this way"
+        "meaning": "this way",
+        "grammatical_role": "adverb"
       },
       {
         "word": "的话",
-        "meaning": "particle indicating a hypothetical situation or condition"
+        "meaning": "this",
+        "grammatical_role": "particle indicating a hypothetical situation"
       },
       {
         "word": "肯定",
-        "meaning": "definitely"
+        "meaning": "definitely",
+        "grammatical_role": "adverb"
       },
       {
         "word": "会",
-        "meaning": "will"
+        "meaning": "will",
+        "grammatical_role": "modal verb"
       },
       {
         "word": "被",
-        "meaning": "by"
+        "meaning": "by",
+        "grammatical_role": "passive voice marker"
       },
       {
         "word": "搜到",
-        "meaning": "get caught"
+        "meaning": "be found",
+        "grammatical_role": "verb phrase"
       }
     ]
   },
@@ -3734,12 +3775,8 @@
     "text": "灰太狼你也一起来",
     "segmented": [
       {
-        "word": "灰",
-        "pinyin": "huī"
-      },
-      {
-        "word": "太狼",
-        "pinyin": "tài láng"
+        "word": "灰太狼",
+        "pinyin": "huī tài láng"
       },
       {
         "word": "你",
@@ -3758,38 +3795,28 @@
         "pinyin": "lái"
       }
     ],
-    "translation": "Huìtàiláng, you also come along.",
-    "explanation": "In this sentence, the phrase '一起来' means 'come along' or 'come with'. The use of '也' emphasizes the inclusion of the Big Bad Wolf in the action.",
+    "translation": "灰太狼你也一起来",
+    "explanation": "The sentence is a simple command asking the Grey Wolf to come along with 'you' (referring to someone else). The word '也' emphasizes that the Grey Wolf should also come.",
     "word_meanings": [
       {
-        "word": "灰",
-        "meaning": "gray",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "太狼",
-        "meaning": "Big Bad Wolf",
-        "grammatical_role": "noun"
+        "word": "灰太狼",
+        "meaning": "Grey Wolf"
       },
       {
         "word": "你",
-        "meaning": "you",
-        "grammatical_role": "pronoun"
+        "meaning": "you"
       },
       {
         "word": "也",
-        "meaning": "also",
-        "grammatical_role": "adverb"
+        "meaning": "also"
       },
       {
         "word": "一起",
-        "meaning": "together",
-        "grammatical_role": "adverb"
+        "meaning": "together"
       },
       {
         "word": "来",
-        "meaning": "come",
-        "grammatical_role": "verb"
+        "meaning": "come"
       }
     ]
   },
@@ -3811,8 +3838,12 @@
         "pinyin": "xiǎng qǐ lái"
       },
       {
-        "word": "还有",
-        "pinyin": "hái yǒu"
+        "word": "还",
+        "pinyin": "hái"
+      },
+      {
+        "word": "有",
+        "pinyin": "yǒu"
       },
       {
         "word": "事",
@@ -3823,38 +3854,43 @@
         "pinyin": "zài jiàn"
       }
     ],
-    "translation": "I suddenly remembered I have something else, goodbye",
-    "explanation": "The structure '想起来' is used to indicate the action of suddenly remembering something.",
+    "translation": "I suddenly remembered that I have something else to do, goodbye",
+    "explanation": "The sentence structure is subject + adverb + verb + complement + adverb + verb + noun + interjection. The verb '想起来' means 'to remember' and is followed by '还' to indicate 'still have'.",
     "word_meanings": [
       {
         "word": "我",
         "meaning": "I",
-        "grammatical_role": "subject"
+        "grammar": "subject"
       },
       {
         "word": "突然",
         "meaning": "suddenly",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "想起来",
-        "meaning": "remembered",
-        "grammatical_role": "verb"
+        "meaning": "remember",
+        "grammar": "verb + complement"
       },
       {
-        "word": "还有",
-        "meaning": "have something else",
-        "grammatical_role": "adverbial phrase"
+        "word": "还",
+        "meaning": "still",
+        "grammar": "adverb"
+      },
+      {
+        "word": "有",
+        "meaning": "have",
+        "grammar": "verb"
       },
       {
         "word": "事",
         "meaning": "something",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "再见",
         "meaning": "goodbye",
-        "grammatical_role": "interjection"
+        "grammar": "interjection"
       }
     ]
   },
@@ -3864,12 +3900,8 @@
     "text": "灰太狼怎么奇奇怪怪的",
     "segmented": [
       {
-        "word": "灰",
-        "pinyin": "huī"
-      },
-      {
-        "word": "太狼",
-        "pinyin": "tài láng"
+        "word": "灰太狼",
+        "pinyin": "huī tài láng"
       },
       {
         "word": "怎么",
@@ -3884,33 +3916,24 @@
         "pinyin": "de"
       }
     ],
-    "translation": "Why is Grey Wolf so strange",
-    "explanation": "The structure '怎么...的' is used to form a question asking why something is a certain way. The repetition of '奇奇怪怪' emphasizes the strangeness of Grey Wolf's behavior.",
+    "translation": "Why is Grey Wolf acting so strangely?",
+    "explanation": "The sentence structure is a question formed by combining '怎么' (why/how) with the adjective '奇奇怪怪' (strangely) to ask why Grey Wolf is acting strangely.",
     "word_meanings": [
       {
-        "word": "灰",
-        "meaning": "grey",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "太狼",
-        "meaning": "Grey Wolf",
-        "grammatical_role": "noun"
+        "word": "灰太狼",
+        "meaning": "Grey Wolf"
       },
       {
         "word": "怎么",
-        "meaning": "why",
-        "grammatical_role": "adverb"
+        "meaning": "why/how"
       },
       {
         "word": "奇奇怪怪",
-        "meaning": "strange",
-        "grammatical_role": "adjective"
+        "meaning": "strangely"
       },
       {
         "word": "的",
-        "meaning": "particle indicating possession or modification",
-        "grammatical_role": "particle"
+        "meaning": "particle indicating emphasis or possession"
       }
     ]
   },
@@ -3936,16 +3959,20 @@
         "pinyin": "shì"
       },
       {
-        "word": "这样的",
-        "pinyin": "zhè yàng de"
+        "word": "这样",
+        "pinyin": "zhè yàng"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       }
     ],
-    "translation": "He has always been like this.",
-    "explanation": "In Chinese, the word order is subject-verb-object, so '他' means 'he', '一直' means 'always', '都' is used for emphasis in this context, '是' is the verb 'to be', and '这样的' means 'like this'.",
+    "translation": "He has always been like this",
+    "explanation": "This sentence structure is a basic Chinese sentence with the subject '他' (he), followed by the adverb '一直' (always), the verb '是' (to be), and the adjective '这样' (like this) formed by adding the possessive particle '的'.",
     "word_meanings": [
       {
         "word": "他",
-        "meaning": "He"
+        "meaning": "he"
       },
       {
         "word": "一直",
@@ -3953,15 +3980,19 @@
       },
       {
         "word": "都",
-        "meaning": "used for emphasis, indicating 'always' in this context"
+        "meaning": "emphasizes the preceding word, in this case '一直' (always)"
       },
       {
         "word": "是",
         "meaning": "to be"
       },
       {
-        "word": "这样的",
+        "word": "这样",
         "meaning": "like this"
+      },
+      {
+        "word": "的",
+        "meaning": "possessive particle, used to form an adjective from a noun"
       }
     ]
   },
@@ -4003,32 +4034,32 @@
         "pinyin": "gōng"
       }
     ],
-    "translation": "Don't mind him, let's find the bow first.",
-    "explanation": "In this sentence, 别管他了 is a common Chinese phrase meaning 'don't mind him'. The structure '还是先找' means 'let's first find'. The word '弓' here refers to a bow, as in a weapon.",
+    "translation": "Don't bother with him, let's first find the bow.",
+    "explanation": "In this sentence, 别管他了 is a common Chinese expression meaning 'Don't bother with him'. 别 is used to negate the following verb 管, and 了 indicates a change in situation or completion of an action. 还是 is used here to suggest 'let's do something else instead'. 先找弓 means 'first find the bow', with 先 indicating the order of actions.",
     "word_meanings": [
       {
         "word": "别",
-        "meaning": "don't/mind",
+        "meaning": "do not; don't",
         "grammatical_role": "verb"
       },
       {
         "word": "管",
-        "meaning": "mind",
+        "meaning": "bother with; care about",
         "grammatical_role": "verb"
       },
       {
         "word": "他",
         "meaning": "him",
-        "grammatical_role": "pronoun"
+        "grammatical_role": "noun"
       },
       {
         "word": "了",
-        "meaning": "indicating a completed action or change of state",
+        "meaning": "(completion marker)",
         "grammatical_role": "particle"
       },
       {
         "word": "还是",
-        "meaning": "or",
+        "meaning": "rather; instead",
         "grammatical_role": "conjunction"
       },
       {
@@ -4074,44 +4105,51 @@
         "pinyin": "sōu chá"
       },
       {
-        "word": "怎么办",
-        "pinyin": "zěn me bàn"
+        "word": "怎么",
+        "pinyin": "zěn me"
       },
       {
-        "word": "呢",
-        "pinyin": "ne"
+        "word": "办",
+        "pinyin": "bàn"
       }
     ],
-    "translation": "What should we do if the leader wants to search each room one by one?",
-    "explanation": "The structure '逐个' means 'each one by one' and is used to emphasize the action of searching each room individually.",
+    "translation": "The leader wants to search each room, what should we do?",
+    "explanation": "The sentence structure is Subject + Verb + Adverb + Object, with the question word '怎么' (how) indicating a question is being asked.",
     "word_meanings": [
       {
         "word": "首领",
-        "meaning": "leader"
+        "meaning": "leader",
+        "grammar": "noun"
       },
       {
         "word": "要",
-        "meaning": "wants to"
+        "meaning": "wants",
+        "grammar": "verb"
       },
       {
         "word": "逐个",
-        "meaning": "each one by one"
+        "meaning": "each",
+        "grammar": "adverb"
       },
       {
         "word": "房间",
-        "meaning": "room"
+        "meaning": "room",
+        "grammar": "noun"
       },
       {
         "word": "搜查",
-        "meaning": "search"
+        "meaning": "search",
+        "grammar": "verb"
       },
       {
-        "word": "怎么办",
-        "meaning": "what to do"
+        "word": "怎么",
+        "meaning": "how",
+        "grammar": "adverb"
       },
       {
-        "word": "呢",
-        "meaning": "used at the end of a sentence to indicate a softening or questioning tone"
+        "word": "办",
+        "meaning": "do",
+        "grammar": "verb"
       }
     ]
   },
@@ -4149,43 +4187,36 @@
         "pinyin": "huí qù"
       }
     ],
-    "translation": "I must find a way to return the bow.",
-    "explanation": "In Chinese, the structure '把 + object + verb' is used to indicate that the object is the focus of the action. The particle '得' is used to indicate necessity or obligation.",
+    "translation": "I have to figure out a way to return the bow.",
+    "explanation": "In this sentence, the structure '得 + verb' is used to indicate necessity or obligation. The word '把' is used to indicate the object of the action in a Chinese sentence.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I/me",
-        "grammatical_role": "subject"
+        "meaning": "I"
       },
       {
         "word": "得",
-        "meaning": "must/to have to",
-        "grammatical_role": "modal verb"
+        "meaning": "have to"
       },
       {
         "word": "想办法",
-        "meaning": "find a way",
-        "grammatical_role": "verb phrase"
+        "meaning": "figure out a way"
       },
       {
         "word": "把",
-        "meaning": "particle indicating the object of the verb",
-        "grammatical_role": "particle"
+        "meaning": "indicating the object of the action"
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "object"
+        "meaning": "bow"
       },
       {
         "word": "还",
-        "meaning": "return",
-        "grammatical_role": "verb"
+        "meaning": "return"
       },
       {
         "word": "回去",
-        "meaning": "back",
-        "grammatical_role": "directional particle"
+        "meaning": "back"
       }
     ]
   },
@@ -4237,74 +4268,65 @@
       {
         "word": "回去",
         "pinyin": "huí qù"
-      },
-      {
-        "word": "呢",
-        "pinyin": "ne"
       }
     ],
-    "translation": "But now outside is full of people, how should I go back?",
-    "explanation": "The structure '怎么还回去' can be translated as 'how should I go back', where '怎么' means 'how', '还' means 'back', and '回去' means 'go back'.",
+    "translation": "But now outside is full of people, how should I return?",
+    "explanation": "The sentence structure is Subject + Adverb + Verb + Object. The use of '可是' at the beginning indicates a contrast in the situation.",
     "word_meanings": [
       {
         "word": "可是",
         "meaning": "but",
-        "grammatical_role": "conjunction"
+        "grammar": "conjunction"
       },
       {
         "word": "外面",
         "meaning": "outside",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "现在",
         "meaning": "now",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "全",
         "meaning": "full of",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "是",
         "meaning": "is",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "人",
         "meaning": "people",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "我",
         "meaning": "I",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "该",
         "meaning": "should",
-        "grammatical_role": "modal verb"
+        "grammar": "modal verb"
       },
       {
         "word": "怎么",
         "meaning": "how",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "还",
-        "meaning": "go back",
-        "grammatical_role": "verb"
+        "meaning": "return",
+        "grammar": "verb"
       },
       {
         "word": "回去",
         "meaning": "go back",
-        "grammatical_role": "verb"
-      },
-      {
-        "word": "呢",
-        "meaning": "question particle",
-        "grammatical_role": "particle"
+        "grammar": "verb"
       }
     ]
   },
@@ -4326,23 +4348,23 @@
         "pinyin": "bàn fǎ"
       }
     ],
-    "translation": "We have a way.",
-    "explanation": "The structure of this sentence is subject + verb + object, which is a common sentence structure in Chinese. The word '办法' specifically means 'way' in this context, referring to a method or solution.",
+    "translation": "We have a way",
+    "explanation": "The sentence indicates that 'we' have a solution or method to a problem.",
     "word_meanings": [
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "subject"
+        "grammar": "pronoun"
       },
       {
         "word": "有",
         "meaning": "have",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "办法",
         "meaning": "way",
-        "grammatical_role": "object"
+        "grammar": "noun"
       }
     ]
   },
@@ -4360,13 +4382,13 @@
         "pinyin": "kàn"
       }
     ],
-    "translation": "You look",
-    "explanation": "In this context, '你们' means 'you all' and '看' means 'look'. The tricky part for learners might be understanding the plural form '你们' which is used to address a group of people.",
+    "translation": "You guys look",
+    "explanation": "The sentence is a command instructing a group of people to look at something.",
     "word_meanings": [
       {
         "word": "你们",
-        "meaning": "you all",
-        "grammatical_role": "pronoun"
+        "meaning": "you guys",
+        "grammatical_role": "subject"
       },
       {
         "word": "看",
@@ -4402,7 +4424,7 @@
       }
     ],
     "translation": "There is an island ahead",
-    "explanation": "In this sentence, the particle '呢' is used to emphasize the existence of the island ahead.",
+    "explanation": "The sentence structure follows the pattern 'location + 有 + object', where '有' means 'there is'. The particle '呢' is used at the end of the sentence to indicate the existence of the island.",
     "word_meanings": [
       {
         "word": "前面",
@@ -4411,7 +4433,7 @@
       },
       {
         "word": "有",
-        "meaning": "is",
+        "meaning": "there is",
         "grammatical_role": "verb"
       },
       {
@@ -4426,7 +4448,7 @@
       },
       {
         "word": "呢",
-        "meaning": "particle indicating emphasis or continuation",
+        "meaning": "(particle indicating existence)",
         "grammatical_role": "particle"
       }
     ]
@@ -4465,27 +4487,27 @@
         "pinyin": "ne"
       }
     ],
-    "translation": "Is that Grandpa Turtle's home?",
-    "explanation": "The structure '会不会' is used to express uncertainty or possibility in a question. The possessive particle '的' is used to show possession or association between '龟爷爷' and '家'. The question particle '呢' is used to seek confirmation or clarification.",
+    "translation": "Could that be Grandpa Tortoise's home?",
+    "explanation": "The sentence is a speculative question about whether a certain location is Grandpa Tortoise's home.",
     "word_meanings": [
       {
         "word": "那里",
         "meaning": "there",
-        "grammatical_role": "location adverb"
+        "grammatical_role": "location adverbial"
       },
       {
         "word": "会不会",
-        "meaning": "will or will not",
+        "meaning": "could it be",
         "grammatical_role": "modal verb"
       },
       {
         "word": "就是",
-        "meaning": "be",
-        "grammatical_role": "verb"
+        "meaning": "be exactly",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "龟爷爷",
-        "meaning": "Grandpa Turtle",
+        "meaning": "Grandpa Tortoise",
         "grammatical_role": "noun"
       },
       {
@@ -4500,8 +4522,8 @@
       },
       {
         "word": "呢",
-        "meaning": "question particle",
-        "grammatical_role": "particle"
+        "meaning": "modal particle indicating speculation",
+        "grammatical_role": "modal particle"
       }
     ]
   },
@@ -4528,7 +4550,7 @@
       }
     ],
     "translation": "Very likely oh",
-    "explanation": "The structure 很有可能 is used to express 'very likely' in Chinese. The final 哦 adds a casual and conversational tone to the sentence.",
+    "explanation": "The sentence structure is Subject + Adjective + Interjection. The use of '哦' at the end adds a casual and conversational tone to the statement.",
     "word_meanings": [
       {
         "word": "很",
@@ -4563,11 +4585,11 @@
       }
     ],
     "translation": "T",
-    "explanation": "In Chinese subtitles, 'T' is often used as a placeholder to indicate a pause or a scene change, similar to how '...' is used in English subtitles.",
+    "explanation": "In this context, 'T' is likely a sound effect or a non-verbal expression used in the movie. It does not have a direct translation in English.",
     "word_meanings": [
       {
         "word": "T",
-        "meaning": "This is a placeholder or abbreviation used in subtitles to indicate a pause or a scene change."
+        "meaning": "This is a character or symbol used in the context of the movie, it does not have a direct translation in English"
       }
     ]
   },
@@ -4586,7 +4608,7 @@
       }
     ],
     "translation": "What sound",
-    "explanation": "The sentence is a simple question asking 'What sound?' The word 什么 (what) is used as an interrogative pronoun to inquire about the type of sound, and 声音 (sound) is a noun indicating the object of the question.",
+    "explanation": "The sentence is a simple question asking about a sound. The word 什么 (what) is used as an interrogative pronoun to inquire about the type of sound, and 声音 (sound) is the noun being asked about.",
     "word_meanings": [
       {
         "word": "什么",
@@ -4614,12 +4636,16 @@
         "pinyin": "zěn me"
       },
       {
-        "word": "睡着了",
-        "pinyin": "shuì zháo le"
+        "word": "睡着",
+        "pinyin": "shuì zháo"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       }
     ],
-    "translation": "Why is Grandpa Turtle sleeping?",
-    "explanation": "The sentence structure in Chinese is Subject + 怎么 + Verb. In this case, 龟爷爷 (Grandpa Turtle) is the subject, 怎么 (why/how) is used to inquire about the action, and 睡着了 (sleeping) indicates the current state of Grandpa Turtle.",
+    "translation": "Why is Grandpa Turtle asleep?",
+    "explanation": "The sentence structure is a question formed by combining '怎么' (why/how) with the verb '睡着了' (asleep). The use of '了' indicates that the action of falling asleep is completed.",
     "word_meanings": [
       {
         "word": "龟爷爷",
@@ -4630,9 +4656,12 @@
         "meaning": "why/how"
       },
       {
-        "word": "睡着了",
-        "meaning": "sleeping",
-        "explanation": "The combination of 睡着了 indicates that someone is currently in a state of sleeping."
+        "word": "睡着",
+        "meaning": "asleep"
+      },
+      {
+        "word": "了",
+        "meaning": "(indicating completion of action)"
       }
     ]
   },
@@ -4666,38 +4695,32 @@
         "pinyin": "a"
       }
     ],
-    "translation": "Why is there smoke around?",
-    "explanation": "The structure '怎么会' together means 'how come' or 'why'. The particle '啊' at the end adds a tone of surprise or emphasis.",
+    "translation": "周围怎么会有烟雾啊",
+    "explanation": "The sentence structure is Subject + 怎么 + 会 + Verb + Object + 啊, where 怎么 means 'how' and 会 indicates a future event.",
     "word_meanings": [
       {
         "word": "周围",
-        "meaning": "around",
-        "grammatical_role": "noun"
+        "meaning": "surroundings"
       },
       {
         "word": "怎么",
-        "meaning": "how",
-        "grammatical_role": "adverb"
+        "meaning": "how"
       },
       {
         "word": "会",
-        "meaning": "will",
-        "grammatical_role": "modal verb"
+        "meaning": "will"
       },
       {
         "word": "有",
-        "meaning": "have",
-        "grammatical_role": "verb"
+        "meaning": "have"
       },
       {
         "word": "烟雾",
-        "meaning": "smoke",
-        "grammatical_role": "noun"
+        "meaning": "smoke"
       },
       {
         "word": "啊",
-        "meaning": "(particle indicating surprise or emphasis)",
-        "grammatical_role": "particle"
+        "meaning": "used at the end of a sentence to express surprise or emphasis"
       }
     ]
   },
@@ -4735,43 +4758,43 @@
         "pinyin": "wèn tí"
       }
     ],
-    "translation": "Everyone quickly retreat, this smoke is problematic.",
-    "explanation": "In Chinese, the verb usually comes before the object, so 'retreat' is placed before 'everyone' in this sentence.",
+    "translation": "Everyone quickly back away, this smoke is problematic.",
+    "explanation": "The sentence structure follows the pattern of 'Subject + Adverb + Verb + Object'. The verb '有' is used here to indicate the existence of a problem with the smoke.",
     "word_meanings": [
       {
         "word": "大家",
         "meaning": "everyone",
-        "grammatical_role": "subject"
+        "grammar": "noun"
       },
       {
         "word": "快",
         "meaning": "quickly",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "后退",
-        "meaning": "retreat",
-        "grammatical_role": "verb"
+        "meaning": "back away",
+        "grammar": "verb"
       },
       {
         "word": "这",
         "meaning": "this",
-        "grammatical_role": "determiner"
+        "grammar": "determiner"
       },
       {
         "word": "烟雾",
         "meaning": "smoke",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "有",
-        "meaning": "has",
-        "grammatical_role": "verb"
+        "meaning": "is",
+        "grammar": "verb"
       },
       {
         "word": "问题",
         "meaning": "problematic",
-        "grammatical_role": "adjective"
+        "grammar": "noun"
       }
     ]
   },
@@ -4793,23 +4816,23 @@
         "pinyin": "xiǎo"
       }
     ],
-    "translation": "Little Ba Little",
-    "explanation": "The sentence consists of two repetitions of the word '小' which means 'little' in English. '巴' is a name in this context. The repetition of '小' emphasizes the small size or stature of 'Ba'.",
+    "translation": "Little Ba little",
+    "explanation": "The sentence consists of the repetition of the words '小' (little) and '巴' (Ba), possibly indicating a character's name or a nickname.",
     "word_meanings": [
       {
         "word": "小",
         "meaning": "little",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "巴",
-        "meaning": "Ba (name)",
-        "grammatical_role": "noun"
+        "meaning": "Ba",
+        "grammar": "noun"
       },
       {
         "word": "小",
         "meaning": "little",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       }
     ]
   },
@@ -4823,20 +4846,31 @@
         "pinyin": "rì"
       },
       {
-        "word": "小只",
-        "pinyin": "xiǎo zhǐ"
+        "word": "小",
+        "pinyin": "xiǎo"
+      },
+      {
+        "word": "只",
+        "pinyin": "zhǐ"
       }
     ],
-    "translation": "Day little ones",
-    "explanation": "In this context, 小只 refers to the 'little goats' or 'small animals', which are the main characters in the Pleasant Goat and Big Big Wolf series. The word order in Chinese can sometimes be different from English, so 'Day little ones' is the natural translation.",
+    "translation": "Day small only",
+    "explanation": "The sentence seems to be describing something small or young that is present only during the day.",
     "word_meanings": [
       {
         "word": "日",
-        "meaning": "day"
+        "meaning": "day",
+        "grammar": "noun"
       },
       {
-        "word": "小只",
-        "meaning": "little ones"
+        "word": "小",
+        "meaning": "small",
+        "grammar": "adjective"
+      },
+      {
+        "word": "只",
+        "meaning": "only",
+        "grammar": "adverb"
       }
     ]
   },
@@ -4854,18 +4888,16 @@
         "pinyin": "bā"
       }
     ],
-    "translation": "Xiao Ba",
-    "explanation": "In this context, '小' means 'small' or 'little' and '巴' is a name, likely referring to a character named 'Ba'.",
+    "translation": "Little Ba",
+    "explanation": "The sentence simply consists of the name 'Little Ba'. The character '小' means 'little' or 'small', while '巴' is part of the name 'Ba'.",
     "word_meanings": [
       {
         "word": "小",
-        "meaning": "small, little",
-        "grammatical_role": "adjective"
+        "meaning": "little; small"
       },
       {
         "word": "巴",
-        "meaning": "Ba (name)",
-        "grammatical_role": "noun"
+        "meaning": "Ba (name)"
       }
     ]
   },
@@ -4875,43 +4907,25 @@
     "text": "小巴小巴",
     "segmented": [
       {
-        "word": "小",
-        "pinyin": "xiǎo"
+        "word": "小巴",
+        "pinyin": "xiǎo bā"
       },
       {
-        "word": "巴",
-        "pinyin": "bā"
-      },
-      {
-        "word": "小",
-        "pinyin": "xiǎo"
-      },
-      {
-        "word": "巴",
-        "pinyin": "bā"
+        "word": "小巴",
+        "pinyin": "xiǎo bā"
       }
     ],
-    "translation": "Little Ba, Little Ba",
-    "explanation": "The repetition of '小巴' emphasizes the small size or cuteness of 'Ba'. This is a common way to address someone or something affectionately in Chinese.",
+    "translation": "Little Ba Little Ba",
+    "explanation": "The sentence simply repeats the name 'Little Ba' twice.",
     "word_meanings": [
       {
-        "word": "小",
-        "meaning": "little",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "巴",
-        "meaning": "Ba (name)",
+        "word": "小巴",
+        "meaning": "Little Ba",
         "grammatical_role": "noun"
       },
       {
-        "word": "小",
-        "meaning": "little",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "巴",
-        "meaning": "Ba (name)",
+        "word": "小巴",
+        "meaning": "Little Ba",
         "grammatical_role": "noun"
       }
     ]
@@ -4954,8 +4968,8 @@
         "pinyin": "de"
       }
     ],
-    "translation": "The sea lion tribe, these smoke, they released.",
-    "explanation": "The tricky part in this sentence might be the use of '是' (is) twice, which is common in Chinese to emphasize a point or clarify a situation. Also, the structure '是...的' is often used to emphasize the subject or object in a sentence.",
+    "translation": "It's the sea lion tribe, they released these smoke screens.",
+    "explanation": "The structure '是...的' is used to emphasize the subject of the sentence, indicating that it was specifically the sea lion tribe who released the smoke screens.",
     "word_meanings": [
       {
         "word": "是",
@@ -4974,12 +4988,12 @@
       },
       {
         "word": "烟雾",
-        "meaning": "smoke",
+        "meaning": "smoke screens",
         "grammatical_role": "noun"
       },
       {
         "word": "是",
-        "meaning": "is",
+        "meaning": "released",
         "grammatical_role": "verb"
       },
       {
@@ -4989,7 +5003,7 @@
       },
       {
         "word": "放",
-        "meaning": "released",
+        "meaning": "release",
         "grammatical_role": "verb"
       },
       {
@@ -5022,7 +5036,7 @@
       }
     ],
     "translation": "Thanks to the wise leader",
-    "explanation": "The sentence expresses gratitude towards a wise leader for their discerning decisions or actions.",
+    "explanation": "The sentence expresses gratitude towards the wise leader for a positive outcome.",
     "word_meanings": [
       {
         "word": "多亏",
@@ -5038,7 +5052,7 @@
       },
       {
         "word": "啊",
-        "meaning": "particle indicating affirmation or approval"
+        "meaning": "particle indicating affirmation or emphasis"
       }
     ]
   },
@@ -5072,38 +5086,32 @@
         "pinyin": "le"
       }
     ],
-    "translation": "If the plan of Iceberg Island fails",
-    "explanation": "The tricky part here might be understanding the possessive particle '的' which indicates that the plan belongs to Iceberg Island. The particle '了' at the end of the sentence indicates a completed action.",
+    "translation": "If the plan on Iceberg Island fails",
+    "explanation": "The sentence structure follows the pattern '如果...，(then)...'. The possessive particle '的' is used to indicate ownership or association between 'Iceberg Island' and 'plan'. The completion particle '了' indicates the completion of the action 'fail'.",
     "word_meanings": [
       {
         "word": "如果",
-        "meaning": "if",
-        "grammatical_role": "conjunction"
+        "meaning": "if"
       },
       {
         "word": "冰山岛",
-        "meaning": "Iceberg Island",
-        "grammatical_role": "noun"
+        "meaning": "Iceberg Island"
       },
       {
         "word": "的",
-        "meaning": "'s",
-        "grammatical_role": "possessive particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "计划",
-        "meaning": "plan",
-        "grammatical_role": "noun"
+        "meaning": "plan"
       },
       {
         "word": "失败",
-        "meaning": "fail",
-        "grammatical_role": "verb"
+        "meaning": "fail"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion",
-        "grammatical_role": "particle"
+        "meaning": "completion particle"
       }
     ]
   },
@@ -5133,8 +5141,12 @@
         "pinyin": "qǐ dòng"
       },
       {
-        "word": "另一个",
-        "pinyin": "lìng yí gè"
+        "word": "另",
+        "pinyin": "lìng"
+      },
+      {
+        "word": "一个",
+        "pinyin": "yí gè"
       },
       {
         "word": "计划",
@@ -5142,42 +5154,39 @@
       }
     ],
     "translation": "Leave a group of sea lions to start another plan",
-    "explanation": "The structure '留一帮海狮' might be tricky for learners as it combines the verb '留' (leave) with the noun '一帮海狮' (a group of sea lions) to convey the idea of leaving a group of sea lions.",
+    "explanation": "The sentence structure is Subject + Verb + Object + Verb + Adjective + Noun. The verb '启动' is followed by the noun '计划' to indicate starting another plan.",
     "word_meanings": [
       {
         "word": "留",
-        "meaning": "leave",
-        "grammatical_role": "verb"
+        "meaning": "leave; let"
       },
       {
         "word": "一",
-        "meaning": "one",
-        "grammatical_role": "adjective"
+        "meaning": "one"
       },
       {
         "word": "帮",
-        "meaning": "group",
-        "grammatical_role": "noun"
+        "meaning": "group of"
       },
       {
         "word": "海狮",
-        "meaning": "sea lions",
-        "grammatical_role": "noun"
+        "meaning": "sea lions"
       },
       {
         "word": "启动",
-        "meaning": "start",
-        "grammatical_role": "verb"
+        "meaning": "start; initiate"
       },
       {
-        "word": "另一个",
-        "meaning": "another",
-        "grammatical_role": "adjective"
+        "word": "另",
+        "meaning": "another"
+      },
+      {
+        "word": "一个",
+        "meaning": "one"
       },
       {
         "word": "计划",
-        "meaning": "plan",
-        "grammatical_role": "noun"
+        "meaning": "plan"
       }
     ]
   },
@@ -5191,12 +5200,13 @@
         "pinyin": "shōu dào"
       }
     ],
-    "translation": "Received",
-    "explanation": "This is a simple sentence meaning 'received'. The word '收到' is commonly used in Chinese to acknowledge receiving something, like a message or a package.",
+    "translation": "received",
+    "explanation": "The word '收到' means 'receive' in this context. It is a verb indicating the action of receiving something.",
     "word_meanings": [
       {
         "word": "收到",
-        "meaning": "received"
+        "meaning": "receive",
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -5223,27 +5233,23 @@
       }
     ],
     "translation": "This time we are determined to win",
-    "explanation": "The phrase '势在必得' is an idiomatic expression meaning 'determined to win' or 'bound to succeed'. It emphasizes a strong determination to achieve a certain goal.",
+    "explanation": "The phrase '势在必得' means 'determined to win' or 'sure to win'. It emphasizes the strong determination of the speaker to achieve victory.",
     "word_meanings": [
       {
         "word": "这",
-        "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "meaning": "this"
       },
       {
         "word": "一次",
-        "meaning": "time",
-        "grammatical_role": "noun"
+        "meaning": "one time"
       },
       {
         "word": "我们",
-        "meaning": "we",
-        "grammatical_role": "pronoun"
+        "meaning": "we"
       },
       {
         "word": "势在必得",
-        "meaning": "determined to win",
-        "grammatical_role": "idiomatic phrase"
+        "meaning": "determined to win"
       }
     ]
   },
@@ -5265,8 +5271,8 @@
         "pinyin": "kāi"
       }
     ],
-    "translation": "Full firepower",
-    "explanation": "The phrase '火力全开' is an idiomatic expression meaning to go all out or to give it your all, often used in contexts where maximum effort or power is required.",
+    "translation": "Fire at full power",
+    "explanation": "The sentence describes the action of firing at full power. The word '火力' means 'firepower' and '全开' is a colloquial way to say 'fully open' or 'at full power'.",
     "word_meanings": [
       {
         "word": "火力",
@@ -5308,7 +5314,7 @@
       }
     ],
     "translation": "The smoke is getting thicker",
-    "explanation": "The structure '越来越' is used to indicate a gradual increase in the intensity of something, in this case, the smoke getting thicker.",
+    "explanation": "The sentence structure '越来越 + adjective' is used to indicate a gradual increase in the intensity of a certain quality.",
     "word_meanings": [
       {
         "word": "烟雾",
@@ -5320,11 +5326,11 @@
       },
       {
         "word": "大",
-        "meaning": "big"
+        "meaning": "thick"
       },
       {
         "word": "了",
-        "meaning": "indicates a change or completion of an action"
+        "meaning": "indicates a change in state"
       }
     ]
   },
@@ -5350,28 +5356,24 @@
         "pinyin": "nǐ men"
       }
     ],
-    "translation": "I'll help you.",
-    "explanation": "The structure of this sentence is Subject + Verb + Object, with the verb '来' indicating the action of coming to help.",
+    "translation": "I will help you",
+    "explanation": "The sentence structure is Subject + Verb + Object. The verb '来' is used here to indicate the action of coming to help.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
-        "grammatical_role": "subject"
+        "meaning": "I"
       },
       {
         "word": "来",
-        "meaning": "to come",
-        "grammatical_role": "verb"
+        "meaning": "to come/to"
       },
       {
         "word": "帮",
-        "meaning": "to help",
-        "grammatical_role": "verb"
+        "meaning": "to help"
       },
       {
         "word": "你们",
-        "meaning": "you (plural)",
-        "grammatical_role": "object"
+        "meaning": "you (plural)"
       }
     ]
   },
@@ -5398,21 +5400,21 @@
       }
     ],
     "translation": "I'll help you",
-    "explanation": "The structure of this sentence is subject-verb-object, which is common in Chinese grammar. The word '来' is used here to indicate the speaker is going to do something, similar to 'will' in English.",
+    "explanation": "The sentence structure is Subject + Verb + Object. The verb '来' is used here to indicate the speaker's intention to come and help.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
+        "meaning": "I/me",
         "grammatical_role": "subject"
       },
       {
         "word": "来",
-        "meaning": "come",
+        "meaning": "to come",
         "grammatical_role": "verb"
       },
       {
         "word": "帮",
-        "meaning": "help",
+        "meaning": "to help",
         "grammatical_role": "verb"
       },
       {
@@ -5444,28 +5446,24 @@
         "pinyin": "nǐ men"
       }
     ],
-    "translation": "I will help you",
-    "explanation": "In this sentence, the verb '来' is used before the verb '帮' to indicate the speaker's intention to come and help. This structure is commonly used in Chinese to express the speaker's willingness or intention to do something.",
+    "translation": "I come to help you",
+    "explanation": "The sentence structure is Subject + Verb + Object. The verb '来' indicates the action of coming to help.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
-        "grammatical_role": "subject"
+        "meaning": "I; me"
       },
       {
         "word": "来",
-        "meaning": "to come",
-        "grammatical_role": "verb"
+        "meaning": "come; to"
       },
       {
         "word": "帮",
-        "meaning": "to help",
-        "grammatical_role": "verb"
+        "meaning": "help"
       },
       {
         "word": "你们",
-        "meaning": "you (plural)",
-        "grammatical_role": "object"
+        "meaning": "you (plural)"
       }
     ]
   },
@@ -5491,22 +5489,22 @@
         "pinyin": "nǐ men"
       }
     ],
-    "translation": "I'll help you",
-    "explanation": "The structure of this sentence is Subject + Verb + Object. The word '来' is used before the verb '帮' to indicate the speaker is coming to help.",
+    "translation": "I come to help you",
+    "explanation": "The sentence structure is Subject + Verb + Object. The verb '来' is used to indicate coming to a place or doing something.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
+        "meaning": "I/me",
         "grammatical_role": "subject"
       },
       {
         "word": "来",
-        "meaning": "to come",
+        "meaning": "come",
         "grammatical_role": "verb"
       },
       {
         "word": "帮",
-        "meaning": "to help",
+        "meaning": "help",
         "grammatical_role": "verb"
       },
       {
@@ -5535,7 +5533,7 @@
       }
     ],
     "translation": "Grey Wolf",
-    "explanation": "In this context, the phrase '灰太狼' refers to the character Grey Wolf in the Pleasant Goat and Big Big Wolf series. The character is known for being the main antagonist who constantly tries to catch the goats.",
+    "explanation": "The sentence simply consists of the name 'Grey Wolf' in Chinese, which is the character's name in the movie 'Pleasant Goat and Big Big Wolf'.",
     "word_meanings": [
       {
         "word": "灰",
@@ -5544,7 +5542,7 @@
       },
       {
         "word": "太",
-        "meaning": "too",
+        "meaning": "very",
         "grammatical_role": "adverb"
       },
       {
@@ -5568,18 +5566,18 @@
         "pinyin": "tā men"
       }
     ],
-    "translation": "It is them",
-    "explanation": "In Chinese, the subject usually comes before the verb, unlike in English where the verb comes before the subject. So '是他们' translates to 'It is them' in English.",
+    "translation": "It's them",
+    "explanation": "The sentence simply states that the subject is 'them'. The verb '是' (is) is used to connect the subject '他们' (them) in this context.",
     "word_meanings": [
       {
         "word": "是",
         "meaning": "is",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "他们",
         "meaning": "them",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       }
     ]
   },
@@ -5641,8 +5639,8 @@
         "pinyin": "ne"
       }
     ],
-    "translation": "Scared me, why do you always stand at the door of my room?",
-    "explanation": "The structure '怎么...呢' is a common way to form a rhetorical question in Chinese, similar to 'why do you always...' in English.",
+    "translation": "You scared me. Why do you always stand at the door of my room?",
+    "explanation": "The structure '吓我一跳' means 'scared me' where '一' is used as a measure word for the action of jumping.",
     "word_meanings": [
       {
         "word": "吓",
@@ -5662,7 +5660,7 @@
       },
       {
         "word": "你们",
-        "meaning": "you all"
+        "meaning": "you"
       },
       {
         "word": "怎么",
@@ -5728,38 +5726,38 @@
         "pinyin": "jǐn zhāng"
       }
     ],
-    "translation": "We just happened to pass by you being so nervous",
-    "explanation": "The adverbial phrase '刚好' indicates the coincidence of passing by, and '这么' is used to intensify the adjective '紧张'.",
+    "translation": "We just happened to pass by, you're so nervous.",
+    "explanation": "The structure 刚好 + Verb is used to express a coincidental action, emphasizing the timing of the action happening right at that moment.",
     "word_meanings": [
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "subject"
+        "grammar": "subject"
       },
       {
         "word": "刚好",
         "meaning": "just happened to",
-        "grammatical_role": "adverbial phrase"
+        "grammar": "adverbial phrase"
       },
       {
         "word": "经过",
         "meaning": "pass by",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "你",
         "meaning": "you",
-        "grammatical_role": "object"
+        "grammar": "object"
       },
       {
         "word": "这么",
         "meaning": "so",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "紧张",
         "meaning": "nervous",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       }
     ]
   },
@@ -5773,12 +5771,12 @@
         "pinyin": "nán dào"
       }
     ],
-    "translation": "Could it be",
-    "explanation": "难道 is an adverb used to express surprise, doubt, or a rhetorical question. It is often used at the beginning of a sentence to indicate a possibility that the speaker finds hard to believe.",
+    "translation": "Could it be...",
+    "explanation": "难道 (nándào) is an adverb used to express doubt or to suggest a possibility. It is often used at the beginning of a sentence to introduce a rhetorical question or a hypothesis.",
     "word_meanings": [
       {
         "word": "难道",
-        "meaning": "could it be",
+        "meaning": "Could it be",
         "grammatical_role": "adverb"
       }
     ]
@@ -5809,8 +5807,8 @@
         "pinyin": "rén"
       }
     ],
-    "translation": "Stop, who goes there",
-    "explanation": "The phrase '快站住' is a common way to say 'stop' in Chinese, with '快' adding urgency to the command.",
+    "translation": "Quickly stop, who are you?",
+    "explanation": "The structure '快 + verb' is used to indicate a quick action, in this case, stopping someone. The verb '站' means 'to stop', and '住' is a verb complement indicating the completion of the action.",
     "word_meanings": [
       {
         "word": "快",
@@ -5819,17 +5817,17 @@
       },
       {
         "word": "站",
-        "meaning": "stand",
-        "grammatical_role": "verb"
-      },
-      {
-        "word": "住",
         "meaning": "stop",
         "grammatical_role": "verb"
       },
       {
+        "word": "住",
+        "meaning": "up",
+        "grammatical_role": "verb complement"
+      },
+      {
         "word": "什么",
-        "meaning": "what",
+        "meaning": "who",
         "grammatical_role": "pronoun"
       },
       {
@@ -5861,8 +5859,8 @@
         "pinyin": "kàn kàn"
       }
     ],
-    "translation": "Go over there quickly and take a look",
-    "explanation": "In this sentence, the repetition of the verb '看' (to look) in '看看' indicates a quick action of taking a look, emphasizing the urgency or promptness of the action.",
+    "translation": "Go over there and take a look",
+    "explanation": "The sentence uses the verb '过去' (go over) followed by '看看' (take a look) to indicate the action of going to a place to visually inspect or observe something.",
     "word_meanings": [
       {
         "word": "那边",
@@ -5898,32 +5896,25 @@
       {
         "word": "住",
         "pinyin": "zhù"
-      },
-      {
-        "word": "啊",
-        "pinyin": "a"
       }
     ],
-    "translation": "Hold on, Honghong!",
-    "explanation": "In Chinese, it is common to repeat a person's name for emphasis or affection. The particle '住' is used after a verb to indicate the continuation of an action.",
+    "translation": "Red, hold on!",
+    "explanation": "The sentence is a command telling someone named Red to hold on. The verb '坚持' means 'to persist' or 'to hold on' in this context.",
     "word_meanings": [
       {
         "word": "红红",
-        "meaning": "Honghong (a name)"
+        "meaning": "Red",
+        "grammar": "noun"
       },
       {
         "word": "坚持",
         "meaning": "hold on",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "住",
         "meaning": "on",
-        "grammatical_role": "particle"
-      },
-      {
-        "word": "啊",
-        "meaning": "exclamatory particle"
+        "grammar": "particle"
       }
     ]
   },
@@ -5937,12 +5928,8 @@
         "pinyin": "wǒ"
       },
       {
-        "word": "很",
-        "pinyin": "hěn"
-      },
-      {
-        "word": "快",
-        "pinyin": "kuài"
+        "word": "很快",
+        "pinyin": "hěn kuài"
       },
       {
         "word": "就",
@@ -5969,53 +5956,40 @@
         "pinyin": "huí qù"
       }
     ],
-    "translation": "I can return the bow quickly.",
-    "explanation": "In Chinese, the structure '把 + object + verb' is used to indicate the object of the verb. The directional complement '回去' indicates the direction of the action, in this case, returning the bow back.",
+    "translation": "I will be able to return the bow very soon.",
+    "explanation": "The sentence structure in Chinese is Subject + Time/Duration + 就 + Verb + Object + Verb Complement/Direction.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
-        "grammatical_role": "subject"
+        "meaning": "I"
       },
       {
-        "word": "很",
-        "meaning": "very",
-        "grammatical_role": "adverb"
-      },
-      {
-        "word": "快",
-        "meaning": "quick",
-        "grammatical_role": "adjective"
+        "word": "很快",
+        "meaning": "very soon"
       },
       {
         "word": "就",
-        "meaning": "soon",
-        "grammatical_role": "adverb"
+        "meaning": "indicating that something will happen soon"
       },
       {
         "word": "能",
-        "meaning": "can",
-        "grammatical_role": "verb"
+        "meaning": "able to"
       },
       {
         "word": "把",
-        "meaning": "indicating the object of the verb",
-        "grammatical_role": "particle"
+        "meaning": "used before a verb to indicate the object affected by the action"
       },
       {
         "word": "弓",
-        "meaning": "bow",
-        "grammatical_role": "object"
+        "meaning": "bow"
       },
       {
         "word": "还",
-        "meaning": "return",
-        "grammatical_role": "verb"
+        "meaning": "return"
       },
       {
         "word": "回去",
-        "meaning": "back",
-        "grammatical_role": "directional complement"
+        "meaning": "back"
       }
     ]
   },
@@ -6033,8 +6007,12 @@
         "pinyin": "nǐ"
       },
       {
-        "word": "印得",
-        "pinyin": "yìn dé"
+        "word": "印",
+        "pinyin": "yìn"
+      },
+      {
+        "word": "得",
+        "pinyin": "dé"
       },
       {
         "word": "也",
@@ -6045,46 +6023,65 @@
         "pinyin": "tài"
       },
       {
-        "word": "乱了",
-        "pinyin": "luàn le"
+        "word": "乱",
+        "pinyin": "luàn"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       },
       {
         "word": "吧",
         "pinyin": "ba"
       }
     ],
-    "translation": "Xiao Huihui, you printed too messily.",
-    "explanation": "In this sentence, the structure 'verb + 得 + complement' is used to indicate the degree or result of an action. The use of '也' emphasizes the degree of messiness in this context.",
+    "translation": "Little Grey, your printing is too messy.",
+    "explanation": "In this sentence, '印' means 'to print' and '得' is a verb complement indicating the degree of messiness. The use of '了' at the end of the sentence indicates a completed action, and '吧' suggests a softening or suggestion tone.",
     "word_meanings": [
       {
         "word": "小灰灰",
-        "meaning": "Xiao Huihui (name of a character)"
+        "meaning": "Little Grey",
+        "grammar": "noun"
       },
       {
         "word": "你",
-        "meaning": "you"
+        "meaning": "you",
+        "grammar": "pronoun"
       },
       {
-        "word": "印得",
-        "meaning": "printed",
-        "grammatical_role": "verb + complement"
+        "word": "印",
+        "meaning": "print",
+        "grammar": "verb"
+      },
+      {
+        "word": "得",
+        "meaning": "(verb complement)",
+        "grammar": "particle"
       },
       {
         "word": "也",
-        "meaning": "too"
+        "meaning": "too",
+        "grammar": "adverb"
       },
       {
         "word": "太",
-        "meaning": "too"
+        "meaning": "too",
+        "grammar": "adverb"
       },
       {
-        "word": "乱了",
-        "meaning": "messily",
-        "grammatical_role": "adverbial"
+        "word": "乱",
+        "meaning": "messy",
+        "grammar": "adjective"
+      },
+      {
+        "word": "了",
+        "meaning": "(completed action)",
+        "grammar": "particle"
       },
       {
         "word": "吧",
-        "meaning": "indicating suggestion or softening the tone"
+        "meaning": "(suggestive particle)",
+        "grammar": "particle"
       }
     ]
   },
@@ -6114,12 +6111,12 @@
         "pinyin": "tā men"
       }
     ],
-    "translation": "I don't know if we can bypass them.",
-    "explanation": "The structure 不知能不能 is a common way to express uncertainty in Chinese, similar to saying 'I don't know if...' in English.",
+    "translation": "I don't know if we can avoid them",
+    "explanation": "The sentence structure is a question expressing uncertainty about the possibility of avoiding someone or something.",
     "word_meanings": [
       {
         "word": "不知",
-        "meaning": "not know"
+        "meaning": "don't know"
       },
       {
         "word": "能",
@@ -6131,7 +6128,7 @@
       },
       {
         "word": "偏过",
-        "meaning": "bypass"
+        "meaning": "avoid"
       },
       {
         "word": "他们",
@@ -6173,8 +6170,8 @@
         "pinyin": "chuán guò lái"
       }
     ],
-    "translation": "The sound just now came from over here.",
-    "explanation": "In this sentence, 刚才 functions as an adverb to indicate the time frame of 'just now'. 的 is a possessive particle linking 刚才 and 声音. 就是 is used to emphasize that the sound is exactly coming from this direction. 传过来 is a verb indicating the action of 'came over'.",
+    "translation": "The voice just now came from over here.",
+    "explanation": "In this sentence, 刚才 is used to indicate a recent past time frame. 的 is a possessive particle indicating that the voice belongs to the following noun. 就是 is used to emphasize that the voice came exactly from this location. 传过来 is a verb phrase meaning 'came over'.",
     "word_meanings": [
       {
         "word": "刚才",
@@ -6186,11 +6183,11 @@
       },
       {
         "word": "声音",
-        "meaning": "sound"
+        "meaning": "voice"
       },
       {
         "word": "就是",
-        "meaning": "exactly is"
+        "meaning": "exactly"
       },
       {
         "word": "从",
@@ -6198,11 +6195,11 @@
       },
       {
         "word": "这边",
-        "meaning": "over here"
+        "meaning": "here"
       },
       {
         "word": "传过来",
-        "meaning": "came"
+        "meaning": "came over"
       }
     ]
   },
@@ -6225,22 +6222,22 @@
       }
     ],
     "translation": "How are these steps",
-    "explanation": "The structure '怎么' is used to ask 'how' in this context, indicating a question about the steps.",
+    "explanation": "The sentence is asking about the nature or condition of the steps, specifically inquiring how they are.",
     "word_meanings": [
       {
         "word": "这些",
         "meaning": "these",
-        "grammatical_role": "determiner"
+        "grammar": "determiner"
       },
       {
         "word": "步伐",
         "meaning": "steps",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "怎么",
         "meaning": "how",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       }
     ]
   },
@@ -6274,22 +6271,22 @@
         "pinyin": "yòu jiǎo"
       }
     ],
-    "translation": "Such a mess, especially the right foot.",
-    "explanation": "The structure '这么...的' is used to emphasize the adjective '凌乱' (messy). The phrase '特别是' means 'especially', indicating a specific emphasis on the right foot being messy.",
+    "translation": "This is especially messy, especially the right foot",
+    "explanation": "The structure '这么...的...特别是' is used to emphasize the description of something, in this case, the messiness of the right foot.",
     "word_meanings": [
       {
         "word": "这么",
-        "meaning": "such",
+        "meaning": "this way; so; such",
         "grammatical_role": "adverb"
       },
       {
         "word": "凌乱",
-        "meaning": "messy",
+        "meaning": "messy; chaotic",
         "grammatical_role": "adjective"
       },
       {
         "word": "的",
-        "meaning": "particle indicating possession or modification",
+        "meaning": "possessive particle; adjectival marker",
         "grammatical_role": "particle"
       },
       {
@@ -6299,7 +6296,7 @@
       },
       {
         "word": "是",
-        "meaning": "is",
+        "meaning": "is; to be",
         "grammatical_role": "verb"
       },
       {
@@ -6344,41 +6341,35 @@
       }
     ],
     "translation": "I know it must be a group committing the crime",
-    "explanation": "In Chinese, the verb '是' (is) is often used to link the subject and predicate without a separate verb for actions. '一定' (must) is used to indicate certainty in this context.",
+    "explanation": "In this sentence, the verb '知道' (know) is followed by the particle '了', indicating the completion of the action of knowing. The phrase '一定是' means 'must be', emphasizing the speaker's certainty that it is a group committing the crime.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
-        "grammatical_role": "subject"
+        "meaning": "I"
       },
       {
         "word": "知道",
-        "meaning": "know",
-        "grammatical_role": "verb"
+        "meaning": "know"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion of action or change of state"
+        "meaning": "(indicates completion of an action)"
       },
       {
         "word": "一定",
-        "meaning": "must",
-        "grammatical_role": "adverb"
+        "meaning": "must"
       },
       {
         "word": "是",
-        "meaning": "is",
-        "grammatical_role": "verb"
+        "meaning": "is"
       },
       {
         "word": "团伙",
-        "meaning": "group",
-        "grammatical_role": "noun"
+        "meaning": "group"
       },
       {
         "word": "作案",
-        "meaning": "committing the crime",
-        "grammatical_role": "verb"
+        "meaning": "committing the crime"
       }
     ]
   },
@@ -6401,7 +6392,7 @@
       }
     ],
     "translation": "We quickly chase",
-    "explanation": "In this sentence, the adverb '快' (quickly) is used to indicate the urgency or speed of the action of chasing. This structure is commonly used in Chinese to convey the quickness or immediacy of an action.",
+    "explanation": "The sentence structure is subject + adverb + verb, which is a common pattern in Chinese sentences.",
     "word_meanings": [
       {
         "word": "我们",
@@ -6438,16 +6429,16 @@
         "pinyin": "shǒu wèi"
       }
     ],
-    "translation": "Oops, there are guards.",
-    "explanation": "The word '糟糕' is commonly used to express a sense of dismay or disappointment, similar to 'oops' in English. The structure '有 + noun' is used to indicate the existence of something, in this case, guards.",
+    "translation": "Disaster, there are guards",
+    "explanation": "The sentence structure is subject + verb + object. The word '糟糕' means 'disaster' or 'bad', '有' is the verb 'have', and '守卫' means 'guards'.",
     "word_meanings": [
       {
         "word": "糟糕",
-        "meaning": "Oops"
+        "meaning": "disaster"
       },
       {
         "word": "有",
-        "meaning": "there are"
+        "meaning": "have"
       },
       {
         "word": "守卫",
@@ -6470,17 +6461,15 @@
       }
     ],
     "translation": "What to do",
-    "explanation": "The phrase 怎么办 (zěnme bàn) is commonly used in Chinese to express 'What to do' or 'What should we do' when facing a problem or difficult situation.",
+    "explanation": "The phrase '怎么办' is a common way to ask 'what to do' in Chinese when facing a problem or dilemma.",
     "word_meanings": [
       {
         "word": "怎么",
-        "meaning": "how",
-        "grammatical_role": "adverb"
+        "meaning": "how"
       },
       {
         "word": "办",
-        "meaning": "to do",
-        "grammatical_role": "verb"
+        "meaning": "to do"
       }
     ]
   },
@@ -6527,7 +6516,7 @@
       }
     ],
     "translation": "What should I do? What should I do?",
-    "explanation": "This sentence is a repetition of 'What should I do?' in Chinese, emphasizing the speaker's confusion or dilemma.",
+    "explanation": "This sentence repeats the question 'What should I do?' for emphasis. The particle '呢' at the end adds a sense of seeking confirmation or further information.",
     "word_meanings": [
       {
         "word": "我",
@@ -6573,17 +6562,17 @@
     "text": "有了",
     "segmented": [
       {
-        "word": "有了",
-        "pinyin": "yǒu le"
+        "word": "有",
+        "pinyin": "yǒu"
       }
     ],
-    "translation": "Got it",
-    "explanation": "In this context, 有了 is a resultative complement used after a verb to indicate the completion or attainment of an action. It is commonly used in Chinese to express understanding or agreement, similar to saying 'Got it' in English.",
+    "translation": "have",
+    "explanation": "The word '有' means 'have' in this context. It is used to indicate possession or existence.",
     "word_meanings": [
       {
-        "word": "有了",
-        "meaning": "Got it",
-        "grammatical_role": "verb + resultative complement"
+        "word": "有",
+        "meaning": "have",
+        "grammar": "verb"
       }
     ]
   },
@@ -6605,8 +6594,8 @@
         "pinyin": "rù qīn zhě"
       }
     ],
-    "translation": "There are intruders.",
-    "explanation": "The tricky part here is the use of '有' which means 'have' in this context. It is used to indicate the existence of something, in this case, intruders.",
+    "translation": "Not good, there are intruders",
+    "explanation": "The sentence structure follows the pattern of 'subject + verb + object'. The word '不好' is used to indicate a negative situation, similar to 'not good' in English.",
     "word_meanings": [
       {
         "word": "不好",
@@ -6643,41 +6632,44 @@
         "pinyin": "jiù"
       },
       {
-        "word": "有人",
-        "pinyin": "yǒu rén"
+        "word": "有",
+        "pinyin": "yǒu"
+      },
+      {
+        "word": "人",
+        "pinyin": "rén"
       },
       {
         "word": "来了",
         "pinyin": "lái le"
       }
     ],
-    "translation": "Someone came so quickly.",
-    "explanation": "The structure '这么快' means 'so quick' and '就' is used to indicate that something happened earlier than expected.",
+    "translation": "Someone came so quickly",
+    "explanation": "The structure '这么...就...' is used to express surprise or emphasis when something happens earlier or more quickly than expected.",
     "word_meanings": [
       {
         "word": "这么",
-        "meaning": "so",
-        "grammatical_role": "adverb"
+        "meaning": "so"
       },
       {
         "word": "快",
-        "meaning": "quick",
-        "grammatical_role": "adjective"
+        "meaning": "quick"
       },
       {
         "word": "就",
-        "meaning": "already",
-        "grammatical_role": "adverb"
+        "meaning": "indicating that something happens earlier than expected"
       },
       {
-        "word": "有人",
-        "meaning": "someone",
-        "grammatical_role": "noun"
+        "word": "有",
+        "meaning": "someone"
+      },
+      {
+        "word": "人",
+        "meaning": "came"
       },
       {
         "word": "来了",
-        "meaning": "came",
-        "grammatical_role": "verb"
+        "meaning": "arrived"
       }
     ]
   },
@@ -6699,23 +6691,23 @@
         "pinyin": "sōu"
       }
     ],
-    "translation": "Search for me",
-    "explanation": "In this context, the sentence is a command instructing someone to search for something on behalf of the speaker.",
+    "translation": "Give me search",
+    "explanation": "The sentence is a command instructing someone to search for something. The verb '给' is used to indicate the action of giving the command, followed by the pronoun '我' meaning 'me', and the verb '搜' meaning 'search'.",
     "word_meanings": [
       {
         "word": "给",
-        "meaning": "give/to",
-        "grammatical_role": "verb"
+        "meaning": "give",
+        "grammar": "verb"
       },
       {
         "word": "我",
         "meaning": "me",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "搜",
         "meaning": "search",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       }
     ]
   },
@@ -6734,7 +6726,7 @@
       }
     ],
     "translation": "Not found",
-    "explanation": "In this context, the phrase 没发现 means 'not found'. 没 (méi) is a negative particle used to indicate the negation of a verb, in this case, 'found'. 发现 (fāxiàn) means 'to find' or 'to discover'.",
+    "explanation": "The sentence is a simple statement indicating that something was not found. 没 (méi) is used to negate the verb 发现 (fāxiàn), which means 'to find'.",
     "word_meanings": [
       {
         "word": "没",
@@ -6764,23 +6756,20 @@
         "pinyin": "méi yǒu"
       }
     ],
-    "translation": "There is also nothing here.",
-    "explanation": "In Chinese, the word order is Subject-Verb-Object. '也' is used to indicate 'also' in this context, and '没有' is the negation form of '有' (to have).",
+    "translation": "There is also nothing here",
+    "explanation": "The sentence structure in Chinese is Subject + Adverb + Negation + Object. In this case, the subject is 'here', the adverb 'also' emphasizes the negation 'nothing'.",
     "word_meanings": [
       {
         "word": "这里",
-        "meaning": "here",
-        "grammatical_role": "location"
+        "meaning": "here"
       },
       {
         "word": "也",
-        "meaning": "also",
-        "grammatical_role": "adverb"
+        "meaning": "also"
       },
       {
         "word": "没有",
-        "meaning": "nothing",
-        "grammatical_role": "verb (negation)"
+        "meaning": "nothing"
       }
     ]
   },
@@ -6800,14 +6789,10 @@
       {
         "word": "打开",
         "pinyin": "dǎ kāi"
-      },
-      {
-        "word": "了",
-        "pinyin": "le"
       }
     ],
     "translation": "How did the wardrobe open?",
-    "explanation": "The structure '怎么 + verb' is commonly used to ask how something happened in Chinese.",
+    "explanation": "The sentence structure is a question formed by combining '怎么' (how) with the verb '打开' (open) to ask how the wardrobe opened.",
     "word_meanings": [
       {
         "word": "衣柜",
@@ -6820,10 +6805,6 @@
       {
         "word": "打开",
         "meaning": "open"
-      },
-      {
-        "word": "了",
-        "meaning": "indicates a completed action"
       }
     ]
   },
@@ -6841,24 +6822,27 @@
         "pinyin": "gōng"
       },
       {
-        "word": "回来了",
-        "pinyin": "huí lái le"
+        "word": "回来",
+        "pinyin": "huí lái"
       }
     ],
-    "translation": "The leader has returned.",
-    "explanation": "In Chinese, the verb '回来了' (huí lái le) is used to indicate that someone or something has returned. It is a common structure to express the action of returning in Chinese.",
+    "translation": "The leader has returned",
+    "explanation": "In this sentence, 首领 (leader) is the subject, 弓 (to return) is the verb, and 回来了 (has returned) is the verb phrase indicating the action of the leader returning.",
     "word_meanings": [
       {
         "word": "首领",
-        "meaning": "leader"
+        "meaning": "leader",
+        "grammar": "noun"
       },
       {
         "word": "弓",
-        "meaning": "returned"
+        "meaning": "to return",
+        "grammar": "verb"
       },
       {
-        "word": "回来了",
-        "meaning": "has returned"
+        "word": "回来",
+        "meaning": "has returned",
+        "grammar": "verb"
       }
     ]
   },
@@ -6881,7 +6865,7 @@
       }
     ],
     "translation": "But where are the people?",
-    "explanation": "The structure 可是人呢 is used to ask where the people are, with 呢 adding emphasis to the question.",
+    "explanation": "The sentence is a simple question asking about the whereabouts of people. The use of '呢' at the end adds emphasis to the question.",
     "word_meanings": [
       {
         "word": "可是",
@@ -6893,7 +6877,7 @@
       },
       {
         "word": "呢",
-        "meaning": "used to indicate a question or emphasis"
+        "meaning": "used at the end of a sentence to indicate a question or emphasis"
       }
     ]
   },
@@ -6919,32 +6903,46 @@
         "pinyin": "lái"
       },
       {
-        "word": "得及时",
-        "pinyin": "dé jí shí"
+        "word": "得",
+        "pinyin": "dé"
+      },
+      {
+        "word": "及时",
+        "pinyin": "jí shí"
       }
     ],
-    "translation": "Red Red, luckily you arrived just in time",
-    "explanation": "幸亏 (xìngkuī) is a Chinese phrase used to express gratitude or relief for a fortunate outcome. In this context, it is used to convey the idea of 'luckily'.",
+    "translation": "Red, luckily you arrived just in time",
+    "explanation": "The structure '幸亏 + subject + verb + 得 + adverb' is used to express gratitude or relief that something happened just in time.",
     "word_meanings": [
       {
         "word": "红红",
-        "meaning": "Red Red"
+        "meaning": "Red",
+        "grammatical_role": "noun"
       },
       {
         "word": "幸亏",
-        "meaning": "luckily"
+        "meaning": "luckily",
+        "grammatical_role": "adverb"
       },
       {
         "word": "你",
-        "meaning": "you"
+        "meaning": "you",
+        "grammatical_role": "pronoun"
       },
       {
         "word": "来",
-        "meaning": "arrive"
+        "meaning": "arrive",
+        "grammatical_role": "verb"
       },
       {
-        "word": "得及时",
-        "meaning": "just in time"
+        "word": "得",
+        "meaning": "just",
+        "grammatical_role": "particle"
+      },
+      {
+        "word": "及时",
+        "meaning": "in time",
+        "grammatical_role": "adverb"
       }
     ]
   },
@@ -6972,35 +6970,38 @@
       {
         "word": "羊",
         "pinyin": "yáng"
+      },
+      {
+        "word": "羊",
+        "pinyin": "yáng"
       }
     ],
-    "translation": "Warm Sheep, Beautiful Sheep",
-    "explanation": "In Chinese, the adjective comes before the noun it describes. Also, the repetition of '羊' emphasizes that both sheep are being referred to.",
+    "translation": "Warm Sheep Sheep, Beautiful Sheep Sheep",
+    "explanation": "The sentence lists the names of characters in the show, 'Warm Sheep Sheep' and 'Beautiful Sheep Sheep'. The repetition of the word '羊' (sheep) emphasizes that both characters are sheep.",
     "word_meanings": [
       {
         "word": "暖",
-        "meaning": "warm",
-        "grammatical_role": "adjective"
+        "meaning": "warm"
       },
       {
         "word": "羊",
-        "meaning": "sheep",
-        "grammatical_role": "noun"
+        "meaning": "sheep"
       },
       {
         "word": "羊",
-        "meaning": "sheep",
-        "grammatical_role": "noun"
+        "meaning": "sheep"
       },
       {
         "word": "美",
-        "meaning": "beautiful",
-        "grammatical_role": "adjective"
+        "meaning": "beautiful"
       },
       {
         "word": "羊",
-        "meaning": "sheep",
-        "grammatical_role": "noun"
+        "meaning": "sheep"
+      },
+      {
+        "word": "羊",
+        "meaning": "sheep"
       }
     ]
   },
@@ -7010,44 +7011,26 @@
     "text": "懒羊羊 沸羊羊",
     "segmented": [
       {
-        "word": "懒",
-        "pinyin": "lǎn"
+        "word": "懒羊羊",
+        "pinyin": "lǎn yáng yáng"
       },
       {
-        "word": "羊",
-        "pinyin": "yáng"
-      },
-      {
-        "word": "羊",
-        "pinyin": "yáng"
-      },
-      {
-        "word": "沸",
-        "pinyin": "fèi"
+        "word": "沸羊羊",
+        "pinyin": "fèi yáng yáng"
       }
     ],
     "translation": "Lazy Goat, Boiling Goat",
-    "explanation": "In this context, '懒' means 'lazy' and '沸' means 'boiling'. The repetition of '羊' emphasizes that both words refer to goats. This is a common naming convention in the 'Pleasant Goat and Big Big Wolf' series where characters are often named after their characteristics.",
+    "explanation": "The sentence introduces two characters, Lazy Goat and Boiling Goat, by their names.",
     "word_meanings": [
       {
-        "word": "懒",
-        "meaning": "lazy",
-        "grammatical_role": "adjective"
+        "word": "懒羊羊",
+        "meaning": "Lazy Goat",
+        "grammatical_role": "subject"
       },
       {
-        "word": "羊",
-        "meaning": "goat",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "羊",
-        "meaning": "goat",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "沸",
-        "meaning": "boiling",
-        "grammatical_role": "adjective"
+        "word": "沸羊羊",
+        "meaning": "Boiling Goat",
+        "grammatical_role": "subject"
       }
     ]
   },
@@ -7069,8 +7052,8 @@
         "pinyin": "dà jiā"
       }
     ],
-    "translation": "Xiao Ba, everyone",
-    "explanation": "In this context, 小 (small) is used as part of the character's name 'Xiao Ba'. 大家 (everyone) is a common term used to refer to a group of people.",
+    "translation": "Xiao Ba everyone",
+    "explanation": "The sentence is a simple introduction of a character named Xiao Ba to everyone.",
     "word_meanings": [
       {
         "word": "小",
@@ -7079,7 +7062,7 @@
       },
       {
         "word": "巴",
-        "meaning": "Ba (character's name)",
+        "meaning": "Ba (name)",
         "grammatical_role": "noun"
       },
       {
@@ -7115,12 +7098,12 @@
         "pinyin": "a"
       }
     ],
-    "translation": "Grandpa Turtle, wake up quickly",
-    "explanation": "In Chinese, it is common to repeat adjectives or verbs for emphasis, hence the repetition of 快 (quickly) and 醒 (wake up) in this sentence.",
+    "translation": "Grandpa Tortoise, wake up quickly",
+    "explanation": "The sentence is a plea for Grandpa Tortoise to wake up quickly, using the particle '啊' to add urgency or emphasis.",
     "word_meanings": [
       {
         "word": "龟爷爷",
-        "meaning": "Grandpa Turtle"
+        "meaning": "Grandpa Tortoise"
       },
       {
         "word": "快",
@@ -7136,7 +7119,7 @@
       },
       {
         "word": "啊",
-        "meaning": "exclamatory particle"
+        "meaning": "particle indicating urgency or emphasis"
       }
     ]
   },
@@ -7158,8 +7141,8 @@
         "pinyin": "xǐng xǐng"
       }
     ],
-    "translation": "Grandpa Turtle, wake up quickly",
-    "explanation": "In Chinese, it is common to repeat a verb to indicate a quick or urgent action. In this case, '醒醒' is used to emphasize the urgency of waking up Grandpa Turtle.",
+    "translation": "Grandpa Turtle wake up quickly",
+    "explanation": "The sentence is a simple command urging Grandpa Turtle to wake up quickly.",
     "word_meanings": [
       {
         "word": "龟爷爷",
@@ -7195,14 +7178,10 @@
       {
         "word": "住",
         "pinyin": "zhù"
-      },
-      {
-        "word": "它",
-        "pinyin": "tā"
       }
     ],
     "translation": "Increase horsepower to drag it",
-    "explanation": "The structure '加大马力' means 'increase horsepower', and '拖住' means 'to drag'. The use of '它' emphasizes the object being dragged.",
+    "explanation": "The sentence uses the verb 加大 (increase) followed by the noun 马力 (horsepower) to indicate increasing the power. The verb 拖 (drag) is used with the object 住 (it) to convey the action of dragging something.",
     "word_meanings": [
       {
         "word": "加大",
@@ -7222,12 +7201,7 @@
       {
         "word": "住",
         "meaning": "it",
-        "grammatical_role": "pronoun"
-      },
-      {
-        "word": "它",
-        "meaning": "it",
-        "grammatical_role": "pronoun"
+        "grammatical_role": "object"
       }
     ]
   },
@@ -7273,8 +7247,8 @@
         "pinyin": "yān wù"
       }
     ],
-    "translation": "Hold on, it has inhaled so much numbing smoke.",
-    "explanation": "The structure '吸入了' means 'inhaled' with the particle '了' indicating the completion of the action. '这么多' together means 'so much'. '麻痹' can mean 'numbing' in this context.",
+    "translation": "Hold on, it has inhaled so much paralyzing smoke.",
+    "explanation": "The sentence structure is Subject + Verb + Object + Verb + Complement. The use of '了' after a verb indicates the completion of the action of inhaling the smoke.",
     "word_meanings": [
       {
         "word": "坚持",
@@ -7283,13 +7257,13 @@
       },
       {
         "word": "住",
-        "meaning": "on",
-        "grammatical_role": "preposition"
+        "meaning": "complement indicating completion of an action",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "它",
         "meaning": "it",
-        "grammatical_role": "pronoun"
+        "grammatical_role": "noun"
       },
       {
         "word": "吸入",
@@ -7298,8 +7272,8 @@
       },
       {
         "word": "了",
-        "meaning": "(particle indicating completion of action)",
-        "grammatical_role": "particle"
+        "meaning": "complement indicating completion of an action",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "这么",
@@ -7308,12 +7282,12 @@
       },
       {
         "word": "多",
-        "meaning": "much",
+        "meaning": "many",
         "grammatical_role": "adverb"
       },
       {
         "word": "麻痹",
-        "meaning": "numbing",
+        "meaning": "paralyzing",
         "grammatical_role": "adjective"
       },
       {
@@ -7339,34 +7313,25 @@
       {
         "word": "多久",
         "pinyin": "duō jiǔ"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
       }
     ],
     "translation": "Can't hold on for long",
-    "explanation": "The structure '坚持不了' means 'not able to hold on'. The word '的' at the end of the sentence is a possessive particle.",
+    "explanation": "The sentence structure is 'verb + negative particle + duration'. The use of '不了' indicates the inability to continue holding on for a long time.",
     "word_meanings": [
       {
         "word": "坚持",
-        "meaning": "hold on",
+        "meaning": "to hold on",
         "grammatical_role": "verb"
       },
       {
         "word": "不了",
         "meaning": "not able to",
-        "grammatical_role": "particle indicating negative"
+        "grammatical_role": "particle"
       },
       {
         "word": "多久",
-        "meaning": "for long",
-        "grammatical_role": "adverb"
-      },
-      {
-        "word": "的",
-        "meaning": "",
-        "grammatical_role": "particle indicating possession or modification"
+        "meaning": "for how long",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -7376,35 +7341,53 @@
     "text": "成功了我们成功了",
     "segmented": [
       {
-        "word": "成功了",
-        "pinyin": "chéng gōng le"
+        "word": "成功",
+        "pinyin": "chéng gōng"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       },
       {
         "word": "我们",
         "pinyin": "wǒ men"
       },
       {
-        "word": "成功了",
-        "pinyin": "chéng gōng le"
+        "word": "成功",
+        "pinyin": "chéng gōng"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       }
     ],
     "translation": "We succeeded, we succeeded",
-    "explanation": "The sentence repeats '成功了' (succeeded) to emphasize the success achieved by '我们' (we). The structure is simple, with a subject pronoun '我们' followed by the verb '成功了' repeated twice.",
+    "explanation": "The sentence repeats the word 'succeed' twice to emphasize the success achieved by 'us'. The particle '了' indicates the completion of the action of succeeding.",
     "word_meanings": [
       {
-        "word": "成功了",
-        "meaning": "succeeded",
-        "grammatical_role": "verb"
+        "word": "成功",
+        "meaning": "succeed",
+        "grammar": "verb"
+      },
+      {
+        "word": "了",
+        "meaning": "indicates completion of an action",
+        "grammar": "particle"
       },
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
-        "word": "成功了",
-        "meaning": "succeeded",
-        "grammatical_role": "verb"
+        "word": "成功",
+        "meaning": "succeed",
+        "grammar": "verb"
+      },
+      {
+        "word": "了",
+        "meaning": "indicates completion of an action",
+        "grammar": "particle"
       }
     ]
   },
@@ -7446,8 +7429,8 @@
         "pinyin": "fēi"
       }
     ],
-    "translation": "Why are there bubbles flying outside?",
-    "explanation": "In Chinese, the verb 'to be able to' (会) is often used to indicate a possibility or likelihood of something happening in the future. The structure '在 + verb' indicates an action in progress.",
+    "translation": "Strange, how come there are bubbles flying outside?",
+    "explanation": "The sentence structure follows the pattern of '怎么 + 会 + verb' to express surprise or confusion about a situation.",
     "word_meanings": [
       {
         "word": "奇怪",
@@ -7463,7 +7446,7 @@
       },
       {
         "word": "会",
-        "meaning": "to be able to"
+        "meaning": "indicating possibility"
       },
       {
         "word": "有",
@@ -7498,7 +7481,7 @@
       }
     ],
     "translation": "Not good",
-    "explanation": "In Chinese, the structure for negating adjectives is to place '不' before the adjective. Here, '不' negates the adjective '好' (good), resulting in '不好' meaning 'not good'.",
+    "explanation": "The sentence is a simple statement indicating that something is not good.",
     "word_meanings": [
       {
         "word": "不",
@@ -7538,33 +7521,33 @@
         "pinyin": "hǎi yù"
       }
     ],
-    "translation": "We entered the psychedelic sea area.",
-    "explanation": "The tricky part here might be the use of 了 at the end of the sentence, which indicates the completion of the action of entering the psychedelic sea area.",
+    "translation": "We entered the psychedelic sea area",
+    "explanation": "The sentence structure is subject + verb + particle indicating completion + adjective + noun. The use of '了' at the end of the verb '进入' indicates that the action of entering is completed.",
     "word_meanings": [
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "subject"
+        "grammar": "pronoun"
       },
       {
         "word": "进入",
         "meaning": "enter",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "了",
-        "meaning": "(indicating completion of action)",
-        "grammatical_role": "particle"
+        "meaning": "(indicates completion of action)",
+        "grammar": "particle"
       },
       {
         "word": "迷幻",
         "meaning": "psychedelic",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "海域",
         "meaning": "sea area",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       }
     ]
   }

@@ -17,6 +17,10 @@
         "pinyin": "èr shí sān"
       },
       {
+        "word": ",",
+        "pinyin": ","
+      },
+      {
         "word": "大象",
         "pinyin": "dà xiàng"
       },
@@ -26,32 +30,31 @@
       }
     ],
     "translation": "Forest Prince twenty-three, elephants march.",
-    "explanation": "In Chinese, the order of words in a sentence can be different from English. Here, 'Forest Prince twenty-three' means 'The twenty-third Forest Prince'. The verb '行进' means 'to march' or 'to move forward'.",
+    "explanation": "The sentence describes the Forest Prince as the twenty-third in a sequence, followed by the action of elephants marching. The structure '森林王子二十三' means 'Forest Prince twenty-three' in English.",
     "word_meanings": [
       {
         "word": "森林",
-        "meaning": "forest",
-        "grammatical_role": "noun"
+        "meaning": "forest"
       },
       {
         "word": "王子",
-        "meaning": "prince",
-        "grammatical_role": "noun"
+        "meaning": "prince"
       },
       {
         "word": "二十三",
-        "meaning": "twenty-three",
-        "grammatical_role": "numeral"
+        "meaning": "twenty-three"
+      },
+      {
+        "word": ",",
+        "meaning": "comma"
       },
       {
         "word": "大象",
-        "meaning": "elephant",
-        "grammatical_role": "noun"
+        "meaning": "elephants"
       },
       {
         "word": "行进",
-        "meaning": "march",
-        "grammatical_role": "verb"
+        "meaning": "march"
       }
     ]
   },
@@ -61,8 +64,16 @@
     "text": "第二天,哈提抬起了他的鼻子。",
     "segmented": [
       {
-        "word": "第二天",
-        "pinyin": "dì èr tiān"
+        "word": "第二",
+        "pinyin": "dì èr"
+      },
+      {
+        "word": "天",
+        "pinyin": "tiān"
+      },
+      {
+        "word": ",",
+        "pinyin": ","
       },
       {
         "word": "哈提",
@@ -86,31 +97,47 @@
       }
     ],
     "translation": "The next day, Hathi lifted his trunk.",
-    "explanation": "In Chinese, the word order is different from English, so 'the next day' comes at the beginning of the sentence. Also, the particle '了' indicates the completion of the action of lifting.",
+    "explanation": "In this sentence, the structure '抬起了' means 'lifted' and the possessive pronoun '他的' is used before '鼻子' to indicate 'his trunk'.",
     "word_meanings": [
       {
-        "word": "第二天",
-        "meaning": "the next day"
+        "word": "第二",
+        "meaning": "the second",
+        "grammar": "numeral"
+      },
+      {
+        "word": "天",
+        "meaning": "day",
+        "grammar": "noun"
+      },
+      {
+        "word": ",",
+        "meaning": ",",
+        "grammar": "punctuation"
       },
       {
         "word": "哈提",
-        "meaning": "Hathi (name of a character)"
+        "meaning": "Hathi",
+        "grammar": "noun"
       },
       {
         "word": "抬起",
-        "meaning": "lifted"
+        "meaning": "lifted",
+        "grammar": "verb"
       },
       {
         "word": "了",
-        "meaning": "(particle indicating completion of action)"
+        "meaning": "indicates completion of an action",
+        "grammar": "particle"
       },
       {
         "word": "他的",
-        "meaning": "his"
+        "meaning": "his",
+        "grammar": "possessive pronoun"
       },
       {
         "word": "鼻子",
-        "meaning": "trunk"
+        "meaning": "trunk (of an elephant)",
+        "grammar": "noun"
       }
     ]
   },
@@ -133,22 +160,22 @@
       }
     ],
     "translation": "Let's go.",
-    "explanation": "The sentence is a simple command or suggestion to go. The use of 吧 at the end softens the tone, making it more polite or friendly.",
+    "explanation": "The sentence is a simple suggestion to start moving, using the verb 走 (to go) and the modal particle 吧 to soften the command.",
     "word_meanings": [
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "subject"
+        "grammar": "pronoun"
       },
       {
         "word": "走",
-        "meaning": "go",
-        "grammatical_role": "verb"
+        "meaning": "to go",
+        "grammar": "verb"
       },
       {
         "word": "吧",
-        "meaning": "modal particle indicating suggestion or softening of tone",
-        "grammatical_role": "sentence-final particle"
+        "meaning": "modal particle indicating suggestion",
+        "grammar": "particle"
       }
     ]
   },
@@ -162,27 +189,19 @@
         "pinyin": "tā"
       },
       {
-        "word": "大",
-        "pinyin": "dà"
-      },
-      {
-        "word": "喊",
-        "pinyin": "hǎn"
+        "word": "大喊",
+        "pinyin": "dà hǎn"
       }
     ],
-    "translation": "He shouted loudly.",
-    "explanation": "In Chinese, the word order is subject-verb-object, so '他' means 'he', '大' means 'loudly', and '喊' means 'shout'.",
+    "translation": "He shouts.",
+    "explanation": "The sentence consists of the subject '他' (he) and the verb '大喊' (shout). In Chinese, the verb typically comes after the subject.",
     "word_meanings": [
       {
         "word": "他",
-        "meaning": "He"
+        "meaning": "he"
       },
       {
-        "word": "大",
-        "meaning": "loudly"
-      },
-      {
-        "word": "喊",
+        "word": "大喊",
         "meaning": "shout"
       }
     ]
@@ -226,47 +245,47 @@
       }
     ],
     "translation": "Then, he and his three sons set off.",
-    "explanation": "In Chinese, the order of words in a sentence can differ from English. Also, the particle '了' is used to indicate the completion of an action in this context.",
+    "explanation": "The structure '他和他的三个儿子' means 'he and his three sons', where '和' is used to connect two nouns. The verb '出发了' is followed by the completion marker '了' to indicate the action of setting off has been completed.",
     "word_meanings": [
       {
         "word": "然后",
         "meaning": "then",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "他",
         "meaning": "he",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "和",
         "meaning": "and",
-        "grammatical_role": "conjunction"
+        "grammar": "conjunction"
       },
       {
         "word": "他的",
         "meaning": "his",
-        "grammatical_role": "possessive pronoun"
+        "grammar": "possessive pronoun"
       },
       {
         "word": "三个",
         "meaning": "three",
-        "grammatical_role": "numeral"
+        "grammar": "numeral"
       },
       {
         "word": "儿子",
         "meaning": "sons",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "出发",
         "meaning": "set off",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "了",
         "meaning": "(indicates completion of an action)",
-        "grammatical_role": "particle"
+        "grammar": "verb complement"
       }
     ]
   },
@@ -300,32 +319,38 @@
         "pinyin": "xíng jìn"
       }
     ],
-    "translation": "The elephant moves in different directions.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate that '不同' (different) describes '方向' (direction). The verb '行进' (move forward) is used to describe the action of the subject '大象' (elephant).",
+    "translation": "Elephants are moving in different directions.",
+    "explanation": "The structure '向 + direction + 行进' means 'move in the direction of'. The possessive particle '的' is used to indicate that the direction belongs to the elephants.",
     "word_meanings": [
       {
         "word": "大象",
-        "meaning": "elephant"
+        "meaning": "elephant",
+        "grammatical_role": "subject"
       },
       {
         "word": "向",
-        "meaning": "towards; in the direction of"
+        "meaning": "towards",
+        "grammatical_role": "preposition"
       },
       {
         "word": "不同",
-        "meaning": "different"
+        "meaning": "different",
+        "grammatical_role": "adjective"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "possessive particle",
+        "grammatical_role": "particle"
       },
       {
         "word": "方向",
-        "meaning": "direction"
+        "meaning": "direction",
+        "grammatical_role": "object"
       },
       {
         "word": "行进",
-        "meaning": "move forward"
+        "meaning": "move",
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -339,8 +364,12 @@
         "pinyin": "tā men"
       },
       {
-        "word": "到了",
-        "pinyin": "dào le"
+        "word": "到",
+        "pinyin": "dào"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       },
       {
         "word": "村民",
@@ -355,8 +384,16 @@
         "pinyin": "tián dì"
       },
       {
-        "word": "行进了",
-        "pinyin": "xíng jìn le"
+        "word": ",",
+        "pinyin": ","
+      },
+      {
+        "word": "行进",
+        "pinyin": "xíng jìn"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       },
       {
         "word": "好几天",
@@ -364,15 +401,19 @@
       }
     ],
     "translation": "They arrived at the villagers' fields and traveled for several days.",
-    "explanation": "In Chinese, the verb usually comes before the object, so 'arrived at the villagers' fields' is structured as '到了村民的田地'. Also, the possessive particle '的' is used to indicate possession, similar to 's in English.",
+    "explanation": "In this sentence, the verb '到' is used to indicate arrival at a location, and the completion marker '了' is used to show that the action of traveling for several days has been completed.",
     "word_meanings": [
       {
         "word": "他们",
-        "meaning": "They"
+        "meaning": "they"
       },
       {
-        "word": "到了",
-        "meaning": "arrived at"
+        "word": "到",
+        "meaning": "arrive at"
+      },
+      {
+        "word": "了",
+        "meaning": "(completion marker)"
       },
       {
         "word": "村民",
@@ -380,15 +421,23 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "(possessive particle)"
       },
       {
         "word": "田地",
         "meaning": "fields"
       },
       {
-        "word": "行进了",
-        "meaning": "traveled"
+        "word": ",",
+        "meaning": "(comma)"
+      },
+      {
+        "word": "行进",
+        "meaning": "travel"
+      },
+      {
+        "word": "了",
+        "meaning": "(completion marker)"
       },
       {
         "word": "好几天",
@@ -406,8 +455,16 @@
         "pinyin": "tā men"
       },
       {
-        "word": "踩坏了",
-        "pinyin": "cǎi huài le"
+        "word": "踩",
+        "pinyin": "cǎi"
+      },
+      {
+        "word": "坏",
+        "pinyin": "huài"
+      },
+      {
+        "word": "了",
+        "pinyin": "le"
       },
       {
         "word": "草地",
@@ -438,8 +495,12 @@
         "pinyin": "tā men"
       },
       {
-        "word": "发现的",
-        "pinyin": "fā xiàn de"
+        "word": "发现",
+        "pinyin": "fā xiàn"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       },
       {
         "word": "其他",
@@ -455,71 +516,71 @@
       }
     ],
     "translation": "They trampled on the grass, crops, tools, and anything else they found.",
-    "explanation": "This sentence showcases the use of the verb '踩坏了' (trampled) followed by a list of items that were trampled on. The conjunction '和' (and) is used to connect the different items in the list.",
+    "explanation": "The sentence describes the actions of 'they' trampling on various things in the field, emphasizing the destruction caused by their movement.",
     "word_meanings": [
       {
         "word": "他们",
         "meaning": "They"
       },
       {
-        "word": "踩坏了",
-        "meaning": "trampled",
-        "grammatical_role": "verb"
+        "word": "踩",
+        "meaning": "trample"
+      },
+      {
+        "word": "坏",
+        "meaning": "badly"
+      },
+      {
+        "word": "了",
+        "meaning": "(completion marker)"
       },
       {
         "word": "草地",
-        "meaning": "grass",
-        "grammatical_role": "noun"
+        "meaning": "grass"
       },
       {
         "word": "、",
-        "meaning": "and",
-        "grammatical_role": "conjunction"
+        "meaning": "(listing particle)"
       },
       {
         "word": "庄稼",
-        "meaning": "crops",
-        "grammatical_role": "noun"
+        "meaning": "crops"
       },
       {
         "word": "、",
-        "meaning": "and",
-        "grammatical_role": "conjunction"
+        "meaning": "(listing particle)"
       },
       {
         "word": "工具",
-        "meaning": "tools",
-        "grammatical_role": "noun"
+        "meaning": "tools"
       },
       {
         "word": "和",
-        "meaning": "and",
-        "grammatical_role": "conjunction"
+        "meaning": "and"
       },
       {
         "word": "他们",
-        "meaning": "they",
-        "grammatical_role": "pronoun"
+        "meaning": "they"
       },
       {
-        "word": "发现的",
-        "meaning": "found",
-        "grammatical_role": "adjective"
+        "word": "发现",
+        "meaning": "found"
+      },
+      {
+        "word": "的",
+        "meaning": "(possessive particle)"
       },
       {
         "word": "其他",
-        "meaning": "other",
-        "grammatical_role": "adjective"
+        "meaning": "other"
       },
       {
         "word": "任何",
-        "meaning": "anything",
-        "grammatical_role": "pronoun"
+        "meaning": "anything"
       },
       {
         "word": "东西",
-        "meaning": "thing",
-        "grammatical_role": "noun"
+        "meaning": "things"
       }
     ]
   },
@@ -531,6 +592,10 @@
       {
         "word": "刚开始",
         "pinyin": "gāng kāi shǐ"
+      },
+      {
+        "word": ",",
+        "pinyin": ","
       },
       {
         "word": "别的",
@@ -545,8 +610,12 @@
         "pinyin": "dòng wù"
       },
       {
-        "word": "远远地",
-        "pinyin": "yuǎn yuǎn dì"
+        "word": "远远",
+        "pinyin": "yuǎn yuǎn"
+      },
+      {
+        "word": "地",
+        "pinyin": "dì"
       },
       {
         "word": "看着",
@@ -561,48 +630,58 @@
         "pinyin": "xíng jìn"
       }
     ],
-    "translation": "At first, other forest animals watched the elephants from afar as they moved forward.",
-    "explanation": "The use of 刚开始 at the beginning of the sentence indicates the time frame. 远远地 is used to emphasize the distance at which the animals were watching the elephants.",
+    "translation": "At the beginning, other forest animals watched the elephants from afar.",
+    "explanation": "The sentence describes the initial scene where other forest animals are observing the elephants from a distance.",
     "word_meanings": [
       {
         "word": "刚开始",
-        "meaning": "At first",
-        "grammatical_role": "adverbial phrase"
+        "meaning": "At the beginning",
+        "grammar": "adverbial phrase"
+      },
+      {
+        "word": ",",
+        "meaning": ",",
+        "grammar": "punctuation"
       },
       {
         "word": "别的",
         "meaning": "other",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "森林",
         "meaning": "forest",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "动物",
         "meaning": "animals",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
-        "word": "远远地",
+        "word": "远远",
         "meaning": "from afar",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
+      },
+      {
+        "word": "地",
+        "meaning": "marker for adverbial phrases",
+        "grammar": "particle"
       },
       {
         "word": "看着",
-        "meaning": "watched",
-        "grammatical_role": "verb"
+        "meaning": "watching",
+        "grammar": "verb complement"
       },
       {
         "word": "大象们",
-        "meaning": "elephants",
-        "grammatical_role": "noun"
+        "meaning": "the elephants",
+        "grammar": "noun"
       },
       {
         "word": "行进",
-        "meaning": "moved forward",
-        "grammatical_role": "verb"
+        "meaning": "move forward",
+        "grammar": "verb"
       }
     ]
   },
@@ -614,6 +693,10 @@
       {
         "word": "后来",
         "pinyin": "hòu lái"
+      },
+      {
+        "word": ",",
+        "pinyin": ","
       },
       {
         "word": "鸟们",
@@ -642,14 +725,22 @@
       {
         "word": "消息",
         "pinyin": "xiāo xī"
+      },
+      {
+        "word": "。",
+        "pinyin": "。"
       }
     ],
     "translation": "Later, the birds flew over the forest to spread the news.",
-    "explanation": "In Chinese, the order of words in a sentence can be different from English. In this sentence, '后来' (later) comes at the beginning, followed by the subject '鸟们' (birds), then the action '飞' (flew), and so on. Also, '到' is used here to indicate the direction of flying 'to' the forest.",
+    "explanation": "The structure '飞到森林上空' means 'fly over the forest', with '上空' indicating 'above'.",
     "word_meanings": [
       {
         "word": "后来",
         "meaning": "later"
+      },
+      {
+        "word": ",",
+        "meaning": "comma"
       },
       {
         "word": "鸟们",
@@ -661,7 +752,7 @@
       },
       {
         "word": "到",
-        "meaning": "to"
+        "meaning": "over"
       },
       {
         "word": "森林",
@@ -669,7 +760,7 @@
       },
       {
         "word": "上空",
-        "meaning": "over"
+        "meaning": "above"
       },
       {
         "word": "传播",
@@ -678,6 +769,10 @@
       {
         "word": "消息",
         "meaning": "news"
+      },
+      {
+        "word": "。",
+        "meaning": "period"
       }
     ]
   },
@@ -689,14 +784,24 @@
       {
         "word": "食物",
         "pinyin": "shí wù"
+      },
+      {
+        "word": "!",
+        "pinyin": "!"
       }
     ],
     "translation": "Food!",
-    "explanation": "This sentence is a simple exclamation in Chinese, where the word '食物' means 'food'.",
+    "explanation": "The word '食物' means 'food' in this context. The exclamation point at the end emphasizes the excitement or urgency of the word.",
     "word_meanings": [
       {
         "word": "食物",
-        "meaning": "food"
+        "meaning": "food",
+        "grammatical_role": "noun"
+      },
+      {
+        "word": "!",
+        "meaning": "exclamation point",
+        "grammatical_role": "punctuation"
       }
     ]
   },
@@ -728,49 +833,34 @@
       {
         "word": "的",
         "pinyin": "de"
-      },
-      {
-        "word": "食物",
-        "pinyin": "shí wù"
       }
     ],
-    "translation": "Food that every animal can eat!",
-    "explanation": "In Chinese, the structure '每个 + noun + 都 + verb' is used to express 'every (noun) can (verb)'. The particle '的' is used to connect the adjective 'every animal' to the noun 'food'.",
+    "translation": "Every animal can eat food!",
+    "explanation": "The structure '每个动物都能吃的食物' emphasizes that every single animal has the ability to eat the food mentioned.",
     "word_meanings": [
       {
         "word": "每个",
-        "meaning": "every",
-        "grammatical_role": "adjective"
+        "meaning": "every"
       },
       {
         "word": "动物",
-        "meaning": "animal",
-        "grammatical_role": "noun"
+        "meaning": "animal"
       },
       {
         "word": "都",
-        "meaning": "all",
-        "grammatical_role": "adverb"
+        "meaning": "can"
       },
       {
         "word": "能",
-        "meaning": "can",
-        "grammatical_role": "verb"
+        "meaning": "can"
       },
       {
         "word": "吃",
-        "meaning": "eat",
-        "grammatical_role": "verb"
+        "meaning": "eat"
       },
       {
         "word": "的",
-        "meaning": "marker for adjectival phrases",
-        "grammatical_role": "particle"
-      },
-      {
-        "word": "食物",
-        "meaning": "food",
-        "grammatical_role": "noun"
+        "meaning": "food"
       }
     ]
   },
@@ -834,50 +924,14 @@
       {
         "word": "队伍",
         "pinyin": "duì wǔ"
-      },
-      {
-        "word": "。",
-        "pinyin": "。"
-      },
-      {
-        "word": "他们",
-        "pinyin": "tā men"
-      },
-      {
-        "word": "都",
-        "pinyin": "dōu"
-      },
-      {
-        "word": "开始",
-        "pinyin": "kāi shǐ"
-      },
-      {
-        "word": "吃",
-        "pinyin": "chī"
-      },
-      {
-        "word": "剩下",
-        "pinyin": "shèng xià"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
-      },
-      {
-        "word": "庄稼",
-        "pinyin": "zhuāng jià"
-      },
-      {
-        "word": "。",
-        "pinyin": "。"
       }
     ],
-    "translation": "Soon, groups of deer, pigs, and boars joined the elephants' team. They all started eating the leftover crops.",
-    "explanation": "In Chinese, adjectives usually come before the noun they describe. The possessive particle '的' is used to indicate possession or association between words. The particle '了' indicates a completed action in this context.",
+    "translation": "Soon, herds of deer, pigs, and boars joined the elephants' team.",
+    "explanation": "This sentence describes various animals joining the elephants' team to eat the leftover crops. The structure '成群的' means 'herds of' and is used to describe the groups of deer, pigs, and boars.",
     "word_meanings": [
       {
         "word": "很快",
-        "meaning": "Soon"
+        "meaning": "soon"
       },
       {
         "word": ",",
@@ -885,7 +939,7 @@
       },
       {
         "word": "成群",
-        "meaning": "groups of"
+        "meaning": "herds of"
       },
       {
         "word": "的",
@@ -917,7 +971,7 @@
       },
       {
         "word": "了",
-        "meaning": "particle indicating completed action"
+        "meaning": "indicating completion"
       },
       {
         "word": "大象",
@@ -930,42 +984,6 @@
       {
         "word": "队伍",
         "meaning": "team"
-      },
-      {
-        "word": "。",
-        "meaning": "period"
-      },
-      {
-        "word": "他们",
-        "meaning": "they"
-      },
-      {
-        "word": "都",
-        "meaning": "all"
-      },
-      {
-        "word": "开始",
-        "meaning": "started"
-      },
-      {
-        "word": "吃",
-        "meaning": "eating"
-      },
-      {
-        "word": "剩下",
-        "meaning": "leftover"
-      },
-      {
-        "word": "的",
-        "meaning": "possessive particle"
-      },
-      {
-        "word": "庄稼",
-        "meaning": "crops"
-      },
-      {
-        "word": "。",
-        "meaning": "period"
       }
     ]
   },
@@ -1001,45 +1019,46 @@
       {
         "word": "根",
         "pinyin": "gēn"
+      },
+      {
+        "word": ".",
+        "pinyin": "."
       }
     ],
-    "translation": "Baloo came, found some tasty roots.",
-    "explanation": "In Chinese, the verb usually comes before the object in a sentence. The structure '找到了' means 'found', with '找到' being the verb 'find' and '了' indicating completion of the action.",
+    "translation": "Baloo came, found some delicious roots.",
+    "explanation": "In this sentence, '来了' indicates the action of Baloo coming has been completed, and '找到了' indicates the action of finding has been completed. '好吃的' is a modifier for '根', describing the roots as delicious.",
     "word_meanings": [
       {
         "word": "巴鲁",
-        "meaning": "Baloo",
-        "grammatical_role": "subject"
+        "meaning": "Baloo"
       },
       {
         "word": "来了",
-        "meaning": "came",
-        "grammatical_role": "verb"
+        "meaning": "came"
       },
       {
         "word": ",",
-        "meaning": ",",
-        "grammatical_role": "punctuation"
+        "meaning": "comma"
       },
       {
         "word": "找到了",
-        "meaning": "found",
-        "grammatical_role": "verb"
+        "meaning": "found"
       },
       {
         "word": "一些",
-        "meaning": "some",
-        "grammatical_role": "determiner"
+        "meaning": "some"
       },
       {
         "word": "好吃的",
-        "meaning": "tasty",
-        "grammatical_role": "adjective"
+        "meaning": "delicious"
       },
       {
         "word": "根",
-        "meaning": "roots",
-        "grammatical_role": "object"
+        "meaning": "roots"
+      },
+      {
+        "word": ".",
+        "meaning": "period"
       }
     ]
   },
@@ -1049,26 +1068,16 @@
     "text": "好吃。",
     "segmented": [
       {
-        "word": "好",
-        "pinyin": "hǎo"
-      },
-      {
-        "word": "吃",
-        "pinyin": "chī"
+        "word": "好吃",
+        "pinyin": "hǎo chī"
       }
     ],
     "translation": "Delicious.",
-    "explanation": "The phrase 好吃 (hǎo chī) means 'delicious' in English. It is a common expression used to describe tasty food in Chinese.",
+    "explanation": "The word '好吃' means 'delicious' in this context. It is a simple adjective describing the food.",
     "word_meanings": [
       {
-        "word": "好",
-        "meaning": "good",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "吃",
-        "meaning": "eat",
-        "grammatical_role": "verb"
+        "word": "好吃",
+        "meaning": "delicious"
       }
     ]
   },
@@ -1111,47 +1120,39 @@
       }
     ],
     "translation": "Other animals knocked down the barley and drank water from the reservoir.",
-    "explanation": "The structure '从...里' is used to indicate the source or starting point of an action, in this case, drinking water from the reservoir.",
+    "explanation": "In this sentence, 别的 (other) is used to specify that it was not Baloo who knocked down the barley and drank water, but other animals. The verb 撞倒 (knocked down) is used to describe the action of knocking down the barley.",
     "word_meanings": [
       {
         "word": "别的",
-        "meaning": "other",
-        "grammatical_role": "adjective"
+        "meaning": "other"
       },
       {
         "word": "动物",
-        "meaning": "animals",
-        "grammatical_role": "noun"
+        "meaning": "animals"
       },
       {
         "word": "撞倒",
-        "meaning": "knocked down",
-        "grammatical_role": "verb"
+        "meaning": "knocked down"
       },
       {
         "word": "大麦",
-        "meaning": "barley",
-        "grammatical_role": "noun"
+        "meaning": "barley"
       },
       {
         "word": "从",
-        "meaning": "from",
-        "grammatical_role": "preposition"
+        "meaning": "from"
       },
       {
         "word": "蓄水池",
-        "meaning": "reservoir",
-        "grammatical_role": "noun"
+        "meaning": "reservoir"
       },
       {
         "word": "里",
-        "meaning": "inside",
-        "grammatical_role": "preposition"
+        "meaning": "inside"
       },
       {
         "word": "喝水",
-        "meaning": "drink water",
-        "grammatical_role": "verb"
+        "meaning": "drink water"
       }
     ]
   },
@@ -1190,7 +1191,7 @@
       }
     ],
     "translation": "The birds fly down to eat seeds and grains.",
-    "explanation": "In Chinese, the verb '飞' (fly) is followed by a directional complement '下来' (down) to indicate the direction of the action. Also, the conjunction '和' (and) is used to connect '种子' (seeds) and '谷粒' (grains) in a list of items being eaten by the birds.",
+    "explanation": "In Chinese, the verb often comes before the direction or manner complement. In this sentence, 飞下来 means 'fly down'. Also, 谷粒 refers to grains or cereals.",
     "word_meanings": [
       {
         "word": "鸟们",
@@ -1255,30 +1256,33 @@
         "pinyin": "shān gǔ"
       }
     ],
-    "translation": "Kaa the python slithered into the valley.",
-    "explanation": "In Chinese, the verb '爬' (climb) is often used to describe the movement of snakes, as they 'slither' instead of walk.",
+    "translation": "The python Kaa crawled into the valley.",
+    "explanation": "In this sentence, the verb '爬' (crawl) is followed by the directional particle '进了' (into) indicating the direction of the action. The subject '蟒蛇卡阿' (python Kaa) is performing the action of crawling into the valley.",
     "word_meanings": [
       {
         "word": "蟒蛇",
-        "meaning": "python"
+        "meaning": "python",
+        "grammatical_role": "subject"
       },
       {
         "word": "卡阿",
-        "meaning": "Kaa (name of the python)"
+        "meaning": "Kaa",
+        "grammatical_role": "subject"
       },
       {
         "word": "爬",
-        "meaning": "slithered",
+        "meaning": "crawl",
         "grammatical_role": "verb"
       },
       {
         "word": "进了",
         "meaning": "into",
-        "grammatical_role": "preposition"
+        "grammatical_role": "directional particle"
       },
       {
         "word": "山谷",
-        "meaning": "valley"
+        "meaning": "valley",
+        "grammatical_role": "object"
       }
     ]
   },
@@ -1296,12 +1300,12 @@
         "pinyin": "xià dé"
       },
       {
-        "word": "跑开了",
-        "pinyin": "pǎo kāi le"
+        "word": "跑开",
+        "pinyin": "pǎo kāi"
       }
     ],
     "translation": "The monkeys ran away in fear.",
-    "explanation": "In Chinese, the structure 'verb + 得 + result' is used to indicate the result or degree of an action. In this sentence, '吓得' indicates that the monkeys ran away as a result of being scared.",
+    "explanation": "In this sentence, the verb '跑开' (ran away) is modified by the adverbial phrase '吓得' (in fear), indicating the reason or manner in which the monkeys ran away.",
     "word_meanings": [
       {
         "word": "猴子们",
@@ -1314,9 +1318,9 @@
         "grammatical_role": "adverbial phrase"
       },
       {
-        "word": "跑开了",
+        "word": "跑开",
         "meaning": "ran away",
-        "grammatical_role": "verb phrase"
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -1338,20 +1342,23 @@
         "pinyin": "è le"
       }
     ],
-    "translation": "Kaa is hungry.",
-    "explanation": "In this sentence, the character Kaa is being described as hungry. The use of '也' emphasizes the subject, and '了' indicates a completed action.",
+    "translation": "Kaa is also hungry.",
+    "explanation": "The sentence structure is subject + adverb + predicate. The use of '了' indicates a change of state, showing that Kaa has become hungry.",
     "word_meanings": [
       {
         "word": "卡阿",
-        "meaning": "Kaa (character's name)"
+        "meaning": "Kaa",
+        "grammar": "subject"
       },
       {
         "word": "也",
-        "meaning": "is (emphasizing the subject)"
+        "meaning": "also",
+        "grammar": "adverb"
       },
       {
         "word": "饿了",
-        "meaning": "hungry (completed action marker)"
+        "meaning": "hungry",
+        "grammar": "predicate"
       }
     ]
   },
@@ -1386,7 +1393,7 @@
       }
     ],
     "translation": "The elephant keeps walking back and forth in the field.",
-    "explanation": "In Chinese, the structure 'verb + 来 + verb + 去' is used to indicate back and forth movement.",
+    "explanation": "The structure '不停地' is used to indicate continuous action, similar to 'continuously' in English. '走来走去' is a Chinese idiom meaning 'walk back and forth'.",
     "word_meanings": [
       {
         "word": "大象",
@@ -1394,7 +1401,7 @@
       },
       {
         "word": "在",
-        "meaning": "in/at (indicating an action in progress)"
+        "meaning": "in, at"
       },
       {
         "word": "田地",
@@ -1402,7 +1409,7 @@
       },
       {
         "word": "里",
-        "meaning": "inside/in"
+        "meaning": "inside"
       },
       {
         "word": "不停地",
@@ -1464,8 +1471,8 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Soon, the villagers in the village were starving in despair.",
-    "explanation": "The structure 'verb + 得 + adjective' is commonly used in Chinese to indicate the degree to which an action is performed. In this sentence, '饿得' means 'starving'. The use of '就' in this context emphasizes the quickness of the villagers becoming desperate.",
+    "translation": "Soon, the people in the village were starving in despair.",
+    "explanation": "The structure '就...了' indicates that the people in the village became hungry and desperate earlier than expected.",
     "word_meanings": [
       {
         "word": "很快",
@@ -1473,7 +1480,7 @@
       },
       {
         "word": ",",
-        "meaning": "comma"
+        "meaning": ","
       },
       {
         "word": "村庄",
@@ -1501,7 +1508,7 @@
       },
       {
         "word": "得",
-        "meaning": "used to connect an adjective to a verb to indicate degree"
+        "meaning": "indicating degree"
       },
       {
         "word": "绝望",
@@ -1509,7 +1516,7 @@
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion of action"
+        "meaning": "particle indicating completion"
       }
     ]
   },
@@ -1532,22 +1539,22 @@
       }
     ],
     "translation": "No crops left.",
-    "explanation": "The structure '没有 + noun + 了' is commonly used in Chinese to indicate the absence of something or that something is no longer present.",
+    "explanation": "The sentence indicates that there are no crops remaining, emphasizing the dire situation of the villagers.",
     "word_meanings": [
       {
         "word": "没有",
-        "meaning": "no",
-        "grammatical_role": "adverb"
+        "meaning": "no; not have",
+        "grammar": "adverb"
       },
       {
         "word": "庄稼",
         "meaning": "crops",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "了",
-        "meaning": "indicating a completed action",
-        "grammatical_role": "particle"
+        "meaning": "(completed action marker)",
+        "grammar": "verb complement"
       }
     ]
   },
@@ -1569,23 +1576,20 @@
         "pinyin": "shuō"
       }
     ],
-    "translation": "A villager said.",
-    "explanation": "In this sentence, the tricky part might be understanding the use of '一个' which means 'one' in this context before the noun '村民' (villager). It is used to indicate 'a' or 'an' in English.",
+    "translation": "一个村民说。",
+    "explanation": "The sentence means 'A villager said.' The structure is subject + verb, with '一个' meaning 'one/a' and '村民' meaning 'villager'.",
     "word_meanings": [
       {
         "word": "一个",
-        "meaning": "one",
-        "grammatical_role": "numeral"
+        "meaning": "one; a"
       },
       {
         "word": "村民",
-        "meaning": "villager",
-        "grammatical_role": "noun"
+        "meaning": "villager"
       },
       {
         "word": "说",
-        "meaning": "said",
-        "grammatical_role": "verb"
+        "meaning": "say"
       }
     ]
   },
@@ -1623,36 +1627,43 @@
         "pinyin": "shí wù"
       }
     ],
-    "translation": "We must look for food in the forest.",
-    "explanation": "In Chinese, the verb 'look for' is expressed as 寻找, with the object coming after the verb. The structure '在...中' is used to indicate the location where an action takes place.",
+    "translation": "We must search for food in the forest.",
+    "explanation": "The structure '在...中' is used to indicate the location where an action takes place. The verb '寻找' is followed by the object '食物' to express the action of searching for food.",
     "word_meanings": [
       {
         "word": "我们",
-        "meaning": "we"
+        "meaning": "we",
+        "grammar": "subject"
       },
       {
         "word": "必须",
-        "meaning": "must"
+        "meaning": "must",
+        "grammar": "modal verb"
       },
       {
         "word": "在",
-        "meaning": "in"
+        "meaning": "in",
+        "grammar": "preposition"
       },
       {
         "word": "森林",
-        "meaning": "forest"
+        "meaning": "forest",
+        "grammar": "noun"
       },
       {
         "word": "中",
-        "meaning": "inside"
+        "meaning": "inside",
+        "grammar": "preposition"
       },
       {
         "word": "寻找",
-        "meaning": "look for"
+        "meaning": "search for",
+        "grammar": "verb"
       },
       {
         "word": "食物",
-        "meaning": "food"
+        "meaning": "food",
+        "grammar": "noun"
       }
     ]
   },
@@ -1686,13 +1697,13 @@
         "pinyin": "jiān guǒ"
       }
     ],
-    "translation": "A group of people enter the forest to look for nuts.",
-    "explanation": "The tricky part in this sentence might be the word 寻找, which means 'look for' or 'search for'. It is a verb that is followed by the object 坚果 (nuts) in this sentence.",
+    "translation": "A group of people entered the forest to look for nuts.",
+    "explanation": "The sentence follows a subject-verb-object structure commonly used in Chinese sentences. The verb '进入' (entered) is followed by the location '森林' (forest) and the purpose '寻找' (to look for) which is followed by the object '坚果' (nuts).",
     "word_meanings": [
       {
         "word": "一群",
-        "meaning": "a group",
-        "grammatical_role": "noun"
+        "meaning": "a group of",
+        "grammatical_role": "noun phrase"
       },
       {
         "word": "人",
@@ -1701,7 +1712,7 @@
       },
       {
         "word": "进入",
-        "meaning": "enter",
+        "meaning": "entered",
         "grammatical_role": "verb"
       },
       {
@@ -1711,7 +1722,7 @@
       },
       {
         "word": "寻找",
-        "meaning": "look for",
+        "meaning": "to look for",
         "grammatical_role": "verb"
       },
       {
@@ -1747,8 +1758,12 @@
         "pinyin": "de"
       },
       {
-        "word": "影子们",
-        "pinyin": "yǐng zi men"
+        "word": "影子",
+        "pinyin": "yǐng zi"
+      },
+      {
+        "word": "们",
+        "pinyin": "men"
       },
       {
         "word": "吓了",
@@ -1761,6 +1776,10 @@
       {
         "word": "一跳",
         "pinyin": "yī tiào"
+      },
+      {
+        "word": ",",
+        "pinyin": ","
       },
       {
         "word": "它们",
@@ -1776,67 +1795,77 @@
       }
     ],
     "translation": "But... the shadows with bright eyes startled them, and they ran out.",
-    "explanation": "The structure '有着' in this context means 'have' or 'possessing'. The measure word '一跳' is used to indicate a sudden movement or startle.",
+    "explanation": "This sentence describes how the shadows with bright eyes startled 'them' and caused 'them' to run out. The use of '有着' indicates possession or presence of the bright eyes on the shadows.",
     "word_meanings": [
       {
         "word": "但是",
         "meaning": "but",
-        "grammatical_role": "conjunction"
+        "grammar": "conjunction"
       },
       {
         "word": "有着",
         "meaning": "have",
-        "grammatical_role": "verb"
+        "grammar": "verb + complement"
       },
       {
         "word": "明亮",
         "meaning": "bright",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "眼睛",
         "meaning": "eyes",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "的",
         "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "grammar": "particle"
       },
       {
-        "word": "影子们",
+        "word": "影子",
         "meaning": "shadows",
-        "grammatical_role": "noun"
+        "grammar": "noun"
+      },
+      {
+        "word": "们",
+        "meaning": "plural marker",
+        "grammar": "noun"
       },
       {
         "word": "吓了",
         "meaning": "startled",
-        "grammatical_role": "verb"
+        "grammar": "verb + complement"
       },
       {
         "word": "它们",
         "meaning": "them",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "一跳",
-        "meaning": "startled",
-        "grammatical_role": "measure word"
+        "meaning": "jump",
+        "grammar": "noun"
+      },
+      {
+        "word": ",",
+        "meaning": ",",
+        "grammar": "punctuation"
       },
       {
         "word": "它们",
-        "meaning": "them",
-        "grammatical_role": "pronoun"
+        "meaning": "they",
+        "grammar": "pronoun"
       },
       {
         "word": "跑了",
         "meaning": "ran",
-        "grammatical_role": "verb"
+        "grammar": "verb + complement"
       },
       {
         "word": "出去",
         "meaning": "out",
-        "grammatical_role": "directional particle"
+        "grammar": "directional complement"
       }
     ]
   },
@@ -1858,12 +1887,8 @@
         "pinyin": "shí"
       },
       {
-        "word": "四",
-        "pinyin": "sì"
-      },
-      {
-        "word": "头",
-        "pinyin": "tóu"
+        "word": "四头",
+        "pinyin": "sì tóu"
       },
       {
         "word": "大象",
@@ -1903,7 +1928,7 @@
       }
     ],
     "translation": "When the rainy season comes, the four elephants completed their task in the field.",
-    "explanation": "The sentence structure in Chinese is Subject-Verb-Object. In this sentence, the subject is '四头大象' (four elephants), the verb is '完成' (completed), and the object is '它们的任务' (their task). The time phrase '雨季来临时' (When the rainy season comes) is placed at the beginning of the sentence to indicate when the action took place.",
+    "explanation": "This sentence describes the elephants finishing their task in the field when the rainy season arrives. The use of '四头' to count elephants is a specific measure word for large animals in Chinese.",
     "word_meanings": [
       {
         "word": "雨季",
@@ -1911,28 +1936,23 @@
       },
       {
         "word": "来临",
-        "meaning": "comes",
-        "explanation": "This is a compound word where 来 means 'come' and 临 means 'arrive'. Together, 来临 means 'to come/arrive'. It is often used to indicate the arrival of a particular season or event."
+        "meaning": "to come, to arrive"
       },
       {
         "word": "时",
         "meaning": "when"
       },
       {
-        "word": "四",
-        "meaning": "four"
-      },
-      {
-        "word": "头",
-        "meaning": "measure word for large animals like elephants"
+        "word": "四头",
+        "meaning": "four (heads, used for counting large animals)"
       },
       {
         "word": "大象",
-        "meaning": "elephant"
+        "meaning": "elephants"
       },
       {
         "word": "在",
-        "meaning": "in/at"
+        "meaning": "in, at"
       },
       {
         "word": "田地",
@@ -1944,19 +1964,19 @@
       },
       {
         "word": "完成",
-        "meaning": "completed"
+        "meaning": "to complete, to finish"
       },
       {
         "word": "了",
-        "meaning": "indicating completion of an action"
+        "meaning": "(completion marker)"
       },
       {
         "word": "它们",
-        "meaning": "their"
+        "meaning": "they"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "possessive particle (indicating 'their')"
       },
       {
         "word": "任务",
@@ -1992,38 +2012,18 @@
       {
         "word": "小屋",
         "pinyin": "xiǎo wū"
-      },
-      {
-        "word": "走去",
-        "pinyin": "zǒu qù"
-      },
-      {
-        "word": "现在",
-        "pinyin": "xiàn zài"
-      },
-      {
-        "word": "它们",
-        "pinyin": "tā men"
-      },
-      {
-        "word": "在",
-        "pinyin": "zài"
-      },
-      {
-        "word": "做什么",
-        "pinyin": "zuò shén me"
       }
     ],
-    "translation": "They started walking towards the villagers' huts. What are they doing now?",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor. The structure '在 + verb' is used to indicate an ongoing action.",
+    "translation": "They start walking towards the villagers' huts. What are they doing now?",
+    "explanation": "The sentence structure is Subject + Verb + Direction + Object. The use of '的' indicates possession, similar to 's in English.",
     "word_meanings": [
       {
         "word": "它们",
-        "meaning": "They"
+        "meaning": "they"
       },
       {
         "word": "开始",
-        "meaning": "started"
+        "meaning": "start"
       },
       {
         "word": "向",
@@ -2035,31 +2035,11 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "'s"
       },
       {
         "word": "小屋",
         "meaning": "huts"
-      },
-      {
-        "word": "走去",
-        "meaning": "walking towards"
-      },
-      {
-        "word": "现在",
-        "meaning": "now"
-      },
-      {
-        "word": "它们",
-        "meaning": "They"
-      },
-      {
-        "word": "在",
-        "meaning": "in"
-      },
-      {
-        "word": "做什么",
-        "meaning": "doing what"
       }
     ]
   },
@@ -2081,13 +2061,12 @@
         "pinyin": "máo kè lì"
       }
     ],
-    "translation": "Bagheera asked Mowgli.",
-    "explanation": "In Chinese, the word order is Subject-Verb-Object, which is different from English. The verb '问' means 'to ask'.",
+    "translation": "Bashira asked Mowgli.",
+    "explanation": "The sentence follows a Subject-Verb-Object structure commonly used in Chinese. 巴希拉 (Bashira) is the subject, 问 (asked) is the verb, and 毛克利 (Mowgli) is the object.",
     "word_meanings": [
       {
         "word": "巴希拉",
-        "meaning": "Bagheera",
-        "grammatical_role": "subject"
+        "meaning": "Bashira"
       },
       {
         "word": "问",
@@ -2096,8 +2075,7 @@
       },
       {
         "word": "毛克利",
-        "meaning": "Mowgli",
-        "grammatical_role": "object"
+        "meaning": "Mowgli"
       }
     ]
   },
@@ -2136,7 +2114,7 @@
       }
     ],
     "translation": "They want to lift the roof of the hut.",
-    "explanation": "In Chinese, the word order is subject-verb-object. The structure '把 + object + verb' is used to indicate the object affected by the action of the verb.",
+    "explanation": "The sentence structure follows the pattern 'subject + 要 + verb + object'. The 把 construction is used to indicate the object affected by the action.",
     "word_meanings": [
       {
         "word": "它们",
@@ -2144,11 +2122,11 @@
       },
       {
         "word": "要",
-        "meaning": "want"
+        "meaning": "want to"
       },
       {
         "word": "把",
-        "meaning": "marker for the object of a verb"
+        "meaning": "used before the object to indicate the object affected by the action"
       },
       {
         "word": "小屋",
@@ -2156,7 +2134,7 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "possessive particle, indicating 'of the hut'"
       },
       {
         "word": "屋顶",
@@ -2183,7 +2161,7 @@
       }
     ],
     "translation": "Mowgli said.",
-    "explanation": "In this context, 毛克利 (Mowgli) is the subject of the sentence, and 说 (said) is the verb. The sentence structure in Chinese is subject + verb, which is different from English where the typical structure is subject + verb + object.",
+    "explanation": "In this sentence, 毛克利 is the subject and 说 is the verb, indicating that Mowgli is speaking.",
     "word_meanings": [
       {
         "word": "毛克利",
@@ -2234,7 +2212,7 @@
       }
     ],
     "translation": "Most of the villagers have already left to find new homes.",
-    "explanation": "The structure '已经...了' is used to indicate that an action has already been completed. The word '去' is used before a verb to indicate the direction or purpose of an action.",
+    "explanation": "The sentence structure in Chinese is Subject + 已经 + Verb + 了 + Object. The use of '了' at the end of the sentence indicates that the action of leaving has been completed.",
     "word_meanings": [
       {
         "word": "大多数",
@@ -2266,7 +2244,7 @@
       },
       {
         "word": "了",
-        "meaning": "indicates completion of an action"
+        "meaning": "(indicating completion of an action)"
       }
     ]
   },
@@ -2302,14 +2280,10 @@
       {
         "word": "走",
         "pinyin": "zǒu"
-      },
-      {
-        "word": "了",
-        "pinyin": "le"
       }
     ],
     "translation": "Now the remaining people should also leave.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association. The structure '该...了' is a common way to express 'should' in Chinese.",
+    "explanation": "The sentence structure is Subject + 也 + Verb, indicating that the action of leaving should also apply to the remaining people.",
     "word_meanings": [
       {
         "word": "现在",
@@ -2338,10 +2312,6 @@
       {
         "word": "走",
         "meaning": "leave"
-      },
-      {
-        "word": "了",
-        "meaning": "indicates completion"
       }
     ]
   },
@@ -2357,6 +2327,10 @@
       {
         "word": "月后",
         "pinyin": "yuè hòu"
+      },
+      {
+        "word": ",",
+        "pinyin": ","
       },
       {
         "word": "毛克利",
@@ -2383,8 +2357,8 @@
         "pinyin": "cūn zhuāng"
       }
     ],
-    "translation": "A month later, Mowgli and Bagheera returned to the village.",
-    "explanation": "In Chinese, the time expression usually comes before the verb. The particle '了' indicates that the action of returning to the village is completed.",
+    "translation": "One month later, Mowgli and Bagheera returned to the village.",
+    "explanation": "The sentence structure follows the pattern of 'time + subject + verb + location'. The particle '了' at the end indicates the completion of the action of returning.",
     "word_meanings": [
       {
         "word": "一个",
@@ -2393,6 +2367,10 @@
       {
         "word": "月后",
         "meaning": "month later"
+      },
+      {
+        "word": ",",
+        "meaning": "comma"
       },
       {
         "word": "毛克利",
@@ -2412,7 +2390,7 @@
       },
       {
         "word": "了",
-        "meaning": "particle indicating completed action"
+        "meaning": "(indicating completion of an action)"
       },
       {
         "word": "村庄",
@@ -2434,10 +2412,6 @@
         "pinyin": "zhǎng mǎn"
       },
       {
-        "word": "了",
-        "pinyin": "le"
-      },
-      {
         "word": "草",
         "pinyin": "cǎo"
       },
@@ -2446,51 +2420,48 @@
         "pinyin": "hé"
       },
       {
-        "word": "秘密的",
-        "pinyin": "mì mì de"
+        "word": "秘密",
+        "pinyin": "mì mì"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       },
       {
         "word": "杂草",
         "pinyin": "zá cǎo"
       }
     ],
-    "translation": "There, it is covered with grass and secret weeds.",
-    "explanation": "In Chinese, the verb '长满' is a compound verb that means 'to be covered with'. It consists of the verb '长' (to grow) and the result complement '满' (full of).",
+    "translation": "There is full of grass and secret weeds there.",
+    "explanation": "In this sentence, the structure '长满' means 'full of (grown)', and '的' is a possessive particle indicating that the secret weeds belong to the grass. This sentence describes the place being filled with grass and secret weeds.",
     "word_meanings": [
       {
         "word": "那里",
-        "meaning": "there",
-        "grammatical_role": "location adverb"
+        "meaning": "there"
       },
       {
         "word": "长满",
-        "meaning": "covered with",
-        "grammatical_role": "verb + result complement"
-      },
-      {
-        "word": "了",
-        "meaning": "(indicating completion of action)",
-        "grammatical_role": "particle"
+        "meaning": "full of (grown)"
       },
       {
         "word": "草",
-        "meaning": "grass",
-        "grammatical_role": "noun"
+        "meaning": "grass"
       },
       {
         "word": "和",
-        "meaning": "and",
-        "grammatical_role": "conjunction"
+        "meaning": "and"
       },
       {
-        "word": "秘密的",
-        "meaning": "secret",
-        "grammatical_role": "adjective"
+        "word": "秘密",
+        "meaning": "secret"
+      },
+      {
+        "word": "的",
+        "meaning": "'s (possessive particle)"
       },
       {
         "word": "杂草",
-        "meaning": "weeds",
-        "grammatical_role": "noun"
+        "meaning": "weeds"
       }
     ]
   },
@@ -2536,8 +2507,8 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Six months later, they both came back again.",
-    "explanation": "In Chinese, the time element usually comes before the subject in a sentence. The use of '又' emphasizes the repetition of an action.",
+    "translation": "Six months later, they both came back.",
+    "explanation": "The sentence structure in Chinese typically follows the pattern of time + subject + verb + object. In this sentence, '六个月后' means 'six months later', '它们俩' means 'they both', and '又回来了' means 'came back again'. The particle '了' at the end indicates the completion of the action.",
     "word_meanings": [
       {
         "word": "六",
@@ -2553,7 +2524,7 @@
       },
       {
         "word": "后",
-        "meaning": "after"
+        "meaning": "later"
       },
       {
         "word": "它们",
@@ -2573,7 +2544,7 @@
       },
       {
         "word": "了",
-        "meaning": "indicates completion of an action"
+        "meaning": "(completion marker indicating action is completed)"
       }
     ]
   },
@@ -2608,7 +2579,7 @@
       }
     ],
     "translation": "Now the forest has recovered its vitality.",
-    "explanation": "The tricky grammar structure in this sentence is the use of the particle '了' after the verb '恢复', indicating the completion of the action of the forest recovering its vitality.",
+    "explanation": "The sentence structure in Chinese typically follows the pattern of Subject + Time + Verb + Object. In this sentence, '现在' (now) is the time, '森林' (forest) is the subject, '已经恢复了' (has recovered) is the verb, and '生机' (vitality) is the object.",
     "word_meanings": [
       {
         "word": "现在",
@@ -2624,11 +2595,12 @@
       },
       {
         "word": "恢复",
-        "meaning": "recovered"
+        "meaning": "recover"
       },
       {
         "word": "了",
-        "meaning": "(indicating completion of an action)"
+        "meaning": "(indicating completion of action)",
+        "particle": true
       },
       {
         "word": "生机",
@@ -2666,38 +2638,38 @@
         "pinyin": "bā xī lā"
       }
     ],
-    "translation": "This... is exactly what I imagined, Baxi La.",
-    "explanation": "The structure '正是' is used to emphasize that something is exactly as expected or imagined. It is commonly used in formal or literary contexts.",
+    "translation": "This... is exactly what I imagined, Bashira.",
+    "explanation": "The structure '这...正是我想象的' emphasizes that the current situation matches exactly what the speaker had imagined. The particle '的' is used to indicate possession or association.",
     "word_meanings": [
       {
         "word": "这",
         "meaning": "this",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "正是",
         "meaning": "exactly",
-        "grammatical_role": "adverb"
+        "grammar": "adverb"
       },
       {
         "word": "我",
         "meaning": "I",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "想象",
         "meaning": "imagine",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "的",
-        "meaning": "(possessive particle)",
-        "grammatical_role": "particle"
+        "meaning": "",
+        "grammar": "particle"
       },
       {
         "word": "巴希拉",
-        "meaning": "Baxi La",
-        "grammatical_role": "proper noun"
+        "meaning": "Bashira",
+        "grammar": "noun"
       }
     ]
   },
@@ -2720,7 +2692,7 @@
       }
     ],
     "translation": "Mowgli whispered.",
-    "explanation": "In this sentence, 毛克利 is the name 'Mowgli', 小声 means 'quietly' indicating how Mowgli spoke, and 说 is the verb 'said'. The structure of the sentence is subject + adverb + verb.",
+    "explanation": "The sentence consists of the character's name 'Mowgli' followed by the adverb '小声' meaning 'whisper' and the verb '说' meaning 'said'. The structure is Subject-Adverb-Verb.",
     "word_meanings": [
       {
         "word": "毛克利",
@@ -2728,7 +2700,7 @@
       },
       {
         "word": "小声",
-        "meaning": "quietly"
+        "meaning": "whisper"
       },
       {
         "word": "说",
@@ -2778,8 +2750,8 @@
         "pinyin": "hén jì"
       }
     ],
-    "translation": "The wild forest has swallowed up all traces of the human village.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between two nouns. In this sentence, it connects '村庄' (village) and '痕迹' (traces) to show that the traces belong to the village.",
+    "translation": "The wild forest swallowed up all traces of the human village.",
+    "explanation": "In this sentence, the verb '吞没' (swallow up) is followed by the object '人类村庄' (human village) and the possessive particle '的' (of), indicating that the forest swallowed up all traces of the human village.",
     "word_meanings": [
       {
         "word": "野生",
@@ -2791,11 +2763,11 @@
       },
       {
         "word": "吞没",
-        "meaning": "swallowed up"
+        "meaning": "swallow up"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion of action"
+        "meaning": "(completion marker)"
       },
       {
         "word": "人类",
@@ -2807,7 +2779,7 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "(possessive particle)"
       },
       {
         "word": "所有",
@@ -2837,6 +2809,10 @@
         "pinyin": "hòu"
       },
       {
+        "word": ",",
+        "pinyin": ","
+      },
+      {
         "word": "毛克利",
         "pinyin": "máo kè lì"
       },
@@ -2853,20 +2829,25 @@
         "pinyin": "láng dòng"
       }
     ],
-    "translation": "After the elephants passed, Mowgli returned to the wolf den.",
-    "explanation": "The tricky part here might be the use of 了 (le) which indicates the completion of an action. Also, the word order in Chinese is different from English, so it's important to pay attention to the sequence of words in the sentence.",
+    "translation": "After the elephants marched, Mowgli returned to the wolf den.",
+    "explanation": "In this sentence, the verb '回到' (returned to) is followed by the completed action particle '了', indicating that the action of returning to the wolf den has been completed. The word '后' indicates the sequence of events, showing that Mowgli returned after the elephants marched.",
     "word_meanings": [
       {
         "word": "大象",
-        "meaning": "elephants"
+        "meaning": "elephant"
       },
       {
         "word": "行进",
-        "meaning": "passing/moving forward"
+        "meaning": "marched",
+        "grammatical_role": "verb"
       },
       {
         "word": "后",
         "meaning": "after"
+      },
+      {
+        "word": ",",
+        "meaning": "comma"
       },
       {
         "word": "毛克利",
@@ -2874,11 +2855,12 @@
       },
       {
         "word": "回到",
-        "meaning": "returned to"
+        "meaning": "returned to",
+        "grammatical_role": "verb"
       },
       {
         "word": "了",
-        "meaning": "indicating completion of action"
+        "meaning": "completed action particle"
       },
       {
         "word": "狼洞",
@@ -2925,11 +2907,11 @@
       }
     ],
     "translation": "He found a way to punish the cruel villagers.",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor. For example, 残忍的村民们 means 'cruel villagers'.",
+    "explanation": "In Chinese, adjectives are often followed by the particle '的' to modify a noun. In this sentence, '残忍的' (cruel) modifies '村民们' (villagers).",
     "word_meanings": [
       {
         "word": "他",
-        "meaning": "He"
+        "meaning": "he"
       },
       {
         "word": "找到",
@@ -2953,7 +2935,7 @@
       },
       {
         "word": "的",
-        "meaning": "-'s (possessive marker)"
+        "meaning": "particle indicating an adjective"
       },
       {
         "word": "村民们",
@@ -3007,8 +2989,8 @@
         "pinyin": "wèn tí"
       }
     ],
-    "translation": "According to the law of the jungle, this punishment solves all problems.",
-    "explanation": "The structure '根据...解决了所有的问题' might be challenging for learners as it combines 'according to' with 'solve all problems' in a concise manner.",
+    "translation": "According to the law of the jungle, this punishment resolved all the issues.",
+    "explanation": "The sentence structure follows the pattern '根据 + noun + 的 + noun' to indicate 'according to the law of the jungle'. The verb '解决' (resolve) is followed by the verb complement '了' to indicate completion of the action.",
     "word_meanings": [
       {
         "word": "根据",
@@ -3032,7 +3014,7 @@
       },
       {
         "word": "解决",
-        "meaning": "solve"
+        "meaning": "resolve"
       },
       {
         "word": "了",
@@ -3048,7 +3030,7 @@
       },
       {
         "word": "问题",
-        "meaning": "problems"
+        "meaning": "issues"
       }
     ]
   },
@@ -3091,47 +3073,47 @@
       }
     ],
     "translation": "But Mowgli is neither calm nor happy.",
-    "explanation": "In Chinese, double negatives are commonly used to emphasize negation. In this sentence, both '既不' and '又不' are used to convey the idea of 'neither...nor'.",
+    "explanation": "This sentence uses the structure '既...又...' to express 'neither...nor...' in Chinese. It is important to note that adverbs like '既' and '又' are used to connect the negations '不' in this context.",
     "word_meanings": [
       {
         "word": "但是",
         "meaning": "but",
-        "grammatical_role": "conjunction"
+        "type": "conjunction"
       },
       {
         "word": "毛克利",
         "meaning": "Mowgli",
-        "grammatical_role": "noun"
+        "type": "noun"
       },
       {
         "word": "既",
         "meaning": "neither",
-        "grammatical_role": "adverb"
+        "type": "adverb"
       },
       {
         "word": "不",
         "meaning": "not",
-        "grammatical_role": "adverb"
+        "type": "adverb"
       },
       {
         "word": "安",
         "meaning": "calm",
-        "grammatical_role": "adjective"
+        "type": "adjective"
       },
       {
         "word": "又",
         "meaning": "nor",
-        "grammatical_role": "conjunction"
+        "type": "conjunction"
       },
       {
         "word": "不",
         "meaning": "not",
-        "grammatical_role": "adverb"
+        "type": "adverb"
       },
       {
         "word": "开心",
         "meaning": "happy",
-        "grammatical_role": "adjective"
+        "type": "adjective"
       }
     ]
   },
@@ -3157,6 +3139,10 @@
         "pinyin": "è"
       },
       {
+        "word": ",",
+        "pinyin": ","
+      },
+      {
         "word": "也",
         "pinyin": "yě"
       },
@@ -3165,24 +3151,32 @@
         "pinyin": "jī hū"
       },
       {
-        "word": "睡不着觉",
-        "pinyin": "shuì bù zhe jué"
+        "word": "睡",
+        "pinyin": "shuì"
       },
       {
-        "word": "我",
-        "pinyin": "wǒ"
+        "word": "不",
+        "pinyin": "bù"
       },
       {
-        "word": "怎么了",
-        "pinyin": "zěn me le"
+        "word": "着",
+        "pinyin": "zhe"
+      },
+      {
+        "word": "觉",
+        "pinyin": "jué"
+      },
+      {
+        "word": "?",
+        "pinyin": "?"
       }
     ],
-    "translation": "He doesn't feel hungry, and he can hardly fall asleep. What's wrong with me?",
-    "explanation": "In Chinese, the structure '不...也...' is used to express 'not...also...' to emphasize the negation. The phrase '几乎' means 'hardly' or 'almost' and is used to indicate the difficulty in falling asleep. The phrase '怎么了' is a common way to ask 'What's wrong?' in Chinese.",
+    "translation": "He doesn't feel hungry, and he can hardly sleep. What's wrong with me?",
+    "explanation": "The structure '也...几乎' is used to express 'also...hardly' in this sentence, indicating that the subject is experiencing both feelings simultaneously.",
     "word_meanings": [
       {
         "word": "他",
-        "meaning": "He"
+        "meaning": "he"
       },
       {
         "word": "不",
@@ -3197,24 +3191,36 @@
         "meaning": "hungry"
       },
       {
+        "word": ",",
+        "meaning": "comma"
+      },
+      {
         "word": "也",
         "meaning": "also"
       },
       {
         "word": "几乎",
-        "meaning": "hardly/almost"
+        "meaning": "hardly"
       },
       {
-        "word": "睡不着觉",
-        "meaning": "can't fall asleep"
+        "word": "睡",
+        "meaning": "sleep"
       },
       {
-        "word": "我",
-        "meaning": "I"
+        "word": "不",
+        "meaning": "not"
       },
       {
-        "word": "怎么了",
-        "meaning": "What's wrong"
+        "word": "着",
+        "meaning": "particle indicating continuous tense"
+      },
+      {
+        "word": "觉",
+        "meaning": "sense"
+      },
+      {
+        "word": "?",
+        "meaning": "question mark"
       }
     ]
   },
@@ -3236,8 +3242,8 @@
         "pinyin": "hào qí"
       }
     ],
-    "translation": "He is curious.",
-    "explanation": "In Chinese, adjectives usually come after the verb, so 'curious' (好奇) follows 'he' (他) in this sentence.",
+    "translation": "He is very curious.",
+    "explanation": "The sentence structure is subject + adverb + adjective, which is a common pattern in Chinese to describe a person's state or emotion.",
     "word_meanings": [
       {
         "word": "他",
@@ -3292,7 +3298,7 @@
       }
     ],
     "translation": "One day, the weather was very hot, Mowgli was playing in the river.",
-    "explanation": "The structure '正在' is used to indicate an action that is currently happening. In this sentence, it is used before '河里' (in the river) to show that Mowgli is currently playing in the river.",
+    "explanation": "The sentence describes the scene where Mowgli is playing in the river on a very hot day. The structure '正在' is used to indicate an action in progress.",
     "word_meanings": [
       {
         "word": "一天",
@@ -3316,7 +3322,7 @@
       },
       {
         "word": "正在",
-        "meaning": "is currently"
+        "meaning": "in the process of"
       },
       {
         "word": "河里",
@@ -3350,8 +3356,8 @@
         "pinyin": "táo pǎo"
       }
     ],
-    "translation": "Suddenly, he longed to escape.",
-    "explanation": "The tricky part here might be the use of '渴望' which means 'long for' or 'yearn for' in this context. It's a stronger way to express desire compared to just 'want'.",
+    "translation": "Suddenly, he yearned to escape.",
+    "explanation": "The sentence describes the sudden desire of the character to escape, using the verb '渴望' (yearn) to convey a strong longing or desire.",
     "word_meanings": [
       {
         "word": "突然",
@@ -3363,7 +3369,7 @@
       },
       {
         "word": "渴望",
-        "meaning": "long for; long to; yearn for"
+        "meaning": "yearn"
       },
       {
         "word": "逃跑",
@@ -3387,6 +3393,10 @@
       {
         "word": "森林",
         "pinyin": "sēn lín"
+      },
+      {
+        "word": ",",
+        "pinyin": ","
       },
       {
         "word": "从",
@@ -3419,22 +3429,34 @@
       {
         "word": "一",
         "pinyin": "yī"
+      },
+      {
+        "word": "棵",
+        "pinyin": "kē"
+      },
+      {
+        "word": "树",
+        "pinyin": "shù"
       }
     ],
-    "translation": "He passed through the forest, jumping from one tree to another.",
-    "explanation": "In Chinese, measure words are used to specify the quantity or type of objects. In this sentence, '棵' is a measure word for trees, indicating that the action of jumping is from one tree to another.",
+    "translation": "He crossed the forest, jumping from one tree to another.",
+    "explanation": "The sentence describes the action of the character moving through the forest by jumping from one tree to another. The structure '从...跳到...' indicates the movement from one place to another.",
     "word_meanings": [
       {
         "word": "他",
-        "meaning": "He"
+        "meaning": "he"
       },
       {
         "word": "穿过",
-        "meaning": "pass through"
+        "meaning": "crossed"
       },
       {
         "word": "森林",
         "meaning": "forest"
+      },
+      {
+        "word": ",",
+        "meaning": "comma"
       },
       {
         "word": "从",
@@ -3467,6 +3489,14 @@
       {
         "word": "一",
         "meaning": "one"
+      },
+      {
+        "word": "棵",
+        "meaning": "measure word for trees"
+      },
+      {
+        "word": "树",
+        "meaning": "tree"
       }
     ]
   },
@@ -3496,8 +3526,8 @@
         "pinyin": "xià wǔ"
       },
       {
-        "word": ",",
-        "pinyin": ","
+        "word": "，",
+        "pinyin": "，"
       },
       {
         "word": "唱歌",
@@ -3521,11 +3551,11 @@
       }
     ],
     "translation": "He ran for an afternoon, singing, swimming, and hunting.",
-    "explanation": "The structure 'verb + 了 + time duration' indicates the completion of an action that lasted for a specific period of time. In this sentence, the verb '跑' (run) is followed by '了一个下午' (for an afternoon), indicating that he ran for the entire afternoon.",
+    "explanation": "The sentence describes the activities he engaged in while running for an afternoon.",
     "word_meanings": [
       {
         "word": "他",
-        "meaning": "He"
+        "meaning": "he"
       },
       {
         "word": "跑",
@@ -3533,7 +3563,7 @@
       },
       {
         "word": "了",
-        "meaning": "indicating completion of an action"
+        "meaning": "(completion marker)"
       },
       {
         "word": "一个",
@@ -3544,20 +3574,20 @@
         "meaning": "afternoon"
       },
       {
-        "word": ",",
-        "meaning": "comma"
+        "word": "，",
+        "meaning": "(comma)"
       },
       {
         "word": "唱歌",
-        "meaning": "singing"
+        "meaning": "sing"
       },
       {
         "word": "、",
-        "meaning": "and"
+        "meaning": "(listing marker)"
       },
       {
         "word": "游泳",
-        "meaning": "swimming"
+        "meaning": "swim"
       },
       {
         "word": "和",
@@ -3565,7 +3595,7 @@
       },
       {
         "word": "打猎",
-        "meaning": "hunting"
+        "meaning": "hunt"
       }
     ]
   },
@@ -3613,14 +3643,10 @@
       {
         "word": "的",
         "pinyin": "de"
-      },
-      {
-        "word": "地方",
-        "pinyin": "dì fāng"
       }
     ],
     "translation": "Finally, he found himself in the forest, a strange place.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between words. In this sentence, it connects '陌生' (strange) and '地方' (place) to describe the place as 'a strange place'.",
+    "explanation": "The structure '身处...中' is used to indicate being in a specific location or situation. In this sentence, it means 'in the forest'.",
     "word_meanings": [
       {
         "word": "最后",
@@ -3640,7 +3666,7 @@
       },
       {
         "word": "身处",
-        "meaning": "be located in"
+        "meaning": "in"
       },
       {
         "word": "森林",
@@ -3648,7 +3674,7 @@
       },
       {
         "word": "中",
-        "meaning": "in"
+        "meaning": "inside"
       },
       {
         "word": "一个",
@@ -3660,10 +3686,6 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
-      },
-      {
-        "word": "地方",
         "meaning": "place"
       }
     ]
@@ -3724,102 +3746,62 @@
       {
         "word": "叫",
         "pinyin": "jiào"
-      },
-      {
-        "word": "人类",
-        "pinyin": "rén lèi"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
-      },
-      {
-        "word": "村庄",
-        "pinyin": "cūn zhuāng"
       }
     ],
-    "translation": "Near a swamp outside a village, he heard several dogs barking. Human village!",
-    "explanation": "The structure '在...附近' is a common way to indicate proximity in Chinese. The possessive particle '的' is used to show possession or association between words.",
+    "translation": "Near a swamp outside a village, he heard several dogs barking.",
+    "explanation": "The sentence structure in Chinese is Subject + Time/Location + Verb + Object. In this sentence, the subject '他' (he) hears the dogs '狗' (dogs) barking '叫' near a swamp '沼泽地' outside a village '村庄外'. The possessive particle '的' is used to indicate the relationship between the location '村庄外的沼泽地' (swamp outside a village) and the subject '他' (he).",
     "word_meanings": [
       {
         "word": "在",
-        "meaning": "at/near",
-        "grammatical_role": "preposition"
+        "meaning": "at, in, on"
       },
       {
         "word": "一个",
-        "meaning": "a/an",
-        "grammatical_role": "adjective"
+        "meaning": "a, an"
       },
       {
         "word": "村庄",
-        "meaning": "village",
-        "grammatical_role": "noun"
+        "meaning": "village"
       },
       {
         "word": "外",
-        "meaning": "outside",
-        "grammatical_role": "noun"
+        "meaning": "outside"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "沼泽地",
-        "meaning": "swamp",
-        "grammatical_role": "noun"
+        "meaning": "swamp"
       },
       {
         "word": "附近",
-        "meaning": "near",
-        "grammatical_role": "adverb"
+        "meaning": "near"
       },
       {
         "word": "他",
-        "meaning": "he",
-        "grammatical_role": "pronoun"
+        "meaning": "he"
       },
       {
         "word": "听见",
-        "meaning": "hear",
-        "grammatical_role": "verb"
+        "meaning": "heard"
       },
       {
         "word": "几只",
-        "meaning": "several",
-        "grammatical_role": "adjective"
+        "meaning": "several"
       },
       {
         "word": "狗",
-        "meaning": "dogs",
-        "grammatical_role": "noun"
+        "meaning": "dogs"
       },
       {
         "word": "在",
-        "meaning": "in/at",
-        "grammatical_role": "preposition"
+        "meaning": "at, in, on"
       },
       {
         "word": "叫",
-        "meaning": "barking",
-        "grammatical_role": "verb"
-      },
-      {
-        "word": "人类",
-        "meaning": "human",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
-      },
-      {
-        "word": "村庄",
-        "meaning": "village",
-        "grammatical_role": "noun"
+        "meaning": "barking"
       }
     ]
   },
@@ -3837,8 +3819,8 @@
         "pinyin": "xiǎng"
       }
     ],
-    "translation": "Mowgli wants.",
-    "explanation": "The sentence is a simple statement where Mowgli is the subject and 'wants' is the verb. The word order in Chinese is subject-verb-object, so 'Mowgli' comes before 'wants'.",
+    "translation": "Mowgli thought.",
+    "explanation": "In this sentence, 毛克利 (Mowgli) is the subject and 想 (thought) is the verb. The sentence is a simple statement indicating that Mowgli is thinking about something.",
     "word_meanings": [
       {
         "word": "毛克利",
@@ -3846,7 +3828,7 @@
       },
       {
         "word": "想",
-        "meaning": "wants"
+        "meaning": "thought"
       }
     ]
   },
@@ -3884,12 +3866,16 @@
         "pinyin": "shēng yīn"
       },
       {
-        "word": "走去",
-        "pinyin": "zǒu qù"
+        "word": "走",
+        "pinyin": "zǒu"
+      },
+      {
+        "word": "去",
+        "pinyin": "qù"
       }
     ],
-    "translation": "He curiously walked towards the sound of the dog barking.",
-    "explanation": "The structure of this sentence is Subject + Adverbial phrase + Verb + Preposition + Noun + Verb + Particle + Noun, which is a common sentence structure in Chinese. The use of 的 in this context is to indicate the possession of the sound by the dog.",
+    "translation": "He curiously walked towards the sound of the dogs barking.",
+    "explanation": "In this sentence, the structure '好奇地' (curiously) is used to describe how '他' (he) walked '向' (towards) the '声音' (sound) of the '狗' (dogs) '叫' (barking). '走去' together means 'walk towards' in this context.",
     "word_meanings": [
       {
         "word": "他",
@@ -3897,38 +3883,35 @@
       },
       {
         "word": "好奇地",
-        "meaning": "curiously",
-        "explanation": "Adverbial phrase indicating the manner in which he walked"
+        "meaning": "curiously"
       },
       {
         "word": "向",
-        "meaning": "towards",
-        "explanation": "Preposition indicating direction"
+        "meaning": "towards"
       },
       {
         "word": "狗",
-        "meaning": "dog",
-        "explanation": "Noun"
+        "meaning": "dogs"
       },
       {
         "word": "叫",
-        "meaning": "barking",
-        "explanation": "Verb"
+        "meaning": "barking"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "explanation": "Particle indicating possession or modification"
+        "meaning": "connecting particle"
       },
       {
         "word": "声音",
-        "meaning": "sound",
-        "explanation": "Noun"
+        "meaning": "sound"
       },
       {
-        "word": "走去",
-        "meaning": "walked",
-        "explanation": "Verb indicating the action of walking towards something"
+        "word": "走",
+        "meaning": "walk"
+      },
+      {
+        "word": "去",
+        "meaning": "to"
       }
     ]
   },
@@ -3959,27 +3942,32 @@
       }
     ],
     "translation": "They walk back and forth in front of the cabin.",
-    "explanation": "The structure '走来走去' is a reduplicated verb phrase in Chinese, indicating repeated or back-and-forth actions.",
+    "explanation": "走来走去 is a Chinese idiom meaning 'to walk back and forth'. It is a repetitive action indicating movement in different directions.",
     "word_meanings": [
       {
         "word": "他们",
-        "meaning": "They"
+        "meaning": "they",
+        "type": "pronoun"
       },
       {
         "word": "在",
-        "meaning": "at/in (indicates an action in progress)"
+        "meaning": "in, at",
+        "type": "preposition"
       },
       {
         "word": "小屋",
-        "meaning": "cabin"
+        "meaning": "cabin",
+        "type": "noun"
       },
       {
         "word": "前",
-        "meaning": "front"
+        "meaning": "front",
+        "type": "noun"
       },
       {
         "word": "走来走去",
-        "meaning": "walk back and forth"
+        "meaning": "walk back and forth",
+        "type": "verb phrase"
       }
     ]
   },
@@ -4045,8 +4033,8 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Mowgli called out to the wolves. The wolves roared like one, and they immediately stopped calling.",
-    "explanation": "The structure '一样' is used here to indicate that the wolves roared in unison, like they were one entity. The use of '了' at the end of the sentence indicates that the action of calling out stopped.",
+    "translation": "Mowgli calls out to the wolves. The wolves roar like wolves, and they immediately stop calling.",
+    "explanation": "The sentence describes Mowgli calling out to the wolves, who respond by roaring like wolves, causing them to immediately stop calling. The use of '一样' emphasizes the similarity between the wolves' roar and their usual behavior.",
     "word_meanings": [
       {
         "word": "毛克利",
@@ -4054,7 +4042,7 @@
       },
       {
         "word": "向",
-        "meaning": "to"
+        "meaning": "to; towards"
       },
       {
         "word": "狼",
@@ -4074,7 +4062,7 @@
       },
       {
         "word": "一样",
-        "meaning": "like one"
+        "meaning": "like; similar to"
       },
       {
         "word": "咆哮",
@@ -4102,7 +4090,7 @@
       },
       {
         "word": "了",
-        "meaning": "indicates completion of an action"
+        "meaning": "indicating completion"
       }
     ]
   },
@@ -4116,6 +4104,10 @@
         "pinyin": "rán hòu"
       },
       {
+        "word": ",",
+        "pinyin": ","
+      },
+      {
         "word": "一个",
         "pinyin": "yí gè"
       },
@@ -4124,32 +4116,44 @@
         "pinyin": "nǚ rén"
       },
       {
-        "word": "走到",
-        "pinyin": "zǒu dào"
+        "word": "走",
+        "pinyin": "zǒu"
+      },
+      {
+        "word": "到",
+        "pinyin": "dào"
       },
       {
         "word": "门口",
         "pinyin": "mén kǒu"
       }
     ],
-    "translation": "Then, a woman walked to the door.",
-    "explanation": "In Chinese, the word order is different from English, so '一个女人' is 'a woman' instead of 'woman a'. Also, the verb '走到' means 'walked to', indicating movement towards a specific location.",
+    "translation": "然后,一个女人走到门口。",
+    "explanation": "The sentence describes the sequence of events, with a woman walking towards the doorway after something else happened.",
     "word_meanings": [
       {
         "word": "然后",
-        "meaning": "then"
+        "meaning": "then, afterwards"
+      },
+      {
+        "word": ",",
+        "meaning": "comma (punctuation)"
       },
       {
         "word": "一个",
-        "meaning": "a"
+        "meaning": "a, one"
       },
       {
         "word": "女人",
         "meaning": "woman"
       },
       {
-        "word": "走到",
-        "meaning": "walked to"
+        "word": "走",
+        "meaning": "walk, go"
+      },
+      {
+        "word": "到",
+        "meaning": "to, towards"
       },
       {
         "word": "门口",
@@ -4179,6 +4183,10 @@
         "pinyin": "shǒu zhuó"
       },
       {
+        "word": ",",
+        "pinyin": ","
+      },
+      {
         "word": "头发",
         "pinyin": "tóu fà"
       },
@@ -4189,6 +4197,10 @@
       {
         "word": "灰色",
         "pinyin": "huī sè"
+      },
+      {
+        "word": "。",
+        "pinyin": "。"
       },
       {
         "word": "谁",
@@ -4203,58 +4215,68 @@
         "pinyin": "nà ér"
       }
     ],
-    "translation": "She is wearing copper bracelets, her hair is a bit gray. Who is there?",
-    "explanation": "The structure '戴着' indicates an ongoing action of wearing. The use of '有点' before an adjective softens the intensity of the adjective, making it 'a bit gray' instead of just 'gray'.",
+    "translation": "She is wearing copper bracelets, and her hair is a bit gray. Who is there?",
+    "explanation": "This sentence describes the appearance of a woman, mentioning her copper bracelets and slightly gray hair, and then poses a question about her identity.",
     "word_meanings": [
       {
         "word": "她",
         "meaning": "she",
-        "grammatical_role": "subject"
+        "grammar": "subject"
       },
       {
         "word": "戴着",
         "meaning": "wearing",
-        "grammatical_role": "verb + complement"
+        "grammar": "verb + complement"
       },
       {
         "word": "铜",
         "meaning": "copper",
-        "grammatical_role": "adjective"
+        "grammar": "noun"
       },
       {
         "word": "手镯",
         "meaning": "bracelets",
-        "grammatical_role": "object"
+        "grammar": "noun"
+      },
+      {
+        "word": ",",
+        "meaning": ",",
+        "grammar": "punctuation"
       },
       {
         "word": "头发",
         "meaning": "hair",
-        "grammatical_role": "subject"
+        "grammar": "noun"
       },
       {
         "word": "有点",
         "meaning": "a bit",
-        "grammatical_role": "adverbial phrase"
+        "grammar": "adverbial phrase"
       },
       {
         "word": "灰色",
         "meaning": "gray",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
+      },
+      {
+        "word": "。",
+        "meaning": ".",
+        "grammar": "punctuation"
       },
       {
         "word": "谁",
         "meaning": "who",
-        "grammatical_role": "subject"
+        "grammar": "subject"
       },
       {
         "word": "在",
         "meaning": "is",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "那儿",
         "meaning": "there",
-        "grammatical_role": "adverb"
+        "grammar": "location"
       }
     ]
   },
@@ -4268,28 +4290,22 @@
         "pinyin": "tā"
       },
       {
-        "word": "喊",
-        "pinyin": "hǎn"
-      },
-      {
-        "word": "道",
-        "pinyin": "dào"
+        "word": "喊道",
+        "pinyin": "hǎn dào"
       }
     ],
     "translation": "She shouted.",
-    "explanation": "In Chinese, the particle '道' is often used after a verb to indicate the completion of an action. It is similar to adding 'ed' to a verb in English.",
+    "explanation": "The sentence consists of the subject '她' (she) and the verb '喊道' (shout). The verb '喊' means 'shout' and '道' is a verb complement indicating the manner in which the action is performed.",
     "word_meanings": [
       {
         "word": "她",
-        "meaning": "she"
+        "meaning": "she",
+        "grammatical_role": "subject"
       },
       {
-        "word": "喊",
-        "meaning": "shout"
-      },
-      {
-        "word": "道",
-        "meaning": "particle indicating the completion of an action"
+        "word": "喊道",
+        "meaning": "shout",
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -4315,20 +4331,16 @@
         "pinyin": "chàn dǒu"
       },
       {
-        "word": "。",
-        "pinyin": "。"
-      },
-      {
         "word": "是",
         "pinyin": "shì"
       },
       {
-        "word": "另一",
-        "pinyin": "lìng yī"
+        "word": "另",
+        "pinyin": "lìng"
       },
       {
-        "word": "只",
-        "pinyin": "zhǐ"
+        "word": "一只",
+        "pinyin": "yī zhī"
       },
       {
         "word": "豺狼",
@@ -4340,7 +4352,7 @@
       }
     ],
     "translation": "She trembled with fear. Is it another jackal?",
-    "explanation": "In Chinese, the structure 'verb + 得 + result' is used to indicate the result of an action caused by the verb. In this sentence, '吓得' means 'trembled with fear'. Also, '只' is a measure word used for animals.",
+    "explanation": "In Chinese, the structure 'verb + 得 + result' is used to indicate the result or degree of an action. In this sentence, '吓得' means 'trembled with fear'. The question particle '吗' is added at the end of a sentence to turn it into a yes-no question.",
     "word_meanings": [
       {
         "word": "她",
@@ -4359,20 +4371,16 @@
         "meaning": "tremble"
       },
       {
-        "word": "。",
-        "meaning": "period"
-      },
-      {
         "word": "是",
         "meaning": "is"
       },
       {
-        "word": "另一",
+        "word": "另",
         "meaning": "another"
       },
       {
-        "word": "只",
-        "meaning": "measure word for animals"
+        "word": "一只",
+        "meaning": "one"
       },
       {
         "word": "豺狼",
@@ -4402,20 +4410,23 @@
         "pinyin": "gǒu men"
       }
     ],
-    "translation": "She asked the dogs.",
-    "explanation": "In Chinese, the subject usually comes before the verb, unlike in English where the subject comes after the verb. Also, the plural marker '们' is added to '狗' to indicate multiple dogs.",
+    "translation": "She asks the dogs.",
+    "explanation": "In this sentence, the subject '她' (she) performs the action of asking (问) the dogs (狗们). The use of '们' after '狗' indicates that it is plural, referring to multiple dogs.",
     "word_meanings": [
       {
         "word": "她",
-        "meaning": "she"
+        "meaning": "she",
+        "grammar": "subject"
       },
       {
         "word": "问",
-        "meaning": "ask"
+        "meaning": "ask",
+        "grammar": "verb"
       },
       {
         "word": "狗们",
-        "meaning": "dogs"
+        "meaning": "dogs",
+        "grammar": "object plural"
       }
     ]
   },
@@ -4473,8 +4484,8 @@
         "pinyin": "fā dǒu"
       }
     ],
-    "translation": "When she looked at it carefully, Mowgli felt himself starting to tremble.",
-    "explanation": "In Chinese, the verb '看' (look) is often followed by the complement '着' to indicate the continuous action of looking. The use of '自己' (himself) emphasizes that Mowgli is the one experiencing the trembling.",
+    "translation": "When she looked at it carefully, Mowgli felt himself also starting to tremble.",
+    "explanation": "This sentence follows the pattern '当...时' to indicate 'when' something happens. The structure '...觉得自己也...' means 'feel oneself also...' in this context.",
     "word_meanings": [
       {
         "word": "当",
@@ -4484,7 +4495,7 @@
       {
         "word": "她",
         "meaning": "she",
-        "grammatical_role": "pronoun"
+        "grammatical_role": "noun"
       },
       {
         "word": "仔细",
@@ -4503,13 +4514,13 @@
       },
       {
         "word": "时",
-        "meaning": "time",
-        "grammatical_role": "noun"
+        "meaning": "when",
+        "grammatical_role": "time word"
       },
       {
         "word": "毛克利",
         "meaning": "Mowgli",
-        "grammatical_role": "proper noun"
+        "grammatical_role": "noun"
       },
       {
         "word": "觉得",
@@ -4628,92 +4639,113 @@
         "pinyin": "mài sū yǎ"
       }
     ],
-    "translation": "That woman said, that woman looks a bit old, but she knows its voice. In fact, she is very clear. Mowgli!",
-    "explanation": "The structure '那个...女人' is repeated twice in the sentence to refer to two different women. The use of '了' indicates the completion of the action '看上去' (looks). The possessive particle '的' is used to show possession between '它' (its) and '声音' (voice).",
+    "translation": "That woman said, that woman looks a bit old, but she knows its voice. In fact, she is very clear. Ma Su Ya!",
+    "explanation": "This sentence consists of a subject-verb-object structure, with the subject '那个女人' (that woman), the verb '说' (said), and the object '那个女人' (that woman). The sentence also includes a comparison using '看上去有点老了' (looks a bit old), and the particle '了' is used to indicate the completion of the action.",
     "word_meanings": [
       {
         "word": "那个",
-        "meaning": "that"
+        "meaning": "that",
+        "grammatical_role": "determiner"
       },
       {
         "word": "女人",
-        "meaning": "woman"
+        "meaning": "woman",
+        "grammatical_role": "noun"
       },
       {
         "word": "说",
-        "meaning": "said"
+        "meaning": "said",
+        "grammatical_role": "verb"
       },
       {
         "word": "那个",
-        "meaning": "that"
+        "meaning": "that",
+        "grammatical_role": "determiner"
       },
       {
         "word": "女",
-        "meaning": "female"
+        "meaning": "woman",
+        "grammatical_role": "noun"
       },
       {
         "word": "人",
-        "meaning": "person"
+        "meaning": "person",
+        "grammatical_role": "noun"
       },
       {
         "word": "看上去",
-        "meaning": "looks"
+        "meaning": "looks",
+        "grammatical_role": "verb"
       },
       {
         "word": "有点",
-        "meaning": "a bit"
+        "meaning": "a bit",
+        "grammatical_role": "adverb"
       },
       {
         "word": "老",
-        "meaning": "old"
+        "meaning": "old",
+        "grammatical_role": "adjective"
       },
       {
         "word": "了",
-        "meaning": "indicating completion of action"
+        "meaning": "particle indicating completion of action",
+        "grammatical_role": "particle"
       },
       {
         "word": "但",
-        "meaning": "but"
+        "meaning": "but",
+        "grammatical_role": "conjunction"
       },
       {
         "word": "她",
-        "meaning": "she"
+        "meaning": "she",
+        "grammatical_role": "pronoun"
       },
       {
         "word": "知道",
-        "meaning": "knows"
+        "meaning": "knows",
+        "grammatical_role": "verb"
       },
       {
         "word": "它",
-        "meaning": "its"
+        "meaning": "its",
+        "grammatical_role": "pronoun"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "particle indicating possession",
+        "grammatical_role": "particle"
       },
       {
         "word": "声音",
-        "meaning": "voice"
+        "meaning": "voice",
+        "grammatical_role": "noun"
       },
       {
         "word": "事实上",
-        "meaning": "in fact"
+        "meaning": "in fact",
+        "grammatical_role": "adverb"
       },
       {
         "word": "她",
-        "meaning": "she"
+        "meaning": "she",
+        "grammatical_role": "pronoun"
       },
       {
         "word": "很",
-        "meaning": "very"
+        "meaning": "very",
+        "grammatical_role": "adverb"
       },
       {
         "word": "清楚",
-        "meaning": "clear"
+        "meaning": "clear",
+        "grammatical_role": "adjective"
       },
       {
         "word": "麦苏雅",
-        "meaning": "Mowgli"
+        "meaning": "Ma Su Ya",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -4732,7 +4764,7 @@
       }
     ],
     "translation": "She shouted.",
-    "explanation": "In Chinese, the subject usually comes before the verb in a sentence, unlike English where the subject typically comes before the verb. Also, the verb '大喊' specifically means 'to shout loudly'.",
+    "explanation": "The sentence consists of the subject '她' (she) and the verb '大喊' (shout). The verb '大喊' is a compound word meaning 'to shout loudly.'",
     "word_meanings": [
       {
         "word": "她",
@@ -4740,7 +4772,7 @@
       },
       {
         "word": "大喊",
-        "meaning": "shout loudly"
+        "meaning": "shout"
       }
     ]
   },
@@ -4782,12 +4814,12 @@
         "pinyin": "lǐ"
       },
       {
-        "word": "走了出来",
-        "pinyin": "zǒu le chū lái"
+        "word": "走了",
+        "pinyin": "zǒu le"
       }
     ],
     "translation": "She walked out of the high trough she had been hiding in.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between words. The structure '从...里' is commonly used to indicate the origin or starting point of an action.",
+    "explanation": "In this sentence, the tricky part might be the use of the verb complement '走了' which indicates the completion of the action of walking out. Also, the structure '从...里' means 'from inside' in this context.",
     "word_meanings": [
       {
         "word": "她",
@@ -4799,11 +4831,11 @@
       },
       {
         "word": "自己",
-        "meaning": "self / own"
+        "meaning": "self/own"
       },
       {
         "word": "一直",
-        "meaning": "continuously / always"
+        "meaning": "continuously"
       },
       {
         "word": "躲着",
@@ -4819,10 +4851,10 @@
       },
       {
         "word": "里",
-        "meaning": "inside"
+        "meaning": "in"
       },
       {
-        "word": "走了出来",
+        "word": "走了",
         "meaning": "walked out"
       }
     ]
@@ -4869,8 +4901,8 @@
         "pinyin": "shàng"
       }
     ],
-    "translation": "The woman was startled and put her hand on her chest.",
-    "explanation": "The tricky part here is the use of the particle '把' which indicates the object of the verb. In this sentence, it shows that the woman 'put' (放) something (her hand) on her chest.",
+    "translation": "That woman was startled and put her hand on her chest.",
+    "explanation": "In this sentence, the verb '吓了一跳' (was startled) is followed by the result complement '了' to indicate the completion of the action. The structure '把...放在...' is a common way to express putting something in a specific location in Chinese.",
     "word_meanings": [
       {
         "word": "那",
@@ -4885,7 +4917,7 @@
       {
         "word": "吓了一跳",
         "meaning": "was startled",
-        "grammatical_role": "verb phrase"
+        "grammatical_role": "verb + result complement"
       },
       {
         "word": ",",
@@ -4895,7 +4927,7 @@
       {
         "word": "把",
         "meaning": "put",
-        "grammatical_role": "particle indicating the object of the verb"
+        "grammatical_role": "preposition"
       },
       {
         "word": "手",
@@ -4904,8 +4936,8 @@
       },
       {
         "word": "放在",
-        "meaning": "put on",
-        "grammatical_role": "verb phrase"
+        "meaning": "on",
+        "grammatical_role": "verb + preposition"
       },
       {
         "word": "胸口",
@@ -4914,8 +4946,8 @@
       },
       {
         "word": "上",
-        "meaning": "on",
-        "grammatical_role": "preposition"
+        "meaning": "",
+        "grammatical_role": "location particle"
       }
     ]
   },
@@ -4933,8 +4965,8 @@
         "pinyin": "tú"
       }
     ],
-    "translation": "Take it!",
-    "explanation": "The sentence is a simple command telling someone to take something. The word 拿 means 'take' and 图 is used here as a pronoun to refer to 'it'.",
+    "translation": "Take the picture!",
+    "explanation": "The sentence is a command instructing someone to take a picture. The verb '拿' means 'take' and '图' means 'picture'.",
     "word_meanings": [
       {
         "word": "拿",
@@ -4943,7 +4975,7 @@
       },
       {
         "word": "图",
-        "meaning": "it",
+        "meaning": "picture",
         "grammatical_role": "noun"
       }
     ]
@@ -4967,22 +4999,22 @@
       }
     ],
     "translation": "Is it you?",
-    "explanation": "In Chinese, a question is formed by adding the question particle 吗 at the end of a statement. This changes the statement into a question. In this sentence, the verb 是 (is) is used to ask if the person being addressed is the one being referred to.",
+    "explanation": "The sentence structure follows the pattern of 'subject + 是 + question particle 吗' to form a yes-no question in Chinese.",
     "word_meanings": [
       {
         "word": "是",
         "meaning": "is",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "你",
         "meaning": "you",
-        "grammatical_role": "pronoun"
+        "grammar": "noun/pronoun"
       },
       {
         "word": "吗",
         "meaning": "question particle",
-        "grammatical_role": "particle"
+        "grammar": "particle"
       }
     ]
   },
@@ -5001,7 +5033,7 @@
       }
     ],
     "translation": "My son!",
-    "explanation": "In Chinese, possessive pronouns like '我的' come before the noun they possess, unlike in English where they come after.",
+    "explanation": "The sentence consists of a possessive pronoun '我的' meaning 'my' and the noun '儿子' meaning 'son'. The exclamation mark at the end indicates strong emotion or emphasis.",
     "word_meanings": [
       {
         "word": "我的",
@@ -5029,8 +5061,8 @@
         "pinyin": "nà"
       }
     ],
-    "translation": "Oh my goodness!",
-    "explanation": "The combination of 天 (heaven/sky) and 呐 (exclamation) together forms an interjection commonly used to express surprise or exclamation in Chinese.",
+    "translation": "Oh my!",
+    "explanation": "The character '天' means 'heaven' or 'sky', but in this context, it is used as an exclamation similar to 'Oh my!' The particle '呐' adds emphasis to the exclamation.",
     "word_meanings": [
       {
         "word": "天",
@@ -5039,8 +5071,8 @@
       },
       {
         "word": "呐",
-        "meaning": "an interjection expressing surprise or exclamation",
-        "grammatical_role": "interjection"
+        "meaning": "exclamation particle",
+        "grammatical_role": "particle"
       }
     ]
   },
@@ -5083,7 +5115,7 @@
       }
     ],
     "translation": "Little bee, are you sure it's me?",
-    "explanation": "In Chinese, the question particle '吗' is added at the end of a sentence to turn it into a question. Also, the structure of '你肯定是我吗?' is different from English, where the subject 'you' comes before the verb 'are'.",
+    "explanation": "The sentence structure is Subject-Verb-Object, with the question particle '吗' indicating a yes-no question at the end.",
     "word_meanings": [
       {
         "word": "小",
@@ -5107,7 +5139,7 @@
       },
       {
         "word": "是",
-        "meaning": "is, be"
+        "meaning": "to be"
       },
       {
         "word": "我",
@@ -5125,12 +5157,8 @@
     "text": "小蜜蜂,你看!",
     "segmented": [
       {
-        "word": "小",
-        "pinyin": "xiǎo"
-      },
-      {
-        "word": "蜜蜂",
-        "pinyin": "mì fēng"
+        "word": "小蜜蜂",
+        "pinyin": "xiǎo mì fēng"
       },
       {
         "word": ",",
@@ -5145,33 +5173,28 @@
         "pinyin": "kàn"
       }
     ],
-    "translation": "Little bee, look!",
-    "explanation": "In Chinese, the verb '看' (look) can be used on its own to mean 'look at' or 'watch'. The structure '你看' is a simple way to say 'you look' or 'look at you'.",
+    "translation": "Little bee, you look!",
+    "explanation": "The sentence is a simple imperative sentence where the speaker is telling the little bee to look.",
     "word_meanings": [
       {
-        "word": "小",
-        "meaning": "little",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "蜜蜂",
-        "meaning": "bee",
-        "grammatical_role": "noun"
+        "word": "小蜜蜂",
+        "meaning": "Little bee",
+        "grammar": "noun"
       },
       {
         "word": ",",
-        "meaning": "comma",
-        "grammatical_role": "punctuation"
+        "meaning": ",",
+        "grammar": "punctuation"
       },
       {
         "word": "你",
         "meaning": "you",
-        "grammatical_role": "pronoun"
+        "grammar": "pronoun"
       },
       {
         "word": "看",
         "meaning": "look",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       }
     ]
   }

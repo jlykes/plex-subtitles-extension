@@ -18,22 +18,19 @@
       }
     ],
     "translation": "Hi everyone!",
-    "explanation": "In Chinese, the word order is often different from English. In this sentence, 'Hi' is used as a greeting at the beginning, followed by 'everyone' and then 'good'.",
+    "explanation": "The sentence is a simple greeting in Chinese, where '大家' means 'everyone' and '好' means 'good'.",
     "word_meanings": [
       {
         "word": "Hi",
-        "meaning": "used as a greeting",
-        "grammatical_role": "interjection"
+        "meaning": "Hi"
       },
       {
         "word": "大家",
-        "meaning": "everyone",
-        "grammatical_role": "noun"
+        "meaning": "everyone"
       },
       {
         "word": "好",
-        "meaning": "good",
-        "grammatical_role": "adjective"
+        "meaning": "good"
       }
     ]
   },
@@ -56,17 +53,17 @@
       }
     ],
     "translation": "I am ALEX",
-    "explanation": "In Chinese, the subject usually comes before the verb, unlike in English where the subject comes after the verb. Also, Chinese does not have articles like 'a' or 'an', so 'I am ALEX' is translated as '我是ALEX' without any articles.",
+    "explanation": "The sentence is a simple statement introducing oneself, with the copula 是 linking the subject 我 (I) to the proper noun ALEX.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
+        "meaning": "I/me",
         "grammatical_role": "subject"
       },
       {
         "word": "是",
         "meaning": "am",
-        "grammatical_role": "verb"
+        "grammatical_role": "copula"
       },
       {
         "word": "ALEX",
@@ -106,7 +103,7 @@
       }
     ],
     "translation": "Welcome everyone back to my channel",
-    "explanation": "The structure of this sentence is quite straightforward, with the only potential challenge being the use of 再次 (zàicì) which means 'again'. This word can be used to emphasize the repetition of an action or event.",
+    "explanation": "The sentence structure in Chinese is Subject-Verb-Object. In this sentence, the subject '大家' (everyone) is being welcomed back by the speaker '我' (my) to the location '频道' (channel). The adverb '再次' (again) emphasizes the action of returning.",
     "word_meanings": [
       {
         "word": "欢迎",
@@ -122,7 +119,7 @@
       },
       {
         "word": "回到",
-        "meaning": "return to"
+        "meaning": "back to"
       },
       {
         "word": "我的",
@@ -144,12 +141,8 @@
         "pinyin": "bù zhī dào"
       },
       {
-        "word": "你",
-        "pinyin": "nǐ"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
+        "word": "你的",
+        "pinyin": "nǐ de"
       },
       {
         "word": "训练",
@@ -160,20 +153,16 @@
         "pinyin": "xí guàn"
       }
     ],
-    "translation": "I don't know your training habits.",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor.",
+    "translation": "I don't know your training habits",
+    "explanation": "The sentence structure is Subject + 不知道 + Possessive Pronoun + Noun. The verb 不知道 means 'do not know' and is used to indicate lack of knowledge about something.",
     "word_meanings": [
       {
         "word": "不知道",
-        "meaning": "don't know"
+        "meaning": "do not know"
       },
       {
-        "word": "你",
-        "meaning": "you"
-      },
-      {
-        "word": "的",
-        "meaning": "possessive particle"
+        "word": "你的",
+        "meaning": "your"
       },
       {
         "word": "训练",
@@ -221,14 +210,10 @@
       {
         "word": "练",
         "pinyin": "liàn"
-      },
-      {
-        "word": "呢",
-        "pinyin": "ne"
       }
     ],
-    "translation": "Is it necessary to start training immediately upon arriving at the gym?",
-    "explanation": "The structure '是不是' is a common way to form a question in Chinese. The repetition of '就' and '马上' emphasizes the immediacy of starting training upon arrival.",
+    "translation": "Is it that as soon as you arrive at the gym, you start training?",
+    "explanation": "This sentence structure in Chinese indicates a rhetorical question, emphasizing the immediate action of starting training upon arrival at the gym.",
     "word_meanings": [
       {
         "word": "是",
@@ -242,8 +227,8 @@
       },
       {
         "word": "来到",
-        "meaning": "arrive",
-        "grammatical_role": "verb"
+        "meaning": "arrive at",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "健身房",
@@ -252,7 +237,7 @@
       },
       {
         "word": "就",
-        "meaning": "immediately",
+        "meaning": "as soon as",
         "grammatical_role": "adverb"
       },
       {
@@ -267,13 +252,8 @@
       },
       {
         "word": "练",
-        "meaning": "training",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "呢",
-        "meaning": "used at the end of a sentence to indicate a rhetorical question",
-        "grammatical_role": "particle"
+        "meaning": "train",
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -296,7 +276,7 @@
       }
     ],
     "translation": "Actually come to the gym",
-    "explanation": "The tricky part here might be the use of '其实' which means 'actually' and can add emphasis or reveal a truth. '来到' is a compound verb meaning 'come to', and '健身房' is 'gym'.",
+    "explanation": "The sentence structure in Chinese is Subject + Adverb + Verb + Location, which is different from English. The adverb '其实' (actually) is placed before the verb '来到' (come to) to emphasize the action.",
     "word_meanings": [
       {
         "word": "其实",
@@ -342,8 +322,8 @@
         "pinyin": "xùn liàn"
       }
     ],
-    "translation": "Start entering strength training immediately",
-    "explanation": "In Chinese, the verb usually comes before the object, so 'enter strength training' is structured as 'enter to strength training'.",
+    "translation": "Immediately start entering strength training",
+    "explanation": "The sentence structure follows the pattern 'adverb + verb + preposition + noun + noun', which is common in Chinese. The use of '马上' (immediately) emphasizes the quick action of starting the strength training.",
     "word_meanings": [
       {
         "word": "马上",
@@ -383,8 +363,12 @@
     "text": "并不是在我们体能的巅峰状态上",
     "segmented": [
       {
-        "word": "并不是",
-        "pinyin": "bìng bú shì"
+        "word": "并",
+        "pinyin": "bìng"
+      },
+      {
+        "word": "不是",
+        "pinyin": "bú shì"
       },
       {
         "word": "在",
@@ -415,12 +399,16 @@
         "pinyin": "shàng"
       }
     ],
-    "translation": "Not at the peak state of our physical fitness",
-    "explanation": "The structure '并不是' is used to negate the following statement, similar to 'not' in English. '在...上' is a common structure in Chinese to indicate being in a certain state or condition.",
+    "translation": "And not at our peak physical state",
+    "explanation": "The sentence structure in Chinese is Subject + 不是 + Location/State, which translates to 'not at' in English. The word '上' at the end of the sentence indicates 'at' or 'on' in this context.",
     "word_meanings": [
       {
-        "word": "并不是",
-        "meaning": "not"
+        "word": "并",
+        "meaning": "and"
+      },
+      {
+        "word": "不是",
+        "meaning": "not at"
       },
       {
         "word": "在",
@@ -432,7 +420,7 @@
       },
       {
         "word": "体能",
-        "meaning": "physical fitness"
+        "meaning": "physical strength"
       },
       {
         "word": "的",
@@ -462,12 +450,12 @@
         "pinyin": "tóng shí"
       }
     ],
-    "translation": "Meanwhile",
-    "explanation": "同时 is used to indicate that two actions are happening at the same time. It is a common transitional word in Chinese subtitles and is equivalent to 'meanwhile' in English.",
+    "translation": "at the same time",
+    "explanation": "The word '同时' means 'at the same time' and is used to indicate that two actions are happening concurrently.",
     "word_meanings": [
       {
         "word": "同时",
-        "meaning": "meanwhile"
+        "meaning": "at the same time"
       }
     ]
   },
@@ -481,16 +469,8 @@
         "pinyin": "yīn wèi"
       },
       {
-        "word": "关节",
-        "pinyin": "guān jié"
-      },
-      {
-        "word": "/",
-        "pinyin": "/"
-      },
-      {
-        "word": "筋膜",
-        "pinyin": "jīn mó"
+        "word": "关节/筋膜",
+        "pinyin": "guān jié / jīn mó"
       },
       {
         "word": "还",
@@ -510,47 +490,37 @@
       }
     ],
     "translation": "Because the joints/fascia have not been activated",
-    "explanation": "The structure '被 + verb' is a passive construction commonly used in Chinese to indicate that the subject receives the action of the verb. In this sentence, it shows that the joints/fascia have not been activated by someone or something.",
+    "explanation": "The sentence structure in Chinese is Subject + 还没有 + Verb + Object, which translates to 'have not + Verb + Object'. The passive marker '被' is used to indicate that the joints/fascia are the ones being activated.",
     "word_meanings": [
       {
         "word": "因为",
         "meaning": "because",
-        "grammatical_role": "conjunction"
+        "grammar": "conjunction"
       },
       {
-        "word": "关节",
-        "meaning": "joints",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "/",
-        "meaning": "/",
-        "grammatical_role": "symbol"
-      },
-      {
-        "word": "筋膜",
-        "meaning": "fascia",
-        "grammatical_role": "noun"
+        "word": "关节/筋膜",
+        "meaning": "joints/fascia",
+        "grammar": "noun"
       },
       {
         "word": "还",
-        "meaning": "not yet",
-        "grammatical_role": "adverb"
+        "meaning": "have not",
+        "grammar": "adverb"
       },
       {
         "word": "没有",
-        "meaning": "have not",
-        "grammatical_role": "verb"
+        "meaning": "not have",
+        "grammar": "verb + negation"
       },
       {
         "word": "被",
         "meaning": "passive marker",
-        "grammatical_role": "particle"
+        "grammar": "passive marker"
       },
       {
         "word": "激活",
         "meaning": "activated",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       }
     ]
   },
@@ -577,7 +547,7 @@
       }
     ],
     "translation": "So exercise at this time",
-    "explanation": "The structure 所以 (so) at the beginning of the sentence indicates a cause-and-effect relationship. The word 时候 (time) is used here to indicate a specific time period for exercising.",
+    "explanation": "The sentence structure is Subject + Adverbial Phrase + Verb. The conjunction '所以' means 'so' and connects the reason with the result.",
     "word_meanings": [
       {
         "word": "所以",
@@ -587,7 +557,7 @@
       {
         "word": "这个",
         "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "grammatical_role": "determiner"
       },
       {
         "word": "时候",
@@ -635,36 +605,43 @@
         "pinyin": "fēng xiǎn"
       }
     ],
-    "translation": "Also increases some risk of injury",
-    "explanation": "The structure '会增加' means 'will increase'. The word '一些' is used to indicate 'some' or 'a few'. The phrase '受伤的' means 'injured'.",
+    "translation": "Also will increase some risk of injury",
+    "explanation": "In this sentence, the structure '也会' is used to indicate that in addition to the previous point, there will also be an increase in the risk of injury.",
     "word_meanings": [
       {
         "word": "也",
-        "meaning": "also"
+        "meaning": "also",
+        "grammar": "adverb"
       },
       {
         "word": "会",
-        "meaning": "will"
+        "meaning": "will",
+        "grammar": "modal verb"
       },
       {
         "word": "增加",
-        "meaning": "increase"
+        "meaning": "increase",
+        "grammar": "verb"
       },
       {
         "word": "一些",
-        "meaning": "some"
+        "meaning": "some",
+        "grammar": "quantifier"
       },
       {
         "word": "受伤",
-        "meaning": "injury"
+        "meaning": "injury",
+        "grammar": "noun"
       },
       {
         "word": "的",
-        "meaning": "of"
+        "meaning": "of",
+        "grammar": "possessive particle"
       },
       {
         "word": "风险",
-        "meaning": "risk"
+        "meaning": "risk",
+        "grammar": "noun"
       }
     ]
   },
@@ -694,8 +671,8 @@
         "pinyin": "shì pín"
       }
     ],
-    "translation": "So today's video",
-    "explanation": "The tricky part here might be the use of '期' which means 'episode' in this context. In Chinese, '期' is often used to refer to a specific installment of a show or series.",
+    "translation": "So today this episode video",
+    "explanation": "The sentence structure follows a simple pattern of 'so + time indicator + this + measure word + noun', which is commonly used in Chinese to introduce a topic or content.",
     "word_meanings": [
       {
         "word": "所以",
@@ -736,29 +713,18 @@
       {
         "word": "回到",
         "pinyin": "huí dào"
-      },
-      {
-        "word": "了",
-        "pinyin": "le"
       }
     ],
-    "translation": "Returned again",
-    "explanation": "The structure 又...了 is commonly used in Chinese to indicate the repetition of an action that has been completed in the past.",
+    "translation": "Returned to",
+    "explanation": "The sentence indicates a return to a previous state or location. The structure '又 + verb' is used to express the idea of doing something again.",
     "word_meanings": [
       {
         "word": "又",
-        "meaning": "again",
-        "grammatical_role": "adverb"
+        "meaning": "again"
       },
       {
         "word": "回到",
-        "meaning": "return to",
-        "grammatical_role": "verb"
-      },
-      {
-        "word": "了",
-        "meaning": "indicates completion of an action",
-        "grammatical_role": "particle"
+        "meaning": "return to"
       }
     ]
   },
@@ -782,42 +748,30 @@
       {
         "word": "带来",
         "pinyin": "dài lái"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
-      },
-      {
-        "word": "是",
-        "pinyin": "shì"
       }
     ],
-    "translation": "Today I bring to everyone",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or modification. In this sentence, it is used to modify '今天' (today) to indicate that 'today' is what is being brought to everyone.",
+    "translation": "Today bring to everyone is",
+    "explanation": "The sentence structure in Chinese is Subject-Verb-Object, where the subject '今天' (today) is followed by the verb '给' (bring) and the object '大家' (everyone), with '带来' (to bring) indicating the action being done.",
     "word_meanings": [
       {
         "word": "今天",
-        "meaning": "today"
+        "meaning": "today",
+        "grammatical_role": "noun"
       },
       {
         "word": "给",
-        "meaning": "to give"
+        "meaning": "bring",
+        "grammatical_role": "verb"
       },
       {
         "word": "大家",
-        "meaning": "everyone"
+        "meaning": "everyone",
+        "grammatical_role": "noun"
       },
       {
         "word": "带来",
-        "meaning": "bring"
-      },
-      {
-        "word": "的",
-        "meaning": "particle indicating possession or modification"
-      },
-      {
-        "word": "是",
-        "meaning": "is"
+        "meaning": "to bring",
+        "grammatical_role": "verb"
       }
     ]
   },
@@ -856,35 +810,42 @@
       }
     ],
     "translation": "Next time, before your back training plan",
-    "explanation": "The structure '在...之前' is used to indicate 'before' a specific time or event. In this sentence, it is used to convey the idea of doing something before a certain action or plan.",
+    "explanation": "The sentence structure is Subject + 在 + Possessive Pronoun + Noun + Noun + 之前, meaning 'before + possessive pronoun + noun + noun'. This sentence structure is commonly used in Chinese to indicate the sequence of events or actions.",
     "word_meanings": [
       {
         "word": "下次",
-        "meaning": "next time"
+        "meaning": "next time",
+        "grammatical_role": "noun"
       },
       {
         "word": "在",
-        "meaning": "at/in (indicates a specific time or location)"
+        "meaning": "before",
+        "grammatical_role": "preposition"
       },
       {
         "word": "你的",
-        "meaning": "your"
+        "meaning": "your",
+        "grammatical_role": "possessive pronoun"
       },
       {
         "word": "练背",
-        "meaning": "back training"
+        "meaning": "back training",
+        "grammatical_role": "noun"
       },
       {
         "word": "训练",
-        "meaning": "training"
+        "meaning": "training",
+        "grammatical_role": "noun"
       },
       {
         "word": "计划",
-        "meaning": "plan"
+        "meaning": "plan",
+        "grammatical_role": "noun"
       },
       {
         "word": "之前",
-        "meaning": "before"
+        "meaning": "before",
+        "grammatical_role": "preposition"
       }
     ]
   },
@@ -922,36 +883,43 @@
         "pinyin": "yī xià"
       }
     ],
-    "translation": "Come with me to do it together first",
-    "explanation": "The structure '先...一下' is commonly used to suggest doing something quickly or briefly before moving on to something else.",
+    "translation": "First, come with me to do it together",
+    "explanation": "The structure '先...一起来进行一下' is used to suggest doing something together as a first step.",
     "word_meanings": [
       {
         "word": "先",
-        "meaning": "first"
+        "meaning": "first",
+        "grammar": "adverb"
       },
       {
         "word": "跟",
-        "meaning": "with"
+        "meaning": "with",
+        "grammar": "preposition"
       },
       {
         "word": "我",
-        "meaning": "me"
+        "meaning": "me",
+        "grammar": "pronoun"
       },
       {
         "word": "一起",
-        "meaning": "together"
+        "meaning": "together",
+        "grammar": "adverb"
       },
       {
         "word": "来",
-        "meaning": "come"
+        "meaning": "come",
+        "grammar": "verb"
       },
       {
         "word": "进行",
-        "meaning": "to do"
+        "meaning": "to do",
+        "grammar": "verb"
       },
       {
         "word": "一下",
-        "meaning": "it"
+        "meaning": "it",
+        "grammar": "measure word"
       }
     ]
   },
@@ -981,28 +949,33 @@
         "pinyin": "rè shēn"
       }
     ],
-    "translation": "Activation and warm-up of the back",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor and before the possessed noun. In this context, it shows that the activation and warm-up are related to the back.",
+    "translation": "Back activation and warm-up",
+    "explanation": "The sentence describes the process of activating and warming up the back muscles before training. The possessive particle '的' is used to indicate the relationship between '背部' (back) and '激活' (activation) and '热身' (warm-up).",
     "word_meanings": [
       {
         "word": "背部",
-        "meaning": "back"
+        "meaning": "back",
+        "grammatical_role": "noun"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "possessive particle",
+        "grammatical_role": "particle"
       },
       {
         "word": "激活",
-        "meaning": "activation"
+        "meaning": "activation",
+        "grammatical_role": "noun"
       },
       {
         "word": "和",
-        "meaning": "and"
+        "meaning": "and",
+        "grammatical_role": "conjunction"
       },
       {
         "word": "热身",
-        "meaning": "warm-up"
+        "meaning": "warm-up",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -1020,8 +993,12 @@
         "pinyin": "ràng"
       },
       {
-        "word": "你的",
-        "pinyin": "nǐ de"
+        "word": "你",
+        "pinyin": "nǐ"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       },
       {
         "word": "背部",
@@ -1032,33 +1009,32 @@
         "pinyin": "xùn liàn"
       }
     ],
-    "translation": "Can let your back train",
-    "explanation": "In Chinese, the verb '让' is often used to indicate permission or to let someone do something. In this sentence, it is used to convey the idea of allowing or enabling someone to train their back.",
+    "translation": "可以让你的背部训练",
+    "explanation": "The sentence structure is Subject + 可以 + Verb + Object, where the subject is implied (you). The verb 让 here means 'let' or 'allow', indicating the action of letting or allowing someone to do something.",
     "word_meanings": [
       {
         "word": "可以",
-        "meaning": "can",
-        "grammatical_role": "verb"
+        "meaning": "can; able to"
       },
       {
         "word": "让",
-        "meaning": "let",
-        "grammatical_role": "verb"
+        "meaning": "let; allow"
       },
       {
-        "word": "你的",
-        "meaning": "your",
-        "grammatical_role": "possessive pronoun"
+        "word": "你",
+        "meaning": "you"
+      },
+      {
+        "word": "的",
+        "meaning": "possessive particle"
       },
       {
         "word": "背部",
-        "meaning": "back",
-        "grammatical_role": "noun"
+        "meaning": "back"
       },
       {
         "word": "训练",
-        "meaning": "train",
-        "grammatical_role": "verb"
+        "meaning": "training"
       }
     ]
   },
@@ -1088,8 +1064,8 @@
         "pinyin": "gāo xiào"
       }
     ],
-    "translation": "More fully and efficiently",
-    "explanation": "In Chinese, adjectives can be intensified by adding '更加' before them. The particle '的' is used to emphasize the preceding adjective. '和' is the conjunction 'and'.",
+    "translation": "more thorough and efficient",
+    "explanation": "The structure '更加...和...' is used to indicate 'more...and...' in a comparative sense.",
     "word_meanings": [
       {
         "word": "更加",
@@ -1097,11 +1073,11 @@
       },
       {
         "word": "的",
-        "meaning": "particle indicating emphasis"
+        "meaning": "grammatical particle indicating possession or description"
       },
       {
         "word": "充分",
-        "meaning": "fully"
+        "meaning": "thorough"
       },
       {
         "word": "和",
@@ -1148,42 +1124,35 @@
       }
     ],
     "translation": "In today's back activation content",
-    "explanation": "The tricky part for learners might be understanding the use of '在' and '当中' to indicate location or time within a sentence.",
+    "explanation": "The structure '在...的...当中' is used to indicate 'in the content of...' or 'among...'.",
     "word_meanings": [
       {
         "word": "在",
-        "meaning": "in",
-        "grammatical_role": "preposition"
+        "meaning": "in, at"
       },
       {
         "word": "今天",
-        "meaning": "today",
-        "grammatical_role": "noun"
+        "meaning": "today"
       },
       {
         "word": "的",
-        "meaning": "'s",
-        "grammatical_role": "possessive particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "背部",
-        "meaning": "back",
-        "grammatical_role": "noun"
+        "meaning": "back"
       },
       {
         "word": "激活",
-        "meaning": "activation",
-        "grammatical_role": "noun"
+        "meaning": "activation"
       },
       {
         "word": "内容",
-        "meaning": "content",
-        "grammatical_role": "noun"
+        "meaning": "content"
       },
       {
         "word": "当中",
-        "meaning": "in",
-        "grammatical_role": "preposition"
+        "meaning": "among, in the middle of"
       }
     ]
   },
@@ -1209,28 +1178,28 @@
         "pinyin": "xuǎn zé"
       }
     ],
-    "translation": "We will choose altogether",
-    "explanation": "The use of '一共' emphasizes the collective action of choosing together. The modal verb '会' indicates a future action.",
+    "translation": "We will choose a total of",
+    "explanation": "The sentence structure is subject + adverb + modal verb + verb, which is a common pattern in Chinese sentences.",
     "word_meanings": [
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "subject"
+        "grammar": "subject"
       },
       {
         "word": "一共",
-        "meaning": "altogether",
-        "grammatical_role": "adverb"
+        "meaning": "total of",
+        "grammar": "adverb"
       },
       {
         "word": "会",
         "meaning": "will",
-        "grammatical_role": "modal verb"
+        "grammar": "modal verb"
       },
       {
         "word": "选择",
         "meaning": "choose",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       }
     ]
   },
@@ -1261,7 +1230,7 @@
       }
     ],
     "translation": "Very good help you",
-    "explanation": "In Chinese, adjectives come before the noun they describe. The possessive particle '的' is used to link the adjective '好' (good) to the noun '帮助' (help).",
+    "explanation": "The structure '非常好的' is used to emphasize the quality of the help provided.",
     "word_meanings": [
       {
         "word": "非常",
@@ -1273,7 +1242,7 @@
       },
       {
         "word": "的",
-        "meaning": "particle indicating possession or description"
+        "meaning": "particle indicating possession or modification"
       },
       {
         "word": "帮助",
@@ -1308,23 +1277,27 @@
       }
     ],
     "translation": "Improve the back and",
-    "explanation": "The tricky part here is the use of the possessive particle 的 after 背部, which indicates possession or association. In this context, it connects 背部 (back) with the action of improving (提高).",
+    "explanation": "The sentence is a simple instruction to improve the back, followed by 'and' indicating there is more to come in the instruction.",
     "word_meanings": [
       {
         "word": "提高",
-        "meaning": "improve"
+        "meaning": "improve",
+        "grammatical_role": "verb"
       },
       {
         "word": "背部",
-        "meaning": "back"
+        "meaning": "back",
+        "grammatical_role": "noun"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "'s",
+        "grammatical_role": "possessive particle"
       },
       {
         "word": "和",
-        "meaning": "and"
+        "meaning": "and",
+        "grammatical_role": "conjunction"
       }
     ]
   },
@@ -1358,32 +1331,38 @@
         "pinyin": "pào mò zhóu"
       }
     ],
-    "translation": "Today the first movement will use a foam roller.",
-    "explanation": "The structure '会用到' means 'will use' in this context. '泡沫轴' refers to a foam roller used in fitness exercises.",
+    "translation": "Today the first movement will use a foam roller",
+    "explanation": "The sentence structure follows the pattern of 'subject + time phrase + measure word + noun + modal verb + verb + object'. The use of '会' indicates a future action.",
     "word_meanings": [
       {
         "word": "今天",
-        "meaning": "today"
+        "meaning": "today",
+        "grammar": "noun"
       },
       {
         "word": "第一个",
-        "meaning": "the first"
+        "meaning": "first",
+        "grammar": "adjective + measure word"
       },
       {
         "word": "动作",
-        "meaning": "movement"
+        "meaning": "movement",
+        "grammar": "noun"
       },
       {
         "word": "会",
-        "meaning": "will"
+        "meaning": "will",
+        "grammar": "modal verb indicating future tense"
       },
       {
         "word": "用到",
-        "meaning": "use"
+        "meaning": "use",
+        "grammar": "verb + directional complement"
       },
       {
         "word": "泡沫轴",
-        "meaning": "foam roller"
+        "meaning": "foam roller",
+        "grammar": "noun"
       }
     ]
   },
@@ -1397,12 +1376,8 @@
         "pinyin": "zài zhè lǐ"
       },
       {
-        "word": "泡沫",
-        "pinyin": "pào mò"
-      },
-      {
-        "word": "轴",
-        "pinyin": "zhóu"
+        "word": "泡沫轴",
+        "pinyin": "pào mò zhóu"
       },
       {
         "word": "有",
@@ -1413,33 +1388,28 @@
         "pinyin": "liǎng zhǒng"
       }
     ],
-    "translation": "There are two types of foam rollers here.",
-    "explanation": "The structure '有两种' is a common way to express 'there are two types of' in Chinese.",
+    "translation": "Here, the foam roller has two types",
+    "explanation": "The sentence structure is subject + verb + object. The phrase '在这里' means 'here' and is used to indicate the location of the foam roller. '有' is the verb 'has' in this context, and '两种' means 'two types'.",
     "word_meanings": [
       {
         "word": "在这里",
         "meaning": "here",
-        "grammatical_role": "location adverb"
+        "grammar": "location adverb"
       },
       {
-        "word": "泡沫",
-        "meaning": "foam",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "轴",
-        "meaning": "roller",
-        "grammatical_role": "noun"
+        "word": "泡沫轴",
+        "meaning": "foam roller",
+        "grammar": "noun"
       },
       {
         "word": "有",
-        "meaning": "have",
-        "grammatical_role": "verb"
+        "meaning": "has",
+        "grammar": "verb"
       },
       {
         "word": "两种",
         "meaning": "two types",
-        "grammatical_role": "numeral + classifier"
+        "grammar": "noun phrase"
       }
     ]
   },
@@ -1465,16 +1435,16 @@
         "pinyin": "dài yǒu"
       },
       {
-        "word": "凸起的",
-        "pinyin": "tū qǐ de"
+        "word": "凸起",
+        "pinyin": "tū qǐ"
       }
     ],
-    "translation": "One type is this kind with protrusions",
-    "explanation": "The structure '带有' means 'with' in this context, indicating the presence of something (protrusions) in relation to the noun '这种' (this kind).",
+    "translation": "One kind is this one with protrusions",
+    "explanation": "The sentence introduces one type of foam roller that has protrusions on it.",
     "word_meanings": [
       {
         "word": "一种",
-        "meaning": "one type",
+        "meaning": "one kind",
         "grammatical_role": "noun"
       },
       {
@@ -1484,18 +1454,18 @@
       },
       {
         "word": "这种",
-        "meaning": "this kind",
+        "meaning": "this one",
         "grammatical_role": "noun"
       },
       {
         "word": "带有",
         "meaning": "with",
-        "grammatical_role": "verb"
+        "grammatical_role": "verb complement"
       },
       {
-        "word": "凸起的",
+        "word": "凸起",
         "meaning": "protrusions",
-        "grammatical_role": "adjective"
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -1525,8 +1495,8 @@
         "pinyin": "de"
       }
     ],
-    "translation": "Another type is flat.",
-    "explanation": "The structure '一种是' is a common way to say 'a type is' in Chinese. The possessive particle '的' is used to indicate that '平面' (flat) belongs to the type mentioned.",
+    "translation": "Another type is flat",
+    "explanation": "The sentence introduces another type of foam roller that is flat.",
     "word_meanings": [
       {
         "word": "另外",
@@ -1547,7 +1517,7 @@
       {
         "word": "的",
         "meaning": "",
-        "explanation": "Possessive particle indicating 'flat' belongs to the type"
+        "explanation": "Possessive particle indicating the following noun '平面'"
       }
     ]
   },
@@ -1557,12 +1527,8 @@
     "text": "平面的相比来说呢",
     "segmented": [
       {
-        "word": "平面",
-        "pinyin": "píng miàn"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
+        "word": "平面的",
+        "pinyin": "píng miàn de"
       },
       {
         "word": "相比",
@@ -1573,28 +1539,23 @@
         "pinyin": "lái shuō"
       }
     ],
-    "translation": "Compared in terms of flatness",
-    "explanation": "The structure '相比来说' is used to express a comparison in terms of a specific aspect or quality.",
+    "translation": "In comparison, flat ones",
+    "explanation": "The structure '相比来说' is used to indicate a comparison or contrast between two things.",
     "word_meanings": [
       {
-        "word": "平面",
+        "word": "平面的",
         "meaning": "flat",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "的",
-        "meaning": "of",
-        "grammatical_role": "particle"
+        "grammatical_role": "adjective"
       },
       {
         "word": "相比",
-        "meaning": "compared to",
-        "grammatical_role": "verb"
+        "meaning": "in comparison",
+        "grammatical_role": "adverb"
       },
       {
         "word": "来说",
-        "meaning": "in terms of",
-        "grammatical_role": "verb"
+        "meaning": "to say",
+        "grammatical_role": "verb complement"
       }
     ]
   },
@@ -1640,12 +1601,12 @@
         "pinyin": "yì diǎn"
       }
     ],
-    "translation": "The pressure on the body will be a bit gentler.",
-    "explanation": "In Chinese, possessive relationships are often expressed using the particle '的'. The structure '更加...一点' is used to indicate a slight increase or change in degree.",
+    "translation": "The pressure on the body will be a bit softer",
+    "explanation": "In this sentence, the structure '会更加...一点' is used to indicate that the pressure on the body will be softer, with '更加' adding emphasis and '一点' indicating a small degree.",
     "word_meanings": [
       {
         "word": "给",
-        "meaning": "to give"
+        "meaning": "to give; for"
       },
       {
         "word": "身体",
@@ -1665,15 +1626,15 @@
       },
       {
         "word": "更加",
-        "meaning": "more"
+        "meaning": "a bit more"
       },
       {
         "word": "的",
-        "meaning": "adverbial particle"
+        "meaning": "particle indicating emphasis"
       },
       {
         "word": "柔和",
-        "meaning": "gentle"
+        "meaning": "soft"
       },
       {
         "word": "一点",
@@ -1715,32 +1676,32 @@
         "pinyin": "zhóu"
       }
     ],
-    "translation": "And this kind of protruding foam roller",
-    "explanation": "The structure '有...的' is commonly used in Chinese to indicate possession or characteristics. In this sentence, it is used to describe the foam roller as 'protruding'.",
+    "translation": "And this kind has a raised foam roller",
+    "explanation": "The structure '这种有凸起的泡沫轴' means 'this kind has a raised foam roller'. The use of '的' after '凸起' indicates that '凸起' is describing the foam roller.",
     "word_meanings": [
       {
         "word": "而",
-        "meaning": "and",
+        "meaning": "and/but",
         "grammatical_role": "conjunction"
       },
       {
         "word": "这种",
         "meaning": "this kind of",
-        "grammatical_role": "demonstrative pronoun"
+        "grammatical_role": "determiner"
       },
       {
         "word": "有",
-        "meaning": "have",
+        "meaning": "have/has",
         "grammatical_role": "verb"
       },
       {
         "word": "凸起",
-        "meaning": "protruding",
+        "meaning": "raised/protruding",
         "grammatical_role": "adjective"
       },
       {
         "word": "的",
-        "meaning": "marker for adjectives",
+        "meaning": "marker of adjectives",
         "grammatical_role": "particle"
       },
       {
@@ -1794,11 +1755,11 @@
       }
     ],
     "translation": "The pressure on the body will be greater.",
-    "explanation": "In this sentence, the tricky part might be the use of '对于' to indicate 'regarding' or 'concerning'. Also, the placement of '更' before '大' to indicate 'greater' can be confusing for learners.",
+    "explanation": "In this sentence, the structure '对于...的...' is used to indicate 'regarding the pressure on the body'. The word '会' is used to indicate future tense, and '更' is used to compare the level of pressure.",
     "word_meanings": [
       {
         "word": "对于",
-        "meaning": "regarding, concerning"
+        "meaning": "regarding, on"
       },
       {
         "word": "身体",
@@ -1826,7 +1787,7 @@
       },
       {
         "word": "一些",
-        "meaning": "a bit, somewhat"
+        "meaning": "a bit, some"
       }
     ]
   },
@@ -1861,7 +1822,7 @@
       }
     ],
     "translation": "So this kind of stimulation will be deeper",
-    "explanation": "In Chinese, adjectives can be formed by adding 的 after a noun. This sentence structure is common in Mandarin Chinese.",
+    "explanation": "In this sentence, 所以 (so) is used as a conjunction to indicate a result or conclusion. 刺激的 (stimulation) is a noun modified by the adjective phrase 这种 (this kind of). The adverb 更 (more) is used to indicate a comparative degree.",
     "word_meanings": [
       {
         "word": "所以",
@@ -1871,12 +1832,12 @@
       {
         "word": "这种",
         "meaning": "this kind of",
-        "grammatical_role": "determiner"
+        "grammatical_role": "adjective"
       },
       {
         "word": "刺激的",
         "meaning": "stimulation",
-        "grammatical_role": "adjective"
+        "grammatical_role": "noun"
       },
       {
         "word": "会",
@@ -1925,8 +1886,8 @@
         "pinyin": "dāng zhōng"
       },
       {
-        "word": "也",
-        "pinyin": "yě"
+        "word": "1",
+        "pinyin": "1"
       },
       {
         "word": "会",
@@ -1941,8 +1902,8 @@
         "pinyin": "tòng"
       }
     ],
-    "translation": "But in the process of doing, it will also hurt more.",
-    "explanation": "The structure '会更' is used to indicate 'will also [verb] more'. The placement of '在' before '做' indicates the action is happening 'in the process of doing'.",
+    "translation": "But in the process of doing, it will also be more painful",
+    "explanation": "The structure '在...当中' means 'in the process of'. The use of '也' emphasizes that the pain is in addition to something else.",
     "word_meanings": [
       {
         "word": "但是",
@@ -1966,10 +1927,10 @@
       },
       {
         "word": "当中",
-        "meaning": "during"
+        "meaning": "among"
       },
       {
-        "word": "也",
+        "word": "1",
         "meaning": "also"
       },
       {
@@ -1982,7 +1943,7 @@
       },
       {
         "word": "痛",
-        "meaning": "hurt"
+        "meaning": "painful"
       }
     ]
   },
@@ -2016,8 +1977,8 @@
         "pinyin": "qíng kuàng"
       }
     ],
-    "translation": "Everyone can adjust according to their own situation",
-    "explanation": "The tricky part for learners might be understanding the possessive particle '的' and how it is used to indicate ownership or possession in Chinese.",
+    "translation": "Everyone can choose according to their own situation",
+    "explanation": "The sentence structure is Subject + Modal Verb + Verb + According to + Possessive Pronoun + Noun. The possessive particle '的' is used to indicate possession or association.",
     "word_meanings": [
       {
         "word": "大家",
@@ -2033,7 +1994,7 @@
       },
       {
         "word": "自己",
-        "meaning": "own"
+        "meaning": "their own"
       },
       {
         "word": "的",
@@ -2079,43 +2040,36 @@
         "pinyin": "pào mò zhóu"
       }
     ],
-    "translation": "Choose a foam roller that suits you better",
-    "explanation": "The structure '更适合' means 'more suitable', and '自己' emphasizes 'oneself' in the context of choosing a foam roller that suits the individual.",
+    "translation": "to choose a foam roller that is more suitable for oneself",
+    "explanation": "The sentence structure is Subject + Verb + Object. The word '更' is used to indicate 'more' in this context.",
     "word_meanings": [
       {
         "word": "来",
-        "meaning": "come",
-        "grammatical_role": "verb"
+        "meaning": "to"
       },
       {
         "word": "选择",
-        "meaning": "choose",
-        "grammatical_role": "verb"
+        "meaning": "choose"
       },
       {
         "word": "更",
-        "meaning": "more",
-        "grammatical_role": "adverb"
+        "meaning": "more"
       },
       {
         "word": "适合",
-        "meaning": "suitable",
-        "grammatical_role": "adjective"
+        "meaning": "suitable for"
       },
       {
         "word": "自己",
-        "meaning": "oneself",
-        "grammatical_role": "pronoun"
+        "meaning": "oneself"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "particle indicating possession"
       },
       {
         "word": "泡沫轴",
-        "meaning": "foam roller",
-        "grammatical_role": "noun"
+        "meaning": "foam roller"
       }
     ]
   },
@@ -2153,8 +2107,8 @@
         "pinyin": "dòng zuò"
       }
     ],
-    "translation": "The first movement we do today",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between words. In this sentence, it connects '我们' (we) and '第一个动作' (the first movement), showing that the first movement is what 'we' do.",
+    "translation": "Today we do the first movement",
+    "explanation": "In this sentence, the word '所' is used before the verb '做' to indicate that the action of doing is in progress. This structure is commonly used in Chinese to emphasize the ongoing nature of an action.",
     "word_meanings": [
       {
         "word": "今天",
@@ -2166,7 +2120,7 @@
       },
       {
         "word": "所",
-        "meaning": "used before a verb to indicate the action being done"
+        "meaning": "used before a verb to indicate the action is in progress"
       },
       {
         "word": "做",
@@ -2178,7 +2132,7 @@
       },
       {
         "word": "第一个",
-        "meaning": "first"
+        "meaning": "the first"
       },
       {
         "word": "动作",
@@ -2212,33 +2166,28 @@
         "pinyin": "jī huó"
       }
     ],
-    "translation": "Activate the back with a foam roller.",
-    "explanation": "The structure '就是' is used to emphasize the action of activating the back with a foam roller. The phrase '泡沫轴' specifically refers to a foam roller used in fitness or physical therapy.",
+    "translation": "It is the activation of the back of the foam roller",
+    "explanation": "The structure '就是' is used to emphasize the following statement, similar to 'it is' in English. The possessive particle '的' is used to indicate possession or association between '泡沫轴' and '背部'. '激活' is a verb meaning 'activate', and '背部' specifies that the activation is happening on the back.",
     "word_meanings": [
       {
         "word": "就是",
-        "meaning": "just",
-        "grammatical_role": "adverb"
+        "meaning": "it is"
       },
       {
         "word": "泡沫轴",
-        "meaning": "foam roller",
-        "grammatical_role": "noun"
+        "meaning": "foam roller"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "背部",
-        "meaning": "back",
-        "grammatical_role": "noun"
+        "meaning": "back"
       },
       {
         "word": "激活",
-        "meaning": "activate",
-        "grammatical_role": "verb"
+        "meaning": "activation"
       }
     ]
   },
@@ -2256,36 +2205,27 @@
         "pinyin": "bǎ"
       },
       {
-        "word": "泡沫",
-        "pinyin": "pào mò"
-      },
-      {
-        "word": "轴",
-        "pinyin": "zhóu"
+        "word": "泡沫轴",
+        "pinyin": "pào mò zhóu"
       }
     ],
-    "translation": "We use foam rollers",
-    "explanation": "The tricky part here is the use of the word '把' which indicates that the noun following it is the object of the verb. In this case, it shows that 'foam rollers' are being used by 'us'.",
+    "translation": "We put the foam roller",
+    "explanation": "In Chinese, the 把 (bǎ) construction is used to indicate the object that is being affected by the action of the verb. It is placed before the object, followed by the verb.",
     "word_meanings": [
       {
         "word": "我们",
         "meaning": "we",
-        "grammatical_role": "subject"
+        "grammar": "subject"
       },
       {
         "word": "把",
-        "meaning": "marker for the object of a verb",
-        "grammatical_role": "particle indicating the object of the action"
+        "meaning": "particle used to indicate the object of the action",
+        "grammar": "particle"
       },
       {
-        "word": "泡沫",
-        "meaning": "foam",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "轴",
-        "meaning": "roller",
-        "grammatical_role": "noun"
+        "word": "泡沫轴",
+        "meaning": "foam roller",
+        "grammar": "object"
       }
     ]
   },
@@ -2319,32 +2259,38 @@
         "pinyin": "wèi zhì"
       }
     ],
-    "translation": "Placed in the middle of the waist",
-    "explanation": "The tricky part in this sentence might be the use of 的 (possessive particle) which indicates the possessive relationship between 'waist' and 'middle'. Also, the word order in Chinese is different from English, so 'middle of the waist' in English is 'waist's middle' in Chinese.",
+    "translation": "Place in the middle of the waist and back",
+    "explanation": "The sentence describes the action of placing something in the middle of the waist and back. The structure '在...的中间位置' is a common way to indicate the specific location where something is being placed.",
     "word_meanings": [
       {
         "word": "放置",
-        "meaning": "place"
+        "meaning": "place",
+        "grammatical_role": "verb"
       },
       {
         "word": "在",
-        "meaning": "at/in"
+        "meaning": "in/at",
+        "grammatical_role": "preposition"
       },
       {
         "word": "腰背",
-        "meaning": "waist"
+        "meaning": "waist and back",
+        "grammatical_role": "noun"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "possessive particle",
+        "grammatical_role": "particle"
       },
       {
         "word": "中间",
-        "meaning": "middle"
+        "meaning": "middle",
+        "grammatical_role": "noun"
       },
       {
         "word": "位置",
-        "meaning": "position"
+        "meaning": "position",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -2379,7 +2325,7 @@
       }
     ],
     "translation": "Then in the process of moving",
-    "explanation": "The structure '在...的过程当中' is a common way to express 'in the process of...' in Chinese.",
+    "explanation": "The structure '在...的过程当中' means 'in the process of...' or 'while...'. It is a common way to describe an action happening during a certain process.",
     "word_meanings": [
       {
         "word": "然后",
@@ -2391,7 +2337,8 @@
       },
       {
         "word": "移动",
-        "meaning": "move"
+        "meaning": "move",
+        "grammatical_role": "verb"
       },
       {
         "word": "的",
@@ -2399,11 +2346,11 @@
       },
       {
         "word": "过程",
-        "meaning": "process"
+        "meaning": "process, course"
       },
       {
         "word": "当中",
-        "meaning": "in the middle of"
+        "meaning": "in the middle of, during"
       }
     ]
   },
@@ -2433,12 +2380,12 @@
         "pinyin": "xiōng qián"
       }
     ],
-    "translation": "Both hands can be wrapped around the chest.",
-    "explanation": "The tricky part here might be the word order in Chinese, as it is different from English. In Chinese, the order is Subject-Verb-Object, while in English it is Subject-Object-Verb. Another point to note is the use of the word '可以' which means 'can' in this context.",
+    "translation": "Hands can be wrapped around the chest",
+    "explanation": "The sentence describes the action of wrapping hands around the chest, indicating a specific movement or position in a fitness context.",
     "word_meanings": [
       {
         "word": "双手",
-        "meaning": "both hands"
+        "meaning": "hands"
       },
       {
         "word": "可以",
@@ -2464,8 +2411,12 @@
     "text": "在这里把屁股向上抬高",
     "segmented": [
       {
-        "word": "在这里",
-        "pinyin": "zài zhè lǐ"
+        "word": "在",
+        "pinyin": "zài"
+      },
+      {
+        "word": "这里",
+        "pinyin": "zhè lǐ"
       },
       {
         "word": "把",
@@ -2484,18 +2435,23 @@
         "pinyin": "tái gāo"
       }
     ],
-    "translation": "Raise your butt up here",
-    "explanation": "The structure '把 + object + verb' is a common way in Chinese to indicate the object of an action being affected or moved in some way. In this sentence, it is used to emphasize raising the butt upwards.",
+    "translation": "Raise your butt up high here",
+    "explanation": "The sentence structure is Subject + Location + Verb Phrase. The verb phrase consists of the verb '抬高' (lift up) and the directional adverb '向上' (upward), indicating the action of raising the butt up high.",
     "word_meanings": [
       {
-        "word": "在这里",
+        "word": "在",
+        "meaning": "at/in/on",
+        "grammatical_role": "preposition"
+      },
+      {
+        "word": "这里",
         "meaning": "here",
-        "grammatical_role": "location adverb"
+        "grammatical_role": "noun"
       },
       {
         "word": "把",
-        "meaning": "indicating the object of the action",
-        "grammatical_role": "particle"
+        "meaning": "indicating a dispositional relationship",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "屁股",
@@ -2504,12 +2460,12 @@
       },
       {
         "word": "向上",
-        "meaning": "upwards",
+        "meaning": "upward",
         "grammatical_role": "directional adverb"
       },
       {
         "word": "抬高",
-        "meaning": "raise",
+        "meaning": "lift up",
         "grammatical_role": "verb"
       }
     ]
@@ -2537,7 +2493,7 @@
       }
     ],
     "translation": "When moving",
-    "explanation": "In Chinese, the possessive particle 的 is used to indicate possession or association between two nouns. In this sentence, it connects the action 'move' with the time 'when', forming the phrase 'when moving'.",
+    "explanation": "The structure 在...的时候 is used to indicate 'when doing something' in Chinese.",
     "word_meanings": [
       {
         "word": "在",
@@ -2592,37 +2548,31 @@
       }
     ],
     "translation": "Mainly rely on our legs",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor and before the possessed noun. This sentence emphasizes the importance of the legs in the context of fitness.",
+    "explanation": "The sentence structure is Subject + 主要 + Verb + Object, which is a common structure in Chinese. The possessive particle '的' is used to indicate possession in this context.",
     "word_meanings": [
       {
         "word": "主要",
-        "meaning": "mainly",
-        "grammatical_role": "adverb"
+        "meaning": "mainly; primarily"
       },
       {
         "word": "是",
-        "meaning": "is",
-        "grammatical_role": "verb"
+        "meaning": "is"
       },
       {
         "word": "靠",
-        "meaning": "rely on",
-        "grammatical_role": "verb"
+        "meaning": "rely on; depend on"
       },
       {
         "word": "我们",
-        "meaning": "our",
-        "grammatical_role": "pronoun"
+        "meaning": "our"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "腿部",
-        "meaning": "legs",
-        "grammatical_role": "noun"
+        "meaning": "legs"
       }
     ]
   },
@@ -2664,48 +2614,40 @@
         "pinyin": "hòu"
       }
     ],
-    "translation": "To drive the movement of the body before and after",
-    "explanation": "The structure '来 + verb' in Chinese is used to indicate the purpose or result of an action. In this sentence, it means 'to drive'.",
+    "translation": "To drive the body's movement front and back",
+    "explanation": "The structure '来 + verb' indicates the purpose or direction of an action, in this case, 'to drive'. The possessive particle '的' is used to show possession, like 'body's movement'.",
     "word_meanings": [
       {
         "word": "来",
-        "meaning": "to",
-        "grammatical_role": "preposition"
+        "meaning": "to"
       },
       {
         "word": "驱动",
-        "meaning": "drive",
-        "grammatical_role": "verb"
+        "meaning": "drive"
       },
       {
         "word": "身体",
-        "meaning": "body",
-        "grammatical_role": "noun"
+        "meaning": "body"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "possessive particle"
+        "meaning": "'s"
       },
       {
         "word": "移动",
-        "meaning": "movement",
-        "grammatical_role": "noun"
+        "meaning": "movement"
       },
       {
         "word": "前",
-        "meaning": "before",
-        "grammatical_role": "adjective"
+        "meaning": "front"
       },
       {
         "word": "和",
-        "meaning": "and",
-        "grammatical_role": "conjunction"
+        "meaning": "and"
       },
       {
         "word": "后",
-        "meaning": "after",
-        "grammatical_role": "adjective"
+        "meaning": "back"
       }
     ]
   },
@@ -2723,8 +2665,12 @@
         "pinyin": "kě yǐ"
       },
       {
-        "word": "更好的",
-        "pinyin": "gèng hǎo de"
+        "word": "更好",
+        "pinyin": "gèng hǎo"
+      },
+      {
+        "word": "的",
+        "pinyin": "de"
       },
       {
         "word": "帮助",
@@ -2747,8 +2693,8 @@
         "pinyin": "shàng bèi"
       }
     ],
-    "translation": "This way can help us better stretch the entire upper back",
-    "explanation": "In Chinese, adjectives usually come before the noun they modify. Also, the word order in Chinese is subject-verb-object, similar to English.",
+    "translation": "This can help us stretch the entire upper back better",
+    "explanation": "The structure '这样可以' means 'this way can' and is used to express the ability or possibility of something happening. The possessive particle '的' is used to indicate possession or association between '帮助' (help) and '我们' (us).",
     "word_meanings": [
       {
         "word": "这样",
@@ -2756,11 +2702,15 @@
       },
       {
         "word": "可以",
-        "meaning": "can"
+        "meaning": "can, able to"
       },
       {
-        "word": "更好的",
+        "word": "更好",
         "meaning": "better"
+      },
+      {
+        "word": "的",
+        "meaning": "(possessive particle)"
       },
       {
         "word": "帮助",
@@ -2776,7 +2726,7 @@
       },
       {
         "word": "整个",
-        "meaning": "entire"
+        "meaning": "whole, entire"
       },
       {
         "word": "上背",
@@ -2792,22 +2742,14 @@
       {
         "word": "同时",
         "pinyin": "tóng shí"
-      },
-      {
-        "word": "呢",
-        "pinyin": "ne"
       }
     ],
     "translation": "At the same time",
-    "explanation": "The particle '呢' is often used to indicate a continuation of a topic or to add emphasis to the previous statement. In this context, it emphasizes the timing of the action.",
+    "explanation": "The word '同时' means 'at the same time' and is used to indicate that two actions are happening concurrently.",
     "word_meanings": [
       {
         "word": "同时",
         "meaning": "at the same time"
-      },
-      {
-        "word": "呢",
-        "meaning": "particle indicating continuation or emphasis"
       }
     ]
   },
@@ -2854,7 +2796,7 @@
       }
     ],
     "translation": "If you feel your lower back is not very good",
-    "explanation": "The structure '如果...的话' is a common way to express 'if' in Chinese. The word '下背' specifically refers to the lower back region of the body.",
+    "explanation": "The structure '如果...的话' is used to express a conditional statement, similar to 'if...'. In this sentence, it is used to introduce a condition related to the state of the lower back.",
     "word_meanings": [
       {
         "word": "如果",
@@ -2890,7 +2832,7 @@
       },
       {
         "word": "的话",
-        "meaning": "particle indicating a condition or assumption"
+        "meaning": "if"
       }
     ]
   },
@@ -2916,8 +2858,8 @@
         "pinyin": "fàng"
       }
     ],
-    "translation": "Can also be placed downwards",
-    "explanation": "In this context, the sentence is a simple instruction indicating that something can also be placed downwards. The tricky part for learners might be understanding the direction indicated by '向下' which means 'downwards'.",
+    "translation": "You can also put it down",
+    "explanation": "The sentence structure is Subject + 也 + Verb + Directional complement. The verb 放 (put) is followed by the directional complement 向下 (downwards), indicating the direction of the action.",
     "word_meanings": [
       {
         "word": "也",
@@ -2925,7 +2867,7 @@
       },
       {
         "word": "可以",
-        "meaning": "can"
+        "meaning": "can, able to"
       },
       {
         "word": "向下",
@@ -2933,7 +2875,7 @@
       },
       {
         "word": "放",
-        "meaning": "place"
+        "meaning": "put"
       }
     ]
   },
@@ -2943,35 +2885,24 @@
     "text": "只不过呢",
     "segmented": [
       {
-        "word": "只",
-        "pinyin": "zhǐ"
-      },
-      {
-        "word": "不过",
-        "pinyin": "bù guò"
+        "word": "只不过",
+        "pinyin": "zhǐ bù guò"
       },
       {
         "word": "呢",
         "pinyin": "ne"
       }
     ],
-    "translation": "Just",
-    "explanation": "In this context, the phrase '只不过' means 'just', indicating a simple or minimal action or situation. '呢' is a sentence-final particle used to soften the tone or express a gentle reminder.",
+    "translation": "Just however",
+    "explanation": "The phrase '只不过' is used to introduce a contrasting or clarifying statement, similar to 'but' or 'however' in English.",
     "word_meanings": [
       {
-        "word": "只",
-        "meaning": "just",
-        "grammatical_role": "adverb"
-      },
-      {
-        "word": "不过",
-        "meaning": "but",
-        "grammatical_role": "conjunction"
+        "word": "只不过",
+        "meaning": "just; however"
       },
       {
         "word": "呢",
-        "meaning": "",
-        "grammatical_role": "particle"
+        "meaning": "(particle indicating a pause or emphasizing the preceding word)"
       }
     ]
   },
@@ -2981,12 +2912,8 @@
     "text": "泡沫轴对于下背的压力",
     "segmented": [
       {
-        "word": "泡沫",
-        "pinyin": "pào mò"
-      },
-      {
-        "word": "轴",
-        "pinyin": "zhóu"
+        "word": "泡沫轴",
+        "pinyin": "pào mò zhóu"
       },
       {
         "word": "对于",
@@ -3005,16 +2932,12 @@
         "pinyin": "yā lì"
       }
     ],
-    "translation": "Foam roller for lower back pressure",
-    "explanation": "The sentence describes the use of a foam roller for applying pressure to the lower back. The tricky part might be understanding the possessive particle '的' which indicates possession or relationship between '下背' (lower back) and '压力' (pressure).",
+    "translation": "Foam roller for the pressure on the lower back",
+    "explanation": "The sentence describes the function of a foam roller in relieving pressure on the lower back.",
     "word_meanings": [
       {
-        "word": "泡沫",
-        "meaning": "foam"
-      },
-      {
-        "word": "轴",
-        "meaning": "roller"
+        "word": "泡沫轴",
+        "meaning": "foam roller"
       },
       {
         "word": "对于",
@@ -3040,12 +2963,8 @@
     "text": "尤其是这种有凸起的泡沫轴",
     "segmented": [
       {
-        "word": "尤其",
-        "pinyin": "yóu qí"
-      },
-      {
-        "word": "是",
-        "pinyin": "shì"
+        "word": "尤其是",
+        "pinyin": "yóu qí shì"
       },
       {
         "word": "这种",
@@ -3064,31 +2983,22 @@
         "pinyin": "de"
       },
       {
-        "word": "泡沫",
-        "pinyin": "pào mò"
-      },
-      {
-        "word": "轴",
-        "pinyin": "zhóu"
+        "word": "泡沫轴",
+        "pinyin": "pào mò zhóu"
       }
     ],
-    "translation": "Especially these protruding foam rollers",
-    "explanation": "The structure '有...的' is used to indicate possession or a characteristic of the noun that follows. In this context, it describes the foam rollers as having a protruding characteristic.",
+    "translation": "Especially this kind with a raised foam roller",
+    "explanation": "The structure '尤其是这种' means 'especially this kind'. The possessive particle '的' is used to indicate possession in Chinese.",
     "word_meanings": [
       {
-        "word": "尤其",
+        "word": "尤其是",
         "meaning": "especially",
         "grammatical_role": "adverb"
       },
       {
-        "word": "是",
-        "meaning": "is",
-        "grammatical_role": "verb"
-      },
-      {
         "word": "这种",
-        "meaning": "these",
-        "grammatical_role": "determiner"
+        "meaning": "this kind",
+        "grammatical_role": "noun"
       },
       {
         "word": "有",
@@ -3097,7 +3007,7 @@
       },
       {
         "word": "凸起",
-        "meaning": "protruding",
+        "meaning": "raised",
         "grammatical_role": "adjective"
       },
       {
@@ -3106,13 +3016,8 @@
         "grammatical_role": "possessive particle"
       },
       {
-        "word": "泡沫",
-        "meaning": "foam",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "轴",
-        "meaning": "rollers",
+        "word": "泡沫轴",
+        "meaning": "foam roller",
         "grammatical_role": "noun"
       }
     ]
@@ -3139,8 +3044,8 @@
         "pinyin": "dà"
       }
     ],
-    "translation": "The pressure will be greater",
-    "explanation": "In Chinese, the verb 'to be' is often omitted, so '会更大' is understood as 'will be greater'.",
+    "translation": "Pressure will be greater",
+    "explanation": "The sentence structure in Chinese is Subject + Verb + Adverb + Adjective, which is different from English. In this case, '压力' (pressure) is the subject, '会' (will) is the verb indicating future tense, '更' (more) is an adverb indicating degree, and '大' (greater) is the adjective describing the pressure.",
     "word_meanings": [
       {
         "word": "压力",
@@ -3156,7 +3061,7 @@
       },
       {
         "word": "大",
-        "meaning": "big/greater"
+        "meaning": "greater"
       }
     ]
   },
@@ -3198,8 +3103,8 @@
         "pinyin": "qíng kuàng"
       }
     ],
-    "translation": "So everyone should base it on their actual situation",
-    "explanation": "The structure '根据自己的实际情况' means 'based on their actual situation'. The possessive particle '的' indicates possession or association between '自己' (their own) and '实际情况' (actual situation).",
+    "translation": "So everyone needs to choose according to their actual situation",
+    "explanation": "The structure '根据自己的实际情况' means 'according to their actual situation'. The possessive particle '的' is used to show possession in Chinese.",
     "word_meanings": [
       {
         "word": "所以",
@@ -3213,12 +3118,12 @@
       },
       {
         "word": "要",
-        "meaning": "should",
+        "meaning": "needs to",
         "grammatical_role": "verb"
       },
       {
         "word": "根据",
-        "meaning": "base on",
+        "meaning": "according to",
         "grammatical_role": "preposition"
       },
       {
@@ -3228,8 +3133,8 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "",
+        "grammatical_role": "possessive particle"
       },
       {
         "word": "实际",
@@ -3273,38 +3178,32 @@
         "pinyin": "yā lì"
       }
     ],
-    "translation": "Choose the pressure that suits you",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between words. In this sentence, it connects '自己' (oneself) with '压力' (pressure) to show that the pressure is suited for oneself.",
+    "translation": "To choose the pressure that suits oneself",
+    "explanation": "The sentence structure is Subject-Verb-Object, with the possessive particle '的' indicating 'oneself'. The verb '选择' (choose/select) is followed by the object '适合自己的压力' (the pressure that suits oneself).",
     "word_meanings": [
       {
         "word": "来",
-        "meaning": "come",
-        "grammatical_role": "verb"
+        "meaning": "to"
       },
       {
         "word": "选择",
-        "meaning": "choose",
-        "grammatical_role": "verb"
+        "meaning": "choose/select"
       },
       {
         "word": "适合",
-        "meaning": "suitable for",
-        "grammatical_role": "adjective"
+        "meaning": "suitable for"
       },
       {
         "word": "自己",
-        "meaning": "oneself",
-        "grammatical_role": "pronoun"
+        "meaning": "oneself"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "压力",
-        "meaning": "pressure",
-        "grammatical_role": "noun"
+        "meaning": "pressure"
       }
     ]
   },
@@ -3326,23 +3225,20 @@
         "pinyin": "liàng lì ér xíng"
       }
     ],
-    "translation": "Must act within one's means",
-    "explanation": "The phrase '量力而行' means 'within one's means' or 'according to one's capabilities'. It emphasizes the importance of not overexerting oneself and acting in a way that is sustainable and appropriate.",
+    "translation": "One must act within one's capabilities",
+    "explanation": "The phrase '量力而行' means 'to act within one's capabilities' or 'to do what one is capable of'. It emphasizes the importance of not overexerting oneself and staying within one's limits.",
     "word_meanings": [
       {
         "word": "一定",
-        "meaning": "must",
-        "grammatical_role": "adverb"
+        "meaning": "must; certainly"
       },
       {
         "word": "要",
-        "meaning": "act",
-        "grammatical_role": "verb"
+        "meaning": "to; must"
       },
       {
         "word": "量力而行",
-        "meaning": "within one's means",
-        "grammatical_role": "phrase"
+        "meaning": "act within one's capabilities"
       }
     ]
   },
@@ -3373,32 +3269,27 @@
       }
     ],
     "translation": "During the stretching process",
-    "explanation": "The tricky part here is the use of '在' and '当中' to indicate 'during' and 'in' respectively. '的' is a possessive particle indicating that '拉伸' (stretching) belongs to '过程' (process).",
+    "explanation": "The sentence structure is Subject + 在 + Action + 的 + Noun, where 在 indicates the action happens during the noun.",
     "word_meanings": [
       {
         "word": "在",
-        "meaning": "during",
-        "grammatical_role": "preposition"
+        "meaning": "during, in"
       },
       {
         "word": "拉伸",
-        "meaning": "stretching",
-        "grammatical_role": "noun"
+        "meaning": "stretching"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "过程",
-        "meaning": "process",
-        "grammatical_role": "noun"
+        "meaning": "process"
       },
       {
         "word": "当中",
-        "meaning": "in",
-        "grammatical_role": "preposition"
+        "meaning": "during, in the middle of"
       }
     ]
   },
@@ -3432,38 +3323,32 @@
         "pinyin": "yí dòng"
       }
     ],
-    "translation": "Must maintain slow movement",
-    "explanation": "The structure '一定要' emphasizes the necessity of an action, similar to 'must' in English. '的' is a possessive particle used to link the adjective 'slow' to the noun 'movement'.",
+    "translation": "One must maintain slow movements.",
+    "explanation": "The structure 一定要 emphasizes the necessity of maintaining slow movements in this context.",
     "word_meanings": [
       {
         "word": "一定",
-        "meaning": "must",
-        "grammatical_role": "adverb"
+        "meaning": "must; certainly"
       },
       {
         "word": "要",
-        "meaning": "to",
-        "grammatical_role": "verb particle"
+        "meaning": "to; must"
       },
       {
         "word": "保持",
-        "meaning": "maintain",
-        "grammatical_role": "verb"
+        "meaning": "maintain"
       },
       {
         "word": "慢速",
-        "meaning": "slow",
-        "grammatical_role": "adjective"
+        "meaning": "slow"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "possessive particle"
+        "meaning": "marker for adjectives"
       },
       {
         "word": "移动",
-        "meaning": "movement",
-        "grammatical_role": "noun"
+        "meaning": "movements"
       }
     ]
   },
@@ -3490,7 +3375,7 @@
       }
     ],
     "translation": "During training",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between two nouns. In this sentence, it connects 'training' and 'time' to show that the time is related to the training.",
+    "explanation": "The structure 在...的时候 is used to indicate 'during' or 'while' doing something. It is a common pattern in Chinese to express actions happening simultaneously.",
     "word_meanings": [
       {
         "word": "在",
@@ -3564,63 +3449,52 @@
         "pinyin": "yī xià"
       }
     ],
-    "translation": "I prefer to pause slightly at every point.",
-    "explanation": "In Chinese, the adverb '都' is often used before a verb to indicate that the action applies to all items in a group. The measure word '一下' is used after a verb to indicate a brief or slight action.",
+    "translation": "I prefer to slightly hold at each point",
+    "explanation": "The structure '每一个点都' means 'each point'. The use of '稍微' before '保持' emphasizes the action of 'holding slightly' at each point.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
-        "grammatical_role": "subject"
+        "meaning": "I"
       },
       {
         "word": "更",
-        "meaning": "prefer",
-        "grammatical_role": "verb"
+        "meaning": "prefer"
       },
       {
         "word": "喜欢",
-        "meaning": "like/prefer",
-        "grammatical_role": "verb"
+        "meaning": "like/prefer"
       },
       {
         "word": "到",
-        "meaning": "to",
-        "grammatical_role": "preposition"
+        "meaning": "to"
       },
       {
         "word": "每",
-        "meaning": "every",
-        "grammatical_role": "adjective"
+        "meaning": "each"
       },
       {
         "word": "一个",
-        "meaning": "one",
-        "grammatical_role": "numeral"
+        "meaning": "one"
       },
       {
         "word": "点",
-        "meaning": "point",
-        "grammatical_role": "noun"
+        "meaning": "point"
       },
       {
         "word": "都",
-        "meaning": "all/every",
-        "grammatical_role": "adverb"
+        "meaning": "all"
       },
       {
         "word": "稍微",
-        "meaning": "slightly",
-        "grammatical_role": "adverb"
+        "meaning": "slightly"
       },
       {
         "word": "保持",
-        "meaning": "maintain/keep",
-        "grammatical_role": "verb"
+        "meaning": "hold/maintain"
       },
       {
         "word": "一下",
-        "meaning": "a bit",
-        "grammatical_role": "measure word"
+        "meaning": "a bit"
       }
     ]
   },
@@ -3644,14 +3518,10 @@
       {
         "word": "来",
         "pinyin": "lái"
-      },
-      {
-        "word": "进行",
-        "pinyin": "jìn xíng"
       }
     ],
-    "translation": "Proceed slowly downwards.",
-    "explanation": "The structure '慢慢来进行' is a common way in Chinese to express 'proceed slowly' or 'do something slowly'.",
+    "translation": "Slowly proceed downwards",
+    "explanation": "The sentence is a command instructing someone to slowly move downwards. The structure '再...来' is used to indicate doing something again in a gradual manner.",
     "word_meanings": [
       {
         "word": "再",
@@ -3668,10 +3538,6 @@
       {
         "word": "来",
         "meaning": "to proceed"
-      },
-      {
-        "word": "进行",
-        "meaning": "to carry out"
       }
     ]
   },
@@ -3721,8 +3587,8 @@
         "pinyin": "chōng fèn"
       }
     ],
-    "translation": "Ensure each position is adequately squeezed.",
-    "explanation": "The structure '每一个' together means 'each' or 'every one'. The passive marker '被' is used to indicate the action is done to the positions. The possessive particle '的' links '挤压' (squeeze) to '位置' (position).",
+    "translation": "Ensure each position is squeezed more thoroughly",
+    "explanation": "This sentence emphasizes the need to thoroughly squeeze each position, using the passive voice marker '被' to indicate the action is done to the positions.",
     "word_meanings": [
       {
         "word": "保证",
@@ -3732,12 +3598,12 @@
       {
         "word": "每",
         "meaning": "each",
-        "grammatical_role": "adjective"
+        "grammatical_role": "adverb"
       },
       {
         "word": "一个",
         "meaning": "one",
-        "grammatical_role": "adjective"
+        "grammatical_role": "adverb"
       },
       {
         "word": "位置",
@@ -3746,7 +3612,7 @@
       },
       {
         "word": "都",
-        "meaning": "all",
+        "meaning": "each",
         "grammatical_role": "adverb"
       },
       {
@@ -3766,12 +3632,12 @@
       },
       {
         "word": "比较",
-        "meaning": "relatively",
+        "meaning": "more",
         "grammatical_role": "adverb"
       },
       {
         "word": "充分",
-        "meaning": "adequately",
+        "meaning": "thoroughly",
         "grammatical_role": "adverb"
       }
     ]
@@ -3791,17 +3657,17 @@
       }
     ],
     "translation": "This action",
-    "explanation": "The structure '这个' is a demonstrative pronoun meaning 'this' and is used before a noun to indicate a specific object or action.",
+    "explanation": "The sentence simply refers to a specific action without providing further details.",
     "word_meanings": [
       {
         "word": "这个",
         "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "grammar": "determiner"
       },
       {
         "word": "动作",
         "meaning": "action",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       }
     ]
   },
@@ -3835,8 +3701,8 @@
         "pinyin": "yí dòng"
       }
     ],
-    "translation": "We maintain a front and back movement for 45 seconds.",
-    "explanation": "The tricky part for learners might be the use of '的' to indicate possession in Chinese. In this context, it connects the duration '45 seconds' to the action 'movement'. Also, the phrase '前后' means 'front and back' in this context.",
+    "translation": "We maintain 45 seconds of forward and backward movement.",
+    "explanation": "The sentence structure in Chinese is Subject + Verb + Object, similar to English. The use of 的 indicates possession or association between '45 seconds' and 'forward and backward movement.'",
     "word_meanings": [
       {
         "word": "我们",
@@ -3852,11 +3718,11 @@
       },
       {
         "word": "的",
-        "meaning": "particle indicating possession"
+        "meaning": "possessive particle"
       },
       {
         "word": "前后",
-        "meaning": "front and back"
+        "meaning": "forward and backward"
       },
       {
         "word": "移动",
@@ -3890,16 +3756,12 @@
         "pinyin": "jī huó"
       },
       {
-        "word": "活动",
-        "pinyin": "huó dòng"
-      },
-      {
-        "word": "作",
-        "pinyin": "zuò"
+        "word": "动作",
+        "pinyin": "dòng zuò"
       }
     ],
-    "translation": "The second active activity to be carried out next",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between words. The structure '第 + number + 个' is commonly used to indicate the order of something, in this case, '第二个' means 'the second'.",
+    "translation": "The next second activation movement to be performed",
+    "explanation": "The sentence introduces the next movement to be performed, emphasizing that it is the second activation movement.",
     "word_meanings": [
       {
         "word": "接下来",
@@ -3908,12 +3770,12 @@
       },
       {
         "word": "进行",
-        "meaning": "carry out",
+        "meaning": "perform",
         "grammatical_role": "verb"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
+        "meaning": "marker of modifier",
         "grammatical_role": "particle"
       },
       {
@@ -3923,17 +3785,12 @@
       },
       {
         "word": "激活",
-        "meaning": "active",
+        "meaning": "activation",
         "grammatical_role": "noun"
       },
       {
-        "word": "活动",
-        "meaning": "activity",
-        "grammatical_role": "noun"
-      },
-      {
-        "word": "作",
-        "meaning": "to be done",
+        "word": "动作",
+        "meaning": "movement",
         "grammatical_role": "noun"
       }
     ]
@@ -3964,8 +3821,8 @@
         "pinyin": "wài cè"
       }
     ],
-    "translation": "It is aimed at the outer side of the latissimus dorsi muscle",
-    "explanation": "The structure '针对在' means 'aimed at' or 'targeting'. The word '背阔肌' refers to the latissimus dorsi muscle, a large muscle in the back. '外侧' specifically refers to the outer side.",
+    "translation": "It is targeting the muscles on the outside of the latissimus dorsi",
+    "explanation": "The sentence structure is Subject + 就是 + Target Verb + Object. 针对 is a preposition meaning 'targeting'. 背阔肌外侧 refers to the muscles on the outside of the latissimus dorsi.",
     "word_meanings": [
       {
         "word": "就是",
@@ -3973,19 +3830,19 @@
       },
       {
         "word": "针对",
-        "meaning": "aimed at"
+        "meaning": "targeting"
       },
       {
         "word": "在",
-        "meaning": "at/in"
+        "meaning": "on"
       },
       {
         "word": "背阔肌",
-        "meaning": "latissimus dorsi muscle"
+        "meaning": "latissimus dorsi"
       },
       {
         "word": "外侧",
-        "meaning": "outer side"
+        "meaning": "outside"
       }
     ]
   },
@@ -4011,8 +3868,8 @@
         "pinyin": "jī ròu"
       }
     ],
-    "translation": "The muscles of this place",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor and before the possessed noun. In this sentence, 的 connects 'this place' (这个地方) with 'muscles' (肌肉), indicating that the muscles belong to or are related to this place.",
+    "translation": "This place's muscles",
+    "explanation": "The sentence is a simple description of the muscles in a specific place. The possessive particle '的' is used to indicate possession or association between '地方' (place) and '肌肉' (muscles).",
     "word_meanings": [
       {
         "word": "这个",
@@ -4026,7 +3883,7 @@
       },
       {
         "word": "的",
-        "meaning": "of",
+        "meaning": "'s",
         "grammatical_role": "possessive particle"
       },
       {
@@ -4058,8 +3915,8 @@
         "pinyin": "zhī dào"
       }
     ],
-    "translation": "Not activate not know",
-    "explanation": "The structure 不...不 (not...not) is used for emphasis in Chinese. In this sentence, it emphasizes that without activating something, one wouldn't know.",
+    "translation": "Not activating, you won't know",
+    "explanation": "The sentence structure in Chinese often places the negative particle '不' before the verb to indicate negation. In this sentence, it emphasizes the importance of activating muscles before knowing their condition or effect.",
     "word_meanings": [
       {
         "word": "不",
@@ -4067,7 +3924,8 @@
       },
       {
         "word": "激活",
-        "meaning": "activate"
+        "meaning": "activate",
+        "grammar": "verb"
       },
       {
         "word": "不",
@@ -4075,7 +3933,8 @@
       },
       {
         "word": "知道",
-        "meaning": "know"
+        "meaning": "know",
+        "grammar": "verb"
       }
     ]
   },
@@ -4113,43 +3972,43 @@
         "pinyin": "lā shēn"
       }
     ],
-    "translation": "Do some squeezing and stretching of the foam roller.",
-    "explanation": "The structure '一下' is a measure word used to indicate doing something briefly or casually. '的' is a possessive particle indicating the foam roller's action of squeezing and stretching.",
+    "translation": "Do some squeezing and stretching with a foam roller",
+    "explanation": "The sentence structure is Subject + Verb + Measure Word + Noun + Particle + Verb Complement + Conjunction + Verb. The use of '一下' adds a sense of informality and lightness to the action.",
     "word_meanings": [
       {
         "word": "做",
         "meaning": "do",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "一下",
         "meaning": "some",
-        "grammatical_role": "measure word"
+        "grammar": "measure word"
       },
       {
         "word": "泡沫轴",
         "meaning": "foam roller",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "particle"
+        "meaning": "with",
+        "grammar": "particle"
       },
       {
         "word": "挤压",
         "meaning": "squeezing",
-        "grammatical_role": "noun"
+        "grammar": "verb complement"
       },
       {
         "word": "和",
         "meaning": "and",
-        "grammatical_role": "conjunction"
+        "grammar": "conjunction"
       },
       {
         "word": "拉伸",
         "meaning": "stretching",
-        "grammatical_role": "noun"
+        "grammar": "verb"
       }
     ]
   },
@@ -4196,7 +4055,7 @@
       }
     ],
     "translation": "You will feel very painful (tight)",
-    "explanation": "In Chinese, adjectives can be used as verbs without a linking verb. The structure 'adj. + 得 + adj.' is commonly used to indicate how someone feels or perceives something.",
+    "explanation": "The structure '会 + verb' is used to indicate a future action. The particle '的' is used to turn the adjective '疼' (painful) into an adverb modifying the adjective '非常' (very). The parentheses are used to provide an alternative or additional meaning to the word '疼'.",
     "word_meanings": [
       {
         "word": "你",
@@ -4216,7 +4075,7 @@
       },
       {
         "word": "的",
-        "meaning": "used to form an adverbial phrase"
+        "meaning": "particle indicating an adjective"
       },
       {
         "word": "疼",
@@ -4224,7 +4083,7 @@
       },
       {
         "word": "（",
-        "meaning": "open parenthesis"
+        "meaning": "left parenthesis indicating additional information"
       },
       {
         "word": "紧",
@@ -4232,7 +4091,7 @@
       },
       {
         "word": "）",
-        "meaning": "close parenthesis"
+        "meaning": "right parenthesis indicating additional information"
       }
     ]
   },
@@ -4271,7 +4130,7 @@
       }
     ],
     "translation": "So when doing this movement",
-    "explanation": "The structure '在...的时候' is a common way to indicate 'when' something happens in Chinese.",
+    "explanation": "The structure '所以在...的时候' is used to indicate a specific time or circumstance when something is happening.",
     "word_meanings": [
       {
         "word": "所以",
@@ -4300,12 +4159,12 @@
       },
       {
         "word": "的",
-        "meaning": "'s",
-        "grammatical_role": "possessive particle"
+        "meaning": "possessive particle",
+        "grammatical_role": "particle"
       },
       {
         "word": "时候",
-        "meaning": "time",
+        "meaning": "time/moment",
         "grammatical_role": "noun"
       }
     ]
@@ -4333,7 +4192,7 @@
       }
     ],
     "translation": "Maintain a steady speed",
-    "explanation": "The tricky part for learners might be understanding the possessive particle '的' which is used to indicate possession or association between '匀速' (steady speed) and '速度' (speed) in this context.",
+    "explanation": "The sentence instructs to maintain a consistent speed while performing the exercise.",
     "word_meanings": [
       {
         "word": "保持",
@@ -4380,27 +4239,23 @@
       }
     ],
     "translation": "Every side 30 seconds",
-    "explanation": "The structure '每一边' means 'every side' or 'each side'. The measure word '秒钟' is used after a numeral to indicate seconds.",
+    "explanation": "The sentence is a simple instruction indicating the duration of 30 seconds for each side.",
     "word_meanings": [
       {
         "word": "每",
-        "meaning": "every",
-        "grammatical_role": "adverb"
+        "meaning": "every"
       },
       {
         "word": "一边",
-        "meaning": "side",
-        "grammatical_role": "noun"
+        "meaning": "side"
       },
       {
         "word": "30",
-        "meaning": "30",
-        "grammatical_role": "numeral"
+        "meaning": "30"
       },
       {
         "word": "秒钟",
-        "meaning": "seconds",
-        "grammatical_role": "noun"
+        "meaning": "seconds"
       }
     ]
   },
@@ -4438,8 +4293,8 @@
         "pinyin": "zī shì"
       }
     ],
-    "translation": "Maintain a side lying position for this movement",
-    "explanation": "The structure '侧躺' combines the adjective 'side' with the verb 'lying' to form 'side lying'. This is a common structure in Chinese to describe positions or actions.",
+    "translation": "This action maintains a side-lying posture",
+    "explanation": "The structure '这个动作' means 'this action', where '这个' is a demonstrative pronoun ('this') and '动作' means 'action'. The verb '保持' means 'maintain' and is followed by '一个' ('a/an') and '侧躺' ('side-lying') to describe the posture.",
     "word_meanings": [
       {
         "word": "这个",
@@ -4448,7 +4303,7 @@
       },
       {
         "word": "动作",
-        "meaning": "movement",
+        "meaning": "action",
         "grammatical_role": "noun"
       },
       {
@@ -4458,13 +4313,13 @@
       },
       {
         "word": "一个",
-        "meaning": "a",
+        "meaning": "a/an",
         "grammatical_role": "numeral"
       },
       {
         "word": "侧躺",
-        "meaning": "side lying",
-        "grammatical_role": "adjective + verb"
+        "meaning": "side-lying",
+        "grammatical_role": "adjective"
       },
       {
         "word": "的",
@@ -4473,7 +4328,7 @@
       },
       {
         "word": "姿势",
-        "meaning": "position",
+        "meaning": "posture",
         "grammatical_role": "noun"
       }
     ]
@@ -4512,8 +4367,8 @@
         "pinyin": "zhèng qián fāng"
       }
     ],
-    "translation": "The body faces directly forward towards you.",
-    "explanation": "The structure '是...的' is used to emphasize the subject '身体' in this sentence.",
+    "translation": "The body is facing straight ahead.",
+    "explanation": "The sentence describes the position of the body, emphasizing that it should be facing directly forward.",
     "word_meanings": [
       {
         "word": "身体",
@@ -4525,7 +4380,7 @@
       },
       {
         "word": "面向",
-        "meaning": "faces towards"
+        "meaning": "facing"
       },
       {
         "word": "看",
@@ -4541,7 +4396,7 @@
       },
       {
         "word": "正前方",
-        "meaning": "directly forward"
+        "meaning": "straight ahead"
       }
     ]
   },
@@ -4559,52 +4414,42 @@
         "pinyin": "pā zhe"
       },
       {
-        "word": "向后",
-        "pinyin": "xiàng hòu"
+        "word": "/",
+        "pinyin": "/"
       },
       {
-        "word": "仰",
-        "pinyin": "yǎng"
+        "word": "向后仰",
+        "pinyin": "xiàng hòu yǎng"
       },
       {
         "word": "的",
         "pinyin": "de"
-      },
-      {
-        "word": "过多",
-        "pinyin": "guò duō"
       }
     ],
-    "translation": "Don't arch your back too much",
-    "explanation": "The sentence structure in Chinese can be different from English, with adverbial phrases placed before the verb they modify. In this sentence, the adverbial phrases '趴着' and '向后' describe how the action of '仰' (lifted) should not be done excessively ('过多').",
+    "translation": "Do not lie on your stomach or arch your back too much",
+    "explanation": "The sentence is a warning or instruction about body posture during exercise, advising against lying on the stomach or arching the back excessively.",
     "word_meanings": [
       {
         "word": "不要",
-        "meaning": "Don't"
+        "meaning": "do not"
       },
       {
         "word": "趴着",
-        "meaning": "arched (back)",
-        "grammatical_role": "adverbial phrase"
+        "meaning": "lie on one's stomach",
+        "grammatical_role": "verb complement"
       },
       {
-        "word": "向后",
-        "meaning": "backwards",
-        "grammatical_role": "adverbial phrase"
+        "word": "/",
+        "meaning": "or"
       },
       {
-        "word": "仰",
-        "meaning": "lifted",
-        "grammatical_role": "verb"
+        "word": "向后仰",
+        "meaning": "arch one's back",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
-      },
-      {
-        "word": "过多",
-        "meaning": "too much",
-        "grammatical_role": "adjective"
+        "meaning": "particle indicating possession or modification"
       }
     ]
   },
@@ -4630,16 +4475,16 @@
         "pinyin": "zhóu"
       }
     ],
-    "translation": "Then put the foam roller",
-    "explanation": "In Chinese, the word order is different from English. The particle '把' is used to indicate the object of the verb in this sentence structure.",
+    "translation": "And then put the foam roller",
+    "explanation": "The sentence structure in Chinese is Subject + Time/Location + Verb + Object. In this case, the verb 'put' is followed by the object 'foam roller' indicated by the particle '把'.",
     "word_meanings": [
       {
         "word": "然后",
-        "meaning": "then"
+        "meaning": "and then"
       },
       {
         "word": "把",
-        "meaning": "particle indicating the object of the verb"
+        "meaning": "particle used to indicate the object of the verb"
       },
       {
         "word": "泡沫",
@@ -4681,28 +4526,28 @@
         "pinyin": "wèi zhì"
       }
     ],
-    "translation": "Positioned at the top of the latissimus dorsi muscle",
-    "explanation": "The structure '在...的...' is a common way to indicate the location or position of something in Chinese sentences.",
+    "translation": "Pad at the top of the latissimus dorsi",
+    "explanation": "The sentence describes placing a pad at the top of the latissimus dorsi muscle during a fitness move.",
     "word_meanings": [
       {
         "word": "垫",
-        "meaning": "positioned"
+        "meaning": "pad; cushion"
       },
       {
         "word": "在",
-        "meaning": "at"
+        "meaning": "at; in"
       },
       {
         "word": "背阔肌",
-        "meaning": "latissimus dorsi muscle"
+        "meaning": "latissimus dorsi"
       },
       {
         "word": "的",
-        "meaning": "of"
+        "meaning": "possessive particle"
       },
       {
         "word": "顶端",
-        "meaning": "top"
+        "meaning": "top; tip"
       },
       {
         "word": "位置",
@@ -4725,17 +4570,17 @@
       }
     ],
     "translation": "This move",
-    "explanation": "In Chinese, the order of words in a sentence is often reversed compared to English. In this sentence, the noun 'move' comes after the demonstrative pronoun 'this'.",
+    "explanation": "The sentence simply introduces the action of 'move' without specifying the exact nature of the movement.",
     "word_meanings": [
       {
         "word": "这个",
         "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "grammar": "demonstrative pronoun"
       },
       {
         "word": "移动",
         "meaning": "move",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       }
     ]
   },
@@ -4777,8 +4622,8 @@
         "pinyin": "tuī dòng"
       }
     ],
-    "translation": "Actually, it also relies on the legs to propel forward.",
-    "explanation": "The structure '靠 + noun' means 'rely on' in this context. The use of '来' after a verb indicates the purpose or direction of the action.",
+    "translation": "Actually, it is also propelled forward by the legs",
+    "explanation": "The structure '靠...来' means 'rely on...to', indicating the means by which something is done.",
     "word_meanings": [
       {
         "word": "其实",
@@ -4794,7 +4639,7 @@
       },
       {
         "word": "靠",
-        "meaning": "rely on"
+        "meaning": "rely on; depend on"
       },
       {
         "word": "腿",
@@ -4838,14 +4683,10 @@
       {
         "word": "回来",
         "pinyin": "huí lái"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
       }
     ],
-    "translation": "And pull back towards",
-    "explanation": "The tricky part here might be the use of '的' at the end of the sentence, which is a possessive particle indicating that the action of pulling back is related to something or someone.",
+    "translation": "and pull back",
+    "explanation": "The sentence describes the action of pulling back after moving forward, emphasizing the importance of maintaining a slow pace during the movement.",
     "word_meanings": [
       {
         "word": "和",
@@ -4866,10 +4707,6 @@
       {
         "word": "回来",
         "meaning": "back"
-      },
-      {
-        "word": "的",
-        "meaning": "(possessive particle)"
       }
     ]
   },
@@ -4904,11 +4741,11 @@
       }
     ],
     "translation": "So in the process of moving",
-    "explanation": "The structure '在...的过程中' is a common way to express 'in the process of...' in Chinese.",
+    "explanation": "The sentence structure is Subject + 在 + Verb + 的 + Noun + 当中, which means 'In the process of + Verb + Noun'. This is a common structure in Chinese to describe actions happening within a certain process.",
     "word_meanings": [
       {
         "word": "所以",
-        "meaning": "So",
+        "meaning": "so/in this way",
         "grammatical_role": "conjunction"
       },
       {
@@ -4918,7 +4755,7 @@
       },
       {
         "word": "移动",
-        "meaning": "move",
+        "meaning": "moving",
         "grammatical_role": "verb"
       },
       {
@@ -4933,7 +4770,7 @@
       },
       {
         "word": "当中",
-        "meaning": "during",
+        "meaning": "during/in the middle of",
         "grammatical_role": "preposition"
       }
     ]
@@ -4972,8 +4809,8 @@
         "pinyin": "yí dòng"
       }
     ],
-    "translation": "Also need to maintain a slow speed of movement",
-    "explanation": "In Chinese, adjectives are often placed before the noun they describe, hence '慢速' (slow speed) comes before '移动' (movement). The possessive particle '的' is used to indicate the relationship between '慢速' and '移动'.",
+    "translation": "Also need to maintain a slow movement",
+    "explanation": "The sentence structure is Subject + 也 + Verb + Object. The use of 的 after 慢速 is to turn the adjective 慢速 (slow) into an adjectival phrase modifying the noun 移动 (movement).",
     "word_meanings": [
       {
         "word": "也",
@@ -4993,11 +4830,11 @@
       },
       {
         "word": "慢速",
-        "meaning": "slow speed"
+        "meaning": "slow"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "marker for adjectives"
       },
       {
         "word": "移动",
@@ -5051,16 +4888,16 @@
         "pinyin": "xí guàn"
       }
     ],
-    "translation": "Also can maintain the same stretching habit as me",
-    "explanation": "The structure '和我一样' means 'the same as me'. The possessive particle '的' is used to show possession or association between '我' (me) and '拉伸习惯' (stretching habit).",
+    "translation": "At the same time, you can also maintain the stretching habit like mine",
+    "explanation": "This sentence showcases the structure '同时...也可以', meaning 'at the same time...also can'. It also uses the possessive particle '的' to indicate possession ('我的', 'my').",
     "word_meanings": [
       {
         "word": "同时",
-        "meaning": "also"
+        "meaning": "at the same time"
       },
       {
         "word": "也",
-        "meaning": "can"
+        "meaning": "also"
       },
       {
         "word": "可以",
@@ -5072,11 +4909,11 @@
       },
       {
         "word": "和",
-        "meaning": "the same"
+        "meaning": "like"
       },
       {
         "word": "我",
-        "meaning": "me"
+        "meaning": "my"
       },
       {
         "word": "一样",
@@ -5084,7 +4921,7 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
+        "meaning": "- (possessive particle)"
       },
       {
         "word": "拉伸",
@@ -5106,8 +4943,12 @@
         "pinyin": "zài"
       },
       {
-        "word": "每一个",
-        "pinyin": "měi yí gè"
+        "word": "每",
+        "pinyin": "měi"
+      },
+      {
+        "word": "一个",
+        "pinyin": "yí gè"
       },
       {
         "word": "点",
@@ -5130,43 +4971,40 @@
         "pinyin": "yī xià"
       }
     ],
-    "translation": "Pause slightly at every point.",
-    "explanation": "The structure '每一个' is used to emphasize 'each' point. The word '都' is used to indicate 'every' point, not just some of them. The measure word '一下' adds a sense of 'a bit' to the verb '停顿'.",
+    "translation": "Pause slightly at every point",
+    "explanation": "The sentence structure is Subject + Adverb + Verb + Object. The adverb '稍微' (slightly) is used to modify the verb '停顿' (pause), indicating the degree of the action.",
     "word_meanings": [
       {
         "word": "在",
-        "meaning": "at/in",
-        "grammatical_role": "preposition"
+        "meaning": "at, in"
       },
       {
-        "word": "每一个",
-        "meaning": "every",
-        "grammatical_role": "adjective + measure word"
+        "word": "每",
+        "meaning": "every"
+      },
+      {
+        "word": "一个",
+        "meaning": "one"
       },
       {
         "word": "点",
-        "meaning": "point",
-        "grammatical_role": "noun"
+        "meaning": "point"
       },
       {
         "word": "都",
-        "meaning": "all",
-        "grammatical_role": "adverb"
+        "meaning": "all, every"
       },
       {
         "word": "稍微",
-        "meaning": "slightly",
-        "grammatical_role": "adverb"
+        "meaning": "slightly"
       },
       {
         "word": "停顿",
-        "meaning": "pause",
-        "grammatical_role": "verb"
+        "meaning": "pause"
       },
       {
         "word": "一下",
-        "meaning": "a bit",
-        "grammatical_role": "measure word"
+        "meaning": "a bit"
       }
     ]
   },
@@ -5184,16 +5022,16 @@
         "pinyin": "ne"
       }
     ],
-    "translation": "Like this",
-    "explanation": "In this sentence, '这样' means 'like this' and '呢' is a particle used to suggest or remind something. Together, they form a phrase to indicate a suggestion or a way of doing something.",
+    "translation": "This way",
+    "explanation": "The phrase '这样' means 'this way' and is followed by the particle '呢' which adds a sense of suggestion or emphasis to the statement.",
     "word_meanings": [
       {
         "word": "这样",
-        "meaning": "like this"
+        "meaning": "this way"
       },
       {
         "word": "呢",
-        "meaning": "particle indicating a suggestion or reminder"
+        "meaning": "particle indicating a suggestion or emphasis"
       }
     ]
   },
@@ -5236,47 +5074,39 @@
       }
     ],
     "translation": "Can activate more fully for this point",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or relationship between words. In this sentence, it connects '点' (point) and '激活' (activate) to show that the activation is for 'this point'.",
+    "explanation": "The structure '对于这个点的激活' means 'activate for this point', with '对于' indicating the target of the action.",
     "word_meanings": [
       {
         "word": "可以",
-        "meaning": "can",
-        "grammatical_role": "verb"
+        "meaning": "can; able to"
       },
       {
         "word": "对于",
-        "meaning": "for",
-        "grammatical_role": "preposition"
+        "meaning": "for; regarding"
       },
       {
         "word": "这个",
-        "meaning": "this",
-        "grammatical_role": "adjective"
+        "meaning": "this"
       },
       {
         "word": "点",
-        "meaning": "point",
-        "grammatical_role": "noun"
+        "meaning": "point"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "possessive particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "激活",
-        "meaning": "activate",
-        "grammatical_role": "verb"
+        "meaning": "activate"
       },
       {
         "word": "更加",
-        "meaning": "more",
-        "grammatical_role": "adverb"
+        "meaning": "more"
       },
       {
         "word": "充分",
-        "meaning": "fully",
-        "grammatical_role": "adverb"
+        "meaning": "fully"
       }
     ]
   },
@@ -5302,8 +5132,8 @@
         "pinyin": "jī huó"
       }
     ],
-    "translation": "Activate the next movement",
-    "explanation": "The structure '的' is used to indicate possession or association between '动作' (movement) and '激活' (activate).",
+    "translation": "Activation of the next movement",
+    "explanation": "The sentence structure follows the pattern of 'adjective + noun + 的 + noun', where 的 is a possessive particle indicating the relationship between 'next movement' and 'activation'.",
     "word_meanings": [
       {
         "word": "下一个",
@@ -5318,12 +5148,12 @@
       {
         "word": "的",
         "meaning": "of",
-        "grammatical_role": "particle"
+        "grammatical_role": "possessive particle"
       },
       {
         "word": "激活",
-        "meaning": "activate",
-        "grammatical_role": "verb"
+        "meaning": "activation",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -5354,16 +5184,16 @@
       }
     ],
     "translation": "Targeting our lower back",
-    "explanation": "The structure '针对在' may seem redundant in English, but in Chinese, it is common to use both words together to indicate targeting or focusing on a specific area or topic.",
+    "explanation": "The sentence structure in Chinese is Subject + Verb + Object. In this case, the subject is implied (you), the verb is 针对 (targeting), and the object is 我们的下背 (our lower back). The possessive particle 的 is used to indicate possession.",
     "word_meanings": [
       {
         "word": "针对",
         "meaning": "targeting",
-        "grammatical_role": "preposition"
+        "grammatical_role": "verb"
       },
       {
         "word": "在",
-        "meaning": "at/in/on",
+        "meaning": "at/in",
         "grammatical_role": "preposition"
       },
       {
@@ -5417,43 +5247,36 @@
         "pinyin": "zī shì"
       }
     ],
-    "translation": "Maintain a bent-over posture",
-    "explanation": "In Chinese, adjectives often come before the noun they describe. The particle '的' is used to link the adjective '俯身' (bent-over) with the noun '姿势' (posture).",
+    "translation": "Maintain the body in a bent posture",
+    "explanation": "The sentence instructs to maintain the body in a bent posture, emphasizing a specific physical position during exercise.",
     "word_meanings": [
       {
         "word": "保持",
-        "meaning": "maintain",
-        "grammatical_role": "verb"
+        "meaning": "maintain; keep"
       },
       {
         "word": "身体",
-        "meaning": "body",
-        "grammatical_role": "noun"
+        "meaning": "body"
       },
       {
         "word": "是",
-        "meaning": "is",
-        "grammatical_role": "verb"
+        "meaning": "is"
       },
       {
         "word": "一个",
-        "meaning": "a",
-        "grammatical_role": "determiner"
+        "meaning": "a; one"
       },
       {
         "word": "俯身",
-        "meaning": "bent-over",
-        "grammatical_role": "adjective"
+        "meaning": "bent; stooped"
       },
       {
         "word": "的",
-        "meaning": "",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "姿势",
-        "meaning": "posture",
-        "grammatical_role": "noun"
+        "meaning": "posture"
       }
     ]
   },
@@ -5471,8 +5294,12 @@
         "pinyin": "shǒu"
       },
       {
-        "word": "放在",
-        "pinyin": "fàng zài"
+        "word": "放",
+        "pinyin": "fàng"
+      },
+      {
+        "word": "在",
+        "pinyin": "zài"
       },
       {
         "word": "肩膀",
@@ -5483,16 +5310,12 @@
         "pinyin": "de"
       },
       {
-        "word": "两",
-        "pinyin": "liǎng"
-      },
-      {
-        "word": "侧",
-        "pinyin": "cè"
+        "word": "两侧",
+        "pinyin": "liǎng cè"
       }
     ],
-    "translation": "Put your hands on both sides of the shoulders from here.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between two nouns. In this sentence, it connects 'shoulder' and 'sides' to show the relationship between them.",
+    "translation": "From here, hands placed on both sides of the shoulders",
+    "explanation": "In this sentence, the structure '从这里' (from here) indicates the starting point of an action, followed by the placement of hands on both sides of the shoulders.",
     "word_meanings": [
       {
         "word": "从这里",
@@ -5500,27 +5323,27 @@
       },
       {
         "word": "手",
-        "meaning": "hand"
+        "meaning": "hands"
       },
       {
-        "word": "放在",
-        "meaning": "put on"
+        "word": "放",
+        "meaning": "placed"
+      },
+      {
+        "word": "在",
+        "meaning": "on"
       },
       {
         "word": "肩膀",
-        "meaning": "shoulder"
+        "meaning": "shoulders"
       },
       {
         "word": "的",
         "meaning": "possessive particle"
       },
       {
-        "word": "两",
-        "meaning": "two"
-      },
-      {
-        "word": "侧",
-        "meaning": "sides"
+        "word": "两侧",
+        "meaning": "both sides"
       }
     ]
   },
@@ -5543,7 +5366,7 @@
       }
     ],
     "translation": "Push up",
-    "explanation": "The phrase '向上' means 'upwards' and is used as an adverb to indicate the direction of the action. The particle '起来' is used after a verb to indicate completion or result of an action, in this case, 'up'.",
+    "explanation": "The sentence is a command instructing someone to push up. The structure '向上推起来' indicates the action of pushing upwards.",
     "word_meanings": [
       {
         "word": "向上",
@@ -5558,7 +5381,7 @@
       {
         "word": "起来",
         "meaning": "up",
-        "grammatical_role": "particle"
+        "grammatical_role": "directional complement"
       }
     ]
   },
@@ -5580,23 +5403,20 @@
         "pinyin": "miǎo"
       }
     ],
-    "translation": "Hold for 45 seconds",
-    "explanation": "The sentence instructs someone to maintain a certain position or action for a duration of 45 seconds.",
+    "translation": "Keep for 45 seconds",
+    "explanation": "The sentence instructs to maintain a certain position or action for a duration of 45 seconds.",
     "word_meanings": [
       {
         "word": "保持",
-        "meaning": "hold",
-        "grammatical_role": "verb"
+        "meaning": "keep"
       },
       {
         "word": "45",
-        "meaning": "45",
-        "grammatical_role": "noun"
+        "meaning": "45"
       },
       {
         "word": "秒",
-        "meaning": "seconds",
-        "grammatical_role": "noun"
+        "meaning": "seconds"
       }
     ]
   },
@@ -5626,27 +5446,27 @@
         "pinyin": "dòng zuò"
       }
     ],
-    "translation": "Just finished the previous movements",
-    "explanation": "In Chinese, the adverb 刚才 is used to indicate that the action just happened. The possessive particle 的 is used to connect 刚才 with 动作.",
+    "translation": "Practice the previous movements",
+    "explanation": "The sentence structure is Subject + Verb + Verb Complement + Possessive Particle + Noun. 练完 means 'practice finish', indicating to practice the movements that were done before.",
     "word_meanings": [
       {
         "word": "练",
-        "meaning": "practice",
+        "meaning": "practice/exercise",
         "grammatical_role": "verb"
       },
       {
         "word": "完",
         "meaning": "finish",
-        "grammatical_role": "adverb"
+        "grammatical_role": "verb complement"
       },
       {
         "word": "刚才",
-        "meaning": "just now",
-        "grammatical_role": "adverbial phrase"
+        "meaning": "previous",
+        "grammatical_role": "noun"
       },
       {
         "word": "的",
-        "meaning": "of",
+        "meaning": "possessive particle",
         "grammatical_role": "particle"
       },
       {
@@ -5694,48 +5514,40 @@
         "pinyin": "ne"
       }
     ],
-    "translation": "Do you feel very tight in your lower back?",
-    "explanation": "The structure '有没有' is a common way to form yes/no questions in Chinese. The particle '呢' is used to soften the tone of the question.",
+    "translation": "Have you felt very tight in your lower back?",
+    "explanation": "The sentence structure is a question asking if the listener has felt tightness in their lower back.",
     "word_meanings": [
       {
         "word": "有",
-        "meaning": "have/has",
-        "grammatical_role": "verb"
+        "meaning": "have"
       },
       {
         "word": "没有",
-        "meaning": "not have/has",
-        "grammatical_role": "adverb"
+        "meaning": "not have"
       },
       {
         "word": "觉得",
-        "meaning": "feel/think",
-        "grammatical_role": "verb"
+        "meaning": "feel"
       },
       {
         "word": "下",
-        "meaning": "lower",
-        "grammatical_role": "adjective"
+        "meaning": "lower"
       },
       {
         "word": "背",
-        "meaning": "back",
-        "grammatical_role": "noun"
+        "meaning": "back"
       },
       {
         "word": "非常",
-        "meaning": "very",
-        "grammatical_role": "adverb"
+        "meaning": "very"
       },
       {
         "word": "紧",
-        "meaning": "tight",
-        "grammatical_role": "adjective"
+        "meaning": "tight"
       },
       {
         "word": "呢",
-        "meaning": "modal particle",
-        "grammatical_role": "particle"
+        "meaning": "used at the end of a sentence to indicate a rhetorical question"
       }
     ]
   },
@@ -5749,20 +5561,28 @@
         "pinyin": "suǒ yǐ"
       },
       {
-        "word": "下一个",
-        "pinyin": "xià yí gè"
+        "word": "下",
+        "pinyin": "xià"
+      },
+      {
+        "word": "一个",
+        "pinyin": "yí gè"
       },
       {
         "word": "动作",
         "pinyin": "dòng zuò"
       },
       {
+        "word": "：",
+        "pinyin": "："
+      },
+      {
         "word": "猫式",
         "pinyin": "māo shì"
       }
     ],
-    "translation": "So, the next move: Cat pose",
-    "explanation": "The sentence structure is straightforward, introducing the next exercise move which is the 'Cat pose'. The word '所以' is used as 'so' to connect the previous action with the upcoming one.",
+    "translation": "So, the next movement: Cat pose",
+    "explanation": "In this sentence, '所以' is used as a conjunction to indicate a sequence of events. '下一个' means 'next one' or 'the next'. '动作' means 'movement' or 'pose'. '：' is a colon used to introduce the next movement. '猫式' specifically refers to the Cat pose in fitness or yoga.",
     "word_meanings": [
       {
         "word": "所以",
@@ -5770,14 +5590,24 @@
         "grammatical_role": "conjunction"
       },
       {
-        "word": "下一个",
+        "word": "下",
         "meaning": "next",
         "grammatical_role": "adjective"
       },
       {
+        "word": "一个",
+        "meaning": "one",
+        "grammatical_role": "numeral"
+      },
+      {
         "word": "动作",
-        "meaning": "move",
+        "meaning": "movement",
         "grammatical_role": "noun"
+      },
+      {
+        "word": "：",
+        "meaning": "colon",
+        "grammatical_role": "punctuation"
       },
       {
         "word": "猫式",
@@ -5817,7 +5647,7 @@
       }
     ],
     "translation": "Can help us very well",
-    "explanation": "In Chinese, the structure '可以 + verb' is commonly used to express the ability or possibility of doing something. The particle '的' is used to link an adjective to a noun, indicating an attribute or function.",
+    "explanation": "The structure '可以...帮助' means 'can help'. The particle '的' here is used to emphasize the effectiveness of the help.",
     "word_meanings": [
       {
         "word": "可以",
@@ -5829,11 +5659,11 @@
       },
       {
         "word": "好",
-        "meaning": "good, well"
+        "meaning": "well"
       },
       {
         "word": "的",
-        "meaning": "particle indicating an attribute or function"
+        "meaning": "particle indicating emphasis or possession"
       },
       {
         "word": "帮助",
@@ -5841,7 +5671,7 @@
       },
       {
         "word": "我们",
-        "meaning": "us, we"
+        "meaning": "us"
       }
     ]
   },
@@ -5879,43 +5709,43 @@
         "pinyin": "jǐn zhāng"
       }
     ],
-    "translation": "To relieve the tension in the lower back muscles",
-    "explanation": "In Chinese, the order of words in a sentence is different from English. Adjectives come before nouns, and possessive relationships are indicated by placing 的 after the noun.",
+    "translation": "Go relieve the tension in the lower back muscles",
+    "explanation": "The structure '去 + verb' is used to indicate the action of going to do something. The possessive particle '的' is used to indicate possession or association between '背' (back) and '肌肉' (muscles).",
     "word_meanings": [
       {
         "word": "去",
-        "meaning": "to",
-        "grammatical_role": "preposition"
+        "meaning": "go",
+        "grammar": "verb"
       },
       {
         "word": "缓解",
         "meaning": "relieve",
-        "grammatical_role": "verb"
+        "grammar": "verb"
       },
       {
         "word": "下",
         "meaning": "lower",
-        "grammatical_role": "adjective"
+        "grammar": "adjective"
       },
       {
         "word": "背",
         "meaning": "back",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle",
+        "grammar": "particle"
       },
       {
         "word": "肌肉",
         "meaning": "muscles",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       },
       {
         "word": "紧张",
         "meaning": "tension",
-        "grammatical_role": "noun"
+        "grammar": "noun"
       }
     ]
   },
@@ -5950,37 +5780,31 @@
       }
     ],
     "translation": "Exhale during the downward process",
-    "explanation": "The structure '在...的过程当中' is a common way to express 'during the process of...' in Chinese.",
+    "explanation": "The structure '在...的过程当中' means 'during the process of...'. 呼气 means 'exhale' and is a verb in this sentence.",
     "word_meanings": [
       {
         "word": "在",
-        "meaning": "at/in/during",
-        "grammatical_role": "preposition"
+        "meaning": "during"
       },
       {
         "word": "向下",
-        "meaning": "downward",
-        "grammatical_role": "adverbial phrase"
+        "meaning": "downward"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "过程",
-        "meaning": "process",
-        "grammatical_role": "noun"
+        "meaning": "process"
       },
       {
         "word": "当中",
-        "meaning": "during/in the middle of",
-        "grammatical_role": "preposition"
+        "meaning": "during"
       },
       {
         "word": "呼气",
-        "meaning": "exhale",
-        "grammatical_role": "verb"
+        "meaning": "exhale"
       }
     ]
   },
@@ -6011,32 +5835,27 @@
       }
     ],
     "translation": "Let the lower back collapse",
-    "explanation": "The structure '让 + [noun] + [verb]' is used to indicate letting or allowing something to happen. The directional complement '下来' indicates the direction of the action, in this case, 'down'.",
+    "explanation": "The sentence instructs to allow the lower back to collapse downwards, likely as part of a fitness or relaxation technique.",
     "word_meanings": [
       {
         "word": "让",
-        "meaning": "let",
-        "grammatical_role": "verb"
+        "meaning": "let; allow"
       },
       {
         "word": "下",
-        "meaning": "lower",
-        "grammatical_role": "adjective"
+        "meaning": "lower"
       },
       {
         "word": "背",
-        "meaning": "back",
-        "grammatical_role": "noun"
+        "meaning": "back"
       },
       {
         "word": "塌",
-        "meaning": "collapse",
-        "grammatical_role": "verb"
+        "meaning": "collapse"
       },
       {
         "word": "下来",
-        "meaning": "down",
-        "grammatical_role": "directional complement"
+        "meaning": "down"
       }
     ]
   },
@@ -6063,7 +5882,7 @@
       }
     ],
     "translation": "Inhale when going up",
-    "explanation": "In Chinese, the adverbial phrase usually comes before the verb it describes. Here, the instruction is to inhale while moving upwards.",
+    "explanation": "The sentence instructs to inhale while moving upwards, emphasizing the importance of breathing technique during exercise.",
     "word_meanings": [
       {
         "word": "向上",
@@ -6077,8 +5896,8 @@
       },
       {
         "word": "时候",
-        "meaning": "time",
-        "grammatical_role": "noun"
+        "meaning": "when",
+        "grammatical_role": "noun phrase"
       },
       {
         "word": "吸气",
@@ -6113,33 +5932,28 @@
         "pinyin": "tái gāo"
       }
     ],
-    "translation": "Lift your back up and raise it",
-    "explanation": "The sentence uses the particle '把' to indicate the action of lifting the back up. The phrase '向上' emphasizes the direction of the action, and '顶起来' is a verb phrase meaning 'lift up'. '抬高' is another verb meaning 'raise'.",
+    "translation": "Lift the back up and raise it high",
+    "explanation": "The sentence uses the structure '把...起来' to indicate lifting up the back. This structure is commonly used in Chinese to show the action of moving an object in a specific direction.",
     "word_meanings": [
       {
         "word": "把",
-        "meaning": "indicating an action done to the object",
-        "grammatical_role": "particle"
+        "meaning": "indicating the object of the action"
       },
       {
         "word": "背",
-        "meaning": "back",
-        "grammatical_role": "noun"
+        "meaning": "back"
       },
       {
         "word": "向上",
-        "meaning": "upward",
-        "grammatical_role": "adverbial phrase"
+        "meaning": "upwards"
       },
       {
         "word": "顶起来",
-        "meaning": "lift up",
-        "grammatical_role": "verb phrase"
+        "meaning": "lift up"
       },
       {
         "word": "抬高",
-        "meaning": "raise",
-        "grammatical_role": "verb"
+        "meaning": "raise high"
       }
     ]
   },
@@ -6153,52 +5967,60 @@
         "pinyin": "zhǎo"
       },
       {
-        "word": "一种",
-        "pinyin": "yī zhǒng"
+        "word": "一",
+        "pinyin": "yī"
+      },
+      {
+        "word": "种",
+        "pinyin": "zhǒng"
       },
       {
         "word": "驼背",
         "pinyin": "tuó bèi"
       },
       {
-        "word": "含胸",
-        "pinyin": "hán xiōng"
+        "word": "含",
+        "pinyin": "hán"
+      },
+      {
+        "word": "胸",
+        "pinyin": "xiōng"
       },
       {
         "word": "的",
         "pinyin": "de"
-      },
-      {
-        "word": "感觉",
-        "pinyin": "gǎn jué"
       }
     ],
-    "translation": "Find a feeling of hunching back and chest compression",
-    "explanation": "The phrase '驼背含胸' refers to a specific posture or feeling in the context of fitness or body positioning.",
+    "translation": "Find a feeling of hunchback with chest",
+    "explanation": "The sentence instructs to find a specific feeling or posture, which is a hunchback with the chest included. The use of '的' here indicates possession or association between 'hunchback' and 'chest'.",
     "word_meanings": [
       {
         "word": "找",
         "meaning": "find"
       },
       {
-        "word": "一种",
-        "meaning": "a kind of"
+        "word": "一",
+        "meaning": "one"
+      },
+      {
+        "word": "种",
+        "meaning": "type/kind"
       },
       {
         "word": "驼背",
         "meaning": "hunchback"
       },
       {
-        "word": "含胸",
-        "meaning": "chest compression"
+        "word": "含",
+        "meaning": "with"
+      },
+      {
+        "word": "胸",
+        "meaning": "chest"
       },
       {
         "word": "的",
-        "meaning": "of"
-      },
-      {
-        "word": "感觉",
-        "meaning": "feeling"
+        "meaning": "'s (possessive particle)"
       }
     ]
   },
@@ -6208,8 +6030,12 @@
     "text": "顶到顶点 慢速向下45秒",
     "segmented": [
       {
-        "word": "顶到",
-        "pinyin": "dǐng dào"
+        "word": "顶",
+        "pinyin": "dǐng"
+      },
+      {
+        "word": "到",
+        "pinyin": "dào"
       },
       {
         "word": "顶点",
@@ -6224,36 +6050,50 @@
         "pinyin": "xiàng xià"
       },
       {
-        "word": "45秒",
-        "pinyin": "45 miǎo"
+        "word": "45",
+        "pinyin": "45"
+      },
+      {
+        "word": "秒",
+        "pinyin": "miǎo"
       }
     ],
-    "translation": "Reach the top. Slowly descend for 45 seconds.",
-    "explanation": "The structure 'verb + direction' is commonly used in Chinese to indicate the direction of an action. In this sentence, it is used to describe the action of reaching the top. The phrase '向下' is a directional verb that means 'downwards'.",
+    "translation": "Top to the top, slow down for 45 seconds",
+    "explanation": "The structure '顶到顶点' is a bit repetitive in Chinese, emphasizing the action of reaching the top or peak.",
     "word_meanings": [
       {
-        "word": "顶到",
-        "meaning": "reach the top",
-        "grammatical_role": "verb + direction"
+        "word": "顶",
+        "meaning": "top; to the top",
+        "grammatical_role": "verb"
+      },
+      {
+        "word": "到",
+        "meaning": "to",
+        "grammatical_role": "preposition"
       },
       {
         "word": "顶点",
-        "meaning": "top",
+        "meaning": "top; peak",
         "grammatical_role": "noun"
       },
       {
         "word": "慢速",
-        "meaning": "slowly",
-        "grammatical_role": "adverb"
+        "meaning": "slow",
+        "grammatical_role": "adjective"
       },
       {
         "word": "向下",
-        "meaning": "descend",
-        "grammatical_role": "directional verb"
+        "meaning": "downwards",
+        "grammatical_role": "adverb"
       },
       {
-        "word": "45秒",
-        "meaning": "45 seconds",
+        "word": "45",
+        "meaning": "45",
+        "grammatical_role": "numeral"
+      },
+      {
+        "word": "秒",
+        "meaning": "seconds",
         "grammatical_role": "noun"
       }
     ]
@@ -6264,8 +6104,12 @@
     "text": "下一个动作：超人式",
     "segmented": [
       {
-        "word": "下一个",
-        "pinyin": "xià yí gè"
+        "word": "下",
+        "pinyin": "xià"
+      },
+      {
+        "word": "一个",
+        "pinyin": "yí gè"
       },
       {
         "word": "动作",
@@ -6280,17 +6124,22 @@
         "pinyin": "chāo rén shì"
       }
     ],
-    "translation": "Next move: Superman pose",
-    "explanation": "The sentence structure in Chinese is Subject-Verb-Object, so '下一个' (next) describes '动作' (move). '超人式' (Superman pose) is a compound word combining '超人' (Superman) and '式' (pose).",
+    "translation": "Next movement: Superman pose",
+    "explanation": "The sentence introduces the next exercise movement, which is the Superman pose. The structure is straightforward, with '下一个' meaning 'next' and '动作' meaning 'movement'. '超人式' refers to the specific pose being described.",
     "word_meanings": [
       {
-        "word": "下一个",
+        "word": "下",
         "meaning": "next",
         "grammatical_role": "adjective"
       },
       {
+        "word": "一个",
+        "meaning": "one",
+        "grammatical_role": "measure word"
+      },
+      {
         "word": "动作",
-        "meaning": "move",
+        "meaning": "movement",
         "grammatical_role": "noun"
       },
       {
@@ -6311,12 +6160,8 @@
     "text": "我们的双手可以环在头的两侧",
     "segmented": [
       {
-        "word": "我们",
-        "pinyin": "wǒ men"
-      },
-      {
-        "word": "的",
-        "pinyin": "de"
+        "word": "我们的",
+        "pinyin": "wǒ men de"
       },
       {
         "word": "双手",
@@ -6347,22 +6192,17 @@
         "pinyin": "liǎng cè"
       }
     ],
-    "translation": "Our hands can encircle the sides of the head.",
-    "explanation": "In Chinese, possessive relationships are often indicated by placing 的 after the possessor. Also, the verb 可以 means 'can' in this context, indicating ability.",
+    "translation": "Our hands can encircle the sides of the head",
+    "explanation": "This sentence describes a physical action where hands are positioned on the sides of the head. The possessive pronoun '我们的' (our) indicates ownership, and the verb '可以' (can) shows ability or permission.",
     "word_meanings": [
       {
-        "word": "我们",
-        "meaning": "we/us",
-        "grammatical_role": "subject"
-      },
-      {
-        "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "possessive marker"
+        "word": "我们的",
+        "meaning": "our",
+        "grammatical_role": "possessive pronoun"
       },
       {
         "word": "双手",
-        "meaning": "both hands",
+        "meaning": "hands",
         "grammatical_role": "noun"
       },
       {
@@ -6377,7 +6217,7 @@
       },
       {
         "word": "在",
-        "meaning": "at/in/on",
+        "meaning": "at",
         "grammatical_role": "preposition"
       },
       {
@@ -6387,12 +6227,12 @@
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "possessive marker"
+        "meaning": "possessive",
+        "grammatical_role": "particle"
       },
       {
         "word": "两侧",
-        "meaning": "both sides",
+        "meaning": "sides",
         "grammatical_role": "noun"
       }
     ]
@@ -6417,34 +6257,30 @@
       {
         "word": "的",
         "pinyin": "de"
-      },
-      {
-        "word": "时候",
-        "pinyin": "shí hòu"
       }
     ],
-    "translation": "When lifting upwards at the same time",
-    "explanation": "The structure '同时...的时候' is a common way to express 'when' in Chinese.",
+    "translation": "At the same time, lift upwards",
+    "explanation": "The sentence describes the action of lifting upwards while doing something else simultaneously.",
     "word_meanings": [
       {
         "word": "同时",
-        "meaning": "at the same time"
+        "meaning": "at the same time",
+        "grammatical_role": "adverb"
       },
       {
         "word": "向上",
-        "meaning": "upwards"
+        "meaning": "upwards",
+        "grammatical_role": "directional adverb"
       },
       {
         "word": "抬高",
-        "meaning": "lift"
+        "meaning": "lift",
+        "grammatical_role": "verb"
       },
       {
         "word": "的",
-        "meaning": "possessive particle"
-      },
-      {
-        "word": "时候",
-        "meaning": "time"
+        "meaning": "particle indicating possession or modification",
+        "grammatical_role": "particle"
       }
     ]
   },
@@ -6458,12 +6294,8 @@
         "pinyin": "bǎ"
       },
       {
-        "word": "肘",
-        "pinyin": "zhǒu"
-      },
-      {
-        "word": "关节",
-        "pinyin": "guān jié"
+        "word": "肘关节",
+        "pinyin": "zhǒu guān jié"
       },
       {
         "word": "向后",
@@ -6475,19 +6307,15 @@
       }
     ],
     "translation": "Open the elbow joint backwards",
-    "explanation": "In Chinese, the word order is different from English, with the object coming before the verb. The use of '把' indicates that the action is being done to the object (in this case, the elbow joint).",
+    "explanation": "The sentence structure in Chinese requires the use of the particle '把' before the object to indicate that the action is being done to the object. In this case, the instruction is to open the elbow joint backwards.",
     "word_meanings": [
       {
         "word": "把",
-        "meaning": "marker indicating the object of the action"
+        "meaning": "particle indicating the object of the verb"
       },
       {
-        "word": "肘",
-        "meaning": "elbow"
-      },
-      {
-        "word": "关节",
-        "meaning": "joint"
+        "word": "肘关节",
+        "meaning": "elbow joint"
       },
       {
         "word": "向后",
@@ -6517,23 +6345,23 @@
         "pinyin": "xià lái"
       }
     ],
-    "translation": "Lie down",
-    "explanation": "The structure '向下 + verb + 下来' is commonly used in Chinese to indicate the action of moving downwards or lying down.",
+    "translation": "向下趴下来",
+    "explanation": "The sentence instructs to 'lie face down'. The adverbial phrase '向下' indicates the direction 'downwards', the verb '趴' means 'to lie prone', and the result complement '下来' emphasizes the completion of the action.",
     "word_meanings": [
       {
         "word": "向下",
         "meaning": "downwards",
-        "grammatical_role": "adverb"
+        "grammatical_role": "adverbial phrase"
       },
       {
         "word": "趴",
-        "meaning": "lie",
+        "meaning": "to lie prone; to lie face down",
         "grammatical_role": "verb"
       },
       {
         "word": "下来",
         "meaning": "down",
-        "grammatical_role": "directional verb particle"
+        "grammatical_role": "result complement"
       }
     ]
   },
@@ -6563,20 +6391,16 @@
         "pinyin": "jī huó"
       },
       {
-        "word": "中下",
-        "pinyin": "zhōng xià"
-      },
-      {
-        "word": "背",
-        "pinyin": "bèi"
+        "word": "中下背",
+        "pinyin": "zhōng xià bèi"
       }
     ],
-    "translation": "Raising is also to activate the lower back",
-    "explanation": "In Chinese, the verb often comes before the object, so 'raising' comes before 'also' in this sentence structure. The use of '也' (also) emphasizes that raising is not only for one purpose but also for activating the lower back.",
+    "translation": "Lifting is also to activate the middle and lower back",
+    "explanation": "The structure '为了' indicates the purpose or reason for an action, and '也' is used to add emphasis to the statement.",
     "word_meanings": [
       {
         "word": "抬高",
-        "meaning": "raising",
+        "meaning": "lifting",
         "grammatical_role": "verb"
       },
       {
@@ -6600,13 +6424,8 @@
         "grammatical_role": "verb"
       },
       {
-        "word": "中下",
-        "meaning": "middle and lower",
-        "grammatical_role": "adjective"
-      },
-      {
-        "word": "背",
-        "meaning": "back",
+        "word": "中下背",
+        "meaning": "middle and lower back",
         "grammatical_role": "noun"
       }
     ]
@@ -6629,8 +6448,8 @@
         "pinyin": "yī xià"
       }
     ],
-    "translation": "Maintain the peak for a bit",
-    "explanation": "The phrase '一下' is a common way to indicate doing something briefly or for a short amount of time in Chinese.",
+    "translation": "Maintain the peak for a moment",
+    "explanation": "The sentence instructs to maintain the peak position for a short period of time.",
     "word_meanings": [
       {
         "word": "顶峰",
@@ -6642,7 +6461,7 @@
       },
       {
         "word": "一下",
-        "meaning": "for a bit"
+        "meaning": "for a moment"
       }
     ]
   },
@@ -6664,20 +6483,23 @@
         "pinyin": "xiàng xià"
       }
     ],
-    "translation": "Exhale slowly downwards",
-    "explanation": "The sentence instructs someone to exhale slowly in a downward direction. The structure of the sentence is straightforward, with the verb '呼气' (exhale) followed by adverbs '慢慢' (slowly) and '向下' (downwards).",
+    "translation": "Exhale slowly downward",
+    "explanation": "The sentence describes the action of exhaling slowly in a downward direction. The verb '呼气' (exhale) is followed by the adverb '慢慢' (slowly) to indicate the manner of the action, and the directional complement '向下' (downward) specifies the direction of the exhaling movement.",
     "word_meanings": [
       {
         "word": "呼气",
-        "meaning": "exhale"
+        "meaning": "exhale",
+        "grammatical_role": "verb"
       },
       {
         "word": "慢慢",
-        "meaning": "slowly"
+        "meaning": "slowly",
+        "grammatical_role": "adverb"
       },
       {
         "word": "向下",
-        "meaning": "downwards"
+        "meaning": "downward",
+        "grammatical_role": "directional complement"
       }
     ]
   },
@@ -6695,32 +6517,45 @@
         "pinyin": "zhǒu guān jié"
       },
       {
-        "word": "落到",
-        "pinyin": "luò dào"
+        "word": "落",
+        "pinyin": "luò"
+      },
+      {
+        "word": "到",
+        "pinyin": "dào"
       },
       {
         "word": "地面",
         "pinyin": "dì miàn"
       }
     ],
-    "translation": "Until the elbow joint touches the ground",
-    "explanation": "The sentence describes a specific action of the elbow joint touching the ground, emphasizing the completion of the action by using the word '直到' (until).",
+    "translation": "Until the elbow joint reaches the ground",
+    "explanation": "The sentence describes a specific action to be performed until the elbow joint reaches the ground. The structure '直到...落到...' indicates a continuous action until a certain point is reached.",
     "word_meanings": [
       {
         "word": "直到",
-        "meaning": "until"
+        "meaning": "until",
+        "grammatical_role": "preposition"
       },
       {
         "word": "肘关节",
-        "meaning": "elbow joint"
+        "meaning": "elbow joint",
+        "grammatical_role": "noun"
       },
       {
-        "word": "落到",
-        "meaning": "touches"
+        "word": "落",
+        "meaning": "reach",
+        "grammatical_role": "verb"
+      },
+      {
+        "word": "到",
+        "meaning": "to",
+        "grammatical_role": "preposition"
       },
       {
         "word": "地面",
-        "meaning": "ground"
+        "meaning": "ground",
+        "grammatical_role": "noun"
       }
     ]
   },
@@ -6742,8 +6577,8 @@
         "pinyin": "tái gāo"
       }
     ],
-    "translation": "Lift higher again",
-    "explanation": "The tricky part in this sentence might be the use of the word '再' which means 'again' and is used to indicate a repeated action. '向上' means 'upwards' and '抬高' means 'lift higher'.",
+    "translation": "Raise up again",
+    "explanation": "The sentence is a simple command instructing someone to raise something up again. The structure is straightforward, with the adverb '再' (again) indicating the repetition of the action, followed by the direction '向上' (upwards) and the verb '抬高' (raise).",
     "word_meanings": [
       {
         "word": "再",
@@ -6755,7 +6590,7 @@
       },
       {
         "word": "抬高",
-        "meaning": "lift higher"
+        "meaning": "raise"
       }
     ]
   },
@@ -6777,23 +6612,20 @@
         "pinyin": "miǎo"
       }
     ],
-    "translation": "Hold for 45 seconds",
-    "explanation": "The sentence instructs to hold a position or action for 45 seconds. The word '保持' means 'to maintain' or 'to hold' in this context.",
+    "translation": "Maintain for 45 seconds",
+    "explanation": "The sentence instructs to maintain a certain position or action for a specific duration of time, in this case, 45 seconds.",
     "word_meanings": [
       {
         "word": "保持",
-        "meaning": "hold",
-        "grammatical_role": "verb"
+        "meaning": "maintain"
       },
       {
         "word": "45",
-        "meaning": "45",
-        "grammatical_role": "noun"
+        "meaning": "45"
       },
       {
         "word": "秒",
-        "meaning": "seconds",
-        "grammatical_role": "noun"
+        "meaning": "seconds"
       }
     ]
   },
@@ -6816,7 +6648,7 @@
       }
     ],
     "translation": "The last movement",
-    "explanation": "In Chinese, the adjective usually comes before the noun it describes. Also, the word order in Chinese is Subject-Verb-Object, so '一个' (one) comes before '动作' (movement).",
+    "explanation": "The sentence is straightforward, describing the final movement in a series of exercises. The word 最后 means 'last' or 'final', 一个 means 'one', and 动作 means 'movement'.",
     "word_meanings": [
       {
         "word": "最后",
@@ -6826,7 +6658,7 @@
       {
         "word": "一个",
         "meaning": "one",
-        "grammatical_role": "numeral"
+        "grammatical_role": "noun"
       },
       {
         "word": "动作",
@@ -6857,12 +6689,12 @@
         "pinyin": "wài cè"
       }
     ],
-    "translation": "It is about the outer side of the latissimus dorsi muscle.",
-    "explanation": "The structure '对于' is used to indicate the topic or subject being discussed, similar to 'regarding' or 'about' in English.",
+    "translation": "It is for the latissimus dorsi lateral",
+    "explanation": "The sentence structure in Chinese is Subject + 就是 + Object, which translates to 'It is' in English. 背阔肌外侧 refers to the lateral part of the latissimus dorsi muscle.",
     "word_meanings": [
       {
         "word": "就是",
-        "meaning": "It is about"
+        "meaning": "it is"
       },
       {
         "word": "对于",
@@ -6870,11 +6702,11 @@
       },
       {
         "word": "背阔肌",
-        "meaning": "latissimus dorsi muscle"
+        "meaning": "latissimus dorsi"
       },
       {
         "word": "外侧",
-        "meaning": "outer side"
+        "meaning": "lateral"
       }
     ]
   },
@@ -6904,8 +6736,8 @@
         "pinyin": "le"
       }
     ],
-    "translation": "Activated the shoulder joints",
-    "explanation": "The sentence structure in Chinese is Subject + Verb + Object. In this case, the subject is implied and the sentence is talking about activating the shoulder joints.",
+    "translation": "And activated the shoulder joint",
+    "explanation": "The sentence structure is Subject + Verb + Object. The verb '激活了' (activated) is followed by the completion particle '了' indicating the action is completed.",
     "word_meanings": [
       {
         "word": "和",
@@ -6913,7 +6745,7 @@
       },
       {
         "word": "肩关节",
-        "meaning": "shoulder joints"
+        "meaning": "shoulder joint"
       },
       {
         "word": "的",
@@ -6921,11 +6753,11 @@
       },
       {
         "word": "激活",
-        "meaning": "activated"
+        "meaning": "activate"
       },
       {
         "word": "了",
-        "meaning": "particle indicating completion"
+        "meaning": "completion particle"
       }
     ]
   },
@@ -6959,17 +6791,17 @@
         "pinyin": "guī shì"
       }
     ],
-    "translation": "This move is: Half Turtle Pose",
-    "explanation": "The sentence introduces a specific yoga pose called 'Half Turtle Pose' in Chinese. The structure '这个动作就是' is commonly used to explain or define something.",
+    "translation": "This movement is: Half Turtle Pose",
+    "explanation": "The sentence introduces a specific movement called 'Half Turtle Pose.' The structure '这个动作就是' is used to emphasize and define the movement being discussed.",
     "word_meanings": [
       {
         "word": "这个",
         "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "grammatical_role": "determiner"
       },
       {
         "word": "动作",
-        "meaning": "move",
+        "meaning": "movement",
         "grammatical_role": "noun"
       },
       {
@@ -7016,37 +6848,40 @@
         "pinyin": "bǎo chí"
       },
       {
-        "word": "45秒钟",
-        "pinyin": "45 miǎo zhōng"
+        "word": "45",
+        "pinyin": "45"
+      },
+      {
+        "word": "秒钟",
+        "pinyin": "miǎo zhōng"
       }
     ],
-    "translation": "This movement also lasts for 45 seconds",
-    "explanation": "The structure of this sentence is straightforward, with the tricky part being the use of '保持' which means 'lasts' or 'maintains' in this context.",
+    "translation": "This movement also maintains for 45 seconds",
+    "explanation": "The sentence structure is Subject + Adverb + Verb + Time Duration. The adverb 同样 (also) emphasizes that the action should be maintained for 45 seconds, similar to the previous one.",
     "word_meanings": [
       {
         "word": "这个",
-        "meaning": "this",
-        "grammatical_role": "demonstrative pronoun"
+        "meaning": "this"
       },
       {
         "word": "动作",
-        "meaning": "movement",
-        "grammatical_role": "noun"
+        "meaning": "movement"
       },
       {
         "word": "同样",
-        "meaning": "also",
-        "grammatical_role": "adverb"
+        "meaning": "also"
       },
       {
         "word": "保持",
-        "meaning": "lasts/maintains",
-        "grammatical_role": "verb"
+        "meaning": "maintain"
       },
       {
-        "word": "45秒钟",
-        "meaning": "45 seconds",
-        "grammatical_role": "noun"
+        "word": "45",
+        "meaning": "45"
+      },
+      {
+        "word": "秒钟",
+        "meaning": "seconds"
       }
     ]
   },
@@ -7060,44 +6895,30 @@
         "pinyin": "bǎo chí"
       },
       {
-        "word": "半",
-        "pinyin": "bàn"
-      },
-      {
-        "word": "跪",
-        "pinyin": "guì"
+        "word": "半跪",
+        "pinyin": "bàn guì"
       },
       {
         "word": "的",
         "pinyin": "de"
-      },
-      {
-        "word": "姿势",
-        "pinyin": "zī shì"
       }
     ],
     "translation": "Maintain a half-kneeling position",
-    "explanation": "The tricky grammar structure here is the possessive particle 的, which is used to indicate that the following noun 'position' belongs to the preceding noun 'kneeling'.",
+    "explanation": "The sentence instructs to keep a position where one is half-kneeling, emphasizing the posture to be maintained.",
     "word_meanings": [
       {
         "word": "保持",
-        "meaning": "maintain"
+        "meaning": "maintain",
+        "grammatical_role": "verb"
       },
       {
-        "word": "半",
-        "meaning": "half"
-      },
-      {
-        "word": "跪",
-        "meaning": "kneeling"
+        "word": "半跪",
+        "meaning": "half-kneeling",
+        "grammatical_role": "noun"
       },
       {
         "word": "的",
         "meaning": "possessive particle"
-      },
-      {
-        "word": "姿势",
-        "meaning": "position"
       }
     ]
   },
@@ -7119,12 +6940,12 @@
         "pinyin": "xiàng qián"
       }
     ],
-    "translation": "Arm straight forward",
-    "explanation": "The tricky part in this sentence might be the word 伸直, which means 'extend straight' in this context. It's a specific instruction for the movement being described.",
+    "translation": "Extend your arms forward",
+    "explanation": "The sentence describes the action of extending the arms straight forward. The structure is Subject + Verb + Direction, which is a common way to give instructions or describe movements in Chinese.",
     "word_meanings": [
       {
         "word": "手臂",
-        "meaning": "arm"
+        "meaning": "arms"
       },
       {
         "word": "伸直",
@@ -7154,8 +6975,8 @@
         "pinyin": "pā xià lái"
       }
     ],
-    "translation": "Until the body collapses",
-    "explanation": "The phrase '趴下来' is a verb that means 'to collapse'. It is important to note that in Chinese, the verb usually comes at the end of the sentence.",
+    "translation": "Until the body lies down",
+    "explanation": "The structure 直到... indicates a continuous action until a certain point is reached. The verb 趴下来 means 'to lie down', with the directional complement 下 indicating the downward motion.",
     "word_meanings": [
       {
         "word": "直到",
@@ -7167,8 +6988,7 @@
       },
       {
         "word": "趴下来",
-        "meaning": "collapse",
-        "grammatical_role": "verb"
+        "meaning": "lie down"
       }
     ]
   },
@@ -7210,8 +7030,8 @@
         "pinyin": "nèi róng"
       }
     ],
-    "translation": "The above is all the content of back activation today.",
-    "explanation": "In Chinese, the possessive particle '的' is used to indicate possession or association between two nouns. In this sentence, it connects '背部' (back) and '激活' (activation) to show that the activation is related to the back.",
+    "translation": "Above is all the content for back activation today",
+    "explanation": "The structure '以上...的全部内容' means 'all the content above'. The word '就是' is used to emphasize that the content provided is exactly what is being referred to.",
     "word_meanings": [
       {
         "word": "以上",
@@ -7241,7 +7061,7 @@
       {
         "word": "的",
         "meaning": "'s",
-        "grammatical_role": "possessive particle"
+        "grammatical_role": "particle"
       },
       {
         "word": "全部",
@@ -7277,8 +7097,8 @@
         "pinyin": "jì de"
       }
     ],
-    "translation": "Remember this video",
-    "explanation": "In Chinese, the verb '记得' (remember) is often used with '要' (to) to indicate a reminder or instruction to remember something.",
+    "translation": "This video, remember",
+    "explanation": "The structure '要记得' is a common way to express 'remember to' in Chinese. The verb '记得' (remember) is preceded by the modal verb '要' (to) to indicate the action of remembering.",
     "word_meanings": [
       {
         "word": "这个",
@@ -7324,8 +7144,12 @@
         "pinyin": "zài"
       },
       {
-        "word": "练背",
-        "pinyin": "liàn bèi"
+        "word": "练",
+        "pinyin": "liàn"
+      },
+      {
+        "word": "背",
+        "pinyin": "bèi"
       },
       {
         "word": "之前",
@@ -7333,7 +7157,7 @@
       }
     ],
     "translation": "Help you every time before training your back",
-    "explanation": "The structure '在...之前' is used to indicate 'before' in Chinese. The word order in Chinese can be different from English, so 'training your back' comes after 'before' in the sentence.",
+    "explanation": "The structure '在...之前' is used to indicate 'before' in this context. The verb '练' (training) is followed by the noun '背' (back) to form the phrase '练背' (training your back).",
     "word_meanings": [
       {
         "word": "帮助",
@@ -7352,8 +7176,12 @@
         "meaning": "before"
       },
       {
-        "word": "练背",
-        "meaning": "training your back"
+        "word": "练",
+        "meaning": "training"
+      },
+      {
+        "word": "背",
+        "meaning": "back"
       },
       {
         "word": "之前",
@@ -7383,8 +7211,8 @@
         "pinyin": "xí guàn"
       }
     ],
-    "translation": "Develop habits with Alex",
-    "explanation": "The tricky part here might be the possessive particle '的' which indicates possession or association between '和' (with) and '习惯' (habits).",
+    "translation": "Develop the habit of ___ and ___",
+    "explanation": "The sentence structure is 'develop the habit of ___ and ___'. 养成 is a verb meaning 'to develop'. 的 is a possessive particle indicating possession or association. 习惯 means 'habit'. 和 is a conjunction meaning 'and'.",
     "word_meanings": [
       {
         "word": "养成",
@@ -7393,17 +7221,17 @@
       },
       {
         "word": "和",
-        "meaning": "with",
-        "grammatical_role": "preposition"
+        "meaning": "and",
+        "grammatical_role": "conjunction"
       },
       {
         "word": "的",
-        "meaning": "possessive particle",
-        "grammatical_role": "particle"
+        "meaning": "",
+        "grammatical_role": "possessive particle"
       },
       {
         "word": "习惯",
-        "meaning": "habits",
+        "meaning": "habit",
         "grammatical_role": "noun"
       }
     ]
@@ -7422,17 +7250,17 @@
         "pinyin": "shòu shāng"
       }
     ],
-    "translation": "Injured from exercising",
-    "explanation": "The sentence describes someone getting injured while exercising. The verb 受伤 means 'to be injured' and is used in this context to show the result of the action of exercising (健身).",
+    "translation": "Fitness injury",
+    "explanation": "The sentence talks about getting injured during fitness activities.",
     "word_meanings": [
       {
         "word": "健身",
-        "meaning": "exercising",
+        "meaning": "fitness",
         "grammatical_role": "noun"
       },
       {
         "word": "受伤",
-        "meaning": "injured",
+        "meaning": "injury",
         "grammatical_role": "verb"
       }
     ]
@@ -7476,17 +7304,17 @@
       }
     ],
     "translation": "I am continuously sharing fitness tips ALEX",
-    "explanation": "In Chinese, the sentence structure is Subject + Verb + Object. The use of '的' after '干货' indicates possession, similar to 's in English.",
+    "explanation": "The structure '是...的' is used to emphasize the subject and provide more information about it. In this case, it emphasizes that the speaker is specifically sharing fitness tips from ALEX.",
     "word_meanings": [
       {
         "word": "我",
-        "meaning": "I",
+        "meaning": "I/me",
         "grammatical_role": "subject"
       },
       {
         "word": "是",
         "meaning": "am",
-        "grammatical_role": "verb"
+        "grammatical_role": "copula"
       },
       {
         "word": "持续",
@@ -7505,13 +7333,13 @@
       },
       {
         "word": "干货",
-        "meaning": "tips",
-        "grammatical_role": "noun"
+        "meaning": "tips/information",
+        "grammatical_role": "object"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "particle"
+        "meaning": "'s",
+        "grammatical_role": "possessive particle"
       },
       {
         "word": "ALEX",
@@ -7550,8 +7378,8 @@
         "pinyin": "sān lián"
       }
     ],
-    "translation": "If you like my video, remember to like, comment, and subscribe!",
-    "explanation": "The phrase '一键三连' is a popular internet slang term used on Chinese social media platforms, meaning 'like, comment, and subscribe'. It is often used by content creators to encourage viewers to engage with their videos.",
+    "translation": "If you like my videos, remember to like, comment, and subscribe!",
+    "explanation": "The phrase '一键三连' is a popular internet slang term used on social media platforms, meaning to like, comment, and subscribe to a channel or video.",
     "word_meanings": [
       {
         "word": "喜欢",
@@ -7563,11 +7391,11 @@
       },
       {
         "word": "视频",
-        "meaning": "video"
+        "meaning": "videos"
       },
       {
         "word": "记得",
-        "meaning": "remember"
+        "meaning": "remember to"
       },
       {
         "word": "一键",
@@ -7575,7 +7403,7 @@
       },
       {
         "word": "三连",
-        "meaning": "like, comment, subscribe"
+        "meaning": "like, comment, and subscribe"
       }
     ]
   },
@@ -7618,12 +7446,12 @@
       }
     ],
     "translation": "Share the video with those around you as well",
-    "explanation": "The tricky grammar structure here is the use of the particle '把' which indicates the object of the action in Chinese sentences. It is placed before the object being acted upon.",
+    "explanation": "The sentence structure follows the pattern of '把 + Object + Verb + 给 + Recipient', which is a common way to express 'do something for someone'.",
     "word_meanings": [
       {
         "word": "把",
-        "meaning": "particle indicating the object of the action",
-        "grammatical_role": "particle"
+        "meaning": "indicating the object of the action (video)",
+        "grammatical_role": "verb complement"
       },
       {
         "word": "视频",
@@ -7700,48 +7528,40 @@
         "pinyin": "ba"
       }
     ],
-    "translation": "Students who do not have the habit of stretching/activating!",
-    "explanation": "The structure '没有...的' is used to indicate the absence of a certain habit or quality in this context. The particle '吧' at the end adds a suggestion or emphasis to the statement.",
+    "translation": "Those students who do not have the habit of stretching/activating!",
+    "explanation": "The sentence is addressing a group of students who do not have the habit of stretching or activating.",
     "word_meanings": [
       {
         "word": "没有",
-        "meaning": "do not have",
-        "grammatical_role": "adverb"
+        "meaning": "not have"
       },
       {
         "word": "拉伸",
-        "meaning": "stretching",
-        "grammatical_role": "noun"
+        "meaning": "stretching"
       },
       {
         "word": "/",
-        "meaning": "/",
-        "grammatical_role": "symbol"
+        "meaning": "or"
       },
       {
         "word": "激活",
-        "meaning": "activating",
-        "grammatical_role": "noun"
+        "meaning": "activating"
       },
       {
         "word": "习惯",
-        "meaning": "habit",
-        "grammatical_role": "noun"
+        "meaning": "habit"
       },
       {
         "word": "的",
-        "meaning": "of",
-        "grammatical_role": "particle"
+        "meaning": "marker of modifier"
       },
       {
         "word": "同学们",
-        "meaning": "students",
-        "grammatical_role": "noun"
+        "meaning": "students"
       },
       {
         "word": "吧",
-        "meaning": "!",
-        "grammatical_role": "particle"
+        "meaning": "modal particle indicating suggestion"
       }
     ]
   },
@@ -7776,7 +7596,7 @@
       }
     ],
     "translation": "Also welcome to tell me in the comments section",
-    "explanation": "The structure '在 + location + 告诉 + object' is commonly used to indicate where someone is telling something, in this case, telling the speaker in the comments section.",
+    "explanation": "The sentence structure is Subject + Verb + Object. The verb '告诉' (tell) is followed by the object '我' (me). '也' (also) is used to indicate 'welcome' in addition to something else.",
     "word_meanings": [
       {
         "word": "也",
@@ -7827,27 +7647,23 @@
       }
     ],
     "translation": "What do you want to learn?",
-    "explanation": "The sentence structure is Subject + Verb + Object. The verb '学习' (to learn) is followed by '什么' (what) to form the question 'What do you want to learn?'",
+    "explanation": "The sentence structure is Subject + Verb + Object, with the verb 学习 (to learn) indicating the action of wanting to learn something.",
     "word_meanings": [
       {
         "word": "你",
-        "meaning": "you",
-        "grammatical_role": "subject"
+        "meaning": "you"
       },
       {
         "word": "想",
-        "meaning": "want",
-        "grammatical_role": "verb"
+        "meaning": "want"
       },
       {
         "word": "学习",
-        "meaning": "to learn",
-        "grammatical_role": "verb"
+        "meaning": "to learn"
       },
       {
         "word": "什么",
-        "meaning": "what",
-        "grammatical_role": "object"
+        "meaning": "what"
       }
     ]
   },
@@ -7889,48 +7705,40 @@
         "pinyin": "dāng zhōng"
       }
     ],
-    "translation": "Let's exercise together",
-    "explanation": "The structure '在...的过程当中' is a common way to indicate 'in the process of...' in Chinese.",
+    "translation": "Let's go through the process of fitness together",
+    "explanation": "The structure '在...的过程当中' means 'in the process of...' and is a common way to describe doing something while it is ongoing.",
     "word_meanings": [
       {
         "word": "让",
-        "meaning": "let",
-        "grammatical_role": "verb"
+        "meaning": "let; make"
       },
       {
         "word": "我们",
-        "meaning": "we",
-        "grammatical_role": "pronoun"
+        "meaning": "we"
       },
       {
         "word": "一起",
-        "meaning": "together",
-        "grammatical_role": "adverb"
+        "meaning": "together"
       },
       {
         "word": "在",
-        "meaning": "in",
-        "grammatical_role": "preposition"
+        "meaning": "in; at"
       },
       {
         "word": "健身",
-        "meaning": "exercise",
-        "grammatical_role": "noun"
+        "meaning": "fitness"
       },
       {
         "word": "的",
-        "meaning": "'s",
-        "grammatical_role": "particle"
+        "meaning": "possessive particle"
       },
       {
         "word": "过程",
-        "meaning": "process",
-        "grammatical_role": "noun"
+        "meaning": "process"
       },
       {
         "word": "当中",
-        "meaning": "during",
-        "grammatical_role": "preposition"
+        "meaning": "in the middle of"
       }
     ]
   },
@@ -7952,23 +7760,23 @@
         "pinyin": "jìn bù"
       }
     ],
-    "translation": "Growing and progressing!",
-    "explanation": "The sentence consists of two nouns '成长' (growing) and '进步' (progressing) connected by the conjunction '和' (and). This structure emphasizes the idea of both growing and progressing.",
+    "translation": "Growth and progress!",
+    "explanation": "The sentence expresses the desire for personal development and improvement.",
     "word_meanings": [
       {
         "word": "成长",
-        "meaning": "growing",
-        "grammatical_role": "noun"
+        "meaning": "growth",
+        "grammar": "noun"
       },
       {
         "word": "和",
         "meaning": "and",
-        "grammatical_role": "conjunction"
+        "grammar": "conjunction"
       },
       {
         "word": "进步",
-        "meaning": "progressing",
-        "grammatical_role": "noun"
+        "meaning": "progress",
+        "grammar": "noun"
       }
     ]
   },
@@ -8003,7 +7811,7 @@
       }
     ],
     "translation": "See you in the next video!",
-    "explanation": "The use of '就' in this sentence emphasizes the immediacy of meeting again in the next video. '再见' is a common way to say goodbye in Chinese.",
+    "explanation": "The sentence is a simple farewell message, expressing the idea of meeting again in the next video.",
     "word_meanings": [
       {
         "word": "我们",
@@ -8015,7 +7823,7 @@
       },
       {
         "word": "下期",
-        "meaning": "next episode"
+        "meaning": "next"
       },
       {
         "word": "视频",
@@ -8023,7 +7831,7 @@
       },
       {
         "word": "再见",
-        "meaning": "goodbye"
+        "meaning": "see you"
       },
       {
         "word": "啦",

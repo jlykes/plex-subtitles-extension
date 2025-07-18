@@ -51,13 +51,10 @@ async function injectBadgeForCell(cell) {
     
     // Check if this is a TV show by looking for season/episode format
     const seasonEpisodeEl = cell.querySelector('span a[title*="Season"], span a[title*="Episode"]');
-    console.log(`[homepage_badge] Checking cell for TV show elements...`);
-    console.log(`[homepage_badge] seasonEpisodeEl found:`, seasonEpisodeEl);
     
     // Let's also check what elements are actually in the cell
     const allLinks = cell.querySelectorAll('a');
-    console.log(`[homepage_badge] All links in cell:`, Array.from(allLinks).map(a => ({text: a.textContent, title: a.title})));
-    
+
     let normalized = '';
     
     if (seasonEpisodeEl) {
@@ -69,11 +66,6 @@ async function injectBadgeForCell(cell) {
       const seasonEpisodeSpan = cell.querySelector('span a[title*="Season"]')?.parentElement;
       const episodeEl = seasonEpisodeSpan ? seasonEpisodeSpan.querySelectorAll('a')[1] : null;
       
-      console.log(`[homepage_badge] TV show elements found:`);
-      console.log(`[homepage_badge] showTitleEl:`, showTitleEl, `text: "${showTitleEl?.textContent}"`);
-      console.log(`[homepage_badge] seasonEl:`, seasonEl, `text: "${seasonEl?.textContent}"`);
-      console.log(`[homepage_badge] episodeEl:`, episodeEl, `text: "${episodeEl?.textContent}"`);
-      console.log(`[homepage_badge] seasonEpisodeSpan:`, seasonEpisodeSpan);
       
       if (showTitleEl && seasonEl && episodeEl) {
         const showTitle = showTitleEl.textContent.trim();
@@ -88,12 +80,6 @@ async function injectBadgeForCell(cell) {
           .replace(/[#]/g, "")
           .replace(/[—'&,'']/g, "_");
         normalized = `${normalizedShowTitle}_-_${season}_·_${episode}`;
-        console.log(`[homepage_badge] TV show detected: ${normalized}`);
-        console.log(`[homepage_badge] Raw show title: "${showTitle}"`);
-        console.log(`[homepage_badge] Normalized show title: "${normalizedShowTitle}"`);
-        console.log(`[homepage_badge] Season: "${season}"`);
-        console.log(`[homepage_badge] Episode: "${episode}"`);
-        console.log(`[homepage_badge] Final filename to check: "${normalized}.enriched.json"`);
       } else {
         normalized = window.normalizeTitle(rawTitle);
       }
@@ -146,36 +132,6 @@ async function injectBadgeForCell(cell) {
   }
 }
 
-function logAllPlexHomepageCells() {
-  const maxRetries = 10; // 10 * 500ms = 5 seconds
-  let attempts = 0;
-
-  async function tryFindCells() {
-    const cells = document.querySelectorAll(cellSelector);
-    if (cells.length > 0) {
-      console.log(`[homepage_badge] Found ${cells.length} movie/poster cells on homepage.`);
-      const titles = [];
-      for (const cell of cells) {
-        await injectBadgeForCell(cell);
-        const titleEl = cell.querySelector(titleSelector);
-        if (titleEl && titleEl.textContent) {
-          titles.push(titleEl.textContent.trim());
-        } else {
-          titles.push('[No title found]');
-        }
-      }
-      console.log('[homepage_badge] Titles found:', titles);
-    } else if (attempts < maxRetries) {
-      attempts++;
-      setTimeout(tryFindCells, 500);
-    } else {
-      console.warn('[homepage_badge] No movie/poster cells found after waiting 5 seconds.');
-    }
-  }
-
-  tryFindCells();
-}
-
 function observeNewCells() {
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
@@ -193,7 +149,4 @@ function observeNewCells() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
-window.logAllPlexHomepageCells = logAllPlexHomepageCells;
-
-logAllPlexHomepageCells();
 observeNewCells(); 
