@@ -2,8 +2,7 @@
 // Logic for injecting 'Enriched Subtitles Available' badges on the Plex homepage.
 // Chunk 14: Badge styling with icons and short text
 
-console.log('[homepage_badge] Script loaded');
-
+// Constants
 const cellSelector = 'div[data-testid="cellItem"]';
 const titleSelector = 'a[data-testid="metadataTitleLink"], a.MetadataPosterCardTitle-title-ImAmGu';
 const yearSelector = 'div.MetadataPosterCardTitle-title-ImAmGu:not(a)';
