@@ -198,4 +198,4 @@ function observeNewCells() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
-observeNewCells(); 
+window.observeNewCells = observeNewCells; 

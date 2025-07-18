@@ -285,15 +285,7 @@ let mainInterval = setInterval(() => {
   }
 }, 100);
 
-// Temporary functions for Notion configuration setup
-window.setupNotionConfig = function() {
-    chrome.runtime.sendMessage({action: 'setupNotionConfig'}, function(response) {
-        console.log('Setup response:', response);
-    });
-};
-
-window.testNotionConnection = function() {
-    chrome.runtime.sendMessage({action: 'testNotionConnection'}, function(response) {
-        console.log('Test response:', response);
-    });
-};
+// === Plex Homepage Badge Injection ===
+if (typeof window.observeNewCells === 'function') {
+  window.observeNewCells();
+}
