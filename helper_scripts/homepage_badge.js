@@ -5,7 +5,22 @@
 const cellSelector = 'div[data-testid="cellItem"]';
 const titleSelector = 'a[data-testid="metadataTitleLink"], a.MetadataPosterCardTitle-title-ImAmGu';
 const yearSelector = 'div.MetadataPosterCardTitle-title-ImAmGu:not(a)';
+let enrichedBadgeObserver = null;// Store the observer globally so it can be disconnected/reconnected
 
+
+/**
+ * Debounce utility to prevent multiple calls to the same function within a given time frame.
+ * @param {Function} fn - The function to debounce.
+ * @param {number} delay - The delay in milliseconds.
+ * @returns {Function} The debounced function.
+ */
+function debounce(fn, delay) {
+    let timer = null;
+    return function(...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
 
 /**
  * Removes any existing badges from a cell.
@@ -46,6 +61,17 @@ function detectPlexPageType() {
   if (document.querySelector('[data-testid="cellItem"]')) {
     return 'home_or_movie_overview';
   }
+
+  // --- NEW: Individual media fallback for YT and similar pages ---
+  if (
+    document.querySelector('[data-testid="metadata-title"]') &&
+    !document.querySelector('[data-testid="cellItem"]')
+  ) {
+    return 'individual_media';
+  }
+
+  // Debug log for unknown page type
+  console.log('detectPlexPageType: unknown. metadata-title:', !!document.querySelector('[data-testid="metadata-title"]'), 'cellItem:', !!document.querySelector('[data-testid="cellItem"]'));
 
   // Unknown page type
   return 'unknown';
@@ -269,6 +295,31 @@ async function getPercentKnownForTitle(normalizedTitle) {
 }
 
 /**
+ * Generates the badge content HTML for a given normalizedTitle
+ * @param {string} normalizedTitle - The normalized title
+ * @returns {string} The badge content HTML
+ */
+async function getEnrichedBadgeContent(normalizedTitle) {
+  let badgeIcon, badgeText, badgeColor;
+  let percentKnown = null;
+  const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
+  if (enrichedJSONExists) {
+    percentKnown = await getPercentKnownForTitle(normalizedTitle);
+  }
+  if (enrichedJSONExists) {
+    badgeIcon = '✅';
+    badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
+    badgeColor = '#2e8b57';
+    return `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+  } else {
+    badgeIcon = '❌';
+    badgeText = 'Not Enriched';
+    badgeColor = '#c0392b';
+    return `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+  }
+}
+
+/**
  * Handles the badge injection logic
  * @param {HTMLElement} cell - The cell element
  * @param {string} normalizedTitle - The normalized title
@@ -282,28 +333,8 @@ async function injectFinalBadgeForCell(cell, normalizedTitle, leftPadding, yearE
   let badge = createInitialBadge(leftPadding);
   placeInitialBadgeForCell(cell, badge, yearEl, sxexEl, episodeInfoEl);
 
-  // Check if enriched JSON exists before trying to pull
-  const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
-
-  // Calculate percentage of known words
-  let percentKnown = null;
-  if (enrichedJSONExists) {
-    percentKnown = await getPercentKnownForTitle(normalizedTitle);
-  }
-
   // Inject the badge based on the enriched JSON result
-  let badgeIcon, badgeText, badgeColor;
-  if (enrichedJSONExists) { // If enriched JSON exists, inject the badge including confirmation icon and percentage
-    badgeIcon = '✅';
-    badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
-    badgeColor = '#2e8b57';
-    badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-  } else { // If enriched JSON does not exist, inject the badge including error icon
-    badgeIcon = '❌';
-    badgeText = 'Not Enriched';
-    badgeColor = '#c0392b';
-    badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-  }
+  badge.innerHTML = await getEnrichedBadgeContent(normalizedTitle);
 } 
 
 /**
@@ -344,6 +375,35 @@ function getEnrichedSubtitleFilenameForEpisodeCard(episodeCard) {
   // 4. Build filename if all info is present
   if (showTitle && seasonNum && epNum) {
     return `${showTitle}_-_S${seasonNum}_·_E${epNum}`;
+  }
+  return null;
+}
+
+/**
+ * Extracts the enriched subtitle filename for a TV episode page.
+ * The filename format is: ShowTitle_-_S1_·_E1
+ * @returns {string|null} The constructed filename, or null if info is missing
+ */
+function getEnrichedSubtitleFilenameForTVEpisodePage() {
+  // 1. Show Title
+  const titleEl = document.querySelector('h1[data-testid="metadata-title"] span, h1[data-testid="metadata-title"] a');
+  const showTitle = titleEl ? window.normalizeTitle(titleEl.textContent.trim()) : null;
+
+  // 2. Season and Episode
+  const line1El = document.querySelector('span[data-testid="metadata-line1"]');
+  let seasonNum = null, episodeNum = null;
+  if (line1El) {
+    // Extract season number
+    const seasonMatch = line1El.textContent.match(/Season\s*(\d+)/i);
+    if (seasonMatch) seasonNum = seasonMatch[1];
+    // Extract episode number
+    const episodeMatch = line1El.textContent.match(/Episode\s*(\d+)/i);
+    if (episodeMatch) episodeNum = episodeMatch[1];
+  }
+
+  // 3. Build filename
+  if (showTitle && seasonNum && episodeNum) {
+    return `${showTitle}_-_S${seasonNum}_·_E${episodeNum}`;
   }
   return null;
 }
@@ -436,82 +496,72 @@ function handleFoldersPageBadge(cell) {
   injectFinalBadgeForCell(cell, normalizedTitle, '', yearEl, null, null);
 }
 
-// Store the observer globally so it can be disconnected/reconnected
-let enrichedBadgeObserver = null;
+
 
 /**
- * Handles badge injection for individual media (movie) pages.
- * @param {HTMLElement} cell - The cell to inject the badge into (not used, but for API consistency)
+ * Handles badge injection for individual media pages (movies or TV episodes).
+ * Determines the correct normalized title for lookup and injects the badge row.
  */
 async function handleIndividualMediaPageBadge() {
-  // Disconnect the observer at the very start to prevent multiple triggers
   if (enrichedBadgeObserver) enrichedBadgeObserver.disconnect();
 
-  // Debug: log when this function is called
-  console.log('[BADGE DEBUG]', new Date().toISOString(), 'handleIndividualMediaPageBadge called');
-  // Find the main title element
   const titleEl = document.querySelector('[data-testid="metadata-title"]');
-  // Normalize the title (reuse your normalization logic)
-  const rawTitle = titleEl ? titleEl.textContent.trim() : '';
-  const normalizedTitle = window.normalizeTitle ? window.normalizeTitle(rawTitle) : rawTitle;
-  // Find the table container
-  const tableContainer = document.querySelector('.StreamDetailPropertiesTable-container-vnpzQ6');
+  const line1El = document.querySelector('span[data-testid="metadata-line1"]');
+  let normalizedTitle = null;
+  const isTVEpisode = line1El && /Season\s*\d+/i.test(line1El.textContent) && /Episode\s*\d+/i.test(line1El.textContent);
 
-  // Remove any existing badge rows to prevent duplicates
-  if (tableContainer) {
-    tableContainer.querySelectorAll('.enriched-badge-row').forEach(row => row.remove());
+  if (isTVEpisode) {
+    normalizedTitle = getEnrichedSubtitleFilenameForTVEpisodePage();
+  } else if (titleEl) {
+    const rawTitle = titleEl.textContent.trim();
+    normalizedTitle = window.normalizeTitle ? window.normalizeTitle(rawTitle) : rawTitle;
   }
 
-  // If the table container exists and the badge row doesn't, create a new row
-  if (tableContainer && !tableContainer.querySelector('.enriched-badge-row')) {
-    // Create a new row div with the same classes as the other rows
+  // Try the table container first (for movies/TV)
+  let container = document.querySelector('.StreamDetailPropertiesTable-container-vnpzQ6');
+  let isYT = false;
+
+  // If not found, fallback to the parent of the Video/Audio/Subtitles rows (for YT)
+  if (!container) {
+    // Find the "Video" row, then get its parent
+    const videoRow = Array.from(document.querySelectorAll('span.ineka90')).find(
+      el => el.textContent.trim() === 'Video'
+    );
+    if (videoRow) {
+      container = videoRow.closest('div._1h4p3k00._1v25wbq8._1v25wbq1o._1v25wbqk._1v25wbq1g._1v25wbq1c._1v25wbq14._1v25wbq3g._1v25wbq28');
+      isYT = true;
+    }
+  }
+
+  // Remove any existing badge rows to prevent duplicates
+  if (container) {
+    container.querySelectorAll('.enriched-badge-row').forEach(row => row.remove());
+  }
+
+  if (container && normalizedTitle && !container.querySelector('.enriched-badge-row')) {
     const rowDiv = document.createElement('div');
+    // Use the same classes as the other rows
     rowDiv.className = '_1h4p3k00 _1v25wbq8 _1v25wbq1s _1v25wbqg _1v25wbq1g _1v25wbq1c _1v25wbq14 _1v25wbq34 _1v25wbq28 enriched-badge-row';
-    rowDiv.style.marginTop = '9px'; // Add extra margin for spacing
+    rowDiv.style.marginTop = '9px';
     rowDiv.style.marginLeft = '-2px';
     rowDiv.style.paddingLeft = '-2px';
-    // Create a single span for the label and value
+
     const labelSpan = document.createElement('span');
     labelSpan.className = 'ineka90 ineka9k ineka9b ineka9n _1v25wbq1g _1v25wbq1c _1v25wbqlk';
     labelSpan.style.marginLeft = '-2px';
     labelSpan.style.paddingLeft = '-2px';
-    // --- Badge content logic (same as injectFinalBadgeForCell) ---
-    let badgeIcon, badgeText, badgeColor;
-    let percentKnown = null;
-    const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
-    if (enrichedJSONExists) {
-      percentKnown = await getPercentKnownForTitle(normalizedTitle);
-    }
-    if (enrichedJSONExists) {
-      badgeIcon = '✅';
-      badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
-      badgeColor = '#2e8b57';
-      labelSpan.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-    } else {
-      badgeIcon = '❌';
-      badgeText = 'Not Enriched';
-      badgeColor = '#c0392b';
-      labelSpan.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-    }
+    labelSpan.innerHTML = await getEnrichedBadgeContent(normalizedTitle);
+
     rowDiv.appendChild(labelSpan);
-    // Append the new row to the table container
-    tableContainer.appendChild(rowDiv);
+    container.appendChild(rowDiv);
   }
-  // Reconnect the observer at the very end
+
   if (enrichedBadgeObserver) enrichedBadgeObserver.observe(document.body, { childList: true, subtree: true });
 }
 
-// Debounce utility
-function debounce(fn, delay) {
-  let timer = null;
-  return function(...args) {
-    clearTimeout(timer);
-    timer = setTimeout(() => fn.apply(this, args), delay);
-  };
-}
 
 // Debounced version of handleIndividualMediaPageBadge
-const debouncedHandleIndividualMediaPageBadge = debounce(handleIndividualMediaPageBadge, 200);
+const debouncedHandleIndividualMediaPageBadge = debounce(handleIndividualMediaPageBadge, 800);
 
 /**
  * Handles the badge injection logic for a given cell (episode card or movie card),
