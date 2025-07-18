@@ -20,21 +20,36 @@ function removeExistingBadges(cell) {
  * Returns one of: 'tv_overview', 'home_or_movie_overview', or 'unknown'.
  */
 function detectPlexPageType() {
-    // TV Overview: has [data-testid="metadata-title"] and multiple [data-testid="cellItem"] with episode structure
-    if (document.querySelector('[data-testid="metadata-title"]') && document.querySelector('[data-testid="metadata-subtitle"]')) {
-      return 'tv_overview';
-    }
-    // Home or Movie Overview: has [data-testid="cellItem"] but no TV overview header
-    if (document.querySelector('[data-testid="cellItem"]') && !document.querySelector('[data-testid="metadata-title"]')) {
-      return 'home_or_movie_overview';
-    }
-    // Folders page: look for ListRow-row-oh5MTV
-    if (document.querySelector('.ListRow-row-oh5MTV')) {
-      return 'folders';
-    }
-    // Add more page type checks as needed
-    return 'unknown';
+  // Individual media (movie) page: has a Cast & Crew hub, no episode cards or folder rows
+  const castCrewHub = Array.from(document.querySelectorAll('[data-testid="hubTitle"]')).find(el => /Cast\s*&\s*Crew/i.test(el.textContent));
+  if (
+    castCrewHub
+  ) {
+    return 'individual_media';
   }
+
+  // TV Overview: has title, subtitle, and episode cards
+  if (
+    document.querySelector('[data-testid="metadata-title"]') &&
+    document.querySelector('[data-testid="metadata-subtitle"]') &&
+    document.querySelector('[data-testid="cellItem"]')
+  ) {
+    return 'tv_overview';
+  }
+
+  // Folders page
+  if (document.querySelector('.ListRow-row-oh5MTV')) {
+    return 'folders';
+  }
+
+  // Home or movie overview: has episode cards but not the above
+  if (document.querySelector('[data-testid="cellItem"]')) {
+    return 'home_or_movie_overview';
+  }
+
+  // Unknown page type
+  return 'unknown';
+}
 
 /**
  * Adjusts the height of the row container to ensure badge visibility.
@@ -197,7 +212,7 @@ function createInitialBadge(leftPadding = '') {
  * @param {HTMLElement|null} sxexEl - The SXEX element.
  * @param {HTMLElement|null} episodeInfoEl - The episode info element (for TV overview pages).
  */
-function placeInitialBadge(cell, badge, yearEl, sxexEl, episodeInfoEl) {
+function placeInitialBadgeForCell(cell, badge, yearEl, sxexEl, episodeInfoEl) {
   let injectedInline = false;
   if (yearEl) {
     yearEl.style.display = 'flex';
@@ -262,10 +277,10 @@ async function getPercentKnownForTitle(normalizedTitle) {
  * @param {HTMLElement} yearEl - The year element
  * @param {HTMLElement} sxexEl - The SXEX element
  */
-async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxexEl, episodeInfoEl) {
+async function injectFinalBadgeForCell(cell, normalizedTitle, leftPadding, yearEl, sxexEl, episodeInfoEl) {
   // Initialize initial badge & place it
   let badge = createInitialBadge(leftPadding);
-  placeInitialBadge(cell, badge, yearEl, sxexEl, episodeInfoEl);
+  placeInitialBadgeForCell(cell, badge, yearEl, sxexEl, episodeInfoEl);
 
   // Check if enriched JSON exists before trying to pull
   const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
@@ -332,7 +347,7 @@ function getEnrichedSubtitleFilenameForEpisodeCard(episodeCard) {
   }
   return null;
 }
-  
+ 
 /**
  * Handles badge injection for Home or Movie Overview pages.
  * @param {HTMLElement} cell - The cell to inject the badge into
@@ -366,7 +381,7 @@ function handleHomeOrMovieOverviewBadge(cell) {
   
   // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
   default:
-      injectFinalBadge(cell, mediaInfo.normalizedTitle, leftPadding, yearEl, sxexEl);
+      injectFinalBadgeForCell(cell, mediaInfo.normalizedTitle, leftPadding, yearEl, sxexEl);
       break;
   }
 }
@@ -391,7 +406,7 @@ async function handleTVOverviewBadge(cell) {
     }
 
     // Pass episodeInfoEl to injectFinalBadge for inline placement
-    await injectFinalBadge(cell, normalizedTitle, '', null, null, episodeInfoEl);
+    await injectFinalBadgeForCell(cell, normalizedTitle, '', null, null, episodeInfoEl);
     return;
   }
 }
@@ -401,17 +416,102 @@ async function handleTVOverviewBadge(cell) {
  * @param {HTMLElement} cell - The cell to inject the badge into
  */
 function handleFoldersPageBadge(cell) {
+  // Skip badge injection if this is a TV folders page
+  const tvHeader = document.querySelector('.PageHeaderTitle-title-W0yjas');
+  if (tvHeader && /TV/i.test(tvHeader.textContent)) {
+    return;
+  }
+
   // Find the title element
   const titleEl = cell.querySelector('.MetadataDetailsRow-title-QFytpJ');
+
   // Find the year/subtitle element
   const yearEl = cell.querySelector('.MetadataDetailsRow-subtitle-rx7YZP');
+  
   // Normalize the title (reuse your normalization logic)
   const rawTitle = titleEl ? titleEl.textContent.trim() : '';
   const normalizedTitle = window.normalizeTitle ? window.normalizeTitle(rawTitle) : rawTitle;
 
   // Inject the badge inline with the year/subtitle
-  injectFinalBadge(cell, normalizedTitle, '', yearEl, null, null);
+  injectFinalBadgeForCell(cell, normalizedTitle, '', yearEl, null, null);
 }
+
+// Store the observer globally so it can be disconnected/reconnected
+let enrichedBadgeObserver = null;
+
+/**
+ * Handles badge injection for individual media (movie) pages.
+ * @param {HTMLElement} cell - The cell to inject the badge into (not used, but for API consistency)
+ */
+async function handleIndividualMediaPageBadge() {
+  // Disconnect the observer at the very start to prevent multiple triggers
+  if (enrichedBadgeObserver) enrichedBadgeObserver.disconnect();
+
+  // Debug: log when this function is called
+  console.log('[BADGE DEBUG]', new Date().toISOString(), 'handleIndividualMediaPageBadge called');
+  // Find the main title element
+  const titleEl = document.querySelector('[data-testid="metadata-title"]');
+  // Normalize the title (reuse your normalization logic)
+  const rawTitle = titleEl ? titleEl.textContent.trim() : '';
+  const normalizedTitle = window.normalizeTitle ? window.normalizeTitle(rawTitle) : rawTitle;
+  // Find the table container
+  const tableContainer = document.querySelector('.StreamDetailPropertiesTable-container-vnpzQ6');
+
+  // Remove any existing badge rows to prevent duplicates
+  if (tableContainer) {
+    tableContainer.querySelectorAll('.enriched-badge-row').forEach(row => row.remove());
+  }
+
+  // If the table container exists and the badge row doesn't, create a new row
+  if (tableContainer && !tableContainer.querySelector('.enriched-badge-row')) {
+    // Create a new row div with the same classes as the other rows
+    const rowDiv = document.createElement('div');
+    rowDiv.className = '_1h4p3k00 _1v25wbq8 _1v25wbq1s _1v25wbqg _1v25wbq1g _1v25wbq1c _1v25wbq14 _1v25wbq34 _1v25wbq28 enriched-badge-row';
+    rowDiv.style.marginTop = '9px'; // Add extra margin for spacing
+    rowDiv.style.marginLeft = '-2px';
+    rowDiv.style.paddingLeft = '-2px';
+    // Create a single span for the label and value
+    const labelSpan = document.createElement('span');
+    labelSpan.className = 'ineka90 ineka9k ineka9b ineka9n _1v25wbq1g _1v25wbq1c _1v25wbqlk';
+    labelSpan.style.marginLeft = '-2px';
+    labelSpan.style.paddingLeft = '-2px';
+    // --- Badge content logic (same as injectFinalBadgeForCell) ---
+    let badgeIcon, badgeText, badgeColor;
+    let percentKnown = null;
+    const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
+    if (enrichedJSONExists) {
+      percentKnown = await getPercentKnownForTitle(normalizedTitle);
+    }
+    if (enrichedJSONExists) {
+      badgeIcon = '✅';
+      badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
+      badgeColor = '#2e8b57';
+      labelSpan.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+    } else {
+      badgeIcon = '❌';
+      badgeText = 'Not Enriched';
+      badgeColor = '#c0392b';
+      labelSpan.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+    }
+    rowDiv.appendChild(labelSpan);
+    // Append the new row to the table container
+    tableContainer.appendChild(rowDiv);
+  }
+  // Reconnect the observer at the very end
+  if (enrichedBadgeObserver) enrichedBadgeObserver.observe(document.body, { childList: true, subtree: true });
+}
+
+// Debounce utility
+function debounce(fn, delay) {
+  let timer = null;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+// Debounced version of handleIndividualMediaPageBadge
+const debouncedHandleIndividualMediaPageBadge = debounce(handleIndividualMediaPageBadge, 200);
 
 /**
  * Handles the badge injection logic for a given cell (episode card or movie card),
@@ -439,6 +539,10 @@ async function handleBadgeInjectionForCell(cell) {
       handleFoldersPageBadge(cell);
       break;
     }
+    case 'individual_media': {
+      await debouncedHandleIndividualMediaPageBadge();
+      break;
+    }
     default: {
       // Unknown or unsupported page type
       // Optionally, do nothing or inject a generic badge
@@ -455,25 +559,17 @@ function observeAndInjectEnrichedBadges() {
   const foldersCellSelector = '.MetadataDetailsRow-overlay-OPOaNZ';
   const defaultCellSelector = 'div[data-testid="cellItem"]';
 
-  function injectForCurrentPage() {
-    const pageType = detectPlexPageType();
-    if (pageType === 'folders') {
-      document.querySelectorAll(foldersCellSelector).forEach(cell => handleBadgeInjectionForCell(cell));
-    } else {
-      document.querySelectorAll(defaultCellSelector).forEach(cell => handleBadgeInjectionForCell(cell));
-    }
-  }
-
-  // Initial injection
-  injectForCurrentPage();
-
   // Observe for dynamically added cells
-  const observer = new MutationObserver(mutations => {
+  enrichedBadgeObserver = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1) {
           const pageType = detectPlexPageType();
-          if (pageType === 'folders') {
+          console.log('[BADGE DEBUG]', 'Page type detected:', pageType);
+          if (pageType === 'individual_media') {
+            // For individual media pages, inject once (no cells to loop over)
+            debouncedHandleIndividualMediaPageBadge();
+          } else if (pageType === 'folders') {
             if (node.matches && node.matches(foldersCellSelector)) {
               handleBadgeInjectionForCell(node);
             }
@@ -490,7 +586,7 @@ function observeAndInjectEnrichedBadges() {
       });
     });
   });
-  observer.observe(document.body, { childList: true, subtree: true });
+  enrichedBadgeObserver.observe(document.body, { childList: true, subtree: true });
 }
 
 window.observeAndInjectEnrichedBadges = observeAndInjectEnrichedBadges; 
