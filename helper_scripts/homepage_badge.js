@@ -49,25 +49,41 @@ async function injectBadgeForCell(cell) {
   if (titleEl && titleEl.textContent && window.normalizeTitle && window.checkEnrichedJSONExists) {
     const rawTitle = titleEl.textContent.trim();
     
-    // Check if this is a TV show by looking for season/episode format
-    const seasonEpisodeEl = cell.querySelector('span a[title*="Season"], span a[title*="Episode"]');
-    
-    // Let's also check what elements are actually in the cell
-    const allLinks = cell.querySelectorAll('a');
-
-    let normalized = '';
-    
-    if (seasonEpisodeEl) {
-      // CASE 1: This is a TV show - construct filename as [Show Title] [S1·E1]
-      // For TV shows, we have: show title, episode title, then season/episode span
-      const showTitleEl = cell.querySelector('a[title]:not([title*="Season"]):not([title*="Welcome"])');
-      const seasonEl = cell.querySelector('span a[title*="Season"]');
-      // The episode element is the second link in the season/episode span
-      const seasonEpisodeSpan = cell.querySelector('span a[title*="Season"]')?.parentElement;
-      const episodeEl = seasonEpisodeSpan ? seasonEpisodeSpan.querySelectorAll('a')[1] : null;
+          // Check if this is a TV show by looking for season/episode format
+      const seasonEpisodeEl = cell.querySelector('span a[title*="Season"], span a[title*="Episode"]');
       
-      // If we have all the elements, we can normalize the title
-      if (showTitleEl && seasonEl && episodeEl) {
+      // Check if this is a season-level entry (should be skipped)
+      const seasonLink = cell.querySelector('a[data-testid="metadataTitleLink"][title*="Season"], a.MetadataPosterCardTitle-title-ImAmGu[title*="Season"]');
+      const seasonSpan = cell.querySelector('span.MetadataPosterCardTitle-title-ImAmGu');
+      
+      const isSeasonLevel = (seasonLink && 
+                            (seasonLink.textContent.trim().toLowerCase().includes('season') ||
+                             seasonLink.textContent.trim().toLowerCase().includes('seasons'))) ||
+                           (seasonSpan && 
+                            (seasonSpan.textContent.trim().toLowerCase().includes('season') ||
+                             seasonSpan.textContent.trim().toLowerCase().includes('seasons')));
+      
+      if (isSeasonLevel) {
+        // Skip season-level entries - don't inject any badge
+        return;
+      }
+      
+      // Let's also check what elements are actually in the cell
+      const allLinks = cell.querySelectorAll('a');
+  
+      let normalized = '';
+      
+      if (seasonEpisodeEl) {
+        // CASE 1: This is a TV show - construct filename as [Show Title] [S1·E1]
+        // For TV shows, we have: show title, episode title, then season/episode span
+        const showTitleEl = cell.querySelector('a[title]:not([title*="Season"]):not([title*="Welcome"])');
+        const seasonEl = cell.querySelector('span a[title*="Season"]');
+        // The episode element is the second link in the season/episode span
+        const seasonEpisodeSpan = cell.querySelector('span a[title*="Season"]')?.parentElement;
+        const episodeEl = seasonEpisodeSpan ? seasonEpisodeSpan.querySelectorAll('a')[1] : null;
+        
+        // If we have all the elements, we can normalize the title
+        if (showTitleEl && seasonEl && episodeEl) {
         const showTitle = showTitleEl.textContent.trim();
         const season = seasonEl.textContent.trim();
         const episode = episodeEl.textContent.trim();
