@@ -286,6 +286,6 @@ let mainInterval = setInterval(() => {
 }, 100);
 
 // === Plex Homepage Badge Injection ===
-if (typeof window.observeNewCells === 'function') {
-  window.observeNewCells();
+if (typeof window.observeAndInjectEnrichedBadges === 'function') {
+  window.observeAndInjectEnrichedBadges();
 }

@@ -16,6 +16,23 @@ function removeExistingBadges(cell) {
 }
 
 /**
+ * Utility to detect the current Plex page type based on DOM structure.
+ * Returns one of: 'tv_overview', 'home_or_movie_overview', or 'unknown'.
+ */
+function detectPlexPageType() {
+    // TV Overview: has [data-testid="metadata-title"] and multiple [data-testid="cellItem"] with episode structure
+    if (document.querySelector('[data-testid="metadata-title"]') && document.querySelector('[data-testid="metadata-subtitle"]')) {
+      return 'tv_overview';
+    }
+    // Home or Movie Overview: has [data-testid="cellItem"] but no TV overview header
+    if (document.querySelector('[data-testid="cellItem"]') && !document.querySelector('[data-testid="metadata-title"]')) {
+      return 'home_or_movie_overview';
+    }
+    // Add more page type checks as needed
+    return 'unknown';
+  }
+
+/**
  * Adjusts the height of the row container to ensure badge visibility.
  * Particularly on Home page.
  * @param {HTMLElement} cell - The cell element.
@@ -169,13 +186,14 @@ function createInitialBadge(leftPadding = '') {
 }
 
 /**
- * Places the badge inline with year or SXEX, or as a new line if neither is found.
+ * Places the badge inline with year, SXEX, or episode info, or as a new line if none is found.
  * @param {HTMLElement} cell - The cell element.
  * @param {HTMLElement} badge - The badge element to inject.
  * @param {HTMLElement|null} yearEl - The year element.
  * @param {HTMLElement|null} sxexEl - The SXEX element.
+ * @param {HTMLElement|null} episodeInfoEl - The episode info element (for TV overview pages).
  */
-function placeInitialBadge(cell, badge, yearEl, sxexEl) {
+function placeInitialBadge(cell, badge, yearEl, sxexEl, episodeInfoEl) {
   let injectedInline = false;
   if (yearEl) {
     yearEl.style.display = 'flex';
@@ -188,6 +206,12 @@ function placeInitialBadge(cell, badge, yearEl, sxexEl) {
     sxexEl.style.alignItems = 'center';
     badge.style.marginLeft = '8px';
     sxexEl.appendChild(badge);
+    injectedInline = true;
+  } else if (episodeInfoEl) {
+    episodeInfoEl.style.display = 'flex';
+    episodeInfoEl.style.alignItems = 'center';
+    badge.style.marginLeft = '8px';
+    episodeInfoEl.appendChild(badge);
     injectedInline = true;
   }
   if (!injectedInline) {
@@ -234,10 +258,10 @@ async function getPercentKnownForTitle(normalizedTitle) {
  * @param {HTMLElement} yearEl - The year element
  * @param {HTMLElement} sxexEl - The SXEX element
  */
-async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxexEl) {
+async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxexEl, episodeInfoEl) {
   // Initialize initial badge & place it
   let badge = createInitialBadge(leftPadding);
-  placeInitialBadge(cell, badge, yearEl, sxexEl);
+  placeInitialBadge(cell, badge, yearEl, sxexEl, episodeInfoEl);
 
   // Check if enriched JSON exists before trying to pull
   const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
@@ -249,6 +273,7 @@ async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxex
   }
 
   // Inject the badge based on the enriched JSON result
+  let badgeIcon, badgeText, badgeColor;
   if (enrichedJSONExists) { // If enriched JSON exists, inject the badge including confirmation icon and percentage
     badgeIcon = '✅';
     badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
@@ -263,72 +288,159 @@ async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxex
 } 
 
 /**
- * Injects the real badge as the last child of the cell, showing subtitle availability.
- * Always removes any existing badge before injecting a new one.
- * Also increases spacing between rows of cells.
- * Adjusts row container height for badge visibility.
- * Aligns badge indent with year.
- * Uses icons and short text for badge.
- * 
- * @param {HTMLElement} cell - The cell to inject the badge into
- * @returns {void}
+ * Extracts the enriched subtitle filename for a TV episode card on the TV overview page.
+ * The filename format is: ShowTitle_-_S1_·_E1.enriched.json
+ * @param {HTMLElement} episodeCard - The DOM element for the episode card
+ * @returns {string|null} The constructed filename, or null if info is missing
  */
-async function handleBadgeInjectionForCell(cell) {
-    // Remove any existing badge(s) in this cell before injecting a new one
-    removeExistingBadges(cell);
-  
-    // Adjust row container height (particularly on Home page)
-    adjustRowContainerHeight(cell);
-  
-    // Find key DOM elements
-    const { yearEl, leftPadding, sxexEl, titleEl, rawTitle } = findBadgePlacementElements(cell);
-  
-    // Determine media type and get normalized title
-    // Used for determining whether to inject badge
-    // Returns data in structure: { normalizedTitle: normalizedTitle, mediaType: 'tv_season' | 'tv_show' | 'movie' }
-    const mediaInfo = determineMediaType(cell, rawTitle);
-  
-    // Decide whether to inject badge, depending on media type
-    switch (true) {
-      // CASE 1: Missing title, or key functions (normalizeTitle, checkEnrichedJSONExists)
-      case (!titleEl?.textContent || !window.normalizeTitle || !window.checkEnrichedJSONExists):
-        injectErrorBadge(cell, '[Error: No title or utility functions available]');
-        return;
-      
-      // CASE 2: TV Season entry - skip entirely
-      case (mediaInfo.mediaType === 'tv_season'):
-        return;
-      
-      // CASE 3: Audio content - skip entirely
-      case (mediaInfo.mediaType === 'audio'):
-        return;
-      
-      // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
-      default:
-        await injectFinalBadge(cell, mediaInfo.normalizedTitle, leftPadding, yearEl, sxexEl);
-        break;
+function getEnrichedSubtitleFilenameForEpisodeCard(episodeCard) {
+  // 1. Get show title (from page header, not card)
+  const showTitleEl = document.querySelector('[data-testid="metadata-title"]');
+  const showTitle = showTitleEl ? showTitleEl.textContent.trim().replace(/\s+/g, '_') : null;
+
+  // 2. Get season number (from page header)
+  const seasonSubtitleEl = document.querySelector('[data-testid="metadata-subtitle"]');
+  let seasonNum = null;
+  if (seasonSubtitleEl) {
+    const seasonMatch = seasonSubtitleEl.textContent.match(/Season\s*(\d+)/i);
+    if (seasonMatch) seasonNum = seasonMatch[1];
+  }
+
+  // 3. Get episode number (from card)
+  let epNum = null;
+  // Try to find the episode number in the 'Episode X' link or span
+  const epNumEl = episodeCard.querySelector('.MetadataPosterCardTitle-title-ImAmGu a, span.MetadataPosterCardTitle-title-ImAmGu a');
+  if (epNumEl) {
+    const epMatch = epNumEl.textContent.match(/Episode\s*(\d+)/i);
+    if (epMatch) epNum = epMatch[1];
+  } else {
+    // Fallback: try to find a span with just 'Episode X'
+    const altEpNumEl = episodeCard.querySelector('span.MetadataPosterCardTitle-title-ImAmGu');
+    if (altEpNumEl) {
+      const epMatch = altEpNumEl.textContent.match(/Episode\s*(\d+)/i);
+      if (epMatch) epNum = epMatch[1];
     }
+  }
+
+  // 4. Build filename if all info is present
+  if (showTitle && seasonNum && epNum) {
+    return `${showTitle}_-_S${seasonNum}_·_E${epNum}.enriched.json`;
+  }
+  return null;
+}
+  
+/**
+ * Handles badge injection for Home or Movie Overview pages.
+ * @param {HTMLElement} cell - The cell to inject the badge into
+ */
+function handleHomeOrMovieOverviewBadge(cell) {
+  // Adjust row container height (particularly on Home page)
+  adjustRowContainerHeight(cell);
+  
+  // Find key DOM elements
+  const { yearEl, leftPadding, sxexEl, titleEl, rawTitle } = findBadgePlacementElements(cell);
+
+  // Determine media type and get normalized title
+  // Used for determining whether to inject badge
+  // Returns data in structure: { normalizedTitle: normalizedTitle, mediaType: 'tv_season' | 'tv_show' | 'movie' }
+  const mediaInfo = determineMediaType(cell, rawTitle);
+
+  // Decide whether to inject badge, depending on media type
+  switch (true) {
+  // CASE 1: Missing title, or key functions (normalizeTitle, checkEnrichedJSONExists)
+  case (!titleEl?.textContent || !window.normalizeTitle || !window.checkEnrichedJSONExists):
+      injectErrorBadge(cell, '[Error: No title or utility functions available]');
+      return;
+  
+  // CASE 2: TV Season entry - skip entirely
+  case (mediaInfo.mediaType === 'tv_season'):
+      return;
+  
+  // CASE 3: Audio content - skip entirely
+  case (mediaInfo.mediaType === 'audio'):
+      return;
+  
+  // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
+  default:
+      injectFinalBadge(cell, mediaInfo.normalizedTitle, leftPadding, yearEl, sxexEl);
+      break;
+  }
 }
 
 /**
- * Observes new cells and injects the badge
- * @returns {void}
+ * Handles badge injection for TV Overview pages (episode cards).
+ * @param {HTMLElement} cell - The cell to inject the badge into
  */
-function observeNewCells() {
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        mutation.addedNodes.forEach(node => {
-          if (node.nodeType === 1) {
-            if (node.matches && node.matches(cellSelector)) {
-              handleBadgeInjectionForCell(node);
-            }
-            const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
-            newCells.forEach(cell => handleBadgeInjectionForCell(cell));
-          }
-        });
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+async function handleTVOverviewBadge(cell) {
+  const enrichedFilename = getEnrichedSubtitleFilenameForEpisodeCard(cell);
+  if (enrichedFilename) {
+    const normalizedTitle = enrichedFilename.replace(/\.enriched\.json$/, '');
+
+    // Find the element that contains the episode number (e.g., "Episode 1")
+    let episodeInfoEl = null;
+    const candidates = cell.querySelectorAll('.MetadataPosterCardTitle-title-ImAmGu, .MetadataPosterCardTitle-title-ImAmGu a');
+    for (const el of candidates) {
+      if (/Episode\s*\d+/i.test(el.textContent)) {
+        episodeInfoEl = el;
+        break;
+      }
+    }
+
+    // Pass episodeInfoEl to injectFinalBadge for inline placement
+    await injectFinalBadge(cell, normalizedTitle, '', null, null, episodeInfoEl);
+    return;
+  }
 }
 
-window.observeNewCells = observeNewCells; 
+/**
+ * Handles the badge injection logic for a given cell (episode card or movie card),
+ * dispatching based on the detected page type.
+ * @param {HTMLElement} cell - The cell to inject the badge into
+ */
+async function handleBadgeInjectionForCell(cell) {
+  // Remove any existing badge(s) in this cell before injecting a new one
+  removeExistingBadges(cell);
+
+  // Detect the current page type
+  const pageType = detectPlexPageType();
+
+  // Inject the badge based on the page type
+  switch (pageType) {
+    case 'home_or_movie_overview': {
+        handleHomeOrMovieOverviewBadge(cell);
+        break;
+    }
+    case 'tv_overview': {
+      await handleTVOverviewBadge(cell);
+      break;
+    }
+    default: {
+      // Unknown or unsupported page type
+      // Optionally, do nothing or inject a generic badge
+      break;
+    }
+  }
+}
+
+/**
+ * Observes new cells and injects enriched subtitle badges.
+ * @returns {void}
+ */
+function observeAndInjectEnrichedBadges() {
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      mutation.addedNodes.forEach(node => {
+        if (node.nodeType === 1) {
+          if (node.matches && node.matches(cellSelector)) {
+            handleBadgeInjectionForCell(node);
+          }
+          const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
+          newCells.forEach(cell => handleBadgeInjectionForCell(cell));
+        }
+      });
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+window.observeAndInjectEnrichedBadges = observeAndInjectEnrichedBadges; 
