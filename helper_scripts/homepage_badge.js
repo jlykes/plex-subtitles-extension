@@ -87,11 +87,13 @@ function injectErrorBadge(cell, message) {
  * Aligns badge indent with year.
  * Uses icons and short text for badge.
  * 
- * cell: the cell to inject the badge into
- * return: void
+ * @param {HTMLElement} cell - The cell to inject the badge into
+ * @returns {void}
  */
 async function injectBadgeForCell(cell) {
-  cell.style.marginBottom = '18px';
+  // Ensure enough vertical space for badge and row separation
+  cell.style.height = '400px';
+  cell.style.marginBottom = '40px';
 
   // --- Adjust row container height ---
   const scroller = cell.closest('.VirtualHubScroller-hubScroller-gv2_Qy');
@@ -120,8 +122,6 @@ async function injectBadgeForCell(cell) {
   // MEDIA TYPE: Determine media type and get normalized title
   // Used for determining whether to inject badge
   const mediaInfo = determineMediaType(cell, rawTitle);
-  const { normalized, mediaType } = mediaInfo;
-
 
   // --- Decide whether to inject badge, depending on media type ---
 
@@ -141,6 +141,8 @@ async function injectBadgeForCell(cell) {
     
     // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
     default:
+      // Only destructure after confirming mediaInfo is not null
+      const { normalized, mediaType } = mediaInfo;
       // Initialize badge
       let badgeText = 'Checking...';
       let badge = document.createElement('div');
@@ -158,7 +160,38 @@ async function injectBadgeForCell(cell) {
       if (leftPadding) {
         badge.style.paddingLeft = leftPadding;
       }
-      cell.appendChild(badge);
+
+      // --- Badge injection location logic ---
+      // Try to inject inline with year or SXEX, else as new line
+      let injectedInline = false;
+      const yearEl = cell.querySelector(yearSelector);
+      // Try to find SXEX (season/episode) element: look for S1·E1, S1.E1, etc.
+      let sxexEl = null;
+      const possibleSXEX = cell.querySelectorAll('span, a');
+      for (const el of possibleSXEX) {
+        if (/S\d+\s*[·.]\s*E\d+/i.test(el.textContent)) {
+          sxexEl = el;
+          break;
+        }
+      }
+      if (yearEl) {
+        yearEl.style.display = 'flex';
+        yearEl.style.alignItems = 'center';
+        badge.style.marginLeft = '8px';
+        yearEl.appendChild(badge);
+        injectedInline = true;
+      } else if (sxexEl) {
+        sxexEl.style.display = 'flex';
+        sxexEl.style.alignItems = 'center';
+        badge.style.marginLeft = '8px';
+        sxexEl.appendChild(badge);
+        injectedInline = true;
+      }
+      if (!injectedInline) {
+        badge.style.display = '';
+        badge.style.marginLeft = '';
+        cell.appendChild(badge);
+      }
 
       // Check for enriched JSON and populate text based on result
       const exists = await window.checkEnrichedJSONExists(normalized);
@@ -179,7 +212,7 @@ async function injectBadgeForCell(cell) {
 
 /**
  * Observes new cells and injects the badge
- * return: void
+ * @returns {void}
  */
 function observeNewCells() {
   const observer = new MutationObserver(mutations => {
