@@ -117,6 +117,16 @@ async function injectBadgeForCell(cell) {
     leftPadding = style.paddingLeft || style.marginLeft || '';
   }
 
+  // Try to find SXEX (season/episode) element: look for S1·E1, S1.E1, etc.
+  let sxexEl = null;
+  const possibleSXEX = cell.querySelectorAll('span, a');
+  for (const el of possibleSXEX) {
+    if (/S\d+\s*[·.]\s*E\d+/i.test(el.textContent)) {
+      sxexEl = el;
+      break;
+    }
+  }
+
   // TITLE: Extract the title from the cell
   const titleEl = cell.querySelector(titleSelector);
   const rawTitle = titleEl.textContent.trim();
@@ -143,122 +153,123 @@ async function injectBadgeForCell(cell) {
     
     // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
     default:
-      // Only destructure after confirming mediaInfo is not null
-      const { normalized, mediaType } = mediaInfo;
-      // Initialize badge
-      let badgeText = 'Checking...';
-      let badge = document.createElement('div');
-      let badgeColor = '#888';
-      let badgeIcon = '';
-
-      // Badge styling
-      badge.className = 'homepage-enriched-badge';
-      badge.textContent = badgeText;
-      badge.style.fontSize = '0.9em';
-      badge.style.color = badgeColor;
-      badge.style.margin = '0';
-      badge.style.padding = '0';
-      badge.style.borderRadius = '0';
-      if (leftPadding) {
-        badge.style.paddingLeft = leftPadding;
-      }
-
-      // --- Badge injection location logic ---
-      // Try to inject inline with year or SXEX, else as new line
-      let injectedInline = false;
-      const yearEl = cell.querySelector(yearSelector);
-      // Try to find SXEX (season/episode) element: look for S1·E1, S1.E1, etc.
-      let sxexEl = null;
-      const possibleSXEX = cell.querySelectorAll('span, a');
-      for (const el of possibleSXEX) {
-        if (/S\d+\s*[·.]\s*E\d+/i.test(el.textContent)) {
-          sxexEl = el;
-          break;
-        }
-      }
-      if (yearEl) {
-        yearEl.style.display = 'flex';
-        yearEl.style.alignItems = 'center';
-        badge.style.marginLeft = '8px';
-        yearEl.appendChild(badge);
-        injectedInline = true;
-      } else if (sxexEl) {
-        sxexEl.style.display = 'flex';
-        sxexEl.style.alignItems = 'center';
-        badge.style.marginLeft = '8px';
-        sxexEl.appendChild(badge);
-        injectedInline = true;
-      }
-      if (!injectedInline) {
-        badge.style.display = '';
-        badge.style.marginLeft = '';
-        cell.appendChild(badge);
-      }
-
-      // Ensure 'exists' is defined before use
-      const exists = await window.checkEnrichedJSONExists(normalized);
-
-      // Check for enriched JSON and populate text based on result
-      let percentKnown = null;
-      if (exists) {
-        // Fetch the enriched JSON
-        try {
-          const url = chrome.runtime.getURL(`enriched_subtitles/${normalized}.enriched.json`);
-          const res = await fetch(url);
-          if (res.ok) {
-            const subtitleData = await res.json();
-            // Get LingQ terms (prefer global window.lingqTerms)
-            let lingqTerms = window.lingqTerms;
-            if (!lingqTerms) {
-              lingqTerms = await window.lingqData.loadLingQTerms();
-              window.lingqTerms = lingqTerms;
-            }
-            // Calculate percentage (known + learned)
-            const percentages = window.calculateLingQStatusPercentages(subtitleData, lingqTerms);
-            if (percentages && percentages.status3_known && percentages.status3_learned && percentages.ignored) {
-              const knownCount = percentages.status3_known.count + percentages.status3_learned.count + percentages.ignored.count;
-              const totalWords = percentages.totalWords || 0;
-              percentKnown = totalWords > 0 ? Math.round((knownCount / totalWords) * 100) : null;
-            }
-          }
-        } catch (e) {
-          percentKnown = null;
-        }
-      }
-      if (exists) {
-        badgeIcon = '✅';
-        badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
-        badgeColor = '#2e8b57';
-        badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-      } else {
-        badgeIcon = '❌';
-        badgeText = 'Not Enriched';
-        badgeColor = '#c0392b';
-        badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-      }
+      await handleBadgeInjection(cell, mediaInfo.normalized, mediaInfo.mediaType, leftPadding, yearEl, sxexEl);
       break;
   }
 }
+
+/**
+ * Handles the badge injection logic
+ * @param {HTMLElement} cell - The cell element
+ * @param {string} normalized - The normalized title
+ * @param {string} mediaType - The media type
+ * @param {string} leftPadding - The left padding
+ * @param {HTMLElement} yearEl - The year element
+ * @param {HTMLElement} sxexEl - The SXEX element
+ */
+async function handleBadgeInjection(cell, normalized, mediaType, leftPadding, yearEl, sxexEl) {
+  // Initialize badge
+  let badgeText = 'Checking...';
+  let badge = document.createElement('div');
+  let badgeColor = '#888';
+  let badgeIcon = '';
+
+  // Badge styling
+  badge.className = 'homepage-enriched-badge';
+  badge.textContent = badgeText;
+  badge.style.fontSize = '0.9em';
+  badge.style.color = badgeColor;
+  badge.style.margin = '0';
+  badge.style.padding = '0';
+  badge.style.borderRadius = '0';
+  if (leftPadding) {
+    badge.style.paddingLeft = leftPadding;
+  }
+
+  // --- Badge injection location logic ---
+  // Try to inject inline with year or SXEX, else as new line
+  let injectedInline = false;
+  if (yearEl) {
+    yearEl.style.display = 'flex';
+    yearEl.style.alignItems = 'center';
+    badge.style.marginLeft = '8px';
+    yearEl.appendChild(badge);
+    injectedInline = true;
+  } else if (sxexEl) {
+    sxexEl.style.display = 'flex';
+    sxexEl.style.alignItems = 'center';
+    badge.style.marginLeft = '8px';
+    sxexEl.appendChild(badge);
+    injectedInline = true;
+  }
+  if (!injectedInline) {
+    badge.style.display = '';
+    badge.style.marginLeft = '';
+    cell.appendChild(badge);
+  }
+
+  // Ensure 'exists' is defined before use
+  const exists = await window.checkEnrichedJSONExists(normalized);
+
+  // Check for enriched JSON and populate text based on result
+  let percentKnown = null;
+  if (exists) {
+    // Fetch the enriched JSON
+    try {
+      const url = chrome.runtime.getURL(`enriched_subtitles/${normalized}.enriched.json`);
+      const res = await fetch(url);
+      if (res.ok) {
+        const subtitleData = await res.json();
+        // Get LingQ terms (prefer global window.lingqTerms)
+        let lingqTerms = window.lingqTerms;
+        if (!lingqTerms) {
+          lingqTerms = await window.lingqData.loadLingQTerms();
+          window.lingqTerms = lingqTerms;
+        }
+        // Calculate percentage (known + learned + ignored)
+        const percentages = window.calculateLingQStatusPercentages(subtitleData, lingqTerms);
+        if (percentages && percentages.status3_known && percentages.status3_learned && percentages.ignored) {
+          const knownCount = percentages.status3_known.count + percentages.status3_learned.count + percentages.ignored.count;
+          const totalWords = percentages.totalWords || 0;
+          percentKnown = totalWords > 0 ? Math.round((knownCount / totalWords) * 100) : null;
+        }
+      }
+    } catch (e) {
+      percentKnown = null;
+    }
+  }
+  if (exists) {
+    badgeIcon = '✅';
+    badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}% known` : '');
+    badgeColor = '#2e8b57';
+    badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+  } else {
+    badgeIcon = '❌';
+    badgeText = 'Not Enriched';
+    badgeColor = '#c0392b';
+    badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+  }
+} 
 
 /**
  * Observes new cells and injects the badge
  * @returns {void}
  */
 function observeNewCells() {
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      mutation.addedNodes.forEach(node => {
-        if (node.nodeType === 1) {
-          if (node.matches && node.matches(cellSelector)) {
-            injectBadgeForCell(node);
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === 1) {
+            if (node.matches && node.matches(cellSelector)) {
+              injectBadgeForCell(node);
+            }
+            const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
+            newCells.forEach(cell => injectBadgeForCell(cell));
           }
-          const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
-          newCells.forEach(cell => injectBadgeForCell(cell));
-        }
+        });
       });
     });
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-}
-
-window.observeNewCells = observeNewCells; 
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+  
+  window.observeNewCells = observeNewCells; 
