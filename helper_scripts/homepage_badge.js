@@ -117,54 +117,63 @@ async function injectBadgeForCell(cell) {
   const titleEl = cell.querySelector(titleSelector);
   const rawTitle = titleEl.textContent.trim();
 
-  // MEDIA TYPE:Determine media type and get normalized title
+  // MEDIA TYPE: Determine media type and get normalized title
+  // Used for determining whether to inject badge
   const mediaInfo = determineMediaType(cell, rawTitle);
   const { normalized, mediaType } = mediaInfo;
 
 
-  // --- Early return if missing required elements or functions ---
+  // --- Decide whether to inject badge, depending on media type ---
 
   switch (true) {
-    case (!titleEl?.textContent || !window.normalizeTitle || !window.checkEnrichedJSONExists): // Missing title, or key functions (normalizeTitle, checkEnrichedJSONExists)
+    // CASE 1: Missing title, or key functions (normalizeTitle, checkEnrichedJSONExists)
+    case (!titleEl?.textContent || !window.normalizeTitle || !window.checkEnrichedJSONExists):
       injectErrorBadge(cell, '[Error: No title or utility functions available]');
       return;
-    case (!mediaInfo): // Season-level entry - skip entirely
+    
+    // CASE 2: Season-level entry - skip entirely
+    case (!mediaInfo):
       return;
-    // Future cases can be added here
-  }
+    
+    // CASE 3: Audio content - skip entirely
+    case (rawTitle.toLowerCase().includes('audio') || rawTitle.toLowerCase().includes('audiobook')):
+      return;
+    
+    // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
+    default:
+      // Initialize badge
+      let badgeText = 'Checking...';
+      let badge = document.createElement('div');
+      let badgeColor = '#888';
+      let badgeIcon = '';
 
-  // --- Initialize badge ---
+      // Badge styling
+      badge.className = 'homepage-enriched-badge';
+      badge.textContent = badgeText;
+      badge.style.fontSize = '0.9em';
+      badge.style.color = badgeColor;
+      badge.style.margin = '0';
+      badge.style.padding = '0';
+      badge.style.borderRadius = '0';
+      if (leftPadding) {
+        badge.style.paddingLeft = leftPadding;
+      }
+      cell.appendChild(badge);
 
-  let badgeText = 'Checking...';
-  let badge = document.createElement('div');
-  let badgeColor = '#888';
-  let badgeIcon = '';
-
-  badge.className = 'homepage-enriched-badge';
-  badge.textContent = badgeText;
-  badge.style.fontSize = '0.9em';
-  badge.style.color = badgeColor;
-  badge.style.margin = '0';
-  badge.style.padding = '0';
-  badge.style.borderRadius = '0';
-  if (leftPadding) {
-    badge.style.paddingLeft = leftPadding;
-  }
-  cell.appendChild(badge);
-  
-  // --- Check for enriched JSON, and populate text ---
-  
-  const exists = await window.checkEnrichedJSONExists(normalized);
-  if (exists) {
-    badgeIcon = '✅';
-    badgeText = 'Enriched Subs';
-    badgeColor = '#2e8b57';
-    badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-  } else {
-    badgeIcon = '❌';
-    badgeText = 'No Enriched Subs';
-    badgeColor = '#c0392b';
-    badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+      // Check for enriched JSON and populate text based on result
+      const exists = await window.checkEnrichedJSONExists(normalized);
+      if (exists) {
+        badgeIcon = '✅';
+        badgeText = 'Enriched Subs';
+        badgeColor = '#2e8b57';
+        badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+      } else {
+        badgeIcon = '❌';
+        badgeText = 'No Enriched Subs';
+        badgeColor = '#c0392b';
+        badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+      }
+      break;
   }
 }
 
