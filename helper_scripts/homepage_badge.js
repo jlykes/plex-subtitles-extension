@@ -517,6 +517,15 @@ async function handleIndividualMediaPageBadge() {
     normalizedTitle = window.normalizeTitle ? window.normalizeTitle(rawTitle) : rawTitle;
   }
 
+  // If the normalized title hasn't changed, don't re-inject the badge
+  if (window._enrichedBadgeLastRenderedTitle === normalizedTitle) {
+    if (enrichedBadgeObserver) enrichedBadgeObserver.observe(document.body, { childList: true, subtree: true });
+    return;
+  }
+
+  // Update the last rendered title
+  window._enrichedBadgeLastRenderedTitle = normalizedTitle;
+
   // Try the table container first (for movies/TV)
   let container = document.querySelector('.StreamDetailPropertiesTable-container-vnpzQ6');
   let isYT = false;
@@ -561,7 +570,7 @@ async function handleIndividualMediaPageBadge() {
 
 
 // Debounced version of handleIndividualMediaPageBadge
-const debouncedHandleIndividualMediaPageBadge = debounce(handleIndividualMediaPageBadge, 800);
+const debouncedHandleIndividualMediaPageBadge = debounce(handleIndividualMediaPageBadge, 100);
 
 /**
  * Handles the badge injection logic for a given cell (episode card or movie card),
@@ -640,3 +649,31 @@ function observeAndInjectEnrichedBadges() {
 }
 
 window.observeAndInjectEnrichedBadges = observeAndInjectEnrichedBadges; 
+
+// --- SPA navigation detection: reset badge render state on URL change ---
+(function(history){
+    const pushState = history.pushState;
+    const replaceState = history.replaceState;
+
+    function firePageChange() {
+        window.dispatchEvent(new Event('plex-page-changed'));
+    }
+
+    history.pushState = function() {
+        const ret = pushState.apply(this, arguments);
+        firePageChange();
+        return ret;
+    };
+    history.replaceState = function() {
+        const ret = replaceState.apply(this, arguments);
+        firePageChange();
+        return ret;
+    };
+})(window.history);
+
+window.addEventListener('plex-page-changed', () => {
+  window._enrichedBadgeLastRenderedTitle = null;
+});
+window.addEventListener('popstate', () => {
+  window._enrichedBadgeLastRenderedTitle = null;
+}); 
