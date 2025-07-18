@@ -193,16 +193,44 @@ async function injectBadgeForCell(cell) {
         cell.appendChild(badge);
       }
 
-      // Check for enriched JSON and populate text based on result
+      // Ensure 'exists' is defined before use
       const exists = await window.checkEnrichedJSONExists(normalized);
+
+      // Check for enriched JSON and populate text based on result
+      let percentKnown = null;
+      if (exists) {
+        // Fetch the enriched JSON
+        try {
+          const url = chrome.runtime.getURL(`enriched_subtitles/${normalized}.enriched.json`);
+          const res = await fetch(url);
+          if (res.ok) {
+            const subtitleData = await res.json();
+            // Get LingQ terms (prefer global window.lingqTerms)
+            let lingqTerms = window.lingqTerms;
+            if (!lingqTerms) {
+              lingqTerms = await window.lingqData.loadLingQTerms();
+              window.lingqTerms = lingqTerms;
+            }
+            // Calculate percentage (known + learned)
+            const percentages = window.calculateLingQStatusPercentages(subtitleData, lingqTerms);
+            if (percentages && percentages.status3_known && percentages.status3_learned) {
+              const knownCount = percentages.status3_known.count + percentages.status3_learned.count;
+              const totalWords = percentages.totalWords || 0;
+              percentKnown = totalWords > 0 ? Math.round((knownCount / totalWords) * 100) : null;
+            }
+          }
+        } catch (e) {
+          percentKnown = null;
+        }
+      }
       if (exists) {
         badgeIcon = '✅';
-        badgeText = 'Enriched Subs';
+        badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
         badgeColor = '#2e8b57';
         badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
       } else {
         badgeIcon = '❌';
-        badgeText = 'No Enriched Subs';
+        badgeText = 'Not Enriched';
         badgeColor = '#c0392b';
         badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
       }
