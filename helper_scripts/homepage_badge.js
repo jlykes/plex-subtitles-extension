@@ -213,8 +213,8 @@ async function injectBadgeForCell(cell) {
             }
             // Calculate percentage (known + learned)
             const percentages = window.calculateLingQStatusPercentages(subtitleData, lingqTerms);
-            if (percentages && percentages.status3_known && percentages.status3_learned) {
-              const knownCount = percentages.status3_known.count + percentages.status3_learned.count;
+            if (percentages && percentages.status3_known && percentages.status3_learned && percentages.ignored) {
+              const knownCount = percentages.status3_known.count + percentages.status3_learned.count + percentages.ignored.count;
               const totalWords = percentages.totalWords || 0;
               percentKnown = totalWords > 0 ? Math.round((knownCount / totalWords) * 100) : null;
             }

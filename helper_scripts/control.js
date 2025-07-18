@@ -596,6 +596,7 @@ function updateStatusPercentagesDisplay(percentages) {
     'status-familiar': percentages?.status2?.percentage,         // Familiar (status=2)
     'status-recognized': percentages?.status1?.percentage,       // Recognized (status=1)
     'status-new': percentages?.status0?.percentage,              // New (status=0)
+    'status-ignored': percentages?.ignored?.percentage,          // Ignored (status=-1)
     'status-unseen': percentages?.unseen?.percentage             // Unseen (not in LingQ data)
   };
 
@@ -612,17 +613,18 @@ function updateStatusPercentagesDisplay(percentages) {
 function showPercentageRows() {
   console.log("👁️ showPercentageRows called");
   
-  const statusElements = [
+  const statusElementsArr = [
     'total-words',
     'status-known',
     'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
+    'status-ignored',
     'status-unseen'
   ];
 
-  statusElements.forEach(elementId => {
+  statusElementsArr.forEach(elementId => {
     const element = document.getElementById(elementId);
     if (element) {
       // Find the parent control-row and show it
@@ -637,17 +639,18 @@ function showPercentageRows() {
 function hidePercentageRows() {
   console.log("🙈 hidePercentageRows called");
   
-  const statusElements = [
+  const statusElementsArr = [
     'total-words',
     'status-known',
     'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
+    'status-ignored',
     'status-unseen'
   ];
 
-  statusElements.forEach(elementId => {
+  statusElementsArr.forEach(elementId => {
     const element = document.getElementById(elementId);
     if (element) {
       // Find the parent control-row and hide it
@@ -662,17 +665,18 @@ function hidePercentageRows() {
 function clearStatusPercentagesDisplay() {
   console.log("🧹 clearStatusPercentagesDisplay called");
   
-  const statusElements = [
+  const statusElementsArr = [
     'total-words',
     'status-known',
     'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
+    'status-ignored',
     'status-unseen'
   ];
 
-  statusElements.forEach(elementId => {
+  statusElementsArr.forEach(elementId => {
     const element = document.getElementById(elementId);
     if (element) {
       element.textContent = '---';
@@ -683,17 +687,18 @@ function clearStatusPercentagesDisplay() {
 function showStatusPercentagesLoading() {
   console.log("⏳ showStatusPercentagesLoading called");
   
-  const statusElements = [
+  const statusElementsArr = [
     'total-words',
     'status-known',
     'status-learned',
     'status-familiar', 
     'status-recognized',
     'status-new',
+    'status-ignored',
     'status-unseen'
   ];
 
-  statusElements.forEach(elementId => {
+  statusElementsArr.forEach(elementId => {
     const element = document.getElementById(elementId);
     if (element) {
       element.textContent = 'Calculating...';

@@ -400,6 +400,7 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
     2: 0, 
     '3_known': 0,    // status=3, extended_status=3
     '3_learned': 0,  // status=3, extended_status=0
+    ignored: 0,      // status=-1
     unseen: 0        // Words not found in LingQ data
   };
 
@@ -409,9 +410,9 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
       const statusInfo = lingqTerms[word];
       const status = statusInfo.status;
       const extended_status = statusInfo.extended_status;
-      
-      if (status === 3) {
-        // Differentiate between "Known" and "Learned"
+      if (status === -1) {
+        statusCounts.ignored++;
+      } else if (status === 3) {
         if (extended_status === 0 || extended_status === null) {
           statusCounts['3_learned']++;
         } else {
@@ -420,10 +421,9 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
       } else if (statusCounts.hasOwnProperty(status)) {
         statusCounts[status]++;
       } else {
-        statusCounts[0]++; // Fallback to new for invalid status
+        statusCounts[0]++;
       }
     } else {
-      // Word not found in LingQ data, count as unseen
       statusCounts.unseen++;
     }
   });
@@ -450,6 +450,10 @@ function calculateLingQStatusPercentages(subtitleData, lingqTerms) {
     status0: { 
       percentage: Math.round((statusCounts[0] / totalWords) * 100), 
       count: statusCounts[0] 
+    },
+    ignored: {
+      percentage: Math.round((statusCounts.ignored / totalWords) * 100),
+      count: statusCounts.ignored
     },
     unseen: {
       percentage: Math.round((statusCounts.unseen / totalWords) * 100),
