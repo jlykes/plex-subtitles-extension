@@ -1,20 +1,80 @@
 // === homepage_badge.js ===
 // Logic for injecting 'Enriched Subtitles Available' badges on the Plex homepage.
-// Chunk 14: Badge styling with icons and short text
 
 // Constants
 const cellSelector = 'div[data-testid="cellItem"]';
 const titleSelector = 'a[data-testid="metadataTitleLink"], a.MetadataPosterCardTitle-title-ImAmGu';
 const yearSelector = 'div.MetadataPosterCardTitle-title-ImAmGu:not(a)';
 
+
+/**
+ * Removes any existing badges from a cell.
+ * @param {HTMLElement} cell - The cell element.
+ */
+function removeExistingBadges(cell) {
+    cell.querySelectorAll('.homepage-enriched-badge').forEach(badge => badge.remove());
+}
+
+/**
+ * Adjusts the height of the row container to ensure badge visibility.
+ * Particularly on Home page.
+ * @param {HTMLElement} cell - The cell element.
+ * @param {number} minHeight - The minimum height in pixels.
+ */
+function adjustRowContainerHeight(cell, minHeight = 420) {
+    const scroller = cell.closest('.VirtualHubScroller-hubScroller-gv2_Qy');
+    if (scroller && scroller.firstElementChild) {
+      const rowContainer = scroller.firstElementChild;
+      const currentHeight = parseInt(rowContainer.style.height || '0', 10);
+      if (isNaN(currentHeight) || currentHeight < minHeight) {
+        rowContainer.style.height = `${minHeight}px`;
+      }
+    }
+}
+
+/**
+ * Finds the year element, left padding, SXEX element, title element, and raw title.
+ * Used for determining where to inject the badge.
+ * @param {HTMLElement} cell - The cell element.
+ * @returns {Object} An object containing the year element, left padding, SXEX element, title element, and raw title.
+ */
+function findBadgePlacementElements(cell) {
+  
+    // YEAR: Try to find the year element for indent alignment
+    const yearEl = cell.querySelector(yearSelector);
+    let leftPadding = '';
+    if (yearEl) {
+      const style = window.getComputedStyle(yearEl);
+      leftPadding = style.paddingLeft || style.marginLeft || '';
+    }
+  
+    // SXEX: Try to find the SXEX element
+    let sxexEl = null;
+    const possibleSXEX = cell.querySelectorAll('span, a');
+    for (const el of possibleSXEX) {
+      if (/S\d+\s*[·.]\s*E\d+/i.test(el.textContent)) {
+        sxexEl = el;
+        break;
+      }
+    }
+  
+    // TITLE: Extract the title from the cell
+    const titleEl = cell.querySelector(titleSelector);
+    const rawTitle = titleEl?.textContent?.trim() || '';
+  
+    // Return the elements
+    return { yearEl, leftPadding, sxexEl, titleEl, rawTitle };
+  } 
+
 /**
  * Determines the media type and returns normalized title
  * @param {HTMLElement} cell - The cell element
  * @param {string} rawTitle - The raw title text
- * @returns {Object|null} Media info with normalized title and type, or null for season-level entries
+ * @returns {Object|null} Media info with normalized title and type, in structure: { normalizedTitle: normalizedTitle, mediaType: 'tv_season' | 'tv_show' | 'movie' }
  */
 function determineMediaType(cell, rawTitle) {
-  // Check if this is a season-level entry (should be skipped)
+  
+  // ---1. TV SEASON? Check if this is a season-level entry
   const seasonLink = cell.querySelector('a[data-testid="metadataTitleLink"][title*="Season"], a.MetadataPosterCardTitle-title-ImAmGu[title*="Season"]');
   const seasonSpan = cell.querySelector('span.MetadataPosterCardTitle-title-ImAmGu');
   
@@ -26,19 +86,21 @@ function determineMediaType(cell, rawTitle) {
                          seasonSpan.textContent.trim().toLowerCase().includes('seasons')));
   
   if (isSeasonLevel) {
-    return null; // Season-level entry - skip
+    // Return the media type
+    return { normalizedTitle: window.normalizeTitle(rawTitle), mediaType: 'tv_season' };
   }
   
-  // Check if this is a TV show by looking for season/episode format
+  // ---2. TV SHOW? Check if this is a TV show by looking for season/episode format
   const seasonEpisodeEl = cell.querySelector('span a[title*="Season"], span a[title*="Episode"]');
   
   if (seasonEpisodeEl) {
-    // TV Show - construct filename as [Show Title] [S1·E1]
+    // Try to find the show title, season, and episode
     const showTitleEl = cell.querySelector('a[title]:not([title*="Season"]):not([title*="Welcome"])');
     const seasonEl = cell.querySelector('span a[title*="Season"]');
     const seasonEpisodeSpan = cell.querySelector('span a[title*="Season"]')?.parentElement;
     const episodeEl = seasonEpisodeSpan ? seasonEpisodeSpan.querySelectorAll('a')[1] : null;
     
+    // If we found the show title, season, and episode, construct the normalized title
     if (showTitleEl && seasonEl && episodeEl) {
       const showTitle = showTitleEl.textContent.trim();
       const season = seasonEl.textContent.trim();
@@ -52,14 +114,21 @@ function determineMediaType(cell, rawTitle) {
         .replace(/[#]/g, "")
         .replace(/[—'&,'']/g, "_");
       
-      const normalized = `${normalizedShowTitle}_-_${season}_·_${episode}`;
-      return { normalized, mediaType: 'tv_show' };
+      const normalizedTitle = `${normalizedShowTitle}_-_${season}_·_${episode}`;
+
+      // Return the normalized title and media type
+      return { normalizedTitle: normalizedTitle, mediaType: 'tv_show' };
     }
   }
   
-  // Movie - use normal title normalization
-  const normalized = window.normalizeTitle(rawTitle);
-  return { normalized, mediaType: 'movie' };
+  // ---3. AUDIO? Check if this is an audio entry
+  const normalizedTitle = window.normalizeTitle(rawTitle);
+  if (rawTitle.toLowerCase().includes('audio') || rawTitle.toLowerCase().includes('audiobook')) {
+    return { normalizedTitle: rawTitle, mediaType: 'audio' };
+  }
+
+  // ---4. MOVIE? Otherwise, assume it's a movie, return the normalized title and media type
+  return { normalizedTitle: normalizedTitle, mediaType: 'movie' };
 }
 
 /**
@@ -80,114 +149,33 @@ function injectErrorBadge(cell, message) {
 }
 
 /**
- * Injects the real badge as the last child of the cell, showing subtitle availability.
- * Always removes any existing badge before injecting a new one.
- * Also increases spacing between rows of cells.
- * Adjusts row container height for badge visibility.
- * Aligns badge indent with year.
- * Uses icons and short text for badge.
- * 
- * @param {HTMLElement} cell - The cell to inject the badge into
- * @returns {void}
- */
-async function injectBadgeForCell(cell) {
-  // Remove any existing badge(s) in this cell before injecting a new one
-  cell.querySelectorAll('.homepage-enriched-badge').forEach(badge => badge.remove());
-  // Ensure enough vertical space for badge and row separation
-  cell.style.height = '400px';
-  cell.style.marginBottom = '40px';
-
-  // --- Adjust row container height ---
-  const scroller = cell.closest('.VirtualHubScroller-hubScroller-gv2_Qy');
-  if (scroller && scroller.firstElementChild) {
-    const rowContainer = scroller.firstElementChild;
-    const currentHeight = parseInt(rowContainer.style.height || '0', 10);
-    if (isNaN(currentHeight) || currentHeight < 420) {
-      rowContainer.style.height = '420px';
-    }
-  }
-
-  // --- Find key DOM elements ---
-  
-  // YEAR: Try to find the year element for indent alignment
-  const yearEl = cell.querySelector(yearSelector);
-  let leftPadding = '';
-  if (yearEl) {
-    const style = window.getComputedStyle(yearEl);
-    leftPadding = style.paddingLeft || style.marginLeft || '';
-  }
-
-  // Try to find SXEX (season/episode) element: look for S1·E1, S1.E1, etc.
-  let sxexEl = null;
-  const possibleSXEX = cell.querySelectorAll('span, a');
-  for (const el of possibleSXEX) {
-    if (/S\d+\s*[·.]\s*E\d+/i.test(el.textContent)) {
-      sxexEl = el;
-      break;
-    }
-  }
-
-  // TITLE: Extract the title from the cell
-  const titleEl = cell.querySelector(titleSelector);
-  const rawTitle = titleEl.textContent.trim();
-
-  // MEDIA TYPE: Determine media type and get normalized title
-  // Used for determining whether to inject badge
-  const mediaInfo = determineMediaType(cell, rawTitle);
-
-  // --- Decide whether to inject badge, depending on media type ---
-
-  switch (true) {
-    // CASE 1: Missing title, or key functions (normalizeTitle, checkEnrichedJSONExists)
-    case (!titleEl?.textContent || !window.normalizeTitle || !window.checkEnrichedJSONExists):
-      injectErrorBadge(cell, '[Error: No title or utility functions available]');
-      return;
-    
-    // CASE 2: Season-level entry - skip entirely
-    case (!mediaInfo):
-      return;
-    
-    // CASE 3: Audio content - skip entirely
-    case (rawTitle.toLowerCase().includes('audio') || rawTitle.toLowerCase().includes('audiobook')):
-      return;
-    
-    // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
-    default:
-      await handleBadgeInjection(cell, mediaInfo.normalized, mediaInfo.mediaType, leftPadding, yearEl, sxexEl);
-      break;
-  }
-}
-
-/**
- * Handles the badge injection logic
- * @param {HTMLElement} cell - The cell element
- * @param {string} normalized - The normalized title
- * @param {string} mediaType - The media type
+ * Creates a checking badge
  * @param {string} leftPadding - The left padding
- * @param {HTMLElement} yearEl - The year element
- * @param {HTMLElement} sxexEl - The SXEX element
+ * @returns {HTMLElement} The created badge
  */
-async function handleBadgeInjection(cell, normalized, mediaType, leftPadding, yearEl, sxexEl) {
-  // Initialize badge
-  let badgeText = 'Checking...';
-  let badge = document.createElement('div');
-  let badgeColor = '#888';
-  let badgeIcon = '';
-
-  // Badge styling
+function createInitialBadge(leftPadding = '') {
+  const badge = document.createElement('div');
   badge.className = 'homepage-enriched-badge';
-  badge.textContent = badgeText;
+  badge.textContent = 'Checking...';
   badge.style.fontSize = '0.9em';
-  badge.style.color = badgeColor;
+  badge.style.color = '#888';
   badge.style.margin = '0';
   badge.style.padding = '0';
   badge.style.borderRadius = '0';
   if (leftPadding) {
     badge.style.paddingLeft = leftPadding;
   }
+  return badge;
+}
 
-  // --- Badge injection location logic ---
-  // Try to inject inline with year or SXEX, else as new line
+/**
+ * Places the badge inline with year or SXEX, or as a new line if neither is found.
+ * @param {HTMLElement} cell - The cell element.
+ * @param {HTMLElement} badge - The badge element to inject.
+ * @param {HTMLElement|null} yearEl - The year element.
+ * @param {HTMLElement|null} sxexEl - The SXEX element.
+ */
+function placeInitialBadge(cell, badge, yearEl, sxexEl) {
   let injectedInline = false;
   if (yearEl) {
     yearEl.style.display = 'flex';
@@ -207,49 +195,120 @@ async function handleBadgeInjection(cell, normalized, mediaType, leftPadding, ye
     badge.style.marginLeft = '';
     cell.appendChild(badge);
   }
+}
 
-  // Ensure 'exists' is defined before use
-  const exists = await window.checkEnrichedJSONExists(normalized);
-
-  // Check for enriched JSON and populate text based on result
-  let percentKnown = null;
-  if (exists) {
-    // Fetch the enriched JSON
-    try {
-      const url = chrome.runtime.getURL(`enriched_subtitles/${normalized}.enriched.json`);
-      const res = await fetch(url);
-      if (res.ok) {
-        const subtitleData = await res.json();
-        // Get LingQ terms (prefer global window.lingqTerms)
-        let lingqTerms = window.lingqTerms;
-        if (!lingqTerms) {
-          lingqTerms = await window.lingqData.loadLingQTerms();
-          window.lingqTerms = lingqTerms;
-        }
-        // Calculate percentage (known + learned + ignored)
-        const percentages = window.calculateLingQStatusPercentages(subtitleData, lingqTerms);
-        if (percentages && percentages.status3_known && percentages.status3_learned && percentages.ignored) {
-          const knownCount = percentages.status3_known.count + percentages.status3_learned.count + percentages.ignored.count;
-          const totalWords = percentages.totalWords || 0;
-          percentKnown = totalWords > 0 ? Math.round((knownCount / totalWords) * 100) : null;
-        }
-      }
-    } catch (e) {
-      percentKnown = null;
+/**
+ * Fetches the enriched JSON and calculates the percentage of known words (known + learned + ignored).
+ * @param {string} normalizedTitle - The normalized title for the JSON file.
+ * @returns {Promise<number|null>} The percentage of known words, or null if not available.
+ */
+async function getPercentKnownForTitle(normalizedTitle) {
+  try {
+    const url = chrome.runtime.getURL(`enriched_subtitles/${normalizedTitle}.enriched.json`);
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const subtitleData = await res.json();
+    let lingqTerms = window.lingqTerms;
+    if (!lingqTerms) {
+      lingqTerms = await window.lingqData.loadLingQTerms();
+      window.lingqTerms = lingqTerms;
     }
+    const percentages = window.calculateLingQStatusPercentages(subtitleData, lingqTerms);
+    if (percentages && percentages.status3_known && percentages.status3_learned && percentages.ignored) {
+      const knownCount = percentages.status3_known.count + percentages.status3_learned.count + percentages.ignored.count;
+      const totalWords = percentages.totalWords || 0;
+      return totalWords > 0 ? Math.round((knownCount / totalWords) * 100) : null;
+    }
+    return null;
+  } catch (e) {
+    return null;
   }
-  if (exists) {
+}
+
+/**
+ * Handles the badge injection logic
+ * @param {HTMLElement} cell - The cell element
+ * @param {string} normalizedTitle - The normalized title
+ * @param {string} mediaType - The media type
+ * @param {string} leftPadding - The left padding
+ * @param {HTMLElement} yearEl - The year element
+ * @param {HTMLElement} sxexEl - The SXEX element
+ */
+async function injectFinalBadge(cell, normalizedTitle, leftPadding, yearEl, sxexEl) {
+  // Initialize initial badge & place it
+  let badge = createInitialBadge(leftPadding);
+  placeInitialBadge(cell, badge, yearEl, sxexEl);
+
+  // Check if enriched JSON exists before trying to pull
+  const enrichedJSONExists = await window.checkEnrichedJSONExists(normalizedTitle);
+
+  // Calculate percentage of known words
+  let percentKnown = null;
+  if (enrichedJSONExists) {
+    percentKnown = await getPercentKnownForTitle(normalizedTitle);
+  }
+
+  // Inject the badge based on the enriched JSON result
+  if (enrichedJSONExists) { // If enriched JSON exists, inject the badge including confirmation icon and percentage
     badgeIcon = '✅';
-    badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}% known` : '');
+    badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
     badgeColor = '#2e8b57';
     badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-  } else {
+  } else { // If enriched JSON does not exist, inject the badge including error icon
     badgeIcon = '❌';
     badgeText = 'Not Enriched';
     badgeColor = '#c0392b';
     badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
   }
 } 
+
+/**
+ * Injects the real badge as the last child of the cell, showing subtitle availability.
+ * Always removes any existing badge before injecting a new one.
+ * Also increases spacing between rows of cells.
+ * Adjusts row container height for badge visibility.
+ * Aligns badge indent with year.
+ * Uses icons and short text for badge.
+ * 
+ * @param {HTMLElement} cell - The cell to inject the badge into
+ * @returns {void}
+ */
+async function handleBadgeInjectionForCell(cell) {
+    // Remove any existing badge(s) in this cell before injecting a new one
+    removeExistingBadges(cell);
+  
+    // Adjust row container height (particularly on Home page)
+    adjustRowContainerHeight(cell);
+  
+    // Find key DOM elements
+    const { yearEl, leftPadding, sxexEl, titleEl, rawTitle } = findBadgePlacementElements(cell);
+  
+    // Determine media type and get normalized title
+    // Used for determining whether to inject badge
+    // Returns data in structure: { normalizedTitle: normalizedTitle, mediaType: 'tv_season' | 'tv_show' | 'movie' }
+    const mediaInfo = determineMediaType(cell, rawTitle);
+  
+    // Decide whether to inject badge, depending on media type
+    switch (true) {
+      // CASE 1: Missing title, or key functions (normalizeTitle, checkEnrichedJSONExists)
+      case (!titleEl?.textContent || !window.normalizeTitle || !window.checkEnrichedJSONExists):
+        injectErrorBadge(cell, '[Error: No title or utility functions available]');
+        return;
+      
+      // CASE 2: TV Season entry - skip entirely
+      case (mediaInfo.mediaType === 'tv_season'):
+        return;
+      
+      // CASE 3: Audio content - skip entirely
+      case (mediaInfo.mediaType === 'audio'):
+        return;
+      
+      // DEFAULT CASE: Valid media content - inject badge based on enriched JSON result
+      default:
+        await injectFinalBadge(cell, mediaInfo.normalizedTitle, leftPadding, yearEl, sxexEl);
+        break;
+    }
+}
 
 /**
  * Observes new cells and injects the badge
@@ -261,15 +320,15 @@ function observeNewCells() {
         mutation.addedNodes.forEach(node => {
           if (node.nodeType === 1) {
             if (node.matches && node.matches(cellSelector)) {
-              injectBadgeForCell(node);
+              handleBadgeInjectionForCell(node);
             }
             const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
-            newCells.forEach(cell => injectBadgeForCell(cell));
+            newCells.forEach(cell => handleBadgeInjectionForCell(cell));
           }
         });
       });
     });
     observer.observe(document.body, { childList: true, subtree: true });
-  }
-  
-  window.observeNewCells = observeNewCells; 
+}
+
+window.observeNewCells = observeNewCells; 
