@@ -15,6 +15,9 @@ const yearSelector = 'div.MetadataPosterCardTitle-title-ImAmGu:not(a)';
  * Adjusts row container height for badge visibility.
  * Aligns badge indent with year.
  * Uses icons and short text for badge.
+ * 
+ * cell: the cell to inject the badge into
+ * return: void
  */
 async function injectBadgeForCell(cell) {
   cell.style.marginBottom = '18px';
@@ -29,9 +32,6 @@ async function injectBadgeForCell(cell) {
     }
   }
 
-  // Remove any existing badge(s) in this cell
-  cell.querySelectorAll('.homepage-enriched-badge').forEach(badge => badge.remove());
-
   // Try to find the year element for indent alignment
   const yearEl = cell.querySelector(yearSelector);
   let leftPadding = '';
@@ -45,7 +45,8 @@ async function injectBadgeForCell(cell) {
   let badgeText = 'No Enriched Subs';
   let badgeColor = '#888';
   let badgeIcon = '';
-  let badgeIconColor = '';
+
+  // If cell has a title and the checkEnrichedJSONExists & normalizeTitle functions are available, run through the logic
   if (titleEl && titleEl.textContent && window.normalizeTitle && window.checkEnrichedJSONExists) {
     const rawTitle = titleEl.textContent.trim();
     
@@ -58,7 +59,7 @@ async function injectBadgeForCell(cell) {
     let normalized = '';
     
     if (seasonEpisodeEl) {
-      // This is a TV show - construct filename as [Show Title] [S1·E1]
+      // CASE 1: This is a TV show - construct filename as [Show Title] [S1·E1]
       // For TV shows, we have: show title, episode title, then season/episode span
       const showTitleEl = cell.querySelector('a[title]:not([title*="Season"]):not([title*="Welcome"])');
       const seasonEl = cell.querySelector('span a[title*="Season"]');
@@ -66,7 +67,7 @@ async function injectBadgeForCell(cell) {
       const seasonEpisodeSpan = cell.querySelector('span a[title*="Season"]')?.parentElement;
       const episodeEl = seasonEpisodeSpan ? seasonEpisodeSpan.querySelectorAll('a')[1] : null;
       
-      
+      // If we have all the elements, we can normalize the title
       if (showTitleEl && seasonEl && episodeEl) {
         const showTitle = showTitleEl.textContent.trim();
         const season = seasonEl.textContent.trim();
@@ -84,7 +85,7 @@ async function injectBadgeForCell(cell) {
         normalized = window.normalizeTitle(rawTitle);
       }
     } else {
-      // This is a movie - use normal title normalization
+      // CASE 2: This is a movie - use normal title normalization
       normalized = window.normalizeTitle(rawTitle);
     }
     
@@ -102,24 +103,24 @@ async function injectBadgeForCell(cell) {
       badge.style.paddingLeft = leftPadding;
     }
     cell.appendChild(badge);
+    
     // Async check
     const exists = await window.checkEnrichedJSONExists(normalized);
-    if (exists) {
+    if (exists) { // If the enriched JSON exists, show the badge
       badgeIcon = '✅';
       badgeText = 'Enriched Subs';
       badgeColor = '#2e8b57';
       badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
-    } else {
+    } else { // If the enriched JSON does not exist, show the badge
       badgeIcon = '❌';
       badgeText = 'No Enriched Subs';
       badgeColor = '#c0392b';
       badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
     }
-  } else {
-    // Fallback if title or utils missing
+  } else { // Else, fallback if title or checkEnrichedJSONExists & normalizeTitle functions are missing
     let badge = document.createElement('div');
     badge.className = 'homepage-enriched-badge';
-    badge.textContent = '[Error: No title or utils]';
+    badge.textContent = '[Error: No title or utililty functions available]';
     badge.style.fontSize = '0.9em';
     badge.style.color = '#888';
     badge.style.margin = '0';
@@ -132,6 +133,10 @@ async function injectBadgeForCell(cell) {
   }
 }
 
+/**
+ * Observes new cells and injects the badge
+ * return: void
+ */
 function observeNewCells() {
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
