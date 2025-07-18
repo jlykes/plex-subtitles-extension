@@ -308,9 +308,26 @@ async function getEnrichedBadgeContent(normalizedTitle) {
   }
   if (enrichedJSONExists) {
     badgeIcon = '✅';
-    badgeText = 'Enriched' + (percentKnown !== null ? ` · ${percentKnown}%` : '');
-    badgeColor = '#2e8b57';
-    return `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+    badgeText = 'Enriched';
+    
+    // Default green color for "Enriched" text and checkmark
+    const defaultColor = '#2e8b57';
+    
+    if (percentKnown !== null) {
+      // Color code only the percentage based on value
+      let percentColor;
+      if (percentKnown < 80) {
+        percentColor = '#e74c3c'; // Red for <80%
+      } else if (percentKnown < 90) {
+        percentColor = '#f39c12'; // Yellow for 80-90%
+      } else {
+        percentColor = '#2e8b57'; // Green for 90%+
+      }
+      
+      return `<span style="color:${defaultColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${defaultColor};font-weight:bold;">${badgeText}</span> <span style="color:#888;font-weight:bold;">·</span> <span style="color:${percentColor};font-weight:bold;">${percentKnown}%</span>`;
+    } else {
+      return `<span style="color:${defaultColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${defaultColor};font-weight:bold;">${badgeText}</span>`;
+    }
   } else {
     badgeIcon = '❌';
     badgeText = 'Not Enriched';
