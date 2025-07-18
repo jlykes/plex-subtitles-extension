@@ -48,7 +48,60 @@ async function injectBadgeForCell(cell) {
   let badgeIconColor = '';
   if (titleEl && titleEl.textContent && window.normalizeTitle && window.checkEnrichedJSONExists) {
     const rawTitle = titleEl.textContent.trim();
-    const normalized = window.normalizeTitle(rawTitle);
+    
+    // Check if this is a TV show by looking for season/episode format
+    const seasonEpisodeEl = cell.querySelector('span a[title*="Season"], span a[title*="Episode"]');
+    console.log(`[homepage_badge] Checking cell for TV show elements...`);
+    console.log(`[homepage_badge] seasonEpisodeEl found:`, seasonEpisodeEl);
+    
+    // Let's also check what elements are actually in the cell
+    const allLinks = cell.querySelectorAll('a');
+    console.log(`[homepage_badge] All links in cell:`, Array.from(allLinks).map(a => ({text: a.textContent, title: a.title})));
+    
+    let normalized = '';
+    
+    if (seasonEpisodeEl) {
+      // This is a TV show - construct filename as [Show Title] [S1·E1]
+      // For TV shows, we have: show title, episode title, then season/episode span
+      const showTitleEl = cell.querySelector('a[title]:not([title*="Season"]):not([title*="Welcome"])');
+      const seasonEl = cell.querySelector('span a[title*="Season"]');
+      // The episode element is the second link in the season/episode span
+      const seasonEpisodeSpan = cell.querySelector('span a[title*="Season"]')?.parentElement;
+      const episodeEl = seasonEpisodeSpan ? seasonEpisodeSpan.querySelectorAll('a')[1] : null;
+      
+      console.log(`[homepage_badge] TV show elements found:`);
+      console.log(`[homepage_badge] showTitleEl:`, showTitleEl, `text: "${showTitleEl?.textContent}"`);
+      console.log(`[homepage_badge] seasonEl:`, seasonEl, `text: "${seasonEl?.textContent}"`);
+      console.log(`[homepage_badge] episodeEl:`, episodeEl, `text: "${episodeEl?.textContent}"`);
+      console.log(`[homepage_badge] seasonEpisodeSpan:`, seasonEpisodeSpan);
+      
+      if (showTitleEl && seasonEl && episodeEl) {
+        const showTitle = showTitleEl.textContent.trim();
+        const season = seasonEl.textContent.trim();
+        const episode = episodeEl.textContent.trim();
+        // Format: ShowTitle_-_S1_·_E1
+        // Apply the same normalization as normalizeTitle function
+        const normalizedShowTitle = showTitle
+          .replace(/[:]/g, " -")
+          .replace(/\s+/g, "_")
+          .replace(/[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]/g, ".")
+          .replace(/[#]/g, "")
+          .replace(/[—'&,'']/g, "_");
+        normalized = `${normalizedShowTitle}_-_${season}_·_${episode}`;
+        console.log(`[homepage_badge] TV show detected: ${normalized}`);
+        console.log(`[homepage_badge] Raw show title: "${showTitle}"`);
+        console.log(`[homepage_badge] Normalized show title: "${normalizedShowTitle}"`);
+        console.log(`[homepage_badge] Season: "${season}"`);
+        console.log(`[homepage_badge] Episode: "${episode}"`);
+        console.log(`[homepage_badge] Final filename to check: "${normalized}.enriched.json"`);
+      } else {
+        normalized = window.normalizeTitle(rawTitle);
+      }
+    } else {
+      // This is a movie - use normal title normalization
+      normalized = window.normalizeTitle(rawTitle);
+    }
+    
     // Show loading while checking
     badgeText = 'Checking...';
     let badge = document.createElement('div');
