@@ -1,0 +1,77 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'dlna-browser' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 silly cache add args [ 'dlna-browser', null ]
+5 verbose cache add spec dlna-browser
+6 silly cache add parsed spec { raw: 'dlna-browser',
+6 silly cache add   scope: null,
+6 silly cache add   name: 'dlna-browser',
+6 silly cache add   rawSpec: '',
+6 silly cache add   spec: '*',
+6 silly cache add   type: 'range' }
+7 verbose addNamed dlna-browser@*
+8 silly addNamed semver.valid null
+9 silly addNamed semver.validRange *
+10 silly addNameRange { name: 'dlna-browser', range: '*', hasData: false }
+11 silly mapToRegistry name dlna-browser
+12 silly mapToRegistry using default registry
+13 silly mapToRegistry registry https://registry.npmjs.org/
+14 silly mapToRegistry uri https://registry.npmjs.org/dlna-browser
+15 verbose addNameRange registry:https://registry.npmjs.org/dlna-browser not in flight; fetching
+16 verbose request uri https://registry.npmjs.org/dlna-browser
+17 verbose request no auth needed
+18 info attempt registry request try #1 at 10:03:18 PM
+19 verbose request id e0ca204b430e9008
+20 http request GET https://registry.npmjs.org/dlna-browser
+21 http 404 https://registry.npmjs.org/dlna-browser
+22 verbose headers { date: 'Mon, 07 Jul 2025 05:03:18 GMT',
+22 verbose headers   'content-type': 'application/json',
+22 verbose headers   'content-length': '21',
+22 verbose headers   connection: 'keep-alive',
+22 verbose headers   'cf-ray': '95b4cb6e29faed40-SJC',
+22 verbose headers   'access-control-allow-origin': '*',
+22 verbose headers   age: '41',
+22 verbose headers   'cache-control': 'public, max-age=300',
+22 verbose headers   vary: 'Accept-Encoding',
+22 verbose headers   'set-cookie': [ '_cfuvid=g9T3N6yHJogcie8pljEKZ6s4Wh0.SQARPKRb3REjwgs-1751864598774-0.0.1.1-604800000; path=/; domain=.npmjs.org; HttpOnly; Secure; SameSite=None' ],
+22 verbose headers   server: 'cloudflare' }
+23 silly get cb [ 404,
+23 silly get   { date: 'Mon, 07 Jul 2025 05:03:18 GMT',
+23 silly get     'content-type': 'application/json',
+23 silly get     'content-length': '21',
+23 silly get     connection: 'keep-alive',
+23 silly get     'cf-ray': '95b4cb6e29faed40-SJC',
+23 silly get     'access-control-allow-origin': '*',
+23 silly get     age: '41',
+23 silly get     'cache-control': 'public, max-age=300',
+23 silly get     vary: 'Accept-Encoding',
+23 silly get     'set-cookie': [ '_cfuvid=g9T3N6yHJogcie8pljEKZ6s4Wh0.SQARPKRb3REjwgs-1751864598774-0.0.1.1-604800000; path=/; domain=.npmjs.org; HttpOnly; Secure; SameSite=None' ],
+23 silly get     server: 'cloudflare' } ]
+24 verbose stack Error: Not found : dlna-browser
+24 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:247:14)
+24 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:170:14)
+24 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:344:22)
+24 verbose stack     at Request.emit (events.js:110:17)
+24 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1239:14)
+24 verbose stack     at Request.emit (events.js:129:20)
+24 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1187:12)
+24 verbose stack     at IncomingMessage.emit (events.js:129:20)
+24 verbose stack     at _stream_readable.js:908:16
+24 verbose stack     at process._tickCallback (node.js:355:11)
+25 verbose statusCode 404
+26 verbose pkgid dlna-browser
+27 verbose cwd /Users/joshualykes/Library/CloudStorage/GoogleDrive-joshua.lykes@gmail.com/My Drive/04 - Programming Projects/plex_metalayer
+28 error Darwin 24.5.0
+29 error argv "node" "/usr/local/bin/npm" "install" "-g" "dlna-browser"
+30 error node v0.12.2
+31 error npm  v2.7.4
+32 error code E404
+33 error 404 Not found : dlna-browser
+33 error 404
+33 error 404 'dlna-browser' is not in the npm registry.
+33 error 404 You should bug the author to publish it (or use the name yourself!)
+33 error 404
+33 error 404 Note that you can also install from a
+33 error 404 tarball, folder, http url, or git url.
+34 verbose exit [ 1, true ]
