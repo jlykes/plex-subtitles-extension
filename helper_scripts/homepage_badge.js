@@ -91,6 +91,8 @@ function injectErrorBadge(cell, message) {
  * @returns {void}
  */
 async function injectBadgeForCell(cell) {
+  // Remove any existing badge(s) in this cell before injecting a new one
+  cell.querySelectorAll('.homepage-enriched-badge').forEach(badge => badge.remove());
   // Ensure enough vertical space for badge and row separation
   cell.style.height = '400px';
   cell.style.marginBottom = '40px';
