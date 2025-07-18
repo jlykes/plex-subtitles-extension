@@ -35,7 +35,8 @@
         "helper_scripts/control/behavior-binders.js",
         "helper_scripts/control/settings-binders.js",
         "helper_scripts/control.js",
-        "content.js"
+        "content.js",
+        "helper_scripts/homepage_badge.js"
       ],
       "run_at": "document_idle"
     }
