@@ -1,6 +1,6 @@
 // === homepage_badge.js ===
 // Logic for injecting 'Enriched Subtitles Available' badges on the Plex homepage.
-// Chunk 10: Remove extra margin, align badge indent with year
+// Chunk 14: Badge styling with icons and short text
 
 console.log('[homepage_badge] Script loaded');
 
@@ -9,14 +9,14 @@ const titleSelector = 'a[data-testid="metadataTitleLink"], a.MetadataPosterCardT
 const yearSelector = 'div.MetadataPosterCardTitle-title-ImAmGu:not(a)';
 
 /**
- * Injects the dummy badge as the last child of the cell.
+ * Injects the real badge as the last child of the cell, showing subtitle availability.
  * Always removes any existing badge before injecting a new one.
  * Also increases spacing between rows of cells.
  * Adjusts row container height for badge visibility.
  * Aligns badge indent with year.
+ * Uses icons and short text for badge.
  */
-function injectBadgeForCell(cell) {
-  // Add extra bottom margin for row spacing
+async function injectBadgeForCell(cell) {
   cell.style.marginBottom = '18px';
 
   // --- Adjust row container height ---
@@ -36,49 +36,81 @@ function injectBadgeForCell(cell) {
   const yearEl = cell.querySelector(yearSelector);
   let leftPadding = '';
   if (yearEl) {
-    // Try to get computed left padding or margin-left
     const style = window.getComputedStyle(yearEl);
     leftPadding = style.paddingLeft || style.marginLeft || '';
   }
 
-  // Inject dummy badge as the last child of the cell
-  let badge = document.createElement('div');
-  badge.className = 'homepage-enriched-badge';
-  badge.textContent = '[To-do: Enriched?]';
-  badge.style.fontSize = '0.9em';
-  badge.style.color = '#888';
-  badge.style.margin = '0';
-  badge.style.padding = '0';
-  badge.style.borderRadius = '0';
-  if (leftPadding) {
-    badge.style.paddingLeft = leftPadding;
+  // Extract the title from the cell
+  const titleEl = cell.querySelector(titleSelector);
+  let badgeText = 'No Enriched Subs';
+  let badgeColor = '#888';
+  let badgeIcon = '';
+  let badgeIconColor = '';
+  if (titleEl && titleEl.textContent && window.normalizeTitle && window.checkEnrichedJSONExists) {
+    const rawTitle = titleEl.textContent.trim();
+    const normalized = window.normalizeTitle(rawTitle);
+    // Show loading while checking
+    badgeText = 'Checking...';
+    let badge = document.createElement('div');
+    badge.className = 'homepage-enriched-badge';
+    badge.textContent = badgeText;
+    badge.style.fontSize = '0.9em';
+    badge.style.color = badgeColor;
+    badge.style.margin = '0';
+    badge.style.padding = '0';
+    badge.style.borderRadius = '0';
+    if (leftPadding) {
+      badge.style.paddingLeft = leftPadding;
+    }
+    cell.appendChild(badge);
+    // Async check
+    const exists = await window.checkEnrichedJSONExists(normalized);
+    if (exists) {
+      badgeIcon = '✅';
+      badgeText = 'Enriched Subs';
+      badgeColor = '#2e8b57';
+      badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+    } else {
+      badgeIcon = '❌';
+      badgeText = 'No Enriched Subs';
+      badgeColor = '#c0392b';
+      badge.innerHTML = `<span style="color:${badgeColor};font-weight:bold;">${badgeIcon}</span> <span style="color:${badgeColor};font-weight:bold;">${badgeText}</span>`;
+    }
+  } else {
+    // Fallback if title or utils missing
+    let badge = document.createElement('div');
+    badge.className = 'homepage-enriched-badge';
+    badge.textContent = '[Error: No title or utils]';
+    badge.style.fontSize = '0.9em';
+    badge.style.color = '#888';
+    badge.style.margin = '0';
+    badge.style.padding = '0';
+    badge.style.borderRadius = '0';
+    if (leftPadding) {
+      badge.style.paddingLeft = leftPadding;
+    }
+    cell.appendChild(badge);
   }
-  cell.appendChild(badge);
 }
 
-/**
- * Finds all movie/poster cells on the Plex homepage, logs their titles, and injects a dummy badge after the year.
- * Also increases spacing between rows of cells.
- * Retries every 500ms for up to 5 seconds if none are found initially.
- */
 function logAllPlexHomepageCells() {
   const maxRetries = 10; // 10 * 500ms = 5 seconds
   let attempts = 0;
 
-  function tryFindCells() {
+  async function tryFindCells() {
     const cells = document.querySelectorAll(cellSelector);
     if (cells.length > 0) {
       console.log(`[homepage_badge] Found ${cells.length} movie/poster cells on homepage.`);
       const titles = [];
-      cells.forEach(cell => {
-        injectBadgeForCell(cell);
+      for (const cell of cells) {
+        await injectBadgeForCell(cell);
         const titleEl = cell.querySelector(titleSelector);
         if (titleEl && titleEl.textContent) {
           titles.push(titleEl.textContent.trim());
         } else {
           titles.push('[No title found]');
         }
-      });
+      }
       console.log('[homepage_badge] Titles found:', titles);
     } else if (attempts < maxRetries) {
       attempts++;
@@ -91,17 +123,14 @@ function logAllPlexHomepageCells() {
   tryFindCells();
 }
 
-// MutationObserver to handle dynamically loaded cells
 function observeNewCells() {
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
       mutation.addedNodes.forEach(node => {
         if (node.nodeType === 1) {
-          // If a new cell is added directly
           if (node.matches && node.matches(cellSelector)) {
             injectBadgeForCell(node);
           }
-          // Or if new cells are added deeper in the tree
           const newCells = node.querySelectorAll ? node.querySelectorAll(cellSelector) : [];
           newCells.forEach(cell => injectBadgeForCell(cell));
         }
@@ -111,18 +140,7 @@ function observeNewCells() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
-// Periodic scan fallback for virtualized/infinite-scroll UIs
-function periodicBadgeScan() {
-  setInterval(() => {
-    const cells = document.querySelectorAll(cellSelector);
-    cells.forEach(cell => injectBadgeForCell(cell));
-  }, 1000); // Every 1 second
-}
-
-// Ensure global assignment for manual testing
 window.logAllPlexHomepageCells = logAllPlexHomepageCells;
 
-// TEMP: Automatically call on page load for this step
 logAllPlexHomepageCells();
-observeNewCells();
-periodicBadgeScan(); 
+observeNewCells(); 
