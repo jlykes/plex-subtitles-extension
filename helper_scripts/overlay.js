@@ -47,7 +47,7 @@ function createOverlayContainer() {
   container.style.userSelect = "text";             // Allow users to select/copy text
   container.style.color = "white";
   // Padding and border radius will be set by updateSubtitleBackground() based on translation visibility
-  container.style.fontFamily = "sans-serif";
+  container.style.fontFamily = "'KaiTi-Web', 'KaiTi', '楷体', sans-serif";
   container.style.textAlign = "center";
   container.style.maxWidth = `${SUBTITLE_MAX_WIDTH_VW}vw`;
   container.style.whiteSpace = "pre-wrap";         // Preserve line breaks if needed
@@ -63,6 +63,12 @@ function createOverlayContainer() {
   // Apply initial background styling
   window.updateSubtitleBackground?.();
 
+  // Load KaiTi font CSS
+  const fontLink = document.createElement("link");
+  fontLink.rel = "stylesheet";
+  fontLink.href = chrome.runtime.getURL("fonts/kaiti-webfont.css");
+  document.head.appendChild(fontLink);
+
   // Add custom styles for ruby/pinyin and hover highlighting
   const style = document.createElement("style");
   style.textContent = `
@@ -71,7 +77,7 @@ function createOverlayContainer() {
       user-select: text !important;
     }
     rt {
-      font-size: 0.5em;
+      font-size: 0.42em;
       line-height: 1;
       color: lightgray;
       user-select: none !important;
