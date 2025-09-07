@@ -31,7 +31,12 @@ function getDefaultSettings() {
     autoPause: false,
     autoPauseDelayMs: 0,
     removeSilences: false,
-    minSilenceGapMs: 1000
+    minSilenceGapMs: 1000,
+
+    // === Notion Settings ===
+    notionApiKey: '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',
+    notionDatabaseId: '15cc93395ee24512acce551712969460',
+    notionTrackingEnabled: true
   };
 }
 
@@ -59,7 +64,15 @@ function saveSettings(settings) {
       return;
     }
 
-    chrome.storage.sync.set({ subtitleSettings: settings }, () => {
+    // Store both the main settings and individual Notion keys for background script
+    const storageData = {
+      subtitleSettings: settings,
+      notionApiKey: settings.notionApiKey,
+      notionDatabaseId: settings.notionDatabaseId,
+      notionTrackingEnabled: settings.notionTrackingEnabled
+    };
+    
+    chrome.storage.sync.set(storageData, () => {
       if (chrome.runtime.lastError) {
         console.error('Error saving settings:', chrome.runtime.lastError);
         reject(chrome.runtime.lastError);
@@ -143,7 +156,15 @@ function resetSettings() {
       return;
     }
 
-    chrome.storage.sync.set({ subtitleSettings: defaultSettings }, () => {
+    // Store both the main settings and individual Notion keys for background script
+    const storageData = {
+      subtitleSettings: defaultSettings,
+      notionApiKey: defaultSettings.notionApiKey,
+      notionDatabaseId: defaultSettings.notionDatabaseId,
+      notionTrackingEnabled: defaultSettings.notionTrackingEnabled
+    };
+    
+    chrome.storage.sync.set(storageData, () => {
       if (chrome.runtime.lastError) {
         console.error('Error resetting settings:', chrome.runtime.lastError);
         reject(chrome.runtime.lastError);
@@ -225,6 +246,23 @@ async function initializeSettings() {
     
     // Initialize the global config object
     window.subtitleConfig = settings;
+    
+    // Also ensure individual Notion keys are stored for background script
+    if (settings.notionApiKey || settings.notionDatabaseId || settings.notionTrackingEnabled !== undefined) {
+      const notionKeys = {
+        notionApiKey: settings.notionApiKey,
+        notionDatabaseId: settings.notionDatabaseId,
+        notionTrackingEnabled: settings.notionTrackingEnabled
+      };
+      
+      chrome.storage.sync.set(notionKeys, () => {
+        if (chrome.runtime.lastError) {
+          console.error('Error storing Notion keys:', chrome.runtime.lastError);
+        } else {
+          console.log('Notion keys stored for background script');
+        }
+      });
+    }
     
     console.log('Settings initialized:', settings);
   } catch (error) {

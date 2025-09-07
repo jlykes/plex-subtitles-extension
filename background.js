@@ -458,7 +458,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'setupNotionConfig') {
     chrome.storage.sync.set({
       notionApiKey: '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',
-      notionDatabaseId: '0ae84e4e41474f96b7036030463ddc46',
+      notionDatabaseId: '15cc93395ee24512acce551712969460',
       notionTrackingEnabled: true
     }, function() {
       console.log('✅ Notion configuration saved!');
