@@ -18,6 +18,7 @@
     {
       "matches": ["*://app.plex.tv/*"],
       "js": [
+        "config.js",
         "helper_scripts/lingq_data.js",
         "helper_scripts/segmentit.min.js",
         "helper_scripts/pinyin-pro.js",

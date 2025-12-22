@@ -34,8 +34,9 @@ function getDefaultSettings() {
     minSilenceGapMs: 1000,
 
     // === Notion Settings ===
-    notionApiKey: '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',
-    notionDatabaseId: '15cc93395ee24512acce551712969460',
+    // Values loaded from config.js (with fallback to empty strings if not available)
+    notionApiKey: (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : '',
+    notionDatabaseId: (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : '',
     notionTrackingEnabled: true
   };
 }

@@ -3,6 +3,9 @@
 // It handles the API requests and responses for the extension.
 // It also contains the functions for the Notion word tracker database. 
 
+// Import configuration (must be at top level for service workers)
+importScripts('config.js');
+
 // === NOTION API FUNCTIONS ===
 /**
  * Creates or updates an entry in the Notion word tracker database.
@@ -456,9 +459,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   
   // Setup Notion configuration
   if (request.action === 'setupNotionConfig') {
+    // Get values from config.js (with fallback to empty strings if not available)
+    const apiKey = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : '';
+    const databaseId = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : '';
+    
     chrome.storage.sync.set({
-      notionApiKey: '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',
-      notionDatabaseId: '0ae84e4e41474f96b7036030463ddc46',
+      notionApiKey: apiKey,
+      notionDatabaseId: databaseId,
       notionTrackingEnabled: true
     }, function() {
       console.log('✅ Notion configuration saved!');
