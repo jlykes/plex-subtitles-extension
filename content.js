@@ -248,6 +248,17 @@ async function main() {
     window.frequencyData = null;
   }
 
+  // Load neutral tone words for pinyin tone changes
+  try {
+    if (typeof loadNeutralToneWords === 'function') {
+      console.log('[Neutral Tone] Loading neutral tone words...');
+      await loadNeutralToneWords();
+      console.log('[Neutral Tone] Neutral tone words loaded successfully');
+    }
+  } catch (error) {
+    console.error('[Neutral Tone] Error loading neutral tone words:', error);
+  }
+
   // Run core initialization logic for current video
   await initializeForCurrentVideo(lingqTerms);
 
