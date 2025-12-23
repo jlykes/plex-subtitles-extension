@@ -427,9 +427,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'addNotionWordTrackerEntry') {
     const { wordText, status, date } = request;
     
-    // Get Notion configuration from storage
+    // Get Notion configuration - prefer config.js, fallback to storage
+    const configApiKey = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : null;
+    const configDatabaseId = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : null;
+    
     chrome.storage.sync.get(['notionApiKey', 'notionDatabaseId', 'notionTrackingEnabled'], function(result) {
       const { notionApiKey, notionDatabaseId, notionTrackingEnabled } = result;
+      
+      // Use config.js values if available, otherwise use storage values
+      const apiKey = configApiKey || notionApiKey;
+      const databaseId = configDatabaseId || notionDatabaseId;
       
       // Check if Notion tracking is enabled
       if (!notionTrackingEnabled) {
@@ -438,13 +445,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       
       // Check if we have the required configuration
-      if (!notionApiKey || !notionDatabaseId) {
+      if (!apiKey || !databaseId) {
         sendResponse({ success: false, error: "Notion API key or database ID not configured" });
         return;
       }
       
       // Create the Notion entry directly in background script
-      createNotionWordTrackerEntry(wordText, status, date, notionApiKey, notionDatabaseId)
+      createNotionWordTrackerEntry(wordText, status, date, apiKey, databaseId)
         .then(result => {
           sendResponse(result);
         })
@@ -476,8 +483,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   
   // Test Notion API connection
   if (request.action === 'testNotionConnection') {
+    // Get Notion configuration - prefer config.js, fallback to storage
+    const configApiKey = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : null;
+    const configDatabaseId = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : null;
+    
     chrome.storage.sync.get(['notionApiKey', 'notionDatabaseId'], function(result) {
-      if (!result.notionApiKey || !result.notionDatabaseId) {
+      // Use config.js values if available, otherwise use storage values
+      const apiKey = configApiKey || result.notionApiKey;
+      const databaseId = configDatabaseId || result.notionDatabaseId;
+      
+      if (!apiKey || !databaseId) {
         sendResponse({ success: false, error: 'Configuration not found' });
         return;
       }
@@ -485,7 +500,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       // Test the API connection - use local date for PST timezone
       const today = new Date();
       const localDate = today.toLocaleDateString('en-CA'); // YYYY-MM-DD format in local timezone
-      createNotionWordTrackerEntry('测试', '4', localDate, result.notionApiKey, result.notionDatabaseId)
+      createNotionWordTrackerEntry('测试', '4', localDate, apiKey, databaseId)
         .then(result => {
           sendResponse(result);
         })
