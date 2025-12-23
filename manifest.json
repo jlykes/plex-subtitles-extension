@@ -49,7 +49,11 @@
         "html/control_panel.html",
         "lingqs.json",
         "cache/word_frequency.json",
-                "cache/word_scores.json"
+        "cache/word_scores.json",
+        "fonts/kaiti-webfont.css",
+        "fonts/KaiTi.woff2",
+        "fonts/KaiTi.woff",
+        "fonts/KaiTi.ttf"
       ],
       "matches": ["*://app.plex.tv/*"]
     }

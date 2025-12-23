@@ -63,11 +63,21 @@ function createOverlayContainer() {
   // Apply initial background styling
   window.updateSubtitleBackground?.();
 
-  // Load KaiTi font CSS
-  const fontLink = document.createElement("link");
-  fontLink.rel = "stylesheet";
-  fontLink.href = chrome.runtime.getURL("fonts/kaiti-webfont.css");
-  document.head.appendChild(fontLink);
+  // Load KaiTi font CSS with correct extension URLs
+  const fontStyle = document.createElement("style");
+  fontStyle.textContent = `
+    @font-face {
+      font-family: 'KaiTi-Web';
+      src: url('${chrome.runtime.getURL("fonts/KaiTi.woff2")}') format('woff2'),
+           url('${chrome.runtime.getURL("fonts/KaiTi.woff")}') format('woff'),
+           url('${chrome.runtime.getURL("fonts/KaiTi.ttf")}') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+      unicode-range: U+4E00-9FFF; /* Chinese characters */
+    }
+  `;
+  document.head.appendChild(fontStyle);
 
   // Add custom styles for ruby/pinyin and hover highlighting
   const style = document.createElement("style");
