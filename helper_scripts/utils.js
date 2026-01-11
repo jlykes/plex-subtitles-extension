@@ -227,6 +227,77 @@ async function loadNeutralToneWords() {
  * Returns empty set if not loaded yet.
  * @returns {Set<string>} The set of neutral tone words
  */
+
+// Cache for known single-character words
+let knownSingleCharWords = null;
+
+/**
+ * Loads known words from the LingQ Learned + Known + Ignored file and extracts single-character words.
+ * This is called once when needed and caches the result.
+ * @returns {Promise<Set<string>>} A promise that resolves to a Set of known single-character words
+ */
+async function loadKnownSingleCharWords() {
+  if (knownSingleCharWords) {
+    return knownSingleCharWords;
+  }
+
+  try {
+    // Use a fixed filename to avoid manual updates. If you need to update the file,
+    // rename the new file to this exact name: "LingQ_Learned_Known_Ignored.txt"
+    const filePath = 'cache/LingQ_Learned_Known_Ignored.txt';
+    const url = chrome.runtime.getURL(filePath);
+    console.log('[Known Characters] Attempting to load file from URL:', url);
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.error(`[Known Characters] Failed to load known words file. Status: ${response.status}, StatusText: ${response.statusText}`);
+      console.error(`[Known Characters] URL attempted: ${url}`);
+      knownSingleCharWords = new Set();
+      return knownSingleCharWords;
+    }
+    
+    const text = await response.text();
+    const words = text
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0);
+    
+    // Extract only single-character words (Chinese characters only)
+    const singleCharWords = words
+      .filter(word => {
+        // Only keep words that are exactly one Chinese character
+        const chineseChars = word.match(/[\u4e00-\u9fff]/g);
+        return chineseChars && chineseChars.length === 1 && word.length === 1;
+      });
+    
+    knownSingleCharWords = new Set(singleCharWords);
+    console.log(`Loaded ${knownSingleCharWords.size} known single-character words`);
+    
+    // Re-render current subtitle if it exists, since pinyin display depends on known characters
+    if (window.reRenderCurrentSubtitle && knownSingleCharWords.size > 0) {
+      // Use setTimeout to ensure this happens after initialization
+      setTimeout(() => {
+        if (window.reRenderCurrentSubtitle) {
+          window.reRenderCurrentSubtitle();
+        }
+      }, 100);
+    }
+    
+    return knownSingleCharWords;
+  } catch (error) {
+    console.error('Error loading known single-character words:', error);
+    knownSingleCharWords = new Set();
+    return knownSingleCharWords;
+  }
+}
+
+/**
+ * Gets the loaded known single-character words set.
+ * Returns empty set if not loaded yet.
+ * @returns {Set<string>} The set of known single-character words
+ */
+function getKnownSingleCharWords() {
+  return knownSingleCharWords || new Set();
+}
 function getNeutralToneWords() {
   return neutralToneWords || new Set();
 }
@@ -472,17 +543,25 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
     config.toneColor === "all" ||
     (config.toneColor === "unknown-only" && (!status || !isKnownWord(status)));
 
-  // Only show pinyin if config allows AND the word contains Chinese
-  const shouldShowPinyin =
-    (config.pinyin === "all" ||
-      (config.pinyin === "unknown-only" &&
-        (!status || (!isKnownWord(status) && status.status !== -1)))) &&
-    isChineseWord(word);
-
-  
   // === Split characters and corresponding pinyin ===
   const charList = [...word]; // Split Chinese word into characters
   const pinyinList = (pinyin || "").split(" "); // One pinyin per char
+
+  // === Determine pinyin display mode ===
+  const isPinyinAll = config.pinyin === "all";
+  const isPinyinUnknownOnly = config.pinyin === "unknown-only";
+  const isChinese = isChineseWord(word);
+  
+  // Get tags from status object
+  const tags = status?.tags || [];
+  const hasCharactersKnownTag = tags.includes("characters known");
+  const hasPartialCharactersKnownTag = tags.includes("partial characters known");
+  
+  // Check if word is "learned" (status=3, extended_status=0)
+  const isLearned = status && status.status === 3 && (status.extended_status === 0 || status.extended_status === null);
+  
+  // Get known single-character words set (will be empty if not loaded yet)
+  const knownSingleChars = getKnownSingleCharWords();
 
   // === Create wrapper for the full word ===
   const wrapper = document.createElement("span");
@@ -536,13 +615,49 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
     span.textContent = char;
     span.style.margin = "0";
 
-    const toneColor = shouldColor && pinyinList[i] ? getToneColor(pinyinList[i]) : "white";
+    const charPinyin = pinyinList[i] || "";
+    const toneColor = shouldColor && charPinyin ? getToneColor(charPinyin) : "white";
     span.style.color = toneColor;
 
-    if (!isPunct && shouldShowPinyin) {
+    // Determine if pinyin should be shown for this character
+    let shouldShowCharPinyin = false;
+    
+    if (!isPunct && isChinese) {
+      if (isPinyinAll) {
+        // "all" mode: show pinyin unless "characters known" tag
+        if (hasCharactersKnownTag) {
+          shouldShowCharPinyin = false;
+        } else {
+          shouldShowCharPinyin = true;
+        }
+      } else if (isPinyinUnknownOnly) {
+        // "unknown-only" mode: complex logic based on tags and status
+        if (hasCharactersKnownTag) {
+          // Rule 1: "characters known" tag = no pinyin for any characters
+          shouldShowCharPinyin = false;
+        } else if (hasPartialCharactersKnownTag) {
+          // Rule 2: "partial characters known" = show pinyin only for characters NOT in known set
+          const isCharKnown = knownSingleChars.has(char);
+          shouldShowCharPinyin = !isCharKnown;
+          // Debug logging for partial characters known
+          console.log(`[Pinyin Debug] Word "${word}" (partial characters known) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set' : '❌ NOT FOUND in known set'} (will ${shouldShowCharPinyin ? 'show' : 'hide'} pinyin)`);
+        } else if (isLearned) {
+          // Rule 3: "learned" words = show pinyin only for characters NOT in known set
+          const isCharKnown = knownSingleChars.has(char);
+          shouldShowCharPinyin = !isCharKnown;
+          // Debug logging for learned words
+          console.log(`[Pinyin Debug] Word "${word}" (learned) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set' : '❌ NOT FOUND in known set'} (will ${shouldShowCharPinyin ? 'show' : 'hide'} pinyin)`);
+        } else {
+          // Default "unknown-only" behavior: show pinyin if word is not known
+          shouldShowCharPinyin = !status || (!isKnownWord(status) && status.status !== -1);
+        }
+      }
+    }
+
+    if (shouldShowCharPinyin) {
       const ruby = document.createElement("ruby");
       const rt = document.createElement("rt");
-      rt.textContent = pinyinList[i] || "";
+      rt.textContent = charPinyin;
       rt.style.color = toneColor;
 
       ruby.appendChild(span);

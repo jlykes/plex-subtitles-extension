@@ -296,15 +296,15 @@ async function showWordPopup(wordElement) {
     
     setTimeout(() => { popup.style.opacity = '1'; }, 10);
 
-    // Remove any existing handler before adding a new one
+    // Remove any existing handler before adding a new one (try both capture and bubble phases)
     document.removeEventListener('click', handleDocumentClickToClosePopup, true);
+    document.removeEventListener('click', handleDocumentClickToClosePopup, false);
+    
+    // Add click outside to close (use capture phase to catch clicks early)
     setTimeout(() => {
         document.addEventListener('click', handleDocumentClickToClosePopup, true);
     }, 0);
 
-    // Add click outside to close
-    document.addEventListener('click', handleDocumentClickToClosePopup);
-    
     // Add button click handlers for status and tag updates
     addButtonClickHandlers(popup, wordText);
 }
@@ -312,12 +312,15 @@ async function showWordPopup(wordElement) {
 /**
  * Hides and removes the current word popup from the DOM.
  * Also cleans up event listeners and resets the last popup word element reference.
+ * @param {boolean} skipReRender - If true, skip re-rendering the subtitle (used when called from addWordClickListeners to prevent loops)
  * @returns {void}
  */
-function hideWordPopup() {
-    console.log('[word_popup] hideWordPopup called');
+function hideWordPopup(skipReRender = false) {
+    console.log('[word_popup] hideWordPopup called', skipReRender ? '(skipReRender=true)' : '');
     console.log('[word_popup] lastPopupWordElement before nulling:', lastPopupWordElement);
     const existing = document.querySelector('.word-popup');
+    const wasOpen = existing !== null;
+    
     if (existing) existing.remove();
     
     // Remove highlight from the previously active word
@@ -328,7 +331,15 @@ function hideWordPopup() {
     
     lastPopupWordElement = null;
     console.log('[word_popup] lastPopupWordElement set to null');
+    // Remove both capture and bubble phase listeners
     document.removeEventListener('click', handleDocumentClickToClosePopup, true);
+    document.removeEventListener('click', handleDocumentClickToClosePopup, false);
+    
+    // Re-render subtitle when popup closes to reflect any tag/status changes
+    // Skip re-render if called from addWordClickListeners to prevent infinite loop
+    if (!skipReRender && wasOpen && window.reRenderCurrentSubtitle) {
+        window.reRenderCurrentSubtitle();
+    }
 }
 
 //////////////////////////////
@@ -589,7 +600,7 @@ function initWordPopup() {
  * @returns {void}
  */
 function addWordClickListeners() {
-    hideWordPopup();
+    hideWordPopup(true); // Pass true to skip re-render and prevent infinite loop
     const wordSpans = document.querySelectorAll('.subtitle-word');
     wordSpans.forEach(span => {
         span.removeEventListener('click', handleWordClick);
@@ -702,15 +713,22 @@ function handleWordHoverEnd(event) {
  */
 function handleDocumentClickToClosePopup(event) {
     const popup = document.querySelector('.word-popup');
-    // If clicking a subtitle word, let its click handler manage the popup
-    if (popup && !popup.contains(event.target)) {
-        if (!event.target.closest('.subtitle-word')) {
-            event.preventDefault();
-            event.stopPropagation();
-            hideWordPopup();
-        }
-        // If it's a subtitle word, do nothing here
+    if (!popup) return;
+    
+    // Don't close if clicking inside the popup (including buttons)
+    if (popup.contains(event.target)) {
+        return;
     }
+    
+    // Don't close if clicking a subtitle word (let its click handler manage the popup)
+    if (event.target.closest('.subtitle-word')) {
+        return;
+    }
+    
+    // Click is outside the popup and not on a subtitle word, so close it
+    event.preventDefault();
+    event.stopPropagation();
+    hideWordPopup();
 }
 
 /**
@@ -822,6 +840,11 @@ async function updateWordStatus(wordText, buttonText) {
         // Update just the clicked word's underline without re-rendering entire subtitle
         updateWordUnderline(wordText, newStatus, newExtendedStatus);
         
+        // Update pinyin display without re-rendering the entire subtitle
+        if (typeof updateWordPinyin === 'function') {
+            updateWordPinyin(wordText, newStatus, newExtendedStatus, currentTags);
+        }
+        
         // Update server in the background (don't await)
         if (newStatus !== null) {
             updateServerLingQData(wordText, newStatus, newExtendedStatus, currentTags).catch(error => {
@@ -894,6 +917,11 @@ async function toggleWordTag(wordText, tagText) {
             console.error('[word_popup] Background server update failed:', error);
         });
         
+        // Update pinyin display without re-rendering the entire subtitle
+        if (typeof updateWordPinyin === 'function') {
+            updateWordPinyin(wordText, currentData.status, currentData.extended_status, newTags);
+        }
+        
     } catch (error) {
         console.error('[word_popup] Error toggling word tag:', error);
     }
@@ -909,22 +937,34 @@ async function toggleWordTag(wordText, tagText) {
  */
 async function updateLocalLingQData(wordText, status, extendedStatus, tags) {
     try {
-        console.log(`[word_popup] Loading current LingQ terms from storage...`);
-        const lingqTerms = await window.lingqData.loadLingQTerms();
-        console.log(`[word_popup] Current LingQ terms loaded:`, Object.keys(lingqTerms).length, 'terms');
+        // Use window.lingqTerms as the source of truth (most up-to-date) to avoid race conditions
+        // If it doesn't exist, load from storage
+        let lingqTerms;
+        if (window.lingqTerms && typeof window.lingqTerms === 'object') {
+            console.log(`[word_popup] Using existing window.lingqTerms (${Object.keys(window.lingqTerms).length} terms)`);
+            // Deep clone to avoid mutating the original object
+            lingqTerms = JSON.parse(JSON.stringify(window.lingqTerms));
+        } else {
+            console.log(`[word_popup] window.lingqTerms not available, loading from storage...`);
+            lingqTerms = await window.lingqData.loadLingQTerms();
+            console.log(`[word_popup] Current LingQ terms loaded:`, Object.keys(lingqTerms).length, 'terms');
+        }
+        
+        // Normalize word text (strip non-Chinese characters)
+        const normalizedWordText = (wordText.match(/[\u4e00-\u9fff]+/g) || []).join('');
         
         if (status === null) {
             // Remove word from LingQ data
-            delete lingqTerms[wordText];
-            console.log(`[word_popup] Removed '${wordText}' from local LingQ data`);
+            delete lingqTerms[normalizedWordText];
+            console.log(`[word_popup] Removed '${normalizedWordText}' from local LingQ data`);
         } else {
             // Update or add word to LingQ data
-            lingqTerms[wordText] = {
+            lingqTerms[normalizedWordText] = {
                 status: status,
                 extended_status: extendedStatus,
                 tags: tags || []
             };
-            console.log(`[word_popup] Updated local LingQ data for '${wordText}':`, lingqTerms[wordText]);
+            console.log(`[word_popup] Updated local LingQ data for '${normalizedWordText}':`, lingqTerms[normalizedWordText]);
         }
         
         // Save updated data back to local storage
@@ -1027,6 +1067,186 @@ function updateWordUnderline(wordText, status, extendedStatus) {
     if (!foundAndUpdated) {
         console.log(`[word_popup] WARNING: No word elements found matching '${wordText}'`);
     }
+}
+
+/**
+ * Updates the pinyin display for a specific word without re-rendering the entire subtitle.
+ * Finds all instances of the word and updates their pinyin structure based on tags/status.
+ * @param {string} wordText - The Chinese word to update
+ * @param {number|null} status - The status value
+ * @param {number|null} extendedStatus - The extended status value
+ * @param {Array<string>} tags - The tags array
+ * @returns {void}
+ */
+function updateWordPinyin(wordText, status, extendedStatus, tags) {
+    console.log(`[word_popup] updateWordPinyin called for '${wordText}' with tags:`, tags);
+    
+    // Functions should be in global scope from utils.js (loaded before word_popup.js)
+    // If they're not available, skip update (pinyin will update on next re-render)
+    if (typeof getPinyin !== 'function' || typeof getToneColor !== 'function') {
+        console.warn('[word_popup] Required functions (getPinyin, getToneColor) not available - pinyin will update on next re-render');
+        return;
+    }
+    
+    // Strip non-Chinese characters for consistent matching
+    const chineseOnly = (wordText.match(/[\u4e00-\u9fff]+/g) || []).join('');
+    if (!chineseOnly) return;
+    
+    // Get pinyin for the word
+    const pinyin = getPinyin(chineseOnly);
+    if (pinyin === "none") return;
+    
+    const pinyinList = pinyin.split(" ");
+    const charList = [...chineseOnly];
+    
+    // Find all word elements with this text
+    const wordElements = document.querySelectorAll('.subtitle-word');
+    
+    wordElements.forEach(element => {
+        // Check if this element contains the target word
+        const elementText = element.textContent.trim();
+        const elementChineseOnly = (elementText.match(/[\u4e00-\u9fff]+/g) || []).join('');
+        
+        if (elementText === wordText || elementText.includes(wordText) || elementChineseOnly === chineseOnly) {
+            // Build status object for pinyin logic
+            const statusObj = { status, extended_status: extendedStatus, tags: tags || [] };
+            
+            // Update pinyin for each character in this word element
+            updateWordElementPinyin(element, charList, pinyinList, statusObj);
+        }
+    });
+}
+
+/**
+ * Updates the pinyin structure for a single word element.
+ * @param {HTMLElement} wordElement - The .subtitle-word element
+ * @param {Array<string>} charList - Array of characters in the word
+ * @param {Array<string>} pinyinList - Array of pinyin syllables (one per character)
+ * @param {Object} statusObj - Status object with status, extended_status, and tags
+ * @returns {void}
+ */
+function updateWordElementPinyin(wordElement, charList, pinyinList, statusObj) {
+    const config = window.subtitleConfig || {};
+    const isPinyinAll = config.pinyin === "all";
+    const isPinyinUnknownOnly = config.pinyin === "unknown-only";
+    const isChinese = true; // We're processing Chinese words
+    const isPunct = false; // We've already filtered to Chinese characters
+    
+    // Get tags from status object
+    const tags = statusObj?.tags || [];
+    const hasCharactersKnownTag = tags.includes("characters known");
+    const hasPartialCharactersKnownTag = tags.includes("partial characters known");
+    const isLearned = statusObj && statusObj.status === 3 && (statusObj.extended_status === 0 || statusObj.extended_status === null);
+    
+    // Get known single-character words set
+    const knownSingleChars = typeof getKnownSingleCharWords === 'function' 
+        ? getKnownSingleCharWords() 
+        : new Set();
+    
+    const shouldColor = config.toneColor === "all" || 
+        (config.toneColor === "unknown-only" && (!statusObj || !isKnownWord(statusObj)));
+    
+    // Get all children (excluding tooltip divs)
+    const children = Array.from(wordElement.children).filter(child => 
+        child.tagName !== 'DIV' && (child.tagName === 'RUBY' || child.tagName === 'SPAN')
+    );
+    
+    // Process each character
+    let charIndex = 0;
+    children.forEach((child, childIndex) => {
+        // Skip if we've processed all characters
+        if (charIndex >= charList.length) return;
+        
+        const char = charList[charIndex];
+        const charPinyin = pinyinList[charIndex] || "";
+        
+        // Extract character text from child
+        let currentChar = '';
+        if (child.tagName === 'RUBY') {
+            const span = child.querySelector('span');
+            currentChar = span ? span.textContent : '';
+        } else if (child.tagName === 'SPAN') {
+            currentChar = child.textContent.trim();
+        } else {
+            // Skip non-character elements (like tooltips)
+            return;
+        }
+        
+        // Skip if this child doesn't match the expected character
+        if (currentChar !== char) {
+            return;
+        }
+        
+        // Determine if pinyin should be shown for this character
+        let shouldShowCharPinyin = false;
+        
+        if (isPinyinAll) {
+            shouldShowCharPinyin = !hasCharactersKnownTag;
+        } else if (isPinyinUnknownOnly) {
+            if (hasCharactersKnownTag) {
+                shouldShowCharPinyin = false;
+            } else if (hasPartialCharactersKnownTag) {
+                const isCharKnown = knownSingleChars.has(char);
+                shouldShowCharPinyin = !isCharKnown;
+            } else if (isLearned) {
+                // Rule 3: "learned" words = show pinyin only for characters NOT in known set
+                const isCharKnown = knownSingleChars.has(char);
+                shouldShowCharPinyin = !isCharKnown;
+                console.log(`[Pinyin Debug] Word (learned) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set (will hide pinyin)' : '❌ NOT FOUND in known set (will show pinyin)'}`);
+            } else {
+                shouldShowCharPinyin = !statusObj || (!isKnownWord(statusObj) && statusObj.status !== -1);
+            }
+        }
+        
+        // Determine current state
+        const currentlyHasPinyin = child.tagName === 'RUBY';
+        const needsPinyin = shouldShowCharPinyin && charPinyin;
+        
+        // Only update if structure needs to change
+        if (currentlyHasPinyin !== needsPinyin) {
+            const toneColor = shouldColor && charPinyin ? getToneColor(charPinyin) : "white";
+            
+            if (needsPinyin) {
+                // Need to add pinyin - convert span to ruby
+                const ruby = document.createElement("ruby");
+                const span = document.createElement("span");
+                span.textContent = char;
+                span.style.margin = "0";
+                span.style.color = toneColor;
+                
+                const rt = document.createElement("rt");
+                rt.textContent = charPinyin;
+                rt.style.color = toneColor;
+                
+                ruby.appendChild(span);
+                ruby.appendChild(rt);
+                wordElement.replaceChild(ruby, child);
+            } else {
+                // Need to remove pinyin - convert ruby to span
+                const span = child.querySelector('span');
+                if (span) {
+                    const newSpan = document.createElement("span");
+                    newSpan.textContent = span.textContent;
+                    newSpan.style.margin = "0";
+                    newSpan.style.color = span.style.color || "white";
+                    wordElement.replaceChild(newSpan, child);
+                }
+            }
+        } else if (currentlyHasPinyin && needsPinyin) {
+            // Structure is correct, but update tone color if needed
+            const span = child.querySelector('span');
+            const rt = child.querySelector('rt');
+            if (span && rt) {
+                const toneColor = shouldColor && charPinyin ? getToneColor(charPinyin) : "white";
+                span.style.color = toneColor;
+                rt.style.color = toneColor;
+            }
+        }
+        
+        charIndex++;
+    });
+    
+    console.log(`[word_popup] Updated pinyin structure for word element`);
 }
 
 /**
