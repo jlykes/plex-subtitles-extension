@@ -1,0 +1,11 @@
+/* KaiTi Web Font - Converted from Windows KaiTi */
+@font-face {
+  font-family: 'KaiTi-Web';
+  src: url('KaiTi.woff2') format('woff2'),
+       url('KaiTi.woff') format('woff'),
+       url('KaiTi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+4E00-9FFF; /* Chinese characters */
+} 

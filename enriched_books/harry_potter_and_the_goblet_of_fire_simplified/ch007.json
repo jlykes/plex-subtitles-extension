@@ -1,0 +1,6768 @@
+{
+  "metadata": {
+    "chapter_name": "第七章　巴格曼和克劳奇",
+    "image": null,
+    "paragraph_count": 49,
+    "word_count": 813
+  },
+  "content": [
+    {
+      "type": "paragraph",
+      "pid": "p001",
+      "raw_text": "哈利和罗恩在一个雾气弥漫的地方醒来，看到两个疲惫的巫师，一个拿着金表，另一个拿着羊皮纸和羽毛笔。他们穿着奇怪的衣服，一个穿着粗花呢西服和高统橡皮套鞋，另一个穿着苏格兰短裙和南美披风。",
+      "sentences": [
+        {
+          "sid": "s001",
+          "text": "哈利和罗恩在一个雾气弥漫的地方醒来，看到两个疲惫的巫师，一个拿着金表，另一个拿着羊皮纸和羽毛笔。",
+          "translation": "Harry and Ron woke up in a foggy place, seeing two tired wizards, one holding a gold watch, the other holding parchment and a quill.",
+          "explanation": "This sentence introduces the setting where Harry and Ron wake up, describing two tired wizards, one holding a gold watch and the other holding parchment and a quill.",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "罗恩",
+              "pinyin": "luó ēn",
+              "definition": "Ron"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in/at"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a/an"
+            },
+            {
+              "hanzi": "雾气",
+              "pinyin": "wù qì",
+              "definition": "fog"
+            },
+            {
+              "hanzi": "弥漫",
+              "pinyin": "mí màn",
+              "definition": "filling"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "地方",
+              "pinyin": "dì fāng",
+              "definition": "place"
+            },
+            {
+              "hanzi": "醒来",
+              "pinyin": "xǐng lái",
+              "definition": "wake up"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "see"
+            },
+            {
+              "hanzi": "两个",
+              "pinyin": "liǎng gè",
+              "definition": "two"
+            },
+            {
+              "hanzi": "疲惫",
+              "pinyin": "pí bèi",
+              "definition": "tired"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizards"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "one"
+            },
+            {
+              "hanzi": "拿着",
+              "pinyin": "ná zhe",
+              "definition": "holding"
+            },
+            {
+              "hanzi": "金表",
+              "pinyin": "jīn biǎo",
+              "definition": "gold watch"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "另一个",
+              "pinyin": "lìng yí gè",
+              "definition": "the other"
+            },
+            {
+              "hanzi": "拿着",
+              "pinyin": "ná zhe",
+              "definition": "holding"
+            },
+            {
+              "hanzi": "羊皮纸",
+              "pinyin": "yáng pí zhǐ",
+              "definition": "parchment"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "羽毛笔",
+              "pinyin": "yǔ máo bǐ",
+              "definition": "quill"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s002",
+          "text": "他们穿着奇怪的衣服，一个穿着粗花呢西服和高统橡皮套鞋，另一个穿着苏格兰短裙和南美披风。",
+          "translation": "They were wearing strange clothes, one wearing a coarse flower-patterned wool suit and high rubber overshoes, the other wearing a Scottish kilt and a South American cloak.",
+          "explanation": "This sentence describes the clothing worn by two individuals, highlighting the unique and contrasting styles they are wearing.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "穿着",
+              "pinyin": "chuān zhe",
+              "definition": "wearing"
+            },
+            {
+              "hanzi": "奇怪",
+              "pinyin": "qí guài",
+              "definition": "strange"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "衣服",
+              "pinyin": "yī fú",
+              "definition": "clothes"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "one"
+            },
+            {
+              "hanzi": "穿着",
+              "pinyin": "chuān zhe",
+              "definition": "wearing"
+            },
+            {
+              "hanzi": "粗花",
+              "pinyin": "cū huā",
+              "definition": "coarse flower-patterned"
+            },
+            {
+              "hanzi": "呢",
+              "pinyin": "ne",
+              "definition": "wool"
+            },
+            {
+              "hanzi": "西服",
+              "pinyin": "xī fú",
+              "definition": "suit"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "高统",
+              "pinyin": "gāo tǒng",
+              "definition": "high-topped"
+            },
+            {
+              "hanzi": "橡皮",
+              "pinyin": "xiàng pí",
+              "definition": "rubber"
+            },
+            {
+              "hanzi": "套鞋",
+              "pinyin": "tào xié",
+              "definition": "overshoes"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "另一个",
+              "pinyin": "lìng yí gè",
+              "definition": "the other"
+            },
+            {
+              "hanzi": "穿着",
+              "pinyin": "chuān zhe",
+              "definition": "wearing"
+            },
+            {
+              "hanzi": "苏格兰",
+              "pinyin": "sū gé lán",
+              "definition": "Scottish"
+            },
+            {
+              "hanzi": "短裙",
+              "pinyin": "duǎn qún",
+              "definition": "kilt"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "南美",
+              "pinyin": "nán měi",
+              "definition": "South American"
+            },
+            {
+              "hanzi": "披风",
+              "pinyin": "pī fēng",
+              "definition": "cloak"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p002",
+      "raw_text": "“早上好，巴兹尔。”韦斯莱先生说，把靴子递给穿短裙的巫师。那人把靴子扔进一个装满用过门钥匙的大箱子里。哈利看到箱子里有旧报纸、空易拉罐和破足球。",
+      "sentences": [
+        {
+          "sid": "s003",
+          "text": "“早上好，巴兹尔。",
+          "translation": "Good morning, Basil.",
+          "explanation": "The sentence is a simple greeting in Chinese, where the speaker is saying 'Good morning, Basil.' The word order in Chinese is different from English, with the time of day 'morning' coming before the greeting 'good'.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "早上",
+              "pinyin": "zǎo shàng",
+              "definition": "morning"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "巴兹尔",
+              "pinyin": "bā zī ěr",
+              "definition": "Basil"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s004",
+          "text": "”韦斯莱先生说，把靴子递给穿短裙的巫师。",
+          "translation": "Mr. Wesley said, handing the boots to the wizard in a short skirt.",
+          "explanation": "The structure '把...递给...' is a common way in Chinese to express 'handing something to someone'.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "把",
+              "pinyin": "bǎ",
+              "definition": "handing"
+            },
+            {
+              "hanzi": "靴子",
+              "pinyin": "xuē zi",
+              "definition": "boots"
+            },
+            {
+              "hanzi": "递给",
+              "pinyin": "dì gěi",
+              "definition": "to"
+            },
+            {
+              "hanzi": "穿",
+              "pinyin": "chuān",
+              "definition": "wear"
+            },
+            {
+              "hanzi": "短裙",
+              "pinyin": "duǎn qún",
+              "definition": "short skirt"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s005",
+          "text": "那人把靴子扔进一个装满用过门钥匙的大箱子里。",
+          "translation": "The man threw the boots into a large box filled with used door keys.",
+          "explanation": "The sentence showcases the use of the directional complement '进' to indicate the direction of the action 'throwing'. The possessive particle '的' is used to show the relationship between 'door keys' and 'box'.",
+          "words": [
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "definition": "that"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person/man"
+            },
+            {
+              "hanzi": "把",
+              "pinyin": "bǎ",
+              "definition": "indicating the object of the verb is being affected"
+            },
+            {
+              "hanzi": "靴子",
+              "pinyin": "xuē zi",
+              "definition": "boots"
+            },
+            {
+              "hanzi": "扔",
+              "pinyin": "rēng",
+              "definition": "throw"
+            },
+            {
+              "hanzi": "进",
+              "pinyin": "jìn",
+              "definition": "into"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "装满",
+              "pinyin": "zhuāng mǎn",
+              "definition": "filled with"
+            },
+            {
+              "hanzi": "用过",
+              "pinyin": "yòng guò",
+              "definition": "used"
+            },
+            {
+              "hanzi": "门钥匙",
+              "pinyin": "mén yào shi",
+              "definition": "door keys"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big/large"
+            },
+            {
+              "hanzi": "箱子",
+              "pinyin": "xiāng zi",
+              "definition": "box"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "inside"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s006",
+          "text": "哈利看到箱子里有旧报纸，空易拉罐和破足球。",
+          "translation": "Harry saw old newspapers, empty soda cans, and a broken soccer ball in the box.",
+          "explanation": "The structure '有' in this context is used to indicate the existence of items in the box.",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "箱子",
+              "pinyin": "xiāng zi",
+              "definition": "box"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "in"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "旧",
+              "pinyin": "jiù",
+              "definition": "old"
+            },
+            {
+              "hanzi": "报纸",
+              "pinyin": "bào zhǐ",
+              "definition": "newspapers"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "、",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "空",
+              "pinyin": "kōng",
+              "definition": "empty"
+            },
+            {
+              "hanzi": "易拉罐",
+              "pinyin": "yì lā guàn",
+              "definition": "soda cans"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "破",
+              "pinyin": "pò",
+              "definition": "broken"
+            },
+            {
+              "hanzi": "足球",
+              "pinyin": "zú qiú",
+              "definition": "soccer ball"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p003",
+      "raw_text": "“你好，亚瑟，”巴兹尔疲倦地说，“你们运气真好，我们整晚都在这里守着。你们的营地在前面四分之一英里处，第一片营地就是。场地管理员是罗伯茨先生。”",
+      "sentences": [
+        {
+          "sid": "s007",
+          "text": "“你好，亚瑟，”巴兹尔疲倦地说，你们运气真好，我们整晚都在这里守着。",
+          "translation": "Hello, Arthur,",
+          "explanation": "The structure '整晚都在这里守着' indicates continuous action of guarding throughout the whole night.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good/well"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "亚瑟",
+              "pinyin": "yà sè",
+              "definition": "Arthur"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "closing quotation mark"
+            },
+            {
+              "hanzi": "巴兹尔",
+              "pinyin": "bā zī ěr",
+              "definition": "Bazil"
+            },
+            {
+              "hanzi": "疲倦",
+              "pinyin": "pí juàn",
+              "definition": "weary"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "particle indicating adverbial phrases"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "你们",
+              "pinyin": "nǐ men",
+              "definition": "you guys"
+            },
+            {
+              "hanzi": "运气",
+              "pinyin": "yùn qì",
+              "definition": "luck"
+            },
+            {
+              "hanzi": "真",
+              "pinyin": "zhēn",
+              "definition": "really"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "lucky"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我们",
+              "pinyin": "wǒ men",
+              "definition": "we"
+            },
+            {
+              "hanzi": "整晚",
+              "pinyin": "zhěng wǎn",
+              "definition": "all night"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "all"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at"
+            },
+            {
+              "hanzi": "这里",
+              "pinyin": "zhè lǐ",
+              "definition": "here"
+            },
+            {
+              "hanzi": "守着",
+              "pinyin": "shǒu zhe",
+              "definition": "guarding"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s008",
+          "text": "你们的营地在前面四分之一英里处，第一片营地就是。",
+          "translation": "Your camp is a quarter mile ahead, the first campsite.",
+          "explanation": "The structure '第一片营地' uses the classifier '片' to indicate the first campsite.",
+          "words": [
+            {
+              "hanzi": "你们",
+              "pinyin": "nǐ men",
+              "definition": "your (plural)"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at/in"
+            },
+            {
+              "hanzi": "前面",
+              "pinyin": "qián miàn",
+              "definition": "ahead"
+            },
+            {
+              "hanzi": "四分之一",
+              "pinyin": "sì fēn zhī yī",
+              "definition": "a quarter"
+            },
+            {
+              "hanzi": "英里",
+              "pinyin": "yīng lǐ",
+              "definition": "mile"
+            },
+            {
+              "hanzi": "处",
+              "pinyin": "chù",
+              "definition": "place"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "第一",
+              "pinyin": "dì yī",
+              "definition": "first"
+            },
+            {
+              "hanzi": "片",
+              "pinyin": "piàn",
+              "definition": "classifier for flat objects like land"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "就是",
+              "pinyin": "jiù shì",
+              "definition": "exactly is"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s009",
+          "text": "场地管理员是罗伯茨先生。",
+          "translation": "The site manager is Mr. Roberts.",
+          "explanation": "The sentence follows the typical subject-verb-object structure in Chinese. The term '先生' is used as a polite way to address or refer to a man.",
+          "words": [
+            {
+              "hanzi": "场地",
+              "pinyin": "chǎng dì",
+              "definition": "site/venue"
+            },
+            {
+              "hanzi": "管理员",
+              "pinyin": "guǎn lǐ yuán",
+              "definition": "manager/administrator"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s010",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only contains a closing quotation mark and a space, with no actual text to translate or analyze.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p004",
+      "raw_text": "“谢谢，巴兹尔。”韦斯莱先生说，带着大家走。",
+      "sentences": [
+        {
+          "sid": "s011",
+          "text": "“谢谢，巴兹尔。",
+          "translation": "Thank you, Basil.",
+          "explanation": "The sentence is a simple expression of gratitude, thanking someone named Basil.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "谢谢",
+              "pinyin": "xiè xiè",
+              "definition": "thank you"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "巴兹尔",
+              "pinyin": "bā zī ěr",
+              "definition": "Basil"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s012",
+          "text": "”韦斯莱先生说，带着大家走。",
+          "translation": "Mr. Wesley said, leading everyone.",
+          "explanation": "The structure '带着' indicates that Mr. Wesley is leading everyone as they go.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "带着",
+              "pinyin": "dài zhe",
+              "definition": "leading"
+            },
+            {
+              "hanzi": "大家",
+              "pinyin": "dà jiā",
+              "definition": "everyone"
+            },
+            {
+              "hanzi": "走",
+              "pinyin": "zǒu",
+              "definition": "to go"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p005",
+      "raw_text": "他们穿过雾气弥漫的沼泽地，走了二十分钟，看到一座小石屋和许多帐篷。哈利认出罗伯茨先生是个麻瓜，他看着他们。",
+      "sentences": [
+        {
+          "sid": "s013",
+          "text": "他们穿过雾气弥漫的沼泽地，走了二十分钟，看到一座小石屋和许多帐篷。",
+          "translation": "They walked through the misty swamp for twenty minutes and saw a small stone house and many tents.",
+          "explanation": "This sentence contains measure words like 座 (measure word for buildings) and 许多 (many), which are common in Chinese to specify the quantity of objects.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "穿过",
+              "pinyin": "chuān guò",
+              "definition": "walked through"
+            },
+            {
+              "hanzi": "雾气",
+              "pinyin": "wù qì",
+              "definition": "mist"
+            },
+            {
+              "hanzi": "弥漫",
+              "pinyin": "mí màn",
+              "definition": "filled"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "connecting particle"
+            },
+            {
+              "hanzi": "沼泽地",
+              "pinyin": "zhǎo zé dì",
+              "definition": "swamp"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "走",
+              "pinyin": "zǒu",
+              "definition": "walked"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion"
+            },
+            {
+              "hanzi": "二十",
+              "pinyin": "èr shí",
+              "definition": "twenty"
+            },
+            {
+              "hanzi": "分钟",
+              "pinyin": "fēn zhōng",
+              "definition": "minutes"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "座",
+              "pinyin": "zuò",
+              "definition": "measure word for buildings"
+            },
+            {
+              "hanzi": "小",
+              "pinyin": "xiǎo",
+              "definition": "small"
+            },
+            {
+              "hanzi": "石屋",
+              "pinyin": "shí wū",
+              "definition": "stone house"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "许多",
+              "pinyin": "xǔ duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tents"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s014",
+          "text": "哈利认出罗伯茨先生是个麻瓜，他看着他们。",
+          "translation": "Harry recognized Mr. Roberts as a Muggle, he looked at them.",
+          "explanation": "The term '麻瓜' (Muggle) is specific to the Harry Potter series, referring to non-magical people. The structure '认出...是...' is used to indicate recognizing someone as something (in this case, recognizing Mr. Roberts as a Muggle).",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "认出",
+              "pinyin": "rèn chū",
+              "definition": "recognized"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "as"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "麻瓜",
+              "pinyin": "má guā",
+              "definition": "Muggle"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ","
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "看着",
+              "pinyin": "kàn zhe",
+              "definition": "looked at"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "them"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p006",
+      "raw_text": "“早上好！”韦斯莱先生说。",
+      "sentences": [
+        {
+          "sid": "s015",
+          "text": "“早上好！",
+          "translation": "Good morning!",
+          "explanation": "The sentence is a common greeting used to say 'Good morning!' in Chinese. The word '早上' means 'morning', '好' means 'good/well', and '！' is an exclamation mark.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "早上",
+              "pinyin": "zǎo shàng",
+              "definition": "morning"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good/well"
+            },
+            {
+              "hanzi": "！",
+              "pinyin": "",
+              "definition": "exclamation mark"
+            }
+          ]
+        },
+        {
+          "sid": "s016",
+          "text": "”韦斯莱先生说。",
+          "translation": "Mr. Wesley said.",
+          "explanation": "In Chinese, the surname comes first followed by the title '先生' (Mr./sir). The verb '说' means 'said' in this context.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr./sir"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p007",
+      "raw_text": "“早上好！”罗伯茨先生回答。",
+      "sentences": [
+        {
+          "sid": "s017",
+          "text": "“早上好！",
+          "translation": "Good morning!",
+          "explanation": "The sentence is a simple greeting meaning 'Good morning!' The word '早上' means 'morning' and '好' means 'good'. The exclamation mark '！' adds emphasis to the greeting.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "早上",
+              "pinyin": "zǎo shàng",
+              "definition": "morning"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good"
+            },
+            {
+              "hanzi": "！",
+              "pinyin": "",
+              "definition": "exclamation mark"
+            }
+          ]
+        },
+        {
+          "sid": "s018",
+          "text": "”罗伯茨先生回答。",
+          "translation": "Mr. Roberts replied.",
+          "explanation": "The sentence is a simple statement where Mr. Roberts is replying to something.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "回答",
+              "pinyin": "huí dá",
+              "definition": "replied"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p008",
+      "raw_text": "“你是罗伯茨先生吗？”",
+      "sentences": [
+        {
+          "sid": "s019",
+          "text": "“你是罗伯茨先生吗？",
+          "translation": "Are you Mr. Roberts?",
+          "explanation": "The sentence structure is a simple question asking if the person is Mr. Roberts. The particle '吗' is used at the end to indicate a yes-no question.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "to be"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "definition": "question particle"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s020",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence contains opening and closing quotation marks.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p009",
+      "raw_text": "“是的。”罗伯茨先生说，“你是谁？”",
+      "sentences": [
+        {
+          "sid": "s021",
+          "text": "“是的。",
+          "translation": "Yes.",
+          "explanation": "The sentence simply means 'Yes.' The tricky part for learners might be understanding the use of the particle '的' at the end of the sentence.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "yes"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating affirmation or completion"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s022",
+          "text": "”罗伯茨先生说，“你是谁？",
+          "translation": "Mr. Roberts said, \"Who are you?\"",
+          "explanation": "The sentence structure is a simple question in Chinese, where the subject '你' (you) is followed by the verb '是' (are) and the question word '谁' (who). The sentence is enclosed in quotation marks to indicate direct speech.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "are"
+            },
+            {
+              "hanzi": "谁",
+              "pinyin": "shuí",
+              "definition": "who"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s023",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence consists of opening and closing quotation marks.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p010",
+      "raw_text": "“韦斯莱——两顶帐篷，两天前预订的。”",
+      "sentences": [
+        {
+          "sid": "s024",
+          "text": "“韦斯莱——",
+          "translation": "Wesley——",
+          "explanation": "The sentence is addressing someone named Wesley, with an emphasis indicated by the em dash.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Wesley"
+            },
+            {
+              "hanzi": "——",
+              "pinyin": "",
+              "definition": "em dash"
+            }
+          ]
+        },
+        {
+          "sid": "s025",
+          "text": "两顶帐篷，两天前预订的。",
+          "translation": "Two tents, booked two days ago.",
+          "explanation": "The structure '两...的' is used to indicate something that was done or happened a certain number of times before.",
+          "words": [
+            {
+              "hanzi": "两",
+              "pinyin": "liǎng",
+              "definition": "two"
+            },
+            {
+              "hanzi": "顶",
+              "pinyin": "dǐng",
+              "definition": "measure word for tents"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "两",
+              "pinyin": "liǎng",
+              "definition": "two"
+            },
+            {
+              "hanzi": "天",
+              "pinyin": "tiān",
+              "definition": "day"
+            },
+            {
+              "hanzi": "前",
+              "pinyin": "qián",
+              "definition": "before"
+            },
+            {
+              "hanzi": "预订",
+              "pinyin": "yù dìng",
+              "definition": "booked"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s026",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or a specific reference.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p011",
+      "raw_text": "“有的。”罗伯茨先生说，“你们在那儿的树林边有个地方。只住一个晚上吗？”",
+      "sentences": [
+        {
+          "sid": "s027",
+          "text": "“有的。",
+          "translation": "Some.",
+          "explanation": "The sentence is a simple one-word response indicating the presence of something.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have; there is"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating possession or description"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s028",
+          "text": "”罗伯茨先生说，“你们在那儿的树林边有个地方。",
+          "translation": "Mr. Roberts said, \"There is a place by the edge of the woods where you are.\"",
+          "explanation": "The sentence structure in Chinese is Subject + Verb + Object. The possessive particle '的' is used to indicate possession or association between '那儿' (there) and '树林' (woods).",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "closing quotation mark"
+            },
+            {
+              "hanzi": "罗伯茨先生",
+              "pinyin": "luó bó cí xiān shēng",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你们",
+              "pinyin": "nǐ men",
+              "definition": "you"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at/in"
+            },
+            {
+              "hanzi": "那儿",
+              "pinyin": "nà ér",
+              "definition": "there"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "树林",
+              "pinyin": "shù lín",
+              "definition": "woods/forest"
+            },
+            {
+              "hanzi": "边",
+              "pinyin": "biān",
+              "definition": "edge/side"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/has"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "地方",
+              "pinyin": "dì fāng",
+              "definition": "place"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s029",
+          "text": "只住一个晚上吗？",
+          "translation": "Just staying for one night?",
+          "explanation": "The sentence structure is a simple question in Chinese, formed by placing the question particle '吗' at the end of the sentence.",
+          "words": [
+            {
+              "hanzi": "只",
+              "pinyin": "zhǐ",
+              "definition": "just/only"
+            },
+            {
+              "hanzi": "住",
+              "pinyin": "zhù",
+              "definition": "stay/live"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "one"
+            },
+            {
+              "hanzi": "晚上",
+              "pinyin": "wǎn shàng",
+              "definition": "night"
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "definition": "question particle"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s030",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence consists of a closing quotation mark and a space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p012",
+      "raw_text": "“是的。”韦斯莱先生说。",
+      "sentences": [
+        {
+          "sid": "s031",
+          "text": "“是的。",
+          "translation": "Yes.",
+          "explanation": "The sentence is a simple affirmation in response to a question or statement. The use of \"的\" at the end of a sentence can indicate a possessive relationship or emphasize a particular characteristic.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "to be; yes"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle; adjectival suffix"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s032",
+          "text": "”韦斯莱先生说。",
+          "translation": "Mr. Wesley said.",
+          "explanation": "In Chinese, the surname (韦斯莱) comes before the title (先生), followed by the verb (说) to indicate speech. The period (。) marks the end of the sentence.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr. (polite title for a man)"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p013",
+      "raw_text": "“现在就付钱吧。”罗伯茨先生说。",
+      "sentences": [
+        {
+          "sid": "s033",
+          "text": "“现在就付钱吧。",
+          "translation": "Now pay the money.",
+          "explanation": "The structure '就...吧' is commonly used to suggest or urge someone to do something in Chinese.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "现在",
+              "pinyin": "xiàn zài",
+              "definition": "now"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "indicating immediacy or earliness"
+            },
+            {
+              "hanzi": "付",
+              "pinyin": "fù",
+              "definition": "to pay"
+            },
+            {
+              "hanzi": "钱",
+              "pinyin": "qián",
+              "definition": "money"
+            },
+            {
+              "hanzi": "吧",
+              "pinyin": "ba",
+              "definition": "modal particle indicating suggestion or urging"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s034",
+          "text": "”罗伯茨先生说。",
+          "translation": "Mr. Roberts said.",
+          "explanation": "The sentence is a simple statement where Mr. Roberts is the subject and 'said' is the action verb.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p014",
+      "raw_text": "“好的。”韦斯莱先生说。他拿出麻瓜的钱，哈利帮他分辨面值。",
+      "sentences": [
+        {
+          "sid": "s035",
+          "text": "“好的。",
+          "translation": "Okay.",
+          "explanation": "The sentence is a simple acknowledgment or agreement, where 好 is used to express 'okay' or 'good', and 的 is a particle that adds emphasis or completion to the sentence.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating completion or emphasis"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s036",
+          "text": "”韦斯莱先生说。",
+          "translation": "Mr. Wesley said.",
+          "explanation": "The sentence is a simple statement where Mr. Wesley is speaking.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s037",
+          "text": "他拿出麻瓜的钱，哈利帮他分辨面值。",
+          "translation": "He took out the Muggle's money, and Harry helped him distinguish the denominations.",
+          "explanation": "This sentence introduces the concept of Muggles (non-magical people) and shows Harry helping someone distinguish the denominations of money.",
+          "words": [
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "拿出",
+              "pinyin": "ná chū",
+              "definition": "take out"
+            },
+            {
+              "hanzi": "麻瓜",
+              "pinyin": "má guā",
+              "definition": "Muggle (non-magical person)"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "钱",
+              "pinyin": "qián",
+              "definition": "money"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "帮",
+              "pinyin": "bāng",
+              "definition": "help"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "分辨",
+              "pinyin": "fēn biàn",
+              "definition": "distinguish"
+            },
+            {
+              "hanzi": "面值",
+              "pinyin": "miàn zhí",
+              "definition": "denominations"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p015",
+      "raw_text": "“你是外国人？”罗伯茨先生问。",
+      "sentences": [
+        {
+          "sid": "s038",
+          "text": "“你是外国人？",
+          "translation": "Are you a foreigner?",
+          "explanation": "The sentence structure is a simple question in Chinese, asking if the person is a foreigner.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "to be"
+            },
+            {
+              "hanzi": "外国人",
+              "pinyin": "wài guó rén",
+              "definition": "foreigner"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s039",
+          "text": "”罗伯茨先生问。",
+          "translation": "Mr. Roberts asked.",
+          "explanation": "The sentence is a simple question where Mr. Roberts is asking something.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p016",
+      "raw_text": "“外国人？”韦斯莱先生重复。",
+      "sentences": [
+        {
+          "sid": "s040",
+          "text": "“外国人？",
+          "translation": "Foreigner?",
+          "explanation": "The sentence is a simple question asking if someone is a foreigner. The word '外国人' means 'foreigner' in this context.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "外国人",
+              "pinyin": "wài guó rén",
+              "definition": "foreigner"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s041",
+          "text": "”韦斯莱先生重复。",
+          "translation": "Mr. Wesley repeated.",
+          "explanation": "This sentence is a simple statement where Mr. Wesley is repeating something.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "重复",
+              "pinyin": "chóng fù",
+              "definition": "repeat"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p017",
+      "raw_text": "“刚才有人给我啤酒瓶盖那么大的金币。”罗伯茨先生说。",
+      "sentences": [
+        {
+          "sid": "s042",
+          "text": "“刚才有人给我啤酒瓶盖那么大的金币。",
+          "translation": "Just now, someone gave me a gold coin as big as a beer bottle cap.",
+          "explanation": "The structure '那么...的' is used to indicate a comparison, meaning 'as...as'.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "刚才",
+              "pinyin": "gāng cái",
+              "definition": "just now"
+            },
+            {
+              "hanzi": "有人",
+              "pinyin": "yǒu rén",
+              "definition": "someone"
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi",
+              "definition": "give"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "啤酒瓶盖",
+              "pinyin": "pí jiǔ píng gài",
+              "definition": "beer bottle cap"
+            },
+            {
+              "hanzi": "那么",
+              "pinyin": "nà me",
+              "definition": "as big as"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "金币",
+              "pinyin": "jīn bì",
+              "definition": "gold coin"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s043",
+          "text": "”罗伯茨先生说。",
+          "translation": "Mr. Roberts said.",
+          "explanation": "The sentence is a simple statement where Mr. Roberts is the subject and 'said' is the action verb.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p018",
+      "raw_text": "“真的吗？”韦斯莱先生不安地说。",
+      "sentences": [
+        {
+          "sid": "s044",
+          "text": "“真的吗？",
+          "translation": "Really?",
+          "explanation": "The sentence is a simple question in Chinese, formed by adding the question particle 吗 at the end of the statement to turn it into a question.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "真的",
+              "pinyin": "zhēn de",
+              "definition": "really"
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "definition": "question particle"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s045",
+          "text": "”韦斯莱先生不安地说。",
+          "translation": "Mr. Wesley said uneasily.",
+          "explanation": "The structure '不安地说' means 'uneasily said', where '不安' means 'uneasy' and '地' is an adverbial suffix that links the adjective '不安' to the verb '说'.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "不安",
+              "pinyin": "bù ān",
+              "definition": "uneasy"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "adverbial suffix"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p019",
+      "raw_text": "罗伯茨先生说：“从来没见过这么多人，几百人预订了帐篷。”",
+      "sentences": [
+        {
+          "sid": "s046",
+          "text": "罗伯茨先生说：“从来没见过这么多人，几百人预订了帐篷。",
+          "translation": "Mr. Roberts said, 'I have never seen so many people before, hundreds of people have booked tents.'",
+          "explanation": "The structure '从来没' means 'have never' in this context. The use of '了' indicates a completed action.",
+          "words": [
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "从来",
+              "pinyin": "cóng lái",
+              "definition": "never"
+            },
+            {
+              "hanzi": "没",
+              "pinyin": "méi",
+              "definition": "not"
+            },
+            {
+              "hanzi": "见过",
+              "pinyin": "jiàn guò",
+              "definition": "seen"
+            },
+            {
+              "hanzi": "这么",
+              "pinyin": "zhè me",
+              "definition": "so"
+            },
+            {
+              "hanzi": "多",
+              "pinyin": "duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "people"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "几百",
+              "pinyin": "jǐ bǎi",
+              "definition": "hundreds"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "people"
+            },
+            {
+              "hanzi": "预订",
+              "pinyin": "yù dìng",
+              "definition": "booked"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "have"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tents"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s047",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or specific text being referenced.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p020",
+      "raw_text": "“有什么不对吗？”韦斯莱先生问。",
+      "sentences": [
+        {
+          "sid": "s048",
+          "text": "“有什么不对吗？",
+          "translation": "Is there something wrong?",
+          "explanation": "The sentence is a question asking if something is wrong. The structure '有什么不对' is a common way to ask 'Is there something wrong?' in Chinese.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have; there is"
+            },
+            {
+              "hanzi": "什么",
+              "pinyin": "shén me",
+              "definition": "what"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "correct; right"
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "definition": "question particle"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s049",
+          "text": "”韦斯莱先生问。",
+          "translation": "Mr. Wesley asked.",
+          "explanation": "The sentence is a simple question where Mr. Wesley is asking something.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p021",
+      "raw_text": "“有些人穿得很奇怪。”罗伯茨先生说。",
+      "sentences": [
+        {
+          "sid": "s050",
+          "text": "“有些人穿得很奇怪。",
+          "translation": "Some people dress very strangely.",
+          "explanation": "The structure '穿得' is a common way in Chinese to express how someone dresses or wears something in a certain manner.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "有些",
+              "pinyin": "yǒu xiē",
+              "definition": "some"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "people"
+            },
+            {
+              "hanzi": "穿",
+              "pinyin": "chuān",
+              "definition": "to wear"
+            },
+            {
+              "hanzi": "得",
+              "pinyin": "dé",
+              "definition": "used to link verb with result"
+            },
+            {
+              "hanzi": "很",
+              "pinyin": "hěn",
+              "definition": "very"
+            },
+            {
+              "hanzi": "奇怪",
+              "pinyin": "qí guài",
+              "definition": "strange"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s051",
+          "text": "”罗伯茨先生说。",
+          "translation": "Mr. Roberts said.",
+          "explanation": "The sentence is a simple statement where Mr. Roberts is speaking.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p022",
+      "raw_text": "这时，一个巫师出现，用魔杖对罗伯茨先生施了遗忘咒。罗伯茨先生的神情变得恍惚。",
+      "sentences": [
+        {
+          "sid": "s052",
+          "text": "这时，一个巫师出现，用魔杖对罗伯茨先生施了遗忘咒。",
+          "translation": "At this moment, a wizard appeared and cast a forgetting spell on Mr. Roberts.",
+          "explanation": "The sentence structure follows the pattern of 'subject + verb + object'. The particle '了' indicates the completion of the action, and '对' is used to indicate the target of the action.",
+          "words": [
+            {
+              "hanzi": "这时",
+              "pinyin": "zhè shí",
+              "definition": "at this moment"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "出现",
+              "pinyin": "chū xiàn",
+              "definition": "appeared"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "use"
+            },
+            {
+              "hanzi": "魔杖",
+              "pinyin": "mó zhàng",
+              "definition": "wand"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "on"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "施",
+              "pinyin": "shī",
+              "definition": "cast"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completion of action)"
+            },
+            {
+              "hanzi": "遗忘",
+              "pinyin": "yí wàng",
+              "definition": "forgetting"
+            },
+            {
+              "hanzi": "咒",
+              "pinyin": "zhòu",
+              "definition": "spell"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s053",
+          "text": "罗伯茨先生的神情变得恍惚。",
+          "translation": "Mr. Roberts' expression became trance-like.",
+          "explanation": "The possessive particle '的' is used to indicate possession or association. '恍惚' means trance-like or absent-minded.",
+          "words": [
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "神情",
+              "pinyin": "shén qíng",
+              "definition": "expression"
+            },
+            {
+              "hanzi": "变得",
+              "pinyin": "biàn dé",
+              "definition": "became"
+            },
+            {
+              "hanzi": "恍惚",
+              "pinyin": "huǎng hū",
+              "definition": "trance-like"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p023",
+      "raw_text": "“给你营地地图。”罗伯茨先生说。",
+      "sentences": [
+        {
+          "sid": "s054",
+          "text": "“给你营地地图。",
+          "translation": "Give you camp map.",
+          "explanation": "The sentence structure is Subject-Verb-Object. The word \"给\" means \"give\" in this context, and the word order in Chinese is different from English.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi",
+              "definition": "give"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "地图",
+              "pinyin": "dì tú",
+              "definition": "map"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s055",
+          "text": "”罗伯茨先生说。",
+          "translation": "Mr. Roberts said.",
+          "explanation": "The sentence is a simple statement where Mr. Roberts is the subject and 'said' is the action verb.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p024",
+      "raw_text": "“谢谢。”韦斯莱先生说。",
+      "sentences": [
+        {
+          "sid": "s056",
+          "text": "“谢谢。",
+          "translation": "Thank you.",
+          "explanation": "The sentence is a simple expression of gratitude, where \"谢谢\" means \"thank you\" and \"。\" is a period.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "谢谢",
+              "pinyin": "xiè xiè",
+              "definition": "thank"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s057",
+          "text": "”韦斯莱先生说。",
+          "translation": "Mr. Wesley said.",
+          "explanation": "The sentence is a simple statement where Mr. Wesley is speaking.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr./sir"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p025",
+      "raw_text": "巫师陪他们走到营地大门。他显得很疲惫，对韦斯莱先生说：“罗伯茨先生给我添了不少麻烦，每天要念十几遍遗忘咒。”",
+      "sentences": [
+        {
+          "sid": "s058",
+          "text": "巫师陪他们走到营地大门。",
+          "translation": "The wizard accompanied them to the camp gate.",
+          "explanation": "The sentence structure is straightforward, with the verb '陪' (accompany) followed by the object '他们' (them), and then the direction '走到' (to walk to) indicating where they are being accompanied to.",
+          "words": [
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "陪",
+              "pinyin": "péi",
+              "definition": "accompany"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "them"
+            },
+            {
+              "hanzi": "走到",
+              "pinyin": "zǒu dào",
+              "definition": "walk to"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "大门",
+              "pinyin": "dà mén",
+              "definition": "gate"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s059",
+          "text": "他显得很疲惫，对韦斯莱先生说：“罗伯茨先生给我添了不少麻烦，每天要念十几遍遗忘咒。",
+          "translation": "He looked very tired and said to Mr. Wesley, 'Mr. Roberts has caused me a lot of trouble. I have to recite the Forgetfulness Spell more than ten times every day.'",
+          "explanation": "The sentence includes the structure '每天要' meaning 'have to' or 'must'. The phrase '十几遍' means 'more than ten times'.",
+          "words": [
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "显得",
+              "pinyin": "xiǎn de",
+              "definition": "looked"
+            },
+            {
+              "hanzi": "很",
+              "pinyin": "hěn",
+              "definition": "very"
+            },
+            {
+              "hanzi": "疲惫",
+              "pinyin": "pí bèi",
+              "definition": "tired"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "to"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "mister"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "罗伯茨",
+              "pinyin": "luó bó cí",
+              "definition": "Mr. Roberts"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "mister"
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi",
+              "definition": "gave"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "添",
+              "pinyin": "tiān",
+              "definition": "caused"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "a lot of"
+            },
+            {
+              "hanzi": "不少",
+              "pinyin": "bù shǎo",
+              "definition": "trouble"
+            },
+            {
+              "hanzi": "麻烦",
+              "pinyin": "má fán",
+              "definition": "trouble"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "每天",
+              "pinyin": "měi tiān",
+              "definition": "every day"
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào",
+              "definition": "have to"
+            },
+            {
+              "hanzi": "念",
+              "pinyin": "niàn",
+              "definition": "recite"
+            },
+            {
+              "hanzi": "十几",
+              "pinyin": "shí jǐ",
+              "definition": "more than ten"
+            },
+            {
+              "hanzi": "遍",
+              "pinyin": "biàn",
+              "definition": "times"
+            },
+            {
+              "hanzi": "遗忘",
+              "pinyin": "yí wàng",
+              "definition": "forgetfulness"
+            },
+            {
+              "hanzi": "咒",
+              "pinyin": "zhòu",
+              "definition": "spell"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s060",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or dialogue.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p026",
+      "raw_text": "“巴格曼应该知道不能在麻瓜面前谈论游走球。”金妮说。",
+      "sentences": [
+        {
+          "sid": "s061",
+          "text": "“巴格曼应该知道不能在麻瓜面前谈论游走球。",
+          "translation": "Bagman should know not to talk about Quidditch in front of Muggles.",
+          "explanation": "The sentence warns against discussing Quidditch, a magical sport, in front of Muggles, who are non-magical people and should not be exposed to such topics.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Bagman (proper noun)"
+            },
+            {
+              "hanzi": "应该",
+              "pinyin": "yīng gāi",
+              "definition": "should"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "不能",
+              "pinyin": "bù néng",
+              "definition": "not"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in/at"
+            },
+            {
+              "hanzi": "麻瓜",
+              "pinyin": "má guā",
+              "definition": "Muggle (non-magical person)"
+            },
+            {
+              "hanzi": "面前",
+              "pinyin": "miàn qián",
+              "definition": "in front of"
+            },
+            {
+              "hanzi": "谈论",
+              "pinyin": "tán lùn",
+              "definition": "talk about"
+            },
+            {
+              "hanzi": "游走",
+              "pinyin": "yóu zǒu",
+              "definition": "Quidditch (literally 'flying ball game')"
+            },
+            {
+              "hanzi": "球",
+              "pinyin": "qiú",
+              "definition": "ball"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s062",
+          "text": "”金妮说。",
+          "translation": "Ginny said.",
+          "explanation": "The sentence simply consists of the name 'Ginny' followed by the verb 'said'.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "金妮",
+              "pinyin": "jīn nī",
+              "definition": "Ginny (name)"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p027",
+      "raw_text": "“卢多对安全问题有些马虎。”韦斯莱先生说，“但他是个有激情的人。”",
+      "sentences": [
+        {
+          "sid": "s063",
+          "text": "“卢多对安全问题有些马虎。",
+          "translation": "Ludo is a bit careless about safety issues.",
+          "explanation": "The structure '对...有些' indicates someone's attitude or behavior towards something, followed by 'a bit' to express the degree.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "卢多",
+              "pinyin": "lú duō",
+              "definition": "Ludo (a name)"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "towards; to; for"
+            },
+            {
+              "hanzi": "安全",
+              "pinyin": "ān quán",
+              "definition": "safety"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "issue; problem"
+            },
+            {
+              "hanzi": "有些",
+              "pinyin": "yǒu xiē",
+              "definition": "a bit; somewhat"
+            },
+            {
+              "hanzi": "马虎",
+              "pinyin": "mǎ hǔ",
+              "definition": "careless"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s064",
+          "text": "”韦斯莱先生说，“但他是个有激情的人。",
+          "translation": "Mr. Wesley said, \"But he is a passionate person.\"",
+          "explanation": "This sentence showcases the structure of expressing attributes in Chinese by using the particle '的'. The word order in Chinese is also different from English, with the subject coming before the verb.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "激情",
+              "pinyin": "jī qíng",
+              "definition": "passionate"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating an attribute"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s065",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or specific text being referenced.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p028",
+      "raw_text": "他们走过营地，看见许多帐篷。有的帐篷像麻瓜的，有的加了烟囱和风向标。哈利看到一个帐篷像宫殿，还有孔雀。另一个帐篷像高楼，还有花园。",
+      "sentences": [
+        {
+          "sid": "s066",
+          "text": "他们走过营地，看见许多帐篷。",
+          "translation": "They walked through the camp and saw many tents.",
+          "explanation": "The structure '看见' (saw) is used in Chinese to indicate the action of seeing something. It is different from the English structure 'saw many tents' where 'saw' is followed by the object 'many tents'.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "走过",
+              "pinyin": "zǒu guò",
+              "definition": "walked through"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看见",
+              "pinyin": "kàn jiàn",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "许多",
+              "pinyin": "xǔ duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tents"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s067",
+          "text": "有的帐篷像麻瓜的，有的加了烟囱和风向标。",
+          "translation": "Some tents are like Muggles', some have chimneys and weather vanes.",
+          "explanation": "The structure '有的...有的...' is used to indicate 'some...some...' in Chinese.",
+          "words": [
+            {
+              "hanzi": "有的",
+              "pinyin": "yǒu de",
+              "definition": "some"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "definition": "like"
+            },
+            {
+              "hanzi": "麻瓜",
+              "pinyin": "má guā",
+              "definition": "Muggles"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "'s"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ","
+            },
+            {
+              "hanzi": "有的",
+              "pinyin": "yǒu de",
+              "definition": "some"
+            },
+            {
+              "hanzi": "加",
+              "pinyin": "jiā",
+              "definition": "add"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(indicating completion)"
+            },
+            {
+              "hanzi": "烟囱",
+              "pinyin": "yān cōng",
+              "definition": "chimney"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "风向标",
+              "pinyin": "fēng xiàng biāo",
+              "definition": "weather vane"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s068",
+          "text": "哈利看到一个帐篷像宫殿，还有孔雀。",
+          "translation": "Harry saw a tent like a palace, with peacocks.",
+          "explanation": "The structure '像...，还有...' is used to describe the appearance of the tent, comparing it to a palace and mentioning the presence of peacocks.",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "definition": "like"
+            },
+            {
+              "hanzi": "宫殿",
+              "pinyin": "gōng diàn",
+              "definition": "palace"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "还有",
+              "pinyin": "hái yǒu",
+              "definition": "with"
+            },
+            {
+              "hanzi": "孔雀",
+              "pinyin": "kǒng què",
+              "definition": "peacocks"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s069",
+          "text": "另一个帐篷像高楼，还有花园。",
+          "translation": "Another tent is like a tall building, with a garden.",
+          "explanation": "The structure '像...，还有...' is used to compare two things, stating that one thing is like another and also has something else.",
+          "words": [
+            {
+              "hanzi": "另",
+              "pinyin": "lìng",
+              "definition": "another"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "one"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "definition": "like"
+            },
+            {
+              "hanzi": "高楼",
+              "pinyin": "gāo lóu",
+              "definition": "tall building"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "还有",
+              "pinyin": "hái yǒu",
+              "definition": "with"
+            },
+            {
+              "hanzi": "花园",
+              "pinyin": "huā yuán",
+              "definition": "garden"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p029",
+      "raw_text": "“大家聚到一起时，总想炫耀。”韦斯莱先生说，“到了，这就是我们的。”",
+      "sentences": [
+        {
+          "sid": "s070",
+          "text": "“大家聚到一起时，总想炫耀。",
+          "translation": "When everyone gathers together, they always want to show off.",
+          "explanation": "The structure '总想' means 'always want to' in this context. '炫耀' means 'to show off'.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "大家",
+              "pinyin": "dà jiā",
+              "definition": "everyone"
+            },
+            {
+              "hanzi": "聚",
+              "pinyin": "jù",
+              "definition": "to gather"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "to"
+            },
+            {
+              "hanzi": "一起",
+              "pinyin": "yì qǐ",
+              "definition": "together"
+            },
+            {
+              "hanzi": "时",
+              "pinyin": "shí",
+              "definition": "when"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "总",
+              "pinyin": "zǒng",
+              "definition": "always"
+            },
+            {
+              "hanzi": "想",
+              "pinyin": "xiǎng",
+              "definition": "to want"
+            },
+            {
+              "hanzi": "炫耀",
+              "pinyin": "xuàn yào",
+              "definition": "to show off"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s071",
+          "text": "”韦斯莱先生说，“到了，这就是我们的。",
+          "translation": "Mr. Wesley said, 'Here we are.'",
+          "explanation": "The sentence structure in Chinese is Subject + Verb + Object. The use of quotation marks '“' and '”' indicates direct speech.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "arrive"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "indicating completion"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "then"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "我们",
+              "pinyin": "wǒ men",
+              "definition": "we"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s072",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or specific text being referenced.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p030",
+      "raw_text": "他们在树林边找到营地，地上有个牌子写着：韦兹利。",
+      "sentences": [
+        {
+          "sid": "s073",
+          "text": "他们在树林边找到营地，地上有个牌子写着：韦兹利。",
+          "translation": "They found a campsite at the edge of the forest, with a sign on the ground that read: Weasley.",
+          "explanation": "The sentence describes the characters finding a campsite with a sign on the ground that says 'Weasley'. The tricky part may be the use of '写着' to indicate that something is written as a specific text.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at/in"
+            },
+            {
+              "hanzi": "树林",
+              "pinyin": "shù lín",
+              "definition": "forest"
+            },
+            {
+              "hanzi": "边",
+              "pinyin": "biān",
+              "definition": "edge/side"
+            },
+            {
+              "hanzi": "找到",
+              "pinyin": "zhǎo dào",
+              "definition": "found"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "campsite"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "地上",
+              "pinyin": "dì shàng",
+              "definition": "on the ground"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/has"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "牌子",
+              "pinyin": "pái zi",
+              "definition": "sign"
+            },
+            {
+              "hanzi": "写着",
+              "pinyin": "xiě zhe",
+              "definition": "written as"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "韦兹利",
+              "pinyin": "wéi zī lì",
+              "definition": "Weasley"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p031",
+      "raw_text": "“这地方真好！”韦斯莱先生说，“场地就在森林那边。”",
+      "sentences": [
+        {
+          "sid": "s074",
+          "text": "“这地方真好！",
+          "translation": "This place is really good!",
+          "explanation": "The sentence structure is Subject + Adjective. The word '真' is used to intensify the adjective '好', meaning 'really good'.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "地方",
+              "pinyin": "dì fāng",
+              "definition": "place"
+            },
+            {
+              "hanzi": "真",
+              "pinyin": "zhēn",
+              "definition": "really"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good"
+            },
+            {
+              "hanzi": "！",
+              "pinyin": "",
+              "definition": "exclamation mark"
+            }
+          ]
+        },
+        {
+          "sid": "s075",
+          "text": "”韦斯莱先生说，“场地就在森林那边。",
+          "translation": "Mr. Wesley said, \"The venue is just beyond the forest.\"",
+          "explanation": "The sentence structure is Subject + Verb + Object. The word '就' is used to emphasize the proximity or immediacy of the location of the venue.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦",
+              "pinyin": "wéi",
+              "definition": "character"
+            },
+            {
+              "hanzi": "斯",
+              "pinyin": "sī",
+              "definition": "character"
+            },
+            {
+              "hanzi": "莱",
+              "pinyin": "lái",
+              "definition": "character"
+            },
+            {
+              "hanzi": "先",
+              "pinyin": "xiān",
+              "definition": "character"
+            },
+            {
+              "hanzi": "生",
+              "pinyin": "shēng",
+              "definition": "character"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "character"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "character"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "场",
+              "pinyin": "chǎng",
+              "definition": "character"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "character"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "character"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "character"
+            },
+            {
+              "hanzi": "森",
+              "pinyin": "sēn",
+              "definition": "character"
+            },
+            {
+              "hanzi": "林",
+              "pinyin": "lín",
+              "definition": "character"
+            },
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "definition": "character"
+            },
+            {
+              "hanzi": "边",
+              "pinyin": "biān",
+              "definition": "character"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s076",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only consists of a closing quotation mark and a space, with no actual text content.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p032",
+      "raw_text": "他们开始搭帐篷。哈利和赫敏帮忙，韦斯莱先生总是帮倒忙。最后，他们搭好了两个歪歪斜斜的帐篷。",
+      "sentences": [
+        {
+          "sid": "s077",
+          "text": "他们开始搭帐篷。",
+          "translation": "They began to set up the tent.",
+          "explanation": "The structure '开始 + verb' is a common way to express the beginning of an action in Chinese.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they/them"
+            },
+            {
+              "hanzi": "开始",
+              "pinyin": "kāi shǐ",
+              "definition": "begin/start"
+            },
+            {
+              "hanzi": "搭",
+              "pinyin": "dā",
+              "definition": "set up/construct"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s078",
+          "text": "哈利和赫敏帮忙，韦斯莱先生总是帮倒忙。",
+          "translation": "Harry and Hermione help, Mr. Weasley always ends up causing trouble.",
+          "explanation": "The structure '总是' means 'always' and '帮倒忙' is an idiomatic phrase meaning 'end up causing trouble.'",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "赫敏",
+              "pinyin": "hè mǐn",
+              "definition": "Hermione"
+            },
+            {
+              "hanzi": "帮忙",
+              "pinyin": "bāng máng",
+              "definition": "help"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Weasley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "总是",
+              "pinyin": "zǒng shì",
+              "definition": "always"
+            },
+            {
+              "hanzi": "帮倒忙",
+              "pinyin": "bāng dào máng",
+              "definition": "end up causing trouble"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s079",
+          "text": "最后，他们搭好了两个歪歪斜斜的帐篷。",
+          "translation": "Finally, they set up two crooked tents.",
+          "explanation": "The structure '最后...了' indicates the completion of an action in the past. The repetition of the character '歪' emphasizes the crookedness of the tents.",
+          "words": [
+            {
+              "hanzi": "最后",
+              "pinyin": "zuì hòu",
+              "definition": "finally"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "搭好",
+              "pinyin": "dā hǎo",
+              "definition": "set up"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "两个",
+              "pinyin": "liǎng gè",
+              "definition": "two"
+            },
+            {
+              "hanzi": "歪歪斜斜",
+              "pinyin": "wāi wāi xié xié",
+              "definition": "crooked"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "(possessive particle)"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tents"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p033",
+      "raw_text": "“可能会有点儿挤。”韦斯莱先生说，“但我想大家能挤进来。”",
+      "sentences": [
+        {
+          "sid": "s080",
+          "text": "“可能会有点儿挤。",
+          "translation": "It might be a little crowded.",
+          "explanation": "The structure '可能会' is used to express the possibility of something happening. '有点儿' is a colloquial way to say 'a little' in Chinese.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "可能",
+              "pinyin": "kě néng",
+              "definition": "might/possible"
+            },
+            {
+              "hanzi": "会",
+              "pinyin": "huì",
+              "definition": "will"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/has"
+            },
+            {
+              "hanzi": "点儿",
+              "pinyin": "diǎn ér",
+              "definition": "a little"
+            },
+            {
+              "hanzi": "挤",
+              "pinyin": "jǐ",
+              "definition": "crowded"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s081",
+          "text": "”韦斯莱先生说，“但我想大家能挤进来。",
+          "translation": "Mr. Wesley said, \"But I think everyone can squeeze in.\"",
+          "explanation": "The structure '能 + verb' indicates the ability to do something. In this sentence, '能挤进来' means 'can squeeze in'.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "想",
+              "pinyin": "xiǎng",
+              "definition": "think"
+            },
+            {
+              "hanzi": "大家",
+              "pinyin": "dà jiā",
+              "definition": "everyone"
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "definition": "can"
+            },
+            {
+              "hanzi": "挤进来",
+              "pinyin": "jǐ jìn lái",
+              "definition": "squeeze in"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s082",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence consists of names of characters in the chapter.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p034",
+      "raw_text": "哈利进了帐篷，发现里面很大，有三间卧室、浴室和厨房。韦斯莱先生说：“我从办公室的珀金斯那里借来的。”",
+      "sentences": [
+        {
+          "sid": "s083",
+          "text": "哈利进了帐篷，发现里面很大，有三间卧室，浴室和厨房。",
+          "translation": "Harry entered the tent and found it very large, with three bedrooms, a bathroom, and a kitchen.",
+          "explanation": "This sentence introduces the layout of the tent Harry entered, describing its size and the different rooms it contains. The use of '了' indicates the completion of the action of entering, and '有' is used to indicate possession of rooms in the tent.",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "进",
+              "pinyin": "jìn",
+              "definition": "enter"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "发现",
+              "pinyin": "fā xiàn",
+              "definition": "find/discover"
+            },
+            {
+              "hanzi": "里面",
+              "pinyin": "lǐ miàn",
+              "definition": "inside"
+            },
+            {
+              "hanzi": "很",
+              "pinyin": "hěn",
+              "definition": "very"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "large"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/has"
+            },
+            {
+              "hanzi": "三",
+              "pinyin": "sān",
+              "definition": "three"
+            },
+            {
+              "hanzi": "间",
+              "pinyin": "jiān",
+              "definition": "(measure word for rooms)"
+            },
+            {
+              "hanzi": "卧室",
+              "pinyin": "wò shì",
+              "definition": "bedroom"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "、",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "浴室",
+              "pinyin": "yù shì",
+              "definition": "bathroom"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "厨房",
+              "pinyin": "chú fáng",
+              "definition": "kitchen"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s084",
+          "text": "韦斯莱先生说：“我从办公室的珀金斯那里借来的。",
+          "translation": "Mr. Wesley said: 'I borrowed it from Perkins in the office.'",
+          "explanation": "The sentence structure in Chinese is Subject + Verb + Object, which is different from English. The possessive particle '的' is used to indicate possession in Chinese.",
+          "words": [
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "definition": "from"
+            },
+            {
+              "hanzi": "办公室",
+              "pinyin": "bàn gōng shì",
+              "definition": "office"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "珀金斯",
+              "pinyin": "pò jīn sī",
+              "definition": "Perkins"
+            },
+            {
+              "hanzi": "那里",
+              "pinyin": "nà lǐ",
+              "definition": "there"
+            },
+            {
+              "hanzi": "借来",
+              "pinyin": "jiè lái",
+              "definition": "borrowed"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating past tense"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s085",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence consists of opening and closing quotation marks.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p035",
+      "raw_text": "他们需要水，罗恩、哈利和赫敏去打水。营地里有许多巫师家庭，哈利看到一个小男孩用魔杖捅鼻涕虫。母亲出来制止，踩爆了鼻涕虫。",
+      "sentences": [
+        {
+          "sid": "s086",
+          "text": "他们需要水，罗恩，哈利和赫敏去打水。",
+          "translation": "They need water, Ron, Harry, and Hermione go to fetch water.",
+          "explanation": "This sentence showcases the use of enumeration marker '、' to list multiple people. The structure '去 + verb' indicates the action of going to do something.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "需要",
+              "pinyin": "xū yào",
+              "definition": "need"
+            },
+            {
+              "hanzi": "水",
+              "pinyin": "shuǐ",
+              "definition": "water"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "罗恩",
+              "pinyin": "luó ēn",
+              "definition": "Ron"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "、",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "赫敏",
+              "pinyin": "hè mǐn",
+              "definition": "Hermione"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "go"
+            },
+            {
+              "hanzi": "打水",
+              "pinyin": "dǎ shuǐ",
+              "definition": "fetch water"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s087",
+          "text": "营地里有许多巫师家庭，哈利看到一个小男孩用魔杖捅鼻涕虫。",
+          "translation": "There are many wizard families in the camp, Harry saw a little boy poking a bogey with a wand.",
+          "explanation": "The sentence introduces the setting of a camp with many wizard families. It describes Harry witnessing a little boy using a wand to poke a bogey, which is a playful and magical scene.",
+          "words": [
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "campsite"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "in"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "许多",
+              "pinyin": "xǔ duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "家庭",
+              "pinyin": "jiā tíng",
+              "definition": "families"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "小",
+              "pinyin": "xiǎo",
+              "definition": "little"
+            },
+            {
+              "hanzi": "男孩",
+              "pinyin": "nán hái",
+              "definition": "boy"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "using"
+            },
+            {
+              "hanzi": "魔杖",
+              "pinyin": "mó zhàng",
+              "definition": "wand"
+            },
+            {
+              "hanzi": "捅",
+              "pinyin": "tǒng",
+              "definition": "poking"
+            },
+            {
+              "hanzi": "鼻涕虫",
+              "pinyin": "bí tì chóng",
+              "definition": "bogey"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s088",
+          "text": "母亲出来制止，踩爆了鼻涕虫。",
+          "translation": "Mother came out to stop it, stepping on the snot bug.",
+          "explanation": "The sentence describes the mother coming out to stop something and accidentally stepping on a 'snot bug', which is a colloquial term for a small bug or insect.",
+          "words": [
+            {
+              "hanzi": "母亲",
+              "pinyin": "mǔ qīn",
+              "definition": "mother"
+            },
+            {
+              "hanzi": "出来",
+              "pinyin": "chū lái",
+              "definition": "come out"
+            },
+            {
+              "hanzi": "制止",
+              "pinyin": "zhì zhǐ",
+              "definition": "to stop"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "踩",
+              "pinyin": "cǎi",
+              "definition": "step on"
+            },
+            {
+              "hanzi": "爆了",
+              "pinyin": "bào le",
+              "definition": "burst"
+            },
+            {
+              "hanzi": "鼻涕虫",
+              "pinyin": "bí tì chóng",
+              "definition": "snot bug"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p036",
+      "raw_text": "他们看到两个小女巫骑着玩具飞天扫帚飞行。一个巫师看到后，心烦地嘀咕。",
+      "sentences": [
+        {
+          "sid": "s089",
+          "text": "他们看到两个小女巫骑着玩具飞天扫帚飞行。",
+          "translation": "They saw two little witches riding toy flying brooms.",
+          "explanation": "The structure 'verb + 着' indicates an action in progress. In this case, '骑着' means 'riding'.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "两个",
+              "pinyin": "liǎng gè",
+              "definition": "two"
+            },
+            {
+              "hanzi": "小",
+              "pinyin": "xiǎo",
+              "definition": "little"
+            },
+            {
+              "hanzi": "女巫",
+              "pinyin": "nǚ wū",
+              "definition": "witches"
+            },
+            {
+              "hanzi": "骑着",
+              "pinyin": "qí zhe",
+              "definition": "riding"
+            },
+            {
+              "hanzi": "玩具",
+              "pinyin": "wán jù",
+              "definition": "toy"
+            },
+            {
+              "hanzi": "飞天",
+              "pinyin": "fēi tiān",
+              "definition": "flying"
+            },
+            {
+              "hanzi": "扫帚",
+              "pinyin": "sào zhǒu",
+              "definition": "brooms"
+            },
+            {
+              "hanzi": "飞行",
+              "pinyin": "fēi xíng",
+              "definition": "fly"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s090",
+          "text": "一个巫师看到后，心烦地嘀咕。",
+          "translation": "After a wizard saw it, he muttered irritably.",
+          "explanation": "The structure '心烦地' is a common way to link an adjective and an adverb in Chinese. It means 'irritably' in this context.",
+          "words": [
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "one; a"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "see; saw"
+            },
+            {
+              "hanzi": "后",
+              "pinyin": "hòu",
+              "definition": "after"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "心烦",
+              "pinyin": "xīn fán",
+              "definition": "irritated"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "adverbial marker"
+            },
+            {
+              "hanzi": "嘀咕",
+              "pinyin": "dí gū",
+              "definition": "mutter"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p037",
+      "raw_text": "他们经过许多帐篷，看到不同国家的巫师。有的在做早饭，有的在聊天。哈利意识到世界上有很多魔法学校。",
+      "sentences": [
+        {
+          "sid": "s091",
+          "text": "他们经过许多帐篷，看到不同国家的巫师。",
+          "translation": "They passed many tents and saw wizards from different countries.",
+          "explanation": "The structure '看到' is used to indicate 'saw' in this context. The possessive particle '的' is used to show ownership in '不同国家的巫师' (wizards from different countries).",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they/them"
+            },
+            {
+              "hanzi": "经过",
+              "pinyin": "jīng guò",
+              "definition": "pass by"
+            },
+            {
+              "hanzi": "许多",
+              "pinyin": "xǔ duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "see"
+            },
+            {
+              "hanzi": "不同",
+              "pinyin": "bù tóng",
+              "definition": "different"
+            },
+            {
+              "hanzi": "国家",
+              "pinyin": "guó jiā",
+              "definition": "country"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s092",
+          "text": "有的在做早饭，有的在聊天。",
+          "translation": "Some are making breakfast, some are chatting.",
+          "explanation": "The structure '有的...有的...' is used to indicate 'some...some...' in Chinese. The use of 在 before the verbs indicates an ongoing action.",
+          "words": [
+            {
+              "hanzi": "有的",
+              "pinyin": "yǒu de",
+              "definition": "some"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "indicating an ongoing action"
+            },
+            {
+              "hanzi": "做",
+              "pinyin": "zuò",
+              "definition": "to do"
+            },
+            {
+              "hanzi": "早饭",
+              "pinyin": "zǎo fàn",
+              "definition": "breakfast"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "有的",
+              "pinyin": "yǒu de",
+              "definition": "some"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "indicating an ongoing action"
+            },
+            {
+              "hanzi": "聊天",
+              "pinyin": "liáo tiān",
+              "definition": "to chat"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s093",
+          "text": "哈利意识到世界上有很多魔法学校。",
+          "translation": "Harry realized there are many magic schools in the world.",
+          "explanation": "The structure '有很多' means 'there are many', which is a common way to express the existence of a large quantity of something in Chinese.",
+          "words": [
+            {
+              "hanzi": "哈利",
+              "pinyin": "hā lì",
+              "definition": "Harry"
+            },
+            {
+              "hanzi": "意识到",
+              "pinyin": "yì shí dào",
+              "definition": "realized"
+            },
+            {
+              "hanzi": "世界上",
+              "pinyin": "shì jiè shàng",
+              "definition": "in the world"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/there are"
+            },
+            {
+              "hanzi": "很多",
+              "pinyin": "hěn duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "魔法",
+              "pinyin": "mó fǎ",
+              "definition": "magic"
+            },
+            {
+              "hanzi": "学校",
+              "pinyin": "xué xiào",
+              "definition": "schools"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p038",
+      "raw_text": "他们遇到西莫·斐尼甘，他的帐篷上覆盖着三叶草。斐尼甘夫人问他们是不是支持爱尔兰队，他们说是。",
+      "sentences": [
+        {
+          "sid": "s094",
+          "text": "他们遇到西莫·斐尼甘，他的帐篷上覆盖着三叶草。",
+          "translation": "They met with Simo Feinigan, whose tent was covered with clover.",
+          "explanation": "This sentence introduces a person's name (Simo Feinigan) and describes his tent being covered with clover. Pay attention to the word order and the use of possessive pronouns in Chinese.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "遇到",
+              "pinyin": "yù dào",
+              "definition": "meet with"
+            },
+            {
+              "hanzi": "西莫",
+              "pinyin": "xī mò",
+              "definition": "Simo (name)"
+            },
+            {
+              "hanzi": "·",
+              "pinyin": "·",
+              "definition": "(punctuation mark to separate name)"
+            },
+            {
+              "hanzi": "斐尼甘",
+              "pinyin": "fěi ní gān",
+              "definition": "Feinigan (name)"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "(comma)"
+            },
+            {
+              "hanzi": "他的",
+              "pinyin": "tā de",
+              "definition": "his"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "上",
+              "pinyin": "shàng",
+              "definition": "on"
+            },
+            {
+              "hanzi": "覆盖着",
+              "pinyin": "fù gài zhe",
+              "definition": "covered with"
+            },
+            {
+              "hanzi": "三叶草",
+              "pinyin": "sān yè cǎo",
+              "definition": "clover"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s095",
+          "text": "斐尼甘夫人问他们是不是支持爱尔兰队，他们说是。",
+          "translation": "Mrs. Feinigan asked them if they supported the Irish team, and they said yes.",
+          "explanation": "The structure '是不是' is used to form a yes-no question in Chinese. In this sentence, it is asking whether they support the Irish team or not.",
+          "words": [
+            {
+              "hanzi": "斐",
+              "pinyin": "fěi",
+              "definition": "Mrs. Feinigan"
+            },
+            {
+              "hanzi": "尼",
+              "pinyin": "ní",
+              "definition": "Lady (suffix)"
+            },
+            {
+              "hanzi": "甘",
+              "pinyin": "gān",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "夫",
+              "pinyin": "fū",
+              "definition": "they"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "people"
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "them"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is/are"
+            },
+            {
+              "hanzi": "不是",
+              "pinyin": "bú shì",
+              "definition": "not"
+            },
+            {
+              "hanzi": "支持",
+              "pinyin": "zhī chí",
+              "definition": "support"
+            },
+            {
+              "hanzi": "爱尔兰",
+              "pinyin": "ài ěr lán",
+              "definition": "Ireland"
+            },
+            {
+              "hanzi": "队",
+              "pinyin": "duì",
+              "definition": "team"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is/are"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p039",
+      "raw_text": "罗恩说：“在那样的气氛下，我们还能说别的吗？”",
+      "sentences": [
+        {
+          "sid": "s096",
+          "text": "罗恩说：“在那样的气氛下，我们还能说别的吗？",
+          "translation": "Ron said: 'In such an atmosphere, can we say anything else?'",
+          "explanation": "This sentence demonstrates the use of the possessive particle '的' and the question particle '吗' to form a question in Chinese.",
+          "words": [
+            {
+              "hanzi": "罗恩",
+              "pinyin": "luó ēn",
+              "definition": "Ron (name)"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in/at"
+            },
+            {
+              "hanzi": "那样",
+              "pinyin": "nà yàng",
+              "definition": "such"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "气氛",
+              "pinyin": "qì fēn",
+              "definition": "atmosphere"
+            },
+            {
+              "hanzi": "下",
+              "pinyin": "xià",
+              "definition": "under"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我们",
+              "pinyin": "wǒ men",
+              "definition": "we/us"
+            },
+            {
+              "hanzi": "还",
+              "pinyin": "hái",
+              "definition": "still/yet"
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "definition": "can/able to"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say"
+            },
+            {
+              "hanzi": "别的",
+              "pinyin": "bié de",
+              "definition": "anything else"
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "definition": "question particle"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s097",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only contains a closing quotation mark and a space, with no actual text to translate.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p040",
+      "raw_text": "他们看到保加利亚的帐篷，上面贴着克鲁姆的招贴画。罗恩说：“克鲁姆是保加利亚的找球手。”",
+      "sentences": [
+        {
+          "sid": "s098",
+          "text": "他们看到保加利亚的帐篷，上面贴着克鲁姆的招贴画。",
+          "translation": "They saw Bulgarian tents, with Krum's posters on them.",
+          "explanation": "The possessive particle '的' is used to indicate possession or association between two nouns. In this sentence, it shows the relationship between the posters and Krum.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "see"
+            },
+            {
+              "hanzi": "保加利亚",
+              "pinyin": "bǎo jiā lì yà",
+              "definition": "Bulgaria"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "帐篷",
+              "pinyin": "zhàng péng",
+              "definition": "tent"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "上面",
+              "pinyin": "shàng miàn",
+              "definition": "on top"
+            },
+            {
+              "hanzi": "贴着",
+              "pinyin": "tiē zhe",
+              "definition": "pasted with"
+            },
+            {
+              "hanzi": "克鲁姆",
+              "pinyin": "kè lǔ mǔ",
+              "definition": "Krum"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "招贴画",
+              "pinyin": "zhāo tiē huà",
+              "definition": "poster"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s099",
+          "text": "罗恩说：“克鲁姆是保加利亚的找球手。",
+          "translation": "Ron said: \"Krum is Bulgaria's seeker.\"",
+          "explanation": "This sentence introduces the character Krum as a seeker from Bulgaria. The possessive particle '的' is used to indicate possession or association.",
+          "words": [
+            {
+              "hanzi": "罗恩",
+              "pinyin": "luó ēn",
+              "definition": "Ron"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "克鲁姆",
+              "pinyin": "kè lǔ mǔ",
+              "definition": "Krum"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "保加利亚",
+              "pinyin": "bǎo jiā lì yà",
+              "definition": "Bulgaria"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle ('s)"
+            },
+            {
+              "hanzi": "找",
+              "pinyin": "zhǎo",
+              "definition": "seek"
+            },
+            {
+              "hanzi": "球手",
+              "pinyin": "qiú shǒu",
+              "definition": "seeker"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s100",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p041",
+      "raw_text": "他们排队打水，看到一个老巫师穿着印花睡衣，另一个巫师劝他穿裤子。老巫师说：“我愿意让微风吹吹我的屁股。”",
+      "sentences": [
+        {
+          "sid": "s101",
+          "text": "他们排队打水，看到一个老巫师穿着印花睡衣，另一个巫师劝他穿裤子。",
+          "translation": "They lined up to fetch water and saw an old wizard wearing floral pajamas, while another wizard advised him to wear pants.",
+          "explanation": "The sentence introduces two wizards, one wearing floral pajamas and the other advising him to wear pants. Pay attention to the use of classifiers like 一个 (a/an) and 另一个 (another) in Chinese.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "排队",
+              "pinyin": "pái duì",
+              "definition": "line up"
+            },
+            {
+              "hanzi": "打水",
+              "pinyin": "dǎ shuǐ",
+              "definition": "fetch water"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a/an"
+            },
+            {
+              "hanzi": "老",
+              "pinyin": "lǎo",
+              "definition": "old"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "穿着",
+              "pinyin": "chuān zhe",
+              "definition": "wearing"
+            },
+            {
+              "hanzi": "印花",
+              "pinyin": "yìn huā",
+              "definition": "floral"
+            },
+            {
+              "hanzi": "睡衣",
+              "pinyin": "shuì yī",
+              "definition": "pajamas"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "另一个",
+              "pinyin": "lìng yí gè",
+              "definition": "another"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "劝",
+              "pinyin": "quàn",
+              "definition": "advise"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "穿",
+              "pinyin": "chuān",
+              "definition": "wear"
+            },
+            {
+              "hanzi": "裤子",
+              "pinyin": "kù zi",
+              "definition": "pants"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s102",
+          "text": "老巫师说：“我愿意让微风吹吹我的屁股。",
+          "translation": "The old wizard said: 'I am willing to let the gentle breeze blow on my buttocks.'",
+          "explanation": "The sentence contains a colloquial expression where the old wizard humorously expresses his willingness to let the breeze blow on his buttocks. The repetition of the verb '吹' (blow) adds emphasis to the action.",
+          "words": [
+            {
+              "hanzi": "老",
+              "pinyin": "lǎo",
+              "definition": "old"
+            },
+            {
+              "hanzi": "巫师",
+              "pinyin": "wū shī",
+              "definition": "wizard"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "愿意",
+              "pinyin": "yuàn yì",
+              "definition": "willing"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "let"
+            },
+            {
+              "hanzi": "微风",
+              "pinyin": "wēi fēng",
+              "definition": "gentle breeze"
+            },
+            {
+              "hanzi": "吹吹",
+              "pinyin": "chuī chuī",
+              "definition": "blow on"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "my"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "屁股",
+              "pinyin": "pì gǔ",
+              "definition": "buttocks"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s103",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence consists of opening and closing quotation marks.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p042",
+      "raw_text": "打完水，他们回到营地。韦斯莱先生在玩火柴，赫敏教他怎么用。火终于点着了，他们开始煮饭。",
+      "sentences": [
+        {
+          "sid": "s104",
+          "text": "打完水，他们回到营地。",
+          "translation": "After fetching water, they returned to the camp.",
+          "explanation": "The structure '打完' together means 'fetching water' or 'fetch water' in this context. Also, '回到' is a set phrase meaning 'return to'.",
+          "words": [
+            {
+              "hanzi": "打",
+              "pinyin": "dǎ",
+              "definition": "fetch; hit"
+            },
+            {
+              "hanzi": "完",
+              "pinyin": "wán",
+              "definition": "complete; finish"
+            },
+            {
+              "hanzi": "水",
+              "pinyin": "shuǐ",
+              "definition": "water"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma (punctuation)"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "回到",
+              "pinyin": "huí dào",
+              "definition": "return to"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s105",
+          "text": "韦斯莱先生在玩火柴，赫敏教他怎么用。",
+          "translation": "Mr. Wesley is playing with matches, and Hermione is teaching him how to use them.",
+          "explanation": "This sentence demonstrates the structure of '在 + verb' to indicate an ongoing action, and the word order in Chinese where the subject comes before the verb.",
+          "words": [
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at/in (indicates an ongoing action)"
+            },
+            {
+              "hanzi": "玩",
+              "pinyin": "wán",
+              "definition": "play"
+            },
+            {
+              "hanzi": "火柴",
+              "pinyin": "huǒ chái",
+              "definition": "matches"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "赫敏",
+              "pinyin": "hè mǐn",
+              "definition": "Hermione"
+            },
+            {
+              "hanzi": "教",
+              "pinyin": "jiào",
+              "definition": "teach"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "怎么",
+              "pinyin": "zěn me",
+              "definition": "how"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "use"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s106",
+          "text": "火终于点着了，他们开始煮饭。",
+          "translation": "The fire is finally lit, and they start cooking.",
+          "explanation": "The structure '开始 + verb' is a common way to express the beginning of an action in Chinese.",
+          "words": [
+            {
+              "hanzi": "火",
+              "pinyin": "huǒ",
+              "definition": "fire"
+            },
+            {
+              "hanzi": "终于",
+              "pinyin": "zhōng yú",
+              "definition": "finally"
+            },
+            {
+              "hanzi": "点着",
+              "pinyin": "diǎn zháo",
+              "definition": "lit"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completion or change of situation)"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "开始",
+              "pinyin": "kāi shǐ",
+              "definition": "start"
+            },
+            {
+              "hanzi": "煮饭",
+              "pinyin": "zhǔ fàn",
+              "definition": "cooking"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p043",
+      "raw_text": "比尔、查理和珀西来了。韦斯莱先生看到卢多·巴格曼，和他打招呼。巴格曼穿着黄蜂队的长袍，显得很兴奋。",
+      "sentences": [
+        {
+          "sid": "s107",
+          "text": "比尔，查理和珀西来了。",
+          "translation": "Bill, Charlie, and Percy came.",
+          "explanation": "This sentence introduces the names of three characters who arrived. The character '、' is used to list items in Chinese.",
+          "words": [
+            {
+              "hanzi": "比尔",
+              "pinyin": "bǐ ěr",
+              "definition": "Bill"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "、",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "查理",
+              "pinyin": "chá lǐ",
+              "definition": "Charlie"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "珀西",
+              "pinyin": "pò xī",
+              "definition": "Percy"
+            },
+            {
+              "hanzi": "来了",
+              "pinyin": "lái le",
+              "definition": "came"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s108",
+          "text": "韦斯莱先生看到卢多·巴格曼，和他打招呼。",
+          "translation": "Mr. Wesley saw Ludo Bagman and greeted him.",
+          "explanation": "The structure '和他' means 'him' in this context, with '和' (and) connecting '他' (him) to the action of greeting.",
+          "words": [
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "mister"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "卢多",
+              "pinyin": "lú duō",
+              "definition": "Ludo"
+            },
+            {
+              "hanzi": "·",
+              "pinyin": "·",
+              "definition": "middle dot (used to separate name components)"
+            },
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Bagman"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "打招呼",
+              "pinyin": "dǎ zhāo hū",
+              "definition": "greeted"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s109",
+          "text": "巴格曼穿着黄蜂队的长袍，显得很兴奋。",
+          "translation": "Bagman is wearing the robe of the Hornets team and looks very excited.",
+          "explanation": "The sentence follows the subject-verb-object structure commonly used in Chinese. The possessive particle '的' is used to indicate possession or association between '黄蜂队' (Hornets team) and '长袍' (robe). The word '显得' is a verb that indicates how something appears or looks.",
+          "words": [
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Bagman (character's name)"
+            },
+            {
+              "hanzi": "穿着",
+              "pinyin": "chuān zhe",
+              "definition": "wearing"
+            },
+            {
+              "hanzi": "黄蜂队",
+              "pinyin": "huáng fēng duì",
+              "definition": "Hornets team"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "长袍",
+              "pinyin": "cháng páo",
+              "definition": "robe"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "显得",
+              "pinyin": "xiǎn de",
+              "definition": "looks"
+            },
+            {
+              "hanzi": "很",
+              "pinyin": "hěn",
+              "definition": "very"
+            },
+            {
+              "hanzi": "兴奋",
+              "pinyin": "xīng fèn",
+              "definition": "excited"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p044",
+      "raw_text": "巴格曼问韦斯莱先生要不要赌比赛。韦斯莱先生赌爱尔兰赢。弗雷德和乔治也下注。",
+      "sentences": [
+        {
+          "sid": "s110",
+          "text": "巴格曼问韦斯莱先生要不要赌比赛。",
+          "translation": "Bagman asked Mr. Wesley if he wanted to bet on the match.",
+          "explanation": "The structure '要不要' is a common way to ask 'whether or not' in Chinese. In this context, it is used to inquire if Mr. Wesley wants to bet on the match.",
+          "words": [
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Bagman (character's name)"
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Wesley (character's name)"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "要不要",
+              "pinyin": "yào bù yào",
+              "definition": "whether or not"
+            },
+            {
+              "hanzi": "赌",
+              "pinyin": "dǔ",
+              "definition": "bet"
+            },
+            {
+              "hanzi": "比赛",
+              "pinyin": "bǐ sài",
+              "definition": "match"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s111",
+          "text": "韦斯莱先生赌爱尔兰赢。",
+          "translation": "Mr. Wesley bets on Ireland to win.",
+          "explanation": "The sentence structure is Subject + Verb + Object. The tricky part here might be the use of the word '赌' which means 'to bet' in this context.",
+          "words": [
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "赌",
+              "pinyin": "dǔ",
+              "definition": "bet"
+            },
+            {
+              "hanzi": "爱尔兰",
+              "pinyin": "ài ěr lán",
+              "definition": "Ireland"
+            },
+            {
+              "hanzi": "赢",
+              "pinyin": "yíng",
+              "definition": "to win"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s112",
+          "text": "弗雷德和乔治也下注。",
+          "translation": "Fred and George also placed bets.",
+          "explanation": "This sentence follows a subject-verb-object structure commonly seen in Chinese sentences. The verb '下注' means 'to place bets'. The word '也' is used to indicate 'also' or 'too'.",
+          "words": [
+            {
+              "hanzi": "弗雷德",
+              "pinyin": "fú léi dé",
+              "definition": "Fred"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "乔治",
+              "pinyin": "qiáo zhì",
+              "definition": "George"
+            },
+            {
+              "hanzi": "也",
+              "pinyin": "yě",
+              "definition": "also"
+            },
+            {
+              "hanzi": "下注",
+              "pinyin": "xià zhù",
+              "definition": "placed bets"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p045",
+      "raw_text": "巴格曼问韦斯莱先生有没有看到巴蒂·克劳奇。珀西说克劳奇先生会讲很多语言。",
+      "sentences": [
+        {
+          "sid": "s113",
+          "text": "巴格曼问韦斯莱先生有没有看到巴蒂·克劳奇。",
+          "translation": "Bagman asked Mr. Wesley if he had seen Barty Crouch.",
+          "explanation": "The sentence follows a typical Chinese sentence structure with the subject (Bagman), verb (ask), object (Mr. Wesley), and the action (seen Barty Crouch) in sequence.",
+          "words": [
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Bagman (a surname)"
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Wesley (a surname)"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "有没有",
+              "pinyin": "yǒu méi yǒu",
+              "definition": "have or not"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "see"
+            },
+            {
+              "hanzi": "巴蒂",
+              "pinyin": "bā dì",
+              "definition": "Barty (a name)"
+            },
+            {
+              "hanzi": "·",
+              "pinyin": "·",
+              "definition": "middle dot (used in names)"
+            },
+            {
+              "hanzi": "克劳奇",
+              "pinyin": "kè láo qí",
+              "definition": "Crouch (a surname)"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s114",
+          "text": "珀西说克劳奇先生会讲很多语言。",
+          "translation": "Percy said Mr. Krauch can speak many languages.",
+          "explanation": "The structure '会 + verb' indicates the ability to do something, in this case, speak many languages.",
+          "words": [
+            {
+              "hanzi": "珀西",
+              "pinyin": "pò xī",
+              "definition": "Percy"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "克劳奇",
+              "pinyin": "kè láo qí",
+              "definition": "Mr. Krauch"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "会",
+              "pinyin": "huì",
+              "definition": "can"
+            },
+            {
+              "hanzi": "讲",
+              "pinyin": "jiǎng",
+              "definition": "speak"
+            },
+            {
+              "hanzi": "很多",
+              "pinyin": "hěn duō",
+              "definition": "many"
+            },
+            {
+              "hanzi": "语言",
+              "pinyin": "yǔ yán",
+              "definition": "languages"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p046",
+      "raw_text": "克劳奇先生出现，和巴格曼谈论工作。巴格曼说：“你们和我一起在顶层包厢上，我是比赛的解说员！”",
+      "sentences": [
+        {
+          "sid": "s115",
+          "text": "克劳奇先生出现，和巴格曼谈论工作。",
+          "translation": "Mr. Krauch appeared and talked about work with Mr. Bagman.",
+          "explanation": "The sentence follows a simple Subject-Verb-Object structure commonly seen in Chinese sentences. The word order in Chinese is usually more flexible compared to English, but in this case, it follows a straightforward pattern.",
+          "words": [
+            {
+              "hanzi": "克劳奇先生",
+              "pinyin": "kè láo qí xiān shēng",
+              "definition": "Mr. Krauch"
+            },
+            {
+              "hanzi": "出现",
+              "pinyin": "chū xiàn",
+              "definition": "appear"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Mr. Bagman"
+            },
+            {
+              "hanzi": "谈论",
+              "pinyin": "tán lùn",
+              "definition": "talk about"
+            },
+            {
+              "hanzi": "工作",
+              "pinyin": "gōng zuò",
+              "definition": "work"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s116",
+          "text": "巴格曼说：“你们和我一起在顶层包厢上，我是比赛的解说员！",
+          "translation": "Bagman said: 'You and I are in the top box together, I am the commentator for the competition!'",
+          "explanation": "This sentence introduces the character Bagman and his role as a commentator for the competition. The structure '和我一起' means 'together with me', and '在顶层包厢上' means 'in the top box'.",
+          "words": [
+            {
+              "hanzi": "巴格曼",
+              "pinyin": "bā gé màn",
+              "definition": "Bagman"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你们",
+              "pinyin": "nǐ men",
+              "definition": "you (plural)"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I, me"
+            },
+            {
+              "hanzi": "一起",
+              "pinyin": "yì qǐ",
+              "definition": "together"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in, at"
+            },
+            {
+              "hanzi": "顶层",
+              "pinyin": "dǐng céng",
+              "definition": "top floor"
+            },
+            {
+              "hanzi": "包厢",
+              "pinyin": "bāo xiāng",
+              "definition": "box, private room"
+            },
+            {
+              "hanzi": "上",
+              "pinyin": "shàng",
+              "definition": "on"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I, me"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "am, is"
+            },
+            {
+              "hanzi": "比赛",
+              "pinyin": "bǐ sài",
+              "definition": "competition, match"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle (marks preceding noun as an attribute of the following noun)"
+            },
+            {
+              "hanzi": "解说员",
+              "pinyin": "jiě shuō yuán",
+              "definition": "commentator"
+            },
+            {
+              "hanzi": "！",
+              "pinyin": "",
+              "definition": "exclamation mark"
+            }
+          ]
+        },
+        {
+          "sid": "s117",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only contains a closing quotation mark and a space, with no actual text content to translate or analyze.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p047",
+      "raw_text": "弗雷德问韦斯莱先生霍格沃茨有什么事。韦斯莱先生说：“你们很快就会知道。”",
+      "sentences": [
+        {
+          "sid": "s118",
+          "text": "弗雷德问韦斯莱先生霍格沃茨有什么事。",
+          "translation": "Fred asked Mr. Weasley what's going on at Hogwarts.",
+          "explanation": "This sentence follows a common structure in Chinese where the verb 'ask' is placed before the person being asked and the topic of the question.",
+          "words": [
+            {
+              "hanzi": "弗雷德",
+              "pinyin": "fú léi dé",
+              "definition": "Fred"
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "韦斯莱先生",
+              "pinyin": "wéi sī lái xiān shēng",
+              "definition": "Mr. Weasley"
+            },
+            {
+              "hanzi": "霍格沃茨",
+              "pinyin": "huò gé wò cí",
+              "definition": "Hogwarts"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "什么",
+              "pinyin": "shén me",
+              "definition": "what"
+            },
+            {
+              "hanzi": "事",
+              "pinyin": "shì",
+              "definition": "matter/thing"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s119",
+          "text": "韦斯莱先生说：“你们很快就会知道。",
+          "translation": "Mr. Wesley said: 'You will soon know.'",
+          "explanation": "The structure '很快就会' is a common way to express 'will soon' in Chinese.",
+          "words": [
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你们",
+              "pinyin": "nǐ men",
+              "definition": "you"
+            },
+            {
+              "hanzi": "很快",
+              "pinyin": "hěn kuài",
+              "definition": "soon"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "will"
+            },
+            {
+              "hanzi": "会",
+              "pinyin": "huì",
+              "definition": "know"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s120",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p048",
+      "raw_text": "随着夜幕降临，营地里充满了兴奋的气氛。小贩们卖着各种纪念品，巫师们准备去看比赛。",
+      "sentences": [
+        {
+          "sid": "s121",
+          "text": "随着夜幕降临，营地里充满了兴奋的气氛。",
+          "translation": "As night falls, the camp is filled with an excited atmosphere.",
+          "explanation": "This sentence showcases the use of the particle '了' to indicate a completed action, and the possessive particle '的' to describe the atmosphere as 'excited'.",
+          "words": [
+            {
+              "hanzi": "随着",
+              "pinyin": "suí zhe",
+              "definition": "as; with"
+            },
+            {
+              "hanzi": "夜幕",
+              "pinyin": "yè mù",
+              "definition": "nightfall"
+            },
+            {
+              "hanzi": "降临",
+              "pinyin": "jiàng lín",
+              "definition": "arrive; fall"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "营地",
+              "pinyin": "yíng dì",
+              "definition": "camp"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "inside"
+            },
+            {
+              "hanzi": "充满",
+              "pinyin": "chōng mǎn",
+              "definition": "filled with"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "兴奋",
+              "pinyin": "xīng fèn",
+              "definition": "excited"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "气氛",
+              "pinyin": "qì fēn",
+              "definition": "atmosphere"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s122",
+          "text": "小贩们卖着各种纪念品，巫师们准备去看比赛。",
+          "translation": "The vendors are selling various souvenirs, and the wizards are getting ready to watch the match.",
+          "explanation": "The structure '卖着' indicates an ongoing action of selling, and '准备去' is a common way to express getting ready to do something in Chinese.",
+          "words": [
+            {
+              "hanzi": "小贩们",
+              "pinyin": "xiǎo fàn men",
+              "definition": "vendors"
+            },
+            {
+              "hanzi": "卖着",
+              "pinyin": "mài zhe",
+              "definition": "selling"
+            },
+            {
+              "hanzi": "各种",
+              "pinyin": "gè zhǒng",
+              "definition": "various"
+            },
+            {
+              "hanzi": "纪念品",
+              "pinyin": "jì niàn pǐn",
+              "definition": "souvenirs"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "巫师们",
+              "pinyin": "wū shī men",
+              "definition": "wizards"
+            },
+            {
+              "hanzi": "准备",
+              "pinyin": "zhǔn bèi",
+              "definition": "getting ready"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "to"
+            },
+            {
+              "hanzi": "看",
+              "pinyin": "kàn",
+              "definition": "watch"
+            },
+            {
+              "hanzi": "比赛",
+              "pinyin": "bǐ sài",
+              "definition": "match"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p049",
+      "raw_text": "“时间到了！”韦斯莱先生说，“快点儿，我们走吧。”",
+      "sentences": [
+        {
+          "sid": "s123",
+          "text": "“时间到了！",
+          "translation": "Time's up!",
+          "explanation": "The sentence uses the word \"到\" (arrive) to indicate that time has arrived or is up, which may be a tricky grammar structure for learners.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "时间",
+              "pinyin": "shí jiān",
+              "definition": "time"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "arrive"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion or change of state"
+            },
+            {
+              "hanzi": "！",
+              "pinyin": "",
+              "definition": "exclamation mark"
+            }
+          ]
+        },
+        {
+          "sid": "s124",
+          "text": "”韦斯莱先生说，“快点儿，我们走吧。",
+          "translation": "Mr. Wesley said, \"Hurry up, let's go.\"",
+          "explanation": "The sentence includes a common structure in Chinese where the speaker's words are enclosed in quotation marks. The phrase '快点儿' is an informal way to say 'hurry up'.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            },
+            {
+              "hanzi": "韦斯莱",
+              "pinyin": "wéi sī lái",
+              "definition": "Mr. Wesley"
+            },
+            {
+              "hanzi": "先生",
+              "pinyin": "xiān shēng",
+              "definition": "Mr."
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "快点儿",
+              "pinyin": "kuài diǎn ér",
+              "definition": "Hurry up"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我们",
+              "pinyin": "wǒ men",
+              "definition": "we"
+            },
+            {
+              "hanzi": "走",
+              "pinyin": "zǒu",
+              "definition": "go"
+            },
+            {
+              "hanzi": "吧",
+              "pinyin": "ba",
+              "definition": "let's"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s125",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or specific text being referenced.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
