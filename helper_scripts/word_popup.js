@@ -1203,14 +1203,20 @@ function updateWordElementPinyin(wordElement, charList, pinyinList, statusObj) {
                 shouldShowCharPinyin = !isCharKnown;
                 console.log(`[Pinyin Debug] Word (learned) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set (will hide pinyin)' : '❌ NOT FOUND in known set (will show pinyin)'}`);
             } else {
-                // Default "unknown-only" behavior
-                if (!statusObj) {
-                    // Unknown word (not in LingQ data): hide pinyin for known characters
-                    const isCharKnown = knownSingleChars.has(char);
-                    shouldShowCharPinyin = !isCharKnown;
+                // Default "unknown-only" behavior: for any unknown word, hide pinyin for known characters
+                if (!statusObj || !isKnownWord(statusObj)) {
+                    // Word is unknown (not in LingQ data OR not known in LingQ): hide pinyin for known characters
+                    if (statusObj && statusObj.status === -1) {
+                        // Ignored words: don't show pinyin
+                        shouldShowCharPinyin = false;
+                    } else {
+                        // Check if this character is known
+                        const isCharKnown = knownSingleChars.has(char);
+                        shouldShowCharPinyin = !isCharKnown;
+                    }
                 } else {
-                    // Word is in LingQ data: show pinyin if word is not known and not ignored
-                    shouldShowCharPinyin = !isKnownWord(statusObj) && statusObj.status !== -1;
+                    // Word is known (status=3): don't show pinyin
+                    shouldShowCharPinyin = false;
                 }
             }
         }

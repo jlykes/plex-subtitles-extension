@@ -668,14 +668,20 @@ function createWordWrapper({ word, pinyin, status, meaning, nextWord, nextWordPi
           // Debug logging for learned words
           console.log(`[Pinyin Debug] Word "${word}" (learned) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set' : '❌ NOT FOUND in known set'} (will ${shouldShowCharPinyin ? 'show' : 'hide'} pinyin)`);
         } else {
-          // Default "unknown-only" behavior
-          if (!status) {
-            // Unknown word (not in LingQ data): hide pinyin for known characters
-            const isCharKnown = knownSingleChars.has(char);
-            shouldShowCharPinyin = !isCharKnown;
+          // Default "unknown-only" behavior: for any unknown word, hide pinyin for known characters
+          if (!status || !isKnownWord(status)) {
+            // Word is unknown (not in LingQ data OR not known in LingQ): hide pinyin for known characters
+            if (status && status.status === -1) {
+              // Ignored words: don't show pinyin
+              shouldShowCharPinyin = false;
+            } else {
+              // Check if this character is known
+              const isCharKnown = knownSingleChars.has(char);
+              shouldShowCharPinyin = !isCharKnown;
+            }
           } else {
-            // Word is in LingQ data: show pinyin if word is not known and not ignored
-            shouldShowCharPinyin = !isKnownWord(status) && status.status !== -1;
+            // Word is known (status=3): don't show pinyin
+            shouldShowCharPinyin = false;
           }
         }
       }
