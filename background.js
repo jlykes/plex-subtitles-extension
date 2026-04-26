@@ -422,6 +422,93 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // ------------------------------------------------------------
   // === NOTION API FUNCTIONS ===
   // ------------------------------------------------------------
+
+  // Generic POST to local ereader proxy (same routes as chinese_ereader proxy-server)
+  if (request.action === 'characterMiningApiPost') {
+    const { apiBaseUrl, path, body } = request;
+    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
+      ? apiBaseUrl.trim().replace(/\/+$/, '')
+      : 'http://localhost:3001/api';
+    const relPath = typeof path === 'string' && path.startsWith('/') ? path : `/${path || ''}`;
+
+    fetch(`${baseUrl}${relPath}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body && typeof body === 'object' ? body : {})
+    })
+      .then(async (response) => {
+        const text = await response.text();
+        let payload = null;
+        if (text) {
+          try {
+            payload = JSON.parse(text);
+          } catch {
+            payload = { raw: text };
+          }
+        }
+        if (!response.ok) {
+          const msg = typeof payload?.error === 'string'
+            ? payload.error
+            : `Request failed (${response.status})`;
+          throw new Error(msg);
+        }
+        return payload;
+      })
+      .then((payload) => {
+        sendResponse({ success: true, payload });
+      })
+      .catch((error) => {
+        console.error('[background] characterMiningApiPost failed:', error);
+        sendResponse({ success: false, error: error.message || String(error) });
+      });
+
+    return true;
+  }
+
+  // Generate character card via local ereader-style proxy server
+  if (request.action === 'generateCharacterCard') {
+    const {
+      hanzi,
+      userSubcomponents,
+      userRequiredWords,
+      storyMeaningFocus,
+      apiBaseUrl
+    } = request;
+
+    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
+      ? apiBaseUrl.trim().replace(/\/+$/, '')
+      : 'http://localhost:3001/api';
+
+    fetch(`${baseUrl}/anki/character/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        hanzi,
+        userSubcomponents,
+        userRequiredWords,
+        storyMeaningFocus
+      })
+    })
+      .then(async (response) => {
+        const payload = await response.json().catch(() => null);
+        if (!response.ok) {
+          const errorText = typeof payload?.error === 'string'
+            ? payload.error
+            : `Character generation failed (${response.status})`;
+          throw new Error(errorText);
+        }
+        return payload;
+      })
+      .then((payload) => {
+        sendResponse({ success: true, payload });
+      })
+      .catch((error) => {
+        console.error('[background] generateCharacterCard failed:', error);
+        sendResponse({ success: false, error: error.message || String(error) });
+      });
+
+    return true; // async response
+  }
   
   // Handle Notion word tracker entries
   if (request.action === 'addNotionWordTrackerEntry') {

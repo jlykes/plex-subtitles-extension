@@ -12,7 +12,11 @@
   "host_permissions": [
     "*://app.plex.tv/*",
     "https://www.lingq.com/*",
-    "https://api.notion.com/*"
+    "https://api.notion.com/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "http://localhost:3001/*",
+    "http://127.0.0.1:3001/*"
   ],
   "content_scripts": [
     {

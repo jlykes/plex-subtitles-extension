@@ -1,0 +1,6208 @@
+{
+  "metadata": {
+    "chapter_name": "16. 三体问题",
+    "image": null,
+    "paragraph_count": 34,
+    "word_count": 862
+  },
+  "content": [
+    {
+      "type": "paragraph",
+      "pid": "p001",
+      "raw_text": "汪淼刚退出游戏，接到大史的电话，说有紧急事情，让他马上去重案组办公室。汪淼看了看表，已经凌晨三点了。",
+      "sentences": [
+        {
+          "sid": "s001",
+          "text": "汪淼刚退出游戏，接到大史的电话，说有紧急事情，让他马上去重案组办公室。",
+          "translation": "Wang Miao just quit the game, received a call from Da Shi, saying there is an emergency, asking him to go to the office of the Serious Crimes Unit immediately.",
+          "explanation": "The sentence introduces a character named Wang Miao who receives an urgent call from Da Shi to go to the Serious Crimes Unit office immediately. The structure of the sentence is straightforward, but it includes vocabulary related to gaming, phone calls, and office settings.",
+          "words": [
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a Chinese surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "vast"
+            },
+            {
+              "hanzi": "刚",
+              "pinyin": "gāng",
+              "definition": "just"
+            },
+            {
+              "hanzi": "退出",
+              "pinyin": "tuì chū",
+              "definition": "quit"
+            },
+            {
+              "hanzi": "游戏",
+              "pinyin": "yóu xì",
+              "definition": "game"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "接到",
+              "pinyin": "jiē dào",
+              "definition": "receive"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "of"
+            },
+            {
+              "hanzi": "电话",
+              "pinyin": "diàn huà",
+              "definition": "phone call"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "紧急",
+              "pinyin": "jǐn jí",
+              "definition": "urgent"
+            },
+            {
+              "hanzi": "事情",
+              "pinyin": "shì qíng",
+              "definition": "matter"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "let"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "马上",
+              "pinyin": "mǎ shàng",
+              "definition": "immediately"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "go"
+            },
+            {
+              "hanzi": "重案组",
+              "pinyin": "zhòng àn zǔ",
+              "definition": "Serious Crimes Unit"
+            },
+            {
+              "hanzi": "办公室",
+              "pinyin": "bàn gōng shì",
+              "definition": "office"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s002",
+          "text": "汪淼看了看表，已经凌晨三点了。",
+          "translation": "Wang Miao looked at the watch, it was already three in the morning.",
+          "explanation": "The sentence structure follows the pattern of Subject-Verb-Object. The use of '了' after a verb indicates the completion of an action. '凌晨' is a term used to refer to the early hours of the morning, typically between midnight and dawn.",
+          "words": [
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a Chinese surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "vast, immense"
+            },
+            {
+              "hanzi": "看",
+              "pinyin": "kàn",
+              "definition": "look"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "看",
+              "pinyin": "kàn",
+              "definition": "look"
+            },
+            {
+              "hanzi": "表",
+              "pinyin": "biǎo",
+              "definition": "character"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "character"
+            },
+            {
+              "hanzi": "已",
+              "pinyin": "yǐ",
+              "definition": "character"
+            },
+            {
+              "hanzi": "经",
+              "pinyin": "jīng",
+              "definition": "character"
+            },
+            {
+              "hanzi": "凌",
+              "pinyin": "líng",
+              "definition": "character"
+            },
+            {
+              "hanzi": "晨",
+              "pinyin": "chén",
+              "definition": "character"
+            },
+            {
+              "hanzi": "三",
+              "pinyin": "sān",
+              "definition": "character"
+            },
+            {
+              "hanzi": "点",
+              "pinyin": "diǎn",
+              "definition": "character"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p002",
+      "raw_text": "汪淼到大史的办公室时，看到烟雾缭绕，旁边的年轻女警徐冰冰不停地用本子扇风。大史介绍她是信息安全部门的专家。办公室里还有一个人，居然是申玉菲的丈夫魏成，头发乱糟糟的。",
+      "sentences": [
+        {
+          "sid": "s003",
+          "text": "汪淼到大史的办公室时，看到烟雾缭绕，旁边的年轻女警徐冰冰不停地用本子扇风。",
+          "translation": "When Wang Miao arrived at Da Shi's office, he saw smoke billowing, and the young female police officer Xu Bingbing was constantly fanning with a notebook.",
+          "explanation": "The sentence introduces characters in a specific setting, describing the actions they are taking. The structure '不停地' means 'constantly' and is used to emphasize the continuous nature of an action.",
+          "words": [
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "Miao (a given name)"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "to arrive"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "Shi (a surname)"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle, indicating 'of'"
+            },
+            {
+              "hanzi": "办公室",
+              "pinyin": "bàn gōng shì",
+              "definition": "office"
+            },
+            {
+              "hanzi": "时",
+              "pinyin": "shí",
+              "definition": "when"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "to see"
+            },
+            {
+              "hanzi": "烟雾",
+              "pinyin": "yān wù",
+              "definition": "smoke"
+            },
+            {
+              "hanzi": "缭绕",
+              "pinyin": "liáo rào",
+              "definition": "billowing"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "旁边",
+              "pinyin": "páng biān",
+              "definition": "beside"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle, indicating 'of'"
+            },
+            {
+              "hanzi": "年轻",
+              "pinyin": "nián qīng",
+              "definition": "young"
+            },
+            {
+              "hanzi": "女警",
+              "pinyin": "nǚ jǐng",
+              "definition": "female police officer"
+            },
+            {
+              "hanzi": "徐冰冰",
+              "pinyin": "xú bīng bīng",
+              "definition": "Xu Bingbing (a name)"
+            },
+            {
+              "hanzi": "不停地",
+              "pinyin": "bù tíng dì",
+              "definition": "constantly"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "to use"
+            },
+            {
+              "hanzi": "本子",
+              "pinyin": "běn zi",
+              "definition": "notebook"
+            },
+            {
+              "hanzi": "扇风",
+              "pinyin": "shān fēng",
+              "definition": "to fan"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s004",
+          "text": "大史介绍她是信息安全部门的专家。",
+          "translation": "Da Shi introduced her as an expert in the Information Security Department.",
+          "explanation": "The structure '是...的' is used to emphasize the noun that comes after it. In this case, it emphasizes that she is an expert in the Information Security Department.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "介绍",
+              "pinyin": "jiè shào",
+              "definition": "introduce"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "信息",
+              "pinyin": "xìn xī",
+              "definition": "information"
+            },
+            {
+              "hanzi": "安全部门",
+              "pinyin": "ān quán bù mén",
+              "definition": "security department"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "of"
+            },
+            {
+              "hanzi": "专家",
+              "pinyin": "zhuān jiā",
+              "definition": "expert"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s005",
+          "text": "办公室里还有一个人，居然是申玉菲的丈夫魏成，头发乱糟糟的。",
+          "translation": "There was another person in the office, unexpectedly, it was Shen Yufei's husband Wei Cheng, with messy hair.",
+          "explanation": "The sentence structure in Chinese is Subject + Predicate + Object. In this sentence, the unexpected element is emphasized by the adverb '居然' (unexpectedly). The possessive particle '的' is used to indicate possession.",
+          "words": [
+            {
+              "hanzi": "办公室",
+              "pinyin": "bàn gōng shì",
+              "definition": "office"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "in"
+            },
+            {
+              "hanzi": "还",
+              "pinyin": "hái",
+              "definition": "still/yet"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/has"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "one"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "居然",
+              "pinyin": "jū rán",
+              "definition": "unexpectedly"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "申玉菲",
+              "pinyin": "shēn yù fēi",
+              "definition": "Shen Yufei (a name)"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "丈夫",
+              "pinyin": "zhàng fū",
+              "definition": "husband"
+            },
+            {
+              "hanzi": "魏成",
+              "pinyin": "wèi chéng",
+              "definition": "Wei Cheng (a name)"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "头发",
+              "pinyin": "tóu fà",
+              "definition": "hair"
+            },
+            {
+              "hanzi": "乱糟糟",
+              "pinyin": "luàn zāo zāo",
+              "definition": "messy"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p003",
+      "raw_text": "“不好意思打扰你，不过我看你也没睡吧。这里有些事儿需要你参谋参谋。”大史说，然后让魏成开始讲。",
+      "sentences": [
+        {
+          "sid": "s006",
+          "text": "“不好意思打扰你，不过我看你也没睡吧。",
+          "translation": "Sorry to disturb you, but I see you're not asleep either.",
+          "explanation": "The structure '不过' is used to introduce a contrasting statement. The particle '吧' at the end of the sentence softens the suggestion or surmise.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "不好意思",
+              "pinyin": "bù hǎo yì sī",
+              "definition": "sorry"
+            },
+            {
+              "hanzi": "打扰",
+              "pinyin": "dǎ rǎo",
+              "definition": "disturb"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "不过",
+              "pinyin": "bù guò",
+              "definition": "but"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "看",
+              "pinyin": "kàn",
+              "definition": "see"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "也",
+              "pinyin": "yě",
+              "definition": "also"
+            },
+            {
+              "hanzi": "没",
+              "pinyin": "méi",
+              "definition": "not"
+            },
+            {
+              "hanzi": "睡",
+              "pinyin": "shuì",
+              "definition": "sleep"
+            },
+            {
+              "hanzi": "吧",
+              "pinyin": "ba",
+              "definition": "modal particle indicating suggestion or surmise"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s007",
+          "text": "这里有些事儿需要你参谋参谋。",
+          "translation": "Here are some things that need your advice.",
+          "explanation": "The term \"事儿\" is a colloquial way of saying \"things\" or \"matters\" in Mandarin Chinese. The repetition of \"参谋\" emphasizes the need for advice or consultation.",
+          "words": [
+            {
+              "hanzi": "这里",
+              "pinyin": "zhè lǐ",
+              "definition": "here"
+            },
+            {
+              "hanzi": "有些",
+              "pinyin": "yǒu xiē",
+              "definition": "some"
+            },
+            {
+              "hanzi": "事儿",
+              "pinyin": "shì ér",
+              "definition": "things/matters"
+            },
+            {
+              "hanzi": "需要",
+              "pinyin": "xū yào",
+              "definition": "need"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "参谋",
+              "pinyin": "cān móu",
+              "definition": "advice"
+            },
+            {
+              "hanzi": "参谋",
+              "pinyin": "cān móu",
+              "definition": "advice"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s008",
+          "text": "”大史说，然后让魏成开始讲。",
+          "translation": "Da Shi said, then let Wei Cheng start speaking.",
+          "explanation": "The sentence structure is straightforward, but the use of '然后' (then) to indicate sequence might be a new grammar structure for some learners.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big, great"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "to say, to speak"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "然",
+              "pinyin": "rán",
+              "definition": "then, so"
+            },
+            {
+              "hanzi": "后",
+              "pinyin": "hòu",
+              "definition": "after"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "to let, to allow"
+            },
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "a Chinese surname"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "to become, to turn into"
+            },
+            {
+              "hanzi": "开始",
+              "pinyin": "kāi shǐ",
+              "definition": "to start, to begin"
+            },
+            {
+              "hanzi": "讲",
+              "pinyin": "jiǎng",
+              "definition": "to speak, to talk"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p004",
+      "raw_text": "魏成说他的生命受到威胁，但脸上没有表情。",
+      "sentences": [
+        {
+          "sid": "s009",
+          "text": "魏成说他的生命受到威胁，但脸上没有表情。",
+          "translation": "Wei Cheng said his life was threatened, but there was no expression on his face.",
+          "explanation": "The sentence structure is Subject + Verb + Object. The word order in Chinese is different from English, so pay attention to the placement of words. Also, the lack of expression on the face is indicated by '脸上没有表情', which is a common expression in Chinese.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "become; turn into"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say; speak"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he; him"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle, similar to 's in English"
+            },
+            {
+              "hanzi": "生命",
+              "pinyin": "shēng mìng",
+              "definition": "life"
+            },
+            {
+              "hanzi": "受到",
+              "pinyin": "shòu dào",
+              "definition": "receive; suffer; be subjected to"
+            },
+            {
+              "hanzi": "威胁",
+              "pinyin": "wēi xié",
+              "definition": "threat; menace"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but; however"
+            },
+            {
+              "hanzi": "脸上",
+              "pinyin": "liǎn shàng",
+              "definition": "on the face"
+            },
+            {
+              "hanzi": "没有",
+              "pinyin": "méi yǒu",
+              "definition": "not have; there is no"
+            },
+            {
+              "hanzi": "表情",
+              "pinyin": "biǎo qíng",
+              "definition": "expression; look"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p005",
+      "raw_text": "“从头说起吧。”大史说。",
+      "sentences": [
+        {
+          "sid": "s010",
+          "text": "“从头说起吧。",
+          "translation": "Let's start from the beginning.",
+          "explanation": "The sentence is a polite way of suggesting to start from the beginning.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "definition": "from"
+            },
+            {
+              "hanzi": "头",
+              "pinyin": "tóu",
+              "definition": "head"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "speak"
+            },
+            {
+              "hanzi": "起",
+              "pinyin": "qǐ",
+              "definition": "start"
+            },
+            {
+              "hanzi": "吧",
+              "pinyin": "ba",
+              "definition": "indicating suggestion or request"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s011",
+          "text": "”大史说。",
+          "translation": "Da Shi said.",
+          "explanation": "The sentence consists of the character '大' meaning 'big', '史' meaning 'history', and '说' meaning 'said'. The quotation mark at the beginning indicates that someone named '大史' is speaking.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p006",
+      "raw_text": "魏成开始讲述他的故事：",
+      "sentences": [
+        {
+          "sid": "s012",
+          "text": "魏成开始讲述他的故事：",
+          "translation": "Wei Cheng began to tell his story:",
+          "explanation": "The sentence structure is Subject + Verb + Object, with the possessive particle '的' used to indicate possession.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "to become; to turn into"
+            },
+            {
+              "hanzi": "开始",
+              "pinyin": "kāi shǐ",
+              "definition": "begin; start"
+            },
+            {
+              "hanzi": "讲述",
+              "pinyin": "jiǎng shù",
+              "definition": "to narrate; to tell"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he; him"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle, indicating that the following noun belongs to the preceding noun"
+            },
+            {
+              "hanzi": "故事",
+              "pinyin": "gù shì",
+              "definition": "story; tale"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p007",
+      "raw_text": "“我从小就是个懒散的人，住校时碗从来不洗，被子从来不叠，对什么都提不起兴趣。虽然我懒得学习，但我知道自己有些天赋，比如我能很快找到黄金分割点。高二时，一位数学老师注意到了我，他让我解一些数学题，我很快就能写出答案。他说我有数学天分，但我不珍惜。”",
+      "sentences": [
+        {
+          "sid": "s013",
+          "text": "“我从小就是个懒散的人，住校时碗从来不洗，被子从来不叠，对什么都提不起兴趣。",
+          "translation": "I have always been a lazy person since I was young, never washing dishes or folding blankets, never interested in anything.",
+          "explanation": "The sentence describes the speaker's lazy habits since childhood, emphasizing their lack of interest in doing chores or engaging with anything.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "quotation mark"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "definition": "from"
+            },
+            {
+              "hanzi": "小",
+              "pinyin": "xiǎo",
+              "definition": "small/young"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "always"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "am/is"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "懒散",
+              "pinyin": "lǎn sǎn",
+              "definition": "lazy"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "住校",
+              "pinyin": "zhù xiào",
+              "definition": "live in school"
+            },
+            {
+              "hanzi": "时",
+              "pinyin": "shí",
+              "definition": "when"
+            },
+            {
+              "hanzi": "碗",
+              "pinyin": "wǎn",
+              "definition": "bowl"
+            },
+            {
+              "hanzi": "从来",
+              "pinyin": "cóng lái",
+              "definition": "never"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "洗",
+              "pinyin": "xǐ",
+              "definition": "wash"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "被子",
+              "pinyin": "bèi zi",
+              "definition": "blanket"
+            },
+            {
+              "hanzi": "从来",
+              "pinyin": "cóng lái",
+              "definition": "never"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "叠",
+              "pinyin": "dié",
+              "definition": "fold"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "towards"
+            },
+            {
+              "hanzi": "什么",
+              "pinyin": "shén me",
+              "definition": "anything"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "all"
+            },
+            {
+              "hanzi": "提不起",
+              "pinyin": "tí bù qǐ",
+              "definition": "not interested in"
+            },
+            {
+              "hanzi": "兴趣",
+              "pinyin": "xìng qù",
+              "definition": "interest"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s014",
+          "text": "虽然我懒得学习，但我知道自己有些天赋，比如我能很快找到黄金分割点。",
+          "translation": "Although I am lazy to study, I know I have some talent, for example, I can quickly find the golden ratio point.",
+          "explanation": "This sentence showcases the use of '虽然...但...' (although...but...) structure to express contrast. It also introduces the concept of '黄金分割点' (golden ratio point) which is a mathematical term often used in art and design.",
+          "words": [
+            {
+              "hanzi": "虽然",
+              "pinyin": "suī rán",
+              "definition": "although"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "懒得",
+              "pinyin": "lǎn de",
+              "definition": "lazy to"
+            },
+            {
+              "hanzi": "学习",
+              "pinyin": "xué xí",
+              "definition": "study"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "自己",
+              "pinyin": "zì jǐ",
+              "definition": "self"
+            },
+            {
+              "hanzi": "有些",
+              "pinyin": "yǒu xiē",
+              "definition": "some"
+            },
+            {
+              "hanzi": "天赋",
+              "pinyin": "tiān fù",
+              "definition": "talent"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "比如",
+              "pinyin": "bǐ rú",
+              "definition": "for example"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "definition": "can"
+            },
+            {
+              "hanzi": "很快",
+              "pinyin": "hěn kuài",
+              "definition": "quickly"
+            },
+            {
+              "hanzi": "找到",
+              "pinyin": "zhǎo dào",
+              "definition": "find"
+            },
+            {
+              "hanzi": "黄金",
+              "pinyin": "huáng jīn",
+              "definition": "golden"
+            },
+            {
+              "hanzi": "分割点",
+              "pinyin": "fēn gē diǎn",
+              "definition": "ratio point"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s015",
+          "text": "高二时，一位数学老师注意到了我，他让我解一些数学题，我很快就能写出答案。",
+          "translation": "In my second year of high school, a math teacher noticed me, and he asked me to solve some math problems. I was quickly able to write out the answers.",
+          "explanation": "This sentence introduces the past experience of the speaker when a math teacher noticed them and asked them to solve math problems. The use of '了' indicates the completion of the action, and '就' emphasizes the quickness of the speaker in being able to write out the answers.",
+          "words": [
+            {
+              "hanzi": "高二",
+              "pinyin": "gāo èr",
+              "definition": "second year of high school"
+            },
+            {
+              "hanzi": "时",
+              "pinyin": "shí",
+              "definition": "time; when"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "一位",
+              "pinyin": "yī wèi",
+              "definition": "a (polite measure word for people)"
+            },
+            {
+              "hanzi": "数学",
+              "pinyin": "shù xué",
+              "definition": "math"
+            },
+            {
+              "hanzi": "老师",
+              "pinyin": "lǎo shī",
+              "definition": "teacher"
+            },
+            {
+              "hanzi": "注意到",
+              "pinyin": "zhù yì dào",
+              "definition": "notice"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I; me"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "let; allow"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "解",
+              "pinyin": "jiě",
+              "definition": "solve"
+            },
+            {
+              "hanzi": "一些",
+              "pinyin": "yī xiē",
+              "definition": "some"
+            },
+            {
+              "hanzi": "数学题",
+              "pinyin": "shù xué tí",
+              "definition": "math problems"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I; me"
+            },
+            {
+              "hanzi": "很快",
+              "pinyin": "hěn kuài",
+              "definition": "quickly"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "then; soon after"
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "definition": "able to"
+            },
+            {
+              "hanzi": "写出",
+              "pinyin": "xiě chū",
+              "definition": "write out"
+            },
+            {
+              "hanzi": "答案",
+              "pinyin": "dá àn",
+              "definition": "answers"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s016",
+          "text": "他说我有数学天分，但我不珍惜。",
+          "translation": "He said I have a talent for math, but I don't cherish it.",
+          "explanation": "The structure '但我不' means 'but I don't' in this context. The word '天分' means 'talent' in the sense of natural aptitude or gift.",
+          "words": [
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "数学",
+              "pinyin": "shù xué",
+              "definition": "math"
+            },
+            {
+              "hanzi": "天分",
+              "pinyin": "tiān fèn",
+              "definition": "talent"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "珍惜",
+              "pinyin": "zhēn xī",
+              "definition": "cherish"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s017",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only contains a closing quotation mark and a space, with no actual text content.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p008",
+      "raw_text": "魏成继续说：“我参加了数学竞赛，一直拿冠军，最后被一所大学录取了。可我在大学里还是吊儿郎当，但居然都过来了。后来我到大学教书，但也混不下去，最后课也没得教了。我厌倦了这一切，就去了南方一座寺庙。”",
+      "sentences": [
+        {
+          "sid": "s018",
+          "text": "魏成继续说：“我参加了数学竞赛，一直拿冠军，最后被一所大学录取了。",
+          "translation": "Wei Cheng continued: \"I participated in math competitions, always won first place, and was finally admitted by a university.\"",
+          "explanation": "This sentence showcases the use of the particle '了' to indicate a completed action, as well as the structure of listing actions in a series using '，' and '、'.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "succeed/finish"
+            },
+            {
+              "hanzi": "继续",
+              "pinyin": "jì xù",
+              "definition": "continue"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "参加",
+              "pinyin": "cān jiā",
+              "definition": "participate in"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "数学",
+              "pinyin": "shù xué",
+              "definition": "mathematics"
+            },
+            {
+              "hanzi": "竞赛",
+              "pinyin": "jìng sài",
+              "definition": "competition"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "一直",
+              "pinyin": "yì zhí",
+              "definition": "always"
+            },
+            {
+              "hanzi": "拿",
+              "pinyin": "ná",
+              "definition": "take/hold"
+            },
+            {
+              "hanzi": "冠军",
+              "pinyin": "guàn jūn",
+              "definition": "champion/first place"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "最后",
+              "pinyin": "zuì hòu",
+              "definition": "finally"
+            },
+            {
+              "hanzi": "被",
+              "pinyin": "bèi",
+              "definition": "by"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "所",
+              "pinyin": "suǒ",
+              "definition": "measure word for institutions"
+            },
+            {
+              "hanzi": "大学",
+              "pinyin": "dà xué",
+              "definition": "university"
+            },
+            {
+              "hanzi": "录取",
+              "pinyin": "lù qǔ",
+              "definition": "admit"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s019",
+          "text": "可我在大学里还是吊儿郎当，但居然都过来了。",
+          "translation": "But I was still carefree in college, yet somehow I made it through.",
+          "explanation": "The sentence structure may seem a bit complex with the use of '可' (but/yet/however) and '居然' (unexpectedly/surprisingly). The phrase '吊儿郎当' is an idiomatic expression meaning carefree or irresponsible.",
+          "words": [
+            {
+              "hanzi": "可",
+              "pinyin": "kě",
+              "definition": "but/yet/however"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at/in"
+            },
+            {
+              "hanzi": "大学",
+              "pinyin": "dà xué",
+              "definition": "college/university"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "inside/in"
+            },
+            {
+              "hanzi": "还是",
+              "pinyin": "hái shì",
+              "definition": "still/yet"
+            },
+            {
+              "hanzi": "吊儿郎当",
+              "pinyin": "diào er láng dāng",
+              "definition": "carefree/irresponsible"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ""
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but/yet"
+            },
+            {
+              "hanzi": "居然",
+              "pinyin": "jū rán",
+              "definition": "unexpectedly/surprisingly"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "all"
+            },
+            {
+              "hanzi": "过来",
+              "pinyin": "guò lái",
+              "definition": "come over/come through"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion of action"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s020",
+          "text": "后来我到大学教书，但也混不下去，最后课也没得教了。",
+          "translation": "Later, I went to teach at the university, but I couldn't make it, and in the end, I didn't even have any classes to teach.",
+          "explanation": "The structure '最后...也没得...' means 'in the end...didn't even have...'. The phrase '混不下去' is an idiomatic expression meaning 'couldn't make it' or 'struggle to survive'.",
+          "words": [
+            {
+              "hanzi": "后来",
+              "pinyin": "hòu lái",
+              "definition": "later"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "to"
+            },
+            {
+              "hanzi": "大学",
+              "pinyin": "dà xué",
+              "definition": "university"
+            },
+            {
+              "hanzi": "教书",
+              "pinyin": "jiāo shū",
+              "definition": "teach"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "也",
+              "pinyin": "yě",
+              "definition": "also"
+            },
+            {
+              "hanzi": "混不下去",
+              "pinyin": "hùn bù xià qù",
+              "definition": "couldn't make it (struggle to survive)"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "最后",
+              "pinyin": "zuì hòu",
+              "definition": "in the end"
+            },
+            {
+              "hanzi": "课",
+              "pinyin": "kè",
+              "definition": "class"
+            },
+            {
+              "hanzi": "也",
+              "pinyin": "yě",
+              "definition": "even"
+            },
+            {
+              "hanzi": "没得",
+              "pinyin": "méi dé",
+              "definition": "not have"
+            },
+            {
+              "hanzi": "教",
+              "pinyin": "jiào",
+              "definition": "teach"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s021",
+          "text": "我厌倦了这一切，就去了南方一座寺庙。",
+          "translation": "I got tired of it all, so I went to a temple in the south.",
+          "explanation": "The structure '就去了' indicates a sequence of events, where the action of going to the temple follows the feeling of being tired of everything.",
+          "words": [
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "厌倦",
+              "pinyin": "yàn juàn",
+              "definition": "tired of"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completion of action)"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "一切",
+              "pinyin": "yī qiè",
+              "definition": "all/everything"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "(indicating a sequence of events)"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "go"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completion of action)"
+            },
+            {
+              "hanzi": "南方",
+              "pinyin": "nán fāng",
+              "definition": "south"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "座",
+              "pinyin": "zuò",
+              "definition": "measure word for buildings"
+            },
+            {
+              "hanzi": "寺庙",
+              "pinyin": "sì miào",
+              "definition": "temple"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s022",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p009",
+      "raw_text": "“我不是去出家，只是想找个清静的地方住一阵儿。寺庙的长老是我父亲的朋友，他收留了我。我对他说，想找个清静省心的方式混完这辈子。长老说，这里并不清静，要清静省心，自己就得空。我开始用‘空’来填充自己，创造了一个无际的太空，但感觉不宁静，反而焦躁。”",
+      "sentences": [
+        {
+          "sid": "s023",
+          "text": "“我不是去出家，只是想找个清静的地方住一阵儿。",
+          "translation": "I am not going to become a monk, just want to find a quiet place to stay for a while.",
+          "explanation": "The sentence structure is straightforward, but the use of '出家' (to become a monk) might be a new vocabulary for intermediate learners.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "不是",
+              "pinyin": "bú shì",
+              "definition": "not"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "to go"
+            },
+            {
+              "hanzi": "出家",
+              "pinyin": "chū jiā",
+              "definition": "to become a monk"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "只是",
+              "pinyin": "zhǐ shì",
+              "definition": "just/only"
+            },
+            {
+              "hanzi": "想",
+              "pinyin": "xiǎng",
+              "definition": "to want"
+            },
+            {
+              "hanzi": "找",
+              "pinyin": "zhǎo",
+              "definition": "to find"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "清静",
+              "pinyin": "qīng jìng",
+              "definition": "quiet"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "地方",
+              "pinyin": "dì fāng",
+              "definition": "place"
+            },
+            {
+              "hanzi": "住",
+              "pinyin": "zhù",
+              "definition": "to stay"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "阵儿",
+              "pinyin": "zhèn ér",
+              "definition": "while"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s024",
+          "text": "寺庙的长老是我父亲的朋友，他收留了我。",
+          "translation": "The elder of the temple is a friend of my father, he took me in.",
+          "explanation": "The possessive particle '的' is used to show possession or connection between words. In this sentence, it connects '长老' (elder) and '寺庙' (temple), as well as '朋友' (friend) and '父亲' (father).",
+          "words": [
+            {
+              "hanzi": "寺庙",
+              "pinyin": "sì miào",
+              "definition": "temple"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle (connecting modifier to modified)"
+            },
+            {
+              "hanzi": "长老",
+              "pinyin": "zhǎng lǎo",
+              "definition": "elder"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "my"
+            },
+            {
+              "hanzi": "父亲",
+              "pinyin": "fù qīn",
+              "definition": "father"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle (connecting modifier to modified)"
+            },
+            {
+              "hanzi": "朋友",
+              "pinyin": "péng yǒu",
+              "definition": "friend"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "收留",
+              "pinyin": "shōu liú",
+              "definition": "take in"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion of action"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s025",
+          "text": "我对他说，想找个清静省心的方式混完这辈子。",
+          "translation": "I told him, I want to find a quiet and peaceful way to get through this lifetime.",
+          "explanation": "The sentence expresses the speaker's desire to find a peaceful and quiet way to live their life.",
+          "words": [
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "to"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "想",
+              "pinyin": "xiǎng",
+              "definition": "want"
+            },
+            {
+              "hanzi": "找",
+              "pinyin": "zhǎo",
+              "definition": "to find"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "清静",
+              "pinyin": "qīng jìng",
+              "definition": "quiet"
+            },
+            {
+              "hanzi": "省心",
+              "pinyin": "shěng xīn",
+              "definition": "peaceful"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating an attribute"
+            },
+            {
+              "hanzi": "方式",
+              "pinyin": "fāng shì",
+              "definition": "way"
+            },
+            {
+              "hanzi": "混",
+              "pinyin": "hùn",
+              "definition": "to get through"
+            },
+            {
+              "hanzi": "完",
+              "pinyin": "wán",
+              "definition": "completely"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "辈子",
+              "pinyin": "bèi zi",
+              "definition": "lifetime"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s026",
+          "text": "长老说，这里并不清静，要清静省心，自己就得空。",
+          "translation": "The elder said, it's not quiet here, to be quiet and at peace, one must be empty themselves.",
+          "explanation": "The sentence emphasizes the importance of inner peace and emptiness to achieve tranquility, using the concept of being 'empty' as a metaphor for a clear and calm mind.",
+          "words": [
+            {
+              "hanzi": "长老",
+              "pinyin": "zhǎng lǎo",
+              "definition": "elder"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "这里",
+              "pinyin": "zhè lǐ",
+              "definition": "here"
+            },
+            {
+              "hanzi": "并不",
+              "pinyin": "bìng bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "清静",
+              "pinyin": "qīng jìng",
+              "definition": "quiet"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào",
+              "definition": "to"
+            },
+            {
+              "hanzi": "清静",
+              "pinyin": "qīng jìng",
+              "definition": "quiet"
+            },
+            {
+              "hanzi": "省心",
+              "pinyin": "shěng xīn",
+              "definition": "at peace"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "自己",
+              "pinyin": "zì jǐ",
+              "definition": "oneself"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "must"
+            },
+            {
+              "hanzi": "得",
+              "pinyin": "dé",
+              "definition": "have to"
+            },
+            {
+              "hanzi": "空",
+              "pinyin": "kōng",
+              "definition": "empty"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s027",
+          "text": "我开始用‘空’来填充自己，创造了一个无际的太空，但感觉不宁静，反而焦躁。",
+          "translation": "I began to fill myself with 'emptiness', creating an infinite space, but it didn't feel peaceful, instead restless.",
+          "explanation": "The sentence uses the structure '用...来...' to indicate using something to do something. The word '空' here refers to 'emptiness' or 'void'. The phrase '无际的太空' means 'infinite space'. The use of '反而' indicates a contrast between expectations and reality.",
+          "words": [
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "开始",
+              "pinyin": "kāi shǐ",
+              "definition": "begin/start"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "use"
+            },
+            {
+              "hanzi": "‘",
+              "pinyin": "‘",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "空",
+              "pinyin": "kōng",
+              "definition": "emptiness"
+            },
+            {
+              "hanzi": "’",
+              "pinyin": "’",
+              "definition": "closing quotation mark"
+            },
+            {
+              "hanzi": "来",
+              "pinyin": "lái",
+              "definition": "to"
+            },
+            {
+              "hanzi": "填充",
+              "pinyin": "tián chōng",
+              "definition": "fill"
+            },
+            {
+              "hanzi": "自己",
+              "pinyin": "zì jǐ",
+              "definition": "myself"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "创造",
+              "pinyin": "chuàng zào",
+              "definition": "create"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a/an"
+            },
+            {
+              "hanzi": "无际",
+              "pinyin": "wú jì",
+              "definition": "infinite"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating possession"
+            },
+            {
+              "hanzi": "太空",
+              "pinyin": "tài kōng",
+              "definition": "space"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "感觉",
+              "pinyin": "gǎn jué",
+              "definition": "feel/sensation"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "宁静",
+              "pinyin": "níng jìng",
+              "definition": "peaceful"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "反而",
+              "pinyin": "fǎn ér",
+              "definition": "instead"
+            },
+            {
+              "hanzi": "焦躁",
+              "pinyin": "jiāo zào",
+              "definition": "restless"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s028",
+          "text": "”",
+          "translation": "Three-body problem.",
+          "explanation": "This sentence simply states the title of the chapter, referring to the 'Three-body problem' in physics.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p010",
+      "raw_text": "“于是我给自己创造了一个球体，但感觉还是不好。后来我又引入了第三个球体，情况发生了变化，三球在太空中进行复杂的运动，我就这样进入梦乡。”",
+      "sentences": [
+        {
+          "sid": "s029",
+          "text": "“于是我给自己创造了一个球体，但感觉还是不好。",
+          "translation": "So I created a sphere for myself, but it still didn't feel right.",
+          "explanation": "The sentence structure in Chinese is Subject-Verb-Object. The use of 创造了 indicates a completed action, and the word 还是 is used to express 'still' in a negative context.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "于是",
+              "pinyin": "yú shì",
+              "definition": "so; therefore"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I; me"
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi",
+              "definition": "give"
+            },
+            {
+              "hanzi": "自己",
+              "pinyin": "zì jǐ",
+              "definition": "myself"
+            },
+            {
+              "hanzi": "创造",
+              "pinyin": "chuàng zào",
+              "definition": "create"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a; one"
+            },
+            {
+              "hanzi": "球体",
+              "pinyin": "qiú tǐ",
+              "definition": "sphere"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "(comma)"
+            },
+            {
+              "hanzi": "但",
+              "pinyin": "dàn",
+              "definition": "but"
+            },
+            {
+              "hanzi": "感觉",
+              "pinyin": "gǎn jué",
+              "definition": "feel"
+            },
+            {
+              "hanzi": "还是",
+              "pinyin": "hái shì",
+              "definition": "still"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good; right"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s030",
+          "text": "后来我又引入了第三个球体，情况发生了变化，三球在太空中进行复杂的运动，我就这样进入梦乡。",
+          "translation": "Later, I introduced a third sphere, the situation changed, the three spheres were engaged in complex movements in space, and I entered dreamland like this.",
+          "explanation": "This sentence introduces the concept of introducing a third sphere and the complex movements happening in space, leading the speaker to enter a dreamlike state.",
+          "words": [
+            {
+              "hanzi": "后来",
+              "pinyin": "hòu lái",
+              "definition": "later"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "又",
+              "pinyin": "yòu",
+              "definition": "again"
+            },
+            {
+              "hanzi": "引入",
+              "pinyin": "yǐn rù",
+              "definition": "introduce"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "第三个",
+              "pinyin": "dì sān gè",
+              "definition": "third"
+            },
+            {
+              "hanzi": "球体",
+              "pinyin": "qiú tǐ",
+              "definition": "sphere"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "(comma)"
+            },
+            {
+              "hanzi": "情况",
+              "pinyin": "qíng kuàng",
+              "definition": "situation"
+            },
+            {
+              "hanzi": "发生",
+              "pinyin": "fā shēng",
+              "definition": "occur/happen"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "变化",
+              "pinyin": "biàn huà",
+              "definition": "change"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "(comma)"
+            },
+            {
+              "hanzi": "三球",
+              "pinyin": "sān qiú",
+              "definition": "three spheres"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in"
+            },
+            {
+              "hanzi": "太空",
+              "pinyin": "tài kōng",
+              "definition": "space"
+            },
+            {
+              "hanzi": "中",
+              "pinyin": "zhōng",
+              "definition": "inside"
+            },
+            {
+              "hanzi": "进行",
+              "pinyin": "jìn xíng",
+              "definition": "engage in"
+            },
+            {
+              "hanzi": "复杂",
+              "pinyin": "fù zá",
+              "definition": "complex"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "(particle indicating descriptive or adjectival relation)"
+            },
+            {
+              "hanzi": "运动",
+              "pinyin": "yùn dòng",
+              "definition": "movement"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "(comma)"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "(particle indicating result or assumption)"
+            },
+            {
+              "hanzi": "这样",
+              "pinyin": "zhè yàng",
+              "definition": "like this"
+            },
+            {
+              "hanzi": "进入",
+              "pinyin": "jìn rù",
+              "definition": "enter"
+            },
+            {
+              "hanzi": "梦乡",
+              "pinyin": "mèng xiāng",
+              "definition": "dreamland"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s031",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space. This may indicate a pause or a break in the text.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p011",
+      "raw_text": "“第二天，我一直想着那三个球，思想从没有像这样全功率转动过。长老说我找到了空，我第一次享受到了数学的乐趣，三体问题的物理原理很单纯，其实是一个数学问题。”",
+      "sentences": [
+        {
+          "sid": "s032",
+          "text": "“第二天，我一直想着那三个球，思想从没有像这样全功率转动过。",
+          "translation": "The next day, I kept thinking about those three balls, and my mind had never spun at full power like this before.",
+          "explanation": "The sentence describes the narrator's intense thoughts about the three balls, emphasizing the unprecedented intensity of their mental activity.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "第二天",
+              "pinyin": "dì èr tiān",
+              "definition": "the next day"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "一直",
+              "pinyin": "yì zhí",
+              "definition": "kept"
+            },
+            {
+              "hanzi": "想着",
+              "pinyin": "xiǎng zhe",
+              "definition": "thinking about"
+            },
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "definition": "those"
+            },
+            {
+              "hanzi": "三个",
+              "pinyin": "sān gè",
+              "definition": "three"
+            },
+            {
+              "hanzi": "球",
+              "pinyin": "qiú",
+              "definition": "balls"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "思想",
+              "pinyin": "sī xiǎng",
+              "definition": "mind"
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "definition": "from"
+            },
+            {
+              "hanzi": "没有",
+              "pinyin": "méi yǒu",
+              "definition": "not"
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "definition": "like"
+            },
+            {
+              "hanzi": "这样",
+              "pinyin": "zhè yàng",
+              "definition": "this"
+            },
+            {
+              "hanzi": "全功率",
+              "pinyin": "quán gōng lǜ",
+              "definition": "full power"
+            },
+            {
+              "hanzi": "转动",
+              "pinyin": "zhuǎn dòng",
+              "definition": "spin"
+            },
+            {
+              "hanzi": "过",
+              "pinyin": "guò",
+              "definition": "before"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s033",
+          "text": "长老说我找到了空，我第一次享受到了数学的乐趣，三体问题的物理原理很单纯，其实是一个数学问题。",
+          "translation": "The elder said I found emptiness, I enjoyed the pleasure of mathematics for the first time, the physical principles of the Three-Body Problem are very simple, in fact, it is a mathematical problem.",
+          "explanation": "This sentence introduces the idea of finding joy in mathematics through the simple principles of the Three-Body Problem. The possessive particle '的' is used to indicate possession or association between words.",
+          "words": [
+            {
+              "hanzi": "长老",
+              "pinyin": "zhǎng lǎo",
+              "definition": "elder"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "找到",
+              "pinyin": "zhǎo dào",
+              "definition": "found"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "空",
+              "pinyin": "kōng",
+              "definition": "emptiness"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I"
+            },
+            {
+              "hanzi": "第一次",
+              "pinyin": "dì yī cì",
+              "definition": "first time"
+            },
+            {
+              "hanzi": "享受",
+              "pinyin": "xiǎng shòu",
+              "definition": "enjoyed"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "(particle indicating completion of action)"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "数学",
+              "pinyin": "shù xué",
+              "definition": "mathematics"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "(possessive particle)"
+            },
+            {
+              "hanzi": "乐趣",
+              "pinyin": "lè qù",
+              "definition": "pleasure"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "三体",
+              "pinyin": "sān tǐ",
+              "definition": "Three-Body"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "problem"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "(possessive particle)"
+            },
+            {
+              "hanzi": "物理",
+              "pinyin": "wù lǐ",
+              "definition": "physical"
+            },
+            {
+              "hanzi": "原理",
+              "pinyin": "yuán lǐ",
+              "definition": "principles"
+            },
+            {
+              "hanzi": "很",
+              "pinyin": "hěn",
+              "definition": "very"
+            },
+            {
+              "hanzi": "单纯",
+              "pinyin": "dān chún",
+              "definition": "simple"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "其实",
+              "pinyin": "qí shí",
+              "definition": "in fact"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "一个",
+              "pinyin": "yí gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "数学",
+              "pinyin": "shù xué",
+              "definition": "mathematical"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "problem"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s034",
+          "text": "”",
+          "translation": "Three-body problem.",
+          "explanation": "This sentence simply states the title of the chapter, which refers to the 'Three-body problem' in physics.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p012",
+      "raw_text": "“后来我遇到了申玉菲，她能从我的废算稿中看出研究对象，数学能力非同一般。她说可以让我使用巨型计算机，还可以送给我一台小型机。于是我跟她下山了。”",
+      "sentences": [
+        {
+          "sid": "s035",
+          "text": "“后来我遇到了申玉菲，她能从我的废算稿中看出研究对象，数学能力非同一般。",
+          "translation": "Later, I met Shen Yufei, who was able to identify the research object from my discarded drafts and had exceptional mathematical abilities.",
+          "explanation": "The sentence showcases the use of the particle '了' to indicate a completed action and the phrase '非同一般' to express exceptional abilities.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "后来",
+              "pinyin": "hòu lái",
+              "definition": "later"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "遇到",
+              "pinyin": "yù dào",
+              "definition": "meet/encounter"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "申玉菲",
+              "pinyin": "shēn yù fēi",
+              "definition": "Shen Yufei (name)"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she"
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "definition": "able/can"
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "definition": "from"
+            },
+            {
+              "hanzi": "我的",
+              "pinyin": "wǒ de",
+              "definition": "my"
+            },
+            {
+              "hanzi": "废算稿",
+              "pinyin": "fèi suàn gǎo",
+              "definition": "discarded drafts"
+            },
+            {
+              "hanzi": "中",
+              "pinyin": "zhōng",
+              "definition": "from/in"
+            },
+            {
+              "hanzi": "看出",
+              "pinyin": "kàn chū",
+              "definition": "identify/see"
+            },
+            {
+              "hanzi": "研究对象",
+              "pinyin": "yán jiū duì xiàng",
+              "definition": "research object"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "数学能力",
+              "pinyin": "shù xué néng lì",
+              "definition": "mathematical abilities"
+            },
+            {
+              "hanzi": "非同一般",
+              "pinyin": "fēi tóng yī bān",
+              "definition": "exceptional/outstanding"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s036",
+          "text": "她说可以让我使用巨型计算机，还可以送给我一台小型机。",
+          "translation": "She said she could let me use a giant computer, and also give me a small one.",
+          "explanation": "The structure '可以...，还可以...' is used to express 'can... and also can...'. The measure word '台' is used for machines.",
+          "words": [
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "可以",
+              "pinyin": "kě yǐ",
+              "definition": "could"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "let"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "使用",
+              "pinyin": "shǐ yòng",
+              "definition": "use"
+            },
+            {
+              "hanzi": "巨型",
+              "pinyin": "jù xíng",
+              "definition": "giant"
+            },
+            {
+              "hanzi": "计算机",
+              "pinyin": "jì suàn jī",
+              "definition": "computer"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "还",
+              "pinyin": "hái",
+              "definition": "also"
+            },
+            {
+              "hanzi": "可以",
+              "pinyin": "kě yǐ",
+              "definition": "could"
+            },
+            {
+              "hanzi": "送给",
+              "pinyin": "sòng gěi",
+              "definition": "give"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "台",
+              "pinyin": "tái",
+              "definition": "measure word for machines"
+            },
+            {
+              "hanzi": "小型",
+              "pinyin": "xiǎo xíng",
+              "definition": "small"
+            },
+            {
+              "hanzi": "机",
+              "pinyin": "jī",
+              "definition": "machine"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s037",
+          "text": "于是我跟她下山了。",
+          "translation": "So I went down the mountain with her.",
+          "explanation": "The structure '跟 + person' is used to indicate going somewhere with someone. The particle '了' at the end of the sentence indicates the completion of the action of going down the mountain.",
+          "words": [
+            {
+              "hanzi": "于是",
+              "pinyin": "yú shì",
+              "definition": "so; therefore"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I; me"
+            },
+            {
+              "hanzi": "跟",
+              "pinyin": "gēn",
+              "definition": "with"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she; her"
+            },
+            {
+              "hanzi": "下山",
+              "pinyin": "xià shān",
+              "definition": "go down the mountain"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completion of an action)"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s038",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating it is a direct quote or specific text being referenced.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "closing quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p013",
+      "raw_text": "“我们结婚了，没有多少爱情，只是为了方便。我专注于三体问题的研究，她每天都要了解研究的进展。”",
+      "sentences": [
+        {
+          "sid": "s039",
+          "text": "“我们结婚了，没有多少爱情，只是为了方便。",
+          "translation": "We got married, not much love, just for convenience.",
+          "explanation": "The sentence structure in Chinese can be different from English. In this sentence, the verb '结婚' (get married) is placed before the subject '我们' (we), which might be confusing for learners used to English word order.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "我们",
+              "pinyin": "wǒ men",
+              "definition": "we"
+            },
+            {
+              "hanzi": "结婚",
+              "pinyin": "jié hūn",
+              "definition": "get married"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion of action"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "没有",
+              "pinyin": "méi yǒu",
+              "definition": "not have"
+            },
+            {
+              "hanzi": "多少",
+              "pinyin": "duō shǎo",
+              "definition": "much"
+            },
+            {
+              "hanzi": "爱情",
+              "pinyin": "ài qíng",
+              "definition": "love"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "只是",
+              "pinyin": "zhǐ shì",
+              "definition": "just"
+            },
+            {
+              "hanzi": "为了",
+              "pinyin": "wèi le",
+              "definition": "for the purpose of"
+            },
+            {
+              "hanzi": "方便",
+              "pinyin": "fāng biàn",
+              "definition": "convenience"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s040",
+          "text": "我专注于三体问题的研究，她每天都要了解研究的进展。",
+          "translation": "I focus on the research of the three-body problem, and she needs to understand the progress of the research every day.",
+          "explanation": "This sentence showcases the possessive particle '的' used to indicate possession or association between words. It also demonstrates the use of '每天都' to express 'every day' and '要' to indicate necessity or obligation.",
+          "words": [
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "专注",
+              "pinyin": "zhuān zhù",
+              "definition": "focus on"
+            },
+            {
+              "hanzi": "于",
+              "pinyin": "yú",
+              "definition": "on/in"
+            },
+            {
+              "hanzi": "三体",
+              "pinyin": "sān tǐ",
+              "definition": "three-body"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "problem"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "研究",
+              "pinyin": "yán jiū",
+              "definition": "research/study"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she"
+            },
+            {
+              "hanzi": "每天",
+              "pinyin": "měi tiān",
+              "definition": "every day"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "always"
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào",
+              "definition": "need/want"
+            },
+            {
+              "hanzi": "了解",
+              "pinyin": "liǎo jiě",
+              "definition": "understand"
+            },
+            {
+              "hanzi": "研究",
+              "pinyin": "yán jiū",
+              "definition": "research/study"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "进展",
+              "pinyin": "jìn zhǎn",
+              "definition": "progress/development"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s041",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only contains a closing quotation mark and a space, with no actual text content to translate or analyze.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p014",
+      "raw_text": "“昨天有个男人来电话，说如果我不停止三体问题的研究，就杀了我。”",
+      "sentences": [
+        {
+          "sid": "s042",
+          "text": "“昨天有个男人来电话，说如果我不停止三体问题的研究，就杀了我。",
+          "translation": "Yesterday, a man called and said he would kill me if I didn't stop researching the three-body problem.",
+          "explanation": "The sentence contains a conditional structure using '如果' (if) and '就' (then). The phrase '三体问题' refers to the 'three-body problem' in physics.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "昨天",
+              "pinyin": "zuó tiān",
+              "definition": "yesterday"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have/has"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "男人",
+              "pinyin": "nán rén",
+              "definition": "man"
+            },
+            {
+              "hanzi": "来",
+              "pinyin": "lái",
+              "definition": "come"
+            },
+            {
+              "hanzi": "电话",
+              "pinyin": "diàn huà",
+              "definition": "phone call"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say"
+            },
+            {
+              "hanzi": "如果",
+              "pinyin": "rú guǒ",
+              "definition": "if"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "停止",
+              "pinyin": "tíng zhǐ",
+              "definition": "stop"
+            },
+            {
+              "hanzi": "三体",
+              "pinyin": "sān tǐ",
+              "definition": "three-body"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "problem"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "研究",
+              "pinyin": "yán jiū",
+              "definition": "research"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "then"
+            },
+            {
+              "hanzi": "杀",
+              "pinyin": "shā",
+              "definition": "kill"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s043",
+          "text": "”",
+          "translation": "Three-body problem.",
+          "explanation": "This sentence simply states the title 'Three-body problem.' It refers to a physics problem involving the gravitational interactions of three bodies in space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p015",
+      "raw_text": "大史问：“那人是谁？”",
+      "sentences": [
+        {
+          "sid": "s044",
+          "text": "大史问：“那人是谁？",
+          "translation": "Da Shi asked: 'Who is that person?'",
+          "explanation": "The sentence structure follows the pattern of Subject + Verb + Object, with the question word '谁' (who) at the end to inquire about the identity of a person.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big/great"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "definition": "that"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "谁",
+              "pinyin": "shuí",
+              "definition": "who"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s045",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only consists of a closing quotation mark and a space, which does not have a specific translation or definition in this context.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p016",
+      "raw_text": "魏成说不知道。",
+      "sentences": [
+        {
+          "sid": "s046",
+          "text": "魏成说不知道。",
+          "translation": "Wei Cheng said he didn't know.",
+          "explanation": "The sentence follows the subject-verb-object structure commonly used in Chinese. The word order is different from English, where the verb 'say' comes after the subject 'Wei Cheng'. The word '不' is used to negate the verb 'know'.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "cheng (to become)"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p017",
+      "raw_text": "“电话里威胁你的那个人，他的声音像谁？”",
+      "sentences": [
+        {
+          "sid": "s047",
+          "text": "“电话里威胁你的那个人，他的声音像谁？",
+          "translation": "The person threatening you on the phone, whose voice does he sound like?",
+          "explanation": "The sentence structure in Chinese is Subject-Verb-Object. The possessive particle '的' is used to indicate possession or association between words. The question particle '吗' is not used in this sentence, instead, a question mark '？' is placed at the end.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "电话",
+              "pinyin": "diàn huà",
+              "definition": "phone"
+            },
+            {
+              "hanzi": "里",
+              "pinyin": "lǐ",
+              "definition": "inside"
+            },
+            {
+              "hanzi": "威胁",
+              "pinyin": "wēi xié",
+              "definition": "threaten"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "那个",
+              "pinyin": "nà ge",
+              "definition": "that"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "he"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "声音",
+              "pinyin": "shēng yīn",
+              "definition": "voice"
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "definition": "resemble"
+            },
+            {
+              "hanzi": "谁",
+              "pinyin": "shuí",
+              "definition": "who"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s048",
+          "text": "”",
+          "translation": "Three-Body Problem",
+          "explanation": "This sentence refers to the title of the chapter, which is 'Three-Body Problem' in English. The term '三体问题' is a specific scientific concept related to celestial mechanics.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p018",
+      "raw_text": "魏成说不知道。",
+      "sentences": [
+        {
+          "sid": "s049",
+          "text": "魏成说不知道。",
+          "translation": "Wei Cheng said he didn't know.",
+          "explanation": "The sentence structure in Chinese is Subject + Verb + Object. In this sentence, the subject is 魏成 (Wei Cheng), the verb is 说 (said), and the object is 不知道 (didn't know). The negative particle 不 is used before the verb to indicate negation.",
+          "words": [
+            {
+              "hanzi": "魏成",
+              "pinyin": "wèi chéng",
+              "definition": "Wei Cheng (a name)"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p019",
+      "raw_text": "大史笑着说：“前面扯了那么一大通，最后要报的就这一句话和几个不知道？”",
+      "sentences": [
+        {
+          "sid": "s050",
+          "text": "大史笑着说：“前面扯了那么一大通，最后要报的就这一句话和几个不知道？",
+          "translation": "Da Shi smiled and said: \"After talking so much, the final thing to report is just this sentence and a few unknown ones?\"",
+          "explanation": "The sentence structure in Chinese may seem different from English, with particles indicating tense, possession, and other relationships between words.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big/large"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "Shi (a surname)"
+            },
+            {
+              "hanzi": "笑",
+              "pinyin": "xiào",
+              "definition": "smile"
+            },
+            {
+              "hanzi": "着",
+              "pinyin": "zhe",
+              "definition": "indicating an action in progress"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "say/speak"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "前面",
+              "pinyin": "qián miàn",
+              "definition": "before/in front"
+            },
+            {
+              "hanzi": "扯",
+              "pinyin": "chě",
+              "definition": "talk nonsense"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating past tense"
+            },
+            {
+              "hanzi": "那么",
+              "pinyin": "nà me",
+              "definition": "so/much"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big/large"
+            },
+            {
+              "hanzi": "通",
+              "pinyin": "tōng",
+              "definition": "a long speech"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "最后",
+              "pinyin": "zuì hòu",
+              "definition": "final/last"
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào",
+              "definition": "to be going to"
+            },
+            {
+              "hanzi": "报",
+              "pinyin": "bào",
+              "definition": "report"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating possession"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "just/only"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "句",
+              "pinyin": "jù",
+              "definition": "sentence"
+            },
+            {
+              "hanzi": "话",
+              "pinyin": "huà",
+              "definition": "words"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "几个",
+              "pinyin": "jǐ gè",
+              "definition": "a few/several"
+            },
+            {
+              "hanzi": "不知道",
+              "pinyin": "bù zhī dào",
+              "definition": "unknown"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s051",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only consists of a closing quotation mark and a period, indicating the end of a text or statement.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p020",
+      "raw_text": "魏成说：“我不扯那一大通，这一句话你听得懂吗你？”",
+      "sentences": [
+        {
+          "sid": "s052",
+          "text": "魏成说：“我不扯那一大通，这一句话你听得懂吗你？",
+          "translation": "Wei Cheng said: 'I'm not talking about that big topic, can you understand this sentence?'",
+          "explanation": "The sentence structure is a bit complex with the use of rhetorical questions and the verb complement '得' to indicate capability.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "to become; to turn into"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "to say; to speak"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I; me"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "扯",
+              "pinyin": "chě",
+              "definition": "to talk about; to mention"
+            },
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "definition": "that"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big; large"
+            },
+            {
+              "hanzi": "通",
+              "pinyin": "tōng",
+              "definition": "topic; subject"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "句",
+              "pinyin": "jù",
+              "definition": "sentence"
+            },
+            {
+              "hanzi": "话",
+              "pinyin": "huà",
+              "definition": "words; speech"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "听",
+              "pinyin": "tīng",
+              "definition": "to listen; to hear"
+            },
+            {
+              "hanzi": "得",
+              "pinyin": "dé",
+              "definition": "used to link a verb with a complement indicating possibility or capability"
+            },
+            {
+              "hanzi": "懂",
+              "pinyin": "dǒng",
+              "definition": "to understand"
+            },
+            {
+              "hanzi": "吗",
+              "pinyin": "ma",
+              "definition": "question particle"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s053",
+          "text": "”",
+          "translation": "Three-Body Problem",
+          "explanation": "The sentence translates to 'Three-Body Problem'. The tricky part here is understanding the term '三体问题' which refers to a specific scientific problem in physics.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p021",
+      "raw_text": "“今天夜里，我看到申玉菲，她用枪口在我脸上蹭，说我必须继续研究三体问题，不然也杀了我。”",
+      "sentences": [
+        {
+          "sid": "s054",
+          "text": "“今天夜里，我看到申玉菲，她用枪口在我脸上蹭，说我必须继续研究三体问题，不然也杀了我。",
+          "translation": "Tonight, I saw Shen Yufei. She pointed a gun at my face and said I must continue researching the Three-Body Problem, or else she would kill me.",
+          "explanation": "The sentence contains a threat and a condition, with the use of the conjunction '不然' (otherwise) to express the consequence if the condition is not met.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "今天",
+              "pinyin": "jīn tiān",
+              "definition": "today"
+            },
+            {
+              "hanzi": "夜里",
+              "pinyin": "yè lǐ",
+              "definition": "nighttime"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "申玉菲",
+              "pinyin": "shēn yù fēi",
+              "definition": "Shen Yufei"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "use"
+            },
+            {
+              "hanzi": "枪口",
+              "pinyin": "qiāng kǒu",
+              "definition": "muzzle of a gun"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at/in/on"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "my"
+            },
+            {
+              "hanzi": "脸上",
+              "pinyin": "liǎn shàng",
+              "definition": "on my face"
+            },
+            {
+              "hanzi": "蹭",
+              "pinyin": "cèng",
+              "definition": "rub against"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I/me"
+            },
+            {
+              "hanzi": "必须",
+              "pinyin": "bì xū",
+              "definition": "must"
+            },
+            {
+              "hanzi": "继续",
+              "pinyin": "jì xù",
+              "definition": "continue"
+            },
+            {
+              "hanzi": "研究",
+              "pinyin": "yán jiū",
+              "definition": "research/study"
+            },
+            {
+              "hanzi": "三体问题",
+              "pinyin": "sān tǐ wèn tí",
+              "definition": "Three-Body Problem"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "不然",
+              "pinyin": "bù rán",
+              "definition": "otherwise"
+            },
+            {
+              "hanzi": "也",
+              "pinyin": "yě",
+              "definition": "also"
+            },
+            {
+              "hanzi": "杀了",
+              "pinyin": "shā le",
+              "definition": "kill"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s055",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is a quotation mark with a space in between.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p022",
+      "raw_text": "“她说：如果三体问题研究成功，你将成为救世主；如果现在停止，你就是个罪人。”",
+      "sentences": [
+        {
+          "sid": "s056",
+          "text": "“她说：如果三体问题研究成功，你将成为救世主；",
+          "translation": "She said: If the three-body problem research is successful, you will become the savior;",
+          "explanation": "The sentence contains a conditional structure '如果...，你将...' (If..., you will...), which is commonly used in Chinese to express hypothetical situations.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "如果",
+              "pinyin": "rú guǒ",
+              "definition": "if"
+            },
+            {
+              "hanzi": "三体",
+              "pinyin": "sān tǐ",
+              "definition": "three-body"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "problem"
+            },
+            {
+              "hanzi": "研究",
+              "pinyin": "yán jiū",
+              "definition": "research"
+            },
+            {
+              "hanzi": "成功",
+              "pinyin": "chéng gōng",
+              "definition": "successful"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "将",
+              "pinyin": "jiāng",
+              "definition": "will"
+            },
+            {
+              "hanzi": "成为",
+              "pinyin": "chéng wéi",
+              "definition": "become"
+            },
+            {
+              "hanzi": "救世主",
+              "pinyin": "jiù shì zhǔ",
+              "definition": "savior"
+            },
+            {
+              "hanzi": "；",
+              "pinyin": "",
+              "definition": "semicolon"
+            }
+          ]
+        },
+        {
+          "sid": "s057",
+          "text": "如果现在停止，你就是个罪人。",
+          "translation": "If you stop now, you will be a criminal.",
+          "explanation": "The structure '如果...，你就是...' is a common way to express a conditional statement in Chinese.",
+          "words": [
+            {
+              "hanzi": "如果",
+              "pinyin": "rú guǒ",
+              "definition": "if"
+            },
+            {
+              "hanzi": "现在",
+              "pinyin": "xiàn zài",
+              "definition": "now"
+            },
+            {
+              "hanzi": "停止",
+              "pinyin": "tíng zhǐ",
+              "definition": "stop"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "then"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "be"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "罪人",
+              "pinyin": "zuì rén",
+              "definition": "criminal"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s058",
+          "text": "”",
+          "translation": " ",
+          "explanation": "This sentence only contains a closing quotation mark and a space, with no actual text content.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p023",
+      "raw_text": "大史让汪淼和徐冰冰跟着去魏成的家。",
+      "sentences": [
+        {
+          "sid": "s059",
+          "text": "大史让汪淼和徐冰冰跟着去魏成的家。",
+          "translation": "Da Shi let Wang Miao and Xu Bingbing follow him to Wei Cheng's house.",
+          "explanation": "The structure '让...跟着...' means 'let...follow...'.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "let"
+            },
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "Miao (a given name)"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "徐",
+              "pinyin": "xú",
+              "definition": "Xu (a surname)"
+            },
+            {
+              "hanzi": "冰",
+              "pinyin": "bīng",
+              "definition": "ice"
+            },
+            {
+              "hanzi": "冰",
+              "pinyin": "bīng",
+              "definition": "ice"
+            },
+            {
+              "hanzi": "跟",
+              "pinyin": "gēn",
+              "definition": "follow"
+            },
+            {
+              "hanzi": "着",
+              "pinyin": "zhe",
+              "definition": "indicates continuous or ongoing action"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "to"
+            },
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "succeed"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "家",
+              "pinyin": "jiā",
+              "definition": "house"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p024",
+      "raw_text": "到达别墅时天还没亮，楼上有个房间亮着灯。汪淼听到楼上有声音，像是什么东西在拍墙。大史踹开院门，飞速冲进别墅，汪淼跟着进了别墅。",
+      "sentences": [
+        {
+          "sid": "s060",
+          "text": "到达别墅时天还没亮，楼上有个房间亮着灯。",
+          "translation": "When arriving at the villa, it was still dark, and a room upstairs had its lights on.",
+          "explanation": "The structure '还没' means 'not yet' in this context, and '亮着' is a combination of '亮' (bright) and '着' (indicating continuous action).",
+          "words": [
+            {
+              "hanzi": "到达",
+              "pinyin": "dào dá",
+              "definition": "arrive"
+            },
+            {
+              "hanzi": "别墅",
+              "pinyin": "bié shù",
+              "definition": "villa"
+            },
+            {
+              "hanzi": "时",
+              "pinyin": "shí",
+              "definition": "when"
+            },
+            {
+              "hanzi": "天",
+              "pinyin": "tiān",
+              "definition": "sky"
+            },
+            {
+              "hanzi": "还",
+              "pinyin": "hái",
+              "definition": "still"
+            },
+            {
+              "hanzi": "没",
+              "pinyin": "méi",
+              "definition": "not yet"
+            },
+            {
+              "hanzi": "亮",
+              "pinyin": "liàng",
+              "definition": "bright"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "楼上",
+              "pinyin": "lóu shàng",
+              "definition": "upstairs"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "a"
+            },
+            {
+              "hanzi": "房间",
+              "pinyin": "fáng jiān",
+              "definition": "room"
+            },
+            {
+              "hanzi": "亮着",
+              "pinyin": "liàng zhe",
+              "definition": "lit"
+            },
+            {
+              "hanzi": "灯",
+              "pinyin": "dēng",
+              "definition": "light"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s061",
+          "text": "汪淼听到楼上有声音，像是什么东西在拍墙。",
+          "translation": "Wang Miao heard a sound upstairs, as if something was hitting the wall.",
+          "explanation": "The sentence uses the structure '像是' to indicate a comparison, meaning 'like' or 'as if'.",
+          "words": [
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a Chinese surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "vast, boundless"
+            },
+            {
+              "hanzi": "听到",
+              "pinyin": "tīng dào",
+              "definition": "hear, hear of"
+            },
+            {
+              "hanzi": "楼上",
+              "pinyin": "lóu shàng",
+              "definition": "upstairs"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have, there is"
+            },
+            {
+              "hanzi": "声音",
+              "pinyin": "shēng yīn",
+              "definition": "sound, noise"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "像",
+              "pinyin": "xiàng",
+              "definition": "like, similar to"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is, to be"
+            },
+            {
+              "hanzi": "什么",
+              "pinyin": "shén me",
+              "definition": "what"
+            },
+            {
+              "hanzi": "东西",
+              "pinyin": "dōng xī",
+              "definition": "thing, object"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in, at"
+            },
+            {
+              "hanzi": "拍",
+              "pinyin": "pāi",
+              "definition": "hit, pat"
+            },
+            {
+              "hanzi": "墙",
+              "pinyin": "qiáng",
+              "definition": "wall"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s062",
+          "text": "大史踹开院门，飞速冲进别墅，汪淼跟着进了别墅。",
+          "translation": "Da Shi kicked open the gate, rushed into the villa at high speed, and Wang Miao followed into the villa.",
+          "explanation": "The sentence describes the action of Da Shi kicking open the gate and rushing into the villa, with Wang Miao following behind. The structure '跟着' indicates following someone or something.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "Da (a surname)"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "Shi (a surname)"
+            },
+            {
+              "hanzi": "踹",
+              "pinyin": "chuài",
+              "definition": "kick"
+            },
+            {
+              "hanzi": "开",
+              "pinyin": "kāi",
+              "definition": "open"
+            },
+            {
+              "hanzi": "院",
+              "pinyin": "yuàn",
+              "definition": "gate"
+            },
+            {
+              "hanzi": "门",
+              "pinyin": "mén",
+              "definition": "door"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "飞速",
+              "pinyin": "fēi sù",
+              "definition": "at high speed"
+            },
+            {
+              "hanzi": "冲进",
+              "pinyin": "chōng jìn",
+              "definition": "rush into"
+            },
+            {
+              "hanzi": "别墅",
+              "pinyin": "bié shù",
+              "definition": "villa"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "Miao (a surname)"
+            },
+            {
+              "hanzi": "跟着",
+              "pinyin": "gēn zhe",
+              "definition": "followed"
+            },
+            {
+              "hanzi": "进",
+              "pinyin": "jìn",
+              "definition": "enter"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "indicating completion"
+            },
+            {
+              "hanzi": "别墅",
+              "pinyin": "bié shù",
+              "definition": "villa"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p025",
+      "raw_text": "他们看到申玉菲躺在房间中间，胸前有两个弹孔，第三颗子弹从左眉心穿入，脸上都是血，旁边有一枝手枪。",
+      "sentences": [
+        {
+          "sid": "s063",
+          "text": "他们看到申玉菲躺在房间中间，胸前有两个弹孔，第三颗子弹从左眉心穿入，脸上都是血，旁边有一枝手枪。",
+          "translation": "They saw Shen Yufei lying in the middle of the room, with two bullet holes in her chest, the third bullet entering from the left eyebrow, her face covered in blood, and a pistol next to her.",
+          "explanation": "This sentence describes a scene of violence and uses specific vocabulary related to injuries and weapons. The structure of '第三' (third) before '颗子弹' (bullet) is a common way to indicate the order of items in Chinese.",
+          "words": [
+            {
+              "hanzi": "他们",
+              "pinyin": "tā men",
+              "definition": "they"
+            },
+            {
+              "hanzi": "看到",
+              "pinyin": "kàn dào",
+              "definition": "saw"
+            },
+            {
+              "hanzi": "申玉菲",
+              "pinyin": "shēn yù fēi",
+              "definition": "Shen Yufei"
+            },
+            {
+              "hanzi": "躺",
+              "pinyin": "tǎng",
+              "definition": "lying"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "in"
+            },
+            {
+              "hanzi": "房间",
+              "pinyin": "fáng jiān",
+              "definition": "room"
+            },
+            {
+              "hanzi": "中间",
+              "pinyin": "zhōng jiān",
+              "definition": "middle"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ","
+            },
+            {
+              "hanzi": "胸前",
+              "pinyin": "xiōng qián",
+              "definition": "chest"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "两个",
+              "pinyin": "liǎng gè",
+              "definition": "two"
+            },
+            {
+              "hanzi": "弹孔",
+              "pinyin": "dàn kǒng",
+              "definition": "bullet holes"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ","
+            },
+            {
+              "hanzi": "第三",
+              "pinyin": "dì sān",
+              "definition": "third"
+            },
+            {
+              "hanzi": "颗",
+              "pinyin": "kē",
+              "definition": "bullet"
+            },
+            {
+              "hanzi": "子弹",
+              "pinyin": "zǐ dàn",
+              "definition": "bullet"
+            },
+            {
+              "hanzi": "从",
+              "pinyin": "cóng",
+              "definition": "from"
+            },
+            {
+              "hanzi": "左",
+              "pinyin": "zuǒ",
+              "definition": "left"
+            },
+            {
+              "hanzi": "眉心",
+              "pinyin": "méi xīn",
+              "definition": "eyebrow"
+            },
+            {
+              "hanzi": "穿入",
+              "pinyin": "chuān rù",
+              "definition": "entering"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ","
+            },
+            {
+              "hanzi": "脸上",
+              "pinyin": "liǎn shàng",
+              "definition": "face"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "all"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "covered"
+            },
+            {
+              "hanzi": "血",
+              "pinyin": "xuè",
+              "definition": "blood"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": ","
+            },
+            {
+              "hanzi": "旁边",
+              "pinyin": "páng biān",
+              "definition": "next to"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "一枝",
+              "pinyin": "yī zhī",
+              "definition": "a"
+            },
+            {
+              "hanzi": "手枪",
+              "pinyin": "shǒu qiāng",
+              "definition": "pistol"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p026",
+      "raw_text": "大史和同事冲进对面房间，窗大开着，外面有汽车发动的声音。大史让汪淼先回去休息，汪淼找到魏成，问他能否给一份三体问题的模型。",
+      "sentences": [
+        {
+          "sid": "s064",
+          "text": "大史和同事冲进对面房间，窗大开着，外面有汽车发动的声音。",
+          "translation": "Da Shi and his colleagues rushed into the opposite room, the window was wide open, and there was the sound of a car starting outside.",
+          "explanation": "The sentence showcases the structure of 'subject + verb + complement' in Chinese grammar. The use of '大' before '开着' emphasizes the window being wide open.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "surname Shi"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "同事",
+              "pinyin": "tóng shì",
+              "definition": "colleague"
+            },
+            {
+              "hanzi": "冲",
+              "pinyin": "chōng",
+              "definition": "rush"
+            },
+            {
+              "hanzi": "进",
+              "pinyin": "jìn",
+              "definition": "enter"
+            },
+            {
+              "hanzi": "对面",
+              "pinyin": "duì miàn",
+              "definition": "opposite"
+            },
+            {
+              "hanzi": "房间",
+              "pinyin": "fáng jiān",
+              "definition": "room"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "窗",
+              "pinyin": "chuāng",
+              "definition": "window"
+            },
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "开着",
+              "pinyin": "kāi zhe",
+              "definition": "wide open"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "外面",
+              "pinyin": "wài miàn",
+              "definition": "outside"
+            },
+            {
+              "hanzi": "有",
+              "pinyin": "yǒu",
+              "definition": "have"
+            },
+            {
+              "hanzi": "汽车",
+              "pinyin": "qì chē",
+              "definition": "car"
+            },
+            {
+              "hanzi": "发动",
+              "pinyin": "fā dòng",
+              "definition": "start"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "声音",
+              "pinyin": "shēng yīn",
+              "definition": "sound"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s065",
+          "text": "大史让汪淼先回去休息，汪淼找到魏成，问他能否给一份三体问题的模型。",
+          "translation": "Da Shi let Wang Miao go back to rest first, Wang Miao found Wei Cheng and asked him if he could provide a model of the Three-Body Problem.",
+          "explanation": "The sentence introduces characters' names and a request for a model of the 'Three-Body Problem'.",
+          "words": [
+            {
+              "hanzi": "大",
+              "pinyin": "dà",
+              "definition": "big"
+            },
+            {
+              "hanzi": "史",
+              "pinyin": "shǐ",
+              "definition": "history"
+            },
+            {
+              "hanzi": "让",
+              "pinyin": "ràng",
+              "definition": "let"
+            },
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "Miao (a given name)"
+            },
+            {
+              "hanzi": "先",
+              "pinyin": "xiān",
+              "definition": "first"
+            },
+            {
+              "hanzi": "回",
+              "pinyin": "huí",
+              "definition": "go back"
+            },
+            {
+              "hanzi": "去",
+              "pinyin": "qù",
+              "definition": "to"
+            },
+            {
+              "hanzi": "休息",
+              "pinyin": "xiū xī",
+              "definition": "rest"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "Miao (a given name)"
+            },
+            {
+              "hanzi": "找到",
+              "pinyin": "zhǎo dào",
+              "definition": "found"
+            },
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "Cheng (a given name)"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "问",
+              "pinyin": "wèn",
+              "definition": "ask"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "能否",
+              "pinyin": "néng fǒu",
+              "definition": "whether or not"
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi",
+              "definition": "give"
+            },
+            {
+              "hanzi": "一份",
+              "pinyin": "yī fèn",
+              "definition": "a"
+            },
+            {
+              "hanzi": "三体",
+              "pinyin": "sān tǐ",
+              "definition": "Three-Body"
+            },
+            {
+              "hanzi": "问题",
+              "pinyin": "wèn tí",
+              "definition": "problem"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "of"
+            },
+            {
+              "hanzi": "模型",
+              "pinyin": "mó xíng",
+              "definition": "model"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p027",
+      "raw_text": "魏成给了他一张光盘，说：“你要是想对我好，就用自己的名字发表它。”",
+      "sentences": [
+        {
+          "sid": "s066",
+          "text": "魏成给了他一张光盘，说：“你要是想对我好，就用自己的名字发表它。",
+          "translation": "Wei Cheng gave him a CD and said, 'If you want to treat me well, publish it under your own name.'",
+          "explanation": "The structure '要是...就...' is a conditional pattern meaning 'if...then...' in this context.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "to accomplish; to become"
+            },
+            {
+              "hanzi": "给",
+              "pinyin": "gěi",
+              "definition": "to give"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "(particle indicating completed action)"
+            },
+            {
+              "hanzi": "他",
+              "pinyin": "tā",
+              "definition": "him"
+            },
+            {
+              "hanzi": "一",
+              "pinyin": "yī",
+              "definition": "one"
+            },
+            {
+              "hanzi": "张",
+              "pinyin": "zhāng",
+              "definition": "measure word for flat objects like CDs"
+            },
+            {
+              "hanzi": "光盘",
+              "pinyin": "guāng pán",
+              "definition": "CD"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "to say"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào",
+              "definition": "to want"
+            },
+            {
+              "hanzi": "是",
+              "pinyin": "shì",
+              "definition": "is"
+            },
+            {
+              "hanzi": "想",
+              "pinyin": "xiǎng",
+              "definition": "to think; to want"
+            },
+            {
+              "hanzi": "对",
+              "pinyin": "duì",
+              "definition": "towards; for"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "me"
+            },
+            {
+              "hanzi": "好",
+              "pinyin": "hǎo",
+              "definition": "good; well"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "then; just"
+            },
+            {
+              "hanzi": "用",
+              "pinyin": "yòng",
+              "definition": "to use"
+            },
+            {
+              "hanzi": "自己",
+              "pinyin": "zì jǐ",
+              "definition": "oneself"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "名字",
+              "pinyin": "míng zì",
+              "definition": "name"
+            },
+            {
+              "hanzi": "发表",
+              "pinyin": "fā biǎo",
+              "definition": "to publish"
+            },
+            {
+              "hanzi": "它",
+              "pinyin": "tā",
+              "definition": "it"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s067",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence consists of a closing quotation mark and a space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p028",
+      "raw_text": "汪淼说不可能。",
+      "sentences": [
+        {
+          "sid": "s068",
+          "text": "汪淼说不可能。",
+          "translation": "Wang Miao said it's impossible.",
+          "explanation": "The sentence structure is subject + verb + negation + adjective. The name 'Wang Miao' is a common Chinese name, and '说不可能' means 'said it's impossible.'",
+          "words": [
+            {
+              "hanzi": "汪",
+              "pinyin": "wāng",
+              "definition": "Wang (a Chinese surname)"
+            },
+            {
+              "hanzi": "淼",
+              "pinyin": "miǎo",
+              "definition": "vast (part of the name 汪淼)"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "said"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "可能",
+              "pinyin": "kě néng",
+              "definition": "possible"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p029",
+      "raw_text": "魏成说：“我劝你离这东西远些，世界就要发生突变了，每个人能平安地过完余生就是大幸了。”",
+      "sentences": [
+        {
+          "sid": "s069",
+          "text": "魏成说：“我劝你离这东西远些，世界就要发生突变了每个人能平安地过完余生就是大幸了。",
+          "translation": "Wei Cheng said: 'I advise you to stay away from this thing. The world is about to undergo a sudden change. It would be a great fortune for everyone to live out the rest of their lives in peace.'",
+          "explanation": "The sentence contains a warning/advice structure, expressing concern about an impending change in the world and the importance of living peacefully through it.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "to become; to turn into"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "to say; to speak"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "我",
+              "pinyin": "wǒ",
+              "definition": "I; me"
+            },
+            {
+              "hanzi": "劝",
+              "pinyin": "quàn",
+              "definition": "to advise; to urge"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "离",
+              "pinyin": "lí",
+              "definition": "to leave; to stay away from"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "东西",
+              "pinyin": "dōng xī",
+              "definition": "thing; stuff"
+            },
+            {
+              "hanzi": "远",
+              "pinyin": "yuǎn",
+              "definition": "far; distant"
+            },
+            {
+              "hanzi": "些",
+              "pinyin": "xiē",
+              "definition": "some; a few"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "世界",
+              "pinyin": "shì jiè",
+              "definition": "world"
+            },
+            {
+              "hanzi": "就",
+              "pinyin": "jiù",
+              "definition": "then; precisely; just"
+            },
+            {
+              "hanzi": "要",
+              "pinyin": "yào",
+              "definition": "about to; will"
+            },
+            {
+              "hanzi": "发生",
+              "pinyin": "fā shēng",
+              "definition": "to happen; to occur"
+            },
+            {
+              "hanzi": "突变",
+              "pinyin": "tū biàn",
+              "definition": "sudden change"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion or change of state"
+            },
+            {
+              "hanzi": "每个",
+              "pinyin": "měi gè",
+              "definition": "each; every"
+            },
+            {
+              "hanzi": "人",
+              "pinyin": "rén",
+              "definition": "person"
+            },
+            {
+              "hanzi": "能",
+              "pinyin": "néng",
+              "definition": "can; able to"
+            },
+            {
+              "hanzi": "平安",
+              "pinyin": "píng ān",
+              "definition": "peaceful; safe"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "particle linking adverbial and verb"
+            },
+            {
+              "hanzi": "过",
+              "pinyin": "guò",
+              "definition": "to live; to pass"
+            },
+            {
+              "hanzi": "完",
+              "pinyin": "wán",
+              "definition": "to finish; to complete"
+            },
+            {
+              "hanzi": "余生",
+              "pinyin": "yú shēng",
+              "definition": "remaining years of life"
+            },
+            {
+              "hanzi": "就是",
+              "pinyin": "jiù shì",
+              "definition": "is precisely; is exactly"
+            },
+            {
+              "hanzi": "大幸",
+              "pinyin": "dà xìng",
+              "definition": "great fortune; great luck"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion or change of state"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s070",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p030",
+      "raw_text": "“你好像还知道更多的事？”",
+      "sentences": [
+        {
+          "sid": "s071",
+          "text": "“你好像还知道更多的事？",
+          "translation": "Do you seem to know more?",
+          "explanation": "The structure '好像...更多的事' is a common way to express 'seem to know more' in Chinese.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "你",
+              "pinyin": "nǐ",
+              "definition": "you"
+            },
+            {
+              "hanzi": "好像",
+              "pinyin": "hǎo xiàng",
+              "definition": "seem like"
+            },
+            {
+              "hanzi": "还",
+              "pinyin": "hái",
+              "definition": "still"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "更多",
+              "pinyin": "gèng duō",
+              "definition": "more"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "事",
+              "pinyin": "shì",
+              "definition": "thing"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s072",
+          "text": "”",
+          "translation": "Three-Body Problem",
+          "explanation": "This sentence refers to the title of the chapter, 'Three-Body Problem'. The hyphen is used to connect the words 'three' and 'body'.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "character"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p031",
+      "raw_text": "“每天和她在一起，不可能什么都不知道。”",
+      "sentences": [
+        {
+          "sid": "s073",
+          "text": "“每天和她在一起，不可能什么都不知道。",
+          "translation": "Every day being with her, it's impossible to not know anything.",
+          "explanation": "The structure '不可能什么都不知道' emphasizes the impossibility of not knowing anything when spending every day with her.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "每天",
+              "pinyin": "měi tiān",
+              "definition": "every day"
+            },
+            {
+              "hanzi": "和",
+              "pinyin": "hé",
+              "definition": "and"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "her"
+            },
+            {
+              "hanzi": "在一起",
+              "pinyin": "zài yì qǐ",
+              "definition": "being together"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "可能",
+              "pinyin": "kě néng",
+              "definition": "possible"
+            },
+            {
+              "hanzi": "什么",
+              "pinyin": "shén me",
+              "definition": "anything"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "all"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "知道",
+              "pinyin": "zhī dào",
+              "definition": "know"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s074",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence contains opening and closing quotation marks.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p032",
+      "raw_text": "“那为什么不告诉警方呢？”",
+      "sentences": [
+        {
+          "sid": "s075",
+          "text": "“那为什么不告诉警方呢？",
+          "translation": "Then why not tell the police?",
+          "explanation": "The structure of this sentence is a question formed by combining '为什么' (why) with '不' (not) and '告诉' (tell). The use of '呢' at the end adds a sense of suggestion or reminder to the question.",
+          "words": [
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "character"
+            },
+            {
+              "hanzi": "那",
+              "pinyin": "nà",
+              "definition": "then"
+            },
+            {
+              "hanzi": "为什么",
+              "pinyin": "wèi shén me",
+              "definition": "why"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "告诉",
+              "pinyin": "gào sù",
+              "definition": "tell"
+            },
+            {
+              "hanzi": "警方",
+              "pinyin": "jǐng fāng",
+              "definition": "police"
+            },
+            {
+              "hanzi": "呢",
+              "pinyin": "ne",
+              "definition": "(modal particle indicating a suggestion or reminder)"
+            },
+            {
+              "hanzi": "？",
+              "pinyin": "",
+              "definition": "question mark"
+            }
+          ]
+        },
+        {
+          "sid": "s076",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space. This may indicate a pause or a break in the text.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p033",
+      "raw_text": "魏成不屑地笑：“警方算个狗屁，现在全人类已经到了‘叫天天不答，叫地地不应’的地步了。”",
+      "sentences": [
+        {
+          "sid": "s077",
+          "text": "魏成不屑地笑：“警方算个狗屁，现在全人类已经到了‘叫天天不答，叫地地不应’的地步了。",
+          "translation": "Wei Cheng sneered: \"The police are useless, now humanity has reached the point where 'Heaven does not answer when called, and Earth does not respond when asked.'\"",
+          "explanation": "The sentence includes a metaphorical expression '叫天天不答，叫地地不应' which means a situation where one is ignored or receives no response no matter who they call upon, emphasizing a sense of hopelessness and despair.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "accomplish; become"
+            },
+            {
+              "hanzi": "不屑",
+              "pinyin": "bù xiè",
+              "definition": "sneer; disdain"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "adverbial particle"
+            },
+            {
+              "hanzi": "笑",
+              "pinyin": "xiào",
+              "definition": "laugh; smile"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "警方",
+              "pinyin": "jǐng fāng",
+              "definition": "police"
+            },
+            {
+              "hanzi": "算",
+              "pinyin": "suàn",
+              "definition": "regard as; consider"
+            },
+            {
+              "hanzi": "个",
+              "pinyin": "gè",
+              "definition": "measure word for general use"
+            },
+            {
+              "hanzi": "狗屁",
+              "pinyin": "gǒu pì",
+              "definition": "nonsense; bullshit"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "现在",
+              "pinyin": "xiàn zài",
+              "definition": "now"
+            },
+            {
+              "hanzi": "全",
+              "pinyin": "quán",
+              "definition": "all"
+            },
+            {
+              "hanzi": "人类",
+              "pinyin": "rén lèi",
+              "definition": "humanity"
+            },
+            {
+              "hanzi": "已经",
+              "pinyin": "yǐ jīng",
+              "definition": "already"
+            },
+            {
+              "hanzi": "到",
+              "pinyin": "dào",
+              "definition": "reach"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "‘",
+              "pinyin": "‘",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "叫",
+              "pinyin": "jiào",
+              "definition": "call"
+            },
+            {
+              "hanzi": "天",
+              "pinyin": "tiān",
+              "definition": "heaven"
+            },
+            {
+              "hanzi": "天",
+              "pinyin": "tiān",
+              "definition": "heaven"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "答",
+              "pinyin": "dá",
+              "definition": "answer"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "叫",
+              "pinyin": "jiào",
+              "definition": "call"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "earth"
+            },
+            {
+              "hanzi": "地",
+              "pinyin": "dì",
+              "definition": "earth"
+            },
+            {
+              "hanzi": "不",
+              "pinyin": "bù",
+              "definition": "not"
+            },
+            {
+              "hanzi": "应",
+              "pinyin": "yīng",
+              "definition": "respond"
+            },
+            {
+              "hanzi": "’",
+              "pinyin": "’",
+              "definition": "closing quotation mark"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "particle indicating possession"
+            },
+            {
+              "hanzi": "地步",
+              "pinyin": "dì bù",
+              "definition": "point; extent"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completed action"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s078",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is empty, consisting only of a closing quotation mark and a space. This may indicate a pause or a break in the text.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "pid": "p034",
+      "raw_text": "魏成站在窗边，看着天边的晨光，说：“其实这一切都在于，上帝，或她说的主，自身难保了。”",
+      "sentences": [
+        {
+          "sid": "s079",
+          "text": "魏成站在窗边，看着天边的晨光，说：“其实这一切都在于，上帝，或她说的主，自身难保了。",
+          "translation": "Wei Cheng stood by the window, looking at the morning light in the sky, and said, 'In fact, all of this comes down to the fact that God, or the master she mentioned, is in a difficult situation herself.'",
+          "explanation": "The sentence contains some complex vocabulary such as '上帝' (God) and '自身' (oneself). The structure '在于' means 'comes down to' or 'lies in'.",
+          "words": [
+            {
+              "hanzi": "魏",
+              "pinyin": "wèi",
+              "definition": "Wei (a Chinese surname)"
+            },
+            {
+              "hanzi": "成",
+              "pinyin": "chéng",
+              "definition": "to become; to turn into"
+            },
+            {
+              "hanzi": "站",
+              "pinyin": "zhàn",
+              "definition": "to stand"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at; in; on"
+            },
+            {
+              "hanzi": "窗",
+              "pinyin": "chuāng",
+              "definition": "window"
+            },
+            {
+              "hanzi": "边",
+              "pinyin": "biān",
+              "definition": "side; edge"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "看",
+              "pinyin": "kàn",
+              "definition": "to look; to see"
+            },
+            {
+              "hanzi": "着",
+              "pinyin": "zhe",
+              "definition": "indicates continuous or ongoing action"
+            },
+            {
+              "hanzi": "天",
+              "pinyin": "tiān",
+              "definition": "sky; day"
+            },
+            {
+              "hanzi": "边",
+              "pinyin": "biān",
+              "definition": "side; edge"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "晨",
+              "pinyin": "chén",
+              "definition": "morning"
+            },
+            {
+              "hanzi": "光",
+              "pinyin": "guāng",
+              "definition": "light"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "to say; to speak"
+            },
+            {
+              "hanzi": "：",
+              "pinyin": "：",
+              "definition": "punctuation"
+            },
+            {
+              "hanzi": "“",
+              "pinyin": "“",
+              "definition": "opening quotation mark"
+            },
+            {
+              "hanzi": "其实",
+              "pinyin": "qí shí",
+              "definition": "in fact; actually"
+            },
+            {
+              "hanzi": "这",
+              "pinyin": "zhè",
+              "definition": "this"
+            },
+            {
+              "hanzi": "一切",
+              "pinyin": "yī qiè",
+              "definition": "all; everything"
+            },
+            {
+              "hanzi": "都",
+              "pinyin": "dōu",
+              "definition": "all; both"
+            },
+            {
+              "hanzi": "在",
+              "pinyin": "zài",
+              "definition": "at; in; on"
+            },
+            {
+              "hanzi": "于",
+              "pinyin": "yú",
+              "definition": "in; at"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "上帝",
+              "pinyin": "shàng dì",
+              "definition": "God"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "或",
+              "pinyin": "huò",
+              "definition": "or"
+            },
+            {
+              "hanzi": "她",
+              "pinyin": "tā",
+              "definition": "she; her"
+            },
+            {
+              "hanzi": "说",
+              "pinyin": "shuō",
+              "definition": "to say; to speak"
+            },
+            {
+              "hanzi": "的",
+              "pinyin": "de",
+              "definition": "possessive particle"
+            },
+            {
+              "hanzi": "主",
+              "pinyin": "zhǔ",
+              "definition": "master; host"
+            },
+            {
+              "hanzi": "，",
+              "pinyin": "，",
+              "definition": "comma"
+            },
+            {
+              "hanzi": "自身",
+              "pinyin": "zì shēn",
+              "definition": "oneself; self"
+            },
+            {
+              "hanzi": "难保",
+              "pinyin": "nán bǎo",
+              "definition": "hard to protect; in a difficult situation"
+            },
+            {
+              "hanzi": "了",
+              "pinyin": "le",
+              "definition": "particle indicating completion of action"
+            },
+            {
+              "hanzi": "。",
+              "pinyin": "",
+              "definition": "period"
+            }
+          ]
+        },
+        {
+          "sid": "s080",
+          "text": "”",
+          "translation": " ",
+          "explanation": "The sentence is enclosed in quotation marks, indicating that it is a direct quote or a specific reference.",
+          "words": [
+            {
+              "hanzi": "”",
+              "pinyin": "”",
+              "definition": "quotation mark"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
