@@ -103,13 +103,7 @@ function getScoreDescription(score) {
  */
 function formatFrequencyCount(count) {
   if (count >= 1000000) {
-    const millions = count / 1000000;
-    // Show one decimal place if it's not a whole number
-    if (millions % 1 === 0) {
-      return `${Math.round(millions)}M`;
-    } else {
-      return `${Math.round(millions * 10) / 10}M`;
-    }
+    return `${Math.round(count / 1000000)}M`;
   } else if (count >= 1000) {
     return `${Math.round(count / 1000)}K`;
   } else {

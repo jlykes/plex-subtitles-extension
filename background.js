@@ -3,9 +3,6 @@
 // It handles the API requests and responses for the extension.
 // It also contains the functions for the Notion word tracker database. 
 
-// Import configuration (must be at top level for service workers)
-importScripts('config.js');
-
 // === NOTION API FUNCTIONS ===
 /**
  * Creates or updates an entry in the Notion word tracker database.
@@ -422,150 +419,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // ------------------------------------------------------------
   // === NOTION API FUNCTIONS ===
   // ------------------------------------------------------------
-
-  // Generic POST to local ereader proxy (same routes as chinese_ereader proxy-server)
-  if (request.action === 'characterMiningApiPost') {
-    const { apiBaseUrl, path, body } = request;
-    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
-      ? apiBaseUrl.trim().replace(/\/+$/, '')
-      : 'http://localhost:3001/api';
-    const relPath = typeof path === 'string' && path.startsWith('/') ? path : `/${path || ''}`;
-
-    fetch(`${baseUrl}${relPath}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body && typeof body === 'object' ? body : {})
-    })
-      .then(async (response) => {
-        const text = await response.text();
-        let payload = null;
-        if (text) {
-          try {
-            payload = JSON.parse(text);
-          } catch {
-            payload = { raw: text };
-          }
-        }
-        if (!response.ok) {
-          const msg = typeof payload?.error === 'string'
-            ? payload.error
-            : `Request failed (${response.status})`;
-          throw new Error(msg);
-        }
-        return payload;
-      })
-      .then((payload) => {
-        sendResponse({ success: true, payload });
-      })
-      .catch((error) => {
-        console.error('[background] characterMiningApiPost failed:', error);
-        sendResponse({ success: false, error: error.message || String(error) });
-      });
-
-    return true;
-  }
-
-  // Generate character card via local ereader-style proxy server
-  if (request.action === 'generateCharacterCard') {
-    const {
-      hanzi,
-      userSubcomponents,
-      userRequiredWords,
-      storyMeaningFocus,
-      apiBaseUrl
-    } = request;
-
-    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
-      ? apiBaseUrl.trim().replace(/\/+$/, '')
-      : 'http://localhost:3001/api';
-
-    fetch(`${baseUrl}/anki/character/generate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        hanzi,
-        userSubcomponents,
-        userRequiredWords,
-        storyMeaningFocus
-      })
-    })
-      .then(async (response) => {
-        const payload = await response.json().catch(() => null);
-        if (!response.ok) {
-          const errorText = typeof payload?.error === 'string'
-            ? payload.error
-            : `Character generation failed (${response.status})`;
-          throw new Error(errorText);
-        }
-        return payload;
-      })
-      .then((payload) => {
-        sendResponse({ success: true, payload });
-      })
-      .catch((error) => {
-        console.error('[background] generateCharacterCard failed:', error);
-        sendResponse({ success: false, error: error.message || String(error) });
-      });
-
-    return true; // async response
-  }
-
-  // Generate sentence card via local ereader-style proxy (parallel to /anki/character/generate)
-  if (request.action === 'generateSentenceCard') {
-    const { sentence, focusWord, targetWord, focusPinyin, notes, source, apiBaseUrl } = request;
-    const tw = String(targetWord || focusWord || '').trim();
-
-    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
-      ? apiBaseUrl.trim().replace(/\/+$/, '')
-      : 'http://localhost:3001/api';
-
-    fetch(`${baseUrl}/anki/sentence/generate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sentence,
-        focusWord: tw,
-        targetWord: tw,
-        focusPinyin,
-        notes,
-        source: source != null ? String(source) : ''
-      })
-    })
-      .then(async (response) => {
-        const payload = await response.json().catch(() => null);
-        if (!response.ok) {
-          const errorText = typeof payload?.error === 'string'
-            ? payload.error
-            : `Sentence generation failed (${response.status})`;
-          throw new Error(errorText);
-        }
-        return payload;
-      })
-      .then((payload) => {
-        sendResponse({ success: true, payload });
-      })
-      .catch((error) => {
-        console.error('[background] generateSentenceCard failed:', error);
-        sendResponse({ success: false, error: error.message || String(error) });
-      });
-
-    return true;
-  }
   
   // Handle Notion word tracker entries
   if (request.action === 'addNotionWordTrackerEntry') {
     const { wordText, status, date } = request;
     
-    // Get Notion configuration - prefer config.js, fallback to storage
-    const configApiKey = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : null;
-    const configDatabaseId = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : null;
-    
+    // Get Notion configuration from storage
     chrome.storage.sync.get(['notionApiKey', 'notionDatabaseId', 'notionTrackingEnabled'], function(result) {
       const { notionApiKey, notionDatabaseId, notionTrackingEnabled } = result;
-      
-      // Use config.js values if available, otherwise use storage values
-      const apiKey = configApiKey || notionApiKey;
-      const databaseId = configDatabaseId || notionDatabaseId;
       
       // Check if Notion tracking is enabled
       if (!notionTrackingEnabled) {
@@ -574,13 +435,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       
       // Check if we have the required configuration
-      if (!apiKey || !databaseId) {
+      if (!notionApiKey || !notionDatabaseId) {
         sendResponse({ success: false, error: "Notion API key or database ID not configured" });
         return;
       }
       
       // Create the Notion entry directly in background script
-      createNotionWordTrackerEntry(wordText, status, date, apiKey, databaseId)
+      createNotionWordTrackerEntry(wordText, status, date, notionApiKey, notionDatabaseId)
         .then(result => {
           sendResponse(result);
         })
@@ -595,13 +456,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   
   // Setup Notion configuration
   if (request.action === 'setupNotionConfig') {
-    // Get values from config.js (with fallback to empty strings if not available)
-    const apiKey = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : '';
-    const databaseId = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : '';
-    
     chrome.storage.sync.set({
-      notionApiKey: apiKey,
-      notionDatabaseId: databaseId,
+      notionApiKey: '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',
+      notionDatabaseId: '0ae84e4e41474f96b7036030463ddc46',
       notionTrackingEnabled: true
     }, function() {
       console.log('✅ Notion configuration saved!');
@@ -612,16 +469,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   
   // Test Notion API connection
   if (request.action === 'testNotionConnection') {
-    // Get Notion configuration - prefer config.js, fallback to storage
-    const configApiKey = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.apiKey) ? NOTION_CONFIG.apiKey : null;
-    const configDatabaseId = (typeof NOTION_CONFIG !== 'undefined' && NOTION_CONFIG.databaseId) ? NOTION_CONFIG.databaseId : null;
-    
     chrome.storage.sync.get(['notionApiKey', 'notionDatabaseId'], function(result) {
-      // Use config.js values if available, otherwise use storage values
-      const apiKey = configApiKey || result.notionApiKey;
-      const databaseId = configDatabaseId || result.notionDatabaseId;
-      
-      if (!apiKey || !databaseId) {
+      if (!result.notionApiKey || !result.notionDatabaseId) {
         sendResponse({ success: false, error: 'Configuration not found' });
         return;
       }
@@ -629,7 +478,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       // Test the API connection - use local date for PST timezone
       const today = new Date();
       const localDate = today.toLocaleDateString('en-CA'); // YYYY-MM-DD format in local timezone
-      createNotionWordTrackerEntry('测试', '4', localDate, apiKey, databaseId)
+      createNotionWordTrackerEntry('测试', '4', localDate, result.notionApiKey, result.notionDatabaseId)
         .then(result => {
           sendResponse(result);
         })

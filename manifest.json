@@ -12,23 +12,12 @@
   "host_permissions": [
     "*://app.plex.tv/*",
     "https://www.lingq.com/*",
-    "https://api.notion.com/*",
-    "http://localhost/*",
-    "http://127.0.0.1/*",
-    "http://localhost:3001/*",
-    "http://127.0.0.1:3001/*"
+    "https://api.notion.com/*"
   ],
   "content_scripts": [
     {
       "matches": ["*://app.plex.tv/*"],
-      "js": ["helper_scripts/mining_image_modal_escape_shim.js"],
-      "run_at": "document_start",
-      "world": "MAIN"
-    },
-    {
-      "matches": ["*://app.plex.tv/*"],
       "js": [
-        "config.js",
         "helper_scripts/lingq_data.js",
         "helper_scripts/segmentit.min.js",
         "helper_scripts/pinyin-pro.js",
@@ -59,13 +48,7 @@
         "html/control_panel.html",
         "lingqs.json",
         "cache/word_frequency.json",
-        "cache/word_scores.json",
-        "cache/_Neutral-Tone-Words.txt",
-        "cache/LingQ_Learned_Known_Ignored.txt",
-        "fonts/kaiti-webfont.css",
-        "fonts/KaiTi.woff2",
-        "fonts/KaiTi.woff",
-        "fonts/KaiTi.ttf"
+                "cache/word_scores.json"
       ],
       "matches": ["*://app.plex.tv/*"]
     }

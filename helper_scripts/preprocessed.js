@@ -206,7 +206,7 @@ function renderPreprocessedLine(sub) {
   const { wrapper, mainLine, translation } = createSubtitleWrapper(sub.translation);
 
   // Create and append one annotated span per segmented word
-  sub.segmented.forEach((entry, index) => {
+  sub.segmented.forEach(entry => {
     const word = entry.word;
     const pinyin = entry.pinyin;
     // Strip non-Chinese characters for LingQ lookup
@@ -214,12 +214,7 @@ function renderPreprocessedLine(sub) {
     const status = window.lingqTerms[chineseOnly];
     const meaning = sub.word_meanings?.find(w => w.word === word)?.meaning || "";
 
-    // Get next word info for cross-word tone change rules
-    const nextEntry = index < sub.segmented.length - 1 ? sub.segmented[index + 1] : null;
-    const nextWord = nextEntry ? nextEntry.word : null;
-    const nextWordPinyin = nextEntry ? nextEntry.pinyin : null;
-
-    const wordSpan = createWordWrapper({ word, pinyin, status, meaning, nextWord, nextWordPinyin });
+    const wordSpan = createWordWrapper({ word, pinyin, status, meaning });
     mainLine.appendChild(wordSpan);
   });
 

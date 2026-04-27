@@ -123,24 +123,16 @@ function renderLiveLine(text, lingqTerms, segmentit) {
     .filter(w => w && w.trim() !== "");
 
   // For each segmented word, create an annotated wrapper using shared logic
-  words.forEach((word, index) => { 
+  words.forEach(word => { 
     // Strip non-Chinese characters for pinyin generation and LingQ lookup
     const chineseOnly = (word.match(/[\u4e00-\u9fff]+/g) || []).join('');
     const pinyin = getPinyin(chineseOnly);
     const status = lingqTerms[chineseOnly];
-    
-    // Get next word info for cross-word tone change rules
-    const nextWord = index < words.length - 1 ? words[index + 1] : null;
-    const nextWordChineseOnly = nextWord ? (nextWord.match(/[\u4e00-\u9fff]+/g) || []).join('') : null;
-    const nextWordPinyin = nextWordChineseOnly ? getPinyin(nextWordChineseOnly) : null;
-    
     const wordSpan = createWordWrapper({
       word,
       pinyin,
       status,
-      meaning: "", // No word meanings available in live mode
-      nextWord: nextWordChineseOnly,
-      nextWordPinyin
+      meaning: "" // No word meanings available in live mode
     });
 
     mainLine.appendChild(wordSpan);

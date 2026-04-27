@@ -53,328 +53,15 @@ function isPunctuationDigitOrSpace(token) {
 }
 
 /**
- * Extracts the tone number (1-5) from a pinyin syllable.
- * @param {string} pinyinSyllable The pinyin syllable with tone marks
- * @returns {number} The tone number (1-4) or 5 for neutral tone
- */
-function extractToneFromPinyin(pinyinSyllable) {
-  const toneMatch = pinyinSyllable.match(/[āēīōūǖ]|[áéíóúǘ]|[ǎěǐǒǔǚ]|[àèìòùǜ]/);
-  if (!toneMatch) return 5; // Neutral tone
-  
-  const toneMarks = {
-    "āēīōūǖ": 1,
-    "áéíóúǘ": 2,
-    "ǎěǐǒǔǚ": 3,
-    "àèìòùǜ": 4
-  };
-  
-  for (const [marks, tone] of Object.entries(toneMarks)) {
-    if (marks.includes(toneMatch[0])) {
-      return tone;
-    }
-  }
-  return 5;
-}
-
-/**
- * Checks if 一 is used as a number (should remain tone 1).
- * @param {string} word The word containing 一
- * @param {number} charIndex The index of 一 in the word
- * @returns {boolean} True if 一 is used as a number
- */
-function isYiAsNumber(word, charIndex) {
-  // Common number words where 一 should be tone 1
-  const numberWords = new Set([
-    '十一', '二十一', '三十一', '四十一', '五十一', '六十一', '七十一', '八十一', '九十一',
-    '一百', '一千', '一万',
-    '第一', '第二', '第三', '第四', '第五', '第六', '第七', '第八', '第九', '第十',
-    '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
-  ]);
-  
-  if (numberWords.has(word)) {
-    return true;
-  }
-  
-  // Pattern matching for number sequences
-  const numberPatterns = [
-    /^一[一二三四五六七八九十]$/,           // 一 followed by single digits
-    /^一[十百千万]$/,                      // 一 with units
-    /^[一二三四五六七八九十]一$/,           // digits followed by 一
-    /^第[一二三四五六七八九十]$/,           // 第 + number
-    /^第[一二三四五六七八九十][个次回]$/,    // 第 + number + counter
-    /^[一二三四五六七八九十]月$/,           // number + 月 (months)
-    /^[一二三四五六七八九十]日$/,           // number + 日 (days)
-    /^[一二三四五六七八九十]号$/,           // number + 号 (day numbers)
-    /^[一二三四五六七八九十]点$/,           // number + 点 (o'clock)
-    /^[一二三四五六七八九十]分$/,           // number + 分 (minutes)
-    /^[一二三四五六七八九十]年$/,           // number + 年 (years)
-    /^第[一二三四五六七八九十]街$/,         // 第 + number + 街
-    /^[一二三四五六七八九十]楼$/,           // number + 楼 (floors)
-  ];
-  
-  return numberPatterns.some(pattern => pattern.test(word));
-}
-
-/**
- * Applies tone change rules for 不 and 一 based on the following character's tone.
- * @param {string} char The Chinese character (不 or 一)
- * @param {string} originalPinyin The original pinyin for the character
- * @param {string} nextCharPinyin The pinyin of the next character (optional)
- * @param {string} word The full word containing the character (optional)
- * @param {number} charIndex The index of the character in the word (optional)
- * @returns {string} The modified pinyin with tone changes applied
- */
-function applyToneChangeRules(char, originalPinyin, nextCharPinyin, word, charIndex) {
-  // Only apply rules to 不 and 一
-  if (char !== '不' && char !== '一') {
-    return originalPinyin;
-  }
-  
-  // Special case: 一 as number (tone 1)
-  if (char === '一' && word !== undefined && charIndex !== undefined && isYiAsNumber(word, charIndex)) {
-    // Convert to tone 1 (first tone marks)
-    return originalPinyin.replace(/[áéíóúǘǎěǐǒǔǚàèìòùǜ]/, (match) => {
-      const toneMap = {
-        'á': 'ā', 'é': 'ē', 'í': 'ī', 'ó': 'ō', 'ú': 'ū', 'ǘ': 'ǖ',
-        'ǎ': 'ā', 'ě': 'ē', 'ǐ': 'ī', 'ǒ': 'ō', 'ǔ': 'ū', 'ǚ': 'ǖ',
-        'à': 'ā', 'è': 'ē', 'ì': 'ī', 'ò': 'ō', 'ù': 'ū', 'ǜ': 'ǖ'
-      };
-      return toneMap[match] || match;
-    });
-  }
-  
-  // If no next character pinyin provided, return original
-  if (!nextCharPinyin) {
-    return originalPinyin;
-  }
-  
-  const nextCharTone = extractToneFromPinyin(nextCharPinyin);
-  
-  // Rule: 不 and 一 change to 2nd tone if next character is 4th tone
-  if (nextCharTone === 4) {
-    if (char === '不') {
-      // Change 不 from 4th tone to 2nd tone
-      return originalPinyin.replace(/[àèìòùǜ]/, (match) => {
-        const toneMap = {
-          'à': 'á', 'è': 'é', 'ì': 'í', 'ò': 'ó', 'ù': 'ú', 'ǜ': 'ǘ'
-        };
-        return toneMap[match] || match;
-      });
-    } else if (char === '一') {
-      // Change 一 from 1st tone to 2nd tone
-      return originalPinyin.replace(/[āēīōūǖ]/, (match) => {
-        const toneMap = {
-          'ā': 'á', 'ē': 'é', 'ī': 'í', 'ō': 'ó', 'ū': 'ú', 'ǖ': 'ǘ'
-        };
-        return toneMap[match] || match;
-      });
-    }
-  } else if (nextCharTone !== 5 && nextCharTone !== 4) {
-    // Rule: 一 changes to 4th tone if next character is 1st, 2nd, or 3rd tone
-    // (不 is already 4th tone, so no change needed)
-    if (char === '一') {
-      return originalPinyin.replace(/[āēīōūǖ]/, (match) => {
-        const toneMap = {
-          'ā': 'à', 'ē': 'è', 'ī': 'ì', 'ō': 'ò', 'ū': 'ù', 'ǖ': 'ǜ'
-        };
-        return toneMap[match] || match;
-      });
-    }
-  }
-  
-  return originalPinyin;
-}
-
-// Cache for neutral tone words
-let neutralToneWords = null;
-
-/**
- * Loads neutral tone words from the cache file.
- * This is called once when needed and caches the result.
- * @returns {Promise<Set<string>>} A promise that resolves to a Set of neutral tone words
- */
-async function loadNeutralToneWords() {
-  if (neutralToneWords) {
-    return neutralToneWords;
-  }
-
-  try {
-    const response = await fetch(chrome.runtime.getURL('cache/_Neutral-Tone-Words.txt'));
-    if (!response.ok) {
-      console.warn('Failed to load neutral tone words file');
-      neutralToneWords = new Set();
-      return neutralToneWords;
-    }
-    
-    const text = await response.text();
-    const words = text
-      .split('\n')
-      .map(line => line.trim())
-      .filter(line => line.length > 0);
-    
-    neutralToneWords = new Set(words);
-    console.log(`Loaded ${neutralToneWords.size} neutral tone words`);
-    return neutralToneWords;
-  } catch (error) {
-    console.error('Error loading neutral tone words:', error);
-    neutralToneWords = new Set();
-    return neutralToneWords;
-  }
-}
-
-/**
- * Gets the loaded neutral tone words set.
- * Returns empty set if not loaded yet.
- * @returns {Set<string>} The set of neutral tone words
- */
-
-// Cache for known single-character words
-let knownSingleCharWords = null;
-
-/**
- * Loads known words from the LingQ Learned + Known + Ignored file and extracts single-character words.
- * This is called once when needed and caches the result.
- * @returns {Promise<Set<string>>} A promise that resolves to a Set of known single-character words
- */
-async function loadKnownSingleCharWords() {
-  if (knownSingleCharWords) {
-    return knownSingleCharWords;
-  }
-
-  try {
-    // Use a fixed filename to avoid manual updates. If you need to update the file,
-    // rename the new file to this exact name: "LingQ_Learned_Known_Ignored.txt"
-    const filePath = 'cache/LingQ_Learned_Known_Ignored.txt';
-    const url = chrome.runtime.getURL(filePath);
-    console.log('[Known Characters] Attempting to load file from URL:', url);
-    const response = await fetch(url);
-    if (!response.ok) {
-      console.error(`[Known Characters] Failed to load known words file. Status: ${response.status}, StatusText: ${response.statusText}`);
-      console.error(`[Known Characters] URL attempted: ${url}`);
-      knownSingleCharWords = new Set();
-      return knownSingleCharWords;
-    }
-    
-    const text = await response.text();
-    const words = text
-      .split('\n')
-      .map(line => line.trim())
-      .filter(line => line.length > 0);
-    
-    // Extract only single-character words (Chinese characters only)
-    const singleCharWords = words
-      .filter(word => {
-        // Only keep words that are exactly one Chinese character
-        const chineseChars = word.match(/[\u4e00-\u9fff]/g);
-        return chineseChars && chineseChars.length === 1 && word.length === 1;
-      });
-    
-    knownSingleCharWords = new Set(singleCharWords);
-    console.log(`Loaded ${knownSingleCharWords.size} known single-character words`);
-    
-    // Re-render current subtitle if it exists, since pinyin display depends on known characters
-    if (window.reRenderCurrentSubtitle && knownSingleCharWords.size > 0) {
-      // Use setTimeout to ensure this happens after initialization
-      setTimeout(() => {
-        if (window.reRenderCurrentSubtitle) {
-          window.reRenderCurrentSubtitle();
-        }
-      }, 100);
-    }
-    
-    return knownSingleCharWords;
-  } catch (error) {
-    console.error('Error loading known single-character words:', error);
-    knownSingleCharWords = new Set();
-    return knownSingleCharWords;
-  }
-}
-
-/**
- * Gets the loaded known single-character words set.
- * Returns empty set if not loaded yet.
- * @returns {Set<string>} The set of known single-character words
- */
-function getKnownSingleCharWords() {
-  return knownSingleCharWords || new Set();
-}
-function getNeutralToneWords() {
-  return neutralToneWords || new Set();
-}
-
-/**
- * Checks if a word should have neutral tone for its last character.
- * @param {string} word The word to check
- * @returns {boolean} True if the word should have neutral tone for its last character
- */
-function isNeutralToneWord(word) {
-  return getNeutralToneWords().has(word);
-}
-
-/**
- * Applies neutral tone to the last character of a pinyin string.
- * Removes tone marks from the last syllable to make it neutral tone.
- * @param {string} pinyin The pinyin string (space-separated syllables)
- * @returns {string} The pinyin string with neutral tone applied to the last syllable
- */
-function applyNeutralToneToLastChar(pinyin) {
-  if (!pinyin) return pinyin;
-  
-  const syllables = pinyin.split(' ');
-  if (syllables.length === 0) return pinyin;
-  
-  const lastSyllable = syllables[syllables.length - 1];
-  
-  // Remove tone marks to get neutral tone (5th tone)
-  const neutralMap = {
-    'ā': 'a', 'ē': 'e', 'ī': 'i', 'ō': 'o', 'ū': 'u', 'ǖ': 'ü',
-    'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ǘ': 'ü',
-    'ǎ': 'a', 'ě': 'e', 'ǐ': 'i', 'ǒ': 'o', 'ǔ': 'u', 'ǚ': 'ü',
-    'à': 'a', 'è': 'e', 'ì': 'i', 'ò': 'o', 'ù': 'u', 'ǜ': 'ü'
-  };
-  
-  let neutralSyllable = lastSyllable;
-  for (const [toneMark, neutral] of Object.entries(neutralMap)) {
-    if (lastSyllable.includes(toneMark)) {
-      neutralSyllable = lastSyllable.replace(new RegExp(toneMark, 'g'), neutral);
-      break;
-    }
-  }
-  
-  syllables[syllables.length - 1] = neutralSyllable;
-  return syllables.join(' ');
-}
-
-/**
  * Uses the pinyin-pro library to convert a Chinese word or character to pinyin.
- * Applies tone change rules for 不 and 一 based on following characters.
- * Also applies neutral tone rules for words in the neutral tone words list.
  * If the library is not available or conversion fails, returns "none".
  * @param {*} word The Chinese word or character to convert to pinyin
- * @returns {string} The pinyin representation of the word with tone changes applied, or "none" if conversion fails
+ * @returns {string} The pinyin representation of the word, or "none" if conversion fails
  */
 function getPinyin(word) {
   if (window.pinyin) {
     try {
-      // Generate pinyin for each character
-      const pinyinArray = window.pinyin(word, { toneType: 'symbol', type: 'array' });
-      const charArray = [...word];
-      
-      // Apply tone change rules character by character
-      let adjustedPinyin = pinyinArray.map((pinyinSyllable, index) => {
-        const char = charArray[index];
-        const nextCharPinyin = index < pinyinArray.length - 1 ? pinyinArray[index + 1] : null;
-        
-        return applyToneChangeRules(char, pinyinSyllable, nextCharPinyin, word, index);
-      });
-      
-      // Apply neutral tone to last character if word is in neutral tone words list
-      if (isNeutralToneWord(word)) {
-        const pinyinString = adjustedPinyin.join(' ');
-        return applyNeutralToneToLastChar(pinyinString);
-      }
-      
-      return adjustedPinyin.join(' ');
+      return window.pinyin(word, { toneType: 'symbol', type: 'array' }).join(' ');
     } catch (e) {
       console.error('Pinyin error:', e);
       return "none";
@@ -515,11 +202,9 @@ function isKnownWord(statusInfo) {
  * @param {string} opts.pinyin - The pinyin with tone marks (space-separated for multi-char words)
  * @param {Object} opts.status - The LingQ status object with status and extended_status properties
  * @param {string} opts.meaning - Definition or explanation for tooltip display
- * @param {string} opts.nextWord - Optional next word for cross-word tone change rules
- * @param {string} opts.nextWordPinyin - Optional next word's pinyin for cross-word tone change rules
  * @returns {HTMLElement} A styled span or ruby wrapper element
  */
-function createWordWrapper({ word, pinyin, status, meaning, nextWord, nextWordPinyin }) {
+function createWordWrapper({ word, pinyin, status, meaning }) {
   const config = window.subtitleConfig || {};
   const isPunct = isPunctuationDigitOrSpace(word);
 
@@ -545,43 +230,17 @@ function createWordWrapper({ word, pinyin, status, meaning, nextWord, nextWordPi
     config.toneColor === "all" ||
     (config.toneColor === "unknown-only" && (!status || !isKnownWord(status)));
 
+  // Only show pinyin if config allows AND the word contains Chinese
+  const shouldShowPinyin =
+    (config.pinyin === "all" ||
+      (config.pinyin === "unknown-only" &&
+        (!status || (!isKnownWord(status) && status.status !== -1)))) &&
+    isChineseWord(word);
+
+  
   // === Split characters and corresponding pinyin ===
   const charList = [...word]; // Split Chinese word into characters
-  let pinyinList = (pinyin || "").split(" "); // One pinyin per char
-  
-  // Get first character and pinyin of next word for cross-word tone change rules
-  // Only use next word if it contains Chinese characters
-  const nextWordChineseOnly = nextWord ? (nextWord.match(/[\u4e00-\u9fff]+/g) || []).join('') : null;
-  const nextWordFirstChar = nextWordChineseOnly ? [...nextWordChineseOnly][0] : null;
-  const nextWordFirstPinyin = nextWordPinyin && nextWordChineseOnly ? (nextWordPinyin.split(" ")[0] || null) : null;
-  
-  // Apply tone change rules for 不 and 一 based on following characters
-  pinyinList = pinyinList.map((charPinyin, index) => {
-    const char = charList[index];
-    // Check next character within the same word first
-    let nextCharPinyin = index < pinyinList.length - 1 ? pinyinList[index + 1] : null;
-    // If this is the last character in the word, check the next word's first character
-    if (!nextCharPinyin && index === charList.length - 1 && nextWordFirstChar && nextWordFirstPinyin) {
-      nextCharPinyin = nextWordFirstPinyin;
-    }
-    return applyToneChangeRules(char, charPinyin, nextCharPinyin, word, index);
-  });
-
-  // === Determine pinyin display mode ===
-  const isPinyinAll = config.pinyin === "all";
-  const isPinyinUnknownOnly = config.pinyin === "unknown-only";
-  const isChinese = isChineseWord(word);
-  
-  // Get tags from status object
-  const tags = status?.tags || [];
-  const hasCharactersKnownTag = tags.includes("characters known");
-  const hasPartialCharactersKnownTag = tags.includes("partial characters known");
-  
-  // Check if word is "learned" (status=3, extended_status=0)
-  const isLearned = status && status.status === 3 && (status.extended_status === 0 || status.extended_status === null);
-  
-  // Get known single-character words set (will be empty if not loaded yet)
-  const knownSingleChars = getKnownSingleCharWords();
+  const pinyinList = (pinyin || "").split(" "); // One pinyin per char
 
   // === Create wrapper for the full word ===
   const wrapper = document.createElement("span");
@@ -635,62 +294,13 @@ function createWordWrapper({ word, pinyin, status, meaning, nextWord, nextWordPi
     span.textContent = char;
     span.style.margin = "0";
 
-    const charPinyin = pinyinList[i] || "";
-    const toneColor = shouldColor && charPinyin ? getToneColor(charPinyin) : "white";
+    const toneColor = shouldColor && pinyinList[i] ? getToneColor(pinyinList[i]) : "white";
     span.style.color = toneColor;
 
-    // Determine if pinyin should be shown for this character
-    let shouldShowCharPinyin = false;
-    
-    if (!isPunct && isChinese) {
-      if (isPinyinAll) {
-        // "all" mode: show pinyin unless "characters known" tag
-        if (hasCharactersKnownTag) {
-          shouldShowCharPinyin = false;
-        } else {
-          shouldShowCharPinyin = true;
-        }
-      } else if (isPinyinUnknownOnly) {
-        // "unknown-only" mode: complex logic based on tags and status
-        if (hasCharactersKnownTag) {
-          // Rule 1: "characters known" tag = no pinyin for any characters
-          shouldShowCharPinyin = false;
-        } else if (hasPartialCharactersKnownTag) {
-          // Rule 2: "partial characters known" = show pinyin only for characters NOT in known set
-          const isCharKnown = knownSingleChars.has(char);
-          shouldShowCharPinyin = !isCharKnown;
-          // Debug logging for partial characters known
-          console.log(`[Pinyin Debug] Word "${word}" (partial characters known) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set' : '❌ NOT FOUND in known set'} (will ${shouldShowCharPinyin ? 'show' : 'hide'} pinyin)`);
-        } else if (isLearned) {
-          // Rule 3: "learned" words = show pinyin only for characters NOT in known set
-          const isCharKnown = knownSingleChars.has(char);
-          shouldShowCharPinyin = !isCharKnown;
-          // Debug logging for learned words
-          console.log(`[Pinyin Debug] Word "${word}" (learned) - Character "${char}": ${isCharKnown ? '✅ FOUND in known set' : '❌ NOT FOUND in known set'} (will ${shouldShowCharPinyin ? 'show' : 'hide'} pinyin)`);
-        } else {
-          // Default "unknown-only" behavior: for any unknown word, hide pinyin for known characters
-          if (!status || !isKnownWord(status)) {
-            // Word is unknown (not in LingQ data OR not known in LingQ): hide pinyin for known characters
-            if (status && status.status === -1) {
-              // Ignored words: don't show pinyin
-              shouldShowCharPinyin = false;
-            } else {
-              // Check if this character is known
-              const isCharKnown = knownSingleChars.has(char);
-              shouldShowCharPinyin = !isCharKnown;
-            }
-          } else {
-            // Word is known (status=3): don't show pinyin
-            shouldShowCharPinyin = false;
-          }
-        }
-      }
-    }
-
-    if (shouldShowCharPinyin) {
+    if (!isPunct && shouldShowPinyin) {
       const ruby = document.createElement("ruby");
       const rt = document.createElement("rt");
-      rt.textContent = charPinyin;
+      rt.textContent = pinyinList[i] || "";
       rt.style.color = toneColor;
 
       ruby.appendChild(span);
