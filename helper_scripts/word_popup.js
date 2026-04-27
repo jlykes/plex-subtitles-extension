@@ -222,7 +222,9 @@ async function showWordPopup(wordElement) {
     if (isAnyMiningDrawerOpen()) return;
     console.log('[word_popup] showWordPopup called for:', wordElement.innerText);
     console.log('[word_popup] Stack trace:', new Error().stack);
-    hideWordPopup();
+    // Always skip re-render: replacing the subtitle DOM would detach `wordElement`
+    // (e.g. second word click, fullscreen reposition).
+    hideWordPopup(true);
     lastPopupWordElement = wordElement;
     
     // Add highlighting to the word element
@@ -348,6 +350,9 @@ let isCharacterMiningDrawerOpen = false;
 let currentSentenceMiningDrawer = null;
 let currentSentenceMiningEscHandler = null;
 let isSentenceMiningDrawerOpen = false;
+
+/** Capture phase so Escape closes the image modal before the browser exits video fullscreen (Plex). */
+const MINING_ESCAPE_KEYDOWN_CAPTURE = true;
 
 function isAnyMiningDrawerOpen() {
     return (
@@ -552,7 +557,7 @@ function mergeSentenceMiningSourceIntoCard(host) {
 function closeCharacterMiningDrawer() {
     closeCharacterMiningImageModal();
     if (currentCharacterMiningEscHandler) {
-        window.removeEventListener('keydown', currentCharacterMiningEscHandler);
+        window.removeEventListener('keydown', currentCharacterMiningEscHandler, MINING_ESCAPE_KEYDOWN_CAPTURE);
         currentCharacterMiningEscHandler = null;
     }
     if (currentCharacterMiningDrawer) {
@@ -569,7 +574,7 @@ function closeCharacterMiningDrawer() {
 function closeSentenceMiningDrawer() {
     closeCharacterMiningImageModal();
     if (currentSentenceMiningEscHandler) {
-        window.removeEventListener('keydown', currentSentenceMiningEscHandler);
+        window.removeEventListener('keydown', currentSentenceMiningEscHandler, MINING_ESCAPE_KEYDOWN_CAPTURE);
         currentSentenceMiningEscHandler = null;
     }
     if (currentSentenceMiningDrawer) {
@@ -590,17 +595,51 @@ function closeCharacterMiningImageModal() {
     return true;
 }
 
+function isMiningImageModalKeyboardTargetEditable(event) {
+    const t = event.target;
+    if (!t || !(t instanceof Element)) return false;
+    const tag = t.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+    return Boolean(t.closest('[contenteditable="true"]'));
+}
+
+/**
+ * Escape closes the preview when possible; Chrome often uses Esc for fullscreen first.
+ * E always closes from this overlay unless focus is in a form field (rare while preview is up).
+ * @returns {boolean} true if the key event was consumed.
+ */
+function tryCloseMiningImageModalFromKeyboard(event) {
+    if (!currentCharacterMiningImageModal) return false;
+    if (event.key === 'Escape') {
+        closeCharacterMiningImageModal();
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        return true;
+    }
+    if (event.key === 'e' || event.key === 'E') {
+        if (isMiningImageModalKeyboardTargetEditable(event)) return false;
+        closeCharacterMiningImageModal();
+        event.preventDefault();
+        event.stopPropagation();
+        return true;
+    }
+    return false;
+}
+
 function openCharacterMiningImageModal(imageUrl) {
     if (!imageUrl) return;
     closeCharacterMiningImageModal();
     const modal = document.createElement('div');
     modal.className = 'char-mining-img-modal';
+    modal.tabIndex = -1;
     modal.innerHTML = `
       <div class="char-mining-img-modal__backdrop" data-action="close-img-modal"></div>
       <div class="char-mining-img-modal__panel" role="dialog" aria-modal="true" aria-label="Image preview">
         <button type="button" class="char-mining-img-modal__close" data-action="close-img-modal" aria-label="Close image preview">×</button>
         <img class="char-mining-img-modal__image" src="${escapeHtmlMining(String(imageUrl))}" alt="Generated option preview" />
       </div>
+      <p class="char-mining-img-modal__hint">Press <kbd>E</kbd> to close · <span class="char-mining-img-modal__hint-sub">Esc often exits Chrome fullscreen instead</span></p>
     `;
     modal.addEventListener('click', (event) => {
         const target = event.target;
@@ -612,6 +651,13 @@ function openCharacterMiningImageModal(imageUrl) {
     });
     document.body.appendChild(modal);
     currentCharacterMiningImageModal = modal;
+    requestAnimationFrame(() => {
+        try {
+            modal.focus({ preventScroll: true });
+        } catch {
+            /* ignore */
+        }
+    });
 }
 
 /** Collapses the subtitle Key Info / control panel (same geometry as control.js hide). */
@@ -873,7 +919,7 @@ function ensureCharacterMiningEreaderCss() {
 .char-mining-gen-images-btn:disabled{opacity:0.4;cursor:not-allowed}
 .char-mining-err{color:#fca5a5;font-size:12px;margin:6px 0 0}
 .char-mining-warn{color:#fcd34d;font-size:12px;margin:6px 0 0}
-.char-mining-img-grid-wrap{border:1px solid #404040;border-radius:8px;background:#1f1f1f;padding:12px;margin-top:4px}
+.char-mining-img-grid-wrap{border:1px solid #404040;border-radius:8px;background:#1f1f1f;padding:14px 12px 12px;margin-top:8px}
 .char-mining-lingq-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border:1px solid #404040;border-radius:8px;background:#262626;padding:12px;min-height:56px;font-size:13px;color:#d1d5db}
 .char-mining-lingq-row button,.char-mining-lingq-row select{border:1px solid #525252;border-radius:6px;background:#1f2937;color:#fff;padding:8px 10px;min-height:36px;font-size:12px;cursor:pointer}
 .char-mining-lingq-row button:disabled,.char-mining-lingq-row select:disabled{opacity:0.4;cursor:not-allowed}
@@ -907,11 +953,11 @@ function ensureCharacterMiningEreaderCss() {
 .character-mining-preview .image-slot__actions{margin-top:10px;display:flex;justify-content:center}
 .character-mining-preview .image-slot__btn{font-size:12px;padding:6px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.22);color:#e4e4e7;cursor:pointer}
 .character-mining-preview .story{margin-top:12px;font-size:15px;line-height:1.5;text-align:center;max-width:450px;margin-left:auto;margin-right:auto;color:#a1a1aa}
-.image-options-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.5rem}
-.image-option-button{border:1px solid #525252;border-radius:0.5rem;overflow:hidden;padding:0;background:rgba(23,23,23,0.85)}
+.image-options-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.5rem;padding-top:4px}
+.image-option-button{border:1px solid #525252;border-radius:0.5rem;overflow:hidden;padding:0;background:rgba(23,23,23,0.85);display:flex;flex-direction:column}
 .image-option-button--selected{border-color:#d6c78f;box-shadow:0 0 0 1px rgba(214,199,143,0.35)}
-.image-option-preview-btn{border:0;padding:0;margin:0;width:100%;display:block;cursor:zoom-in;background:transparent}
-.image-option-apply-btn{width:100%;border:0;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.45);color:#f3f4f6;padding:0.38rem 0.5rem;font-size:10px;font-weight:500;text-align:center;cursor:pointer}
+.image-option-preview-btn{border:0;padding:0;margin:0;width:100%;display:block;cursor:zoom-in;background:transparent;line-height:0;overflow:hidden;flex-shrink:0}
+.image-option-apply-btn{width:100%;border:0;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.45);color:#f3f4f6;padding:10px 8px 8px;font-size:10px;font-weight:500;text-align:center;cursor:pointer;line-height:1.35;flex-shrink:0;box-sizing:border-box}
 .image-option-thumb{width:100%;height:5.5rem;object-fit:cover;display:block}
 .character-mining-preview-shell{border:1px solid #404040;border-radius:8px;background:#1f1f1f;padding:16px;margin-top:8px}
 .character-mining-preview .sentence-card-hanzi{font-size:20px;line-height:1.45;white-space:pre-wrap;word-break:break-word;max-width:100%;font-weight:600}
@@ -933,6 +979,9 @@ function ensureCharacterMiningEreaderCss() {
 .char-mining-img-modal__panel{position:absolute;inset:24px;display:flex;align-items:center;justify-content:center}
 .char-mining-img-modal__image{max-width:min(94vw,1200px);max-height:calc(100vh - 72px);width:auto;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,0.16);box-shadow:0 14px 46px rgba(0,0,0,0.52);background:#111}
 .char-mining-img-modal__close{position:absolute;top:6px;right:6px;width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);background:rgba(0,0,0,0.66);color:#fff;font-size:23px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.char-mining-img-modal__hint{position:absolute;left:12px;right:12px;bottom:10px;margin:0;text-align:center;font-size:12px;line-height:1.45;color:rgba(255,255,255,0.72);pointer-events:none;z-index:2}
+.char-mining-img-modal__hint kbd{font:inherit;font-size:11px;padding:2px 7px;border-radius:4px;background:rgba(0,0,0,0.45);border:1px solid rgba(255,255,255,0.22);box-shadow:none}
+.char-mining-img-modal__hint-sub{opacity:0.88}
 `;
     document.head.appendChild(style);
 }
@@ -1993,15 +2042,11 @@ function openCharacterMiningDrawer(seed) {
     backdrop.addEventListener('click', closeCharacterMiningDrawer);
     closeBtn.addEventListener('click', closeCharacterMiningDrawer);
     currentCharacterMiningEscHandler = (event) => {
+        if (tryCloseMiningImageModalFromKeyboard(event)) return;
         if (event.key !== 'Escape') return;
-        if (closeCharacterMiningImageModal()) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-        }
         closeCharacterMiningDrawer();
     };
-    window.addEventListener('keydown', currentCharacterMiningEscHandler);
+    window.addEventListener('keydown', currentCharacterMiningEscHandler, MINING_ESCAPE_KEYDOWN_CAPTURE);
 }
 
 function openSentenceMiningDrawer(seed) {
@@ -2179,15 +2224,11 @@ function openSentenceMiningDrawer(seed) {
     backdrop.addEventListener('click', closeSentenceMiningDrawer);
     closeBtn.addEventListener('click', closeSentenceMiningDrawer);
     currentSentenceMiningEscHandler = (event) => {
+        if (tryCloseMiningImageModalFromKeyboard(event)) return;
         if (event.key !== 'Escape') return;
-        if (closeCharacterMiningImageModal()) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-        }
         closeSentenceMiningDrawer();
     };
-    window.addEventListener('keydown', currentSentenceMiningEscHandler);
+    window.addEventListener('keydown', currentSentenceMiningEscHandler, MINING_ESCAPE_KEYDOWN_CAPTURE);
 }
 
 /**
@@ -2209,22 +2250,14 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
     // Generate frequency score display
     let frequencyHTML = '';
     if (frequencyInfo && frequencyInfo.score) {
-        const scoreColors = {
-            5: '#4CAF50', // Green for very common
-            4: '#8BC34A', // Light green for common
-            3: '#FFC107', // Yellow for moderate
-            2: '#FF9800', // Orange for uncommon
-            1: '#F44336'  // Red for rare
-        };
-        const scoreColor = scoreColors[frequencyInfo.score] || '#888';
         const formattedCount = typeof formatFrequencyCount === 'function' ? 
             formatFrequencyCount(frequencyInfo.count) : frequencyInfo.count;
         const scoreDescriptionMapZh = {
             5: '前60%',
-            4: '60%-80%',
-            3: '80%-90%',
-            2: '90%-97%',
-            1: '97%-100%'
+            4: '60-80%',
+            3: '80-90%',
+            2: '90-97%',
+            1: '97-100%'
         };
         const scoreDescriptionZh =
             scoreDescriptionMapZh[frequencyInfo.score] || frequencyInfo.scoreDescription || '未知';
@@ -2234,6 +2267,18 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
             Object.values(window.frequencyData.frequency).reduce((sum, count) => sum + count, 0) : 0;
         const corpusSizeFormatted = typeof formatFrequencyCount === 'function' ? 
             formatFrequencyCount(corpusSize) : corpusSize;
+
+        // Match chinese_ereader PopupHeader: N filled stars (same SVG as CorpusScoreIcon), no leading digit
+        const corpusStarSvg =
+            '<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" style="display:block"><path d="M12 2.5l2.7 6 6.6.5-5 4.3 1.6 6.4L12 16.3 6.1 19.7l1.6-6.4-5-4.3 6.6-.5L12 2.5z" fill="currentColor" stroke-linejoin="round"/></svg>';
+        const starCount = Math.max(1, Math.min(5, Number(frequencyInfo.score) || 1));
+        let corpusStarsHtml = '';
+        for (let si = 0; si < starCount; si += 1) {
+            corpusStarsHtml +=
+                '<span style="display:inline-flex;align-items:center;justify-content:center;width:1rem;height:1rem;line-height:0;">' +
+                corpusStarSvg +
+                '</span>';
+        }
         
         frequencyHTML = `
           <div class="popup-frequency" style="
@@ -2249,11 +2294,7 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
             justify-content:center;
             align-items:center;
             gap:8px;">
-            <span class="frequency-score" style="
-              color: ${scoreColor};
-              font-weight: bold;
-              font-size: 1.1em;">${frequencyInfo.score}</span>
-            <span style="color: ${scoreColor}; font-size: 1.1em;">⭐</span>
+            <span class="popup-corpus-stars" style="display:inline-flex;align-items:center;gap:0;color:#c4b06a;">${corpusStarsHtml}</span>
             <span style="color: #888; font-size: 0.95em;">(${scoreDescriptionZh})</span>
             <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
             <span style="color:#fff;font-size:0.97em;margin:0;padding:0;">语料 ${formattedCount} 次 / ${corpusSizeFormatted}</span>
@@ -2415,8 +2456,6 @@ function applyPopupStyling(popup) {
  */
 function positionPopup(popup, wordElement) {
     const rect = wordElement.getBoundingClientRect();
-    const scrollY = window.scrollY || window.pageYOffset;
-    const scrollX = window.scrollX || window.pageXOffset;
     let borderBottom = 0;
     const computed = window.getComputedStyle(wordElement);
     if (computed && computed.borderBottomWidth) {
@@ -2424,32 +2463,22 @@ function positionPopup(popup, wordElement) {
     }
     const hasUnderline = borderBottom > 0 && computed.borderBottomStyle !== 'none';
 
+    // Viewport-fixed overlay (Plex player): use getBoundingClientRect() only — no scrollX/scrollY.
+    popup.style.position = 'fixed';
+
     // Determine if popup should appear above or below
     const position = window.subtitleConfig?.position || 'bottom';
     let popupTop;
-    if (position === 'bottom') {
-        // For bottom subtitles, ignore underline/border. Only adjust for pinyin (ruby/rt) height.
-        let popupOffset = 8; // px
-        let popupHeight = popup.offsetHeight;
-        let extraPinyinOffset = 0;
-        const ruby = wordElement.querySelector('ruby');
-        if (ruby) {
-            const rt = ruby.querySelector('rt');
-            if (rt) {
-                extraPinyinOffset = rt.offsetHeight || 0;
-            }
-        }
-        popup.style.top = `${rect.top + scrollY - popupHeight - popupOffset + extraPinyinOffset}px`;
-    } else {
+    if (position !== 'bottom') {
         // For center/top, include underline/border if present
-        let popupOffset = 8;
-        popupTop = rect.bottom + popupOffset + scrollY;
+        const popupOffset = 8;
+        popupTop = rect.bottom + popupOffset;
         if (hasUnderline) {
             // Subtract the border width so the popup is always offset from the text baseline
-            popupTop = rect.bottom - borderBottom + popupOffset + scrollY - 2;
+            popupTop = rect.bottom - borderBottom + popupOffset - 2;
         }
     }
-    popup.style.left = `${rect.left + rect.width / 2 + scrollX}px`;
+    popup.style.left = `${rect.left + rect.width / 2}px`;
     // Temporarily set top to 0 to measure height
     popup.style.top = '0px';
     popup.style.transform = 'translateX(-50%)';
@@ -2467,7 +2496,7 @@ function positionPopup(popup, wordElement) {
                 extraPinyinOffset = rt.offsetHeight - 4 || 0;
             }
         }
-        popup.style.top = `${rect.top + scrollY - popupHeight - popupOffset + extraPinyinOffset}px`;
+        popup.style.top = `${rect.top - popupHeight - popupOffset + extraPinyinOffset}px`;
     } else {
         // Already handled above for center/top
         popup.style.top = `${popupTop}px`;
@@ -2571,7 +2600,9 @@ function handleWordClick(event) {
 
     // Popup is not open for this word, so open it
     console.log('[word_popup] System thinks popup is not open for this word, so opening it');
-    hideWordPopup();
+    // Skip subtitle re-render here: reRenderCurrentSubtitle replaces DOM and invalidates this
+    // `wordElement` reference, so getBoundingClientRect() would be (0,0) and the popup jumps to the corner.
+    hideWordPopup(true);
     showWordPopup(wordElement);
 }
 
