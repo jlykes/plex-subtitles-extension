@@ -649,6 +649,12 @@ function openCharacterMiningImageModal(imageUrl) {
             closeCharacterMiningImageModal();
         }
     });
+    modal.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+    });
+    modal.addEventListener('keyup', (e) => {
+        e.stopPropagation();
+    });
     document.body.appendChild(modal);
     currentCharacterMiningImageModal = modal;
     requestAnimationFrame(() => {
@@ -1334,6 +1340,18 @@ function bindCharacterMiningHostEvents(host) {
     if (host._charMiningHostEventsBound) return;
     host._charMiningHostEventsBound = true;
 
+    // Plex listens on document/window for Space/K/… to control playback. Bubble this
+    // drawer’s key events so they never reach the player, without preventDefault (so
+    // spaces and typing in inputs/textareas still work).
+    const stopKeysReachingPlayer = (e) => {
+        const target = e.target;
+        if (!target || !(target instanceof Node)) return;
+        if (!host.contains(target)) return;
+        e.stopPropagation();
+    };
+    host.addEventListener('keydown', stopKeysReachingPlayer, false);
+    host.addEventListener('keyup', stopKeysReachingPlayer, false);
+
     host.addEventListener('input', (e) => {
         const t = e.target;
         if (!t || !t.classList) return;
@@ -1717,18 +1735,17 @@ function applyCharacterMiningDrawerStyling(host) {
             lineHeight: '1.5'
         });
     }
+    const miningHanziFieldStyle = {
+        fontSize: '1.5rem',
+        fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+    };
     const subcomponentsInput = host.querySelector('.char-mining-subcomponents-input');
     if (subcomponentsInput) {
-        Object.assign(subcomponentsInput.style, {
-            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
-        });
+        Object.assign(subcomponentsInput.style, miningHanziFieldStyle);
     }
     const commonWordsInput = host.querySelector('.char-mining-common-words-input');
     if (commonWordsInput) {
-        Object.assign(commonWordsInput.style, {
-            fontSize: '1.5rem',
-            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
-        });
+        Object.assign(commonWordsInput.style, miningHanziFieldStyle);
     }
     const optionsWrap = host.querySelector('.char-mining-options');
     if (optionsWrap) {
@@ -1840,7 +1857,11 @@ function openCharacterMiningDrawer(seed) {
     const { wordText, pinyinText, sentenceText } = seed;
     let pinyinMap = getCharacterPinyinMapFromWord(wordText, pinyinText);
     const charOptions = Array.from(new Set(Array.from(wordText || '').filter((char) => /[\u4e00-\u9fff]/.test(char))));
-    const initialChar = charOptions[0] || '';
+    const initialUnknownChar = charOptions.find((char) => {
+        const displayScore = getLocalLingqDisplayScore(char);
+        return typeof displayScore !== 'number' || displayScore < 5;
+    });
+    const initialChar = initialUnknownChar || charOptions[0] || '';
 
     const host = document.createElement('div');
     host.className = 'char-mining-drawer-host';
