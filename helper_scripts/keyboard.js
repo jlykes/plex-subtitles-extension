@@ -18,6 +18,17 @@ let keyboardShortcutsInitialized = false;
 // Tracks whether Plex UI is currently hidden
 window.__plexUIHidden = false;
 
+function isCharacterMiningOverlayOpen() {
+  return Boolean(window._characterMiningDrawerOpen || window._sentenceMiningDrawerOpen);
+}
+
+function isEditableTarget(target) {
+  if (!target || !(target instanceof Element)) return false;
+  const tag = target.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return true;
+  return Boolean(target.closest('[contenteditable="true"]'));
+}
+
 
 /**
  * Toggles visibility of known Plex UI elements (e.g., playback controls, overlays)
@@ -65,6 +76,16 @@ function setupKeyboardShortcuts() {
     }
 
     const key = e.key.toLowerCase();
+
+    // While the character mining drawer is open, block playback toggles.
+    // Keep typing behavior intact inside editable inputs.
+    if (isCharacterMiningOverlayOpen() && !isEditableTarget(e.target)) {
+      if (key === " " || key === "k" || key === "mediaplaypause") {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+    }
 
     // H - Toggle Plex UI overlay visibility
     if (key === "h") {
@@ -125,9 +146,15 @@ function setupKeyboardShortcuts() {
     if (!video) {
       return;
     }
+
+    // Don't allow click-to-toggle playback while mining drawer is active.
+    if (isCharacterMiningOverlayOpen()) {
+      return;
+    }
   
     const isSubtitlePanel = event.target.closest("#subtitle-control-panel");
     const isSubtitleOverlay = event.target.closest("#custom-subtitle-overlay");
+    const isCharacterMiningDrawer = event.target.closest(".char-mining-drawer-host");
   
     console.log("🖱️ Click target:", event.target);
     console.log("➡️ Subtitle Panel:", !!isSubtitlePanel);
@@ -137,7 +164,8 @@ function setupKeyboardShortcuts() {
     if (
       window.__plexUIHidden &&
       !isSubtitlePanel &&
-      !isSubtitleOverlay
+      !isSubtitleOverlay &&
+      !isCharacterMiningDrawer
     ) {
       console.log(`[🖱️ Click during hidden UI] Toggling playback`);
       video.paused ? video.play() : video.pause();

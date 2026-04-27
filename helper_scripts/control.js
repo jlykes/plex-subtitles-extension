@@ -220,6 +220,7 @@ function initHoverPanelBehavior(panel, trigger) {
   let hideTimeout;
 
   const showPanel = () => {
+    if (window._characterMiningDrawerOpen || window._sentenceMiningDrawerOpen) return;
     clearTimeout(hideTimeout);
     hoverActive = true;
     panel.style.opacity = "1";

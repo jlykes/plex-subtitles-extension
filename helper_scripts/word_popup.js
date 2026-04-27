@@ -134,7 +134,7 @@ function highlightCurrentStatusAndTags(popup, wordData) {
     // Highlight status buttons
     const statusButtons = popup.querySelectorAll('.status-btn');
     statusButtons.forEach((btn, index) => {
-        const buttonText = btn.textContent.trim();
+        const buttonText = (btn.getAttribute('data-status-key') || btn.textContent || '').trim();
         let shouldHighlight = false;
         
         if (buttonText === '✓') {
@@ -179,28 +179,21 @@ function highlightCurrentStatusAndTags(popup, wordData) {
         }
     });
     
-    // Highlight tag buttons
+    // Highlight tag buttons (labels may be localized; LingQ stores English tag strings)
     const tagButtons = popup.querySelectorAll('.tag-btn');
     tagButtons.forEach(btn => {
-        const buttonText = btn.textContent.trim();
+        const tagValue = (btn.getAttribute('data-tag-value') || btn.textContent || '').trim();
         let shouldHighlight = false;
         
-        console.log(`[word_popup] Checking tag button: '${buttonText}'`);
+        console.log(`[word_popup] Checking tag button value: '${tagValue}'`);
         console.log(`[word_popup] Word tags:`, wordData.tags);
         
-        if (buttonText === 'no characters known') {
-            // Don't highlight "no characters known" by default - only if explicitly set
-            shouldHighlight = false;
-            console.log(`[word_popup] 'no characters known' should highlight:`, shouldHighlight);
-        } else {
-            // Check if this tag exists in the word's tags
-            shouldHighlight = wordData.tags && wordData.tags.includes(buttonText);
-            console.log(`[word_popup] '${buttonText}' should highlight:`, shouldHighlight);
-        }
+        shouldHighlight = Boolean(tagValue && wordData.tags && wordData.tags.includes(tagValue));
+        console.log(`[word_popup] '${tagValue}' should highlight:`, shouldHighlight);
         
         if (shouldHighlight) {
             // Get colors from the reusable function
-            const colors = getHighlightColors(buttonText, false);
+            const colors = getHighlightColors(tagValue, false);
             btn.style.background = colors.background;
             btn.style.borderColor = colors.background;
             btn.style.color = colors.text;
@@ -226,6 +219,7 @@ function highlightCurrentStatusAndTags(popup, wordData) {
  * @returns {Promise<void>}
  */
 async function showWordPopup(wordElement) {
+    if (isAnyMiningDrawerOpen()) return;
     console.log('[word_popup] showWordPopup called for:', wordElement.innerText);
     console.log('[word_popup] Stack trace:', new Error().stack);
     hideWordPopup();
@@ -251,11 +245,11 @@ async function showWordPopup(wordElement) {
     }
     
     // Get count using extractAllWordsFromSubtitles and window.subtitleList if available
-    let count = 'N/A';
+    let count = '本视频 N/A 次';
     if (window.subtitleList && typeof window.extractAllWordsFromSubtitles === 'function') {
         const allWords = window.extractAllWordsFromSubtitles(window.subtitleList);
         const num = allWords.filter(w => w === wordText).length;
-        count = `${num.toLocaleString()}x this video`;
+        count = `本视频 ${num.toLocaleString()} 次`;
     }
 
     // Try to extract the definition from the tooltip (if present)
@@ -306,7 +300,7 @@ async function showWordPopup(wordElement) {
     }, 0);
 
     // Add button click handlers for status and tag updates
-    addButtonClickHandlers(popup, wordText);
+    addButtonClickHandlers(popup, wordText, wordElement);
 }
 
 /**
@@ -347,6 +341,1854 @@ function hideWordPopup(skipReRender = false) {
 //////////////////////////////
 
 let lastPopupWordElement = null;
+let currentCharacterMiningDrawer = null;
+let currentCharacterMiningEscHandler = null;
+let currentCharacterMiningImageModal = null;
+let isCharacterMiningDrawerOpen = false;
+let currentSentenceMiningDrawer = null;
+let currentSentenceMiningEscHandler = null;
+let isSentenceMiningDrawerOpen = false;
+
+function isAnyMiningDrawerOpen() {
+    return (
+        isCharacterMiningDrawerOpen ||
+        Boolean(window._characterMiningDrawerOpen) ||
+        isSentenceMiningDrawerOpen ||
+        Boolean(window._sentenceMiningDrawerOpen)
+    );
+}
+
+/** Status button keys and Chinese tooltips (aligned with chinese_ereader StatusRow labels). */
+const STATUS_BUTTON_META = [
+    { key: '🗑️', title: '忽略' },
+    { key: '0', title: '未见' },
+    { key: '1', title: '新词' },
+    { key: '2', title: '学习中' },
+    { key: '3', title: '较熟' },
+    { key: '4', title: '已学' },
+    { key: '✓', title: '已掌握' }
+];
+
+/**
+ * Builds the current subtitle line as plain Chinese by walking sibling `.subtitle-word` nodes.
+ * @param {HTMLElement} wordElement - A `.subtitle-word` span from the subtitle main line
+ * @returns {string}
+ */
+function getSubtitleLinePlainFromWordElement(wordElement) {
+    const mainLine = wordElement && wordElement.parentElement;
+    if (!mainLine) return '';
+    const wordSpans = mainLine.querySelectorAll(':scope > .subtitle-word');
+    if (!wordSpans || wordSpans.length === 0) return '';
+    const segments = [];
+    wordSpans.forEach((w) => {
+        const raw = w.innerText || '';
+        const hanzi = (raw.match(/[\u4e00-\u9fff]+/g) || []).join('');
+        segments.push(hanzi);
+    });
+    return segments.join('');
+}
+
+/**
+ * Copies the full subtitle line to the clipboard; optional label element shows brief feedback.
+ * @param {HTMLElement} wordElement
+ * @param {HTMLButtonElement|HTMLElement|null} labelEl
+ * @returns {Promise<void>}
+ */
+async function copySubtitleSentenceFromWordElement(wordElement, labelEl) {
+    const text = getSubtitleLinePlainFromWordElement(wordElement);
+    if (!text) return;
+    const original = labelEl && labelEl.textContent;
+    const done = () => {
+        if (labelEl) {
+            labelEl.textContent = '已复制';
+            window.setTimeout(() => {
+                if (labelEl) labelEl.textContent = original || '复制句子';
+            }, 2000);
+        }
+    };
+    try {
+        await navigator.clipboard.writeText(text);
+        done();
+    } catch {
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            done();
+        } catch {
+            /* ignore */
+        }
+    }
+}
+
+function getCharacterPinyinMapFromWord(wordText, pinyinText) {
+    const map = {};
+    const chars = Array.from(wordText || '').filter((char) => /[\u4e00-\u9fff]/.test(char));
+    const syllables = String(pinyinText || '').split(/\s+/).map((s) => s.trim()).filter(Boolean);
+    const count = Math.min(chars.length, syllables.length);
+    for (let i = 0; i < count; i += 1) {
+        if (!map[chars[i]]) map[chars[i]] = syllables[i];
+    }
+    return map;
+}
+
+function getLocalLingqDisplayScore(term) {
+    if (!term || !window.lingqTerms || typeof window.lingqTerms !== 'object') return 0;
+    const normalized = (String(term).match(/[\u4e00-\u9fff]+/g) || []).join('');
+    if (!normalized) return 0;
+    const word = window.lingqTerms[normalized];
+    if (!word) return 0;
+    if (word.status === 3 && word.extended_status === 3) return 5;
+    if (word.status === 3) return 4;
+    if (word.status === 2) return 3;
+    if (word.status === 1) return 2;
+    if (word.status === 0) return 1;
+    return 0;
+}
+
+async function generateCharacterCardViaBackground(payload) {
+    const apiBaseUrl = (window.characterMiningApiBaseUrl || 'http://localhost:3001/api');
+    const response = await chrome.runtime.sendMessage({
+        action: 'generateCharacterCard',
+        apiBaseUrl,
+        ...payload
+    });
+    if (!response || !response.success) {
+        throw new Error(response?.error || 'Character generation failed');
+    }
+    return response.payload;
+}
+
+async function generateSentenceCardViaBackground(payload) {
+    const apiBaseUrl = window.characterMiningApiBaseUrl || 'http://localhost:3001/api';
+    const response = await chrome.runtime.sendMessage({
+        action: 'generateSentenceCard',
+        apiBaseUrl,
+        ...payload
+    });
+    if (!response || !response.success) {
+        throw new Error(response?.error || 'Sentence generation failed');
+    }
+    return response.payload;
+}
+
+/** Map proxy sentence payload into the same card shape used by the character mining UI. */
+function normalizeSentenceMiningCardData(data, fallbackSentence) {
+    const d = data && typeof data === 'object' ? data : {};
+    const rawSentence = String(
+        d.sentence ?? d.sentence_zh ?? d.hanzi ?? d.full_sentence ?? d.text ?? fallbackSentence ?? ''
+    ).trim();
+    const zhPlain = stripHtmlToPlainTextMining(rawSentence) || String(fallbackSentence ?? '').trim();
+    const sentenceHtmlStored = String(d.sentence_html ?? d.sentenceHtml ?? d.html_sentence ?? '').trim();
+    const sentenceHtml =
+        sentenceHtmlStored ||
+        (rawSentence.includes('<') && /\btarget-word\b/.test(rawSentence) ? rawSentence : '');
+    const targetWord = String(
+        d.target_word ?? d.targetWord ?? d.focus_word ?? d.focusWord ?? d.word ?? ''
+    ).trim();
+    const wordPinyin = String(
+        d.word_pinyin ?? d.wordPinyin ?? d.target_pinyin ?? d.focus_pinyin ?? d.pinyin_word ?? ''
+    ).trim();
+    let sentencePinyin = String(
+        d.sentence_pinyin ?? d.pinyin_sentence ?? d.full_sentence_pinyin ?? d.sentencePinyin ?? ''
+    ).trim();
+    const genericPinyin = String(d.pinyin ?? '').trim();
+    if (!sentencePinyin) sentencePinyin = genericPinyin;
+    const wordPinyinOut = wordPinyin || genericPinyin;
+    const sentenceTranslation = String(
+        d.translation ?? d.sentence_translation ?? d.sentenceTranslation ?? d.english_sentence ?? d.meaning ?? ''
+    ).trim();
+    const wordDef = String(
+        d.word_definition ?? d.wordDefinition ?? d.word_meaning ?? d.gloss ?? d.dict_definition ?? ''
+    ).trim();
+    const defGeneric = String(d.definition ?? '').trim();
+    const definition = sentenceTranslation || (wordDef ? '' : defGeneric);
+    const word_definition = wordDef || (sentenceTranslation ? defGeneric : '');
+    const toneRaw = Number(d.tone);
+    const tone = Number.isFinite(toneRaw) && toneRaw >= 1 && toneRaw <= 5 ? toneRaw : 0;
+    return {
+        hanzi: zhPlain,
+        sentence_html: sentenceHtml || null,
+        target_word: targetWord,
+        word_pinyin: wordPinyinOut,
+        word_definition,
+        pinyin: sentencePinyin,
+        tone,
+        definition,
+        notes: String(d.notes ?? d.note ?? '').trim(),
+        cloze: String(d.cloze ?? d.cloze_sentence ?? d.clozeSentence ?? '').trim(),
+        components: String(d.components ?? d.grammar ?? d.structure ?? d.breakdown ?? ''),
+        related: String(d.related ?? d.synonyms ?? '').trim(),
+        common_words: String(d.common_words ?? d.vocabulary ?? d.vocab ?? ''),
+        image_prompt: '',
+        memory_blurb: String(d.memory_blurb ?? ''),
+        anki_story_html: '',
+        source: String(d.source ?? '')
+    };
+}
+
+/** Best-effort current media label from the Plex web tab (document.title). */
+function getPlexMediaTitleForSourceSync() {
+    const t = document.title?.trim() || '';
+    if (!t || /^plex$/i.test(t)) return '';
+    const stripped = t.replace(/\s*[-\u2013\u2014|:]\s*Plex(?:\s+Web)?\s*$/i, '').trim();
+    return stripped || t;
+}
+
+function mergeSentenceMiningSourceIntoCard(host) {
+    if (!host._sentenceMining || !host._miningState || !host._miningState.card) return;
+    const inp = host.querySelector('.char-mining-source-input');
+    if (!inp) return;
+    const v = String(inp.value || '').trim();
+    if (v) host._miningState.card.source = v;
+}
+
+function closeCharacterMiningDrawer() {
+    closeCharacterMiningImageModal();
+    if (currentCharacterMiningEscHandler) {
+        window.removeEventListener('keydown', currentCharacterMiningEscHandler);
+        currentCharacterMiningEscHandler = null;
+    }
+    if (currentCharacterMiningDrawer) {
+        currentCharacterMiningDrawer.remove();
+        currentCharacterMiningDrawer = null;
+    }
+    isCharacterMiningDrawerOpen = false;
+    window._characterMiningDrawerOpen = false;
+    if (!isSentenceMiningDrawerOpen && !window._sentenceMiningDrawerOpen) {
+        setSubtitleControlPanelInteractivity(false);
+    }
+}
+
+function closeSentenceMiningDrawer() {
+    closeCharacterMiningImageModal();
+    if (currentSentenceMiningEscHandler) {
+        window.removeEventListener('keydown', currentSentenceMiningEscHandler);
+        currentSentenceMiningEscHandler = null;
+    }
+    if (currentSentenceMiningDrawer) {
+        currentSentenceMiningDrawer.remove();
+        currentSentenceMiningDrawer = null;
+    }
+    isSentenceMiningDrawerOpen = false;
+    window._sentenceMiningDrawerOpen = false;
+    if (!isCharacterMiningDrawerOpen && !window._characterMiningDrawerOpen) {
+        setSubtitleControlPanelInteractivity(false);
+    }
+}
+
+function closeCharacterMiningImageModal() {
+    if (!currentCharacterMiningImageModal) return false;
+    currentCharacterMiningImageModal.remove();
+    currentCharacterMiningImageModal = null;
+    return true;
+}
+
+function openCharacterMiningImageModal(imageUrl) {
+    if (!imageUrl) return;
+    closeCharacterMiningImageModal();
+    const modal = document.createElement('div');
+    modal.className = 'char-mining-img-modal';
+    modal.innerHTML = `
+      <div class="char-mining-img-modal__backdrop" data-action="close-img-modal"></div>
+      <div class="char-mining-img-modal__panel" role="dialog" aria-modal="true" aria-label="Image preview">
+        <button type="button" class="char-mining-img-modal__close" data-action="close-img-modal" aria-label="Close image preview">×</button>
+        <img class="char-mining-img-modal__image" src="${escapeHtmlMining(String(imageUrl))}" alt="Generated option preview" />
+      </div>
+    `;
+    modal.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target && target.closest && target.closest('[data-action="close-img-modal"]')) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeCharacterMiningImageModal();
+        }
+    });
+    document.body.appendChild(modal);
+    currentCharacterMiningImageModal = modal;
+}
+
+/** Collapses the subtitle Key Info / control panel (same geometry as control.js hide). */
+function hideSubtitleControlPanelForOverlay() {
+    const panel = document.getElementById('subtitle-control-panel');
+    if (!panel) return;
+    panel.style.opacity = '0';
+    panel.style.right = '-330px';
+    panel.style.pointerEvents = 'none';
+}
+
+/**
+ * While character mining is open, disable the right-edge hover trigger that can
+ * still capture pointer/wheel input even when the panel itself is hidden.
+ */
+function setSubtitleControlPanelInteractivity(disabled) {
+    const panel = document.getElementById('subtitle-control-panel');
+    const trigger = document.getElementById('subtitle-panel-hover-trigger');
+    if (disabled) {
+        if (panel) {
+            panel.style.opacity = '0';
+            panel.style.right = '-330px';
+            panel.style.pointerEvents = 'none';
+        }
+        if (trigger) {
+            trigger.style.pointerEvents = 'none';
+        }
+    } else if (trigger) {
+        trigger.style.pointerEvents = 'auto';
+    }
+}
+
+/** Notion “Latest” options (same set as chinese_ereader SentenceMiningDrawer). */
+const CHARACTER_MINING_NOTION_OPTIONS = ['→4', '4 →SRS', '3 →SRS', '2 →SRS', '1 →SRS', '0 →SRS', '🔄'];
+
+function getCharacterMiningApiBase() {
+    return String(window.characterMiningApiBaseUrl || 'http://localhost:3001/api').replace(/\/+$/, '');
+}
+
+async function characterMiningApiPost(path, body) {
+    const rel = typeof path === 'string' && path.startsWith('/') ? path : `/${path || ''}`;
+    const response = await chrome.runtime.sendMessage({
+        action: 'characterMiningApiPost',
+        apiBaseUrl: getCharacterMiningApiBase(),
+        path: rel,
+        body: body && typeof body === 'object' ? body : {}
+    });
+    if (!response || !response.success) {
+        throw new Error(response?.error || 'Request failed');
+    }
+    return response.payload;
+}
+
+function escapeHtmlMining(s) {
+    return String(s ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+/** Strip tags for plain-text fields (LingQ, exports). */
+function stripHtmlToPlainTextMining(html) {
+    const s = String(html ?? '').trim();
+    if (!s) return '';
+    const tmp = document.createElement('div');
+    tmp.innerHTML = s;
+    return String(tmp.textContent || tmp.innerText || '').trim();
+}
+
+/**
+ * Allow only text nodes and <span class="target-word">…</span> (eReader sentence HTML).
+ * Returns a safe HTML string for innerHTML.
+ */
+function sanitizeSentenceCardHtml(html) {
+    const raw = String(html ?? '').trim();
+    if (!raw) return '';
+    const doc = new DOMParser().parseFromString(`<div id="__sroot">${raw}</div>`, 'text/html');
+    const root = doc.getElementById('__sroot');
+    if (!root) return escapeHtmlMining(stripHtmlToPlainTextMining(raw));
+
+    function process(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const t = node.textContent;
+            return t ? [document.createTextNode(t)] : [];
+        }
+        if (node.nodeType !== Node.ELEMENT_NODE) return [];
+        const tag = node.tagName.toUpperCase();
+        if (tag === 'SPAN' && /\btarget-word\b/.test(node.getAttribute('class') || '')) {
+            const sp = document.createElement('span');
+            sp.className = 'target-word';
+            node.childNodes.forEach((ch) => {
+                process(ch).forEach((n) => sp.appendChild(n));
+            });
+            return [sp];
+        }
+        const parts = [];
+        node.childNodes.forEach((ch) => {
+            parts.push(...process(ch));
+        });
+        return parts;
+    }
+
+    const holder = document.createElement('div');
+    root.childNodes.forEach((ch) => {
+        process(ch).forEach((n) => holder.appendChild(n));
+    });
+    return holder.innerHTML;
+}
+
+/** If API did not return HTML, wrap first occurrence of target in <span class="target-word">. */
+function buildSentenceHtmlWithTargetWord(plainSentence, targetWord) {
+    const plain = String(plainSentence ?? '');
+    const tw = String(targetWord ?? '').trim();
+    if (!tw) return escapeHtmlMining(plain);
+    const idx = plain.indexOf(tw);
+    if (idx < 0) return escapeHtmlMining(plain);
+    return (
+        escapeHtmlMining(plain.slice(0, idx)) +
+        `<span class="target-word">${escapeHtmlMining(tw)}</span>` +
+        escapeHtmlMining(plain.slice(idx + tw.length))
+    );
+}
+
+function getSentenceCardPreviewHtml(c) {
+    const stored = String(c.sentence_html ?? '').trim();
+    if (stored && stored.includes('<')) {
+        return sanitizeSentenceCardHtml(stored);
+    }
+    return buildSentenceHtmlWithTargetWord(c.hanzi || '', c.target_word || '');
+}
+
+function toneClassNameMining(tone) {
+    const t = Number(tone);
+    if (t >= 1 && t <= 5) return `tone-${t}`;
+    return '';
+}
+
+function toneHexColorMining(tone) {
+    const t = Number(tone);
+    if (t === 1) return '#e53935';
+    if (t === 2) return '#fdd835';
+    if (t === 3) return '#43a047';
+    if (t === 4) return '#1e88e5';
+    return '#e4e4e7';
+}
+
+function colorizeStoryHtmlForToneMining(storyHtml, tone) {
+    const html = String(storyHtml ?? '').trim();
+    if (!html) return '';
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    const toneColor = toneHexColorMining(tone);
+    tmp.querySelectorAll('strong, b, span[data-keyword], span.story-keyword').forEach((el) => {
+        el.style.color = toneColor;
+        if (!el.style.fontWeight) el.style.fontWeight = '700';
+    });
+    return tmp.innerHTML;
+}
+
+function toCharacterCardPayloadMining(card) {
+    const tone = Number.isFinite(Number(card.tone)) ? Number(card.tone) : 0;
+    const storyHtml = colorizeStoryHtmlForToneMining(card.anki_story_html, tone);
+    return {
+        hanzi: String(card.hanzi ?? ''),
+        pinyin: String(card.pinyin ?? ''),
+        tone,
+        definition: String(card.definition ?? ''),
+        components: String(card.components ?? ''),
+        related: String(card.related ?? ''),
+        common_words: String(card.common_words ?? ''),
+        image_prompt: String(card.image_prompt ?? ''),
+        memory_blurb: String(card.memory_blurb ?? ''),
+        anki_story_html: storyHtml
+    };
+}
+
+/**
+ * Body.card for sentence routes — must match character_anki_card_generator `sentenceMiningCardSchema`
+ * (same object SentenceMiningDrawer sends as `card`).
+ */
+function toSentenceMiningCardPayloadForExport(card) {
+    const stored = String(card.sentence_html ?? '').trim();
+    let sentence =
+        stored && stored.includes('<')
+            ? sanitizeSentenceCardHtml(stored)
+            : buildSentenceHtmlWithTargetWord(String(card.hanzi || ''), String(card.target_word || ''));
+    sentence = String(sentence || '').trim();
+    if (!sentence) sentence = String(card.hanzi || '').trim();
+    return {
+        sentence,
+        target_word: String(card.target_word || '').trim(),
+        pinyin: String(card.word_pinyin || card.pinyin || ''),
+        definition: String(card.word_definition || ''),
+        translation: String(card.definition || ''),
+        related: String(card.related || '')
+    };
+}
+
+function snapshotLingqScoreForAnkiTagsMining(st, displayScore) {
+    const n = typeof displayScore === 'number' ? displayScore : 0;
+    st.lingqDisplayScoreAtLookup = n;
+}
+
+function extraTagsForAnkiFromLingqSnapshotMining(st) {
+    const s = st.lingqDisplayScoreAtLookup;
+    const n = typeof s === 'number' ? s : 0;
+    return n === 5 ? ['AltMeaning'] : [];
+}
+
+function normalizedImageDataUrlForSubmitMining(value) {
+    if (!value || typeof value !== 'string') return null;
+    const trimmed = value.trim();
+    if (!trimmed.startsWith('data:image/')) return null;
+    const maxBytes = 12 * 1024 * 1024;
+    const match = /^data:[^;]+;base64,([\s\S]+)$/.exec(trimmed);
+    if (!match) return trimmed;
+    const b64 = match[1].replace(/\s/g, '');
+    const padding = b64.endsWith('==') ? 2 : b64.endsWith('=') ? 1 : 0;
+    const bytes = Math.floor((b64.length * 3) / 4) - padding;
+    if (bytes > maxBytes) return null;
+    return trimmed;
+}
+
+function createDefaultCharacterMiningState() {
+    return {
+        card: null,
+        imageDataUrl: null,
+        imageGenOptions: [],
+        imageGenModel: 'gemini-3.1-flash-image-preview',
+        imageGenLoading: false,
+        imageGenError: '',
+        imageGenPartial: '',
+        lingqBlock: null,
+        /** LingQ `displayScore` right after lookup when the card was built; used for Anki `AltMeaning`, unchanged by Mark Known. */
+        lingqDisplayScoreAtLookup: null,
+        lingqLoading: false,
+        lingqMarkLoading: false,
+        lingqMarkError: '',
+        notionLatest: '→4',
+        notionLoading: false,
+        notionAdded: false,
+        notionError: '',
+        ankiLoading: false,
+        ankiAdded: false,
+        ankiError: ''
+    };
+}
+
+function ensureCharacterMiningEreaderCss() {
+    if (document.getElementById('plex-character-mining-ereader-css')) return;
+    const style = document.createElement('style');
+    style.id = 'plex-character-mining-ereader-css';
+    style.textContent = `
+.char-mining-aux-box{border:1px solid #404040;border-radius:8px;background:#262626;padding:12px;font-size:12px;color:#d4d4d8}
+.char-mining-aux-title{font-weight:600;color:#e5e7eb;margin-bottom:6px}
+.char-mining-aux-body{margin-top:4px;font-size:14px;color:#d1d5db;white-space:pre-wrap;word-break:break-word}
+.char-mining-gen-images-btn{width:100%;min-height:48px;border-radius:8px;border:1px solid #4b5563;background:#1f2937;color:#fff;padding:12px 14px;font-size:0.9rem;font-weight:500;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
+.char-mining-gen-images-btn:disabled{opacity:0.4;cursor:not-allowed}
+.char-mining-err{color:#fca5a5;font-size:12px;margin:6px 0 0}
+.char-mining-warn{color:#fcd34d;font-size:12px;margin:6px 0 0}
+.char-mining-img-grid-wrap{border:1px solid #404040;border-radius:8px;background:#1f1f1f;padding:12px;margin-top:4px}
+.char-mining-lingq-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;border:1px solid #404040;border-radius:8px;background:#262626;padding:12px;min-height:56px;font-size:13px;color:#d1d5db}
+.char-mining-lingq-row button,.char-mining-lingq-row select{border:1px solid #525252;border-radius:6px;background:#1f2937;color:#fff;padding:8px 10px;min-height:36px;font-size:12px;cursor:pointer}
+.char-mining-lingq-row button:disabled,.char-mining-lingq-row select:disabled{opacity:0.4;cursor:not-allowed}
+.char-mining-editable-wrap{border:1px solid #404040;border-radius:8px;background:#262626;padding:12px;margin-top:8px}
+.char-mining-editable-title{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9ca3af;margin-bottom:8px}
+.char-mining-editable-wrap label{display:block;width:100%;margin-top:10px}
+.char-mining-editable-wrap label:first-of-type{margin-top:0}
+.char-mining-field-label{font-size:12px;color:#d1d5db;margin-bottom:4px;display:block}
+.char-mining-textarea{width:100%;box-sizing:border-box;border:1px solid #525252;border-radius:8px;background:#1f1f1f;color:#fff;padding:8px 10px;font-size:13px;resize:vertical}
+.character-mining-preview{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Kaiti SC","STKaiti","KaiTi",serif;text-align:center}
+.character-mining-preview .hanzi{font-size:42px;font-weight:700;margin-top:10px;font-family:"Kaiti SC","STKaiti","KaiTi",serif;color:#fafafa}
+.character-mining-preview .hanzi.tone-1,.character-mining-preview .pinyin.tone-1{color:#e53935}
+.character-mining-preview .hanzi.tone-2,.character-mining-preview .pinyin.tone-2{color:#fdd835}
+.character-mining-preview .hanzi.tone-3,.character-mining-preview .pinyin.tone-3{color:#43a047}
+.character-mining-preview .hanzi.tone-4,.character-mining-preview .pinyin.tone-4{color:#1e88e5}
+.character-mining-preview .hanzi.tone-5,.character-mining-preview .pinyin.tone-5{color:#e4e4e7}
+.character-mining-preview .components{font-size:15px;margin-top:10px;margin-bottom:20px;color:#a1a1aa}
+.character-mining-preview .pinyin{font-size:26px;margin-top:12px;color:#e4e4e7}
+.character-mining-preview .definition{margin-top:5px;font-size:19px;margin-bottom:16px;color:#d4d4d8}
+.character-mining-preview .related-header,.character-mining-preview .common-header{font-size:12px;color:#a1a1aa;margin-bottom:6px;letter-spacing:1px;text-transform:uppercase}
+.character-mining-preview .common-header{margin-top:18px}
+.character-mining-preview .related-content,.character-mining-preview .common-content{font-size:14px;color:#c4c4cc;line-height:1.6;white-space:pre-wrap}
+.character-mining-preview .image-slot{margin-top:20px}
+.character-mining-preview .image-placeholder{display:inline-block;margin-top:12px;padding:24px 28px;max-width:300px;width:100%;box-sizing:border-box;border:1px dashed rgba(255,255,255,0.18);border-radius:8px;font-size:12px;line-height:1.45;color:#a1a1aa;background:rgba(0,0,0,0.22)}
+.character-mining-preview .image-slot__paste-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:10px}
+.character-mining-preview .image-slot__btn{font-size:12px;padding:0 12px;height:44px;min-height:44px;border-radius:6px;border:1px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.22);color:#e4e4e7;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;box-sizing:border-box;margin:0;vertical-align:middle}
+.character-mining-preview .image-slot__btn--primary{border-color:rgba(196,181,253,0.35);color:#ddd6fe}
+.character-mining-preview .image-slot__file-input{display:none}
+.character-mining-preview .image-slot__img{max-width:280px;width:100%;height:auto;display:block;margin:10px auto;border-radius:8px}
+.character-mining-preview .image-slot__filled{text-align:center}
+.character-mining-preview .image-slot__actions{margin-top:10px;display:flex;justify-content:center}
+.character-mining-preview .image-slot__btn{font-size:12px;padding:6px 12px;border-radius:6px;border:1px solid rgba(255,255,255,0.12);background:rgba(0,0,0,0.22);color:#e4e4e7;cursor:pointer}
+.character-mining-preview .story{margin-top:12px;font-size:15px;line-height:1.5;text-align:center;max-width:450px;margin-left:auto;margin-right:auto;color:#a1a1aa}
+.image-options-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.5rem}
+.image-option-button{border:1px solid #525252;border-radius:0.5rem;overflow:hidden;padding:0;background:rgba(23,23,23,0.85)}
+.image-option-button--selected{border-color:#d6c78f;box-shadow:0 0 0 1px rgba(214,199,143,0.35)}
+.image-option-preview-btn{border:0;padding:0;margin:0;width:100%;display:block;cursor:zoom-in;background:transparent}
+.image-option-apply-btn{width:100%;border:0;border-top:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.45);color:#f3f4f6;padding:0.38rem 0.5rem;font-size:10px;font-weight:500;text-align:center;cursor:pointer}
+.image-option-thumb{width:100%;height:5.5rem;object-fit:cover;display:block}
+.character-mining-preview-shell{border:1px solid #404040;border-radius:8px;background:#1f1f1f;padding:16px;margin-top:8px}
+.character-mining-preview .sentence-card-hanzi{font-size:20px;line-height:1.45;white-space:pre-wrap;word-break:break-word;max-width:100%;font-weight:600}
+/* Sentence mining: Anki card *back* preview (eReader-style, centered) */
+.sent-anki-back-preview{text-align:center;max-width:440px;margin:0 auto;padding:22px 18px 26px;box-sizing:border-box}
+.sent-anki-back-preview .sent-back-word-block{margin:0 0 4px;padding:0 6px}
+.sent-anki-back-preview .sent-back-target{font-size:2.55rem;font-weight:700;font-family:"Kaiti SC","STKaiti","KaiTi",serif;color:#fafafa;line-height:1.2}
+.sent-anki-back-preview .sent-back-word-pinyin{font-size:1.12rem;color:#e8e8e8;margin-top:10px;font-weight:400;letter-spacing:0.03em}
+.sent-anki-back-preview .sent-back-word-gloss{font-size:1.02rem;color:#f0f0f0;margin-top:12px;line-height:1.5;white-space:pre-wrap}
+.sent-anki-back-preview .sent-back-example-block{margin-top:22px;padding-top:0}
+.sent-anki-back-preview .sent-back-sentence{font-size:1.38rem;line-height:1.65;font-family:"Kaiti SC","STKaiti","KaiTi",serif;color:#fafafa;font-weight:500;word-break:break-word}
+.sent-anki-back-preview .sent-back-sentence .target-word{background:#634e32;color:#fff;border-radius:4px;padding:2px 6px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sent-anki-back-preview .sent-back-translation{font-size:0.95rem;color:#c4c4cc;line-height:1.58;margin-top:16px;white-space:pre-wrap}
+.sent-anki-back-preview .sent-back-meta{margin-top:22px}
+.sent-anki-back-preview .sent-back-sec-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#888;font-weight:600;margin-bottom:8px}
+.sent-anki-back-preview .sent-back-sec-body{font-size:0.9rem;color:#e5e5e5;line-height:1.55;white-space:pre-wrap}
+.char-mining-img-modal{position:fixed;inset:0;z-index:10040}
+.char-mining-img-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.72)}
+.char-mining-img-modal__panel{position:absolute;inset:24px;display:flex;align-items:center;justify-content:center}
+.char-mining-img-modal__image{max-width:min(94vw,1200px);max-height:calc(100vh - 72px);width:auto;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,0.16);box-shadow:0 14px 46px rgba(0,0,0,0.52);background:#111}
+.char-mining-img-modal__close{position:absolute;top:6px;right:6px;width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);background:rgba(0,0,0,0.66);color:#fff;font-size:23px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}
+`;
+    document.head.appendChild(style);
+}
+
+function readCharacterCardEditablesFromDom(host) {
+    const out = host.querySelector('.char-mining-card-output');
+    const st = host._miningState;
+    if (!out || !st || !st.card) return;
+    const c = st.card;
+    const v = (sel) => {
+        const el = out.querySelector(sel);
+        return el ? el.value : undefined;
+    };
+    const co = v('.js-char-edit-components');
+    const def = v('.js-char-edit-definition');
+    const rel = v('.js-char-edit-related');
+    const com = v('.js-char-edit-common');
+    if (typeof co === 'string') c.components = co;
+    if (typeof def === 'string') c.definition = def;
+    if (typeof rel === 'string') c.related = rel;
+    if (typeof com === 'string') c.common_words = com;
+}
+
+function readSentenceMiningCardEditablesFromDom(host) {
+    const out = host.querySelector('.char-mining-card-output');
+    const st = host._miningState;
+    if (!out || !st || !st.card) return;
+    const c = st.card;
+    const v = (sel) => {
+        const el = out.querySelector(sel);
+        return el ? el.value : undefined;
+    };
+    const wdef = v('.js-sent-edit-definition');
+    const tr = v('.js-sent-edit-translation');
+    const rel = v('.js-sent-edit-related');
+    if (typeof wdef === 'string') c.word_definition = wdef;
+    if (typeof tr === 'string') c.definition = tr;
+    if (typeof rel === 'string') c.related = rel;
+}
+
+function readMiningCardEditablesFromDom(host) {
+    if (host._sentenceMining) readSentenceMiningCardEditablesFromDom(host);
+    else readCharacterCardEditablesFromDom(host);
+}
+
+function syncCharacterMiningPreviewFromState(host) {
+    const out = host.querySelector('.char-mining-card-output');
+    const st = host._miningState;
+    if (!out || !st || !st.card) return;
+    const c = st.card;
+    const root = out.querySelector('.character-mining-preview');
+    if (!root) return;
+    if (host._sentenceMining && root.classList.contains('sent-anki-back-preview')) {
+        const setText = (sel, text) => {
+            const el = root.querySelector(sel);
+            if (el) el.textContent = text ?? '';
+        };
+        const sentEl = root.querySelector('.js-prev-sentence-html');
+        if (sentEl) {
+            sentEl.innerHTML = getSentenceCardPreviewHtml(c);
+            sentEl.className = 'sent-back-sentence js-prev-sentence-html';
+        }
+        const twEl = root.querySelector('.js-prev-target-word');
+        if (twEl) {
+            twEl.textContent = c.target_word || '';
+            twEl.className = 'sent-back-target js-prev-target-word';
+        }
+        setText('.js-prev-word-pinyin', c.word_pinyin || '');
+        setText('.js-prev-word-definition', c.word_definition || '');
+        const fb = root.querySelector('.js-prev-focus-block');
+        if (fb) {
+            const showFocus = String(c.target_word || c.word_pinyin || c.word_definition || '').trim();
+            fb.style.display = showFocus ? 'block' : 'none';
+        }
+        setText('.js-prev-definition', c.definition || '');
+        const clozeW = root.querySelector('.js-prev-cloze-wrap');
+        if (clozeW) {
+            const has = String(c.cloze || '').trim();
+            clozeW.style.display = has ? 'block' : 'none';
+            setText('.js-prev-cloze', c.cloze || '');
+        }
+        const notesW = root.querySelector('.js-prev-notes-wrap');
+        if (notesW) {
+            const has = String(c.notes || '').trim();
+            notesW.style.display = has ? 'block' : 'none';
+            setText('.js-prev-notes', c.notes || '');
+        }
+        const relW = root.querySelector('.js-prev-related-wrap');
+        if (relW) {
+            const has = String(c.related || '').trim();
+            relW.style.display = has ? 'block' : 'none';
+            setText('.js-prev-related', c.related || '');
+        }
+        const srcW = root.querySelector('.js-prev-source-wrap');
+        if (srcW) {
+            const has = String(c.source || '').trim();
+            srcW.style.display = has ? 'block' : 'none';
+            setText('.js-prev-source', c.source || '');
+        }
+        return;
+    }
+    const tone = toneClassNameMining(c.tone);
+    const setText = (sel, text) => {
+        const el = root.querySelector(sel);
+        if (el) el.textContent = text ?? '';
+    };
+    const hanzi = root.querySelector('.js-prev-hanzi');
+    if (hanzi) {
+        hanzi.textContent = c.hanzi || '';
+        const sentCls = host._sentenceMining ? ' sentence-card-hanzi' : '';
+        hanzi.className = `hanzi js-prev-hanzi ${tone}${sentCls}`.trim();
+    }
+    const compEl = root.querySelector('.js-prev-components');
+    if (compEl) {
+        compEl.textContent = c.components || '';
+    }
+    const py = root.querySelector('.js-prev-pinyin');
+    if (py) {
+        py.textContent = c.pinyin || '';
+        py.className = `pinyin js-prev-pinyin ${tone}`.trim();
+    }
+    setText('.js-prev-definition', c.definition || '');
+    const relW = root.querySelector('.js-prev-related-wrap');
+    if (relW) {
+        relW.style.display = String(c.related || '').trim() ? 'block' : 'none';
+        setText('.js-prev-related', c.related || '');
+    }
+    const comW = root.querySelector('.js-prev-common-wrap');
+    if (comW) {
+        comW.style.display = String(c.common_words || '').trim() ? 'block' : 'none';
+        setText('.js-prev-common', c.common_words || '');
+    }
+    const story = root.querySelector('.js-char-story');
+    if (story) {
+        if (String(c.anki_story_html || '').trim()) {
+            const coloredStory = colorizeStoryHtmlForToneMining(c.anki_story_html, c.tone);
+            c.anki_story_html = coloredStory;
+            story.innerHTML = coloredStory;
+            story.setAttribute('data-tone', String(c.tone));
+            story.className = 'story js-char-story';
+        } else {
+            story.innerHTML = '';
+            story.textContent = 'No story generated.';
+            story.className = 'story js-char-story';
+            story.style.color = '#9ca3af';
+        }
+    }
+}
+
+function refreshCharacterMiningCardDOM(host) {
+    ensureCharacterMiningEreaderCss();
+    const out = host.querySelector('.char-mining-card-output');
+    const st = host._miningState;
+    if (!out) return;
+    if (!st || !st.card) {
+        out.style.display = 'none';
+        out.innerHTML = '';
+        return;
+    }
+
+    const lingqScoreText = st.lingqLoading
+        ? 'LingQ ...'
+        : st.lingqBlock
+          ? `LingQ ${typeof st.lingqBlock.displayScore === 'number' ? st.lingqBlock.displayScore : '-'}`
+          : 'LingQ -';
+
+    const esc = escapeHtmlMining;
+    const notionOpts = CHARACTER_MINING_NOTION_OPTIONS.map(
+        (opt) => `<option value="${esc(opt)}"${st.notionLatest === opt ? ' selected' : ''}>${esc(opt)}</option>`
+    ).join('');
+
+    const lingqRowHtml = `
+  <div class="char-mining-lingq-row">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+      <span title="${esc(st.lingqBlock?.error || 'LingQ score')}">${esc(lingqScoreText)}</span>
+      ${
+          st.lingqBlock?.configured && !st.lingqBlock.error
+              ? `<button type="button" data-action="mark-known" ${st.lingqMarkLoading || (typeof st.lingqBlock.displayScore === 'number' && st.lingqBlock.displayScore >= 5) ? 'disabled' : ''}>${
+                    st.lingqMarkLoading
+                        ? 'Updating...'
+                        : typeof st.lingqBlock.displayScore === 'number' && st.lingqBlock.displayScore >= 5
+                          ? 'Known'
+                          : 'Mark Known'
+                }</button>`
+              : ''
+      }
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+      <select class="js-char-notion-latest" data-action="notion-latest">${notionOpts}</select>
+      <button type="button" data-action="add-notion" ${st.notionLoading ? 'disabled' : ''}>${st.notionLoading ? 'Adding...' : st.notionAdded ? 'Notion added' : 'Add to Notion'}</button>
+      <button type="button" data-action="add-anki" ${st.ankiLoading ? 'disabled' : ''}>${st.ankiLoading ? 'Adding...' : st.ankiAdded ? 'Anki added' : 'Add to Anki'}</button>
+    </div>
+  </div>
+  ${st.lingqMarkError ? `<p class="char-mining-err">${esc(st.lingqMarkError)}</p>` : ''}
+  ${st.notionError ? `<p class="char-mining-err">${esc(st.notionError)}</p>` : ''}
+  ${st.ankiError ? `<p class="char-mining-err">${esc(st.ankiError)}</p>` : ''}`;
+
+    if (host._sentenceMining) {
+        readSentenceMiningCardEditablesFromDom(host);
+        const c = st.card;
+        out.style.display = 'block';
+        out.innerHTML = `
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+  ${lingqRowHtml}
+  <div class="character-mining-preview character-mining-preview-shell sent-anki-back-preview">
+    <div class="sent-back-word-block js-prev-focus-block">
+      <div class="sent-back-target js-prev-target-word"></div>
+      <div class="sent-back-word-pinyin js-prev-word-pinyin"></div>
+      <div class="sent-back-word-gloss js-prev-word-definition"></div>
+    </div>
+    <div class="sent-back-example-block">
+      <div class="sent-back-sentence js-prev-sentence-html"></div>
+      <div class="sent-back-translation js-prev-definition"></div>
+    </div>
+    <div class="sent-back-meta js-prev-related-wrap" style="display:none">
+      <div class="sent-back-sec-label">Related</div>
+      <div class="sent-back-sec-body related-content js-prev-related"></div>
+    </div>
+    <div class="sent-back-meta js-prev-source-wrap" style="display:none">
+      <div class="sent-back-sec-label">Source</div>
+      <div class="sent-back-sec-body js-prev-source"></div>
+    </div>
+    <div class="sent-back-meta js-prev-cloze-wrap" style="display:none">
+      <div class="sent-back-sec-label">Cloze</div>
+      <div class="sent-back-sec-body js-prev-cloze"></div>
+    </div>
+    <div class="sent-back-meta js-prev-notes-wrap" style="display:none">
+      <div class="sent-back-sec-label">Notes</div>
+      <div class="sent-back-sec-body js-prev-notes"></div>
+    </div>
+  </div>
+  <div class="char-mining-editable-wrap">
+    <div class="char-mining-editable-title">Editable fields</div>
+    <label><span class="char-mining-field-label">Definition</span>
+      <textarea class="char-mining-textarea js-sent-edit-definition" rows="2">${esc(c.word_definition || '')}</textarea></label>
+    <label><span class="char-mining-field-label">Translation</span>
+      <textarea class="char-mining-textarea js-sent-edit-translation" rows="3">${esc(c.definition || '')}</textarea></label>
+    <label><span class="char-mining-field-label">Related</span>
+      <textarea class="char-mining-textarea js-sent-edit-related" rows="3">${esc(c.related || '')}</textarea></label>
+  </div>
+</div>`;
+        syncCharacterMiningPreviewFromState(host);
+        return;
+    }
+
+    readCharacterCardEditablesFromDom(host);
+    const c = st.card;
+    const tone = toneClassNameMining(c.tone);
+    const fid = host._charMiningFileInputId || (host._charMiningFileInputId = `char-mining-img-${Date.now().toString(36)}`);
+
+    const imgBtnLabel = st.imageGenLoading
+        ? 'Generating Images...'
+        : `Generate Images (${esc(st.imageGenModel)})`;
+
+    const imgGrid = (st.imageGenOptions || []).length
+        ? `<div class="image-options-grid">${st.imageGenOptions
+              .map(
+                  (url, idx) => `
+            <div class="image-option-button${st.imageDataUrl === url ? ' image-option-button--selected' : ''}">
+              <button type="button" class="image-option-preview-btn" data-action="img-open" data-idx="${idx}">
+                <img class="image-option-thumb" src="${esc(url)}" alt="" />
+              </button>
+              <button type="button" class="image-option-apply-btn" data-action="img-apply" data-idx="${idx}">
+                ${st.imageDataUrl === url ? 'Selected for card' : `Option ${idx + 1} - use on card`}
+              </button>
+            </div>`
+              )
+              .join('')}</div>`
+        : '<div style="font-size:12px;color:#737373">Generated images will appear here.</div>';
+
+    const auxComponentsTitle = 'Components used for image/story';
+
+    const imageSlotHtml = st.imageDataUrl
+        ? `<div class="image-slot__filled">
+             <img class="image-slot__img" src="${esc(st.imageDataUrl)}" alt="" />
+             <div class="image-slot__actions"><button type="button" class="image-slot__btn" data-action="remove-image">Remove image</button></div>
+           </div>`
+        : `<div class="image-placeholder image-slot__paste" tabindex="0" data-paste-zone="1">
+             <p class="image-slot__paste-title" style="margin:0 0 8px;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#a1a1aa">Image (Anki field)</p>
+             <p style="margin:0 0 12px;font-size:13px;color:#d4d4d8">Click here, then paste <kbd style="display:inline-block;padding:0.1em 0.4em;border-radius:4px;font-size:11px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.12)">⌘V</kbd> / <kbd style="display:inline-block;padding:0.1em 0.4em;border-radius:4px;font-size:11px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.12)">Ctrl+V</kbd></p>
+             <div class="image-slot__paste-row">
+               <button type="button" class="image-slot__btn image-slot__btn--primary" data-action="read-clip">Read clipboard</button>
+               <label class="image-slot__btn image-slot__btn--primary" for="${fid}" style="cursor:pointer">Choose file</label>
+               <input id="${fid}" class="image-slot__file-input" type="file" accept="image/*" data-action="file-input" />
+             </div>
+           </div>`;
+
+    out.style.display = 'block';
+    out.innerHTML = `
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+  <div class="char-mining-aux-box">
+    <div class="char-mining-aux-title">${esc(auxComponentsTitle)}</div>
+    <div class="char-mining-aux-body">${esc(c.components || '—')}</div>
+  </div>
+  <div class="char-mining-aux-box">
+    <div class="char-mining-aux-title">Image Prompt</div>
+    <div class="char-mining-aux-body">${esc(c.image_prompt || 'No prompt')}</div>
+  </div>
+  <button type="button" class="char-mining-gen-images-btn" data-action="gen-images" ${st.imageGenLoading || !String(c.image_prompt || '').trim() ? 'disabled' : ''}>${imgBtnLabel}</button>
+  ${st.imageGenError ? `<p class="char-mining-err">${esc(st.imageGenError)}</p>` : ''}
+  ${st.imageGenPartial ? `<p class="char-mining-warn">${esc(st.imageGenPartial)}</p>` : ''}
+  <div class="char-mining-img-grid-wrap">${imgGrid}</div>
+  ${lingqRowHtml}
+
+  <div class="character-mining-preview character-mining-preview-shell">
+    <div class="hanzi js-prev-hanzi ${tone}">${esc(c.hanzi || '')}</div>
+    <div class="components js-prev-components">${esc(c.components || '')}</div>
+    <div class="pinyin js-prev-pinyin ${tone}">${esc(c.pinyin || '')}</div>
+    <div class="definition js-prev-definition">${esc(c.definition || '')}</div>
+    <div class="js-prev-related-wrap" style="display:${String(c.related || '').trim() ? 'block' : 'none'}">
+      <div class="related-header">Related:</div>
+      <div class="related-content js-prev-related">${esc(c.related || '')}</div>
+    </div>
+    <div class="js-prev-common-wrap" style="display:${String(c.common_words || '').trim() ? 'block' : 'none'}">
+      <div class="common-header">Common Words:</div>
+      <div class="common-content js-prev-common">${esc(c.common_words || '')}</div>
+    </div>
+    <div class="image-slot">${imageSlotHtml}</div>
+    <div class="story js-char-story" data-tone="${esc(String(c.tone || 0))}"></div>
+  </div>
+
+  <div class="char-mining-editable-wrap">
+    <div class="char-mining-editable-title">Editable Fields</div>
+    <label><span class="char-mining-field-label">Components</span>
+      <textarea class="char-mining-textarea js-char-edit-components" data-field="components" rows="2">${esc(c.components || '')}</textarea></label>
+    <label><span class="char-mining-field-label">Definition</span>
+      <textarea class="char-mining-textarea js-char-edit-definition" data-field="definition" rows="2">${esc(c.definition || '')}</textarea></label>
+    <label><span class="char-mining-field-label">Related</span>
+      <textarea class="char-mining-textarea js-char-edit-related" data-field="related" rows="3">${esc(c.related || '')}</textarea></label>
+    <label><span class="char-mining-field-label">Common Words</span>
+      <textarea class="char-mining-textarea js-char-edit-common" data-field="common_words" rows="3">${esc(c.common_words || '')}</textarea></label>
+  </div>
+</div>`;
+
+    const story = out.querySelector('.js-char-story');
+    if (story) {
+        if (String(c.anki_story_html || '').trim()) {
+            const coloredStory = colorizeStoryHtmlForToneMining(c.anki_story_html, c.tone);
+            c.anki_story_html = coloredStory;
+            story.innerHTML = coloredStory;
+            story.style.color = '';
+        } else {
+            story.textContent = 'No story generated.';
+            story.style.color = '#9ca3af';
+        }
+    }
+}
+
+function bindCharacterMiningHostEvents(host) {
+    if (host._charMiningHostEventsBound) return;
+    host._charMiningHostEventsBound = true;
+
+    host.addEventListener('input', (e) => {
+        const t = e.target;
+        if (!t || !t.classList) return;
+        if (!host._miningState || !host._miningState.card) return;
+        if (t.classList.contains('js-char-edit-components')) host._miningState.card.components = t.value;
+        if (t.classList.contains('js-char-edit-definition')) host._miningState.card.definition = t.value;
+        if (t.classList.contains('js-char-edit-related')) host._miningState.card.related = t.value;
+        if (t.classList.contains('js-char-edit-common')) host._miningState.card.common_words = t.value;
+        if (t.classList.contains('js-sent-edit-definition')) host._miningState.card.word_definition = t.value;
+        if (t.classList.contains('js-sent-edit-translation')) host._miningState.card.definition = t.value;
+        if (t.classList.contains('js-sent-edit-related')) host._miningState.card.related = t.value;
+        if (
+            t.classList.contains('char-mining-source-input') &&
+            host._sentenceMining &&
+            host._miningState &&
+            host._miningState.card
+        ) {
+            host._miningState.card.source = t.value;
+        }
+        if (
+            t.matches(
+                '.js-char-edit-components, .js-char-edit-definition, .js-char-edit-related, .js-char-edit-common, .js-sent-edit-definition, .js-sent-edit-translation, .js-sent-edit-related'
+            )
+        ) {
+            syncCharacterMiningPreviewFromState(host);
+        }
+    });
+
+    host.addEventListener('change', (e) => {
+        const t = e.target;
+        if (t && t.classList && t.classList.contains('js-char-notion-latest')) {
+            if (host._miningState) host._miningState.notionLatest = t.value;
+        }
+        if (t && t.matches('input[data-action="file-input"]')) {
+            const file = t.files && t.files[0];
+            if (!file || !file.type.startsWith('image/') || !host._miningState) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                host._miningState.imageDataUrl = typeof reader.result === 'string' ? reader.result : null;
+                refreshCharacterMiningCardDOM(host);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    host.addEventListener(
+        'paste',
+        (e) => {
+            if (host._sentenceMining) return;
+            const zone = e.target && e.target.closest && e.target.closest('[data-paste-zone]');
+            if (!zone || !host._miningState) return;
+            const items = e.clipboardData && e.clipboardData.items;
+            if (!items) return;
+            for (let i = 0; i < items.length; i += 1) {
+                if (items[i].type && items[i].type.indexOf('image') === 0) {
+                    e.preventDefault();
+                    const blob = items[i].getAsFile();
+                    if (!blob) return;
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        host._miningState.imageDataUrl = typeof reader.result === 'string' ? reader.result : null;
+                        refreshCharacterMiningCardDOM(host);
+                    };
+                    reader.readAsDataURL(blob);
+                    return;
+                }
+            }
+        },
+        true
+    );
+
+    host.addEventListener('click', async (e) => {
+        const btn = e.target && e.target.closest && e.target.closest('[data-action]');
+        if (!btn || !host._miningState || !host._miningState.card) return;
+        const action = btn.getAttribute('data-action');
+        const st = host._miningState;
+        const c = st.card;
+        const isSentence = Boolean(host._sentenceMining);
+        const imgGenPath = isSentence ? '/anki/sentence/generate-images' : '/anki/character/generate-images';
+        const notionPath = isSentence ? '/anki/sentence/notion-entry' : '/anki/character/notion-entry';
+        const ankiPath = isSentence ? '/anki/sentence/add' : '/anki/character/add';
+
+        if (action === 'gen-images') {
+            e.preventDefault();
+            if (isSentence) return;
+            if (!c.image_prompt || !String(c.image_prompt).trim()) return;
+            st.imageGenLoading = true;
+            st.imageGenError = '';
+            st.imageGenPartial = '';
+            st.imageGenOptions = [];
+            refreshCharacterMiningCardDOM(host);
+            try {
+                const payload = await characterMiningApiPost(imgGenPath, {
+                    prompt: String(c.image_prompt).trim(),
+                    count: 3
+                });
+                const images = Array.isArray(payload?.images)
+                    ? payload.images.filter((x) => typeof x === 'string')
+                    : [];
+                if (images.length === 0) st.imageGenError = 'No generated images returned.';
+                else st.imageGenOptions = images;
+                if (typeof payload?.model === 'string' && payload.model.trim()) st.imageGenModel = payload.model.trim();
+                const partialErrors = Array.isArray(payload?.partialErrors)
+                    ? payload.partialErrors.filter((x) => typeof x === 'string')
+                    : [];
+                if (partialErrors.length) st.imageGenPartial = partialErrors.join('; ');
+            } catch (err) {
+                st.imageGenError = err instanceof Error ? err.message : String(err);
+            } finally {
+                st.imageGenLoading = false;
+                refreshCharacterMiningCardDOM(host);
+            }
+            return;
+        }
+
+        if (action === 'img-apply') {
+            e.preventDefault();
+            const idx = Number(btn.getAttribute('data-idx'));
+            if (!Number.isFinite(idx) || !st.imageGenOptions[idx]) return;
+            st.imageDataUrl = st.imageGenOptions[idx];
+            refreshCharacterMiningCardDOM(host);
+            return;
+        }
+
+        if (action === 'img-open') {
+            e.preventDefault();
+            const idx = Number(btn.getAttribute('data-idx'));
+            if (!Number.isFinite(idx) || !st.imageGenOptions[idx]) return;
+            openCharacterMiningImageModal(st.imageGenOptions[idx]);
+            return;
+        }
+
+        if (action === 'remove-image') {
+            e.preventDefault();
+            st.imageDataUrl = null;
+            refreshCharacterMiningCardDOM(host);
+            return;
+        }
+
+        if (action === 'read-clip') {
+            e.preventDefault();
+            try {
+                const clipItems = await navigator.clipboard.read();
+                for (const item of clipItems) {
+                    for (const type of item.types || []) {
+                        if (type.startsWith('image/')) {
+                            const blob = await item.getType(type);
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                                st.imageDataUrl = typeof reader.result === 'string' ? reader.result : null;
+                                refreshCharacterMiningCardDOM(host);
+                            };
+                            reader.readAsDataURL(blob);
+                            return;
+                        }
+                    }
+                }
+            } catch {
+                /* ignore */
+            }
+            return;
+        }
+
+        if (action === 'mark-known') {
+            e.preventDefault();
+            st.lingqMarkError = '';
+            st.lingqMarkLoading = true;
+            refreshCharacterMiningCardDOM(host);
+            try {
+                const fwEl = host.querySelector('.char-mining-focus-word-input');
+                const termSource =
+                    fwEl && String(fwEl.value || '').trim()
+                        ? String(fwEl.value).trim()
+                        : host._lingqTerm != null
+                          ? host._lingqTerm
+                          : c.hanzi;
+                const body = { term: String(termSource || '').trim() };
+                if (typeof st.lingqBlock?.cardPk === 'number') body.cardPk = st.lingqBlock.cardPk;
+                const j = await characterMiningApiPost('/anki/sentence/lingq-mark-known', body);
+                if (j && st.lingqBlock) {
+                    st.lingqBlock.displayScore = 5;
+                    st.lingqBlock.found = true;
+                    st.lingqBlock.error = undefined;
+                }
+            } catch (err) {
+                st.lingqMarkError = err instanceof Error ? err.message : String(err);
+            } finally {
+                st.lingqMarkLoading = false;
+                refreshCharacterMiningCardDOM(host);
+            }
+            return;
+        }
+
+        if (action === 'add-notion') {
+            e.preventDefault();
+            readMiningCardEditablesFromDom(host);
+            mergeSentenceMiningSourceIntoCard(host);
+            st.notionError = '';
+            st.notionLoading = true;
+            refreshCharacterMiningCardDOM(host);
+            try {
+                if (isSentence) {
+                    const cardPayload = toSentenceMiningCardPayloadForExport(c);
+                    const notionBody = { card: cardPayload, latest: String(st.notionLatest ?? '→4') };
+                    const src = String(c.source || '').trim();
+                    if (src) notionBody.source = src;
+                    await characterMiningApiPost(notionPath, notionBody);
+                    st.notionAdded = true;
+                } else {
+                    const cardPayload = toCharacterCardPayloadMining(c);
+                    const safeImage = normalizedImageDataUrlForSubmitMining(st.imageDataUrl);
+                    if (st.imageDataUrl && !safeImage) {
+                        st.notionError = 'Image is too large to upload (max ~12 MB).';
+                    } else {
+                        const notionBody = { card: cardPayload, latest: String(st.notionLatest ?? '→4') };
+                        if (safeImage) notionBody.imageDataUrl = safeImage;
+                        await characterMiningApiPost(notionPath, notionBody);
+                        st.notionAdded = true;
+                    }
+                }
+            } catch (err) {
+                st.notionError = err instanceof Error ? err.message : String(err);
+            } finally {
+                st.notionLoading = false;
+                refreshCharacterMiningCardDOM(host);
+            }
+            return;
+        }
+
+        if (action === 'add-anki') {
+            e.preventDefault();
+            readMiningCardEditablesFromDom(host);
+            mergeSentenceMiningSourceIntoCard(host);
+            st.ankiError = '';
+            st.ankiLoading = true;
+            refreshCharacterMiningCardDOM(host);
+            try {
+                if (isSentence) {
+                    const cardPayload = toSentenceMiningCardPayloadForExport(c);
+                    const extraTags = extraTagsForAnkiFromLingqSnapshotMining(st);
+                    await characterMiningApiPost(ankiPath, {
+                        card: cardPayload,
+                        source: String(c.source || '').trim(),
+                        extraTags
+                    });
+                    st.ankiAdded = true;
+                } else {
+                    const cardPayload = toCharacterCardPayloadMining(c);
+                    const safeImage = normalizedImageDataUrlForSubmitMining(st.imageDataUrl);
+                    if (st.imageDataUrl && !safeImage) {
+                        st.ankiError = 'Image is too large to upload (max ~12 MB).';
+                    } else {
+                        const extraTags = extraTagsForAnkiFromLingqSnapshotMining(st);
+                        const ankiBody = { card: cardPayload, extraTags };
+                        if (safeImage) ankiBody.imageDataUrl = safeImage;
+                        await characterMiningApiPost(ankiPath, ankiBody);
+                        st.ankiAdded = true;
+                    }
+                }
+            } catch (err) {
+                st.ankiError = err instanceof Error ? err.message : String(err);
+            } finally {
+                st.ankiLoading = false;
+                refreshCharacterMiningCardDOM(host);
+            }
+        }
+    });
+}
+
+function applyCharacterMiningDrawerStyling(host) {
+    Object.assign(host.style, {
+        position: 'fixed',
+        inset: '0',
+        zIndex: '10020'
+    });
+    const backdrop = host.querySelector('.char-mining-backdrop');
+    if (backdrop) {
+        Object.assign(backdrop.style, {
+            position: 'absolute',
+            inset: '0',
+            background: 'rgba(0,0,0,0.45)'
+        });
+    }
+    const panel = host.querySelector('.char-mining-panel');
+    if (panel) {
+        Object.assign(panel.style, {
+            position: 'absolute',
+            top: '0',
+            right: '0',
+            width: 'min(560px, 94vw)',
+            height: '100%',
+            background: 'rgb(24, 24, 27)',
+            color: '#fff',
+            boxShadow: '-6px 0 22px rgba(0,0,0,0.45)',
+            display: 'flex',
+            flexDirection: 'column',
+            borderLeft: '1px solid #3f3f46'
+        });
+    }
+    const header = host.querySelector('.char-mining-header');
+    if (header) {
+        Object.assign(header.style, {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '12px 14px',
+            borderBottom: '1px solid #444'
+        });
+    }
+    const headerTitle = host.querySelector('.char-mining-header h3');
+    if (headerTitle) Object.assign(headerTitle.style, { margin: '0', fontSize: '1rem', fontWeight: '600' });
+    const closeBtn = host.querySelector('.char-mining-close-btn');
+    if (closeBtn) {
+        Object.assign(closeBtn.style, {
+            border: '1px solid #666',
+            background: 'rgb(44, 44, 44)',
+            color: '#fff',
+            borderRadius: '6px',
+            width: '30px',
+            height: '30px',
+            cursor: 'pointer',
+            fontSize: '1.15rem',
+            lineHeight: '1',
+            padding: '0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxSizing: 'border-box'
+        });
+    }
+    const body = host.querySelector('.char-mining-body');
+    if (body) Object.assign(body.style, { padding: '14px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' });
+    const formCard = host.querySelector('.char-mining-form-card');
+    if (formCard) {
+        Object.assign(formCard.style, {
+            border: '1px solid #3f3f46',
+            borderRadius: '8px',
+            background: '#262626',
+            padding: '12px'
+        });
+    }
+    host.querySelectorAll('.char-mining-row').forEach((row) => {
+        Object.assign(row.style, { display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '8px' });
+    });
+    const firstRow = host.querySelector('.char-mining-form-card .char-mining-row');
+    if (firstRow) firstRow.style.marginTop = '0';
+    host.querySelectorAll('.char-mining-row label').forEach((label) => {
+        Object.assign(label.style, { color: '#c7c7c7', fontSize: '0.82rem', paddingTop: '2px' });
+    });
+    host.querySelectorAll('.char-mining-word, .char-mining-sentence, .char-mining-sentence-textarea, .char-mining-character-input, .char-mining-subcomponents-input, .char-mining-common-words-input, .char-mining-story-meaning-input, .char-mining-focus-word-input, .char-mining-source-input').forEach((input) => {
+        Object.assign(input.style, {
+            width: '100%',
+            boxSizing: 'border-box',
+            border: '1px solid #555',
+            background: '#1f1f1f',
+            color: '#fff',
+            borderRadius: '8px',
+            padding: '8px 10px',
+            fontSize: '0.92rem'
+        });
+    });
+    const characterInput = host.querySelector('.char-mining-character-input');
+    if (characterInput) {
+        Object.assign(characterInput.style, {
+            fontSize: '1.75rem',
+            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+        });
+    }
+    const focusWordInput = host.querySelector('.char-mining-focus-word-input');
+    if (focusWordInput) {
+        Object.assign(focusWordInput.style, {
+            fontSize: '1.35rem',
+            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+        });
+    }
+    const sentenceTextarea = host.querySelector('.char-mining-sentence-textarea');
+    if (sentenceTextarea) {
+        Object.assign(sentenceTextarea.style, {
+            fontSize: '1.35rem',
+            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif",
+            lineHeight: '1.5'
+        });
+    }
+    const subcomponentsInput = host.querySelector('.char-mining-subcomponents-input');
+    if (subcomponentsInput) {
+        Object.assign(subcomponentsInput.style, {
+            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+        });
+    }
+    const commonWordsInput = host.querySelector('.char-mining-common-words-input');
+    if (commonWordsInput) {
+        Object.assign(commonWordsInput.style, {
+            fontSize: '1.5rem',
+            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+        });
+    }
+    const optionsWrap = host.querySelector('.char-mining-options');
+    if (optionsWrap) {
+        Object.assign(optionsWrap.style, { display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginTop: '6px' });
+    }
+    host.querySelectorAll('.char-mining-option-btn').forEach((btn) => {
+        const isActive = btn.classList.contains('char-mining-option-btn--active');
+        const isKnown = btn.classList.contains('char-mining-option-btn--known');
+        Object.assign(btn.style, {
+            minWidth: '92px',
+            border: isKnown
+                ? (isActive ? '3px solid #f5f5f5' : '1px solid #3f3f46')
+                : (isActive ? '3px solid #facc15' : '1px solid #b9a96a'),
+            borderRadius: '12px',
+            padding: isActive ? '7px 9px 6px' : '9px 11px 8px',
+            background: isKnown ? (isActive ? 'rgba(82,82,91,0.98)' : 'rgba(24,24,27,0.7)') : (isActive ? 'rgba(64,64,64,0.98)' : 'rgba(23,23,23,0.9)'),
+            color: '#fff',
+            cursor: 'pointer',
+            fontSize: '0.95rem',
+            display: 'grid',
+            gridTemplateRows: '1.1rem auto 0.95rem',
+            alignItems: 'center',
+            transition: 'border-color 120ms ease, background-color 120ms ease, transform 120ms ease'
+        });
+    });
+    host.querySelectorAll('.char-mining-option-pinyin').forEach((el) => {
+        Object.assign(el.style, {
+            display: 'block',
+            textAlign: 'center',
+            fontSize: '1rem',
+            color: '#d1d5db',
+            minHeight: '1rem',
+            marginTop: '0.8rem',
+            marginBottom: '0.2rem'
+        });
+    });
+    host.querySelectorAll('.char-mining-option-hanzi').forEach((el) => {
+        Object.assign(el.style, {
+            display: 'block',
+            textAlign: 'center',
+            fontFamily: "'Inter', 'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif",
+            fontSize: '2.4rem',
+            lineHeight: '1',
+            color: '#f9fafb'
+        });
+    });
+    host.querySelectorAll('.char-mining-option-status').forEach((el) => {
+        Object.assign(el.style, {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '0.9rem',
+            color: '#e5e7eb',
+            fontSize: '0.9rem'
+        });
+    });
+    const preview = host.querySelector('.char-mining-preview');
+    if (preview) {
+        Object.assign(preview.style, {
+            border: '1px solid #555',
+            borderRadius: '10px',
+            background: 'rgb(43, 43, 43)',
+            padding: '12px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px'
+        });
+    }
+    const previewHanzi = host.querySelector('.char-mining-preview-hanzi');
+    if (previewHanzi) Object.assign(previewHanzi.style, { fontSize: '2rem', color: '#fff', lineHeight: '1.1' });
+    const previewPinyin = host.querySelector('.char-mining-preview-pinyin');
+    if (previewPinyin) Object.assign(previewPinyin.style, { fontSize: '1rem', color: '#ddd' });
+    const previewDef = host.querySelector('.char-mining-preview-def');
+    if (previewDef) Object.assign(previewDef.style, { fontSize: '0.88rem', color: '#bbb' });
+    const generateBtn = host.querySelector('.char-mining-generate-btn');
+    if (generateBtn) {
+        Object.assign(generateBtn.style, {
+            width: '100%',
+            borderRadius: '12px',
+            border: '2px solid #4a5f7c',
+            background: '#1d2d45',
+            color: '#fff',
+            padding: '12px 14px',
+            fontSize: '1.1rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            marginTop: '14px',
+            lineHeight: '1.1',
+            letterSpacing: '0.01em',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        });
+    }
+    const generateError = host.querySelector('.char-mining-generate-error');
+    if (generateError) {
+        Object.assign(generateError.style, {
+            margin: '8px 0 0',
+            fontSize: '0.8rem',
+            color: '#fca5a5'
+        });
+    }
+}
+
+function openCharacterMiningDrawer(seed) {
+    closeSentenceMiningDrawer();
+    closeCharacterMiningDrawer();
+    const { wordText, pinyinText, sentenceText } = seed;
+    let pinyinMap = getCharacterPinyinMapFromWord(wordText, pinyinText);
+    const charOptions = Array.from(new Set(Array.from(wordText || '').filter((char) => /[\u4e00-\u9fff]/.test(char))));
+    const initialChar = charOptions[0] || '';
+
+    const host = document.createElement('div');
+    host.className = 'char-mining-drawer-host';
+    host._sentenceMining = false;
+    host.innerHTML = `
+      <div class="char-mining-backdrop"></div>
+      <aside class="char-mining-panel" role="dialog" aria-modal="true" aria-label="Character Mining">
+        <div class="char-mining-header">
+          <h3>Character Mining</h3>
+          <button type="button" class="char-mining-close-btn" title="Close">×</button>
+        </div>
+        <div class="char-mining-body">
+          <div class="char-mining-form-card">
+            <div class="char-mining-row">
+              <div class="char-mining-options"></div>
+            </div>
+            <div class="char-mining-row" style="margin-top:10px;">
+              <label>Character</label>
+              <input type="text" class="char-mining-character-input" value="${initialChar}" placeholder="Single hanzi" />
+            </div>
+            <div class="char-mining-row">
+              <label>Subcomponents (Optional)</label>
+              <input type="text" class="char-mining-subcomponents-input" placeholder="e.g. 氵 刀" />
+            </div>
+            <div class="char-mining-row">
+              <label>Common Words (Optional)</label>
+              <input type="text" class="char-mining-common-words-input" value="${wordText || ''}" placeholder="e.g. 学习 学校" />
+            </div>
+            <div class="char-mining-row">
+              <label>Story Meaning (Optional)</label>
+              <input type="text" class="char-mining-story-meaning-input" placeholder="e.g. bank (financial)" />
+            </div>
+            <button type="button" class="char-mining-generate-btn">Generate Character Card</button>
+            <p class="char-mining-generate-error" style="display:none;"></p>
+            <div class="char-mining-card-output" style="display:none;"></div>
+          </div>
+        </div>
+      </aside>
+    `;
+    document.body.appendChild(host);
+    host._miningState = createDefaultCharacterMiningState();
+    bindCharacterMiningHostEvents(host);
+    applyCharacterMiningDrawerStyling(host);
+    currentCharacterMiningDrawer = host;
+    isCharacterMiningDrawerOpen = true;
+    window._characterMiningDrawerOpen = true;
+    hideSubtitleControlPanelForOverlay();
+    setSubtitleControlPanelInteractivity(true);
+
+    const backdrop = host.querySelector('.char-mining-backdrop');
+    const closeBtn = host.querySelector('.char-mining-close-btn');
+    const optionsWrap = host.querySelector('.char-mining-options');
+    const generateBtn = host.querySelector('.char-mining-generate-btn');
+    const characterInput = host.querySelector('.char-mining-character-input');
+    const subcomponentsInput = host.querySelector('.char-mining-subcomponents-input');
+    const commonWordsInput = host.querySelector('.char-mining-common-words-input');
+    const storyMeaningInput = host.querySelector('.char-mining-story-meaning-input');
+    const generateErrorEl = host.querySelector('.char-mining-generate-error');
+    let selectedChar = initialChar;
+
+    const refreshOptions = () => {
+        optionsWrap.innerHTML = '';
+        charOptions.forEach((char) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'char-mining-option-btn';
+            const displayScore = getLocalLingqDisplayScore(char);
+            const isKnown = typeof displayScore === 'number' && displayScore >= 5;
+            const isActive = char === selectedChar;
+            btn.classList.toggle('char-mining-option-btn--active', isActive);
+            btn.classList.toggle('char-mining-option-btn--known', isKnown);
+            btn.classList.toggle('char-mining-option-btn--unknown', !isKnown);
+            const py = pinyinMap[char] ? pinyinMap[char].trim() : '\u00A0';
+            btn.innerHTML = `
+              <span class="char-mining-option-pinyin">${py || '\u00A0'}</span>
+              <span class="char-mining-option-hanzi">${char}</span>
+              <span class="char-mining-option-status">${isKnown ? '✓' : ''}</span>
+            `;
+            btn.addEventListener('click', () => {
+                selectedChar = char;
+                if (characterInput) characterInput.value = char;
+                refreshOptions();
+            });
+            optionsWrap.appendChild(btn);
+        });
+        applyCharacterMiningDrawerStyling(host);
+    };
+    refreshOptions();
+
+    if (characterInput) {
+        characterInput.addEventListener('input', () => {
+            const next = (characterInput.value || '').trim();
+            selectedChar = next;
+            refreshOptions();
+        });
+    }
+
+    generateBtn.addEventListener('click', async () => {
+        const hanzi = String(selectedChar || '').trim();
+        if (!hanzi) return;
+
+        if (generateErrorEl) {
+            generateErrorEl.style.display = 'none';
+            generateErrorEl.textContent = '';
+        }
+
+        const original = generateBtn.textContent || 'Generate Character Card';
+        generateBtn.disabled = true;
+        generateBtn.textContent = 'Generating...';
+        generateBtn.style.opacity = '0.75';
+
+        try {
+            const payload = await generateCharacterCardViaBackground({
+                hanzi,
+                userSubcomponents: String(subcomponentsInput?.value || '').trim() || undefined,
+                userRequiredWords: String(commonWordsInput?.value || '').trim() || undefined,
+                storyMeaningFocus: String(storyMeaningInput?.value || '').trim() || undefined
+            });
+
+            const data = payload?.data && typeof payload.data === 'object' ? payload.data : null;
+            if (!data) {
+                throw new Error('Unexpected response from character generator');
+            }
+
+            if (data.hanzi && characterInput) {
+                characterInput.value = String(data.hanzi).trim();
+                selectedChar = characterInput.value;
+            }
+            // Keep picker pinyin in sync when returned pinyin includes selected character syllable.
+            if (selectedChar && data.pinyin) {
+                const firstSyllable = String(data.pinyin).trim().split(/\s+/)[0];
+                if (firstSyllable) pinyinMap[selectedChar] = firstSyllable;
+                refreshOptions();
+            }
+
+            const toneRaw = Number(data.tone);
+            const tone = Number.isFinite(toneRaw) && toneRaw >= 1 && toneRaw <= 5 ? toneRaw : 0;
+            host._miningState = createDefaultCharacterMiningState();
+            host._miningState.card = {
+                hanzi: String(data.hanzi ?? hanzi).trim(),
+                pinyin: String(data.pinyin ?? ''),
+                tone,
+                definition: String(data.definition ?? ''),
+                components: String(data.components ?? ''),
+                related: String(data.related ?? ''),
+                common_words: String(data.common_words ?? ''),
+                image_prompt: String(data.image_prompt ?? ''),
+                memory_blurb: String(data.memory_blurb ?? ''),
+                anki_story_html: String(data.anki_story_html ?? '')
+            };
+            host._miningState.lingqLoading = true;
+            refreshCharacterMiningCardDOM(host);
+            try {
+                const term = String(host._miningState.card.hanzi || hanzi).trim();
+                const lj = await characterMiningApiPost('/anki/sentence/lingq-lookup', { term });
+                host._miningState.lingqBlock = {
+                    configured: Boolean(lj?.configured),
+                    found: Boolean(lj?.found),
+                    displayScore: typeof lj?.displayScore === 'number' ? lj.displayScore : 0,
+                    cardPk: typeof lj?.cardPk === 'number' ? lj.cardPk : undefined,
+                    error: typeof lj?.error === 'string' ? lj.error : undefined
+                };
+                snapshotLingqScoreForAnkiTagsMining(host._miningState, host._miningState.lingqBlock.displayScore);
+                if (
+                    typeof lj?.suggestedLatest === 'string' &&
+                    CHARACTER_MINING_NOTION_OPTIONS.includes(lj.suggestedLatest)
+                ) {
+                    host._miningState.notionLatest = lj.suggestedLatest;
+                }
+            } catch (lingqErr) {
+                host._miningState.lingqBlock = {
+                    configured: false,
+                    found: false,
+                    displayScore: 0,
+                    error: lingqErr instanceof Error ? lingqErr.message : String(lingqErr)
+                };
+                snapshotLingqScoreForAnkiTagsMining(host._miningState, 0);
+            } finally {
+                host._miningState.lingqLoading = false;
+                refreshCharacterMiningCardDOM(host);
+            }
+        } catch (error) {
+            if (generateErrorEl) {
+                generateErrorEl.style.display = 'block';
+                let msg = error instanceof Error ? error.message : String(error);
+                if (/failed to fetch/i.test(msg)) {
+                    const base = (window.characterMiningApiBaseUrl || 'http://localhost:3001/api').replace(/\/+$/, '');
+                    msg = `Could not reach ${base} (Failed to fetch). Start the ereader proxy on this machine and reload the extension after updating permissions.`;
+                }
+                generateErrorEl.textContent = msg;
+            }
+        } finally {
+            generateBtn.disabled = false;
+            generateBtn.textContent = original;
+            generateBtn.style.opacity = '1';
+        }
+    });
+
+    backdrop.addEventListener('click', closeCharacterMiningDrawer);
+    closeBtn.addEventListener('click', closeCharacterMiningDrawer);
+    currentCharacterMiningEscHandler = (event) => {
+        if (event.key !== 'Escape') return;
+        if (closeCharacterMiningImageModal()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+        closeCharacterMiningDrawer();
+    };
+    window.addEventListener('keydown', currentCharacterMiningEscHandler);
+}
+
+function openSentenceMiningDrawer(seed) {
+    closeCharacterMiningDrawer();
+    closeSentenceMiningDrawer();
+    const { wordText, pinyinText, sentenceText } = seed;
+    const sent0 = String(sentenceText || '');
+    const focus0 = String(wordText || '');
+    const esc = escapeHtmlMining;
+
+    const host = document.createElement('div');
+    host.className = 'char-mining-drawer-host';
+    host._sentenceMining = true;
+    host._lingqTerm = focus0;
+    const source0 = esc(getPlexMediaTitleForSourceSync());
+    host.innerHTML = `
+      <div class="char-mining-backdrop"></div>
+      <aside class="char-mining-panel" role="dialog" aria-modal="true" aria-label="Sentence Mining">
+        <div class="char-mining-header">
+          <h3>Sentence Mining</h3>
+          <button type="button" class="char-mining-close-btn" title="Close">×</button>
+        </div>
+        <div class="char-mining-body">
+          <div class="char-mining-form-card">
+            <div class="char-mining-row">
+              <label>Sentence</label>
+              <textarea class="char-mining-word char-mining-sentence-textarea" rows="3" placeholder="Chinese sentence">${esc(sent0)}</textarea>
+            </div>
+            <div class="char-mining-row">
+              <label>Target word or phrase</label>
+              <input type="text" class="char-mining-focus-word-input" value="${esc(focus0)}" />
+            </div>
+            <div class="char-mining-row">
+              <label>Source</label>
+              <input type="text" class="char-mining-source-input" value="${source0}" placeholder="e.g. show or episode title" />
+            </div>
+            <button type="button" class="char-mining-generate-btn">Generate Sentence Card</button>
+            <p class="char-mining-generate-error" style="display:none;"></p>
+            <div class="char-mining-card-output" style="display:none;"></div>
+          </div>
+        </div>
+      </aside>
+    `;
+    document.body.appendChild(host);
+    host._miningState = createDefaultCharacterMiningState();
+    bindCharacterMiningHostEvents(host);
+    applyCharacterMiningDrawerStyling(host);
+    currentSentenceMiningDrawer = host;
+    isSentenceMiningDrawerOpen = true;
+    window._sentenceMiningDrawerOpen = true;
+    hideSubtitleControlPanelForOverlay();
+    setSubtitleControlPanelInteractivity(true);
+
+    const backdrop = host.querySelector('.char-mining-backdrop');
+    const closeBtn = host.querySelector('.char-mining-close-btn');
+    const generateBtn = host.querySelector('.char-mining-generate-btn');
+    const sentenceTa = host.querySelector('.char-mining-sentence-textarea');
+    const focusInput = host.querySelector('.char-mining-focus-word-input');
+    const sourceInput = host.querySelector('.char-mining-source-input');
+    const generateErrorEl = host.querySelector('.char-mining-generate-error');
+
+    if (focusInput) {
+        focusInput.addEventListener('input', () => {
+            host._lingqTerm = String(focusInput.value || '').trim();
+        });
+    }
+
+    void (async () => {
+        if (!sourceInput || sourceInput.value.trim()) return;
+        if (typeof detectMediaTitleWithRetry !== 'function') return;
+        try {
+            const raw = await detectMediaTitleWithRetry(12, 400);
+            if (!raw || !sourceInput || sourceInput.value.trim()) return;
+            const cleaned = String(raw)
+                .replace(/\s*[-\u2013\u2014|:]\s*Plex(?:\s+Web)?\s*$/i, '')
+                .trim();
+            sourceInput.value = cleaned || String(raw).trim();
+        } catch {
+            /* ignore */
+        }
+    })();
+
+    generateBtn.addEventListener('click', async () => {
+        const sentenceBody = String(sentenceTa?.value || '').trim();
+        if (!sentenceBody) return;
+
+        if (generateErrorEl) {
+            generateErrorEl.style.display = 'none';
+            generateErrorEl.textContent = '';
+        }
+
+        const original = generateBtn.textContent || 'Generate Sentence Card';
+        generateBtn.disabled = true;
+        generateBtn.textContent = 'Generating...';
+        generateBtn.style.opacity = '0.75';
+
+        try {
+            const focusWord = String(focusInput?.value || '').trim() || focus0;
+            const source = String(sourceInput?.value || '').trim() || undefined;
+            const payload = await generateSentenceCardViaBackground({
+                sentence: sentenceBody,
+                focusWord,
+                targetWord: focusWord,
+                focusPinyin: String(pinyinText || '').trim() || undefined,
+                source
+            });
+
+            const raw =
+                payload?.data && typeof payload.data === 'object'
+                    ? payload.data
+                    : payload && typeof payload === 'object'
+                      ? payload
+                      : null;
+            if (!raw || typeof raw !== 'object') {
+                throw new Error('Unexpected response from sentence generator');
+            }
+
+            const card = normalizeSentenceMiningCardData(raw, sentenceBody);
+            const srcVal = String(sourceInput?.value || '').trim();
+            if (srcVal) card.source = srcVal;
+            if (!String(card.target_word || '').trim()) card.target_word = focusWord;
+            host._lingqTerm = focusWord;
+            if (focusInput) focusInput.value = focusWord;
+
+            host._miningState = createDefaultCharacterMiningState();
+            host._miningState.card = card;
+            host._miningState.lingqLoading = true;
+            refreshCharacterMiningCardDOM(host);
+            try {
+                const term = String(focusWord || '').trim();
+                const lj = await characterMiningApiPost('/anki/sentence/lingq-lookup', { term });
+                host._miningState.lingqBlock = {
+                    configured: Boolean(lj?.configured),
+                    found: Boolean(lj?.found),
+                    displayScore: typeof lj?.displayScore === 'number' ? lj.displayScore : 0,
+                    cardPk: typeof lj?.cardPk === 'number' ? lj.cardPk : undefined,
+                    error: typeof lj?.error === 'string' ? lj.error : undefined
+                };
+                snapshotLingqScoreForAnkiTagsMining(host._miningState, host._miningState.lingqBlock.displayScore);
+                if (
+                    typeof lj?.suggestedLatest === 'string' &&
+                    CHARACTER_MINING_NOTION_OPTIONS.includes(lj.suggestedLatest)
+                ) {
+                    host._miningState.notionLatest = lj.suggestedLatest;
+                }
+            } catch (lingqErr) {
+                host._miningState.lingqBlock = {
+                    configured: false,
+                    found: false,
+                    displayScore: 0,
+                    error: lingqErr instanceof Error ? lingqErr.message : String(lingqErr)
+                };
+                snapshotLingqScoreForAnkiTagsMining(host._miningState, 0);
+            } finally {
+                host._miningState.lingqLoading = false;
+                refreshCharacterMiningCardDOM(host);
+            }
+        } catch (error) {
+            if (generateErrorEl) {
+                generateErrorEl.style.display = 'block';
+                let msg = error instanceof Error ? error.message : String(error);
+                if (/failed to fetch/i.test(msg)) {
+                    const base = (window.characterMiningApiBaseUrl || 'http://localhost:3001/api').replace(/\/+$/, '');
+                    msg = `Could not reach ${base} (Failed to fetch). Start the ereader proxy on this machine and reload the extension after updating permissions.`;
+                }
+                generateErrorEl.textContent = msg;
+            }
+        } finally {
+            generateBtn.disabled = false;
+            generateBtn.textContent = original;
+            generateBtn.style.opacity = '1';
+        }
+    });
+
+    backdrop.addEventListener('click', closeSentenceMiningDrawer);
+    closeBtn.addEventListener('click', closeSentenceMiningDrawer);
+    currentSentenceMiningEscHandler = (event) => {
+        if (event.key !== 'Escape') return;
+        if (closeCharacterMiningImageModal()) {
+            event.preventDefault();
+            event.stopPropagation();
+            return;
+        }
+        closeSentenceMiningDrawer();
+    };
+    window.addEventListener('keydown', currentSentenceMiningEscHandler);
+}
 
 /**
  * Generates the HTML content for the word popup.
@@ -377,6 +2219,15 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
         const scoreColor = scoreColors[frequencyInfo.score] || '#888';
         const formattedCount = typeof formatFrequencyCount === 'function' ? 
             formatFrequencyCount(frequencyInfo.count) : frequencyInfo.count;
+        const scoreDescriptionMapZh = {
+            5: '前60%',
+            4: '60%-80%',
+            3: '80%-90%',
+            2: '90%-97%',
+            1: '97%-100%'
+        };
+        const scoreDescriptionZh =
+            scoreDescriptionMapZh[frequencyInfo.score] || frequencyInfo.scoreDescription || '未知';
         
         // Get corpus size from frequency data (total word occurrences)
         const corpusSize = window.frequencyData ? 
@@ -403,14 +2254,19 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
               font-weight: bold;
               font-size: 1.1em;">${frequencyInfo.score}</span>
             <span style="color: ${scoreColor}; font-size: 1.1em;">⭐</span>
-            <span style="color: #888; font-size: 0.95em;">(${frequencyInfo.scoreDescription})</span>
+            <span style="color: #888; font-size: 0.95em;">(${scoreDescriptionZh})</span>
             <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
-            <span style="color:#fff;font-size:0.97em;margin:0;padding:0;">${formattedCount} in ${corpusSizeFormatted} corpus</span>
+            <span style="color:#fff;font-size:0.97em;margin:0;padding:0;">语料 ${formattedCount} 次 / ${corpusSizeFormatted}</span>
             <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">|</span>
             <span class="popup-count" style="color:#fff;font-size:0.97em;margin:0;padding:0;">${count}</span>
           </div>
         `;
     }
+
+    const statusButtonsHtml = STATUS_BUTTON_META.map(
+        ({ key, title }) =>
+            `<button type="button" class="status-btn" data-status-key="${key}" title="${title}">${key}</button>`
+    ).join('');
 
     return `
       <div class="popup-header" style="
@@ -433,18 +2289,17 @@ function generatePopupHTML(wordText, pinyin, definition, count, frequencyInfo) {
         <span style="color:#888;font-size:1.1em;margin:0 6px;padding:0;">${definitionHTML}</span>
       </div>
       ${frequencyHTML}
-      <div class="status-row" style="display:flex;gap:16px;justify-content:center;margin-bottom:6px;">
-        <button class="status-btn">🗑️</button>
-        <button class="status-btn">0</button>
-        <button class="status-btn">1</button>
-        <button class="status-btn">2</button>
-        <button class="status-btn">3</button>
-        <button class="status-btn">4</button>
-        <button class="status-btn">✓</button>
+      <div class="status-row" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:6px;">
+        ${statusButtonsHtml}
       </div>
-      <div class="tag-row" style="display:flex;flex-direction:column;gap:7px;justify-content:center;align-items:center;">
-        <button class="tag-btn">characters known</button>
-        <button class="tag-btn">partial characters known</button>
+      <div class="tag-row" style="display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;">
+        <button type="button" class="tag-btn" data-tag-value="characters known">字都认识</button>
+        <button type="button" class="tag-btn" data-tag-value="partial characters known">部分字认识</button>
+      </div>
+      <div class="popup-actions-row">
+        <button type="button" class="popup-action-btn popup-copy-sentence-btn">复制句子</button>
+        <button type="button" class="popup-action-btn popup-mine-char-btn">字卡</button>
+        <button type="button" class="popup-action-btn popup-mine-sentence-btn">句卡</button>
       </div>
     `;
 }
@@ -499,7 +2354,7 @@ function applyPopupStyling(popup) {
         btn.style.border = '1px solid rgba(136, 136, 136, 0.85)';
         btn.style.background = 'rgba(34, 34, 34, 0.85)';
         btn.style.color = '#fff';
-        btn.style.fontSize = '0.98em';
+        btn.style.fontSize = '0.8em';
         btn.style.padding = '7px 18px';
         btn.style.cursor = 'pointer';
         btn.style.transition = 'background 0.15s, border 0.15s, color 0.15s';
@@ -511,6 +2366,44 @@ function applyPopupStyling(popup) {
         btn.style.textAlign = 'center';
         btn.style.lineHeight = '1';
     });
+
+    const actionRow = popup.querySelector('.popup-actions-row');
+    if (actionRow) {
+        Object.assign(actionRow.style, {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            gap: '6px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            marginTop: '2px'
+        });
+    }
+
+    popup.querySelectorAll('.popup-action-btn').forEach((btn) => {
+        Object.assign(btn.style, {
+            flex: '1 1 auto',
+            minWidth: '0',
+            borderRadius: '6px',
+            border: '1px solid #6B7280',
+            background: 'rgb(40, 40, 40)',
+            color: '#fff',
+            fontSize: '0.84em',
+            padding: '6px 10px',
+            cursor: btn.disabled ? 'not-allowed' : 'pointer',
+            opacity: btn.disabled ? '0.55' : '1',
+            outline: 'none',
+            lineHeight: '1.2',
+            whiteSpace: 'nowrap',
+            transition: 'opacity 0.15s, background 0.15s'
+        });
+    });
+
+    const panel = document.querySelector('.char-mining-panel');
+    if (panel) {
+        // already open; no-op
+    }
 }
 
 /**
@@ -654,6 +2547,11 @@ if (!window._wordPopupFullscreenListenerAdded) {
  * @returns {void}
  */
 function handleWordClick(event) {
+    if (isAnyMiningDrawerOpen()) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+    }
     console.log('[word_popup] handleWordClick called for word:', event.currentTarget.innerText);
     console.log('[word_popup] lastPopupWordElement before check:', lastPopupWordElement);
     event.stopPropagation();
@@ -714,6 +2612,7 @@ function handleWordHoverEnd(event) {
 function handleDocumentClickToClosePopup(event) {
     const popup = document.querySelector('.word-popup');
     if (!popup) return;
+    const targetEl = event.target instanceof Element ? event.target : event.target?.parentElement;
     
     // Don't close if clicking inside the popup (including buttons)
     if (popup.contains(event.target)) {
@@ -721,7 +2620,7 @@ function handleDocumentClickToClosePopup(event) {
     }
     
     // Don't close if clicking a subtitle word (let its click handler manage the popup)
-    if (event.target.closest('.subtitle-word')) {
+    if (targetEl && targetEl.closest('.subtitle-word')) {
         return;
     }
     
@@ -736,32 +2635,71 @@ function handleDocumentClickToClosePopup(event) {
  * Handles status updates and tag toggles when buttons are clicked.
  * @param {HTMLElement} popup - The popup DOM element containing buttons
  * @param {string} wordText - The Chinese word text being updated
+ * @param {HTMLElement} wordElement - The clicked `.subtitle-word` element (for copy sentence)
  * @returns {void}
  */
-function addButtonClickHandlers(popup, wordText) {
+function addButtonClickHandlers(popup, wordText, wordElement) {
     // Add status button click handlers
     const statusButtons = popup.querySelectorAll('.status-btn');
     statusButtons.forEach(btn => {
         btn.addEventListener('click', async (event) => {
             event.stopPropagation();
-            const buttonText = btn.textContent.trim();
-            console.log(`[word_popup] Status button clicked: ${buttonText} for word: ${wordText}`);
+            const statusKey = (btn.getAttribute('data-status-key') || btn.textContent || '').trim();
+            console.log(`[word_popup] Status button clicked: ${statusKey} for word: ${wordText}`);
             
-            await updateWordStatus(wordText, buttonText);
+            await updateWordStatus(wordText, statusKey);
         });
     });
     
-    // Add tag button click handlers
+    // Add tag button click handlers (labels localized; LingQ values in data-tag-value)
     const tagButtons = popup.querySelectorAll('.tag-btn');
     tagButtons.forEach(btn => {
         btn.addEventListener('click', async (event) => {
             event.stopPropagation();
-            const buttonText = btn.textContent.trim();
-            console.log(`[word_popup] Tag button clicked: ${buttonText} for word: ${wordText}`);
+            const tagValue = (btn.getAttribute('data-tag-value') || btn.textContent || '').trim();
+            console.log(`[word_popup] Tag button clicked: ${tagValue} for word: ${wordText}`);
             
-            await toggleWordTag(wordText, buttonText);
+            await toggleWordTag(wordText, tagValue);
         });
     });
+
+    const copyBtn = popup.querySelector('.popup-copy-sentence-btn');
+    if (copyBtn && wordElement) {
+        copyBtn.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            await copySubtitleSentenceFromWordElement(wordElement, copyBtn);
+        });
+    }
+
+    const mineCharBtn = popup.querySelector('.popup-mine-char-btn');
+    if (mineCharBtn && wordElement) {
+        mineCharBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const sentenceText = getSubtitleLinePlainFromWordElement(wordElement);
+            const pinyinText = typeof window.getPinyin === 'function' ? window.getPinyin(wordText) : '';
+            hideWordPopup(true);
+            openCharacterMiningDrawer({
+                wordText,
+                pinyinText,
+                sentenceText
+            });
+        });
+    }
+
+    const mineSentenceBtn = popup.querySelector('.popup-mine-sentence-btn');
+    if (mineSentenceBtn && wordElement) {
+        mineSentenceBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const sentenceText = getSubtitleLinePlainFromWordElement(wordElement);
+            const pinyinText = typeof window.getPinyin === 'function' ? window.getPinyin(wordText) : '';
+            hideWordPopup(true);
+            openSentenceMiningDrawer({
+                wordText,
+                pinyinText,
+                sentenceText
+            });
+        });
+    }
 }
 
 //////////////////////////////
@@ -770,9 +2708,9 @@ function addButtonClickHandlers(popup, wordText) {
 
 /**
  * Updates the LingQ status for a word based on button click.
- * Maps button text to LingQ status values and updates both local storage and server.
+ * Maps status key (data-status-key / same as visible glyph) to LingQ status values and updates both local storage and server.
  * @param {string} wordText - The Chinese word to update
- * @param {string} buttonText - The button text (0, 1, 2, 3, 4, or ✓)
+ * @param {string} buttonText - Status key: 🗑️, 0, 1, 2, 3, 4, or ✓
  * @returns {Promise<void>}
  */
 async function updateWordStatus(wordText, buttonText) {
@@ -873,7 +2811,7 @@ async function updateWordStatus(wordText, buttonText) {
  * Toggles a tag for a word based on button click.
  * Adds or removes the tag from both local storage and server.
  * @param {string} wordText - The Chinese word to update
- * @param {string} tagText - The tag text to toggle
+ * @param {string} tagText - LingQ tag string (e.g. characters known, partial characters known)
  * @returns {Promise<void>}
  */
 async function toggleWordTag(wordText, tagText) {

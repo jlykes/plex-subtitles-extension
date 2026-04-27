@@ -509,6 +509,48 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     return true; // async response
   }
+
+  // Generate sentence card via local ereader-style proxy (parallel to /anki/character/generate)
+  if (request.action === 'generateSentenceCard') {
+    const { sentence, focusWord, targetWord, focusPinyin, notes, source, apiBaseUrl } = request;
+    const tw = String(targetWord || focusWord || '').trim();
+
+    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
+      ? apiBaseUrl.trim().replace(/\/+$/, '')
+      : 'http://localhost:3001/api';
+
+    fetch(`${baseUrl}/anki/sentence/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sentence,
+        focusWord: tw,
+        targetWord: tw,
+        focusPinyin,
+        notes,
+        source: source != null ? String(source) : ''
+      })
+    })
+      .then(async (response) => {
+        const payload = await response.json().catch(() => null);
+        if (!response.ok) {
+          const errorText = typeof payload?.error === 'string'
+            ? payload.error
+            : `Sentence generation failed (${response.status})`;
+          throw new Error(errorText);
+        }
+        return payload;
+      })
+      .then((payload) => {
+        sendResponse({ success: true, payload });
+      })
+      .catch((error) => {
+        console.error('[background] generateSentenceCard failed:', error);
+        sendResponse({ success: false, error: error.message || String(error) });
+      });
+
+    return true;
+  }
   
   // Handle Notion word tracker entries
   if (request.action === 'addNotionWordTrackerEntry') {
