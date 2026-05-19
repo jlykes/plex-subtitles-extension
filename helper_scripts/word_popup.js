@@ -546,6 +546,301 @@ function getPlexMediaTitleForSourceSync() {
     return stripped || t;
 }
 
+const COMMON_COMPONENT_GLOSSES = {
+    '一': 'one',
+    '丨': 'line',
+    '丶': 'dot',
+    '丿': 'slash',
+    '乙': 'second',
+    '亅': 'hook',
+    '二': 'two',
+    '亠': 'lid',
+    '人': 'person',
+    '亻': 'person',
+    '儿': 'legs',
+    '入': 'enter',
+    '八': 'eight',
+    '冂': 'down box',
+    '冖': 'cover',
+    '冫': 'ice',
+    '几': 'table',
+    '凵': 'open box',
+    '刀': 'knife',
+    '刂': 'knife',
+    '力': 'power',
+    '勹': 'wrap',
+    '匕': 'spoon',
+    '匚': 'box',
+    '十': 'ten',
+    '卜': 'divination',
+    '卩': 'seal',
+    '厂': 'cliff',
+    '厶': 'private',
+    '又': 'again',
+    '口': 'mouth',
+    '囗': 'enclosure',
+    '土': 'earth',
+    '士': 'scholar',
+    '夂': 'go',
+    '夕': 'evening',
+    '大': 'big',
+    '女': 'woman',
+    '子': 'child',
+    '宀': 'roof',
+    '寸': 'inch',
+    '小': 'small',
+    '尢': 'lame',
+    '尸': 'corpse',
+    '山': 'mountain',
+    '巾': 'cloth',
+    '干': 'dry',
+    '幺': 'tiny',
+    '广': 'shelter',
+    '廴': 'stride',
+    '廾': 'hands',
+    '弋': 'shoot',
+    '弓': 'bow',
+    '彐': 'snout',
+    '彡': 'bristle',
+    '彳': 'step',
+    '心': 'heart',
+    '忄': 'heart',
+    '戈': 'spear',
+    '戶': 'door',
+    '户': 'door',
+    '手': 'hand',
+    '扌': 'hand',
+    '攴': 'tap',
+    '攵': 'tap',
+    '文': 'writing',
+    '斗': 'dipper',
+    '斤': 'axe',
+    '方': 'direction',
+    '日': 'sun',
+    '曰': 'say',
+    '月': 'moon',
+    '木': 'wood',
+    '欠': 'lack',
+    '止': 'stop',
+    '歹': 'death',
+    '殳': 'weapon',
+    '母': 'mother',
+    '比': 'compare',
+    '毛': 'fur',
+    '氏': 'clan',
+    '气': 'air',
+    '水': 'water',
+    '氵': 'water',
+    '火': 'fire',
+    '灬': 'fire',
+    '爪': 'claw',
+    '爫': 'claw',
+    '父': 'father',
+    '爻': 'lines',
+    '片': 'slice',
+    '牙': 'tooth',
+    '牛': 'cow',
+    '牜': 'cow',
+    '犬': 'dog',
+    '犭': 'dog',
+    '玉': 'jade',
+    '王': 'jade',
+    '田': 'field',
+    '疒': 'sickness',
+    '癶': 'footsteps',
+    '白': 'white',
+    '皮': 'skin',
+    '皿': 'dish',
+    '目': 'eye',
+    '矛': 'spear',
+    '矢': 'arrow',
+    '石': 'stone',
+    '示': 'spirit',
+    '礻': 'spirit',
+    '禾': 'grain',
+    '穴': 'cave',
+    '立': 'stand',
+    '竹': 'bamboo',
+    '米': 'rice',
+    '糸': 'silk',
+    '纟': 'silk',
+    '缶': 'jar',
+    '网': 'net',
+    '罒': 'net',
+    '羊': 'sheep',
+    '羽': 'feather',
+    '老': 'old',
+    '而': 'and',
+    '耒': 'plow',
+    '耳': 'ear',
+    '聿': 'brush',
+    '肉': 'meat',
+    '月肉': 'meat',
+    '臣': 'minister',
+    '自': 'self',
+    '至': 'arrive',
+    '臼': 'mortar',
+    '舌': 'tongue',
+    '舛': 'oppose',
+    '舟': 'boat',
+    '艮': 'stopping',
+    '色': 'color',
+    '艸': 'grass',
+    '艹': 'grass',
+    '虍': 'tiger',
+    '虫': 'insect',
+    '血': 'blood',
+    '行': 'walk',
+    '衣': 'clothing',
+    '衤': 'clothing',
+    '西': 'west',
+    '見': 'see',
+    '见': 'see',
+    '角': 'horn',
+    '言': 'speech',
+    '讠': 'speech',
+    '谷': 'valley',
+    '豆': 'bean',
+    '豕': 'pig',
+    '貝': 'shell',
+    '贝': 'shell',
+    '赤': 'red',
+    '走': 'walk',
+    '足': 'foot',
+    '車': 'cart',
+    '车': 'cart',
+    '辛': 'bitter',
+    '辶': 'walk',
+    '邑': 'city',
+    '阝': 'mound',
+    '酉': 'wine',
+    '釆': 'distinguish',
+    '里': 'village',
+    '金': 'metal',
+    '钅': 'metal',
+    '門': 'gate',
+    '门': 'gate',
+    '隹': 'bird',
+    '雨': 'rain',
+    '青': 'blue-green',
+    '非': 'wrong',
+    '面': 'face',
+    '革': 'leather',
+    '韋': 'leather',
+    '韦': 'leather',
+    '音': 'sound',
+    '頁': 'page',
+    '页': 'page',
+    '風': 'wind',
+    '风': 'wind',
+    '飛': 'fly',
+    '飞': 'fly',
+    '食': 'food',
+    '饣': 'food',
+    '首': 'head',
+    '香': 'fragrance',
+    '馬': 'horse',
+    '马': 'horse',
+    '骨': 'bone',
+    '高': 'tall',
+    '髟': 'hair',
+    '鬥': 'fight',
+    '斗鬥': 'fight',
+    '鬯': 'sacrificial wine',
+    '鬲': 'cauldron',
+    '鬼': 'ghost',
+    '魚': 'fish',
+    '鱼': 'fish',
+    '鳥': 'bird',
+    '鸟': 'bird',
+    '鹵': 'salt',
+    '鹿': 'deer',
+    '麥': 'wheat',
+    '麦': 'wheat',
+    '麻': 'hemp',
+    '黃': 'yellow',
+    '黄': 'yellow',
+    '黍': 'millet',
+    '黑': 'black',
+    '黹': 'embroidery',
+    '黽': 'frog',
+    '黾': 'frog',
+    '鼎': 'tripod',
+    '鼓': 'drum',
+    '鼠': 'rat',
+    '鼻': 'nose',
+    '齊': 'even',
+    '齐': 'even',
+    '齒': 'tooth',
+    '齿': 'tooth',
+    '龍': 'dragon',
+    '龙': 'dragon',
+    '龜': 'turtle',
+    '龟': 'turtle'
+};
+
+function extractComponentEntries(text) {
+    const entries = [];
+    const seen = new Set();
+    const source = String(text || '');
+    const re = /([\u3400-\u9fff])\s*(?:\(([^)]+)\))?/g;
+    let match;
+    while ((match = re.exec(source))) {
+        const char = match[1];
+        const gloss = String(match[2] || '').trim();
+        if (seen.has(char)) continue;
+        seen.add(char);
+        entries.push({ char, gloss });
+    }
+    return entries;
+}
+
+function getImagePromptGlossForComponent(char, imagePrompt) {
+    if (!char || !imagePrompt) return '';
+    const escaped = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const patterns = [
+        new RegExp(`${escaped}\\s+is\\s+(?:the\\s+|a\\s+|an\\s+|her\\s+|his\\s+)?([^,.;]+)`, 'i'),
+        new RegExp(`${escaped}\\s+represents\\s+(?:the\\s+|a\\s+|an\\s+)?([^,.;]+)`, 'i'),
+        new RegExp(`${escaped}\\s+as\\s+(?:the\\s+|a\\s+|an\\s+)?([^,.;]+)`, 'i')
+    ];
+    for (const pattern of patterns) {
+        const match = String(imagePrompt).match(pattern);
+        if (match && match[1]) {
+            return match[1].trim().replace(/\s+/g, ' ');
+        }
+    }
+    return '';
+}
+
+function formatComponentEntry(char, gloss) {
+    const cleanGloss = String(gloss || '').trim();
+    return cleanGloss ? `${char} (${cleanGloss})` : char;
+}
+
+function buildComponentBreakdown(submittedSubcomponents, generatedComponents, imagePrompt) {
+    const generated = String(generatedComponents || '').trim();
+    const submittedEntries = extractComponentEntries(submittedSubcomponents);
+    if (!submittedEntries.length) return generated;
+
+    const generatedEntries = extractComponentEntries(generated);
+    const generatedMap = new Map(generatedEntries.map((entry) => [entry.char, entry.gloss]));
+    const submittedChars = submittedEntries.map((entry) => entry.char);
+    const generatedHasAllSubmitted = submittedChars.every((char) => generatedMap.has(char));
+    const generatedHasGlosses = generatedEntries.some((entry) => entry.gloss);
+    if (generatedHasAllSubmitted && generatedHasGlosses) return generated;
+
+    return submittedChars
+        .map((char) => {
+            const gloss =
+                generatedMap.get(char) ||
+                COMMON_COMPONENT_GLOSSES[char] ||
+                getImagePromptGlossForComponent(char, imagePrompt) ||
+                '';
+            return formatComponentEntry(char, gloss);
+        })
+        .join(' + ');
+}
+
 function mergeSentenceMiningSourceIntoCard(host) {
     if (!host._sentenceMining || !host._miningState || !host._miningState.card) return;
     const inp = host.querySelector('.char-mining-source-input');
@@ -2000,9 +2295,10 @@ function openCharacterMiningDrawer(seed) {
         generateBtn.style.opacity = '0.75';
 
         try {
+            const submittedSubcomponents = String(subcomponentsInput?.value || '').trim();
             const payload = await generateCharacterCardViaBackground({
                 hanzi,
-                userSubcomponents: String(subcomponentsInput?.value || '').trim() || undefined,
+                userSubcomponents: submittedSubcomponents || undefined,
                 userRequiredWords: String(commonWordsInput?.value || '').trim() || undefined,
                 storyMeaningFocus: String(storyMeaningInput?.value || '').trim() || undefined
             });
@@ -2025,16 +2321,27 @@ function openCharacterMiningDrawer(seed) {
 
             const toneRaw = Number(data.tone);
             const tone = Number.isFinite(toneRaw) && toneRaw >= 1 && toneRaw <= 5 ? toneRaw : 0;
+            const oldOutput = host.querySelector('.char-mining-card-output');
+            if (oldOutput) {
+                oldOutput.innerHTML = '';
+                oldOutput.style.display = 'none';
+            }
+            const generatedImagePrompt = String(data.image_prompt ?? '');
+            const componentBreakdown = buildComponentBreakdown(
+                submittedSubcomponents,
+                String(data.components ?? ''),
+                generatedImagePrompt
+            );
             host._miningState = createDefaultCharacterMiningState();
             host._miningState.card = {
                 hanzi: String(data.hanzi ?? hanzi).trim(),
                 pinyin: String(data.pinyin ?? ''),
                 tone,
                 definition: String(data.definition ?? ''),
-                components: String(data.components ?? ''),
+                components: componentBreakdown,
                 related: String(data.related ?? ''),
                 common_words: String(data.common_words ?? ''),
-                image_prompt: String(data.image_prompt ?? ''),
+                image_prompt: generatedImagePrompt,
                 memory_blurb: String(data.memory_blurb ?? ''),
                 anki_story_html: String(data.anki_story_html ?? '')
             };
