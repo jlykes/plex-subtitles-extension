@@ -17,6 +17,7 @@ function getDefaultSettings() {
     // === Appearance Settings ===
     visibility: "on",
     fontSizeVH: 5.5,
+    chineseFont: "system-sans",
     position: "bottom",
     heightVH: 16,
     lingqStatus: "on",

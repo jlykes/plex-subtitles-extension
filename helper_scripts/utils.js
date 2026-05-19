@@ -2,6 +2,32 @@
 // This module contains utility functions used across the extension,
 // such as loading LingQ terms, normalizing titles, and creating styled word spans.
 
+const CHINESE_FONT_KAITI_STACK = "'KaiTi-Web', 'KaiTi', 'KaiTi_GB2312', 'Kaiti SC', 'STKaiti', 'DFKai-SB', serif";
+const CHINESE_FONT_SYSTEM_SANS_STACK = "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+const LATIN_UI_FONT_STACK = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif";
+
+function getChineseFontChoice() {
+  return window.subtitleConfig?.chineseFont || "system-sans";
+}
+
+function getChineseFontFamily() {
+  return getChineseFontChoice() === "kaiti"
+    ? CHINESE_FONT_KAITI_STACK
+    : CHINESE_FONT_SYSTEM_SANS_STACK;
+}
+
+function applyChineseFontToOverlay() {
+  const fontFamily = getChineseFontFamily();
+  const overlay = document.getElementById("custom-subtitle-overlay");
+  if (overlay) overlay.style.fontFamily = fontFamily;
+  document.querySelectorAll(".char-mining-drawer-host").forEach((host) => {
+    host.style.setProperty("--plex-chinese-font", fontFamily);
+  });
+}
+
+window.getChineseFontFamily = getChineseFontFamily;
+window.applyChineseFontToOverlay = applyChineseFontToOverlay;
+
 /**
  * Returns the underline color based on the LingQ status code
  * @param {Object} statusInfo The LingQ status info object with status and extended_status properties
@@ -293,6 +319,9 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
     const span = document.createElement("span");
     span.textContent = char;
     span.style.margin = "0";
+    if (/[^\u0000-\u007F]/.test(char) && /[\u4e00-\u9fff]/.test(char)) {
+      span.style.fontFamily = getChineseFontFamily();
+    }
 
     const toneColor = shouldColor && pinyinList[i] ? getToneColor(pinyinList[i]) : "white";
     span.style.color = toneColor;
@@ -302,6 +331,7 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
       const rt = document.createElement("rt");
       rt.textContent = pinyinList[i] || "";
       rt.style.color = toneColor;
+      rt.style.fontFamily = LATIN_UI_FONT_STACK;
 
       ruby.appendChild(span);
       ruby.appendChild(rt);

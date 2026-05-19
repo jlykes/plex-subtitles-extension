@@ -261,6 +261,7 @@ function initializeControlValues(panel) {
   // Initialize all dropdown controls
   const dropdowns = {
     'dropdown-visibility': config.visibility || 'on',
+    'dropdown-chinese-font': config.chineseFont || 'system-sans',
     'dropdown-position': config.position || 'bottom',
     'dropdown-lingq': config.lingqStatus || 'on',
     'dropdown-pinyin': config.pinyin || 'unknown-only',

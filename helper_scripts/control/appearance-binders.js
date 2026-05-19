@@ -50,6 +50,18 @@ function bindAppearanceControls(panel) {
         }
     });
 
+    // "Chinese font" dropdown changes
+    panel.querySelector("#dropdown-chinese-font")?.addEventListener("change", async e => {
+        window.subtitleConfig.chineseFont = e.target.value;
+        window.applyChineseFontToOverlay?.();
+        window.reRenderCurrentSubtitle?.();
+
+        // Save setting to storage
+        if (window.storageUtils) {
+            await window.storageUtils.updateSetting('chineseFont', e.target.value);
+        }
+    });
+
     // "Position" dropdown changes
     document.getElementById("dropdown-position")?.addEventListener("change", async e => {
         window.subtitleConfig.position = e.target.value;

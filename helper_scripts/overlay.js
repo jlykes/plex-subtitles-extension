@@ -39,6 +39,8 @@ function createOverlayContainer() {
   container.style.left = "50%";
   container.style.transform = "translateX(-50%)";
 
+  ensureKaiTiFontFaceLoaded();
+
   // Sizing and styling
   container.style.fontSize = `${window.subtitleConfig.fontSizeVH}vh`;
   container.style.lineHeight = SUBTITLE_LINE_HEIGHT;
@@ -47,7 +49,7 @@ function createOverlayContainer() {
   container.style.userSelect = "text";             // Allow users to select/copy text
   container.style.color = "white";
   // Padding and border radius will be set by updateSubtitleBackground() based on translation visibility
-  container.style.fontFamily = "sans-serif";
+  container.style.fontFamily = window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
   container.style.textAlign = "center";
   container.style.maxWidth = `${SUBTITLE_MAX_WIDTH_VW}vw`;
   container.style.whiteSpace = "pre-wrap";         // Preserve line breaks if needed
@@ -103,6 +105,31 @@ function createOverlayContainer() {
     }
   });
 
+}
+
+/**
+ * Injects the KaiTi web font definition once so subtitle text can still use
+ * the existing KaiTi option when selected.
+ * @returns {void}
+ */
+function ensureKaiTiFontFaceLoaded() {
+  if (document.getElementById("custom-kaiti-font-style")) return;
+
+  const fontStyle = document.createElement("style");
+  fontStyle.id = "custom-kaiti-font-style";
+  fontStyle.textContent = `
+    @font-face {
+      font-family: 'KaiTi-Web';
+      src: url('${chrome.runtime.getURL("fonts/KaiTi.woff2")}') format('woff2'),
+           url('${chrome.runtime.getURL("fonts/KaiTi.woff")}') format('woff'),
+           url('${chrome.runtime.getURL("fonts/KaiTi.ttf")}') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+      unicode-range: U+4E00-9FFF;
+    }
+  `;
+  document.head.appendChild(fontStyle);
 }
 
 /**

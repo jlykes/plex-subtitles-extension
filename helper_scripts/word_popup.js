@@ -1248,8 +1248,8 @@ function ensureCharacterMiningEreaderCss() {
 .char-mining-editable-wrap label:first-of-type{margin-top:0}
 .char-mining-field-label{font-size:12px;color:#d1d5db;margin-bottom:4px;display:block}
 .char-mining-textarea{width:100%;box-sizing:border-box;border:1px solid #525252;border-radius:6px;background:rgba(64,64,64,0.7);color:#fff;padding:8px 10px;font-size:13px;resize:vertical}
-.character-mining-preview{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","Kaiti SC","STKaiti","KaiTi","SimKai",serif;text-align:center}
-.character-mining-preview .hanzi{font-size:42px;font-weight:700;margin-top:10px;font-family:"Kaiti SC","STKaiti","KaiTi","SimKai","Songti SC",serif;color:#fafafa}
+.character-mining-preview{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center}
+.character-mining-preview .hanzi{font-size:42px;font-weight:700;margin-top:10px;font-family:var(--plex-chinese-font);color:#fafafa}
 .character-mining-preview .hanzi.tone-1,.character-mining-preview .pinyin.tone-1{color:#e53935}
 .character-mining-preview .hanzi.tone-2,.character-mining-preview .pinyin.tone-2{color:#fdd835}
 .character-mining-preview .hanzi.tone-3,.character-mining-preview .pinyin.tone-3{color:#43a047}
@@ -1285,11 +1285,11 @@ function ensureCharacterMiningEreaderCss() {
 /* Sentence mining: Anki card *back* preview (eReader-style, centered) */
 .sent-anki-back-preview{text-align:center;max-width:36rem;margin:0 auto;padding:16px 16px 24px;box-sizing:border-box}
 .sent-anki-back-preview .sent-back-word-block{margin:0 0 4px;padding:0 6px}
-.sent-anki-back-preview .sent-back-target{font-size:clamp(2rem,5vw,2.75rem);font-weight:700;font-family:"Inter","KaiTi-Web","Noto Serif SC","STKaiti","KaiTi","SimSun",serif;color:#f9fafb;line-height:1.2}
+.sent-anki-back-preview .sent-back-target{font-size:clamp(2rem,5vw,2.75rem);font-weight:700;font-family:var(--plex-chinese-font);color:#f9fafb;line-height:1.2}
 .sent-anki-back-preview .sent-back-word-pinyin{font-size:1.35rem;color:#d1d5db;margin-top:1rem;font-weight:400;letter-spacing:0}
 .sent-anki-back-preview .sent-back-word-gloss{font-size:1.05rem;color:#f9fafb;margin-top:0.35rem;margin-bottom:1rem;line-height:1.5;white-space:pre-wrap}
 .sent-anki-back-preview .sent-back-example-block{margin-top:0;padding-top:0}
-.sent-anki-back-preview .sent-back-sentence{font-size:clamp(1.15rem,3vw,1.45rem);line-height:1.75;font-family:"Inter","KaiTi-Web","Noto Serif SC","STKaiti","KaiTi","SimSun",serif;color:#f9fafb;font-weight:500;word-break:break-word;max-width:36rem;margin:0 auto 0.75rem;padding:0 0.75rem}
+.sent-anki-back-preview .sent-back-sentence{font-size:clamp(1.15rem,3vw,1.45rem);line-height:1.75;font-family:var(--plex-chinese-font);color:#f9fafb;font-weight:500;word-break:break-word;max-width:36rem;margin:0 auto 0.75rem;padding:0 0.75rem}
 .sent-anki-back-preview .sent-back-sentence .target-word{background:rgba(255,214,102,0.22);color:#fff;border-radius:5px;padding:1px 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .sent-anki-back-preview .sent-back-translation{font-size:0.9rem;color:#9ca3af;line-height:1.5;margin:0 auto;max-width:32rem;white-space:pre-wrap;font-weight:400}
 .sent-anki-back-preview .sent-back-meta{margin-top:1.25rem}
@@ -1947,6 +1947,10 @@ function applyCharacterMiningDrawerStyling(host) {
         inset: '0',
         zIndex: '10020'
     });
+    host.style.setProperty(
+        '--plex-chinese-font',
+        window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    );
     const backdrop = host.querySelector('.char-mining-backdrop');
     if (backdrop) {
         Object.assign(backdrop.style, {
@@ -2040,27 +2044,27 @@ function applyCharacterMiningDrawerStyling(host) {
     if (characterInput) {
         Object.assign(characterInput.style, {
             fontSize: '1.75rem',
-            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+            fontFamily: window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
         });
     }
     const focusWordInput = host.querySelector('.char-mining-focus-word-input');
     if (focusWordInput) {
         Object.assign(focusWordInput.style, {
             fontSize: '1.5rem',
-            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+            fontFamily: window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
         });
     }
     const sentenceTextarea = host.querySelector('.char-mining-sentence-textarea');
     if (sentenceTextarea) {
         Object.assign(sentenceTextarea.style, {
             fontSize: '1.5rem',
-            fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif",
+            fontFamily: window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
             lineHeight: '1.5'
         });
     }
     const miningHanziFieldStyle = {
         fontSize: '1.5rem',
-        fontFamily: "'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif"
+        fontFamily: window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
     };
     const subcomponentsInput = host.querySelector('.char-mining-subcomponents-input');
     if (subcomponentsInput) {
@@ -2108,7 +2112,7 @@ function applyCharacterMiningDrawerStyling(host) {
         Object.assign(el.style, {
             display: 'block',
             textAlign: 'center',
-            fontFamily: "'Inter', 'KaiTi-Web', 'Noto Sans SC', 'SimSun', serif",
+            fontFamily: window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
             fontSize: 'clamp(2rem, 5vw, 2.7rem)',
             lineHeight: '1',
             color: '#f9fafb'
@@ -3449,7 +3453,7 @@ function updateWordPinyin(wordText, status, extendedStatus, tags) {
  * @returns {void}
  */
 function updateWordElementPinyin(wordElement, charList, pinyinList, statusObj) {
-    const hanziFontStack = "'KaiTi-Web', 'KaiTi', 'KaiTi_GB2312', 'Kaiti SC', 'STKaiti', 'DFKai-SB', serif";
+    const hanziFontStack = window.getChineseFontFamily?.() || "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
     const latinFontStack = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif";
     const config = window.subtitleConfig || {};
     const isPinyinAll = config.pinyin === "all";

@@ -41,6 +41,8 @@ function bindSettingsManagement(panel) {
           const newFontSize = `${window.subtitleConfig.fontSizeVH}vh`;
           overlay.style.fontSize = newFontSize;
           console.log("Font size set to:", newFontSize);
+
+          window.applyChineseFontToOverlay?.();
           
           // Apply position and height
           const position = window.subtitleConfig.position;
