@@ -131,6 +131,10 @@ async function loadLingQTerms() {
       };
     }
   });
+
+  if (typeof window.rebuildKnownSingleCharWords === 'function') {
+    window.rebuildKnownSingleCharWords(result);
+  }
   
   return result;
 }

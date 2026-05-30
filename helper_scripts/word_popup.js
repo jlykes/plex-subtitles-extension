@@ -1672,6 +1672,16 @@ function bindCharacterMiningHostEvents(host) {
     host.addEventListener('keydown', stopKeysReachingPlayer, false);
     host.addEventListener('keyup', stopKeysReachingPlayer, false);
 
+    const stopPointerEventsReachingPlayer = (e) => {
+        const target = e.target;
+        if (!target || !(target instanceof Node)) return;
+        if (!host.contains(target)) return;
+        e.stopPropagation();
+    };
+    ['click', 'dblclick', 'mousedown', 'mouseup', 'pointerdown', 'pointerup', 'touchstart', 'touchend'].forEach((type) => {
+        host.addEventListener(type, stopPointerEventsReachingPlayer, false);
+    });
+
     host.addEventListener('input', (e) => {
         const t = e.target;
         if (!t || !t.classList) return;
@@ -2259,7 +2269,7 @@ function openCharacterMiningDrawer(seed) {
             btn.classList.toggle('char-mining-option-btn--active', isActive);
             btn.classList.toggle('char-mining-option-btn--known', isKnown);
             btn.classList.toggle('char-mining-option-btn--unknown', !isKnown);
-            const py = pinyinMap[char] ? pinyinMap[char].trim() : '\u00A0';
+            const py = !isKnown && pinyinMap[char] ? pinyinMap[char].trim() : '\u00A0';
             btn.innerHTML = `
               <span class="char-mining-option-pinyin">${py || '\u00A0'}</span>
               <span class="char-mining-option-hanzi">${char}</span>
@@ -2284,7 +2294,9 @@ function openCharacterMiningDrawer(seed) {
         });
     }
 
-    generateBtn.addEventListener('click', async () => {
+    generateBtn.addEventListener('click', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         const hanzi = String(selectedChar || '').trim();
         if (!hanzi) return;
 
@@ -2487,7 +2499,9 @@ function openSentenceMiningDrawer(seed) {
         }
     })();
 
-    generateBtn.addEventListener('click', async () => {
+    generateBtn.addEventListener('click', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
         const sentenceBody = String(sentenceTa?.value || '').trim();
         if (!sentenceBody) return;
 
@@ -3302,6 +3316,10 @@ async function updateLocalLingQData(wordText, status, extendedStatus, tags) {
         // Also update the global window.lingqTerms to keep it in sync
         window.lingqTerms = lingqTerms;
         console.log(`[word_popup] Updated global window.lingqTerms`);
+
+        if (typeof window.syncKnownSingleCharWord === 'function') {
+            window.syncKnownSingleCharWord(normalizedWordText, lingqTerms[normalizedWordText]);
+        }
         
         // Recalculate and update LingQ status percentages in the control panel
         if (window.subtitleList && window.updateStatusPercentagesDisplay && typeof calculateLingQStatusPercentages === "function") {

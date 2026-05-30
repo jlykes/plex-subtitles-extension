@@ -28,6 +28,48 @@ function applyChineseFontToOverlay() {
 window.getChineseFontFamily = getChineseFontFamily;
 window.applyChineseFontToOverlay = applyChineseFontToOverlay;
 
+function isSingleChineseCharacter(term) {
+  return /^[\u4e00-\u9fff]$/.test(String(term || ""));
+}
+
+function isKnownSingleCharacterStatus(statusInfo) {
+  if (!statusInfo || typeof statusInfo !== "object") return false;
+  return statusInfo.status === -1 || statusInfo.status === 3;
+}
+
+function rebuildKnownSingleCharWords(lingqTerms = window.lingqTerms || {}) {
+  const knownChars = new Set();
+  Object.entries(lingqTerms || {}).forEach(([term, info]) => {
+    if (isSingleChineseCharacter(term) && isKnownSingleCharacterStatus(info)) {
+      knownChars.add(term);
+    }
+  });
+  window.knownSingleCharWords = knownChars;
+  console.log(`[LingQ] Known single-character cache rebuilt (${knownChars.size} chars)`);
+  return knownChars;
+}
+
+function getKnownSingleCharWords() {
+  if (!(window.knownSingleCharWords instanceof Set)) {
+    return rebuildKnownSingleCharWords();
+  }
+  return window.knownSingleCharWords;
+}
+
+function syncKnownSingleCharWord(term, statusInfo) {
+  if (!isSingleChineseCharacter(term)) return;
+  const knownChars = getKnownSingleCharWords();
+  if (isKnownSingleCharacterStatus(statusInfo)) {
+    knownChars.add(term);
+  } else {
+    knownChars.delete(term);
+  }
+}
+
+window.rebuildKnownSingleCharWords = rebuildKnownSingleCharWords;
+window.getKnownSingleCharWords = getKnownSingleCharWords;
+window.syncKnownSingleCharWord = syncKnownSingleCharWord;
+
 /**
  * Returns the underline color based on the LingQ status code
  * @param {Object} statusInfo The LingQ status info object with status and extended_status properties
@@ -219,6 +261,23 @@ function isKnownWord(statusInfo) {
   return statusInfo.status === 3;
 }
 
+function shouldShowPinyinForCharacter(char, word, statusInfo, knownSingleChars, pinyinMode) {
+  const chineseOnly = (String(word || "").match(/[\u4e00-\u9fff]+/g) || []).join("");
+  if (!/[\u4e00-\u9fff]/.test(char)) return false;
+  if (!chineseOnly) return false;
+
+  const tags = Array.isArray(statusInfo?.tags) ? statusInfo.tags : [];
+  if (tags.includes("characters known")) return false;
+  if (statusInfo?.status === -1) return false;
+  if (statusInfo?.status === 3 && statusInfo.extended_status === 3) return false;
+  if (knownSingleChars && knownSingleChars.has(char)) return false;
+
+  if (pinyinMode === "all") return true;
+  if (pinyinMode !== "unknown-only") return false;
+
+  return true;
+}
+
 /**
  * Creates a fully styled and annotated word span for a subtitle line.
  * Includes optional pinyin ruby, tone coloring, underlining by LingQ status,
@@ -256,17 +315,10 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
     config.toneColor === "all" ||
     (config.toneColor === "unknown-only" && (!status || !isKnownWord(status)));
 
-  // Only show pinyin if config allows AND the word contains Chinese
-  const shouldShowPinyin =
-    (config.pinyin === "all" ||
-      (config.pinyin === "unknown-only" &&
-        (!status || (!isKnownWord(status) && status.status !== -1)))) &&
-    isChineseWord(word);
-
-  
   // === Split characters and corresponding pinyin ===
   const charList = [...word]; // Split Chinese word into characters
   const pinyinList = (pinyin || "").split(" "); // One pinyin per char
+  const knownSingleChars = getKnownSingleCharWords();
 
   // === Create wrapper for the full word ===
   const wrapper = document.createElement("span");
@@ -326,7 +378,12 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
     const toneColor = shouldColor && pinyinList[i] ? getToneColor(pinyinList[i]) : "white";
     span.style.color = toneColor;
 
-    if (!isPunct && shouldShowPinyin) {
+    const shouldShowCharPinyin =
+      !isPunct &&
+      shouldShowPinyinForCharacter(char, word, status, knownSingleChars, config.pinyin) &&
+      Boolean(pinyinList[i]);
+
+    if (shouldShowCharPinyin) {
       const ruby = document.createElement("ruby");
       const rt = document.createElement("rt");
       rt.textContent = pinyinList[i] || "";

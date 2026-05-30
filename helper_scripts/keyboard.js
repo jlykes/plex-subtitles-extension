@@ -128,6 +128,7 @@ function setupKeyboardShortcuts() {
   
     const isSubtitlePanel = event.target.closest("#subtitle-control-panel");
     const isSubtitleOverlay = event.target.closest("#custom-subtitle-overlay");
+    const isMiningDrawer = event.target.closest(".char-mining-drawer-host");
   
     console.log("🖱️ Click target:", event.target);
     console.log("➡️ Subtitle Panel:", !!isSubtitlePanel);
@@ -137,7 +138,8 @@ function setupKeyboardShortcuts() {
     if (
       window.__plexUIHidden &&
       !isSubtitlePanel &&
-      !isSubtitleOverlay
+      !isSubtitleOverlay &&
+      !isMiningDrawer
     ) {
       console.log(`[🖱️ Click during hidden UI] Toggling playback`);
       video.paused ? video.play() : video.pause();
@@ -148,4 +150,3 @@ function setupKeyboardShortcuts() {
 
 // Note: Call setupKeyboardShortcuts() from main() in content.js
 // after subtitles have been loaded and the video element is ready.
-

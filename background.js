@@ -160,6 +160,95 @@ async function createNotionWordTrackerEntry(word, status, date, apiKey, database
  * @param {Function} sendResponse - Function to send the response back to the content script
  */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
+  async function postToCharacterMiningProxy(path, body, apiBaseUrl) {
+    const baseUrl = typeof apiBaseUrl === 'string' && apiBaseUrl.trim()
+      ? apiBaseUrl.trim().replace(/\/+$/, '')
+      : 'http://localhost:3001/api';
+    const relPath = typeof path === 'string' && path.startsWith('/') ? path : `/${path || ''}`;
+
+    const response = await fetch(`${baseUrl}${relPath}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body && typeof body === 'object' ? body : {})
+    });
+
+    const text = await response.text();
+    let payload = null;
+    if (text) {
+      try {
+        payload = JSON.parse(text);
+      } catch {
+        payload = { raw: text };
+      }
+    }
+
+    if (!response.ok) {
+      const msg = typeof payload?.error === 'string'
+        ? payload.error
+        : `Request failed (${response.status})`;
+      throw new Error(msg);
+    }
+
+    return payload;
+  }
+
+  // ------------------------------------------------------------
+  // === LOCAL CHARACTER / SENTENCE MINING PROXY FUNCTIONS ===
+  // ------------------------------------------------------------
+
+  if (request.action === 'characterMiningApiPost') {
+    postToCharacterMiningProxy(request.path, request.body, request.apiBaseUrl)
+      .then((payload) => {
+        sendResponse({ success: true, payload });
+      })
+      .catch((error) => {
+        console.error('[background] characterMiningApiPost failed:', error);
+        sendResponse({ success: false, error: error.message || String(error) });
+      });
+
+    return true;
+  }
+
+  if (request.action === 'generateCharacterCard') {
+    postToCharacterMiningProxy('/anki/character/generate', {
+      hanzi: request.hanzi,
+      userSubcomponents: request.userSubcomponents,
+      userRequiredWords: request.userRequiredWords,
+      storyMeaningFocus: request.storyMeaningFocus
+    }, request.apiBaseUrl)
+      .then((payload) => {
+        sendResponse({ success: true, payload });
+      })
+      .catch((error) => {
+        console.error('[background] generateCharacterCard failed:', error);
+        sendResponse({ success: false, error: error.message || String(error) });
+      });
+
+    return true;
+  }
+
+  if (request.action === 'generateSentenceCard') {
+    const targetWord = String(request.targetWord || request.focusWord || '').trim();
+
+    postToCharacterMiningProxy('/anki/sentence/generate', {
+      sentence: request.sentence,
+      focusWord: targetWord,
+      targetWord,
+      focusPinyin: request.focusPinyin,
+      notes: request.notes,
+      source: request.source != null ? String(request.source) : ''
+    }, request.apiBaseUrl)
+      .then((payload) => {
+        sendResponse({ success: true, payload });
+      })
+      .catch((error) => {
+        console.error('[background] generateSentenceCard failed:', error);
+        sendResponse({ success: false, error: error.message || String(error) });
+      });
+
+    return true;
+  }
   
   // ------------------------------------------------------------
   // === LINGQ API FUNCTIONS ===
