@@ -849,6 +849,31 @@ function mergeSentenceMiningSourceIntoCard(host) {
     if (v) host._miningState.card.source = v;
 }
 
+async function markSentenceMiningTermKnownEverywhere(host, termSource) {
+    const term = String(termSource || '').trim();
+    if (!term) return;
+    const st = host && host._miningState ? host._miningState : null;
+    const body = { term };
+    if (typeof st?.lingqBlock?.cardPk === 'number') body.cardPk = st.lingqBlock.cardPk;
+
+    await characterMiningApiPost('/anki/sentence/lingq-mark-known', body);
+
+    if (st && st.lingqBlock) {
+        st.lingqBlock.displayScore = 5;
+        st.lingqBlock.found = true;
+        st.lingqBlock.error = undefined;
+    }
+
+    await updateLocalLingQData(term, 3, 3, []);
+    updateWordUnderline(term, 3, 3);
+    if (typeof updateWordPinyin === 'function') {
+        updateWordPinyin(term, 3, 3, []);
+    }
+    if (typeof window.reRenderCurrentSubtitle === 'function') {
+        window.reRenderCurrentSubtitle();
+    }
+}
+
 function closeCharacterMiningDrawer() {
     closeCharacterMiningImageModal();
     if (currentCharacterMiningEscHandler) {
@@ -1858,14 +1883,7 @@ function bindCharacterMiningHostEvents(host) {
                         : host._lingqTerm != null
                           ? host._lingqTerm
                           : c.hanzi;
-                const body = { term: String(termSource || '').trim() };
-                if (typeof st.lingqBlock?.cardPk === 'number') body.cardPk = st.lingqBlock.cardPk;
-                const j = await characterMiningApiPost('/anki/sentence/lingq-mark-known', body);
-                if (j && st.lingqBlock) {
-                    st.lingqBlock.displayScore = 5;
-                    st.lingqBlock.found = true;
-                    st.lingqBlock.error = undefined;
-                }
+                await markSentenceMiningTermKnownEverywhere(host, termSource);
             } catch (err) {
                 st.lingqMarkError = err instanceof Error ? err.message : String(err);
             } finally {
@@ -1928,6 +1946,16 @@ function bindCharacterMiningHostEvents(host) {
                         extraTags
                     });
                     st.ankiAdded = true;
+                    const termForKnown =
+                        String(c.target_word || '').trim() ||
+                        String(host._lingqTerm || '').trim() ||
+                        String(cardPayload.target_word || '').trim();
+                    try {
+                        await markSentenceMiningTermKnownEverywhere(host, termForKnown);
+                    } catch (knownErr) {
+                        const msg = knownErr instanceof Error ? knownErr.message : String(knownErr);
+                        st.ankiError = `Anki added, but could not mark known: ${msg}`;
+                    }
                 } else {
                     const cardPayload = toCharacterCardPayloadMining(c);
                     const safeImage = normalizedImageDataUrlForSubmitMining(st.imageDataUrl);
