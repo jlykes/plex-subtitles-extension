@@ -2861,7 +2861,9 @@ function positionPopup(popup, wordElement) {
     if (computed && computed.borderBottomWidth) {
         borderBottom = parseFloat(computed.borderBottomWidth) || 0;
     }
-    const hasUnderline = borderBottom > 0 && computed.borderBottomStyle !== 'none';
+    const hasBorderUnderline = borderBottom > 0 && computed.borderBottomStyle !== 'none';
+    const hasBackgroundUnderline = computed && computed.backgroundImage && computed.backgroundImage !== 'none';
+    const hasUnderline = hasBorderUnderline || hasBackgroundUnderline;
 
     // Viewport-fixed overlay (Plex player): use getBoundingClientRect() only — no scrollX/scrollY.
     popup.style.position = 'fixed';
@@ -2874,8 +2876,8 @@ function positionPopup(popup, wordElement) {
         const popupOffset = 8;
         popupTop = rect.bottom + popupOffset;
         if (hasUnderline) {
-            // Subtract the border width so the popup is always offset from the text baseline
-            popupTop = rect.bottom - borderBottom + popupOffset - 2;
+            // Keep the popup visually offset from the underline whether it is border- or background-drawn.
+            popupTop = rect.bottom - (borderBottom || 2) + popupOffset - 2;
         }
     }
     popup.style.left = `${rect.left + rect.width / 2}px`;
@@ -3421,12 +3423,22 @@ function updateWordUnderline(wordText, status, extendedStatus) {
                 }
                 
                 // Update the underline
-                if (underlineColor) {
-                    element.style.borderBottom = `0.1em solid ${underlineColor}`;
+                if (typeof window.applyWordUnderlineStyle === 'function') {
+                    window.applyWordUnderlineStyle(element, underlineColor);
+                } else if (underlineColor) {
+                    element.style.backgroundImage = `linear-gradient(${underlineColor}, ${underlineColor})`;
+                    element.style.backgroundRepeat = "no-repeat";
+                    element.style.backgroundSize = "100% 0.1em";
+                    element.style.backgroundPosition = "0 100%";
+                    element.style.borderBottom = "";
                     element.style.paddingBottom = "2px";
                     element.style.borderRadius = "0.05em";
                 } else {
                     // Remove underline if no color should be applied
+                    element.style.backgroundImage = "";
+                    element.style.backgroundRepeat = "";
+                    element.style.backgroundSize = "";
+                    element.style.backgroundPosition = "";
                     element.style.borderBottom = "";
                     element.style.paddingBottom = "";
                     element.style.borderRadius = "";

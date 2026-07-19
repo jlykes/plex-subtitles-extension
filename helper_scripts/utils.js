@@ -104,6 +104,33 @@ function getUnderlineColor(statusInfo, word) {
   }
 }
 
+function applyWordUnderlineStyle(element, underlineColor) {
+  if (!element || !element.style) return;
+
+  element.style.borderBottom = "";
+
+  if (!underlineColor) {
+    element.style.backgroundImage = "";
+    element.style.backgroundRepeat = "";
+    element.style.backgroundSize = "";
+    element.style.backgroundPosition = "";
+    element.style.paddingBottom = "";
+    element.style.borderRadius = "";
+    return;
+  }
+
+  Object.assign(element.style, {
+    backgroundImage: `linear-gradient(${underlineColor}, ${underlineColor})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100% 0.1em",
+    backgroundPosition: "0 100%",
+    paddingBottom: "2px",
+    borderRadius: "0.05em",
+  });
+}
+
+window.applyWordUnderlineStyle = applyWordUnderlineStyle;
+
 /**
  * Checks if a token is punctuation, a digit, or whitespace.
  * This is useful for filtering out non-content tokens in subtitles.
@@ -327,11 +354,7 @@ function createWordWrapper({ word, pinyin, status, meaning }) {
   wrapper.style.display = "inline-block";
 
   // === Add underline if applicable ===
-  if (underlineColor) {
-    wrapper.style.borderBottom = `0.1em solid ${underlineColor}`;
-    wrapper.style.paddingBottom = "2px";
-    wrapper.style.borderRadius = "0.05em";
-  }
+  applyWordUnderlineStyle(wrapper, underlineColor);
 
   // === Add tooltip (hover definition), if present ===
   if (meaning) {
